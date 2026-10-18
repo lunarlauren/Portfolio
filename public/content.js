@@ -15,6 +15,9 @@ window.PORTFOLIO = {
     {id:"alcon",name:"Alcon",category:"VISUAL DESIGN",description:"A selection of design work for Alcon. Add your project details here.",accent:"#b18b7b",projects:[
       {title:"Alcon Project 01",type:"Visual Design",summary:"Replace with your actual project description.",image:""},
       {title:"Alcon Project 02",type:"Visual Design",summary:"Replace with your actual project description.",image:""}
+    ]},
+    {id:"holland-america",name:"Holland America Line",category:"BRAND · VISUAL DESIGN",description:"Selected creative work for Holland America Line. Add project details and imagery here.",accent:"#314e69",projects:[
+      {title:"Holland America Line Project 01",type:"Visual Design",summary:"Add a description of the project, your role, and the outcome.",image:""}
     ]}
   ],
   playground:[
