@@ -200,3 +200,19 @@ body{background:var(--paper)}
 .playground:before{background:radial-gradient(circle at 85% 0%,#e65da35c,transparent 42%),radial-gradient(circle at 12% 95%,#497eab55,transparent 48%)}
 .playground .section-head h2:after{color:#ff9acb}
 .playground .project-meta{color:#ffc4e0}
+
+/* Interactive self-portrait: hover/focus speech bubble, accessible About link. */
+.hero-feature .feature-top a,.hero-feature .feature-bottom a{color:inherit;text-decoration:none}
+.hero-feature .feature-top a:hover,.hero-feature .feature-bottom a:hover{text-decoration:underline}
+.hero-feature .feature-art{cursor:pointer}
+.portrait-interaction{position:absolute;z-index:6;right:-13%;bottom:-17%;width:48%;max-width:240px;aspect-ratio:1;display:flex;align-items:end;justify-content:end}
+.hero-feature .portrait-interaction .hero-portrait{position:relative;right:auto;bottom:auto;width:100%;max-width:none;max-height:none;height:auto;object-fit:contain;pointer-events:auto;cursor:help;transform-origin:bottom center}
+.portrait-bubble{position:absolute;right:73%;bottom:73%;width:max-content;max-width:min(240px,65vw);padding:15px 17px;background:#fff7fc;color:#203344;border:2px solid #f15c9d;border-radius:17px 17px 5px 17px;box-shadow:0 12px 30px #2033442c;display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700;letter-spacing:0;line-height:1.3;opacity:0;visibility:hidden;transform:translateY(9px) scale(.96);transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none}
+.portrait-bubble:after{content:"";position:absolute;right:12px;bottom:-11px;width:17px;height:17px;background:#fff7fc;border-right:2px solid #f15c9d;border-bottom:2px solid #f15c9d;transform:rotate(45deg)}
+.portrait-about-link{color:#bc3277;font-size:13px;text-decoration:underline;text-underline-offset:3px;position:relative;z-index:1}
+.portrait-interaction:hover .portrait-bubble,.portrait-interaction:focus-within .portrait-bubble{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto}
+.portrait-interaction:hover .hero-portrait,.portrait-interaction:focus-within .hero-portrait{transform:translate(-3px,-6px) rotate(1deg)}
+@media(max-width:950px){.portrait-interaction{width:39%;max-width:220px;right:-5%;bottom:-12%}}
+@media(max-width:760px){.portrait-interaction{width:45%;max-width:195px;right:-3%;bottom:-10%}.portrait-bubble{right:52%;bottom:78%;font-size:12px;padding:11px 13px}}
+@media(hover:none){.portrait-bubble{opacity:1;visibility:visible;transform:none;pointer-events:auto;right:55%;bottom:80%;padding:10px 12px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.portrait-bubble{transition:none}.portrait-interaction:hover .hero-portrait{transform:none}}
