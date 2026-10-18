@@ -104,3 +104,12 @@
 .hero-feature:has(.hero-portrait) .art-center{display:none}
 .hero-portrait{display:block;max-width:none;width:108%;max-height:94%;right:-9%;bottom:7%;object-fit:contain;object-position:bottom right}
 @media(max-width:760px){.hero-portrait{width:105%;right:-5%;bottom:9%}}
+
+/* Portrait is a small corner mascot, not the featured project's artwork. */
+.hero-feature{overflow:hidden}
+.hero-feature:has(.hero-portrait) .feature-art{opacity:1;pointer-events:none}
+.hero-feature:has(.hero-portrait) .art-center{display:block}
+.hero-feature .hero-portrait{position:absolute;z-index:3;display:block;width:43%;height:auto;max-width:220px;max-height:48%;right:-1%;bottom:5%;object-fit:contain;object-position:bottom right;filter:drop-shadow(0 9px 12px #23465b25);pointer-events:none}
+.hero-feature:hover .hero-portrait{transform:translateY(-4px) rotate(1deg)}
+@media(max-width:760px){.hero-feature .hero-portrait{width:42%;max-width:185px;max-height:46%;right:0;bottom:6%}}
+@media(prefers-reduced-motion:reduce){.hero-feature:hover .hero-portrait{transform:none}}
