@@ -82,3 +82,6 @@
 .playground .project-visual:not(:has(img)) .visual-label{color:#c4d4e6;border-color:#758ca5}
 .playground .project-card-link:focus-visible{outline-color:#c6d4ff}
 @media(max-width:760px){.company-grid{grid-template-columns:1fr}.company-card.featured{grid-column:auto}.playground.wrap{padding:75px 20px}.projects-grid,.play-grid{grid-template-columns:1fr}}
+
+/* Deployment refresh: keep all company cards aligned across changing project counts. */
+.company-grid>.company-card{height:100%;}
