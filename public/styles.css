@@ -143,3 +143,28 @@ body{background:var(--paper)}
 .art-orbit{border-color:#497b9860}
 .playground.wrap{background:#142638}
 .playground:before{background:radial-gradient(circle at 85% 0%,#3b658060,transparent 42%),radial-gradient(circle at 12% 95%,#4d829052,transparent 48%)}
+
+/* Pink-forward accents balanced against signature sky blue. */
+:root{--clay:#e47fa8;--lilac:#f5dce9}
+.wordmark span{color:#e47fa8}
+.hero h1 em{color:#bc5685}
+.hero .status-dot{background:#df77a2}
+.hero-foot{color:#745b75}
+.hero-feature .art-tile-one{background:#f5b7d2}
+.hero-feature .art-tile-three{background:#e9c9e9}
+.hero-feature .art-center span{color:#fce6ef}
+.hero-feature .feature-art{filter:drop-shadow(0 14px 22px #a9578b26)}
+.hero-feature .hero-portrait{filter:drop-shadow(0 9px 12px #88456c35)}
+.section-head h2 em,.about h2 em{color:#bc5685}
+.company-card:not(.featured):nth-child(even){background:#f7e2ed}
+.company-card:not(.featured):nth-child(odd){background:#e3edf6}
+.collection{background:#f7eef4}
+.project-card:nth-child(3n+1) .project-visual{background:#f3d8e7}
+.project-card:nth-child(3n+2) .project-visual{background:#d9eaf6}
+.project-card:nth-child(3n+3) .project-visual{background:#f7dce5}
+.primary-link:hover{background:#a94979}
+.quiet-link:hover,.text-link:hover,.site-header nav a:hover{color:#b44c7e}
+.round-link:hover{background:#f4cddd}
+.playground:before{background:radial-gradient(circle at 85% 0%,#aa5c9670,transparent 42%),radial-gradient(circle at 12% 95%,#497eab55,transparent 48%)}
+.playground .section-head h2:after{color:#f2a8d0}
+.playground .project-meta{color:#e6b7d4}
