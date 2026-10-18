@@ -216,3 +216,10 @@ body{background:var(--paper)}
 @media(max-width:760px){.portrait-interaction{width:45%;max-width:195px;right:-3%;bottom:-10%}.portrait-bubble{right:52%;bottom:78%;font-size:12px;padding:11px 13px}}
 @media(hover:none){.portrait-bubble{opacity:1;visibility:visible;transform:none;pointer-events:auto;right:55%;bottom:80%;padding:10px 12px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.portrait-bubble{transition:none}.portrait-interaction:hover .hero-portrait{transform:none}}
+
+/* Employer-specific tile colors, independent of positional pink accents. */
+.company-grid .company-card[data-company="hoylu"]{background:#ffacd3;color:#203344}
+.company-grid .company-card[data-company="alcon"]{background:#fff0dc;color:#203344}
+.company-grid .company-card[data-company="holland-america"]{background:#203d64;color:#fff}
+.company-grid .company-card[data-company="holland-america"] .card-top,
+.company-grid .company-card[data-company="holland-america"] .card-bottom{color:#fff}
