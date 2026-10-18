@@ -288,3 +288,16 @@ body{color:var(--ink)}
   .hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,
   .project-card h4,.case-head h1,.case-prose h2,.art-center{transition:none}
 }
+
+/* Company → project gallery drill-down, replacing the hidden below-grid accordion. */
+.company-grid[hidden],.collection[hidden]{display:none!important}
+.collection{margin-top:0;padding:0;background:transparent;scroll-margin-top:24px;animation:collection-enter .25s ease-out both}
+.collection-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+.collection-back{display:inline-flex;align-items:center;gap:10px;color:var(--ink);font:700 14px 'DM Sans',system-ui,sans-serif;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:5px}
+.collection-back:hover{color:#a92666}
+.collection-head{margin-bottom:32px;padding:clamp(22px,4vw,42px);background:#fff0f8;border-radius:6px}
+.collection-head h3{font-size:clamp(48px,6vw,84px);line-height:1.05}
+.collection .projects-grid{margin-bottom:12px}
+@keyframes collection-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){.collection-nav{align-items:flex-start;flex-direction:column}.collection-head{padding:24px}}
+@media(prefers-reduced-motion:reduce){.collection{animation:none}}
