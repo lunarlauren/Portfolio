@@ -98,3 +98,9 @@
 @media(max-width:950px){.hero-portrait{right:-2%;width:min(90%,520px)}}
 @media(max-width:760px){.hero-feature{min-height:430px}.hero-portrait{right:-2%;width:94%;max-height:84%;bottom:12%}}
 @media(prefers-reduced-motion:reduce){.hero-feature:hover .hero-portrait{transform:none}}
+
+/* Portrait takes center stage; hide the temporary typographic artwork. */
+.hero-feature:has(.hero-portrait) .feature-art{opacity:.13;pointer-events:none}
+.hero-feature:has(.hero-portrait) .art-center{display:none}
+.hero-portrait{display:block;max-width:none;width:108%;max-height:94%;right:-9%;bottom:7%;object-fit:contain;object-position:bottom right}
+@media(max-width:760px){.hero-portrait{width:105%;right:-5%;bottom:9%}}
