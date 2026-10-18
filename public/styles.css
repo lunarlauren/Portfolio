@@ -85,3 +85,16 @@
 
 /* Deployment refresh: keep all company cards aligned across changing project counts. */
 .company-grid>.company-card{height:100%;}
+
+/* Personal hero illustration: character perched over featured work */
+.hero-feature{background:#99caeb;color:#213845;overflow:visible}
+.hero-feature:before{background:linear-gradient(145deg,#99caeb 10%,#b8e1f5 100%);border-radius:3px}
+.hero-feature .feature-top,.hero-feature .feature-bottom{color:#213845}
+.hero-feature .feature-art{opacity:.48;inset:16% 3% 13%;transform:rotate(-8deg) scale(.86)}
+.hero-feature:hover .feature-art{transform:rotate(-3deg) scale(.91)}
+.hero-portrait{position:absolute;z-index:3;bottom:11%;right:-7%;width:min(102%,590px);height:auto;max-height:87%;object-fit:contain;object-position:bottom right;pointer-events:none;filter:drop-shadow(0 16px 18px #23465b22);transition:transform .45s ease}
+.hero-feature:hover .hero-portrait{transform:translateY(-8px) rotate(1deg)}
+.hero-feature .feature-bottom{z-index:4;position:relative}
+@media(max-width:950px){.hero-portrait{right:-2%;width:min(90%,520px)}}
+@media(max-width:760px){.hero-feature{min-height:430px}.hero-portrait{right:-2%;width:94%;max-height:84%;bottom:12%}}
+@media(prefers-reduced-motion:reduce){.hero-feature:hover .hero-portrait{transform:none}}
