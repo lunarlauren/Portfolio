@@ -223,3 +223,16 @@ body{background:var(--paper)}
 .company-grid .company-card[data-company="holland-america"]{background:#203d64;color:#fff}
 .company-grid .company-card[data-company="holland-america"] .card-top,
 .company-grid .company-card[data-company="holland-america"] .card-bottom{color:#fff}
+
+/* Speech bubble repair: make the portrait hover target and bubble reliably visible. */
+.hero-feature .feature-art{text-decoration:none;color:inherit;z-index:0}
+.hero-feature .feature-art .art-center{text-decoration:none}
+.hero-feature .feature-top,.hero-feature .feature-bottom{position:relative;z-index:2}
+.hero-feature .portrait-interaction{z-index:20;overflow:visible;isolation:isolate}
+.hero-feature .portrait-interaction .hero-portrait{position:relative;z-index:1;display:block}
+.hero-feature .portrait-bubble{z-index:30;right:65%;bottom:88%;min-width:188px;width:max-content;max-width:230px;box-sizing:border-box;white-space:normal;text-align:left;background:#fff7fc;color:#203344;border:2px solid #f15c9d;border-radius:18px 18px 4px 18px;box-shadow:0 14px 30px #20334433;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+.hero-feature .portrait-interaction:hover .portrait-bubble,
+.hero-feature .portrait-interaction:focus-within .portrait-bubble{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+.hero-feature .portrait-bubble a{display:inline-block;color:#bc3277;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:760px){.hero-feature .portrait-bubble{right:45%;bottom:88%;min-width:160px;max-width:190px}}
+@media(hover:none){.hero-feature .portrait-bubble{opacity:1;visibility:visible;transform:none;pointer-events:auto}}
