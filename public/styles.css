@@ -236,3 +236,10 @@ body{background:var(--paper)}
 .hero-feature .portrait-bubble a{display:inline-block;color:#bc3277;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:760px){.hero-feature .portrait-bubble{right:45%;bottom:88%;min-width:160px;max-width:190px}}
 @media(hover:none){.hero-feature .portrait-bubble{opacity:1;visibility:visible;transform:none;pointer-events:auto}}
+
+/* Move Lauren's hello bubble into clear space above the character. */
+.hero-feature .portrait-bubble{right:-8%;bottom:112%;min-width:188px;max-width:220px;text-align:left}
+.hero-feature .portrait-bubble:after{right:36px}
+@media(max-width:950px){.hero-feature .portrait-bubble{right:4%;bottom:112%}}
+@media(max-width:760px){.hero-feature .portrait-bubble{right:0;bottom:113%;min-width:158px;max-width:185px}}
+@media(hover:none){.hero-feature .portrait-bubble{right:0;bottom:112%}}
