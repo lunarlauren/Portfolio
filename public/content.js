@@ -5,18 +5,18 @@
 window.PORTFOLIO = {
   email: "hello@example.com", // TODO: change to your real public contact email
   companies: [
-    { id:"hoylu", name:"Hoylu", category:"PRODUCT · BRAND · MOTION", description:"Making complex construction workflows clearer, more connected, and more human.", accent:"#264650", featured:true,
+    { id:"hoylu", name:"Hoylu", category:"PRODUCT · BRAND · MOTION", description:"Making complex construction workflows clearer, more connected, and more human.", accent:"#ffacd3", featured:true,
       projects:[
         {title:"Connected Planning",type:"Product UX",summary:"Exploring clearer, connected workflows for construction teams.",image:""},
         {title:"Mobile Insights",type:"UX / UI",summary:"Design explorations for useful project information on the go.",image:""},
         {title:"Campaigns & Events",type:"Visual Design",summary:"Brand storytelling across event spaces and marketing touchpoints.",image:""},
         {title:"Motion & Storytelling",type:"Motion Design",summary:"Making complex platform ideas easier to understand through motion.",image:""}
       ]},
-    {id:"alcon",name:"Alcon",category:"VISUAL DESIGN",description:"A selection of design work for Alcon. Add your project details here.",accent:"#b18b7b",projects:[
+    {id:"alcon",name:"Alcon",category:"VISUAL DESIGN",description:"A selection of design work for Alcon. Add your project details here.",accent:"#fff0dc",projects:[
       {title:"Alcon Project 01",type:"Visual Design",summary:"Replace with your actual project description.",image:""},
       {title:"Alcon Project 02",type:"Visual Design",summary:"Replace with your actual project description.",image:""}
     ]},
-    {id:"holland-america",name:"Holland America Line",category:"BRAND · VISUAL DESIGN",description:"Selected creative work for Holland America Line. Add project details and imagery here.",accent:"#314e69",projects:[
+    {id:"holland-america",name:"Holland America Line",category:"BRAND · VISUAL DESIGN",description:"Selected creative work for Holland America Line. Add project details and imagery here.",accent:"#203d64",projects:[
       {title:"Holland America Line Project 01",type:"Visual Design",summary:"Add a description of the project, your role, and the outcome.",image:""}
     ]}
   ],
