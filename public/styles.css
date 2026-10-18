@@ -264,3 +264,42 @@ body{background:var(--paper)}
 .hero-feature .portrait-bubble::after{pointer-events:none;}
 @media(max-width:950px){.hero-feature .portrait-interaction{bottom:-7%}.hero-feature .portrait-bubble{bottom:100%;right:4%}}
 @media(max-width:760px){.hero-feature .portrait-interaction{bottom:-5%}.hero-feature .portrait-bubble{bottom:100%;right:0}}
+
+/* Design system alignment — atomic-age warmth, logo-matched pink and navy. */
+:root{
+  --paper:#f7f9fa;--ink:#203344;--muted:#526778;--line:#cbdde7;
+  --teal:#326b86;--clay:#f15c9d;--lilac:#ffe0f1;
+  --brand-pink:#f15c9d;--brand-navy:#203344;--brand-sky:#99caeb;
+  --focus:#155caa;
+}
+body{color:var(--ink)}
+/* Two type roles only: characterful display and highly legible UI. */
+.hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,
+.project-card h4,.case-head h1,.case-prose h2,.art-center{
+  font-family:'Fraunces',Georgia,serif;
+  font-variation-settings:"SOFT" 75,"WONK" 1;
+}
+.hero h1{letter-spacing:-.045em;line-height:1.04}
+.section-head h2,.about h2,.company-name,.case-head h1{letter-spacing:-.035em;line-height:1.1}
+.eyebrow,.hero-foot,.card-top,.card-bottom,.project-meta,.feature-top,.feature-bottom{
+  font-family:'DM Sans',system-ui,sans-serif;
+}
+.wordmark{display:inline-flex;align-items:center;line-height:1}
+.wordmark img{display:block;width:40px;height:auto}
+.hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink)}
+.hero-description,.case-intro,.section-head>p,.project-card p{color:var(--muted)}
+.hero-foot{color:#526778}
+.hero .status-dot{background:var(--brand-pink)}
+.hero-feature{background:var(--brand-sky)}
+.hero-feature:before{background:linear-gradient(145deg,#99caeb 12%,#b5dcef 100%)}
+.primary-link{background:var(--brand-navy);color:#fff}
+.primary-link:hover{background:#304d61}
+.quiet-link:hover,.text-link:hover,.site-header nav a:hover{color:#a92666}
+.hero-feature .portrait-bubble a{color:#a92666}
+.hero-feature .portrait-bubble{color:var(--brand-navy);border-color:var(--brand-pink)}
+/* Keep employer cards distinct; dark text stays readable on light brand fills. */
+.company-grid .company-card[data-company="hoylu"]{background:#ffacd3;color:var(--brand-navy)}
+.company-grid .company-card[data-company="alcon"]{background:#fff0dc;color:var(--brand-navy)}
+.company-grid .company-card[data-company="holland-america"]{background:#203d64;color:#fff}
+.playground .section-head>p,.playground .project-card p{color:#d0d9e5}
+.playground .project-meta{color:#f8c8e0}
