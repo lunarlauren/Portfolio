@@ -178,3 +178,25 @@ body{background:var(--paper)}
 @media(max-width:950px){.hero-feature .hero-portrait{width:39%;max-width:220px;right:-5%;bottom:-12%}}
 @media(max-width:760px){.hero-feature .hero-portrait{width:45%;max-width:195px;right:-3%;bottom:-10%}.hero-feature .feature-bottom{padding-right:30%}}
 @media(prefers-reduced-motion:reduce){.hero-feature:hover .hero-portrait{transform:none}}
+
+/* Fresh, playful pink: candy-bright rather than muted dusty rose. */
+:root{--clay:#ff79b5;--lilac:#ffe0f1}
+.wordmark span{color:#ff79b5}
+.hero h1 em,.section-head h2 em,.about h2 em{color:#f15c9d}
+.hero .status-dot{background:#ff79b5}
+.hero-foot{color:#61778b}
+.hero-feature .art-tile-one{background:#ffb5d8}
+.hero-feature .art-tile-three{background:#e7d6ff}
+.hero-feature .art-center span{color:#fff0f8}
+.hero-feature .feature-art{filter:drop-shadow(0 14px 22px #f15c9d1c)}
+.hero-feature .hero-portrait{filter:drop-shadow(0 16px 13px #28465d38)}
+.company-card:not(.featured):nth-child(even){background:#ffe3f1}
+.collection{background:#fff0f8}
+.project-card:nth-child(3n+1) .project-visual{background:#ffd7eb}
+.project-card:nth-child(3n+3) .project-visual{background:#ffe4ed}
+.primary-link:hover{background:#db4c91}
+.quiet-link:hover,.text-link:hover,.site-header nav a:hover{color:#d84189}
+.round-link:hover{background:#ffd3e8}
+.playground:before{background:radial-gradient(circle at 85% 0%,#e65da35c,transparent 42%),radial-gradient(circle at 12% 95%,#497eab55,transparent 48%)}
+.playground .section-head h2:after{color:#ff9acb}
+.playground .project-meta{color:#ffc4e0}
