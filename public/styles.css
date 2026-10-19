@@ -335,3 +335,20 @@ body{color:var(--ink)}
   .project-card .project-meta span:last-child{transition:none!important}
   .company-card:hover,.collection .project-card-link:hover .project-visual,.play-grid .project-card-link:hover .project-visual{transform:none}
 }
+
+/* Spatial continuity: the selected tile physically becomes the collection header. */
+@supports (view-transition-name: selected-company){
+  ::view-transition-old(selected-company),
+  ::view-transition-new(selected-company){
+    animation-duration:.68s;
+    animation-timing-function:cubic-bezier(.22,1,.36,1);
+    mix-blend-mode:normal;
+  }
+  ::view-transition-old(root){animation:fade-away .22s ease both}
+  ::view-transition-new(root){animation:fade-in .42s ease .1s both}
+  @keyframes fade-away{to{opacity:0}}
+  @keyframes fade-in{from{opacity:0}to{opacity:1}}
+}
+@media(prefers-reduced-motion:reduce){
+  ::view-transition-old(*),::view-transition-new(*){animation-duration:.01ms!important}
+}
