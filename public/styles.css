@@ -1824,3 +1824,13 @@ body{font-size:var(--type-body);line-height:1.6}
 html{scroll-padding-top:82px}
 #work,#playground,#about,#top,#main{scroll-margin-top:82px}
 @media(max-width:480px){.site-header{padding:7px 13px;gap:8px}.site-header .wordmark img{width:31px;max-height:34px}.site-header nav{gap:clamp(7px,2.3vw,13px);font-size:12px}.site-header nav a{min-height:40px;letter-spacing:-.015em}}
+
+/* Clearer case-study progression without extra navigation clutter. */
+.case-next-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-block:32px 48px}
+.case-next-nav .case-next{min-height:44px;display:inline-flex;align-items:center;text-decoration:none}
+.case-next-nav .case-next:last-child:not(:first-child){text-align:right;margin-left:auto}
+.case-prose{max-width:72ch}
+.case-prose h2{margin-top:1.8em;margin-bottom:.45em}
+.case-prose h2:first-child{margin-top:0}
+.case-prose p{max-width:68ch}
+@media(max-width:600px){.case-next-nav{align-items:stretch;flex-direction:column}.case-next-nav .case-next:last-child:not(:first-child){margin-left:0;text-align:left}}
