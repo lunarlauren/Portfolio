@@ -41,3 +41,19 @@ function routeWithMotion(){
   previousHash=nextHash;
 }
 window.addEventListener("hashchange",routeWithMotion);route();$("#year").textContent=new Date().getFullYear();if(data.email&&data.email!=="hello@example.com"){const mail="mailto:"+data.email;$("#contact-link").href=mail;$("#email-link").href=mail}else{$("#contact-link").href="#about";$("#email-link").href="#about";$("#email-link").textContent="Contact details coming soon ↗"}
+
+// About inventory: each slot is text-first until custom item artwork is supplied.
+const inventoryDescriptions={
+ figma:["Figma","Where the wireframes, UI ideas, and probably-too-many iterations live."],
+ illustrator:["Illustrator","Vector shapes, logos, icons, and all the little details."],
+ photoshop:["Photoshop","Photo editing, composites, and making the visual idea actually happen."],
+ aftereffects:["After Effects","A little movement can make a whole design feel alive."],
+ prototyping:["Prototyping","Making things clickable so the idea can speak for itself."],
+ sidequests:["Side quests","Illustration, games, and personal projects I get very invested in."]
+};
+document.querySelectorAll(".inventory-item").forEach(button=>button.addEventListener("click",()=>{
+ const entry=inventoryDescriptions[button.dataset.item];if(!entry)return;
+ document.querySelectorAll(".inventory-item").forEach(item=>item.setAttribute("aria-pressed",String(item===button)));
+ const panel=document.getElementById("inventory-inspect");
+ panel.querySelector("strong").textContent=entry[0];panel.querySelector("p").textContent=entry[1];
+}));
