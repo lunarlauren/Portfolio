@@ -89,7 +89,6 @@ button:focus-visible,a:focus-visible {
   letter-spacing:.16em;
   font-weight:700
 }
-.hero {}
 .status-dot {
   display:inline-block;
   width:8px;
@@ -170,7 +169,6 @@ section.work,section.playground,section.about {
   background:var(--accent);
   min-height:420px
 }
-.company-card:hover {}
 .card-top,.card-bottom {
   display:flex;
   justify-content:space-between;
@@ -195,7 +193,6 @@ section.work,section.playground,section.about {
 .card-bottom {
   margin-top:auto
 }
-.collection {}
 .collection-head {
   display:flex;
   justify-content:space-between;
@@ -230,7 +227,6 @@ section.work,section.playground,section.about {
   place-items:center;
   overflow:hidden
 }
-.project-card:nth-child(3n+2) .project-visual {}
 .project-card:nth-child(3n+3) .project-visual {}
 .project-visual img {
   width:100%;
@@ -316,7 +312,6 @@ footer a {
     justify-content:flex-end;
     gap:12px 18px
   }
-  .hero {}
   .hero h1 {}
   .section-head,.about-bottom {
     display:block
@@ -327,7 +322,6 @@ footer a {
   .company-grid,.projects-grid,.play-grid {
     grid-template-columns:1fr
   }
-  .company-card.featured {}
   .company-card,.company-card.featured {
     min-height:300px
   }
@@ -621,7 +615,6 @@ footer a {
   height:100%;
   object-fit:cover
 }
-.case-hero-visual:not(:has(img)):before {}
 .case-body {
   display:grid;
   grid-template-columns:220px minmax(0,700px);
@@ -679,7 +672,6 @@ footer a {
   .hero h1 {
     font-size:clamp(50px,12vw,78px)
   }
-  .hero-feature {}
   .hero-actions {
     gap:18px
   }
@@ -748,7 +740,6 @@ footer a {
   font-size:11px;
   text-align:center
 }
-.case-hero-visual:not(:has(img)) {}
 .case-hero-visual:not(:has(img)):before {
   content:"HERO IMAGE PLACEHOLDER";
   font:700 clamp(12px,2vw,18px) 'Newsreader';
@@ -786,11 +777,9 @@ footer a {
   font-size:.5em;
   vertical-align:top
 }
-.playground .section-head>p,.playground .project-card p {}
 .playground .project-card h3 {
   color:#f5f7fc
 }
-.playground .project-meta {}
 .playground .project-visual:not(:has(img)) {
   background:#1e3247!important;
   border-color:#758ca5
@@ -819,7 +808,6 @@ footer a {
 .company-grid>.company-card {
   height:100%
 }
-.hero-feature {}
 .hero-feature:has(.hero-portrait) .feature-art {
   opacity:1;
   pointer-events:none
@@ -846,7 +834,6 @@ body {
 .hero-description,.case-intro {
   color:var(--muted)
 }
-.hero-foot {}
 .status-dot {
   background:#377b91
 }
@@ -856,7 +843,6 @@ body {
 .hero h1 em,.about h2 em,.section-head h2 em {
   color:#326b86
 }
-.primary-link {}
 .primary-link:hover {}
 .company-card {
   background:#e5eef4
@@ -864,11 +850,9 @@ body {
 .company-card.featured {
   color:#fff
 }
-.collection {}
 .project-visual {
   background:#dce7f4
 }
-.project-card:nth-child(3n+2) .project-visual {}
 .project-card:nth-child(3n+3) .project-visual {}
 .project-visual:not(:has(img)),.case-hero-visual:not(:has(img)) {
   background:#e8f0f5!important;
@@ -881,7 +865,6 @@ body {
 .hero-feature {
   color:var(--brand-ink)
 }
-.hero-feature:before {}
 .hero-feature .feature-top,.hero-feature .feature-bottom {
   color:var(--brand-ink)
 }
@@ -906,36 +889,25 @@ body {
 .playground.wrap {
   background:var(--night-bg)
 }
-.playground:before {}
 .hero h1 em {
   color:#bc5685
 }
-.hero .status-dot {}
 .hero-foot {}
-.hero-feature .art-tile-one {}
 .hero-feature .art-tile-three {}
-.hero-feature .art-center span {}
 .hero-feature .feature-art {}
-.hero-feature .hero-portrait {}
 .section-head h2 em,.about h2 em {
   color:#bc5685
 }
-.company-card:not(.featured):nth-child(even) {}
 .company-card:not(.featured):nth-child(odd) {
   background:#e3edf6
 }
-.collection {}
 .project-card:nth-child(3n+1) .project-visual {}
 .project-card:nth-child(3n+2) .project-visual {
   background:#d9eaf6
 }
-.project-card:nth-child(3n+3) .project-visual {}
 .primary-link:hover {}
-.quiet-link:hover,.text-link:hover,.site-header nav a:hover {}
 .round-link:hover {}
-.playground:before {}
 .playground .section-head h2:after {}
-.playground .project-meta {}
 .hero-feature {
   overflow:visible;
   isolation:isolate
@@ -984,9 +956,7 @@ body {
     transform:none
   }
 }
-.hero h1 em,.section-head h2 em,.about h2 em {}
 .hero .status-dot {}
-.hero-foot {}
 .hero-feature .art-tile-one {
   background:#ffb5d8
 }
@@ -1005,14 +975,12 @@ body {
 .company-card:not(.featured):nth-child(even) {
   background:#ffe3f1
 }
-.collection {}
 .project-card:nth-child(3n+1) .project-visual {
   background:#ffd7eb
 }
 .project-card:nth-child(3n+3) .project-visual {
   background:#ffe4ed
 }
-.primary-link:hover {}
 .quiet-link:hover,.text-link:hover,.site-header nav a:hover {}
 .round-link:hover {
   background:#ffd3e8
@@ -1023,7 +991,6 @@ body {
 .playground .section-head h2:after {
   color:#ff9acb
 }
-.playground .project-meta {}
 .hero-feature .feature-top a,.hero-feature .feature-bottom a {
   color:inherit;
   text-decoration:none
@@ -1734,11 +1701,9 @@ body {
   }
 }
 
-/* Preserve the hero's original two-tone headline. */
 .hero h1{color:var(--brand-ink)}
 .hero h1 em{color:var(--brand-pink);font-style:normal}
 
-/* Mobile viewport containment and safe hero illustration placement. */
 html,body{max-width:100%;overflow-x:clip}
 @media(max-width:760px){
   .hero{min-width:0}
@@ -1749,43 +1714,35 @@ html,body{max-width:100%;overflow-x:clip}
   .hero-feature .portrait-bubble{right:0;bottom:105%;max-width:min(185px,55vw)}
 }
 
-/* Expanded company stays above the remaining, unopened company tiles. */
 .company-grid[data-active]:not([data-active=""]) .company-card[aria-expanded="true"]{display:none}
 .company-grid[data-active]:not([data-active=""]){margin-top:18px}
 .company-grid[data-active]:not([data-active=""]) .company-card{min-height:clamp(220px,23vw,320px)}
 
-/* Keyboard navigation and forced-colors accessibility. */
 :where(a,button,[tabindex="-1"]):focus-visible{outline:3px solid var(--focus,#155caa);outline-offset:4px}
 :where(.collection,.case-view)[tabindex="-1"]:focus{outline:none}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(forced-colors:active){.company-card,.project-card-link,.primary-link,.portrait-bubble{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
 
-/* Accessible touch targets and small-screen text reflow. */
 .site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next,.portrait-about-link{min-height:44px;display:inline-flex;align-items:center}
 .company-card{touch-action:manipulation}
 @media(max-width:760px){.site-header nav{flex-wrap:wrap}.company-name,.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot,.company-description{opacity:1;text-shadow:none}.project-visual:not(:has(img)){border-style:solid}}
 
-/* Keep skip navigation usable when a case study replaces the main content. */
 .skip-link{position:fixed;top:0;left:12px;transform:translateY(-150%);z-index:9999;background:#fff;color:#203344;border:2px solid #155caa;border-radius:8px;text-decoration:none}
 .skip-link:focus-visible{transform:translateY(12px);outline:3px solid #155caa;outline-offset:2px}
 #work-title:focus,.collection-head h3:focus{outline:none}
 
-/* Contrast remediation: retain bright brand pink for decoration, use AA-safe pink for text. */
 :root{--brand-pink-text:#ee5599}
 .hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
 .hero .eyebrow,.work .eyebrow,.about .eyebrow{color:var(--muted)}
 .night-sparkles{color:#ff9acb}
 
-/* Readability: avoid tiny utility labels and preserve contrast in project cards. */
 .case-fact-label,.brief-kicker{font-size:12px;line-height:1.5}
 .eyebrow,.project-meta,.card-top,.card-bottom{font-size:max(12px,1em)}
 @media(max-width:760px){.case-fact-label,.brief-kicker{letter-spacing:.08em}}
 
-/* Programmatic route focus should not look like a keyboard tab stop. */
 .collection:focus,.case-view:focus,#work-title:focus,.collection-head h3:focus{outline:none!important;box-shadow:none!important}
 
-/* Type scale audit: comfortable minimum sizes for readable interface copy. */
 :root{--type-xs:12px;--type-sm:14px;--type-body:16px;--type-lead:18px}
 body{font-size:var(--type-body);line-height:1.6}
 .site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.case-facts,.case-fact-label,.brief-kicker,.project-visual .visual-label,.project-visual:not(:has(img)) .visual-label{font-size:var(--type-xs);line-height:1.5}
@@ -1793,12 +1750,10 @@ body{font-size:var(--type-body);line-height:1.6}
 .hero-description,.about-bottom p,.case-prose p{line-height:1.65}
 @media(max-width:760px){.site-header nav{font-size:13px}.hero-description,.about-bottom p,.case-prose p{font-size:16px}.project-card p{font-size:14px}}
 
-/* Comfortable paragraph rhythm in About. */
 .about-copy{min-width:0;max-width:68ch}
 .about-copy p{margin:0 0 1.15em;line-height:1.7}
 .about-copy p:last-child{margin-bottom:0}
 
-/* Creative inventory: a tiny point-and-click collection, ready for illustrated objects. */
 .creative-inventory{width:100%;max-width:700px;margin:32px 0;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none;color:#203344}
 .inventory-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:15px}
 .inventory-heading h3{font-family:Newsreader,serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.035em;line-height:1.1;margin:3px 0}
@@ -1820,7 +1775,6 @@ body{font-size:var(--type-body);line-height:1.6}
 @media(max-width:460px){.inventory-heading{align-items:flex-start;flex-direction:column;gap:3px}.inventory-grid{gap:0;padding:26px 7px 12px;min-height:270px}.inventory-item{min-height:105px;padding:5px 2px}.inventory-icon{width:58px;height:58px;font-size:41px}.inventory-item:nth-child(2) .inventory-icon,.inventory-item:nth-child(3) .inventory-icon,.inventory-item:nth-child(4) .inventory-icon{font-size:43px}.inventory-item:nth-child(5) .inventory-icon{font-size:50px}.inventory-item>span:last-child{font-size:11px}.inventory-inspect{padding:14px 15px}}
 @media(prefers-reduced-motion:reduce){.inventory-item{transition:none}}
 
-/* Compact, persistent navigation; keep anchor headings clear of the bar. */
 .site-header{position:sticky;top:0;z-index:100;max-width:none;width:100%;box-sizing:border-box;padding:8px clamp(18px,4vw,56px);gap:14px;background:rgba(247,249,250,.95);border-bottom:1px solid rgba(32,51,68,.13);box-shadow:0 4px 18px rgba(32,51,68,.045);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .site-header .wordmark{display:inline-flex;align-items:center;flex:none}
 .site-header .wordmark img{width:36px;height:auto;max-height:38px}
@@ -1830,7 +1784,6 @@ html{scroll-padding-top:82px}
 #work,#playground,#about,#top,#main{scroll-margin-top:82px}
 @media(max-width:480px){.site-header{padding:7px 13px;gap:8px}.site-header .wordmark img{width:31px;max-height:34px}.site-header nav{gap:clamp(7px,2.3vw,13px);font-size:12px}.site-header nav a{min-height:40px;letter-spacing:-.015em}}
 
-/* Clearer case-study progression without extra navigation clutter. */
 .case-next-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-block:32px 48px}
 .case-next-nav .case-next{min-height:44px;display:inline-flex;align-items:center;text-decoration:none}
 .case-next-nav .case-next:last-child:not(:first-child){text-align:right;margin-left:auto}
@@ -1840,7 +1793,6 @@ html{scroll-padding-top:82px}
 .case-prose p{max-width:68ch}
 @media(max-width:600px){.case-next-nav{align-items:stretch;flex-direction:column}.case-next-nav .case-next:last-child:not(:first-child){margin-left:0;text-align:left}}
 
-/* Small, discoverable interactions: playful without distracting from the work. */
 .sparkle-button{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin:-12px -8px;padding:5px 8px;background:transparent;border:0;border-radius:50%;cursor:pointer;color:inherit}
 .sparkle-button:hover .night-sparkles{filter:brightness(1.3);transform:rotate(-12deg) scale(1.12)}
 .sparkle-button .night-sparkles{display:inline-flex;align-items:center;gap:2px;transition:transform .2s ease}
@@ -1852,7 +1804,6 @@ html{scroll-padding-top:82px}
 @media(hover:hover) and (pointer:fine){.company-card:hover,.project-card-link:hover{transform:translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){.sparkle-button .night-sparkles,.footer-secret,.company-card,.project-card-link{transition:none!important}.sparkle-button.sparkle-pop .night-sparkles{animation:none!important}}
 
-/* Playground repair: protect the heading and keep sparkle interactions discrete. */
 .playground .section-head h2{display:block!important;visibility:visible!important;opacity:1!important;color:#fff!important;position:relative;z-index:1}
 .playground .section-head h2::after{content:none!important}
 .playground .night-eyebrow{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
@@ -1865,13 +1816,10 @@ html{scroll-padding-top:82px}
 .playground .sparkle-button.sparkle-pop .night-sparkles{animation:sparkle-pop .3s ease-out}
 @media(prefers-reduced-motion:reduce){.playground .sparkle-button.sparkle-pop .night-sparkles{animation:none}}
 
-/* Playground heading: standalone, stable typography; sparkles retired. */
 .playground .section-head .playground-title{display:block!important;position:relative;z-index:2;visibility:visible!important;opacity:1!important;color:#fff!important;font:600 clamp(35px,5vw,66px)/1.1 'Newsreader',Georgia,serif!important;margin:14px 0 0!important;max-width:100%;height:auto!important;overflow:visible!important}
 .playground .section-head .playground-title::before,.playground .section-head .playground-title::after{content:none!important;display:none!important}
 .playground .night-eyebrow{display:block}
 
-
-/* About: intentional spacing and a dedicated column for the interactive inventory. */
 .about-bottom{
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(300px,.92fr);
@@ -1909,16 +1857,12 @@ html{scroll-padding-top:82px}
  .inventory-inspect{padding:15px 16px 17px}
 }
 
-
-/* Case-study skimming: quiet editorial callouts, not competing feature cards. */
 .case-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,3vw,32px);margin:clamp(24px,4vw,44px) 0;padding:clamp(18px,2.8vw,30px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .case-highlight{min-width:0;padding-left:clamp(12px,1.7vw,20px);border-left:3px solid #ee5599}
 .case-highlight-label{display:block;font-size:11px;letter-spacing:.12em;font-weight:700;color:var(--muted);margin-bottom:9px}
 .case-highlight p{font-family:Newsreader,Georgia,serif;font-size:clamp(21px,2.3vw,30px);line-height:1.2;letter-spacing:-.025em;margin:0;max-width:28ch;color:var(--ink)}
 @media(max-width:600px){.case-highlights{grid-template-columns:1fr;gap:20px;margin:24px 0;padding:20px 0}.case-highlight p{font-size:23px}}
 
-
-/* Accessible, persistent theme switcher. Keep the playground's night identity in both modes. */
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font-size:12px;font-weight:700;line-height:1;white-space:nowrap;cursor:pointer;transition:background .2s,border-color .2s}
 .theme-toggle:hover{background:var(--surface-blush)}
 .theme-toggle-icon{font-size:17px;line-height:1}
@@ -1972,8 +1916,6 @@ html[data-theme="dark"] .feature-top,html[data-theme="dark"] .feature-bottom{col
 html[data-theme="dark"] .footer-secret{color:#ff9acb}
 @media(prefers-reduced-motion:reduce){.theme-toggle{transition:none}}
 
-
-/* Header: clear navigation, a distinct contact action, and a compact theme control. */
 .site-header{min-height:66px;gap:24px}
 .header-actions{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2vw,28px);min-width:0}
 .site-header .header-actions nav{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
@@ -1998,8 +1940,6 @@ html[data-theme="dark"] .header-contact:hover{background:#edf4fa;color:#111d2a}
  .header-contact span{display:none}
 }
 
-
-/* Dark-mode contrast corrections, based on mobile review. */
 html[data-theme="dark"] .primary-link,
 html[data-theme="dark"] .hero-actions .primary-link{
  background:#f18bbd!important;
@@ -2023,7 +1963,7 @@ html[data-theme="dark"] .inventory-grid{background:radial-gradient(ellipse at 50
 html[data-theme="dark"] .company-grid .company-card[data-company="alcon"]{background:#433a38;color:#fff1e8}
 html[data-theme="dark"] .company-grid .company-card[data-company="holland-america"]{background:#294968;color:#eef5fa}
 html[data-theme="dark"] .company-grid .company-card[data-company="hoylu"]{background:#613552;color:#fff1f7}
-/* On phones, use a deliberate two-tier header rather than compressing five actions. */
+
 @media(max-width:650px){
  .site-header{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:42px 40px;column-gap:10px;row-gap:3px;align-items:center;padding:7px 16px 8px;min-height:0}
  .site-header .wordmark{grid-column:1;grid-row:1;align-self:center}
@@ -2042,8 +1982,6 @@ html[data-theme="dark"] .company-grid .company-card[data-company="hoylu"]{backgr
  .site-header .header-contact{font-size:11px;padding-inline:8px}
 }
 
-
-/* Creative inventory refinement: unified geometry, quieter surfaces, deliberate interaction. */
 .creative-inventory{--inv-border:rgba(117,101,128,.24);--inv-surface:#fff9fc;--inv-panel:#fff4f9;--inv-ink:#26384a;--inv-muted:#746779;--inv-accent:#bd4f83;max-width:700px;color:var(--inv-ink)}
 .inventory-heading{margin-bottom:18px;align-items:end}
 .inventory-heading h3{font-size:clamp(29px,3.5vw,39px);letter-spacing:-.045em}
@@ -2071,15 +2009,6 @@ html[data-theme="dark"] .inventory-item:hover{background:rgba(245,161,200,.09)}
 html[data-theme="dark"] .inventory-item[aria-pressed="true"]{background:rgba(245,161,200,.12);border-color:rgba(245,161,200,.5)}
 @media(max-width:460px){.inventory-heading{gap:6px;margin-bottom:15px}.inventory-grid{padding:35px 9px 12px;gap:4px;border-radius:16px 16px 0 0}.inventory-item,.inventory-item:nth-child(1),.inventory-item:nth-child(2),.inventory-item:nth-child(3),.inventory-item:nth-child(4),.inventory-item:nth-child(5),.inventory-item:nth-child(6){min-height:105px;padding:8px 2px;gap:5px}.inventory-inspect{border-radius:0 0 16px 16px;padding:17px 18px 19px}}
 @media(prefers-reduced-motion:reduce){.inventory-icon{transition:none}}
-
-
-/* Tactile interactions with restrained motion and clear focus. */
-.inventory-tools{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:0 0 10px}
-.inventory-counter{font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--inv-muted)}
-.inventory-random{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:7px 13px;border:1px solid var(--inv-border);border-radius:999px;background:transparent;color:var(--inv-ink);font-size:12px;font-weight:700;cursor:pointer;transition:background .2s ease,transform .2s ease,border-color .2s ease}
-.inventory-random:hover{background:rgba(189,79,131,.09);border-color:var(--inv-accent);transform:translateY(-2px)}
-.inventory-random span{font-size:18px;transition:transform .25s ease}
-.inventory-random:hover span{transform:translateX(3px) rotate(-12deg)}
 .inventory-item{transition:background .22s ease,border-color .22s ease,transform .22s ease}
 .inventory-item:active{transform:scale(.96)}
 .inventory-item.inventory-pop .inventory-icon{animation:inventory-bounce .38s cubic-bezier(.2,.75,.25,1.2)}
@@ -2095,12 +2024,10 @@ html[data-theme="dark"] .inventory-item[aria-pressed="true"]{background:rgba(245
 .reveal-ready{animation:reveal-enter .55s ease both}
 @keyframes reveal-enter{from{opacity:.55;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){
- .inventory-item,.inventory-random,.inventory-random span,.hero-actions .primary-link span{transition:none!important}
+ .inventory-item,.hero-actions .primary-link span{transition:none!important}
  .inventory-item.inventory-pop .inventory-icon,.inventory-inspect.inventory-refresh>*,.reveal-ready{animation:none!important}
 }
 
-
-/* Keep the inventory heading anchored to the same left edge as its cards. */
 .about-bottom .creative-inventory{width:100%;max-width:none;justify-self:stretch;text-align:left}
 .creative-inventory .inventory-heading{display:block;text-align:left;margin:0 0 18px;padding:0}
 .creative-inventory .inventory-heading>div{width:100%;text-align:left}
