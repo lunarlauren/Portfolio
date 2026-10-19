@@ -137,16 +137,19 @@ window.PORTFOLIO = {
       ]
     },
     {
-      title:"Fallout 76 Environments",type:"Game Environment Design",
-      summary:"Building atmospheric, story-rich spaces that reward exploration and make players curious.",
-      details:"Building in Fallout 76 is a form of environmental storytelling: architecture, lighting, props, and routes imply a narrative without needing a line of dialogue. My builds explore how spaces can feel inhabited, unsettling, playful, or unexpectedly believable.",
-      process:"Start with a concept and a story the environment should tell. Block out the route, plan key sightlines, layer recognizable details, and use light, contrast, and prop placement to guide the visitor through the scene.",
-      outcome:"A growing body of personal worldbuilding work, including a slasher-themed hospital environment. Show finished screenshots alongside layout decisions and behind-the-scenes construction.",
-      imageBrief:"Hero composition: wide in-game screenshot of the horror hospital exterior or lobby, emphasizing architecture, atmosphere, and environmental clues.",
+      title:"Fallout 76 — What I'd Design",type:"Unofficial Game Concept Design · Fan Work",
+      summary:"Three ideas I'd love to bring to Appalachia: a Meat Week charcuterie display, a Mistress of Mystery season, and Brahmin-powered transportation.",
+      details:"Fallout 76 has a wonderfully strange visual language: retro-futurist advertising, scavenged materials, regional folklore, and humor in the middle of the apocalypse. This is my space to imagine additions that feel at home in that world. These are independent fan concepts—not official Bethesda designs or announced game features.",
+      process:"MEAT WEEK / THE CHARCUTERIE BOARD — A camp display inspired by Meat Week: an oversized, delightfully absurd spread of wasteland meats and snacks. The design challenge is to make a playful collectible display feel readable, appetizing in a Fallout sort of way, and unmistakably part of Grahm's celebration.\n\nMISTRESS OF MYSTERY / THE SEASON — A season concept inspired by the Order of Mysteries, with a themed season scoreboard and a curated lineup of rewards I'd want to earn. The visual direction draws from secret identities, pulp-comic drama, and the faction's theatrical elegance. Reward illustrations and a scoreboard mockup will make the concept tangible.\n\nBRAHMIN TRANSPORTATION — A concept for moving through Appalachia with Brahmin. I'd explore how the vehicle or caravan looks, what it feels like to use, and how it fits Fallout's scrappy world without pretending it's an existing mechanic.",
+      outcome:"An evolving collection of speculative game-design pitches. The goal is to communicate each idea through clear concept art, UI mockups, and in-world presentation—not to suggest these features are implemented. As the designs develop, I'll replace these briefs with my own finished artwork and explain the choices behind each concept.",
+      imageBrief:"Concept portfolio cover: three distinct fan-design proposals—Meat Week charcuterie display, Mistress of Mystery season scoreboard, and Brahmin transportation. Use original concept artwork once designed; do not imply these are in-game screenshots.",
       galleryBriefs:[
-        "Wide in-game interior showing the hospital's storytelling through props, signage, and lighting.",
-        "Overhead or diagrammatic floor plan highlighting visitor flow, ramps, stairs, and narrative beats.",
-        "Three cinematic close-ups of environmental details that reward exploration."
+        "01 / MEAT WEEK CHARCUTERIE — Concept illustration of a placeable camp meat display board, with ingredients, presentation, scale, and a playful Fallout-style item name.",
+        "02 / MEAT WEEK ITEM PRESENTATION — Mock up the camp-building catalog tile and the display in a player camp, clearly labeled FAN CONCEPT.",
+        "03 / MISTRESS OF MYSTERY SEASON — Design a complete season scoreboard composition inspired by the Order of Mysteries, using an original layout and clearly marked as an unofficial concept.",
+        "04 / THE REWARDS I'D WANT — Illustrate a proposed reward lineup for the season: outfits, camp decor, props, and other themed collectibles. Final item choices and art to be designed.",
+        "05 / BRAHMIN TRANSPORTATION — Concept sheet showing a Brahmin-powered caravan or transport system, including silhouette, materials, and how a player might interact with it.",
+        "06 / IN-WORLD EXPERIENCE — UI and environmental mockups showing how the transportation concept could fit into Appalachia; speculative gameplay, not an existing feature."
       ]
     },
     {
