@@ -365,3 +365,6 @@ body{color:var(--ink)}
   font-variation-settings:normal;
 }
 .hero h1,.case-head h1,.company-name{letter-spacing:-.045em}
+
+/* Keep each company's identity consistent through the card-to-collection transition. */
+.collection[data-active="alcon"] .collection-head{background:#fff0dc;color:var(--brand-navy)}
