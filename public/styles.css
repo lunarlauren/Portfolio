@@ -1839,3 +1839,15 @@ html{scroll-padding-top:82px}
 .case-prose h2:first-child{margin-top:0}
 .case-prose p{max-width:68ch}
 @media(max-width:600px){.case-next-nav{align-items:stretch;flex-direction:column}.case-next-nav .case-next:last-child:not(:first-child){margin-left:0;text-align:left}}
+
+/* Small, discoverable interactions: playful without distracting from the work. */
+.sparkle-button{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin:-12px -8px;padding:5px 8px;background:transparent;border:0;border-radius:50%;cursor:pointer;color:inherit}
+.sparkle-button:hover .night-sparkles{filter:brightness(1.3);transform:rotate(-12deg) scale(1.12)}
+.sparkle-button .night-sparkles{display:inline-flex;align-items:center;gap:2px;transition:transform .2s ease}
+.sparkle-button.sparkle-pop .night-sparkles{animation:sparkle-pop .3s ease-out}
+@keyframes sparkle-pop{50%{transform:scale(1.3) rotate(10deg)}}
+.footer-secret{appearance:none;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:4px 10px;border:0;background:transparent;color:#c13f7c;font-size:14px;font-weight:700;cursor:pointer;transition:transform .2s ease}
+.footer-secret:hover{transform:rotate(18deg) scale(1.12)}
+.company-card,.project-card-link{transition:transform .2s ease,box-shadow .2s ease}
+@media(hover:hover) and (pointer:fine){.company-card:hover,.project-card-link:hover{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.sparkle-button .night-sparkles,.footer-secret,.company-card,.project-card-link{transition:none!important}.sparkle-button.sparkle-pop .night-sparkles{animation:none!important}}
