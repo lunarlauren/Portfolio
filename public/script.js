@@ -1,3 +1,26 @@
+// Inventory is initialized independently of portfolio routing.
+function initInventory(){
+ const panel=document.getElementById("inventory-inspect");
+ const buttons=[...document.querySelectorAll(".inventory-item")];
+ if(!panel||!buttons.length)return;
+ const descriptions={
+ figma:["Figma","Where the wireframes, UI ideas, and probably-too-many iterations live."],
+ illustrator:["Illustrator","Vector shapes, logos, icons, and all the little details."],
+ photoshop:["Photoshop","Photo editing, composites, and making the visual idea actually happen."],
+ aftereffects:["After Effects","A little movement can make a whole design feel alive."],
+ gummyworms:["Gummy worms","A vital part of the creative process. For research purposes, obviously."],
+ coffee:["Coffee","Creative fuel. Occasionally more urgent than the actual brief."]
+ };
+ buttons.forEach(button=>button.addEventListener("click",()=>{
+  const item=descriptions[button.dataset.item];
+  if(!item)return;
+  buttons.forEach(other=>other.setAttribute("aria-pressed",String(other===button)));
+  panel.querySelector("strong").textContent=item[0];
+  panel.querySelector("p").textContent=item[1];
+ }));
+}
+initInventory();
+
 const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">':'<span class="visual-label visual-brief"><span class="brief-kicker">IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';const projectCard=(p,i,group)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p></a></article>';const companyGrid=$("#company-grid");companyGrid.innerHTML=data.companies.map((c,i)=>'<button class="company-card '+(c.featured?'featured':'')+'" type="button" data-company="'+esc(c.id)+'" style="--accent:'+esc(c.accent)+';--i:'+i+'" aria-controls="collection" aria-expanded="false"><span class="card-top"><span>'+esc(c.category)+'</span><span aria-hidden="true">↗</span></span><span class="company-name">'+esc(c.name)+'</span><span class="company-description">'+esc(c.description)+'</span><span class="card-bottom">'+c.projects.length+' PROJECT'+(c.projects.length===1?'':'S')+' <span aria-hidden="true">→</span></span></button>').join("");$("#play-grid").innerHTML=data.playground.map((p,i)=>projectCard(p,i,"playground")).join("");const collection=$("#collection");
 function openCompany(id){
   const c=data.companies.find(x=>x.id===id);if(!c)return;
@@ -40,29 +63,6 @@ function routeWithMotion(){
   previousHash=nextHash;
 }
 window.addEventListener("hashchange",routeWithMotion);route();$("#year").textContent=new Date().getFullYear();if(data.email&&data.email!=="hello@example.com"){const mail="mailto:"+data.email;$("#contact-link").href=mail;$("#email-link").href=mail}else{$("#contact-link").href="#about";$("#email-link").href="#about";$("#email-link").textContent="Contact details coming soon ↗"}
-
-// Inventory is initialized independently of portfolio routing.
-function initInventory(){
- const panel=document.getElementById("inventory-inspect");
- const buttons=[...document.querySelectorAll(".inventory-item")];
- if(!panel||!buttons.length)return;
- const descriptions={
- figma:["Figma","Where the wireframes, UI ideas, and probably-too-many iterations live."],
- illustrator:["Illustrator","Vector shapes, logos, icons, and all the little details."],
- photoshop:["Photoshop","Photo editing, composites, and making the visual idea actually happen."],
- aftereffects:["After Effects","A little movement can make a whole design feel alive."],
- gummyworms:["Gummy worms","A vital part of the creative process. For research purposes, obviously."],
- coffee:["Coffee","Creative fuel. Occasionally more urgent than the actual brief."]
- };
- buttons.forEach(button=>button.addEventListener("click",()=>{
-  const item=descriptions[button.dataset.item];
-  if(!item)return;
-  buttons.forEach(other=>other.setAttribute("aria-pressed",String(other===button)));
-  panel.querySelector("strong").textContent=item[0];
-  panel.querySelector("p").textContent=item[1];
- }));
-}
-initInventory();
 
 // Small, optional tactile details: no autoplay, no sound, no persistent state.
 const footerSecret=document.getElementById("footer-secret");
