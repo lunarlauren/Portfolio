@@ -11,7 +11,9 @@ function openCompany(id,scroll=true){
   // Keep other company cards visible for quick switching.
 }
 function showCompanies(){
+  const wasOpen=!collection.hidden;
   collection.hidden=true;collection.after(companyGrid);companyGrid.hidden=false;companyGrid.dataset.active="";collection.dataset.active="";
+  if(wasOpen&&location.hash==="#work"){requestAnimationFrame(()=>{const first=companyGrid.querySelector(".company-card");if(first)first.focus({preventScroll:true});});}
   document.querySelectorAll(".company-card").forEach(btn=>{btn.setAttribute("aria-expanded","false");btn.setAttribute("aria-pressed","false");});
 }
 document.querySelectorAll("[data-company]").forEach(btn=>btn.addEventListener("click",()=>{location.hash="company/"+encodeURIComponent(btn.dataset.company)}));
