@@ -1784,3 +1784,11 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* Programmatic route focus should not look like a keyboard tab stop. */
 .collection:focus,.case-view:focus,#work-title:focus,.collection-head h3:focus{outline:none!important;box-shadow:none!important}
+
+/* Type scale audit: comfortable minimum sizes for readable interface copy. */
+:root{--type-xs:12px;--type-sm:14px;--type-body:16px;--type-lead:18px}
+body{font-size:var(--type-body);line-height:1.6}
+.site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.case-facts,.case-fact-label,.brief-kicker,.project-visual .visual-label,.project-visual:not(:has(img)) .visual-label{font-size:var(--type-xs);line-height:1.5}
+.project-card p,.company-description,.case-back,.portrait-about-link,footer{font-size:var(--type-sm);line-height:1.6}
+.hero-description,.about-bottom p,.case-prose p{line-height:1.65}
+@media(max-width:760px){.site-header nav{font-size:13px}.hero-description,.about-bottom p,.case-prose p{font-size:16px}.project-card p{font-size:14px}}
