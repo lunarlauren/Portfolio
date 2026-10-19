@@ -4,7 +4,7 @@
    Images: set image to a file in public/images; gallery can contain image paths.
    imageBrief and galleryBriefs appear as descriptive placeholders until then. */
 window.PORTFOLIO = {
-  email: "hello@example.com",
+  email: "bertinoln@gmail.com",
   companies: [
     {
       id:"hoylu", name:"Hoylu", category:"PRODUCT · BRAND · MOTION",
