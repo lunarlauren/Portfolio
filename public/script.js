@@ -5,7 +5,7 @@ function openCompany(id,scroll=true){
   collection.hidden=false;collection.dataset.active=id;
   collection.innerHTML='<div class="collection-nav"><a href="#work" class="collection-back">← All companies</a><span class="eyebrow">SELECTED WORK / '+esc(c.projects.length)+' PROJECTS</span></div><div class="collection-head"><div><p class="eyebrow">'+esc(c.category)+'</p><h3>'+esc(c.name)+'</h3><p>'+esc(c.description)+'</p></div></div><div class="projects-grid">'+c.projects.map((p,i)=>projectCard(p,i,c.id)).join("")+'</div>';
   document.querySelectorAll(".company-card").forEach(btn=>btn.setAttribute("aria-expanded",String(btn.dataset.company===id)));
-  if(scroll)$("#work").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+  // Keep the viewport stable while the card morphs into the collection header.
 }
 function showCompanies(){
   collection.hidden=true;companyGrid.hidden=false;collection.dataset.active="";
