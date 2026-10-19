@@ -105,10 +105,10 @@ window.PORTFOLIO = {
       projects:[
         {
           title:"Navigator App",type:"Mobile UX/UI · Guest Experience",
-          summary:"Designing clearer paths through dining reservations, shore excursions, purchase statements, and one surprisingly important hurdle: getting connected to ship Wi-Fi.",
-          details:"A cruise vacation involves a lot of decisions, and guests shouldn't have to fight an app to make them. I designed and prototyped interfaces for Navigator, Holland America Line's mobile guest experience, covering restaurant reservations, shore excursion booking, and purchase statements. These are practical, high-intent moments: finding an experience, making a choice, checking the details, and knowing what happens next. My role was to translate those needs into clear, approachable mobile screens and flows.",
-          process:"One especially useful design problem came from real-time guest feedback: connecting to the ship's Wi-Fi wasn't as obvious as it needed to be. I worked on visual cues to make that connection step easier to recognize and understand. In the reservation and excursion flows, I designed and prototyped the path from browsing to booking, keeping the hierarchy focused on the information guests need to make a decision. The through-line was reducing uncertainty—not adding more decoration or more steps.",
-          outcome:"The work produced UI designs and prototypes across booking, purchase-information, and connectivity experiences. The Wi-Fi improvements were informed by feedback from actual guests, giving the design work a concrete usability problem to respond to. I don't have verified conversion, completion-rate, or satisfaction metrics to share, so I'm keeping the story focused on the design decisions and deliverables.",
+          summary:"Designing passenger-facing booking and account flows, including clearer guidance for connecting to ship Wi-Fi.",
+          details:"I designed and prototyped parts of Holland America Line's Navigator app, including dining reservations, shore excursion booking, and purchase statements. These flows needed to make choices and confirmations clear to passengers who might be using the app for the first time while onboard.",
+          process:"Passenger feedback showed that connecting to the ship's Wi-Fi was confusing. I designed visual cues to make that step easier to recognize. For dining and excursion bookings, I worked through the screens from browsing to confirmation, focusing on the details passengers needed at each point.",
+          outcome:"My designs contributed to Navigator, a shipped app used by Holland America Line passengers. I designed and prototyped booking and account-related flows, along with Wi-Fi guidance informed by passenger feedback. I don't have verified metrics for these individual changes.",
           imageBrief:"Approved Navigator app screens showing dining reservations, shore excursions, or Wi-Fi connection guidance.",
           galleryBriefs:[
             "Dining reservation and excursion booking flow screens, showing how guests choose and confirm experiences.",
@@ -118,10 +118,10 @@ window.PORTFOLIO = {
         },
         {
           title:"Stateroom TV App",type:"In-Room TV UX/UI · Guest Experience",
-          summary:"Designing voyage information for a stateroom TV, where the remote—not a touchscreen—drives the experience.",
-          details:"The stateroom TV app brought ship information into guests' rooms, including widgets such as Voyage Tracker. Unlike a mobile interface, the TV is viewed from a distance and operated with a remote control. That changes the interaction model: guests need to see where they are in the interface, understand what is selectable, and move through options without tapping directly on the screen.",
-          process:"Remote navigation was a major focus of my design work. I considered directional movement between controls, visible focus and selected states, predictable paths through content, and the amount of information a guest can comfortably read from across the room. For widgets such as Voyage Tracker, the hierarchy needed to communicate the main information quickly while keeping the remote-driven experience straightforward. The key UX question was not just 'Can guests read it?' but 'Can they confidently move through it with a few buttons?'",
-          outcome:"UX/UI design for the in-room TV experience and onboard information widgets, with particular attention to remote-control navigation. Approved screen states showing focus movement and selection would make this work especially compelling; measured usability or launch outcomes have not been verified.",
+          summary:"Designing voyage information and remote-control navigation for the stateroom TV.",
+          details:"I worked on the interface for Holland America Line's stateroom TV app, including onboard information such as Voyage Tracker. Guests use the experience from across the room with a remote, so focus states and directional navigation matter as much as the screen layout.",
+          process:"I designed for directional movement between controls, clear focus and selected states, and text that remains readable at TV viewing distance. On screens such as Voyage Tracker, I gave the main voyage information priority and kept navigation predictable with a remote.",
+          outcome:"My interface work shipped as part of Holland America Line's in-stateroom TV experience. It included remote-friendly navigation and onboard information such as Voyage Tracker. I don't have measured usability results for my specific contributions.",
           imageBrief:"Approved stateroom TV app interface with the Voyage Tracker widget visible.",
           galleryBriefs:[
             "Stateroom TV home screen showing its layout and navigation.",
