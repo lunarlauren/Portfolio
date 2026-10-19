@@ -368,3 +368,12 @@ body{color:var(--ink)}
 
 /* Keep each company's identity consistent through the card-to-collection transition. */
 .collection[data-active="alcon"] .collection-head{background:#fff0dc;color:var(--brand-navy)}
+
+/* Keep the selected company's original color during shared-element expansion. */
+.collection[data-active="holland-america"] .collection-head{background:#203d64;color:#fff}
+.collection[data-active="holland-america"] .collection-head p{color:inherit}
+.collection[data-active="alcon"] .collection-head p{color:inherit}
+/* Avoid a second slide animation fighting the shared-element transition. */
+@supports (view-transition-name: selected-company){
+  .collection .collection-head{animation:none}
+}
