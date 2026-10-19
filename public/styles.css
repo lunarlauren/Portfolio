@@ -166,7 +166,7 @@ section.work,section.playground,section.about {
   animation:rise .55s both;
   animation-delay:calc(var(--i)*90ms)
 }
-.company-card.featured {;
+.company-card.featured {
   background:var(--accent);
   min-height:420px
 }
@@ -225,7 +225,7 @@ section.work,section.playground,section.about {
 .project-card {
   min-width:0
 }
-.project-visual {;
+.project-visual {
   display:grid;
   place-items:center;
   overflow:hidden
@@ -402,7 +402,7 @@ footer a {
   border-radius:3px;
   transition:transform .25s,background .25s
 }
-.primary-link:hover {;
+.primary-link:hover {
   transform:translateY(-3px)
 }
 .quiet-link {
@@ -419,7 +419,7 @@ footer a {
   font-size:10px;
   font-weight:700;
   letter-spacing:.14em}
-.eyebrow-divider {;
+.eyebrow-divider {
   margin-inline:10px
 }
 .hero-feature {
@@ -726,7 +726,7 @@ footer a {
   align-items:start
 }
 
-.project-visual:not(:has(img)) {;
+.project-visual:not(:has(img)) {
   border:2px dashed #8b989d;
   display:flex;
   align-items:center;
@@ -878,7 +878,7 @@ body {
   color:#42647a;
   border-color:#91adbf
 }
-.hero-feature {;
+.hero-feature {
   color:var(--brand-ink)
 }
 .hero-feature:before {}
@@ -1046,7 +1046,7 @@ body {
   align-items:end;
   justify-content:end
 }
-.hero-feature .portrait-interaction .hero-portrait {;
+.hero-feature .portrait-interaction .hero-portrait {
   right:auto;
   bottom:auto;
   width:100%;
@@ -1208,7 +1208,7 @@ body {
   text-underline-offset:3px
 }
 @media(max-width:760px) {
-  .hero-feature .portrait-bubble {;
+  .hero-feature .portrait-bubble {
     min-width:160px;
     max-width:190px
   }
@@ -1267,7 +1267,7 @@ body {
   --teal:#326b86;
   --clay:var(--brand-pink);
   --lilac:#ffe0f1;
-  --brand-pink:var(--brand-pink);
+  --brand-pink:#f15c9d;
   --brand-navy:var(--brand-ink);
   --brand-sky:#99caeb;
   --focus:#155caa
@@ -1737,3 +1737,14 @@ body {
 /* Preserve the hero's original two-tone headline. */
 .hero h1{color:var(--brand-ink)}
 .hero h1 em{color:var(--brand-pink);font-style:normal}
+
+/* Mobile viewport containment and safe hero illustration placement. */
+html,body{max-width:100%;overflow-x:clip}
+@media(max-width:760px){
+  .hero{min-width:0}
+  .hero-feature{min-width:0}
+  .hero-feature .feature-bottom{padding-right:0;max-width:68%}
+  .hero-feature .portrait-interaction{right:0;bottom:0;width:34%;max-width:145px}
+  .hero-feature .portrait-interaction .hero-portrait{width:100%;max-width:100%}
+  .hero-feature .portrait-bubble{right:0;bottom:105%;max-width:min(185px,55vw)}
+}
