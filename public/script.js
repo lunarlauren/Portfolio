@@ -21,7 +21,7 @@ function routeWithMotion(){
   const id=toCompany||fromCompany;
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const supportsTransition=typeof document.startViewTransition==="function";
-  if(!id||!supportsTransition||reduced){route();previousHash=nextHash;return}
+  if(!id||!supportsTransition||reduced){route();if(toCompany){const work=$("#work");if(work)window.scrollTo({top:Math.max(0,window.scrollY+work.getBoundingClientRect().top),behavior:"instant"});}previousHash=nextHash;return}
   const card=companyGrid.querySelector('[data-company="'+CSS.escape(id)+'"]');
   const header=collection.querySelector(".collection-head");
   // Give only the visible source the shared transition name.
@@ -29,6 +29,8 @@ function routeWithMotion(){
   if(header&&!collection.hidden)header.style.viewTransitionName="selected-company";
   const transition=document.startViewTransition(()=>{
     route();
+    // The company grid collapses on mobile; reset scroll before the new view is captured.
+    if(toCompany){const work=$("#work");if(work)window.scrollTo({top:Math.max(0,window.scrollY+work.getBoundingClientRect().top),behavior:"instant"});}
     if(toCompany){
       const nextHeader=collection.querySelector(".collection-head");
       if(nextHeader)nextHeader.style.viewTransitionName="selected-company";
