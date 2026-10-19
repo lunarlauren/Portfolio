@@ -11,18 +11,13 @@ function initInventory(){
  gummyworms:["Gummy worms","A vital part of the creative process. For research purposes, obviously."],
  coffee:["Coffee","Creative fuel. Occasionally more urgent than the actual brief."]
  };
- const counter=document.getElementById("inventory-counter");
- const random=document.getElementById("inventory-random");
  const reduceMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
- let active=0;
  function selectItem(button,animate=true){
   const item=descriptions[button.dataset.item];
   if(!item)return;
-  active=buttons.indexOf(button);
   buttons.forEach(other=>other.setAttribute("aria-pressed",String(other===button)));
   panel.querySelector("strong").textContent=item[0];
   panel.querySelector("p").textContent=item[1];
-  if(counter)counter.textContent=String(active+1).padStart(2,"0")+" / "+String(buttons.length).padStart(2,"0");
   if(animate&&!reduceMotion){
    button.classList.remove("inventory-pop");
    panel.classList.remove("inventory-refresh");
@@ -42,11 +37,7 @@ function initInventory(){
    selectItem(next);
   });
  });
- random?.addEventListener("click",()=>{
-  const next=buttons[(active+1+Math.floor(Math.random()*(buttons.length-1)))%buttons.length];
-  selectItem(next);
-  next.focus({preventScroll:true});
- });
+
 }
 initInventory();
 
