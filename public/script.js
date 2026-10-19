@@ -56,3 +56,23 @@ document.querySelectorAll(".inventory-item").forEach(button=>button.addEventList
  const panel=document.getElementById("inventory-inspect");
  panel.querySelector("strong").textContent=entry[0];panel.querySelector("p").textContent=entry[1];
 }));
+
+// Small, optional tactile details: no autoplay, no sound, no persistent state.
+const sparkleButton=document.getElementById("sparkle-button");
+const sparkleSets=[["✦","✧","✦"],["✳","✦","✳"],["✧","✴","✧"],["✺","✧","✺"]];
+let sparkleIndex=0;
+sparkleButton?.addEventListener("click",()=>{
+ sparkleIndex=(sparkleIndex+1)%sparkleSets.length;
+ sparkleButton.querySelectorAll(".night-sparkles span").forEach((el,i)=>{el.textContent=sparkleSets[sparkleIndex][i];});
+ sparkleButton.classList.remove("sparkle-pop");
+ void sparkleButton.offsetWidth;
+ sparkleButton.classList.add("sparkle-pop");
+});
+const footerSecret=document.getElementById("footer-secret");
+const footerMessages=["✳","made with curiosity ✦","one more little detail ♡","✳"];
+let secretIndex=0;
+footerSecret?.addEventListener("click",()=>{
+ secretIndex=(secretIndex+1)%footerMessages.length;
+ footerSecret.textContent=footerMessages[secretIndex];
+ footerSecret.setAttribute("aria-label",footerMessages[secretIndex]==="✳"?"Reveal a little surprise":footerMessages[secretIndex]);
+});
