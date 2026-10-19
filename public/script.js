@@ -21,14 +21,21 @@ const main=$("#main"),caseView=document.createElement("section");caseView.classN
 let previousHash=decodeURIComponent(location.hash.slice(1));
 function routeWithMotion(){
   const nextHash=decodeURIComponent(location.hash.slice(1));
+  const leavingProject=previousHash.startsWith("project/")&&!nextHash.startsWith("project/");
   const toCompany=nextHash.startsWith("company/")?nextHash.slice(8):null;
   // Avoid shared-element snapshots while moving the expanded panel in the DOM.
   route();
+  if(leavingProject){
+    requestAnimationFrame(()=>{
+      if(toCompany){const heading=collection.querySelector(".collection-head h3");if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}}
+      else{const heading=$("#work-title");if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}}
+    });
+  }
   if(toCompany){
     requestAnimationFrame(()=>{
       const work=$("#work");
       if(work)window.scrollTo({top:Math.max(0,window.scrollY+work.getBoundingClientRect().top),behavior:"instant"});
-      collection.focus({preventScroll:true});
+      if(!leavingProject)collection.focus({preventScroll:true});
     });
   }
   previousHash=nextHash;
