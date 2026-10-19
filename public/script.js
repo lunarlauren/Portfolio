@@ -58,16 +58,6 @@ document.querySelectorAll(".inventory-item").forEach(button=>button.addEventList
 }));
 
 // Small, optional tactile details: no autoplay, no sound, no persistent state.
-const sparkleButton=document.getElementById("sparkle-button");
-const sparkleSets=[["✦","✧","✦"],["✳","✦","✳"],["✧","✴","✧"],["✺","✧","✺"]];
-let sparkleIndex=0;
-sparkleButton?.addEventListener("click",()=>{
- sparkleIndex=(sparkleIndex+1)%sparkleSets.length;
- sparkleButton.querySelectorAll(".night-sparkles span").forEach((el,i)=>{el.textContent=sparkleSets[sparkleIndex][i];});
- sparkleButton.classList.remove("sparkle-pop");
- void sparkleButton.offsetWidth;
- sparkleButton.classList.add("sparkle-pop");
-});
 const footerSecret=document.getElementById("footer-secret");
 const footerMessages=["✳","made with curiosity ✦","one more little detail ♡","✳"];
 let secretIndex=0;
