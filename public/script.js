@@ -13,7 +13,7 @@ function openCompany(id,scroll=true){
 function showCompanies(){
   const wasOpen=!collection.hidden;
   collection.hidden=true;collection.after(companyGrid);companyGrid.hidden=false;companyGrid.dataset.active="";collection.dataset.active="";
-  if(wasOpen&&location.hash==="#work"){requestAnimationFrame(()=>{const first=companyGrid.querySelector(".company-card");if(first)first.focus({preventScroll:true});});}
+  
   document.querySelectorAll(".company-card").forEach(btn=>{btn.setAttribute("aria-expanded","false");});
 }
 document.querySelectorAll("[data-company]").forEach(btn=>btn.addEventListener("click",()=>{location.hash="company/"+encodeURIComponent(btn.dataset.company)}));
@@ -27,7 +27,7 @@ function routeWithMotion(){
   route();
   if(leavingProject){
     requestAnimationFrame(()=>{
-      if(toCompany){const heading=collection.querySelector(".collection-head h3");if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}}
+      if(toCompany){collection.focus({preventScroll:true});}
       else{const heading=$("#work-title");if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}}
     });
   }
