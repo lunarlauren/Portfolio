@@ -1869,3 +1869,42 @@ html{scroll-padding-top:82px}
 .playground .section-head .playground-title{display:block!important;position:relative;z-index:2;visibility:visible!important;opacity:1!important;color:#fff!important;font:600 clamp(35px,5vw,66px)/1.1 'Newsreader',Georgia,serif!important;margin:14px 0 0!important;max-width:100%;height:auto!important;overflow:visible!important}
 .playground .section-head .playground-title::before,.playground .section-head .playground-title::after{content:none!important;display:none!important}
 .playground .night-eyebrow{display:block}
+
+
+/* About: intentional spacing and a dedicated column for the interactive inventory. */
+.about-bottom{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(300px,.92fr);
+  align-items:start;
+  column-gap:clamp(32px,5vw,88px);
+  row-gap:clamp(28px,4vw,48px);
+  margin-top:clamp(32px,5vw,64px);
+}
+.about-copy{max-width:62ch}
+.about-copy p{margin:0 0 1.25em}
+.about-bottom .creative-inventory{min-width:0;max-width:none;margin:0}
+.about-bottom .text-link{
+  grid-column:1/-1;
+  justify-self:start;
+  margin:0;
+  white-space:normal;
+}
+.inventory-heading{align-items:end;gap:12px;margin-bottom:18px}
+.inventory-heading h3{margin:5px 0 0}
+.inventory-heading p{max-width:155px;line-height:1.45;text-align:right}
+.inventory-grid{min-height:0;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 6px;padding:28px 12px 14px}
+.inventory-item{min-height:108px}
+.inventory-inspect{min-height:94px;padding:16px 18px 18px}
+@media(max-width:900px){
+ .about-bottom{grid-template-columns:minmax(0,1fr);row-gap:30px}
+ .about-bottom .creative-inventory{width:100%;max-width:660px}
+ .about-bottom .text-link{grid-column:1;margin-top:0;display:inline-flex}
+}
+@media(max-width:460px){
+ .about-bottom{margin-top:30px;row-gap:26px}
+ .inventory-heading{align-items:flex-start;gap:5px;margin-bottom:14px}
+ .inventory-heading p{max-width:none;text-align:left}
+ .inventory-grid{padding:28px 8px 12px;gap:2px}
+ .inventory-item{min-height:98px}
+ .inventory-inspect{padding:15px 16px 17px}
+}
