@@ -71,11 +71,11 @@ window.PORTFOLIO = {
       accent:"#fff0dc",
       projects:[
         {
-          title:"Customizable Patient Portal",type:"Healthcare Product UX",
+          title:"Customizable Patient Portal",type:"UX/UI Design · Patient Experience",
           summary:"A practice-customizable patient portal for sharing surgical documents, preparation instructions, and important care information.",
           details:"This patient-facing application gave practices a way to tailor the portal experience to their needs and share surgery-related information with patients. The design challenge was to balance practice-level customization with a clear, reassuring experience for people preparing for a procedure.",
-          process:"Case-study angle: demonstrate the relationship between practice configuration and the patient experience. Show how important documents, surgery instructions, and patient information can be organized for clarity. Add your specific design decisions, ownership, and research or testing details when confirmed.",
-          outcome:"Project functionality described from firsthand experience. Specific responsibilities, release status, and measured outcomes still need confirmation.",
+          process:"Case-study angle: demonstrate the relationship between practice configuration and the patient experience. Show how important documents, surgery instructions, and patient information can be organized for clarity. Show your actual wireframes, interface iterations, and UX decisions; add research or testing details only if you conducted them.",
+          outcome:"UX/UI design work completed. Deployment, adoption, and measured patient outcomes are not confirmed.",
           imageBrief:"Hero to design: two connected views—practice customization dashboard on desktop and a patient portal on mobile, showing surgery information, a document list, and clear next steps. Use fictional patient data.",
           galleryBriefs:[
             "Practice setup flow: configurable branding, information modules, and the resulting patient-facing preview.",
@@ -84,11 +84,11 @@ window.PORTFOLIO = {
           ]
         },
         {
-          title:"AI-Assisted IOL Planning",type:"Clinical Workflow UX",
+          title:"AI-Assisted IOL Planning",type:"UX/UI Design · Clinical Tools",
           summary:"Connecting patient measurements, scans, and clinician-trained AI predictions to an IOL prescription planning workflow.",
           details:"This clinician-facing system supported doctors in training an AI model on intraocular lens (IOL) prescription decisions using patient data and scans. The predicted information was then associated with the patient's file and passed into another application, creating a connected workflow across clinical tools.",
-          process:"Case-study angle: map the end-to-end journey from patient data and imaging through clinician model training, predicted IOL information, and downstream patient-file use. Emphasize clear distinctions between source measurements, model predictions, and clinician decisions. Add the exact interfaces and your contribution after review.",
-          outcome:"Workflow described from firsthand experience. No claims are made about prediction accuracy, clinical performance, automation of decisions, or regulatory status.",
+          process:"Case-study angle: map the end-to-end journey from patient data and imaging through clinician model training, predicted IOL information, and downstream patient-file use. Emphasize clear distinctions between source measurements, model predictions, and clinician decisions. Use your actual UX flows, screen designs, and interaction decisions to explain your contribution.",
+          outcome:"UX/UI design work completed. Deployment, adoption, prediction accuracy, and clinical outcomes are not confirmed.",
           imageBrief:"Hero to design: connected clinical application screens with anonymized patient scan thumbnails, a model-training or review interface, and predicted IOL information flowing into a patient record. Label predictions clearly as AI-generated.",
           galleryBriefs:[
             "System flow diagram: patient data and scans → clinician-guided model training → prediction → patient file → connected application.",
