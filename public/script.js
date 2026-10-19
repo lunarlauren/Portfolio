@@ -48,8 +48,8 @@ const inventoryDescriptions={
  illustrator:["Illustrator","Vector shapes, logos, icons, and all the little details."],
  photoshop:["Photoshop","Photo editing, composites, and making the visual idea actually happen."],
  aftereffects:["After Effects","A little movement can make a whole design feel alive."],
- prototyping:["Prototyping","Making things clickable so the idea can speak for itself."],
- sidequests:["Side quests","Illustration, games, and personal projects I get very invested in."]
+ gummyworms:["Gummy worms","A vital part of the creative process. For research purposes, obviously."],
+ coffee:["Coffee","Creative fuel. Occasionally more urgent than the actual brief."]
 };
 document.querySelectorAll(".inventory-item").forEach(button=>button.addEventListener("click",()=>{
  const entry=inventoryDescriptions[button.dataset.item];if(!entry)return;
