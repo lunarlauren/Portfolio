@@ -301,3 +301,37 @@ body{color:var(--ink)}
 @keyframes collection-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:760px){.collection-nav{align-items:flex-start;flex-direction:column}.collection-head{padding:24px}}
 @media(prefers-reduced-motion:reduce){.collection{animation:none}}
+
+/* Motion language: quiet editorial transitions, tactile cards, purposeful hierarchy. */
+:root{--motion-ease:cubic-bezier(.22,1,.36,1)}
+@keyframes gallery-reveal{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes detail-reveal{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@media(prefers-reduced-motion:no-preference){
+  .collection{animation:gallery-reveal .5s var(--motion-ease) both}
+  .collection .collection-nav{animation:gallery-reveal .42s var(--motion-ease) .04s both}
+  .collection .collection-head{animation:gallery-reveal .55s var(--motion-ease) .09s both}
+  .collection .project-card{animation:gallery-reveal .62s var(--motion-ease) both;animation-delay:calc(.16s + var(--i,0)*.075s)}
+  .case-view:not([hidden]) .case-head{animation:detail-reveal .6s var(--motion-ease) .06s both}
+  .case-view:not([hidden]) .case-hero-visual{animation:detail-reveal .7s var(--motion-ease) .13s both}
+  .case-view:not([hidden]) .case-body{animation:detail-reveal .7s var(--motion-ease) .2s both}
+  .case-view:not([hidden]) .case-gallery{animation:detail-reveal .7s var(--motion-ease) .25s both}
+}
+.company-card{transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
+.company-card:hover{transform:translateY(-7px);box-shadow:0 22px 42px #20334420}
+.company-card .card-top span:last-child,.company-card .card-bottom span:last-child{display:inline-block;transition:transform .4s var(--motion-ease)}
+.company-card:hover .card-top span:last-child,.company-card:focus-visible .card-top span:last-child{transform:translate(3px,-3px)}
+.company-card:hover .card-bottom span:last-child,.company-card:focus-visible .card-bottom span:last-child{transform:translateX(6px)}
+.collection-back{transition:color .2s ease}
+.collection-back:hover{color:#a92666}
+.collection .project-card-link .project-visual,.play-grid .project-card-link .project-visual{transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
+.collection .project-card-link:hover .project-visual,.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px);box-shadow:0 15px 30px #20334419}
+.project-card .project-meta span:last-child{display:inline-block;transition:transform .4s var(--motion-ease)}
+.project-card-link:hover .project-meta span:last-child,.project-card-link:focus-visible .project-meta span:last-child{transform:translate(4px,-4px)}
+@media(prefers-reduced-motion:reduce){
+  .collection,.collection .collection-nav,.collection .collection-head,.collection .project-card,
+  .case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}
+  .company-card,.company-card .card-top span:last-child,.company-card .card-bottom span:last-child,
+  .collection .project-card-link .project-visual,.play-grid .project-card-link .project-visual,
+  .project-card .project-meta span:last-child{transition:none!important}
+  .company-card:hover,.collection .project-card-link:hover .project-visual,.play-grid .project-card-link:hover .project-visual{transform:none}
+}
