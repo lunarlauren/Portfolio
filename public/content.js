@@ -66,34 +66,34 @@ window.PORTFOLIO = {
       ]
     },
     {
-      id:"alcon",name:"Alcon",category:"VISUAL DESIGN",
-      description:"Selected visual communication work. The project narratives below are editorial drafts pending confirmation of scope and deliverables.",
+      id:"alcon",name:"Alcon",category:"HEALTHCARE PRODUCT UX",
+      description:"Patient-facing surgical communication and clinician-facing AI-assisted IOL planning workflows.",
       accent:"#fff0dc",
       projects:[
         {
-          title:"Visual Communication Systems",type:"Visual Design · Draft",
-          summary:"Exploring how a precise visual language can make specialized information easier to understand.",
-          details:"EDITORIAL DRAFT — Specific project scope is not yet documented. This proposed case-study structure is designed for work where accuracy, consistency, and audience comprehension are central to the visual communication challenge.",
-          process:"Replace with your actual brief, audience, design constraints, and the steps you took to develop the visual solution. Useful evidence might include hierarchy studies, layout iterations, and production-ready assets.",
-          outcome:"TO VERIFY — Add the real deliverables, your responsibilities, review process, and any outcomes you can substantiate.",
-          imageBrief:"Hero suggestion: approved Alcon-branded visual communication layout shown across a desktop presentation and a printed piece; avoid unapproved product or medical claims.",
+          title:"Customizable Patient Portal",type:"Healthcare Product UX",
+          summary:"A practice-customizable patient portal for sharing surgical documents, preparation instructions, and important care information.",
+          details:"This patient-facing application gave practices a way to tailor the portal experience to their needs and share surgery-related information with patients. The design challenge was to balance practice-level customization with a clear, reassuring experience for people preparing for a procedure.",
+          process:"Case-study angle: demonstrate the relationship between practice configuration and the patient experience. Show how important documents, surgery instructions, and patient information can be organized for clarity. Add your specific design decisions, ownership, and research or testing details when confirmed.",
+          outcome:"Project functionality described from firsthand experience. Specific responsibilities, release status, and measured outcomes still need confirmation.",
+          imageBrief:"Hero to design: two connected views—practice customization dashboard on desktop and a patient portal on mobile, showing surgery information, a document list, and clear next steps. Use fictional patient data.",
           galleryBriefs:[
-            "Suggested visual: approved layout exploration with grid, typography, and information hierarchy annotations.",
-            "Suggested visual: two or three final approved deliverables shown at realistic scale.",
-            "Suggested visual: detail crop showing accessibility, clarity, and consistency in the final design."
+            "Practice setup flow: configurable branding, information modules, and the resulting patient-facing preview.",
+            "Patient journey: surgery overview, preparation instructions, documents, and follow-up information in a clear sequence.",
+            "Document delivery detail: example surgery packet, read/download states, and a reassuring information hierarchy using fictional records."
           ]
         },
         {
-          title:"Campaign & Production Design",type:"Visual Design · Draft",
-          summary:"A proposed case-study framework for cohesive campaign assets across formats.",
-          details:"EDITORIAL DRAFT — The exact assignment and deliverables need confirmation. This page is structured to showcase the craft of adapting one visual direction to multiple touchpoints without losing clarity or consistency.",
-          process:"Document the real campaign objective, creative direction, production constraints, and how you translated the system across required sizes and channels.",
-          outcome:"TO VERIFY — Replace this note with approved project results and a precise account of your contribution.",
-          imageBrief:"Hero suggestion: a tidy grid of approved Alcon campaign assets, including a large-format key visual and supporting digital or print formats.",
+          title:"AI-Assisted IOL Planning",type:"Clinical Workflow UX",
+          summary:"Connecting patient measurements, scans, and clinician-trained AI predictions to an IOL prescription planning workflow.",
+          details:"This clinician-facing system supported doctors in training an AI model on intraocular lens (IOL) prescription decisions using patient data and scans. The predicted information was then associated with the patient's file and passed into another application, creating a connected workflow across clinical tools.",
+          process:"Case-study angle: map the end-to-end journey from patient data and imaging through clinician model training, predicted IOL information, and downstream patient-file use. Emphasize clear distinctions between source measurements, model predictions, and clinician decisions. Add the exact interfaces and your contribution after review.",
+          outcome:"Workflow described from firsthand experience. No claims are made about prediction accuracy, clinical performance, automation of decisions, or regulatory status.",
+          imageBrief:"Hero to design: connected clinical application screens with anonymized patient scan thumbnails, a model-training or review interface, and predicted IOL information flowing into a patient record. Label predictions clearly as AI-generated.",
           galleryBriefs:[
-            "Suggested visual: creative direction board showing approved type, imagery, and color choices.",
-            "Suggested visual: production-ready asset family across three different aspect ratios.",
-            "Suggested visual: close-up of an approved final piece with craft details and layout notes."
+            "System flow diagram: patient data and scans → clinician-guided model training → prediction → patient file → connected application.",
+            "Clinician interface concept: anonymized measurements, scan previews, training/review controls, and clear model-output labeling.",
+            "Patient record detail: side-by-side source measurements and predicted IOL information, with visual cues separating AI output from clinician-reviewed data."
           ]
         }
       ]
