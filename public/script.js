@@ -3,7 +3,7 @@ function openCompany(id,scroll=true){
   const c=data.companies.find(x=>x.id===id);if(!c)return;
   companyGrid.hidden=false;
   companyGrid.dataset.active=id;
-  companyGrid.before(collection);
+  companyGrid.parentNode.insertBefore(collection,companyGrid);
   collection.hidden=false;collection.dataset.active=id;
   collection.innerHTML='<div class="collection-nav"><a href="#work" class="collection-back">← All companies</a><span class="eyebrow">SELECTED WORK / '+esc(c.projects.length)+' PROJECTS</span></div><div class="collection-head"><div><p class="eyebrow">'+esc(c.category)+'</p><h3>'+esc(c.name)+'</h3><p>'+esc(c.description)+'</p></div></div><div class="projects-grid">'+c.projects.map((p,i)=>projectCard(p,i,c.id)).join("")+'</div>';
   document.querySelectorAll(".company-card").forEach(btn=>btn.setAttribute("aria-expanded",String(btn.dataset.company===id)));
@@ -18,33 +18,15 @@ const main=$("#main"),caseView=document.createElement("section");caseView.classN
 let previousHash=decodeURIComponent(location.hash.slice(1));
 function routeWithMotion(){
   const nextHash=decodeURIComponent(location.hash.slice(1));
-  const fromCompany=previousHash.startsWith("company/")?previousHash.slice(8):null;
   const toCompany=nextHash.startsWith("company/")?nextHash.slice(8):null;
-  const id=toCompany||fromCompany;
-  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const supportsTransition=typeof document.startViewTransition==="function";
-  if(!id||!supportsTransition||reduced){route();if(toCompany){const work=$("#work");if(work)window.scrollTo({top:Math.max(0,window.scrollY+work.getBoundingClientRect().top),behavior:"instant"});}previousHash=nextHash;return}
-  const card=companyGrid.querySelector('[data-company="'+CSS.escape(id)+'"]');
-  const header=collection.querySelector(".collection-head");
-  // Give only the visible source the shared transition name.
-  if(card&&!companyGrid.hidden)card.style.viewTransitionName="selected-company";
-  if(header&&!collection.hidden)header.style.viewTransitionName="selected-company";
-  const transition=document.startViewTransition(()=>{
-    route();
-    // The company grid collapses on mobile; reset scroll before the new view is captured.
-    if(toCompany){const work=$("#work");if(work)window.scrollTo({top:Math.max(0,window.scrollY+work.getBoundingClientRect().top),behavior:"instant"});}
-    if(toCompany){
-      const nextHeader=collection.querySelector(".collection-head");
-      if(nextHeader)nextHeader.style.viewTransitionName="selected-company";
-    }else if(fromCompany&&card&&!companyGrid.hidden){
-      card.style.viewTransitionName="selected-company";
-    }
-  });
-  transition.finished.finally(()=>{
-    if(card)card.style.viewTransitionName="";
-    const nextHeader=collection.querySelector(".collection-head");
-    if(nextHeader)nextHeader.style.viewTransitionName="";
-  });
+  // Avoid shared-element snapshots while moving the expanded panel in the DOM.
+  route();
+  if(toCompany){
+    requestAnimationFrame(()=>{
+      const work=$("#work");
+      if(work)window.scrollTo({top:Math.max(0,window.scrollY+work.getBoundingClientRect().top),behavior:"instant"});
+    });
+  }
   previousHash=nextHash;
 }
 window.addEventListener("hashchange",routeWithMotion);route();$("#year").textContent=new Date().getFullYear();if(data.email&&data.email!=="hello@example.com"){const mail="mailto:"+data.email;$("#contact-link").href=mail;$("#email-link").href=mail}else{$("#contact-link").href="#about";$("#email-link").href="#about";$("#email-link").textContent="Contact details coming soon ↗"}
