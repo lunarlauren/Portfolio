@@ -13,10 +13,10 @@ window.PORTFOLIO = {
       projects:[
         {
           title:"Connected Planning", type:"Product UX",
-          summary:"Turning complex construction planning into a more connected, understandable product experience.",
-          details:"Construction planning brings schedules, teams, dependencies, and changing project information into the same conversation. This case study explores how a product experience can make that complexity easier to navigate, with stronger information hierarchy and clearer relationships between work, people, and project context.",
-          process:"Frame the key planning questions first: what has changed, who needs to know, and what should happen next? Map the relationships between project-level information and the views different stakeholders need. Use progressive disclosure, consistent visual language, and realistic construction scenarios to guide the interface.",
-          outcome:"Portfolio focus: show the design reasoning, interaction decisions, and iteration behind connected planning. Add validated launch details or measurable outcomes only when approved.",
+          summary::"Making complex construction planning easier to understand by connecting project context, stakeholders, and the information teams act on.",
+          details::"Construction projects rarely fail for lack of information; the challenge is finding the right information in time to use it. At Hoylu, I worked on product design in a space where schedules, stakeholders, and planning conversations overlap. The central UX problem was how to make a complex, collaborative workflow feel coherent: what belongs to the project, how views relate, and where a person goes to understand the next decision.",
+          process::"My design approach centered on information hierarchy and the relationship between project-level context and individual planning views. I explored how teams could move from a broad project picture to the detail behind an item without losing context. The work required thinking about different audiences—people coordinating plans and people acting on them—and how the interface communicates changes, dependencies, and ownership. This is the kind of product problem where structure and clarity matter more than adding another panel.",
+          outcome::"Product UX and visual design contributions to Hoylu's construction-planning experience. The strongest case-study evidence will be annotated screens showing project context, linked views, and interaction decisions; product impact metrics have not been verified.",
           imageBrief:"Hero composition: a polished desktop construction-planning interface showing a project overview, linked schedule items, and a focused detail panel. Use realistic but anonymized sample data.",
           galleryBriefs:[
             "Before-and-after information architecture: disconnected boards versus a unified project hierarchy, with clear labels and arrows.",
@@ -26,10 +26,10 @@ window.PORTFOLIO = {
         },
         {
           title:"Mobile Insights", type:"UX / UI",
-          summary:"Bringing the right construction project information to people who need answers away from their desks.",
-          details:"A mobile experience has to respect limited space and limited attention. This exploration focuses on translating dense project information into glanceable status, useful priorities, and a clear path from summary to detail.",
-          process:"Start with field-friendly tasks: check progress, spot changes, understand risk, and follow up. Prioritize the highest-value information, establish a readable hierarchy, and design touch targets and states that work in real-world conditions.",
-          outcome:"Portfolio focus: demonstrate mobile-first prioritization, legibility, and how a complex desktop workflow becomes a useful on-the-go experience. Confirm which screens can be shown publicly.",
+          summary::"Translating dense construction information into mobile views that prioritize what someone needs to know next.",
+          details::"A project dashboard that works on a desktop does not automatically work on a phone. For Hoylu's mobile insights work, the design challenge was to make project information useful in short, focused moments: checking a status, understanding a change, or finding the detail behind an insight. Limited screen space made prioritization—not simply resizing—the central problem.",
+          process::"I developed the mobile UX story around a sequence of questions: what should the user notice first, what context helps them understand it, and what action or deeper view comes next? I considered the hierarchy of insight cards, summary information, and supporting detail, with a focus on legibility and touch-friendly interactions. The aim was to preserve meaning while removing the density that makes desktop planning tools difficult to scan on the go.",
+          outcome::"Mobile UX concepts and visual storytelling for Hoylu's project insights experience. Screens and interaction examples can demonstrate the hierarchy and decision-making; implementation and performance results have not been confirmed.",
           imageBrief:"Hero composition: three mobile screens displaying a construction project dashboard, an insight detail, and a status update; include realistic charts and clear labels.",
           galleryBriefs:[
             "Mobile user-flow diagram showing how a site lead moves from an alert to the affected planning item.",
@@ -39,10 +39,10 @@ window.PORTFOLIO = {
         },
         {
           title:"Campaigns & Events", type:"Visual Design",
-          summary:"Making a complex construction technology story approachable across campaigns, events, and physical spaces.",
-          details:"Marketing design for a technical product has to earn attention quickly while remaining accurate. This collection brings together visual storytelling across event environments, presentations, and campaign assets—formats that must communicate clearly at dramatically different scales.",
-          process:"Distill each message to a simple visual idea, then adapt it into a flexible system. Consider distance, viewing time, contrast, and production constraints for booth signage; carry the same hierarchy into smaller digital and print touchpoints.",
-          outcome:"Portfolio focus: show the consistency of the system across formats, from large environmental graphics to small campaign assets. Add photographs and approved deliverables as available.",
+          summary::"Taking a technical SaaS product story from digital campaigns to full-size event environments without losing clarity.",
+          details::"At Hoylu, I worked on visual communications for a construction technology audience across marketing and event touchpoints. The challenge changes with the format: a social graphic has seconds to earn attention, while a booth wall must communicate from across a room. Both need a clear message, recognizable brand, and a useful visual hierarchy.",
+          process::"I translated product messages into compositions that could scale across formats, including event booth signage, presentation assets, and digital campaign graphics. For large-format work, I considered viewing distance, display proportions, and the relationship between printed graphics and screens, including 65-inch and 40-inch displays. The design decisions centered on what should be readable first and what supporting information could wait until someone moved closer.",
+          outcome::"Visual design work spanning environmental signage and digital marketing materials. Approved booth photos, screen mockups, and campaign assets will show how the system holds together across sizes; event conversion or engagement metrics are not available.",
           imageBrief:"Hero composition: realistic trade-show booth mockup featuring large Hoylu signage, a screen, and a clear product message; use approved branding.",
           galleryBriefs:[
             "Wide environmental mockup showing booth walls, screen placements, and scale relative to visitors.",
@@ -52,10 +52,10 @@ window.PORTFOLIO = {
         },
         {
           title:"Motion & Storytelling", type:"Motion Design",
-          summary:"Explaining platform ideas through concise, approachable visual narratives.",
-          details:"Some product ideas are easier to understand in motion. This case study looks at how interface-inspired animation and purposeful transitions can explain relationships, changes, and workflows without overwhelming the viewer.",
-          process:"Begin with the single takeaway the audience should remember. Build a storyboard around a clear opening, visual progression, and resolution. Use restrained motion, consistent visual metaphors, and pacing that allows technical ideas to land.",
-          outcome:"Portfolio focus: present the storyboard-to-animation process. Include a final video or approved excerpt when available; do not imply unverified campaign performance.",
+          summary::"Turning complex product messages into a concise, visual story built for motion.",
+          details::"Construction software can be difficult to explain in a static image, especially when the value lies in how information connects and changes over time. I worked on motion-oriented product storytelling at Hoylu, including a short-form, approximately 30-second storyboard intended to communicate a product idea quickly and clearly.",
+          process::"I approached the piece as a sequence rather than a collection of effects: establish the problem, introduce the key relationship, and land on a clear takeaway. Storyboarding helped determine what the audience needed to see in each moment, where transitions should clarify a connection, and where motion would distract. I focused on readable pacing, consistent visual language, and an achievable narrative within a tight runtime.",
+          outcome::"Storyboard and motion-design planning for short-form product communication. The storyboard frames are the primary evidence available; a finished animation and performance results should only be shown if confirmed.",
           imageBrief:"Hero composition: cinematic 16:9 storyboard keyframe with connected project nodes, interface panels, and motion paths in Hoylu's visual language.",
           galleryBriefs:[
             "Six-frame storyboard strip showing the progression of a 30-second product explainer.",
@@ -72,10 +72,10 @@ window.PORTFOLIO = {
       projects:[
         {
           title:"Customizable Patient Portal",type:"UX/UI Design · Patient Experience",
-          summary:"A practice-customizable patient portal for sharing surgical documents, preparation instructions, and important care information.",
-          details:"This patient-facing application gave practices a way to tailor the portal experience to their needs and share surgery-related information with patients. The design challenge was to balance practice-level customization with a clear, reassuring experience for people preparing for a procedure.",
-          process:"Case-study angle: demonstrate the relationship between practice configuration and the patient experience. Show how important documents, surgery instructions, and patient information can be organized for clarity. Show your actual wireframes, interface iterations, and UX decisions; add research or testing details only if you conducted them.",
-          outcome:"UX/UI design work completed. Deployment, adoption, and measured patient outcomes are not confirmed.",
+          summary::"Balancing practice-specific customization with a clear patient experience for surgery documents and preparation.",
+          details::"Preparing for a procedure comes with a lot of information, and patients need to find the right instructions without decoding a clinical system. I worked on a customizable patient portal that allowed medical practices to tailor the experience and share surgery-related documents and preparation information. The UX challenge was to support different practice needs while keeping the patient-facing experience consistent and easy to understand.",
+          process::"I considered the relationship between what a practice configures and what a patient ultimately sees. Important documents, preparation steps, and other surgery information needed a hierarchy that made the next relevant item obvious. This required thinking about content grouping, navigation, and the balance between flexibility for practices and clarity for patients. In the portfolio, actual screens should show both sides of that relationship rather than presenting customization as an isolated feature.",
+          outcome::"UX/UI design for a patient-facing portal and practice customization workflow. I do not have verified adoption, accessibility testing, or clinical outcome metrics to attribute to this work.",
           imageBrief:"Hero to design: two connected views—practice customization dashboard on desktop and a patient portal on mobile, showing surgery information, a document list, and clear next steps. Use fictional patient data.",
           galleryBriefs:[
             "Practice setup flow: configurable branding, information modules, and the resulting patient-facing preview.",
@@ -85,10 +85,10 @@ window.PORTFOLIO = {
         },
         {
           title:"AI-Assisted IOL Planning",type:"UX/UI Design · Clinical Tools",
-          summary:"Connecting patient measurements, scans, and clinician-trained AI predictions to an IOL prescription planning workflow.",
-          details:"This clinician-facing system supported doctors in training an AI model on intraocular lens (IOL) prescription decisions using patient data and scans. The predicted information was then associated with the patient's file and passed into another application, creating a connected workflow across clinical tools.",
-          process:"Case-study angle: map the end-to-end journey from patient data and imaging through clinician model training, predicted IOL information, and downstream patient-file use. Emphasize clear distinctions between source measurements, model predictions, and clinician decisions. Use your actual UX flows, screen designs, and interaction decisions to explain your contribution.",
-          outcome:"UX/UI design work completed. Deployment, adoption, prediction accuracy, and clinical outcomes are not confirmed.",
+          summary::"Making patient data, imaging, and AI-generated IOL predictions understandable within a connected clinical workflow.",
+          details::"I worked on a clinician-facing UX/UI system related to intraocular lens (IOL) planning. Doctors could use patient measurements and scans to train an AI model on prescription decisions, with predicted information then associated with a patient's file and passed to another application. The design problem was not simply displaying a prediction; it was presenting several kinds of information with enough context to support a careful clinical workflow.",
+          process::"I approached the interface as a sequence: review patient source data and scans, work with the model-training or prediction workflow, and understand how resulting information moves into the patient record and downstream application. A key design consideration was distinguishing measured inputs, model-generated outputs, and clinician-reviewed information, so those categories would not visually collapse into one another. The screens and flows should make the handoff between tools legible without implying that the interface replaces clinical judgment.",
+          outcome::"UX/UI work for a connected clinical planning tool. This case study does not claim clinical validation, model accuracy, deployment status, or improved patient outcomes; those would require documented evidence.",
           imageBrief:"Hero to design: connected clinical application screens with anonymized patient scan thumbnails, a model-training or review interface, and predicted IOL information flowing into a patient record. Label predictions clearly as AI-generated.",
           galleryBriefs:[
             "System flow diagram: patient data and scans → clinician-guided model training → prediction → patient file → connected application.",
@@ -118,10 +118,10 @@ window.PORTFOLIO = {
         },
         {
           title:"Stateroom TV App",type:"In-Room TV UX/UI · Guest Experience",
-          summary:"Bringing voyage information into the stateroom through a TV interface, including a Voyage Tracker widget.",
-          details:"Not every guest experience happens on a phone. I also worked on the stateroom TV app, where ship information needed to feel useful and approachable on an in-room screen. The work included interface design for onboard information widgets such as Voyage Tracker. It's a different design challenge from a mobile app: the screen is larger, the guest is farther away, and the content needs to communicate its purpose at a glance.",
-          process:"My focus was on how ship and voyage information could be presented clearly in a TV-sized layout. I considered the hierarchy of the widgets, legibility at a distance, and how a guest would understand the information without the close-up context of a phone screen. Voyage Tracker is a good example of the kind of content that benefits from an immediately recognizable visual structure. I would use the finished interface screens here to show the hierarchy and layout decisions, rather than claim interaction details I can't substantiate.",
-          outcome:"The deliverable was UI design work for the stateroom TV experience and its ship-information widgets, including Voyage Tracker. I don't have verified usage data or launch metrics for this project; the strongest evidence here will be the actual screens and the rationale behind their layout.",
+          summary::"Designing voyage information for a stateroom TV, where the remote—not a touchscreen—drives the experience.",
+          details::"The stateroom TV app brought ship information into guests' rooms, including widgets such as Voyage Tracker. Unlike a mobile interface, the TV is viewed from a distance and operated with a remote control. That changes the interaction model: guests need to see where they are in the interface, understand what is selectable, and move through options without tapping directly on the screen.",
+          process::"Remote navigation was a major focus of my design work. I considered directional movement between controls, visible focus and selected states, predictable paths through content, and the amount of information a guest can comfortably read from across the room. For widgets such as Voyage Tracker, the hierarchy needed to communicate the main information quickly while keeping the remote-driven experience straightforward. The key UX question was not just 'Can guests read it?' but 'Can they confidently move through it with a few buttons?'",
+          outcome::"UX/UI design for the in-room TV experience and onboard information widgets, with particular attention to remote-control navigation. Approved screen states showing focus movement and selection would make this work especially compelling; measured usability or launch outcomes have not been verified.",
           imageBrief:"Approved stateroom TV app interface with the Voyage Tracker widget visible.",
           galleryBriefs:[
             "Stateroom TV home screen showing its layout and navigation.",
@@ -135,10 +135,10 @@ window.PORTFOLIO = {
   playground:[
     {
       title:"Forktactics",type:"Independent Product · UX/UI Design",
-      summary:"Tell Forktactics what you like. Get a week of dinners and a grocery list that fits your budget—with a playful trading-card-game twist.",
-      details:"The problem isn't a shortage of recipes. It's the daily decision of what to cook, what to buy, and how to stay on budget. Forktactics flips the process: share your tastes and preferences, then let the app propose a week of meals you can review and change. The goal is to make dinner planning feel simple, personal, and a little fun.",
-      process:"I started by building an AI-assisted working prototype to test the idea quickly. That let me explore preference-based discovery, generated menus, meal swaps, and a menu-first weekly dashboard. A central product challenge was the planning logic: favoring meals that reuse ingredients across the week so a grocery trip buys fewer one-off items, while balancing estimated ingredient costs against the user's budget. The shopping list needs to consolidate shared ingredients and quantities rather than count each recipe separately. These ingredient-overlap and budgeting rules are part of the prototype's evolving approach, not a proven optimization algorithm or verified savings claim. Just as importantly, it exposed confusing flows, excessive scrolling, and features competing with the main task.\n\nThe prototype helped clarify the product direction: the generated weekly menu should be the hero. I'm now moving into a designer-led redesign, starting from scratch in Figma rather than polishing the prototype indefinitely. I'm keeping the trading-card-game aesthetic as the distinctive hook, while designing the interface, components, and interactions intentionally around ease of use.",
-      outcome:"Current stage: a functional, AI-assisted exploratory prototype and a defined direction for the next design phase—not a finished redesign. I'll create the new UI and design system myself, using the prototype as a reference for what works and what needs to change. AI will remain a tool for implementation and iteration, with product and design decisions led by me.",
+      summary::"An independently built meal-planning product that turns preferences and a budget into a weekly menu and consolidated grocery list.",
+      details::"Forktactics started with a familiar problem: deciding what to cook is tiring, and buying ingredients for unrelated meals can get expensive. I conceived and iterated on a product that helps people choose meals, review a week of dinners, and shop with less waste. The experience combines preference-based discovery, a weekly menu, budget awareness, and a grocery list that consolidates ingredients used by multiple recipes. It is an independent, actively evolving project rather than a finished client launch.",
+      process::"I designed the experience around the weekly menu as the primary destination, not a maze of settings. I iterated on meal discovery, swipe interactions, menu previews before committing, recipe swaps, ingredient consolidation, and a clear cooked/not-cooked state. I also explored multiple visual themes—including a playful trading-card-game direction—while repeatedly addressing practical usability issues such as small-screen overflow, scrolling versus swiping, confusing onboarding, and inconsistent component styling. Building an AI-assisted prototype helped me test ideas quickly, but the important design work was deciding which interactions genuinely made planning easier.",
+      outcome::"A working, iterated product prototype with a weekly planning flow, recipe discovery, and shopping-list functionality. The project demonstrates end-to-end product thinking, rapid prototyping, responsive UI work, and iterative debugging. User adoption, grocery savings, and commercial results have not been measured.",
       imageBrief:"Show the existing Forktactics prototype as an exploration, clearly labeled PROTOTYPE. Replace with original Figma-designed hero visuals once the redesign exists.",
       galleryBriefs:[
         "01 / THE CORE IDEA — Diagram the flow: tell Forktactics your tastes → get a proposed weekly menu → review and swap meals → shop within your budget.",
@@ -151,10 +151,10 @@ window.PORTFOLIO = {
     },
     {
       title:"Fallout 76 — What I'd Design",type:"Unofficial Game Concept Design · Fan Work",
-      summary:"Three ideas I'd love to bring to Appalachia: a Meat Week charcuterie display, a Mistress of Mystery season, and Brahmin-powered transportation.",
-      details:"Fallout 76 has a wonderfully strange visual language: retro-futurist advertising, scavenged materials, regional folklore, and humor in the middle of the apocalypse. This is my space to imagine additions that feel at home in that world. These are independent fan concepts—not official Bethesda designs or announced game features.",
+      summary::"Independent Fallout 76 fan concepts exploring how new camp objects, seasonal themes, and traversal ideas could fit an established game world.",
+      details::"I love the challenge of designing inside an existing visual universe. These unofficial Fallout 76 concepts explore three different types of game content: a Meat Week charcuterie display, a Mistress of Mystery-inspired season, and Brahmin-powered transportation. None are Bethesda commissions or announced features. The design challenge is to make something new feel like it belongs in Appalachia, where retro-futurist advertising, environmental storytelling, and dark humor all have a role.",
       process:"MEAT WEEK / THE CHARCUTERIE BOARD — A camp display inspired by Meat Week: an oversized, delightfully absurd spread of wasteland meats and snacks. The design challenge is to make a playful collectible display feel readable, appetizing in a Fallout sort of way, and unmistakably part of Grahm's celebration.\n\nMISTRESS OF MYSTERY / THE SEASON — A season concept inspired by the Order of Mysteries, with a themed season scoreboard and a curated lineup of rewards I'd want to earn. The visual direction draws from secret identities, pulp-comic drama, and the faction's theatrical elegance. Reward illustrations and a scoreboard mockup will make the concept tangible.\n\nBRAHMIN TRANSPORTATION — A concept for moving through Appalachia with Brahmin. I'd explore how the vehicle or caravan looks, what it feels like to use, and how it fits Fallout's scrappy world without pretending it's an existing mechanic.",
-      outcome:"An evolving collection of speculative game-design pitches. The goal is to communicate each idea through clear concept art, UI mockups, and in-world presentation—not to suggest these features are implemented. As the designs develop, I'll replace these briefs with my own finished artwork and explain the choices behind each concept.",
+      outcome::"Independent game-design concepts demonstrating visual worldbuilding, themed content ideation, and sensitivity to an existing franchise's style. They are fan work, not shipped game features.",
       imageBrief:"Concept portfolio cover: three distinct fan-design proposals—Meat Week charcuterie display, Mistress of Mystery season scoreboard, and Brahmin transportation. Use original concept artwork once designed; do not imply these are in-game screenshots.",
       galleryBriefs:[
         "01 / MEAT WEEK CHARCUTERIE — Concept illustration of a placeable camp meat display board, with ingredients, presentation, scale, and a playful Fallout-style item name.",
@@ -167,10 +167,10 @@ window.PORTFOLIO = {
     },
     {
       title:"Illustration & Experiments",type:"Personal Creative Practice",
-      summary:"Characters, playful visual systems, and experiments that keep curiosity at the center of my process.",
-      details:"Personal work gives me room to try styles, materials, and ideas without a conventional brief. It is where I develop characters, explore unexpected visual directions, and practice translating rough concepts into finished compositions.",
-      process:"Collect references, sketch rapidly, test silhouettes and color relationships, then refine the strongest ideas. Keep the early studies visible: the experimentation is often as interesting as the finished image.",
-      outcome:"An evolving collection rather than a single campaign. Curate a small number of strong pieces and show the decisions that connect sketch to final artwork.",
+      summary::"Personal illustration and visual experiments that strengthen character design, composition, and storytelling across my work.",
+      details::"Illustration is where I get to follow curiosity without a product requirement or campaign brief. I use personal projects to explore character silhouettes, color, expression, composition, and visual styles that might not fit a client assignment. That experimentation also feeds back into my design work: it sharpens my ability to communicate personality and create memorable visual systems.",
+      process::"My process usually moves from rough sketches and references into silhouette exploration, color studies, and refinement. I look for what makes a character or composition recognizable before adding detail, then test whether the final image still communicates at a glance. Showing a few deliberate iterations alongside the finished work gives a better picture of my thinking than a gallery of polished images alone.",
+      outcome::"An ongoing body of independent illustration and creative experiments. This collection demonstrates range and process rather than claiming client deliverables or business results.",
       imageBrief:"Hero composition: editorial collage of original character illustrations, color studies, and selected polished artwork on a restrained background.",
       galleryBriefs:[
         "Character development sheet: silhouettes, expressions, palettes, and final poses.",
