@@ -251,7 +251,7 @@ section.work,section.playground,section.about {
   font-weight:700;
   margin-top:20px
 }
-.project-card h4 {
+.project-card h3 {
   font:600 25px 'Newsreader';
   letter-spacing:-.04em;
   margin:8px 0
@@ -787,7 +787,7 @@ footer a {
   vertical-align:top
 }
 .playground .section-head>p,.playground .project-card p {}
-.playground .project-card h4 {
+.playground .project-card h3 {
   color:#f5f7fc
 }
 .playground .project-meta {}
@@ -1275,7 +1275,7 @@ body {
 body {
   color:var(--ink)
 }
-.hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h4,.case-head h1,.case-prose h2,.art-center {
+.hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {
   font-family:'Newsreader',Georgia,serif}
 .hero h1 {
   letter-spacing:-.045em;
@@ -1421,7 +1421,7 @@ body {
     min-height:310px
   }
 }
-.hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h4,.case-head h1,.case-prose h2,.art-center {
+.hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {
   font-variation-settings:"SOFT" 75,"WONK" 0;
   transition:font-variation-settings .38s ease,letter-spacing .38s ease
 }
@@ -1437,7 +1437,7 @@ body {
   font-variation-settings:"SOFT" 75,"WONK" 1
 }
 @media(prefers-reduced-motion:reduce) {
-  .hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h4,.case-head h1,.case-prose h2,.art-center {
+  .hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {
     transition:none
   }
 }
@@ -1662,7 +1662,7 @@ body {
   font:600 clamp(14px,1.3vw,17px)/1.45 'DM Sans',system-ui,sans-serif;
   letter-spacing:0
 }
-.wordmark,.hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.placeholder-mark,.project-card h4,.art-center,.case-head h1,.case-prose h2,.project-card h4,.case-head h1,.case-prose h2,.art-center {
+.wordmark,.hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.placeholder-mark,.project-card h3,.art-center,.case-head h1,.case-prose h2,.project-card h3,.case-head h1,.case-prose h2,.art-center {
   font-variation-settings:normal
 }
 .hero h1,.case-head h1,.company-name {
@@ -1776,3 +1776,8 @@ html,body{max-width:100%;overflow-x:clip}
 .hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
 .hero .eyebrow,.work .eyebrow,.about .eyebrow{color:var(--muted)}
 .night-sparkles{color:#ff9acb}
+
+/* Readability: avoid tiny utility labels and preserve contrast in project cards. */
+.case-fact-label,.brief-kicker{font-size:12px;line-height:1.5}
+.eyebrow,.project-meta,.card-top,.card-bottom{font-size:max(12px,1em)}
+@media(max-width:760px){.case-fact-label,.brief-kicker{letter-spacing:.08em}}
