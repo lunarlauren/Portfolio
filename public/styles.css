@@ -227,7 +227,7 @@ section.work,section.playground,section.about {
   place-items:center;
   overflow:hidden
 }
-.project-card:nth-child(3n+3) .project-visual {}
+
 .project-visual img {
   width:100%;
   height:100%;
@@ -312,7 +312,7 @@ footer a {
     justify-content:flex-end;
     gap:12px 18px
   }
-  .hero h1 {}
+
   .section-head,.about-bottom {
     display:block
   }
@@ -826,7 +826,7 @@ footer a {
   }
 }
 @media(prefers-reduced-motion:reduce) {
-  .hero-feature:hover .hero-portrait {}
+
 }
 body {
   background:var(--paper)
@@ -843,7 +843,7 @@ body {
 .hero h1 em,.about h2 em,.section-head h2 em {
   color:#326b86
 }
-.primary-link:hover {}
+
 .company-card {
   background:#e5eef4
 }
@@ -853,7 +853,7 @@ body {
 .project-visual {
   background:#dce7f4
 }
-.project-card:nth-child(3n+3) .project-visual {}
+
 .project-visual:not(:has(img)),.case-hero-visual:not(:has(img)) {
   background:#e8f0f5!important;
   border-color:#91adbf
@@ -892,22 +892,18 @@ body {
 .hero h1 em {
   color:#bc5685
 }
-.hero-foot {}
-.hero-feature .art-tile-three {}
-.hero-feature .feature-art {}
+
 .section-head h2 em,.about h2 em {
   color:#bc5685
 }
 .company-card:not(.featured):nth-child(odd) {
   background:#e3edf6
 }
-.project-card:nth-child(3n+1) .project-visual {}
+
 .project-card:nth-child(3n+2) .project-visual {
   background:#d9eaf6
 }
-.primary-link:hover {}
-.round-link:hover {}
-.playground .section-head h2:after {}
+
 .hero-feature {
   overflow:visible;
   isolation:isolate
@@ -956,7 +952,7 @@ body {
     transform:none
   }
 }
-.hero .status-dot {}
+
 .hero-feature .art-tile-one {
   background:#ffb5d8
 }
@@ -981,7 +977,7 @@ body {
 .project-card:nth-child(3n+3) .project-visual {
   background:#ffe4ed
 }
-.quiet-link:hover,.text-link:hover,.site-header nav a:hover {}
+
 .round-link:hover {
   background:#ffd3e8
 }
@@ -1826,7 +1822,7 @@ html{scroll-padding-top:82px}
   align-items:start;
   column-gap:clamp(32px,5vw,88px);
   row-gap:clamp(28px,4vw,48px);
-  margin-top:clamp(32px,5vw,64px);
+  margin-top:clamp(32px,5vw,64px)
 }
 .about-copy{max-width:62ch}
 .about-copy p{margin:0 0 1.25em}
@@ -1835,7 +1831,7 @@ html{scroll-padding-top:82px}
   grid-column:1/-1;
   justify-self:start;
   margin:0;
-  white-space:normal;
+  white-space:normal
 }
 .inventory-heading{align-items:end;gap:12px;margin-bottom:18px}
 .inventory-heading h3{margin:5px 0 0}
@@ -1883,7 +1879,7 @@ html[data-theme="dark"]{
  --surface-cream:#3b302d;
  --surface-navy:#1b344b;
  color-scheme:dark;
- background:var(--paper);
+ background:var(--paper)
 }
 html[data-theme="dark"] body{background:var(--paper);color:var(--ink)}
 html[data-theme="dark"] .site-header{background:rgba(17,29,42,.96);border-color:var(--line);box-shadow:0 4px 18px rgba(0,0,0,.16)}
@@ -1944,7 +1940,7 @@ html[data-theme="dark"] .primary-link,
 html[data-theme="dark"] .hero-actions .primary-link{
  background:#f18bbd!important;
  color:#182333!important;
- border:1px solid #f18bbd!important;
+ border:1px solid #f18bbd!important
 }
 html[data-theme="dark"] .primary-link:hover{background:#ffc0dc!important;color:#182333!important}
 html[data-theme="dark"] .hero-foot{color:#b7c7d7}
