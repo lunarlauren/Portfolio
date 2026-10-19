@@ -789,9 +789,7 @@ footer a {
   grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
   align-items:start
 }
-.project-card {
-  min-width:0
-}
+
 .project-visual:not(:has(img)) {
   background:#e6e8e4!important;
   border:2px dashed #8b989d;
@@ -1742,9 +1740,7 @@ body {
 .collection-back {
   transition:color .2s ease
 }
-.collection-back:hover {
-  color:#a92666
-}
+
 .collection .project-card-link .project-visual,.play-grid .project-card-link .project-visual {
   transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease
 }
