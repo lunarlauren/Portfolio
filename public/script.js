@@ -1,14 +1,15 @@
 const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">':'<span class="visual-label visual-brief"><span class="brief-kicker">IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';const projectCard=(p,i,group)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h4>'+esc(p.title)+'</h4><p>'+esc(p.summary)+'</p></a></article>';const companyGrid=$("#company-grid");companyGrid.innerHTML=data.companies.map((c,i)=>'<button class="company-card '+(c.featured?'featured':'')+'" type="button" data-company="'+esc(c.id)+'" style="--accent:'+esc(c.accent)+';--i:'+i+'" aria-controls="collection" aria-expanded="false"><span class="card-top"><span>'+esc(c.category)+'</span><span aria-hidden="true">↗</span></span><span class="company-name">'+esc(c.name)+'</span><span class="company-description">'+esc(c.description)+'</span><span class="card-bottom">'+c.projects.length+' PROJECT'+(c.projects.length===1?'':'S')+' <span aria-hidden="true">→</span></span></button>').join("");$("#play-grid").innerHTML=data.playground.map((p,i)=>projectCard(p,i,"playground")).join("");const collection=$("#collection");
 function openCompany(id,scroll=true){
   const c=data.companies.find(x=>x.id===id);if(!c)return;
-  companyGrid.hidden=true;
+  companyGrid.hidden=false;
+  companyGrid.dataset.active=id;
   collection.hidden=false;collection.dataset.active=id;
   collection.innerHTML='<div class="collection-nav"><a href="#work" class="collection-back">← All companies</a><span class="eyebrow">SELECTED WORK / '+esc(c.projects.length)+' PROJECTS</span></div><div class="collection-head"><div><p class="eyebrow">'+esc(c.category)+'</p><h3>'+esc(c.name)+'</h3><p>'+esc(c.description)+'</p></div></div><div class="projects-grid">'+c.projects.map((p,i)=>projectCard(p,i,c.id)).join("")+'</div>';
   document.querySelectorAll(".company-card").forEach(btn=>btn.setAttribute("aria-expanded",String(btn.dataset.company===id)));
-  // Keep the viewport stable while the card morphs into the collection header.
+  // Keep other company cards visible for quick switching.
 }
 function showCompanies(){
-  collection.hidden=true;companyGrid.hidden=false;collection.dataset.active="";
+  collection.hidden=true;companyGrid.hidden=false;companyGrid.dataset.active="";collection.dataset.active="";
   document.querySelectorAll(".company-card").forEach(btn=>btn.setAttribute("aria-expanded","false"));
 }
 document.querySelectorAll("[data-company]").forEach(btn=>btn.addEventListener("click",()=>{location.hash="company/"+encodeURIComponent(btn.dataset.company)}));
