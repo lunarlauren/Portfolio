@@ -2098,3 +2098,15 @@ html[data-theme="dark"] .inventory-item[aria-pressed="true"]{background:rgba(245
  .inventory-item,.inventory-random,.inventory-random span,.hero-actions .primary-link span{transition:none!important}
  .inventory-item.inventory-pop .inventory-icon,.inventory-inspect.inventory-refresh>*,.reveal-ready{animation:none!important}
 }
+
+
+/* Keep the inventory heading anchored to the same left edge as its cards. */
+.about-bottom .creative-inventory{width:100%;max-width:none;justify-self:stretch;text-align:left}
+.creative-inventory .inventory-heading{display:block;text-align:left;margin:0 0 18px;padding:0}
+.creative-inventory .inventory-heading>div{width:100%;text-align:left}
+.creative-inventory .inventory-heading .eyebrow,
+.creative-inventory .inventory-heading h3,
+.creative-inventory .inventory-heading>p{display:block;width:100%;max-width:none;margin-left:0;margin-right:0;text-align:left}
+.creative-inventory .inventory-heading>p{margin-top:9px}
+.creative-inventory .inventory-grid{margin-top:0}
+@media(max-width:900px){.about-bottom .creative-inventory{max-width:660px;justify-self:start}}
