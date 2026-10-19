@@ -2071,3 +2071,30 @@ html[data-theme="dark"] .inventory-item:hover{background:rgba(245,161,200,.09)}
 html[data-theme="dark"] .inventory-item[aria-pressed="true"]{background:rgba(245,161,200,.12);border-color:rgba(245,161,200,.5)}
 @media(max-width:460px){.inventory-heading{gap:6px;margin-bottom:15px}.inventory-grid{padding:35px 9px 12px;gap:4px;border-radius:16px 16px 0 0}.inventory-item,.inventory-item:nth-child(1),.inventory-item:nth-child(2),.inventory-item:nth-child(3),.inventory-item:nth-child(4),.inventory-item:nth-child(5),.inventory-item:nth-child(6){min-height:105px;padding:8px 2px;gap:5px}.inventory-inspect{border-radius:0 0 16px 16px;padding:17px 18px 19px}}
 @media(prefers-reduced-motion:reduce){.inventory-icon{transition:none}}
+
+
+/* Tactile interactions with restrained motion and clear focus. */
+.inventory-tools{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:0 0 10px}
+.inventory-counter{font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--inv-muted)}
+.inventory-random{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:7px 13px;border:1px solid var(--inv-border);border-radius:999px;background:transparent;color:var(--inv-ink);font-size:12px;font-weight:700;cursor:pointer;transition:background .2s ease,transform .2s ease,border-color .2s ease}
+.inventory-random:hover{background:rgba(189,79,131,.09);border-color:var(--inv-accent);transform:translateY(-2px)}
+.inventory-random span{font-size:18px;transition:transform .25s ease}
+.inventory-random:hover span{transform:translateX(3px) rotate(-12deg)}
+.inventory-item{transition:background .22s ease,border-color .22s ease,transform .22s ease}
+.inventory-item:active{transform:scale(.96)}
+.inventory-item.inventory-pop .inventory-icon{animation:inventory-bounce .38s cubic-bezier(.2,.75,.25,1.2)}
+.inventory-inspect.inventory-refresh>*{animation:inventory-fade .32s ease both}
+@keyframes inventory-bounce{0%{transform:scale(.88) rotate(-7deg)}55%{transform:scale(1.13) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes inventory-fade{from{opacity:.25;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(hover:hover) and (pointer:fine){
+ .company-card .card-bottom span,.project-card .project-meta span:last-child{display:inline-block;transition:transform .25s ease}
+ .company-card:hover .card-bottom span,.project-card-link:hover .project-meta span:last-child{transform:translate(4px,-3px)}
+ .hero-actions .primary-link span{display:inline-block;transition:transform .2s ease}
+ .hero-actions .primary-link:hover span{transform:translate(4px,-3px)}
+}
+.reveal-ready{animation:reveal-enter .55s ease both}
+@keyframes reveal-enter{from{opacity:.55;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+ .inventory-item,.inventory-random,.inventory-random span,.hero-actions .primary-link span{transition:none!important}
+ .inventory-item.inventory-pop .inventory-icon,.inventory-inspect.inventory-refresh>*,.reveal-ready{animation:none!important}
+}
