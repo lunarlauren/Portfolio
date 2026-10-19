@@ -1772,7 +1772,7 @@ html,body{max-width:100%;overflow-x:clip}
 #work-title:focus,.collection-head h3:focus{outline:none}
 
 /* Contrast remediation: retain bright brand pink for decoration, use AA-safe pink for text. */
-:root{--brand-pink-text:#a92666}
+:root{--brand-pink-text:#ee5599}
 .hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
 .hero .eyebrow,.work .eyebrow,.about .eyebrow{color:var(--muted)}
 .night-sparkles{color:#ff9acb}
@@ -1781,3 +1781,6 @@ html,body{max-width:100%;overflow-x:clip}
 .case-fact-label,.brief-kicker{font-size:12px;line-height:1.5}
 .eyebrow,.project-meta,.card-top,.card-bottom{font-size:max(12px,1em)}
 @media(max-width:760px){.case-fact-label,.brief-kicker{letter-spacing:.08em}}
+
+/* Programmatic route focus should not look like a keyboard tab stop. */
+.collection:focus,.case-view:focus,#work-title:focus,.collection-head h3:focus{outline:none!important;box-shadow:none!important}
