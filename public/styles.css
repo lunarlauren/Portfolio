@@ -1759,3 +1759,9 @@ html,body{max-width:100%;overflow-x:clip}
 :where(.collection,.case-view)[tabindex="-1"]:focus{outline:none}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(forced-colors:active){.company-card,.project-card-link,.primary-link,.portrait-bubble{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
+
+/* Accessible touch targets and small-screen text reflow. */
+.site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next,.portrait-about-link{min-height:44px;display:inline-flex;align-items:center}
+.company-card{touch-action:manipulation}
+@media(max-width:760px){.site-header nav{flex-wrap:wrap}.company-name,.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
+@media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot,.company-description{opacity:1;text-shadow:none}.project-visual:not(:has(img)){border-style:solid}}
