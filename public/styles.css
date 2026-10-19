@@ -1748,3 +1748,8 @@ html,body{max-width:100%;overflow-x:clip}
   .hero-feature .portrait-interaction .hero-portrait{width:100%;max-width:100%}
   .hero-feature .portrait-bubble{right:0;bottom:105%;max-width:min(185px,55vw)}
 }
+
+/* Expanded company stays above the remaining, unopened company tiles. */
+.company-grid[data-active]:not([data-active=""]) .company-card[aria-expanded="true"]{display:none}
+.company-grid[data-active]:not([data-active=""]){margin-top:18px}
+.company-grid[data-active]:not([data-active=""]) .company-card{min-height:clamp(220px,23vw,320px)}
