@@ -1792,3 +1792,8 @@ body{font-size:var(--type-body);line-height:1.6}
 .project-card p,.company-description,.case-back,.portrait-about-link,footer{font-size:var(--type-sm);line-height:1.6}
 .hero-description,.about-bottom p,.case-prose p{line-height:1.65}
 @media(max-width:760px){.site-header nav{font-size:13px}.hero-description,.about-bottom p,.case-prose p{font-size:16px}.project-card p{font-size:14px}}
+
+/* Comfortable paragraph rhythm in About. */
+.about-copy{min-width:0;max-width:68ch}
+.about-copy p{margin:0 0 1.15em;line-height:1.7}
+.about-copy p:last-child{margin-bottom:0}
