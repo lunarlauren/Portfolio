@@ -1765,3 +1765,8 @@ html,body{max-width:100%;overflow-x:clip}
 .company-card{touch-action:manipulation}
 @media(max-width:760px){.site-header nav{flex-wrap:wrap}.company-name,.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot,.company-description{opacity:1;text-shadow:none}.project-visual:not(:has(img)){border-style:solid}}
+
+/* Keep skip navigation usable when a case study replaces the main content. */
+.skip-link{position:fixed;top:0;left:12px;transform:translateY(-150%);z-index:9999;background:#fff;color:#203344;border:2px solid #155caa;border-radius:8px;text-decoration:none}
+.skip-link:focus-visible{transform:translateY(12px);outline:3px solid #155caa;outline-offset:2px}
+#work-title:focus,.collection-head h3:focus{outline:none}
