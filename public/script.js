@@ -1,32 +1,3 @@
-// Respect a saved preference first, then the device theme.
-function initTheme(){
- const button=document.getElementById("theme-toggle");
- const meta=document.querySelector('meta[name="theme-color"]');
- let saved=null;
- try{saved=localStorage.getItem("portfolio-theme")}catch{}
- const preferred=saved==="dark"||saved==="light"?saved:(window.matchMedia?.("(prefers-color-scheme: dark)").matches?"dark":"light");
- const apply=theme=>{
-  document.documentElement.dataset.theme=theme;
-  document.documentElement.style.colorScheme=theme;
-  if(meta)meta.content=theme==="dark"?"#111d2a":"#f7f9fa";
-  if(button){
-   const dark=theme==="dark";
-   button.setAttribute("aria-pressed",String(dark));
-   button.setAttribute("aria-label",dark?"Switch to light theme":"Switch to dark theme");
-   button.title=dark?"Switch to light theme":"Switch to dark theme";
-   button.querySelector(".theme-toggle-icon").textContent=dark?"☀":"☾";
-   button.querySelector(".theme-toggle-label").textContent=dark?"Light":"Dark";
-  }
- };
- apply(preferred);
- button?.addEventListener("click",()=>{
-  const next=document.documentElement.dataset.theme==="dark"?"light":"dark";
-  apply(next);
-  try{localStorage.setItem("portfolio-theme",next)}catch{}
- });
-}
-initTheme();
-
 // Inventory is initialized independently of portfolio routing.
 function initInventory(){
  const panel=document.getElementById("inventory-inspect");
