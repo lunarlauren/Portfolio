@@ -1851,3 +1851,16 @@ html{scroll-padding-top:82px}
 .company-card,.project-card-link{transition:transform .2s ease,box-shadow .2s ease}
 @media(hover:hover) and (pointer:fine){.company-card:hover,.project-card-link:hover{transform:translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){.sparkle-button .night-sparkles,.footer-secret,.company-card,.project-card-link{transition:none!important}.sparkle-button.sparkle-pop .night-sparkles{animation:none!important}}
+
+/* Playground repair: protect the heading and keep sparkle interactions discrete. */
+.playground .section-head h2{display:block!important;visibility:visible!important;opacity:1!important;color:#fff!important;position:relative;z-index:1}
+.playground .section-head h2::after{content:none!important}
+.playground .night-eyebrow{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.playground .sparkle-button{flex:none;min-width:44px;min-height:44px;margin:0;padding:8px;border-radius:10px;position:relative;z-index:1;color:#ff9acb}
+.playground .sparkle-button .night-sparkles{gap:4px;color:#ff9acb;transform:none}
+.playground .sparkle-button .night-sparkles span{animation:none!important;opacity:1!important;transform:none!important;line-height:1;font-size:17px}
+.playground .sparkle-button .night-sparkles span:nth-child(2){font-size:13px}
+.playground .sparkle-button .night-sparkles span:nth-child(3){font-size:10px}
+.playground .sparkle-button:hover .night-sparkles{transform:rotate(-8deg) scale(1.07)}
+.playground .sparkle-button.sparkle-pop .night-sparkles{animation:sparkle-pop .3s ease-out}
+@media(prefers-reduced-motion:reduce){.playground .sparkle-button.sparkle-pop .night-sparkles{animation:none}}
