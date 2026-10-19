@@ -1971,3 +1971,29 @@ html[data-theme="dark"] .portrait-bubble a{color:#ffd1e7}
 html[data-theme="dark"] .feature-top,html[data-theme="dark"] .feature-bottom{color:var(--ink)}
 html[data-theme="dark"] .footer-secret{color:#ff9acb}
 @media(prefers-reduced-motion:reduce){.theme-toggle{transition:none}}
+
+
+/* Header: clear navigation, a distinct contact action, and a compact theme control. */
+.site-header{min-height:66px;gap:24px}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2vw,28px);min-width:0}
+.site-header .header-actions nav{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
+.site-header .header-actions nav a{font-size:13px;font-weight:600;letter-spacing:0}
+.header-contact{display:inline-flex;align-items:center;gap:6px;justify-content:center;min-height:38px;padding:8px 14px;border:1px solid var(--ink);border-radius:999px;text-decoration:none;font-size:12px;font-weight:700;white-space:nowrap}
+.header-contact:hover{background:var(--ink);color:var(--paper)}
+.site-header .theme-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;min-width:38px;height:38px;min-height:38px;padding:0;border-radius:50%;border:1px solid var(--line)}
+html[data-theme="dark"] .header-contact{border-color:#a5c0d2;color:var(--ink)}
+html[data-theme="dark"] .header-contact:hover{background:#edf4fa;color:#111d2a}
+@media(max-width:650px){
+ .site-header{gap:10px;padding-inline:12px;min-height:58px}
+ .header-actions{gap:8px}
+ .site-header .header-actions nav{gap:clamp(9px,2.6vw,16px)}
+ .site-header .header-actions nav a{font-size:12px;min-height:38px}
+ .header-contact{min-height:36px;padding:7px 9px;font-size:11px}
+ .site-header .theme-toggle{width:36px;min-width:36px;flex-basis:36px;height:36px;min-height:36px}
+}
+@media(max-width:390px){
+ .site-header .header-actions nav{gap:8px}
+ .site-header .header-actions nav a{font-size:11px}
+ .header-contact{padding-inline:7px}
+ .header-contact span{display:none}
+}
