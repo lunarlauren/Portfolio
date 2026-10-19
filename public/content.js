@@ -122,18 +122,18 @@ window.PORTFOLIO = {
   playground:[
     {
       title:"Forktactics",type:"Independent Product · UX/UI Design",
-      summary:"Tell Forktactics what you like. Get a week of dinners and a grocery list built around your budget.",
-      details:"Meal planning should be easier than deciding what to eat every night. Forktactics starts with your tastes and preferences, then generates a weekly menu you can preview and adjust before committing. The goal: fewer decisions, simpler shopping, and less wasted food.",
-      process:"The experience is designed around three moments: tell Forktactics what sounds good, get a suggested week of meals, and shop from one consolidated list with estimated costs. Users can swap meals, consider leftovers, and keep track of what's cooked.\n\nAs the product evolved from YumPlan to SupperPal to Forktactics, I refined the mobile flow, swipe interactions, menu-first dashboard, and expressive visual themes. The biggest UX lesson was to make the generated menu—not the feature set—the star.",
-      outcome:"An evolving, self-directed meal-planning PWA. I lead the product concept, UX/UI, visual identity, and iterative testing and implementation, with AI-assisted development. The experience is still being refined; no adoption or savings metrics are claimed.",
-      imageBrief:"Actual Forktactics weekly menu dashboard: lead with the generated dinner plan, not a generic app collage. Use a real screenshot when available.",
+      summary:"Tell Forktactics what you like. Get a week of dinners and a grocery list that fits your budget—with a playful trading-card-game twist.",
+      details:"The problem isn't a shortage of recipes. It's the daily decision of what to cook, what to buy, and how to stay on budget. Forktactics flips the process: share your tastes and preferences, then let the app propose a week of meals you can review and change. The goal is to make dinner planning feel simple, personal, and a little fun.",
+      process:"I started by building an AI-assisted working prototype to test the idea quickly. That let me explore preference-based discovery, generated menus, meal swaps, shared grocery ingredients, cost estimates, and a menu-first weekly dashboard. Just as importantly, it exposed confusing flows, excessive scrolling, and features competing with the main task.\n\nThe prototype helped clarify the product direction: the generated weekly menu should be the hero. I'm now moving into a designer-led redesign, starting from scratch in Figma rather than polishing the prototype indefinitely. I'm keeping the trading-card-game aesthetic as the distinctive hook, while designing the interface, components, and interactions intentionally around ease of use.",
+      outcome:"Current stage: a functional, AI-assisted exploratory prototype and a defined direction for the next design phase—not a finished redesign. I'll create the new UI and design system myself, using the prototype as a reference for what works and what needs to change. AI will remain a tool for implementation and iteration, with product and design decisions led by me.",
+      imageBrief:"Show the existing Forktactics prototype as an exploration, clearly labeled PROTOTYPE. Replace with original Figma-designed hero visuals once the redesign exists.",
       galleryBriefs:[
-        "01 / TELL IT WHAT YOU LIKE — Actual preference and meal-discovery screens. Show how users express tastes, dietary preferences, and what they do not want.",
-        "02 / GENERATE YOUR WEEK — The core hero moment: a proposed weekly menu with meals users can preview, swap, or accept.",
-        "03 / SHOP TO YOUR BUDGET — Consolidated grocery list, shared ingredients, and estimated spending in a clear mobile view.",
-        "04 / KEEP IT SIMPLE — Weekly dashboard with cooked/not-cooked states, leftovers, and a clear start-new-week action.",
-        "05 / ITERATE THE UX — Before/after screenshots showing reduced scrolling, clearer navigation, and improved touch interactions.",
-        "06 / BUILD A PERSONALITY — Forktactics identity and selected TCG, cozy pixel, cyberpunk, and modern themes, shown using real UI."
+        "01 / THE CORE IDEA — Diagram the flow: tell Forktactics your tastes → get a proposed weekly menu → review and swap meals → shop within your budget.",
+        "02 / PROTOTYPE EXPLORATION — Real screenshots of the AI-assisted working prototype, labeled as exploratory rather than final design.",
+        "03 / WHAT I LEARNED — Annotated prototype screens showing where scrolling, navigation, or competing features distracted from the generated menu.",
+        "04 / THE DESIGN DIRECTION — Early original Figma explorations of a TCG-inspired interface that makes choosing meals playful without complicating planning. Work in progress.",
+        "05 / DESIGNING THE SYSTEM — Future Figma components: meal cards, states, navigation, typography, spacing, and accessibility decisions. Add when created.",
+        "06 / FROM PROTOTYPE TO PRODUCT — Future side-by-side comparison of exploratory prototype and designer-led redesign. Do not present as completed until built."
       ]
     },
     {
