@@ -11,13 +11,42 @@ function initInventory(){
  gummyworms:["Gummy worms","A vital part of the creative process. For research purposes, obviously."],
  coffee:["Coffee","Creative fuel. Occasionally more urgent than the actual brief."]
  };
- buttons.forEach(button=>button.addEventListener("click",()=>{
+ const counter=document.getElementById("inventory-counter");
+ const random=document.getElementById("inventory-random");
+ const reduceMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+ let active=0;
+ function selectItem(button,animate=true){
   const item=descriptions[button.dataset.item];
   if(!item)return;
+  active=buttons.indexOf(button);
   buttons.forEach(other=>other.setAttribute("aria-pressed",String(other===button)));
   panel.querySelector("strong").textContent=item[0];
   panel.querySelector("p").textContent=item[1];
- }));
+  if(counter)counter.textContent=String(active+1).padStart(2,"0")+" / "+String(buttons.length).padStart(2,"0");
+  if(animate&&!reduceMotion){
+   button.classList.remove("inventory-pop");
+   panel.classList.remove("inventory-refresh");
+   void button.offsetWidth;
+   button.classList.add("inventory-pop");
+   panel.classList.add("inventory-refresh");
+  }
+ }
+ buttons.forEach((button,i)=>{
+  button.addEventListener("click",()=>selectItem(button));
+  button.addEventListener("keydown",event=>{
+   if(!["ArrowRight","ArrowDown","ArrowLeft","ArrowUp"].includes(event.key))return;
+   event.preventDefault();
+   const step=event.key==="ArrowRight"||event.key==="ArrowDown"?1:-1;
+   const next=buttons[(i+step+buttons.length)%buttons.length];
+   next.focus();
+   selectItem(next);
+  });
+ });
+ random?.addEventListener("click",()=>{
+  const next=buttons[(active+1+Math.floor(Math.random()*(buttons.length-1)))%buttons.length];
+  selectItem(next);
+  next.focus({preventScroll:true});
+ });
 }
 initInventory();
 
@@ -88,3 +117,21 @@ footerSecret?.addEventListener("click",()=>{
  footerSecret.textContent=footerMessages[secretIndex];
  footerSecret.setAttribute("aria-label",footerMessages[secretIndex]==="✳"?"Reveal a little surprise":footerMessages[secretIndex]);
 });
+
+
+/* Reveal elements when they enter the viewport, without hiding content when JS fails. */
+function initReveals(){
+ if(!("IntersectionObserver" in window)||window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)return;
+ const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+   if(!entry.isIntersecting)return;
+   entry.target.classList.add("in-view");
+   observer.unobserve(entry.target);
+  });
+ },{threshold:.08,rootMargin:"0px 0px -24px 0px"});
+ document.querySelectorAll(".section-head,.about h2,.about-copy,.creative-inventory").forEach(el=>{
+  el.classList.add("reveal-ready");
+  observer.observe(el);
+ });
+}
+initReveals();
