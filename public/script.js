@@ -101,7 +101,7 @@ window.addEventListener("hashchange",routeWithMotion);route();$("#year").textCon
 
 // Small, optional tactile details: no autoplay, no sound, no persistent state.
 const footerSecret=document.getElementById("footer-secret");
-const footerMessages=["✳","made with curiosity ✦","one more little detail ♡","✳"];
+const footerMessages=["✳","made with curiosity","one more little detail ♡","✳"];
 let secretIndex=0;
 footerSecret?.addEventListener("click",()=>{
  secretIndex=(secretIndex+1)%footerMessages.length;
