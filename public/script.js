@@ -6,7 +6,7 @@ function openCompany(id,scroll=true){
   companyGrid.parentNode.insertBefore(collection,companyGrid);
   collection.hidden=false;collection.dataset.active=id;
   collection.setAttribute("aria-label",c.name+" projects");
-  collection.innerHTML='<div class="collection-nav"><a href="#work" class="collection-back">← All companies</a><span class="eyebrow">SELECTED WORK / '+esc(c.projects.length)+' PROJECTS</span></div><div class="collection-head"><div><p class="eyebrow">'+esc(c.category)+'</p><h3>'+esc(c.name)+'</h3><p>'+esc(c.description)+'</p></div></div><div class="projects-grid">'+c.projects.map((p,i)=>projectCard(p,i,c.id)).join("")+'</div>';
+  collection.innerHTML='<div class="collection-nav"><span class="eyebrow">SELECTED WORK / '+esc(c.projects.length)+' PROJECTS</span></div><div class="collection-head"><div><p class="eyebrow">'+esc(c.category)+'</p><h3>'+esc(c.name)+'</h3><p>'+esc(c.description)+'</p></div></div><div class="projects-grid">'+c.projects.map((p,i)=>projectCard(p,i,c.id)).join("")+'</div>';
   document.querySelectorAll(".company-card").forEach(btn=>{const active=btn.dataset.company===id;btn.setAttribute("aria-expanded",String(active));});
   // Keep other company cards visible for quick switching.
 }
