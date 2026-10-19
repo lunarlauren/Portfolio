@@ -377,3 +377,13 @@ body{color:var(--ink)}
 @supports (view-transition-name: selected-company){
   .collection .collection-head{animation:none}
 }
+
+/* Subtle, staggered twinkle for the after-hours section. */
+.night-eyebrow{display:flex;align-items:center;gap:12px}
+.night-sparkles{display:inline-flex;align-items:center;gap:5px;color:#c44e8b;pointer-events:none}
+.night-sparkles span{display:inline-block;transform-origin:center;animation:night-twinkle 3.6s ease-in-out infinite}
+.night-sparkles span:nth-child(1){font-size:15px;animation-delay:0s}
+.night-sparkles span:nth-child(2){font-size:11px;animation-delay:1.1s}
+.night-sparkles span:nth-child(3){font-size:8px;animation-delay:2.1s}
+@keyframes night-twinkle{0%,15%,55%,100%{opacity:.32;transform:scale(.72) rotate(-10deg)}28%,37%{opacity:1;transform:scale(1.2) rotate(12deg)}}
+@media(prefers-reduced-motion:reduce){.night-sparkles span{animation:none;opacity:.85;transform:none}}
