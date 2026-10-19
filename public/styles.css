@@ -1916,3 +1916,58 @@ html{scroll-padding-top:82px}
 .case-highlight-label{display:block;font-size:11px;letter-spacing:.12em;font-weight:700;color:var(--muted);margin-bottom:9px}
 .case-highlight p{font-family:Newsreader,Georgia,serif;font-size:clamp(21px,2.3vw,30px);line-height:1.2;letter-spacing:-.025em;margin:0;max-width:28ch;color:var(--ink)}
 @media(max-width:600px){.case-highlights{grid-template-columns:1fr;gap:20px;margin:24px 0;padding:20px 0}.case-highlight p{font-size:23px}}
+
+
+/* Accessible, persistent theme switcher. Keep the playground's night identity in both modes. */
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font-size:12px;font-weight:700;line-height:1;white-space:nowrap;cursor:pointer;transition:background .2s,border-color .2s}
+.theme-toggle:hover{background:var(--surface-blush)}
+.theme-toggle-icon{font-size:17px;line-height:1}
+@media(max-width:480px){.theme-toggle{min-width:40px;padding:7px}.theme-toggle-label{display:none}}
+html[data-theme="dark"]{
+ --paper:#111d2a;
+ --brand-ink:#edf4fa;
+ --ink:#edf4fa;
+ --muted:#b6c8d7;
+ --line:#3b5266;
+ --teal:#90c9df;
+ --clay:#ff8fc1;
+ --lilac:#422d45;
+ --focus:#9bd5ff;
+ --brand-pink:#ff91c3;
+ --brand-pink-text:#ff91c3;
+ --surface-blush:#2d2538;
+ --surface-cream:#3b302d;
+ --surface-navy:#1b344b;
+ color-scheme:dark;
+ background:var(--paper);
+}
+html[data-theme="dark"] body{background:var(--paper);color:var(--ink)}
+html[data-theme="dark"] .site-header{background:rgba(17,29,42,.96);border-color:var(--line);box-shadow:0 4px 18px rgba(0,0,0,.16)}
+html[data-theme="dark"] .hero h1{color:var(--ink)!important}
+html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
+html[data-theme="dark"] .skip-link{background:#263c50;color:#fff}
+html[data-theme="dark"] .company-card{color:var(--ink)}
+html[data-theme="dark"] .company-card.featured{background:#4c2945;color:#fff}
+html[data-theme="dark"] .company-card:not(.featured){background:#1c3042;color:var(--ink)}
+html[data-theme="dark"] .company-card:not(.featured) .company-description{color:#c8d7e3}
+html[data-theme="dark"] .project-card-link,html[data-theme="dark"] .collection,html[data-theme="dark"] .case-view{color:var(--ink)}
+html[data-theme="dark"] .project-visual,html[data-theme="dark"] .hero-image-brief,html[data-theme="dark"] .case-hero-visual{background:#233749;color:#e3edf5;border-color:#496074}
+html[data-theme="dark"] .visual-label,html[data-theme="dark"] .visual-brief,html[data-theme="dark"] .brief-kicker{color:#d6e4ef}
+html[data-theme="dark"] .case-facts,html[data-theme="dark"] .case-fact,html[data-theme="dark"] .case-prose,html[data-theme="dark"] .case-head{color:var(--ink)}
+html[data-theme="dark"] .case-highlight p{color:var(--ink)}
+html[data-theme="dark"] .creative-inventory{color:var(--ink)}
+html[data-theme="dark"] .inventory-heading p{color:#b8c9d8}
+html[data-theme="dark"] .inventory-grid{background:radial-gradient(ellipse at 50% 42%,#334052 0%,#2a3045 62%,#29263c 100%);border-color:#625168}
+html[data-theme="dark"] .inventory-grid:before{color:#e6b4d1}
+html[data-theme="dark"] .inventory-item{color:#f4eefa}
+html[data-theme="dark"] .inventory-item[aria-pressed="true"]{background:rgba(255,255,255,.1);border-color:#ce8fb2}
+html[data-theme="dark"] .inventory-inspect{background:#242e40;border-color:#625168;color:#edf4fa}
+html[data-theme="dark"] .inventory-inspect-tag{color:#e8a9ce}
+html[data-theme="dark"] .inventory-icon{filter:drop-shadow(2px 5px 0 rgba(0,0,0,.2))}
+html[data-theme="dark"] .theme-toggle{border-color:#61798c;background:#24394c;color:#edf4fa}
+html[data-theme="dark"] .theme-toggle:hover{background:#304e63}
+html[data-theme="dark"] .portrait-bubble{background:#2b3d50;color:#f5f7fa;border-color:#62778a}
+html[data-theme="dark"] .portrait-bubble a{color:#ffd1e7}
+html[data-theme="dark"] .feature-top,html[data-theme="dark"] .feature-bottom{color:var(--ink)}
+html[data-theme="dark"] .footer-secret{color:#ff9acb}
+@media(prefers-reduced-motion:reduce){.theme-toggle{transition:none}}
