@@ -352,3 +352,9 @@ body{color:var(--ink)}
 @media(prefers-reduced-motion:reduce){
   ::view-transition-old(*),::view-transition-new(*){animation-duration:.01ms!important}
 }
+
+/* Case-study metadata: labels read as labels, values as meaningful content. */
+.case-facts{display:flex;flex-direction:column;gap:24px;line-height:1.4;letter-spacing:normal}
+.case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--brand-pink)}
+.case-fact-label{display:block;color:#7a6070;font:700 10px/1.3 'DM Sans',system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase}
+.case-fact-value{display:block;color:var(--ink);font:600 clamp(14px,1.3vw,17px)/1.45 'DM Sans',system-ui,sans-serif;letter-spacing:0}
