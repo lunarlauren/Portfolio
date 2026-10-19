@@ -1770,3 +1770,9 @@ html,body{max-width:100%;overflow-x:clip}
 .skip-link{position:fixed;top:0;left:12px;transform:translateY(-150%);z-index:9999;background:#fff;color:#203344;border:2px solid #155caa;border-radius:8px;text-decoration:none}
 .skip-link:focus-visible{transform:translateY(12px);outline:3px solid #155caa;outline-offset:2px}
 #work-title:focus,.collection-head h3:focus{outline:none}
+
+/* Contrast remediation: retain bright brand pink for decoration, use AA-safe pink for text. */
+:root{--brand-pink-text:#a92666}
+.hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
+.hero .eyebrow,.work .eyebrow,.about .eyebrow{color:var(--muted)}
+.night-sparkles{color:#ff9acb}
