@@ -99,22 +99,27 @@ window.PORTFOLIO = {
       ]
     },
     {
-      id:"holland-america",name:"Holland America Line",category:"BRAND · VISUAL DESIGN",
-      description:"Brand and visual storytelling work. The draft below awaits confirmed project details and approved imagery.",
+      id:"holland-america",name:"Holland America Line",category:"MOBILE APPS · UX/UI DESIGN",
+      description:"App design work for Holland America Line, including the Navigator app and a stateroom app.",
       accent:"#203d64",
       projects:[
         {
-          title:"Travel Brand Storytelling",type:"Brand & Visual Design · Draft",
-          summary:"A proposed showcase for translating a distinctive travel brand into engaging visual communications.",
-          details:"EDITORIAL DRAFT — Specific responsibilities and deliverables have not yet been supplied. This framework emphasizes the interplay between evocative imagery, refined typography, and practical communication across travel-related touchpoints.",
-          process:"Replace with the actual assignment, audience, brand requirements, creative explorations, and final execution. Explain which decisions were yours and how they served the brief.",
-          outcome:"TO VERIFY — Add approved deliverables and factual outcomes when available.",
-          imageBrief:"Hero suggestion: approved Holland America Line campaign key art featuring destination photography, refined typography, and a premium editorial composition.",
-          galleryBriefs:[
-            "Suggested visual: approved campaign artwork adapted for web, email, and print.",
-            "Suggested visual: detail of typography and image treatment with brand consistency notes.",
-            "Suggested visual: realistic mockup of a final approved customer-facing touchpoint."
-          ]
+          title:"Navigator App",type:"Mobile App · UX/UI Design",
+          summary:"Design work for Holland America Line's Navigator app, supporting the guest experience through a mobile interface.",
+          details:"I worked on the Navigator app for Holland America Line. This case study will highlight my specific contributions, design decisions, and the guest workflows I worked on once the project details and approved visuals are added.",
+          process:"Project-specific design process and responsibilities to be added.",
+          outcome:"Deliverables and outcomes to be confirmed.",
+          imageBrief:"Add approved Navigator app screens or interface mockups.",
+          galleryBriefs:["Navigator app screen designs.","Guest journey or interface flow.","Additional approved UI details."]
+        },
+        {
+          title:"Stateroom App",type:"Mobile App · UX/UI Design",
+          summary:"Design work on a stateroom app for Holland America Line.",
+          details:"I also worked on a stateroom app for Holland America Line. I'll add the specific functionality, my responsibilities, and relevant interface examples when those details are ready.",
+          process:"Project-specific design process and responsibilities to be added.",
+          outcome:"Deliverables and outcomes to be confirmed.",
+          imageBrief:"Add approved stateroom app screens or interface mockups.",
+          galleryBriefs:["Stateroom app interface screens.","Relevant user flows.","Additional approved UI details."]
         }
       ]
     }
