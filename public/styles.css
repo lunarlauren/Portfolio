@@ -1753,3 +1753,9 @@ html,body{max-width:100%;overflow-x:clip}
 .company-grid[data-active]:not([data-active=""]) .company-card[aria-expanded="true"]{display:none}
 .company-grid[data-active]:not([data-active=""]){margin-top:18px}
 .company-grid[data-active]:not([data-active=""]) .company-card{min-height:clamp(220px,23vw,320px)}
+
+/* Keyboard navigation and forced-colors accessibility. */
+:where(a,button,[tabindex="-1"]):focus-visible{outline:3px solid var(--focus,#155caa);outline-offset:4px}
+:where(.collection,.case-view)[tabindex="-1"]:focus{outline:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(forced-colors:active){.company-card,.project-card-link,.primary-link,.portrait-bubble{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
