@@ -2034,27 +2034,26 @@ html[data-theme="dark"] .inventory-item[aria-pressed="true"]{background:rgba(245
 .creative-inventory .inventory-grid{margin-top:0}
 @media(max-width:900px){.about-bottom .creative-inventory{max-width:660px;justify-self:start}}
 
-
 /* Dark theme accessibility: legible controls, visible focus, and discernible states. */
 html[data-theme="dark"]{
  --focus:#a6dcff;
  --muted:#c2d0df;
- --line:#536a80;
+ --line:#536a80
 }
 html[data-theme="dark"] :where(a,button):focus-visible{
  outline:3px solid #a6dcff;
- outline-offset:4px;
+ outline-offset:4px
 }
 html[data-theme="dark"] .inventory-item:focus-visible{
  outline:3px solid #a6dcff;
  outline-offset:2px;
  position:relative;
- z-index:1;
+ z-index:1
 }
 html[data-theme="dark"] .theme-toggle:focus-visible,
 html[data-theme="dark"] .header-contact:focus-visible{
  outline:3px solid #a6dcff;
- outline-offset:3px;
+ outline-offset:3px
 }
 html[data-theme="dark"] .site-header nav a,
 html[data-theme="dark"] .site-header .header-contact,
@@ -2062,7 +2061,7 @@ html[data-theme="dark"] .quiet-link,
 html[data-theme="dark"] .text-link,
 html[data-theme="dark"] .case-back,
 html[data-theme="dark"] .collection-back{
- color:#e8f1f9;
+ color:#e8f1f9
 }
 html[data-theme="dark"] .site-header nav a:hover,
 html[data-theme="dark"] .quiet-link:hover,
@@ -2084,7 +2083,7 @@ html[data-theme="dark"] .company-card[data-company="holland-america"] .company-d
 html[data-theme="dark"] .inventory-item[aria-pressed="true"]{
  border:2px solid #f5b0d2;
  background:#47394f;
- box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)
 }
 html[data-theme="dark"] .inventory-item[aria-pressed="true"]>span:last-child{font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 html[data-theme="dark"] .inventory-item{color:#f3f5fa}
