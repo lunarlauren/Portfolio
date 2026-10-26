@@ -109,3 +109,7 @@ The dynamic case-study container is a named region rather than a second `main` l
 
 ### Pass 10 — narrow-screen navigation
 At widths up to 420px the header uses a two-row CSS grid: logo, Contact, and theme toggle on top; Work, Playground, and About underneath. The hero headline, decorative star, and project cards also have narrow-width safeguards. The earlier mobile header overrides remain candidates for consolidation after real-browser visual QA. Verify 320px, 375px, 390px, and 420px, including zoomed text, before considering this complete.
+
+
+### Pass 11 — mobile CSS consolidation
+Removed four superseded mobile header blocks (old 650px/390px/365px rules, including a competing two-row grid). The current 421–650px layout and <=420px two-row layout remain. Static checks: `public/script.js` parses as JavaScript and stylesheet braces are balanced. These checks do **not** validate browser layout or CSS semantics; test responsive header, hero portrait, and keyboard focus in a real browser before release.
