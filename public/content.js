@@ -2,7 +2,9 @@
    Drafts are based on known work themes, not verified client results.
    Replace review notes and add approved imagery before publishing externally.
    Images: set image to a file in public/images; gallery can contain image paths.
-   imageBrief and galleryBriefs appear as descriptive placeholders until then. */
+   imageBrief and galleryBriefs appear as descriptive placeholders until then.
+   audience and constraints are editorial summaries of documented context;
+   explicitly label design scenarios that are not validated research personas. */
 window.PORTFOLIO = {
   email: "bertinoln@gmail.com",
   companies: [
@@ -13,6 +15,8 @@ window.PORTFOLIO = {
       projects:[
         {
           title:"Connected Planning", type:"Product UX",
+          audience:"Construction teams coordinating plans and decisions (design context; not a research-validated persona).",
+          constraints:"Interrelated schedules, stakeholders and planning details; preserving context while making detail findable.",
           summary:"A project can have one schedule and a dozen different versions of what's happening. How do you bring everyone back to the same picture?",
           details:"Construction teams work with a lot of information. The challenge is helping people find what they need when decisions are being made. At Hoylu, I worked on product design in a space where schedules, stakeholders, and planning conversations overlap. The central UX problem was how to make a complex, collaborative workflow feel coherent: what belongs to the project, how views relate, and where a person goes to understand the next decision.",
           process:"I explored how teams could move from a broad project picture to the detail behind an item without losing context. The design considerations included the needs of people coordinating plans and those carrying them out: clear hierarchy, relationships between views, and a way to follow changes and responsibilities. This describes my design focus, not a claim that a particular flow was user-tested or adopted.",
@@ -28,6 +32,8 @@ window.PORTFOLIO = {
         },
         {
           title:"Mobile Insights", type:"UX / UI",
+          audience:"Project managers checking project information away from a desktop (design scenario, not documented persona research).",
+          constraints:"Small-screen readability and touch interaction; balancing quick status checks with supporting context.",
           summary:"A project manager doesn't need a desktop dashboard squeezed onto a phone. They need to know what changed and what needs attention.",
           details:"Hoylu Mobile Insights is a shipped product experience. My role was UX/UI design for its mobile insights work, framed around project managers checking construction-project information away from a desktop. A dashboard cannot simply be squeezed onto a phone: status, changes, and supporting context compete for limited space. The challenge was to make short checks useful without stripping away the information needed to understand an insight. This audience scenario is design framing, not a claim of documented user research.",
           process:"I explored the mobile UX story as a sequence of questions: what should someone notice first, what context explains it, and where should they go for detail? My design focus included the hierarchy of insight cards, summary information, and supporting detail, alongside legibility and touch-friendly interaction. The key rationale was to prioritize a quick status check while preserving a path to deeper context. This describes design exploration, not verified test findings or a claim that every explored interaction shipped.",
@@ -45,6 +51,8 @@ window.PORTFOLIO = {
         },
         {
           title:"Campaigns & Events", type:"Visual Design",
+          audience:"Construction-technology event visitors and digital audiences (format-based design framing).",
+          constraints:"Viewing distance, legibility and different display formats, including 65-inch and 40-inch screens.",
           summary:"A trade-show wall gets a few seconds. A campaign graphic gets even less. I designed for both.",
           details:"At Hoylu, I worked on visual communications for a construction technology audience across marketing and event touchpoints. The challenge changes with the format: a social graphic has seconds to earn attention, while a booth wall must communicate from across a room. Both need a clear message, recognizable brand, and a useful visual hierarchy.",
           process:"I translated product messages into layouts for event booth signage, presentation assets, and digital campaign graphics. For large-format work, I considered viewing distance, display proportions, and how printed graphics relate to nearby screens, including 65-inch and 40-inch displays. I adjusted the information hierarchy for each setting: a short, legible message from across a room versus more supporting detail at screen-reading distance. These are documented design considerations, not results of a comparative audience study.",
@@ -61,6 +69,8 @@ window.PORTFOLIO = {
         },
         {
           title:"Motion & Storytelling", type:"Motion Design",
+          audience:"Viewers needing a quick introduction to the product (communication goal, not audience-study findings).",
+          constraints:"Approximately 30 seconds to explain connected workflows without overloading individual frames.",
           summary:"Thirty seconds isn't long to explain construction software. That's what makes every frame matter.",
           details:"Construction planning software has relationships and changes over time that are difficult to communicate in a still image. At Hoylu, my documented contribution included a storyboard for an approximately 30-second product explainer. The audience challenge was to help a viewer understand the product idea quickly, without assuming familiarity with its workflows. My role here was visual storytelling and motion-design planning; a completed animation or production handoff has not been confirmed for this case study.",
           process:"The storyboard organized the explanation into short visual beats: establish the product idea, show how information connects, then leave enough time for the viewer to understand the relationship. Within a roughly 30-second runtime, pacing and legibility compete with the amount of detail that can be shown. The rationale was to give each frame one clear communication job and maintain a consistent visual language. Specific rounds of exploration, review feedback, and implementation collaboration have not been documented, so they are not presented as completed steps.",
@@ -84,6 +94,8 @@ window.PORTFOLIO = {
       projects:[
         {
           title:"Customizable Patient Portal",type:"UX/UI Design · Patient Experience",
+          audience:"Patients preparing for surgery and medical-practice staff configuring the portal.",
+          constraints:"Practice-level flexibility without sacrificing clarity and consistency for patients.",
           summary:"Before surgery, patients have enough to think about. The portal should make the next step obvious.",
           details:"Preparing for a procedure comes with a lot of information, and patients need to find the right instructions without decoding a clinical system. I worked on a customizable patient portal that allowed medical practices to tailor the experience and share surgery-related documents and preparation information. The UX challenge was to support different practice needs while keeping the patient-facing experience consistent and easy to understand.",
           process:"I considered the relationship between what a practice configures and what a patient ultimately sees. Important documents, preparation steps, and other surgery information needed a hierarchy that made the next relevant item obvious. This required thinking about content grouping, navigation, and the balance between flexibility for practices and clarity for patients. I approached customization as part of the patient experience, not a separate settings exercise.",
@@ -100,6 +112,8 @@ window.PORTFOLIO = {
         },
         {
           title:"AI-Assisted IOL Planning",type:"UX/UI Design · Clinical Tools",
+          audience:"Clinicians working with patient measurements, scans and model-generated information.",
+          constraints:"Distinguishing measured inputs from predictions and clarifying information passed between tools.",
           summary:"A prediction and a patient measurement aren't the same thing. A clinical interface needs to make that distinction unmistakable.",
           details:"I worked on a clinician-facing UX/UI system related to intraocular lens (IOL) planning. Doctors could use patient measurements and scans to train an AI model on prescription decisions, with predicted information then associated with a patient's file and passed to another application. The interface needed to make the source information and generated predictions understandable within a clinical workflow.",
           process:"I approached the interface as a sequence of information states: patient measurements and scans, the model-training or prediction workflow, and information passed to the patient file and a connected application. My UX/UI focus was how to help a clinician recognize the source of each piece of information and understand the handoff between tools. Separating measured inputs from model-generated predictions was a design consideration, not a claim that a specific labeling system was implemented or clinically validated. Iteration rounds and review decisions have not been documented here.",
@@ -123,6 +137,8 @@ window.PORTFOLIO = {
       projects:[
         {
           title:"Navigator App",type:"Mobile UX/UI · Guest Experience",
+          audience:"Cruise passengers using onboard booking, account and Wi-Fi guidance.",
+          constraints:"Making choices, confirmation and connection guidance understandable to guests using a mobile app.",
           summary:"On a cruise, even simple tasks have unfamiliar steps. I worked on making bookings, account details, and Wi-Fi guidance easier to navigate.",
           details:"I designed and prototyped parts of Holland America Line's Navigator app, including dining reservations, shore excursion booking, and purchase statements. These flows needed to make choices and confirmations clear to passengers who might be using the app for the first time while onboard.",
           process:"Passenger feedback showed that connecting to the ship's Wi-Fi was confusing. I worked on visual cues to help make that step easier to recognize. For dining and excursion bookings, I worked through the screens from browsing to confirmation, focusing on the details passengers needed at each point.",
@@ -140,6 +156,8 @@ window.PORTFOLIO = {
         },
         {
           title:"Stateroom TV App",type:"In-Room TV UX/UI · Guest Experience",
+          audience:"Cruise guests viewing onboard information from across a room.",
+          constraints:"Remote-control directional navigation, visible focus and television viewing distance.",
           summary:"No touchscreen. No mouse. Just a remote, a television, and a guest who wants to find something quickly.",
           details:"I contributed UX/UI design to Holland America Line's shipped stateroom TV experience, including onboard information such as Voyage Tracker. The audience was guests navigating from across the room with a remote rather than a mouse or touchscreen. That input constraint shaped the interface: readable information, clear focus states, and a directional path between controls all needed attention.",
           process:"I considered the interaction from the remote outward: where focus starts, how it moves between choices, and how a guest can tell which control is selected. For Voyage Tracker, I prioritized the main voyage information and considered how secondary details could remain accessible without competing for attention. This describes my interface-design approach; it is not a claim that a particular navigation pattern was validated through testing.",
