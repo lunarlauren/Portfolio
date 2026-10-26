@@ -897,3 +897,7 @@ html[data-theme="dark"] .project-card-process strong{color:#f2f7fc}
 @media(hover:none) and (max-width:760px){
  .hero-feature .portrait-bubble{opacity:1;visibility:visible;pointer-events:auto;transform:none}
 }
+/* Keyboard users should be able to reveal the portrait note without hover. */
+.hero-feature .portrait-about-link:focus-visible{outline:3px solid var(--brand-navy);outline-offset:3px;border-radius:3px}
+html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline-color:#fff}
+
