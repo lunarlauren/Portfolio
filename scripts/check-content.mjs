@@ -75,6 +75,10 @@ assert.match(script, /"Mobile Insights":\["Hoylu · Construction software","Mobi
 assert.match(mobile.evidence, /shipped Mobile Insights experience/i, 'Evidence must retain shipped status');
 assert.match(mobile.evidence, /not been provided/i, 'Do not imply undocumented research or metrics');
 assert.match(mobile.tradeoffs, /design tension/i, 'Describe the UX tradeoff without inventing testing');
+assert.match(mobile.details, /My role was UX\/UI design/i, 'Mobile Insights must name the designer\'s actual role');
+assert.match(mobile.details, /project managers.*away from a desktop/i, 'Mobile Insights must make the audience scenario clear');
+assert.match(mobile.details, /design framing, not a claim of documented user research/i, 'Audience framing must not masquerade as research');
+assert.match(mobile.evidence, /implementation handoff details, collaboration records/i, 'Do not invent Mobile Insights implementation or collaboration specifics');
 assert.match(script, /processNotesMarkup\(p\)/, 'Case study must render evidence and tradeoff notes');
 assert.match(script, /Design approach/, 'Project previews must expose design rationale');
 const patientPortal = data.companies.find(company => company.id === 'alcon')?.projects.find(project => project.title === 'Customizable Patient Portal');
@@ -145,7 +149,9 @@ assert.match(css, /@media\(min-width:421px\) and \(max-width:650px\)/, 'Mid-size
 assert.match(css, /@media\(max-width:420px\)\{\s*\/\* The earlier two-row grid is intentional/, 'Smallest screens should retain two-row navigation');
 assert.match(css, /\.case-view \.case-section-links\{top:110px/, 'Small-screen sticky chapter index must clear the two-row header');
 assert.match(css, /\.case-view \.case-section-links\{top:64px/, 'Mid-size sticky chapter index must clear the one-row header');
-assert.match(html, /styles\.css\?v=20261026-responsive-case-index/, 'HTML must reference the revised stylesheet');
+// The version is intentionally updated with each CSS deployment. Do not pin a
+// smoke test to one historic cache-busting token: that made routine releases fail.
+assert.match(html, /styles\\.css\\?v=[a-zA-Z0-9-]+/, 'HTML must reference a versioned stylesheet');
 
 // Case-study accessibility: the visible title names the active main landmark,
 // and evidence is a labeled group rather than an unnamed generic container.
@@ -153,5 +159,13 @@ assert.match(script, /caseView\.setAttribute\("aria-labelledby","case-title"\)/,
 assert.match(script, /<h1 id="case-title">/, 'Case-study title must label its main landmark');
 assert.match(script, /class="case-evidence" role="group" aria-label="Project overview"/, 'Evidence overview must have valid grouping semantics');
 assert.doesNotMatch(script, /behavior:"instant"/, 'Scroll restoration should use a standard behavior value');
+
+// A light-theme notebook-paper rule must not cover the dark Playground intro.
+// This is a source-order guard only, not a measured color-contrast test.
+const genericPaperRule = css.indexOf('html:not([data-theme="dark"]) .section-head>p');
+const playgroundContrastRule = css.lastIndexOf('html:not([data-theme="dark"]) .playground .section-head>p');
+assert.ok(genericPaperRule >= 0 && playgroundContrastRule > genericPaperRule, 'Playground contrast override must follow the notebook-paper rule');
+assert.match(css.slice(playgroundContrastRule, playgroundContrastRule + 260), /background:transparent/, 'Playground intro must not inherit paper background');
+assert.match(script, /class="case-section-context" aria-hidden="true"/, 'Sticky case-study navigation must identify the current project');
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
