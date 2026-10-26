@@ -786,3 +786,23 @@ html[data-theme="dark"] .notebook-sticker{background:#f7bf56;color:#203344}
 .case-section-links button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 .case-prose h2[id]{scroll-margin-top:96px}
 html[data-theme="dark"] .case-section-links button:hover{background:#29455d}
+
+
+/* Notebook project index — one project per entry, with a clear editorial hierarchy.
+   Cards use existing approved imagery or descriptive placeholders from content.js. */
+#company-grid[hidden],#collection[hidden]{display:none!important}
+.notebook-project-index{counter-reset:project;align-items:stretch}
+.notebook-project-index .featured-project{position:relative;display:flex;flex-direction:column;gap:0;min-width:0}
+.notebook-project-index .featured-project .project-card{flex:1}
+.notebook-project-index .featured-project-context{margin-top:auto}
+.notebook-project-index .featured-project-context p{display:block;-webkit-line-clamp:unset;overflow:visible}
+.notebook-project-index .featured-project-context strong{display:block;text-transform:uppercase;font-size:11px;letter-spacing:.12em;margin-bottom:5px}
+.notebook-project-index .featured-project .eyebrow{font-size:11px;letter-spacing:.08em}
+.notebook-project-index .featured-project .project-card-link{height:auto}
+@media(max-width:760px){
+ .notebook-project-index{gap:22px}
+ .notebook-project-index .featured-project{padding:16px 16px 20px}
+ .notebook-project-index .featured-project .project-card h3{font-size:clamp(25px,7vw,34px)}
+ .notebook-project-index .featured-project-context p{font-size:14px;line-height:1.55}
+ .notebook-project-index .featured-project .project-visual{aspect-ratio:16/10}
+}
