@@ -57,6 +57,15 @@ assert.match(campaigns.evidence, /do not establish formal audience research/i, '
 assert.match(campaigns.tradeoffs, /distance versus detail/i, 'Campaigns must explain its visual-design tradeoff');
 assert.match(campaigns.outcome, /have not been quantified here/i, 'Campaigns must not imply measured marketing results');
 
+// Motion & Storytelling: a documented storyboard is not evidence of a finished animation.
+const motion = data.companies.find(company => company.id === 'hoylu')?.projects.find(project => project.title === 'Motion & Storytelling');
+assert.ok(motion, 'Missing Hoylu Motion & Storytelling case study');
+assert.match(motion.details, /approximately 30-second product explainer/i, 'Motion must preserve the documented storyboard runtime');
+assert.match(motion.details, /my role here was visual storytelling and motion-design planning/i, 'Motion must identify the designer\'s actual scope');
+assert.match(motion.evidence, /final animation delivery.*have not been supplied/i, 'Motion must not imply an undocumented finished video');
+assert.match(motion.tradeoffs, /clarity versus coverage/i, 'Motion must explain the storytelling tradeoff');
+assert.match(motion.outcome, /have not been verified/i, 'Motion must distinguish the storyboard from unverified outcomes');
+
 const mobile = data.companies.find(company => company.id === 'hoylu')?.projects.find(project => project.title === 'Mobile Insights');
 assert.ok(mobile, 'Missing Hoylu Mobile Insights case study');
 assert.match(mobile.outcome, /shipped/i, 'Mobile Insights was confirmed shipped');
