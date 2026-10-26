@@ -1312,7 +1312,7 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
  margin-top:22px;
  border:1px solid #d5e3ed!important;
  border-top:2px solid var(--file-accent)!important;
- border-radius:0 12px 14px 14px;
+ border-radius:0;
  overflow:visible;
 }
 .client-file--hoylu{--file-accent:#357caa;--file-ink:#174b70;--file-tint:#dceefa}
@@ -1338,7 +1338,7 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
  margin:0;
  background:var(--file-accent);
  color:#fff;
- border-radius:6px 0 0 0;
+ border-radius:0;
  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,0 100%);
  font-size:11px;
  font-weight:800;
@@ -1359,3 +1359,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  .client-file{margin-top:19px}
  .client-file .client-file-label{min-width:102px;height:24px;font-size:10px;bottom:calc(100% + 24px)}
 }
+
+/* The filing system uses cut paper edges, not softened UI-card corners. */
+.work .featured-project.client-file{border-radius:0!important}
+.work .featured-project.client-file .client-file-label{border-radius:0}
