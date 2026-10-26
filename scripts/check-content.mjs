@@ -50,5 +50,5 @@ assert.match(mobile.evidence, /shipped Mobile Insights experience/i, 'Evidence m
 assert.match(mobile.evidence, /not been provided/i, 'Do not imply undocumented research or metrics');
 assert.match(mobile.tradeoffs, /design tension/i, 'Describe the UX tradeoff without inventing testing');
 assert.match(script, /processNotesMarkup\(p\)/, 'Case study must render evidence and tradeoff notes');
-assert.match(script, /Design approach/, 'Project previews must expose design rationale');
+assert.match(script, /Design thinking/, 'Project previews must expose design rationale');
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
