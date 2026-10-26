@@ -160,9 +160,12 @@ function initSectionNavigation(){
   // Contact is a mailto action rather than an anchor section. At the bottom
   // of a short page, its CTA can never reach the usual top-of-screen threshold.
   // Mark Contact current when the CTA is visible near the page's end.
-  const atPageEnd=window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-24;
-  const contactVisible=contactCTA&&!main.hidden&&contactCTA.getBoundingClientRect().top<window.innerHeight*.82;
-  if(!hash.startsWith("project/")&&atPageEnd&&contactVisible)active="contact";
+  // The contact CTA is the last meaningful destination, even when the footer
+  // or browser viewport prevents it from reaching the normal scrollspy line.
+  const contactRect=contactCTA?.getBoundingClientRect();
+  const contactVisible=contactRect&&!main.hidden&&contactRect.top<window.innerHeight*.82&&contactRect.bottom>0;
+  const nearEnd=document.documentElement.scrollHeight-(window.scrollY+window.innerHeight)<Math.max(96,window.innerHeight*.2);
+  if(!hash.startsWith("project/")&&contactVisible&&nearEnd)active="contact";
   if(contactLink){
    if(active==="contact")contactLink.setAttribute("aria-current","location");
    else contactLink.removeAttribute("aria-current");
