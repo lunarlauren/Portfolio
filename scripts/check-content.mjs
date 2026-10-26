@@ -39,6 +39,22 @@ for (const project of projects) {
     }
   }
 }
+// Case-study reading contract: make the intended audience and the real
+// design constraints visible without inventing discovery or validation.
+const professionalProjects = data.companies.flatMap(company => company.projects);
+for (const project of professionalProjects) {
+  for (const key of ['audience', 'constraints']) {
+    assert.ok(typeof project[key] === 'string' && project[key].trim(), `${project.title}: missing ${key}`);
+  }
+}
+assert.match(script, /const caseFactsMarkup=/, 'Case studies must share a named facts renderer');
+assert.match(script, /caseFactsMarkup\(p,company\)/, 'Case study must display the facts');
+assert.match(script, /<dl class="case-facts"/, 'Facts should be a semantic description list');
+assert.match(script, /<dt class="case-fact-label"/, 'Fact labels should use dt elements');
+assert.match(script, /<dd class="case-fact-value"/, 'Fact values should use dd elements');
+assert.match(css, /\.case-view \.case-facts\s*\{/, 'Case facts must have scoped layout styles');
+assert.match(css, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Case facts should have a narrow-screen two-column layout');
+
 for (const id of ['main', 'work', 'playground', 'about']) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `Missing #${id} navigation target`);
 }
