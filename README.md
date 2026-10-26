@@ -40,7 +40,9 @@ or decisions). `processNotesMarkup` renders these in labeled callouts. These fie
 
 For **Connected Planning**, preserve the distinction between documented UX/visual design contribution, unverified delivery or impact, and the breadth-versus-detail design rationale. The associated content smoke check protects that boundary.
 
-For **Campaigns & Events**, describe the actual formats, viewing-distance constraints, and visual hierarchy choices; avoid presenting unmeasured booth response, lead generation, or campaign metrics as verified results. The optional `evidence` and `tradeoffs` fields are rendered as explicit case-study notes and checked in the content smoke test.\n\nDo not treat descriptive image briefs as completed wireframes, test artifacts, or
+For **Campaigns & Events**, describe the actual formats, viewing-distance constraints, and visual hierarchy choices; avoid presenting unmeasured booth response, lead generation, or campaign metrics as verified results. The optional `evidence` and `tradeoffs` fields are rendered as explicit case-study notes and checked in the content smoke test.
+
+For **Motion & Storytelling**, the verified scope is a roughly 30-second product storyboard and motion-design planning, **not** a confirmed finished or shipped animation. Explain frame hierarchy and pacing as design rationale; the intended audience is framing rather than documented user research. Do not add review cycles, animation delivery, audience testing, or comprehension metrics without source evidence. `scripts/check-content.mjs` includes a regression assertion for this distinction. The October 26 update passed 10 targeted source-level V8 checks (content and renderer parsing, data shape, links, Motion evidence and Mobile Insights shipped status); the Node smoke command, browser QA, and deployment were **not** run or verified.\n\nDo not treat descriptive image briefs as completed wireframes, test artifacts, or
 verified outcomes. Add actual discovery, iterations, collaboration details, and
 results only when supported by owner-approved materials. Update
 `scripts/check-content.mjs` whenever new structured case-study fields are added.
