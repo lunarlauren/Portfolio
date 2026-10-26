@@ -26,6 +26,12 @@ The case-study view presents these as **Challenge & role → Process & design de
 
 **Evidence guardrails:** Never invent user interviews, usability tests, adoption numbers, conversion lifts, shipped features, or collaborators. Clearly distinguish concept/prototype work from shipped contributions. The user has confirmed **Hoylu Mobile Insights shipped**; do not describe its delivery as concept-only. The Holland America Line Navigator and stateroom TV contributions are also described as shipped. For Stateroom TV, the remote-control interaction model and Voyage Tracker scope are documented; the case study explicitly separates interface rationale from any unprovided guest research, tests, or impact measures. For Alcon **AI-Assisted IOL Planning**, the UX/UI workflow and connection between patient scans, model predictions, and another tool are documented, but clinical testing, safety validation, deployment, and impact are **not** verified; never present suggested labels or clinician review states as implemented safeguards. If the delivery status or outcome is unknown, say so rather than implying success.
 
+### Illustration and independent-work handoff (October 26, 2026)
+
+`Illustration & Experiments` describes an ongoing personal practice, **not** a verified sequence of completed studies. Its `evidence` and `tradeoffs` fields explain what is known and what is only design rationale. The three `PLANNED /` gallery briefs are intentional placeholders; replace each only with approved original work and captions describing actual choices. Do not imply sketch rounds, audience tests, or finished assets without source material. `projectEvidence` in `public/script.js` now labels this status, and the Fallout highlight lookup uses the exact title key from `content.js`. Keep those keys synchronized when renaming projects.
+
+**Validation performed:** The repository smoke-test assertions (176 assertions) were executed against GitHub-fetched sources in a V8 JavaScript harness with Node file imports adapted. This is not a Node test run or browser/visual/deployment verification. Full Node execution and 320px–desktop keyboard, dark-mode, and reduced-motion QA remain open.
+
 ## Evidence and decision notes (October 2026)
 
 The professional project index uses each project's `summary` for the problem and
