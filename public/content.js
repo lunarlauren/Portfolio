@@ -198,14 +198,17 @@ window.PORTFOLIO = {
     {
       title:"Illustration & Experiments",type:"Personal Creative Practice",
       summary:"Sometimes the best reason to make something is that I can't stop thinking about it. This is where those ideas go.",
-      details:"Illustration is where I get to follow curiosity without a product requirement or campaign brief. I use personal projects to explore character silhouettes, color, expression, composition, and visual styles that might not fit a client assignment. That experimentation also feeds back into my design work: it sharpens my ability to communicate personality and create memorable visual systems.",
-      process:"My process usually moves from rough sketches and references into silhouette exploration, color studies, and refinement. I look for what makes a character or composition recognizable before adding detail, then test whether the final image still communicates at a glance. Showing a few deliberate iterations alongside the finished work gives a better picture of my thinking than a gallery of polished images alone.",
-      outcome:"An ongoing body of independent illustration and creative experiments. It's where I can experiment freely and bring that curiosity back to client work.",
-      imageBrief:"Hero composition: editorial collage of original character illustrations, color studies, and selected polished artwork on a restrained background.",
+      details:"Outside client briefs, I use personal illustration as a place to explore character, expression, and visual style. My role is independent creative direction and illustration, rather than product UX for a defined user group. The visual challenge is to make a character or composition readable and distinctive without relying on extra detail. This collection does not have a documented client brief, audience study, or production deadline.",
+      process:"The questions guiding this work are visual ones: what can a silhouette communicate before color is added, how does a palette change the mood, and which details support the expression? A stronger process presentation would pair original sketches with alternatives, explain why one direction was refined, and show the final artwork. Those stages are a presentation plan here, not a claim that particular sketch rounds or tests have been documented.",
+      // Personal practice is documented; these visual briefs are not completed artwork.
+      evidence:"Confirmed scope: ongoing independent illustration and creative exploration. Specific dated sketches, comparative iterations, audience feedback, and approved finished pieces have not been supplied for this case study. The hero and gallery descriptions are future image briefs, not completed deliverables or test evidence.",
+      tradeoffs:"The design tension is expression versus clarity: a distinctive silhouette, palette, or exaggeration can give a character personality, but too many competing details can weaken the read. These are creative considerations for future examples, not validated findings or documented selections between tested variants.",
+      outcome:"An ongoing personal illustration practice. This page currently communicates the creative direction and planned process presentation; it does not claim a completed illustrated series, formal evaluation, or measured audience response.",
+      imageBrief:"Planned hero: editorial collage of original character illustrations, color studies, and selected polished artwork on a restrained background. Add only when the artwork is ready.",
       galleryBriefs:[
-        "Character development sheet: silhouettes, expressions, palettes, and final poses.",
-        "Process comparison: rough sketch, refined linework, and final colored illustration.",
-        "Curated mini-gallery of three visually distinct personal pieces with short captions."
+        "PLANNED / Character development sheet with original silhouettes, expressions, palettes, and final poses. Not yet supplied.",
+        "PLANNED / Side-by-side original rough sketch, refined linework, and final color with notes on actual decisions. Not yet supplied.",
+        "PLANNED / Curated mini-gallery of three personal pieces with captions identifying each piece and its process. Not yet supplied."
       ]
     }
   ]
