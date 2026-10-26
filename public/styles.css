@@ -842,6 +842,15 @@ html[data-theme="dark"] .case-process-note h3{color:#f2f7fc}
    sentence. This is a preview of documented copy, not generated evidence. */
 .project-card .project-card-process{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;line-height:1.55;color:var(--muted)}
 .project-card-process strong{display:block;color:var(--ink);font-size:11px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
+/* Night section has a dark surface in BOTH themes; never inherit the
+   light-page muted/ink tokens for process copy inside these cards. */
+.playground .project-card .project-card-process{color:#e1eaf4;border-top-color:#8da5bd}
+.playground .project-card .project-card-process strong{color:#f7c3dc}
+.playground .project-card .project-card-cta{color:#f3f7ff}
+.playground .project-card .project-meta{color:#f4bfd9}
+.playground .project-card .project-card-process,
+.playground .project-card .project-card-process p{opacity:1}
+
 html[data-theme="dark"] .project-card-process strong{color:#f2f7fc}
 
 
