@@ -111,11 +111,11 @@ caseView.querySelectorAll("[data-case-jump]").forEach(button=>{
   const heading=document.getElementById(button.dataset.caseJump);
   if(!heading)return;
   heading.setAttribute("tabindex","-1");
-  heading.scrollIntoView({behavior:window.matchMedia?.("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});
+  heading.scrollIntoView({behavior:window.matchMedia?.("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
   heading.focus({preventScroll:true});
  });
 });
-document.title=p.title+" — Lauren Leven";window.scrollTo({top:0,behavior:"instant"});caseView.focus({preventScroll:true})}// Keep focus and scroll position predictable during hash navigation.
+document.title=p.title+" — Lauren Leven";window.scrollTo({top:0,behavior:"auto"});caseView.focus({preventScroll:true})}// Keep focus and scroll position predictable during hash navigation.
 let previousHash=safeHash();
 function routeWithMotion(){
  const nextHash=safeHash();
@@ -123,7 +123,8 @@ function routeWithMotion(){
  route();
  if(leavingProject){
   requestAnimationFrame(()=>{
-   const heading=$("#work-title");
+   const destination=nextHash==="playground"?"#playground-title":"#work-title";
+   const heading=$(destination);
    if(heading&&!main.hidden){heading.tabIndex=-1;heading.focus({preventScroll:true});}
   });
  }
