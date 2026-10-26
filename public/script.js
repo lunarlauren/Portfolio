@@ -52,7 +52,10 @@ featuredGrid.className="projects-grid featured-projects-grid";
 featuredGrid.setAttribute("aria-label","Featured case studies");
 featuredGrid.innerHTML=featuredProjects.map(({company,project,index})=>
  '<div class="featured-project"><p class="eyebrow">'+esc(company.name)+' · '+esc(project.type)+'</p>'+
- projectCard(project,index,company.id)+'</div>'
+ projectCard(project,index,company.id)+
+ '<div class="featured-project-context"><p><strong>Challenge</strong> '+esc(project.details||project.summary)+'</p>'+
+ '<p><strong>Design approach</strong> '+esc(project.process||"Process details not yet documented.")+'</p>'+
+ '<a class="featured-case-link" href="#project/'+slug(company.id)+'/'+slug(String(index))+'">Read the case study <span aria-hidden="true">→</span></a></div></div>'
 ).join("");
 companyGrid.before(featuredGrid);
 const companyIntro=document.createElement("p");
