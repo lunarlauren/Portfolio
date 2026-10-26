@@ -757,8 +757,10 @@ html:not([data-theme="dark"]) .hero{border-radius:22px;position:relative}
 html:not([data-theme="dark"]) .hero-copy,
 html:not([data-theme="dark"]) .section-head,
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
+/* Keep paper lines visible behind editorial text; opaque text backgrounds
+   made the lines appear broken and disconnected from the writing. */
 html:not([data-theme="dark"]) .hero-description,
-html:not([data-theme="dark"]) .section-head>p{background:var(--notebook-paper);box-decoration-break:clone;-webkit-box-decoration-break:clone}
+html:not([data-theme="dark"]) .section-head>p{background:transparent;box-decoration-break:initial;-webkit-box-decoration-break:initial}
 html:not([data-theme="dark"]) .featured-project{background:var(--notebook-paper);border:1px solid #d5e3ed;border-radius:16px;padding:clamp(14px,2vw,22px);box-shadow:4px 6px 0 rgba(153,202,235,.35)}
 html:not([data-theme="dark"]) .featured-project:nth-child(even){box-shadow:-4px 6px 0 rgba(240,91,159,.17)}
 .notebook-sticker{position:absolute;z-index:2;right:clamp(14px,3vw,42px);top:12px;width:52px;height:52px;border:2px solid white;border-radius:16px;background:#ffcf4e;box-shadow:0 3px 0 #dcac39,0 5px 12px rgba(32,51,68,.15);transform:rotate(12deg);display:grid;place-items:center;font-size:28px;cursor:pointer;touch-action:manipulation}
@@ -1057,4 +1059,23 @@ html[data-theme="dark"] .playground .section-head>p{
 }
 @media(prefers-reduced-motion:reduce){
  :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.notebook-sticker,.case-section-links button):active{filter:none}
+}
+
+
+/* Baseline-ruled paper: match the repeat to the body copy's actual line box
+   instead of a fixed 32px grid. Offset places the rule just below each line. */
+@media(max-width:600px){
+ html:not([data-theme="dark"]) :is(.hero,.work,.about){
+  --paper-baseline:33px;
+  background-image:linear-gradient(90deg,transparent 0,transparent var(--notebook-margin-offset),rgba(240,91,159,var(--notebook-margin-opacity)) var(--notebook-margin-offset),rgba(240,91,159,var(--notebook-margin-opacity)) calc(var(--notebook-margin-offset) + 2px),transparent calc(var(--notebook-margin-offset) + 2px)),
+  repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--paper-baseline) - 1px),var(--notebook-rule) calc(var(--paper-baseline) - 1px),var(--notebook-rule) var(--paper-baseline));
+  background-size:100% var(--paper-baseline);
+ }
+ html:not([data-theme="dark"]) .hero .hero-description{
+  font-size:20px;line-height:33px;
+ }
+ html:not([data-theme="dark"]) .work .section-head>p,
+ html:not([data-theme="dark"]) .about .about-copy p{
+  line-height:33px;
+ }
 }
