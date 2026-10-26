@@ -96,3 +96,7 @@ The obsolete company expansion renderer has been retired. Work is a single data-
 The Work gallery now mounts directly inside `#work`; the retired `#company-grid` and `#collection` elements and their script references have been removed. The `#company/...` hash still redirects to `#work` for existing links. Do not reintroduce empty company navigation containers.
 
 A JavaScript parse check was performed on the updated `public/script.js` source. Browser rendering, interaction testing, and deployment status remain unverified.
+
+
+### Pass 8 — scan-first project cards
+Project cards show the project identity, preview, and short summary. The longer design-process explanation belongs in the case study, not repeated in the index. The obsolete `.featured-project-context` styles and related selector rules were removed from `public/styles.css`. Keep this division of content when adding new projects.
