@@ -29,7 +29,7 @@ The case-study view presents these as **Challenge & role → Process & design de
 ## Evidence and decision notes (October 2026)
 
 The professional project index uses each project's `summary` for the problem and
-the first sentence of `process` for a short **Design thinking** preview. The
+the first sentence of `process` for a short **Design approach** preview. The
 `processTeaser` helper reuses the existing copy instead of inventing research or
 outcomes. Each card has **one** case-study link, avoiding duplicate tab stops.
 
@@ -37,7 +37,7 @@ Case studies may include two optional, plain-text fields in `public/content.js`:
 `evidence` (what is confirmed and what supporting research/metrics are absent)
 and `tradeoffs` (design tensions and rationale, without implying unverified tests
 or decisions). `processNotesMarkup` renders these in labeled callouts. Currently
-Hoylu **Mobile Insights** uses both, and its delivery remains explicitly **shipped**.
+Hoylu **Mobile Insights** and Alcon **Customizable Patient Portal** use both. Mobile Insights remains explicitly **shipped**.
 
 Do not treat descriptive image briefs as completed wireframes, test artifacts, or
 verified outcomes. Add actual discovery, iterations, collaboration details, and
