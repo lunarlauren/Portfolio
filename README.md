@@ -46,3 +46,12 @@ Open the local server in a browser. The content smoke check validates data shape
 ## Manual QA before publishing
 
 Review at narrow and wide mobile widths and desktop; check light/dark contrast, keyboard focus order, skip link, company → project → back navigation, reduced-motion behavior, image alt text, and the Contact underline near the bottom of the page. Verify all copy and imagery with the portfolio owner. Run Lighthouse or axe in a browser before calling an accessibility pass complete.
+
+
+## Project-first homepage navigation
+
+The Work section shows four featured case studies directly before the company collection cards. The featured selection is defined in `public/script.js` as `featuredProjects`; it references the original project objects and indices, so cards link to the same case studies without duplicating content. Company collections remain available for browsing the complete body of work.
+
+When updating the featured list, confirm exact project titles against `public/content.js` and keep the selection small enough to scan on mobile. Do not add speculative delivery badges or outcomes. Featured-card layout rules live near the end of `public/styles.css` under the “Featured case studies” comment.
+
+**QA specific to this change:** Verify that all four cards appear, their links open the correct case study, the company collection remains accessible, and focus/scroll behavior works when returning from a case study. Test at 320–390px widths, tablet, desktop, both themes, and keyboard-only navigation. CSS/markup inspection alone does not establish visual or accessibility compliance.
