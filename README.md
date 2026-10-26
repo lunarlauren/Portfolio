@@ -125,3 +125,7 @@ When the homepage is hidden on a project route, the case-study view takes the `m
 
 ### Pass 14 — navigation QA
 Returning from a project case study now focuses the relevant Work or Playground heading, rather than always focusing Work. Changed nonstandard `behavior: "instant"` scroll options to `"auto"`. Static checks confirm both script files parse, destination heading IDs exist, and case-study main landmark setup is present. Browser QA and screen-reader verification remain outstanding.
+
+
+### Pass 15 — release cache and route focus
+Updated HTML query versions for CSS and JavaScript to ensure new deployments request the latest assets. Case-study exit now restores heading focus only for explicit `#work` and `#playground` returns; other destinations retain native hash navigation. Source-level JavaScript parsing checked. Browser QA, deployed-asset verification, and cross-device testing are still required before sign-off.
