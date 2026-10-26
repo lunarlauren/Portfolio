@@ -41,7 +41,19 @@ function initInventory(){
 }
 initInventory();
 
-const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const safeHash=()=>{try{return decodeURIComponent(location.hash.slice(1))}catch{return "work"}};const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">':'<span class="visual-label visual-brief"><span class="brief-kicker">IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';const projectCard=(p,i,group)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p></a></article>';const companyGrid=$("#company-grid");companyGrid.innerHTML=data.companies.map((c,i)=>'<button class="company-card '+(c.featured?'featured':'')+'" type="button" data-company="'+esc(c.id)+'" style="--accent:'+esc(c.accent)+';--i:'+i+'" aria-controls="collection" aria-expanded="false"><span class="card-top"><span>'+esc(c.category)+'</span><span aria-hidden="true">↗</span></span><span class="company-name">'+esc(c.name)+'</span><span class="company-description">'+esc(c.description)+'</span><span class="card-bottom">'+c.projects.length+' PROJECT'+(c.projects.length===1?'':'S')+' <span aria-hidden="true">→</span></span></button>').join("");$("#play-grid").innerHTML=data.playground.map((p,i)=>projectCard(p,i,"playground")).join("");const collection=$("#collection");
+const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const safeHash=()=>{try{return decodeURIComponent(location.hash.slice(1))}catch{return "work"}};const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">':'<span class="visual-label visual-brief"><span class="brief-kicker">IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';const projectCard=(p,i,group)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p></a></article>';const companyGrid=$("#company-grid");
+// Company cards are direct project links, not expandable gates.
+// The complete set of projects is already visible in the project-first grid.
+companyGrid.innerHTML=data.companies.map(c=>{
+ const first=c.projects[0];
+ if(!first)return "";
+ return '<a class="company-card '+(c.featured?'featured':'')+'" href="#project/'+slug(c.id)+'/0" style="--accent:'+esc(c.accent)+'">'+
+ '<span class="card-top"><span>'+esc(c.category)+'</span><span aria-hidden="true">↗</span></span>'+
+ '<span class="company-name">'+esc(c.name)+'</span>'+
+ '<span class="company-description">'+esc(c.description)+'</span>'+
+ '<span class="card-bottom">VIEW A CASE STUDY <span aria-hidden="true">→</span></span></a>';
+}).join("");
+const collection=$("#collection");
 // Project-first discovery: keep company collections available, but never require
 // visitors to open a company before reaching a case study.
 const featuredProjects=data.companies.flatMap(company=>
@@ -80,7 +92,7 @@ function showCompanies(){
   
   document.querySelectorAll(".company-card").forEach(btn=>{btn.setAttribute("aria-expanded","false");});
 }
-document.querySelectorAll("[data-company]").forEach(btn=>btn.addEventListener("click",()=>{location.hash="company/"+encodeURIComponent(btn.dataset.company)}));
+
 // Short, factual takeaways help visitors skim without replacing the full case study.
 const caseHighlights={
  "Connected Planning":[["THE PROBLEM","Project information can be hard to follow across teams."],["MY FOCUS","Project context and clearer paths into the details."]],
