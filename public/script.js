@@ -116,25 +116,16 @@ caseView.querySelectorAll("[data-case-jump]").forEach(button=>{
 document.title=p.title+" — Lauren Leven";window.scrollTo({top:0,behavior:"instant"});caseView.focus({preventScroll:true})}// Keep focus and scroll position predictable during hash navigation.
 let previousHash=safeHash();
 function routeWithMotion(){
-  const nextHash=safeHash();
-  const leavingProject=previousHash.startsWith("project/")&&!nextHash.startsWith("project/");
-  const toCompany=nextHash.startsWith("company/")?nextHash.slice(8):null;
-  // Avoid shared-element snapshots while moving the expanded panel in the DOM.
-  route();
-  if(leavingProject){
-    requestAnimationFrame(()=>{
-      if(toCompany){collection.focus({preventScroll:true});}
-      else{const heading=$("#work-title");if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}}
-    });
-  }
-  if(toCompany){
-    requestAnimationFrame(()=>{
-      const work=$("#work");
-      if(work)window.scrollTo({top:Math.max(0,window.scrollY+work.getBoundingClientRect().top),behavior:"instant"});
-      if(!leavingProject)collection.focus({preventScroll:true});
-    });
-  }
-  previousHash=nextHash;
+ const nextHash=safeHash();
+ const leavingProject=previousHash.startsWith("project/")&&!nextHash.startsWith("project/");
+ route();
+ if(leavingProject){
+  requestAnimationFrame(()=>{
+   const heading=$("#work-title");
+   if(heading&&!main.hidden){heading.tabIndex=-1;heading.focus({preventScroll:true});}
+  });
+ }
+ previousHash=nextHash;
 }
 window.addEventListener("hashchange",routeWithMotion);route();
 // Navigation handoff: keep the header's current-section indicator synchronized
