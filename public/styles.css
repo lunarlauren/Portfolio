@@ -1309,9 +1309,9 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
  --file-ink:#174b70;
  --file-tint:#dceefa;
  position:relative;
- margin-top:22px;
+ margin-top:32px;
  border:1px solid #d5e3ed!important;
- border-top:2px solid var(--file-accent)!important;
+ border-top:1px solid var(--file-accent)!important;
  border-radius:0;
  overflow:visible;
 }
@@ -1320,7 +1320,6 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
 .client-file--holland-america{--file-accent:#247767;--file-ink:#165d50;--file-tint:#dcf2e9}
 .client-file::before{content:none}
 .client-file>.eyebrow{
- position:relative;
  margin-top:8px;
  margin-bottom:12px;
  font-size:11px;
@@ -1328,8 +1327,8 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
 }
 .client-file .client-file-label{
  position:absolute;
- left:0;
- bottom:calc(100% + 25px);
+ left:-1px;
+ top:-28px;
  display:flex;
  align-items:center;
  min-width:116px;
@@ -1356,10 +1355,6 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
 }
 html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-color:var(--file-accent)!important}
 @media(max-width:600px){
- .client-file{margin-top:19px}
- .client-file .client-file-label{min-width:102px;height:24px;font-size:10px;bottom:calc(100% + 24px)}
+ .client-file{margin-top:29px}
+ .client-file .client-file-label{min-width:102px;height:24px;font-size:10px;top:-25px}
 }
-
-/* The filing system uses cut paper edges, not softened UI-card corners. */
-.work .featured-project.client-file{border-radius:0!important}
-.work .featured-project.client-file .client-file-label{border-radius:0}
