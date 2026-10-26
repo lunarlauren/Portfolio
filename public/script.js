@@ -121,10 +121,11 @@ function routeWithMotion(){
  const nextHash=safeHash();
  const leavingProject=previousHash.startsWith("project/")&&!nextHash.startsWith("project/");
  route();
- if(leavingProject){
+ // Restore focus only for explicit return-to-gallery navigation.
+ // Other destinations (e.g. About or the top of the page) keep native hash focus.
+ if(leavingProject&&(nextHash==="work"||nextHash==="playground")){
   requestAnimationFrame(()=>{
-   const destination=nextHash==="playground"?"#playground-title":"#work-title";
-   const heading=$(destination);
+   const heading=$(nextHash==="playground"?"#playground-title":"#work-title");
    if(heading&&!main.hidden){heading.tabIndex=-1;heading.focus({preventScroll:true});}
   });
  }
