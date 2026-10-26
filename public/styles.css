@@ -679,3 +679,24 @@ html[data-theme="dark"] .case-evidence-item strong{color:#f2f7fc}
  .site-header .theme-toggle{flex:0 0 34px;width:34px;min-width:34px;height:44px;min-height:44px;display:grid;place-items:center}
  .site-header .header-actions nav a[aria-current="location"]{padding-inline:6px}
 }
+
+
+/* Compact mobile navigation: no competing pill outlines.
+   The current section uses a short underline; contact remains a text link. */
+@media(max-width:650px){
+ .site-header{gap:10px;padding-inline:14px}
+ .site-header .header-actions{gap:clamp(7px,2vw,12px)}
+ .site-header .header-actions nav{gap:clamp(10px,2.8vw,17px)}
+ .site-header .header-actions nav a,
+ .site-header .header-contact{
+  padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;
+  font-size:clamp(11px,2.85vw,13px);line-height:1.2;
+ }
+ .site-header .header-actions nav a[aria-current="location"],
+ html[data-theme="dark"] .site-header .header-actions nav a[aria-current="location"]{
+  padding:0;background:transparent;box-shadow:none;border:0;border-radius:0;
+  color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;
+ }
+ .site-header .header-contact{min-width:auto;width:auto;min-height:44px;text-decoration:none}
+ .site-header .theme-toggle{border-radius:50%;width:36px;min-width:36px;flex-basis:36px;height:36px;min-height:36px}
+}
