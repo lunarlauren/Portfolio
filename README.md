@@ -12,6 +12,10 @@ A lightweight portfolio of product UX, visual design, and illustration. The prod
 - `wrangler.jsonc` — Worker configuration; `assets.directory` points to `./public`.
 - `scripts/check-content.mjs` — dependency-free content and JavaScript smoke checks.
 
+### Responsive navigation handoff (October 26, 2026)
+
+The sticky header deliberately switches between a **single row at 421–650px** and a **two-row grid at 420px and below**. The smaller layout preserves readable labels and 44px targets for Work, Playground, About, Contact, and the theme toggle. The case-study chapter index uses corresponding sticky offsets (64px / 110px) and heading scroll margins so keyboard and touch navigation should not hide chapter headings behind the header. These values are kept together at the end of `public/styles.css`; update both the header and chapter-index offsets when changing header dimensions. The source smoke test checks these declarations, **not** their rendered geometry. Still verify 320, 375, 420, 421, 650 and 760px widths, both themes, keyboard focus, and chapter scrolling in a browser before release.
+
 ## UX case-study editing guide
 
 Each project in `window.PORTFOLIO` should make the designer's **reasoning** as clear as the final visual work:
