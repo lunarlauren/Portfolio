@@ -117,7 +117,46 @@ function routeWithMotion(){
   }
   previousHash=nextHash;
 }
-window.addEventListener("hashchange",routeWithMotion);route();$("#year").textContent=new Date().getFullYear();if(data.email&&data.email!=="hello@example.com"){const mail="mailto:"+data.email;$("#contact-link").href=mail;$("#email-link").href=mail}else{$("#contact-link").href="#about";$("#email-link").href="#about";$("#email-link").textContent="Contact details coming soon ↗"}
+window.addEventListener("hashchange",routeWithMotion);route();
+// Navigation handoff: keep the header's current-section indicator synchronized
+// with both hash routes and ordinary scrolling, without rewriting browser history.
+function initSectionNavigation(){
+ const links=[...document.querySelectorAll('.site-header nav a[href^="#"]')];
+ const sections=links.map(link=>({link,section:document.querySelector(link.getAttribute("href"))}))
+   .filter(entry=>entry.section);
+ if(!sections.length)return;
+ function updateCurrent(){
+  const hash=safeHash();
+  let active=null;
+  if(hash.startsWith("project/")){
+   active="work";
+  }else{
+   // Track the section nearest the top reading position. This also handles
+   // visitors scrolling without using the navigation links.
+   const threshold=Math.min(180,window.innerHeight*.25);
+   for(const entry of sections){
+    if(entry.section.getBoundingClientRect().top<=threshold)active=entry.section.id;
+   }
+   if(!active&&hash.startsWith("company/"))active="work";
+  }
+  for(const {link,section} of sections){
+   if(section.id===active)link.setAttribute("aria-current","location");
+   else link.removeAttribute("aria-current");
+  }
+ }
+ let pending=false;
+ function scheduleUpdate(){
+  if(pending)return;
+  pending=true;
+  requestAnimationFrame(()=>{pending=false;updateCurrent()});
+ }
+ window.addEventListener("scroll",scheduleUpdate,{passive:true});
+ window.addEventListener("resize",scheduleUpdate);
+ window.addEventListener("hashchange",scheduleUpdate);
+ updateCurrent();
+}
+initSectionNavigation();
+$("#year").textContent=new Date().getFullYear();if(data.email&&data.email!=="hello@example.com"){const mail="mailto:"+data.email;$("#contact-link").href=mail;$("#email-link").href=mail}else{$("#contact-link").href="#about";$("#email-link").href="#about";$("#email-link").textContent="Contact details coming soon ↗"}
 
 // Small, optional tactile details: no autoplay, no sound, no persistent state.
 const footerSecret=document.getElementById("footer-secret");
