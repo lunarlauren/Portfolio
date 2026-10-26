@@ -1359,3 +1359,35 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  .client-file{margin-top:29px}
  .client-file .client-file-label{min-width:102px;height:24px;font-size:10px;top:-25px}
 }
+
+/* Archive metadata: distinguish the designer's actual contribution from
+   delivery status at scan speed. No invented outcomes or research badges. */
+.work .project-card-facts{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+ gap:10px 16px;
+ margin:16px 0 4px;
+ padding:12px 0;
+ border-block:1px solid var(--line);
+}
+.work .project-card-facts>div{min-width:0}
+.work .project-card-facts dt{
+ margin-bottom:4px;
+ color:var(--muted);
+ font-size:10px;
+ font-weight:800;
+ letter-spacing:.1em;
+ line-height:1.4;
+ text-transform:uppercase;
+}
+.work .project-card-facts dd{
+ margin:0;
+ color:var(--ink);
+ font-size:12px;
+ font-weight:600;
+ line-height:1.45;
+ overflow-wrap:break-word;
+}
+@media(max-width:420px){
+ .work .project-card-facts{grid-template-columns:minmax(0,1fr)}
+}
