@@ -147,4 +147,11 @@ assert.match(css, /\.case-view \.case-section-links\{top:110px/, 'Small-screen s
 assert.match(css, /\.case-view \.case-section-links\{top:64px/, 'Mid-size sticky chapter index must clear the one-row header');
 assert.match(html, /styles\.css\?v=20261026-responsive-case-index/, 'HTML must reference the revised stylesheet');
 
+// Case-study accessibility: the visible title names the active main landmark,
+// and evidence is a labeled group rather than an unnamed generic container.
+assert.match(script, /caseView\.setAttribute\("aria-labelledby","case-title"\)/, 'Case-study main landmark must have a name');
+assert.match(script, /<h1 id="case-title">/, 'Case-study title must label its main landmark');
+assert.match(script, /class="case-evidence" role="group" aria-label="Project overview"/, 'Evidence overview must have valid grouping semantics');
+assert.doesNotMatch(script, /behavior:"instant"/, 'Scroll restoration should use a standard behavior value');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
