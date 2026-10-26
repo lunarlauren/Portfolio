@@ -1320,6 +1320,7 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
 .client-file--holland-america{--file-accent:#247767;--file-ink:#165d50;--file-tint:#dcf2e9}
 .client-file::before{content:none}
 .client-file>.eyebrow{
+ position:static;
  margin-top:8px;
  margin-bottom:12px;
  font-size:11px;
