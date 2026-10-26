@@ -78,7 +78,7 @@ const caseHighlights={
 // Update alongside content.js when the scope or delivery status is confirmed.
 const projectEvidence={
  "Connected Planning":["Hoylu · Construction software","Product UX and visual design","Product design contribution"],
- "Mobile Insights":["Hoylu · Construction software","Mobile UX concepts and visual storytelling","Concept exploration"],
+ "Mobile Insights":["Hoylu · Construction software","Mobile UX and visual design","Shipped product contribution"],
  "Campaigns & Events":["Hoylu · Marketing and events","Event signage and campaign visual design","Produced design assets"],
  "Motion & Storytelling":["Hoylu · Product communications","Storyboard and motion design planning","Storyboard deliverable"],
  "Customizable Patient Portal":["Alcon · Healthcare","UX/UI for patient and practice workflows","Design contribution"],
