@@ -152,3 +152,7 @@ Updated HTML query versions for CSS and JavaScript to ensure new deployments req
 
 ### Case-study landmark and return navigation (accessibility pass)
 The dynamically rendered case-study `role="main"` is named by its visible `#case-title` heading; the homepage `<main>` is hidden while a case study is open. The project overview's context, contribution, and delivery labels form a named group. Preserve the **shipped** designation for Hoylu Mobile Insights and the evidence boundaries in every case study when editing these templates. Returning to a project card uses standard `scrollTo({behavior:"auto"})` before restoring keyboard focus. `scripts/check-content.mjs` guards these source-level contracts, but real keyboard/screen-reader and responsive browser QA are still required.
+
+
+### Mobile case-study reading pass (2026-10-26)
+Added scoped <=600px text wrapping, line-height, 44px chapter targets, and responsive case-study image sizing without changing content, image placeholders, or theme tokens. Refreshed the stylesheet query version. Source checks: CSS braces balanced; `public/script.js` and `public/content.js` parse as JavaScript; HTML points to the new stylesheet version. **Not verified:** browser layout, keyboard/screen-reader interactions, contrast measurements, deployed site, or the native Node test suite.
