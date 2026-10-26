@@ -57,7 +57,7 @@ gallery.className="projects-grid featured-projects-grid notebook-project-index";
 gallery.setAttribute("role","list");
 gallery.setAttribute("aria-label","Professional design projects");
 gallery.innerHTML=professionalProjects.map(({company,project,index},order)=>
- '<div class="featured-project" role="listitem"><p class="eyebrow">PROJECT '+String(order+1).padStart(2,"0")+' / '+esc(company.name)+' · '+esc(project.type)+'</p>'+
+ '<div class="featured-project client-file client-file--'+esc(company.id)+'" role="listitem"><p class="eyebrow"><span class="client-file-label">'+esc(company.name)+'</span> <span class="client-file-number">FILE '+String(order+1).padStart(2,"0")+'</span> · '+esc(project.type)+'</p>'+
  projectCard(project,index,company.id)+'</div>'
 ).join("");
 $("#work").append(gallery);
