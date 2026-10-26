@@ -1160,13 +1160,16 @@ html[data-theme="dark"] .playground .section-head>p{
  .work.wrap{padding-top:clamp(32px,4vw,56px)}
  .work .section-head{
   display:grid;
-  grid-template-columns:minmax(0,1.65fr) minmax(260px,.85fr);
-  align-items:end;
-  column-gap:clamp(36px,5vw,88px);
+  /* Match the project cards' exact column tracks and gutter. */
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start;
+  column-gap:clamp(20px,2.5vw,36px);
   margin-bottom:clamp(24px,3vw,40px);
  }
  .work .section-head h2{margin-bottom:0;font-size:clamp(42px,4vw,64px);line-height:1.06}
- .work .section-head>p{max-width:34ch;margin:0 0 5px;line-height:1.6}
+ /* Start beside the heading rather than at its bottom; align left edge
+    with the second project card, not the paragraph's right edge. */
+ .work .section-head>p{justify-self:start;max-width:34ch;margin:32px 0 0;line-height:1.6}
  .work .featured-projects-grid{gap:clamp(20px,2.5vw,36px)}
  .work .notebook-project-index .featured-project{padding:clamp(18px,2vw,26px)}
  .work .notebook-project-index .project-visual{aspect-ratio:16/8;min-height:0}
