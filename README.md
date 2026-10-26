@@ -36,9 +36,9 @@ outcomes. Each card has **one** case-study link, avoiding duplicate tab stops.
 Case studies may include two optional, plain-text fields in `public/content.js`:
 `evidence` (what is confirmed and what supporting research/metrics are absent)
 and `tradeoffs` (design tensions and rationale, without implying unverified tests
-or decisions). `processNotesMarkup` renders these in labeled callouts. Currently Hoylu **Mobile Insights**, Alcon **Customizable Patient Portal**, and Holland America Line **Navigator App** use both. Mobile Insights and Navigator remain explicitly **shipped**. Navigator's documented passenger feedback does not establish a quantified improvement or formal study.
+or decisions). `processNotesMarkup` renders these in labeled callouts. These fields are used on documented professional case studies including Hoylu **Connected Planning** and **Mobile Insights**, Alcon **Customizable Patient Portal**, and Holland America Line **Navigator App** and **Stateroom TV App**. Mobile Insights and Navigator remain explicitly **shipped**. Navigator's documented passenger feedback does not establish a quantified improvement or formal study.
 
-Do not treat descriptive image briefs as completed wireframes, test artifacts, or
+For **Connected Planning**, preserve the distinction between documented UX/visual design contribution, unverified delivery or impact, and the breadth-versus-detail design rationale. The associated content smoke check protects that boundary.\n\nDo not treat descriptive image briefs as completed wireframes, test artifacts, or
 verified outcomes. Add actual discovery, iterations, collaboration details, and
 results only when supported by owner-approved materials. Update
 `scripts/check-content.mjs` whenever new structured case-study fields are added.
