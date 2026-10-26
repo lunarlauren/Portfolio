@@ -36,8 +36,7 @@ outcomes. Each card has **one** case-study link, avoiding duplicate tab stops.
 Case studies may include two optional, plain-text fields in `public/content.js`:
 `evidence` (what is confirmed and what supporting research/metrics are absent)
 and `tradeoffs` (design tensions and rationale, without implying unverified tests
-or decisions). `processNotesMarkup` renders these in labeled callouts. Currently
-Hoylu **Mobile Insights** and Alcon **Customizable Patient Portal** use both. Mobile Insights remains explicitly **shipped**.
+or decisions). `processNotesMarkup` renders these in labeled callouts. Currently Hoylu **Mobile Insights**, Alcon **Customizable Patient Portal**, and Holland America Line **Navigator App** use both. Mobile Insights and Navigator remain explicitly **shipped**. Navigator's documented passenger feedback does not establish a quantified improvement or formal study.
 
 Do not treat descriptive image briefs as completed wireframes, test artifacts, or
 verified outcomes. Add actual discovery, iterations, collaboration details, and
