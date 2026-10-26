@@ -738,3 +738,13 @@ html[data-theme="dark"] .case-evidence-item strong{color:#f2f7fc}
 }
 html[data-theme="dark"] .featured-project>.eyebrow,
 html[data-theme="dark"] .featured-projects-grid+.eyebrow{color:#d3e2ef}
+
+
+/* Featured project context: reveal documented UX reasoning without extra navigation.
+   Long case-study paragraphs are visually clamped here; the full text remains in the case study. */
+.featured-project-context{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}
+.featured-project-context p{margin:0 0 12px;color:var(--muted);font-size:14px;line-height:1.6;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.featured-project-context strong{color:var(--ink);font-weight:700;margin-right:.4em}
+.featured-case-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;text-underline-offset:4px;min-height:44px}
+html[data-theme="dark"] .featured-project-context p{color:#d3e2ef}
+html[data-theme="dark"] .featured-project-context strong{color:#f2f7fc}
