@@ -62,22 +62,19 @@ companyGrid.before(gallery);
 // Retain legacy company deep links, but hide the duplicate company index on home.
 companyGrid.hidden=true;
 
+// Historical company hashes resolve to the same single gallery.
+// No separate company grid is rendered or maintained.
 function openCompany(id){
-  const c=data.companies.find(x=>x.id===id);if(!c)return;
-  companyGrid.hidden=false;
-  companyGrid.dataset.active=id;
-  companyGrid.parentNode.insertBefore(collection,companyGrid);
-  collection.hidden=false;collection.dataset.active=id;
-  collection.setAttribute("aria-label",c.name+" projects");
-  // Legacy company deep links remain supported; the homepage no longer uses this extra navigation layer.
-  collection.innerHTML='<div class="collection-nav"><span class="eyebrow">SELECTED WORK / '+esc(c.projects.length)+' PROJECTS</span></div><div class="collection-head"><div><p class="eyebrow">'+esc(c.category)+'</p><h3>'+esc(c.name)+'</h3><p>'+esc(c.description)+'</p></div></div><div class="projects-grid">'+c.projects.map((p,i)=>projectCard(p,i,c.id)).join("")+'</div>';
-  document.querySelectorAll(".company-card").forEach(btn=>{const active=btn.dataset.company===id;btn.setAttribute("aria-expanded",String(active));});
-  // Keep other company cards visible for quick switching.
+ const company=data.companies.find(c=>c.id===id);
+ if(!company)return;
+ showCompanies();
+ const first=gallery.querySelector('.featured-project');
+ if(first)first.scrollIntoView({block:"start",behavior:"instant"});
 }
 function showCompanies(){
-  collection.hidden=true;collection.after(companyGrid);companyGrid.hidden=true;companyGrid.dataset.active="";collection.dataset.active="";
-  
-  document.querySelectorAll(".company-card").forEach(btn=>{btn.setAttribute("aria-expanded","false");});
+ collection.hidden=true;
+ companyGrid.hidden=true;
+ collection.dataset.active="";
 }
 
 // Short, factual takeaways help visitors skim without replacing the full case study.
