@@ -121,3 +121,7 @@ The portrait now has bounded mobile widths, and its speech bubble stays aligned 
 
 ### Pass 13 — route landmarks and process previews
 When the homepage is hidden on a project route, the case-study view takes the `main` landmark; when the homepage is shown, the case-study view is hidden. Project-card process previews are only rendered when source copy exists. The portrait's About link has an explicit keyboard focus outline in both themes. JavaScript parsing was checked, but actual screen-reader/browser route behavior still requires QA.
+
+
+### Pass 14 — navigation QA
+Returning from a project case study now focuses the relevant Work or Playground heading, rather than always focusing Work. Changed nonstandard `behavior: "instant"` scroll options to `"auto"`. Static checks confirm both script files parse, destination heading IDs exist, and case-study main landmark setup is present. Browser QA and screen-reader verification remain outstanding.
