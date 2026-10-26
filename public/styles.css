@@ -641,3 +641,7 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:#c9e4f5}
 html[data-theme="dark"] .case-evidence-item{background:#20374b;border-color:#718ba2}
 html[data-theme="dark"] .case-evidence-label{color:#d3e2ef}
 html[data-theme="dark"] .case-evidence-item strong{color:#f2f7fc}
+
+
+/* Navigation: a persistent current-section cue works without relying on color alone. */
+.site-header nav a[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
