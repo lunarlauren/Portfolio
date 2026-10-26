@@ -115,6 +115,10 @@ window.PORTFOLIO = {
           summary:"On a cruise, even simple tasks have unfamiliar steps. I worked on making bookings, account details, and Wi-Fi guidance easier to navigate.",
           details:"I designed and prototyped parts of Holland America Line's Navigator app, including dining reservations, shore excursion booking, and purchase statements. These flows needed to make choices and confirmations clear to passengers who might be using the app for the first time while onboard.",
           process:"Passenger feedback showed that connecting to the ship's Wi-Fi was confusing. I worked on visual cues to help make that step easier to recognize. For dining and excursion bookings, I worked through the screens from browsing to confirmation, focusing on the details passengers needed at each point.",
+          // Evidence boundary: passenger Wi-Fi confusion was reported, but no
+          // interview count, test method, or before/after metric is documented.
+          evidence:"Documented project context: passenger feedback identified confusion around connecting to the ship's Wi-Fi. I contributed visual guidance for that step and designed and prototyped booking and account flows. The feedback source, sample size, validation method, and post-release impact are not documented here.",
+          tradeoffs:"For a first-time guest, the tradeoff was between showing enough booking or connection detail to make the next step understandable and keeping the flow approachable on a phone. I focused on legible choices, guidance, and confirmations; this describes my design priorities, not a tested improvement in completion rates.",
           outcome:"My designs contributed to Navigator, a shipped app used by Holland America Line passengers. I designed and prototyped booking and account-related flows, along with Wi-Fi guidance informed by passenger feedback. The work gave me experience designing for real passenger needs within a shipped product.",
           imageBrief:"Approved Navigator app screens showing dining reservations, shore excursions, or Wi-Fi connection guidance.",
           galleryBriefs:[
