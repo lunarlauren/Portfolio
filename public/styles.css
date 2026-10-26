@@ -901,3 +901,15 @@ html[data-theme="dark"] .project-card-process strong{color:#f2f7fc}
 .hero-feature .portrait-about-link:focus-visible{outline:3px solid var(--brand-navy);outline-offset:3px;border-radius:3px}
 html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline-color:#fff}
 
+
+/* Case-study reading index: show the active chapter without color alone. */
+.case-section-links button[aria-current="location"]{
+ border-color:var(--ink);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;
+}
+html[data-theme="dark"] .case-section-links button[aria-current="location"]{
+ border-color:#f2f7fc;color:#f2f7fc;
+}
+@media(max-width:760px){
+ .case-section-links{display:flex;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;padding-bottom:6px}
+ .case-section-links button{flex:0 0 auto;white-space:nowrap}
+}
