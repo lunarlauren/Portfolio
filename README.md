@@ -6,7 +6,7 @@ A lightweight portfolio of product UX, visual design, and illustration. The prod
 
 - `public/index.html` — page structure, header, hero, contact and theme toggle.
 - `public/content.js` — company/project data, UX case-study writing, image briefs and galleries.
-- `public/script.js` — project cards, company collections, case-study rendering, hash routing, active navigation and interactions.
+- `public/script.js` — project index, case-study rendering, hash routing, active navigation and interactions.
 - `public/styles.css` — responsive styling, themes, layout and motion.
 - `public/LL logo.svg` and `public/laurenlevenportfolioheroportrait.png` — current brand and portrait assets.
 - `wrangler.jsonc` — Worker configuration; `assets.directory` points to `./public`.
@@ -62,12 +62,12 @@ Open the local server in a browser. The content smoke check validates data shape
 
 ## Manual QA before publishing
 
-Review at narrow and wide mobile widths and desktop; check light/dark contrast, keyboard focus order, skip link, company → project → back navigation, reduced-motion behavior, image alt text, and the Contact underline near the bottom of the page. Verify all copy and imagery with the portfolio owner. Run Lighthouse or axe in a browser before calling an accessibility pass complete.
+Review at narrow and wide mobile widths and desktop; check light/dark contrast, keyboard focus order, skip link, work → project → back navigation, reduced-motion behavior, image alt text, and the Contact underline near the bottom of the page. Verify all copy and imagery with the portfolio owner. Run Lighthouse or axe in a browser before calling an accessibility pass complete.
 
 
 ## Project-first homepage navigation
 
-The Work section renders **every professional project once** using the canonical company/project data in `public/content.js`. `professionalProjects` in `public/script.js` preserves each project's original company ID and index for stable case-study links. The old company tile layer is hidden on the homepage, while historical `#company/...` URLs remain supported for existing bookmarks. Do not reintroduce a second company gallery or a second set of featured project cards.
+The Work section renders **every professional project once** using the canonical company/project data in `public/content.js`. `professionalProjects` in `public/script.js` preserves each project's original company ID and index for stable case-study links. The old company tile layer and collection markup have been removed. Historical `#company/...` URLs redirect to `#work` for existing bookmarks. Do not reintroduce a second company gallery or a second set of featured project cards.
 
 Project previews use existing summaries and intentionally labeled image placeholders. Avoid invented research, outcomes, or metrics. Test every project link, the return-to-work route, and browser back navigation on mobile before release.
 
