@@ -125,5 +125,18 @@ assert.match(falloutConcept.tradeoffs, /different design tension/i, 'Fallout mus
 assert.match(falloutConcept.outcome, /not shipped game features/i, 'Fallout must remain explicitly unshipped');
 assert.match(script, /Speculative proposals · not shipped/, 'Case-study overview must expose Fallout delivery status');
 
+// Personal illustration: process plans must not masquerade as documented artwork or testing.
+const illustration = data.playground.find(project => project.title === 'Illustration & Experiments');
+assert.ok(illustration, 'Missing independent illustration case study');
+assert.match(illustration.details, /independent creative direction and illustration/i, 'Illustration must identify the actual role');
+assert.match(illustration.process, /presentation plan here, not a claim/i, 'Illustration must distinguish future process visuals from recorded iterations');
+assert.match(illustration.evidence, /future image briefs, not completed deliverables/i, 'Illustration must not imply that planned art exists');
+assert.match(illustration.tradeoffs, /expression versus clarity/i, 'Illustration must explain its visual design tension');
+assert.match(illustration.outcome, /does not claim a completed illustrated series/i, 'Illustration must not imply undocumented outcomes');
+assert.ok(illustration.galleryBriefs.every(brief => brief.startsWith('PLANNED /')), 'Illustration gallery placeholders must be labeled as planned');
+assert.match(script, /"Illustration & Experiments":\["Independent · Personal creative practice"/, 'Illustration overview must disclose independent status');
+assert.match(script, /"Fallout 76 ;  What I'd Design":\[\["THE IDEA"/, 'Fallout highlight key must match the case-study title');
+
+
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
