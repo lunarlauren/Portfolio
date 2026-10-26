@@ -48,6 +48,15 @@ assert.match(connectedPlanning.evidence, /do not establish a specific research m
 assert.match(connectedPlanning.tradeoffs, /breadth versus detail/i, 'Connected Planning must explain its UX design tension');
 assert.match(connectedPlanning.outcome, /not independently verified/i, 'Connected Planning must not imply unverified delivery or impact');
 
+
+// Campaigns & Events: show visual-design decisions without inventing marketing impact.
+const campaigns = data.companies.find(company => company.id === 'hoylu')?.projects.find(project => project.title === 'Campaigns & Events');
+assert.ok(campaigns, 'Missing Hoylu Campaigns & Events case study');
+assert.match(campaigns.process, /65-inch and 40-inch displays/i, 'Campaigns must retain actual display-format constraints');
+assert.match(campaigns.evidence, /do not establish formal audience research/i, 'Campaigns must separate documented scope from unverified research');
+assert.match(campaigns.tradeoffs, /distance versus detail/i, 'Campaigns must explain its visual-design tradeoff');
+assert.match(campaigns.outcome, /have not been quantified here/i, 'Campaigns must not imply measured marketing results');
+
 const mobile = data.companies.find(company => company.id === 'hoylu')?.projects.find(project => project.title === 'Mobile Insights');
 assert.ok(mobile, 'Missing Hoylu Mobile Insights case study');
 assert.match(mobile.outcome, /shipped/i, 'Mobile Insights was confirmed shipped');
