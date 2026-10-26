@@ -621,3 +621,11 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:#c9e4f5}
  .collection .project-visual{aspect-ratio:16/10}
  .collection .project-visual .visual-brief{font-size:13px}
 }
+
+
+/* Accessibility: keyboard users must be able to reach the skip link, even over the sticky header. */
+.skip-link{position:fixed;top:0;left:16px;z-index:10000;transform:translateY(-150%);background:var(--paper);color:var(--ink);border:2px solid var(--focus);border-radius:0 0 8px 8px}
+.skip-link:focus,.skip-link:focus-visible{top:0;transform:translateY(0);outline:3px solid var(--focus);outline-offset:2px}
+:where(a,button):focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(forced-colors:active){.inventory-item[aria-pressed="true"]{outline:2px solid Highlight;outline-offset:-3px}.skip-link{border-color:CanvasText}}
