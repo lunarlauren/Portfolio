@@ -1167,9 +1167,9 @@ html[data-theme="dark"] .playground .section-head>p{
   margin-bottom:clamp(24px,3vw,40px);
  }
  .work .section-head h2{margin-bottom:0;font-size:clamp(42px,4vw,64px);line-height:1.06}
- /* Start beside the heading rather than at its bottom; align left edge
-    with the second project card, not the paragraph's right edge. */
- .work .section-head>p{justify-self:start;max-width:34ch;margin:32px 0 0;line-height:1.6}
+ /* Align to the second card horizontally, but center the paragraph
+    vertically against the full eyebrow + headline block. */
+ .work .section-head>p{justify-self:start;align-self:center;max-width:34ch;margin:0;line-height:1.6}
  .work .featured-projects-grid{gap:clamp(20px,2.5vw,36px)}
  .work .notebook-project-index .featured-project{padding:clamp(18px,2vw,26px)}
  .work .notebook-project-index .project-visual{aspect-ratio:16/8;min-height:0}
