@@ -138,6 +138,8 @@ function initSectionNavigation(){
     if(entry.section.getBoundingClientRect().top<=threshold)active=entry.section.id;
    }
    if(!active&&hash.startsWith("company/"))active="work";
+   // On the landing hero, highlight Work as the next primary destination.
+   if(!active)active="work";
   }
   for(const {link,section} of sections){
    if(section.id===active)link.setAttribute("aria-current","location");
