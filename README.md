@@ -50,12 +50,9 @@ Review at narrow and wide mobile widths and desktop; check light/dark contrast, 
 
 ## Project-first homepage navigation
 
-The Work section shows four featured case studies directly before the company collection cards. The featured selection is defined in `public/script.js` as `featuredProjects`; it references the original project objects and indices, so cards link to the same case studies without duplicating content. Company collections remain available for browsing the complete body of work.
+The Work section renders **every professional project once** using the canonical company/project data in `public/content.js`. `professionalProjects` in `public/script.js` preserves each project's original company ID and index for stable case-study links. The old company tile layer is hidden on the homepage, while historical `#company/...` URLs remain supported for existing bookmarks. Do not reintroduce a second company gallery or a second set of featured project cards.
 
-When updating the featured list, confirm exact project titles against `public/content.js` and keep the selection small enough to scan on mobile. Do not add speculative delivery badges or outcomes. Featured-card layout rules live near the end of `public/styles.css` under the “Featured case studies” comment.
-
-**QA specific to this change:** Verify that all four cards appear, their links open the correct case study, the company collection remains accessible, and focus/scroll behavior works when returning from a case study. Test at 320–390px widths, tablet, desktop, both themes, and keyboard-only navigation. CSS/markup inspection alone does not establish visual or accessibility compliance.
-
+Project previews use existing summaries and intentionally labeled image placeholders. Avoid invented research, outcomes, or metrics. Test every project link, the return-to-work route, and browser back navigation on mobile before release.
 
 ## Notebook redesign — incremental implementation
 
