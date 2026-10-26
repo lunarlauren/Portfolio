@@ -87,7 +87,8 @@ const projectEvidence={
  "AI-Assisted IOL Planning":["Alcon · Clinical software","UX/UI for connected clinical workflows","Design contribution"],
  "Navigator App":["Holland America Line · Guest experience","Booking, account and Wi-Fi guidance UI","Shipped product contribution"],
  "Stateroom TV App":["Holland America Line · Guest experience","TV interface and remote navigation","Shipped product contribution"],
- "Forktactics":["Independent · Meal planning","Product concept, interaction design and iteration","Evolving prototype"]
+ "Forktactics":["Independent · Meal planning","Product concept, interaction design and iteration","Evolving prototype"],
+ "Fallout 76 ;  What I'd Design":["Unofficial Fallout 76 fan work","Independent concept direction and visual planning","Speculative proposals · not shipped"]
 };
 const evidenceMarkup=p=>{
  const evidence=projectEvidence[p.title];
