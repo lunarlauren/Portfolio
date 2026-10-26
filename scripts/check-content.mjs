@@ -115,4 +115,15 @@ assert.match(forktactics.tradeoffs, /automation versus control/i, 'Forktactics m
 assert.match(forktactics.outcome, /not been independently validated/i, 'Forktactics must not imply verified savings or usability impact');
 
 
+// Unofficial game work: concept briefs and future image prompts are not shipped features.
+const falloutConcept = data.playground.find(project => project.title === "Fallout 76 ;  What I'd Design");
+assert.ok(falloutConcept, 'Missing Fallout fan-concept case study');
+assert.match(falloutConcept.details, /independent concept direction and visual planning/i, 'Fallout must identify the designer\'s role');
+assert.match(falloutConcept.process, /concept briefs, not documented prototypes/i, 'Fallout must distinguish exploration from validated iterations');
+assert.match(falloutConcept.evidence, /do not establish completed concept illustrations/i, 'Fallout must not treat image briefs as completed artwork');
+assert.match(falloutConcept.tradeoffs, /different design tension/i, 'Fallout must explain its design rationale');
+assert.match(falloutConcept.outcome, /not shipped game features/i, 'Fallout must remain explicitly unshipped');
+assert.match(script, /Speculative proposals · not shipped/, 'Case-study overview must expose Fallout delivery status');
+
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
