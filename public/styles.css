@@ -1034,3 +1034,27 @@ html[data-theme="dark"] .playground .section-head>p{
  .playground .section-head>p{font-size:clamp(17px,4.2vw,20px);line-height:1.6;max-width:36ch}
  .about.wrap{padding-block:clamp(52px,10vw,76px)}
 }
+
+
+/* iPhone-quality touch foundation: crisp taps, predictable focus and safe-area
+   spacing without changing the notebook identity or inventing app chrome. */
+@media(pointer:coarse){
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.notebook-sticker,.case-section-links button){
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+ }
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.notebook-sticker,.case-section-links button):active{
+  filter:brightness(.96);
+ }
+}
+@media(max-width:600px){
+ .site-header{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+ .hero.wrap,.work.wrap,.about.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+ .playground.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+ .case-view .case-section-links{scrollbar-width:none}
+ .case-view .case-section-links::-webkit-scrollbar{display:none}
+ .case-view .case-section-links{mask-image:linear-gradient(to right,#000 0%,#000 calc(100% - 18px),transparent 100%)}
+}
+@media(prefers-reduced-motion:reduce){
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.notebook-sticker,.case-section-links button):active{filter:none}
+}
