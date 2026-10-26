@@ -42,38 +42,25 @@ function initInventory(){
 initInventory();
 
 const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const safeHash=()=>{try{return decodeURIComponent(location.hash.slice(1))}catch{return "work"}};const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">':'<span class="visual-label visual-brief"><span class="brief-kicker">IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';const projectCard=(p,i,group)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p></a></article>';const companyGrid=$("#company-grid");
-// Company cards are direct project links, not expandable gates.
-// The complete set of projects is already visible in the project-first grid.
-companyGrid.innerHTML=data.companies.map(c=>{
- const first=c.projects[0];
- if(!first)return "";
- return '<a class="company-card '+(c.featured?'featured':'')+'" href="#project/'+slug(c.id)+'/0" style="--accent:'+esc(c.accent)+'">'+
- '<span class="card-top"><span>'+esc(c.category)+'</span><span aria-hidden="true">↗</span></span>'+
- '<span class="company-name">'+esc(c.name)+'</span>'+
- '<span class="company-description">'+esc(c.description)+'</span>'+
- '<span class="card-bottom">VIEW A CASE STUDY <span aria-hidden="true">→</span></span></a>';
-}).join("");
+// Single source of truth for project discovery. No company gate or repeated
+// featured/company lists: each professional project appears exactly once.
 const collection=$("#collection");
-// Project-first discovery: keep company collections available, but never require
-// visitors to open a company before reaching a case study.
-const featuredProjects=data.companies.flatMap(company=>
+const professionalProjects=data.companies.flatMap(company=>
  company.projects.map((project,index)=>({company,project,index}))
-).filter(({project})=>["Mobile Insights","Connected Planning","Navigator App","Customizable Patient Portal"].includes(project.title));
-const featuredGrid=document.createElement("div");
-featuredGrid.className="projects-grid featured-projects-grid";
-featuredGrid.setAttribute("aria-label","Featured case studies");
-featuredGrid.innerHTML=featuredProjects.map(({company,project,index})=>
- '<div class="featured-project"><p class="eyebrow">'+esc(company.name)+' · '+esc(project.type)+'</p>'+
+);
+const gallery=document.createElement("div");
+gallery.className="projects-grid featured-projects-grid notebook-project-index";
+gallery.setAttribute("role","list");
+gallery.setAttribute("aria-label","Professional design projects");
+gallery.innerHTML=professionalProjects.map(({company,project,index},order)=>
+ '<div class="featured-project" role="listitem"><p class="eyebrow">PROJECT '+String(order+1).padStart(2,"0")+' / '+esc(company.name)+' · '+esc(project.type)+'</p>'+
  projectCard(project,index,company.id)+
- '<div class="featured-project-context"><p><strong>Challenge</strong> '+esc(project.details||project.summary)+'</p>'+
- '<p><strong>Design approach</strong> '+esc(project.process||"Process details not yet documented.")+'</p>'+
- '<a class="featured-case-link" href="#project/'+slug(company.id)+'/'+slug(String(index))+'">Read the case study <span aria-hidden="true">→</span></a></div></div>'
+ '<div class="featured-project-context"><p><strong>The question</strong> '+esc(project.summary)+'</p>'+
+ '<a class="featured-case-link" href="#project/'+slug(company.id)+'/'+slug(String(index))+'">Open the case study <span aria-hidden="true">→</span></a></div></div>'
 ).join("");
-companyGrid.before(featuredGrid);
-const companyIntro=document.createElement("p");
-companyIntro.className="eyebrow";
-companyIntro.textContent="MORE WORK / EXPLORE BY COMPANY";
-companyGrid.before(companyIntro);
+companyGrid.before(gallery);
+// Retain legacy company deep links, but hide the duplicate company index on home.
+companyGrid.hidden=true;
 
 function openCompany(id){
   const c=data.companies.find(x=>x.id===id);if(!c)return;
@@ -88,7 +75,7 @@ function openCompany(id){
   // Keep other company cards visible for quick switching.
 }
 function showCompanies(){
-  collection.hidden=true;collection.after(companyGrid);companyGrid.hidden=false;companyGrid.dataset.active="";collection.dataset.active="";
+  collection.hidden=true;collection.after(companyGrid);companyGrid.hidden=true;companyGrid.dataset.active="";collection.dataset.active="";
   
   document.querySelectorAll(".company-card").forEach(btn=>{btn.setAttribute("aria-expanded","false");});
 }
