@@ -151,7 +151,7 @@ assert.match(css, /\.case-view \.case-section-links\{top:110px/, 'Small-screen s
 assert.match(css, /\.case-view \.case-section-links\{top:64px/, 'Mid-size sticky chapter index must clear the one-row header');
 // The version is intentionally updated with each CSS deployment. Do not pin a
 // smoke test to one historic cache-busting token: that made routine releases fail.
-assert.match(html, /styles\\.css\\?v=[a-zA-Z0-9-]+/, 'HTML must reference a versioned stylesheet');
+assert.match(html, /styles\.css\?v=[a-zA-Z0-9-]+/, 'HTML must reference a versioned stylesheet');
 
 // Case-study accessibility: the visible title names the active main landmark,
 // and evidence is a labeled group rather than an unnamed generic container.
