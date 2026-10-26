@@ -8,6 +8,7 @@ const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
 const content = read('../public/content.js');
 const script = read('../public/script.js');
 const html = read('../public/index.html');
+const css = read('../public/styles.css');
 const context = { window: {} };
 vm.runInNewContext(content, context, { filename: 'public/content.js' });
 new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not available here
@@ -138,5 +139,12 @@ assert.match(script, /"Illustration & Experiments":\["Independent · Personal cr
 assert.match(script, /"Fallout 76 ;  What I'd Design":\[\["THE IDEA"/, 'Fallout highlight key must match the case-study title');
 
 
+
+// Static responsive guards: these do not prove browser layout or screen-reader behavior.
+assert.match(css, /@media\(min-width:421px\) and \(max-width:650px\)/, 'Mid-size header should remain single-row');
+assert.match(css, /@media\(max-width:420px\)\{\s*\/\* The earlier two-row grid is intentional/, 'Smallest screens should retain two-row navigation');
+assert.match(css, /\.case-view \.case-section-links\{top:110px/, 'Small-screen sticky chapter index must clear the two-row header');
+assert.match(css, /\.case-view \.case-section-links\{top:64px/, 'Mid-size sticky chapter index must clear the one-row header');
+assert.match(html, /styles\.css\?v=20261026-responsive-case-index/, 'HTML must reference the revised stylesheet');
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
