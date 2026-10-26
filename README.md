@@ -113,3 +113,7 @@ At widths up to 420px the header uses a two-row CSS grid: logo, Contact, and the
 
 ### Pass 11 — mobile CSS consolidation
 Removed four superseded mobile header blocks (old 650px/390px/365px rules, including a competing two-row grid). The current 421–650px layout and <=420px two-row layout remain. Static checks: `public/script.js` parses as JavaScript and stylesheet braces are balanced. These checks do **not** validate browser layout or CSS semantics; test responsive header, hero portrait, and keyboard focus in a real browser before release.
+
+
+### Pass 12 — hero portrait layout
+The portrait now has bounded mobile widths, and its speech bubble stays aligned with the portrait on touch devices rather than inheriting desktop offsets. The featured-card footer reserves space for the portrait. This is a CSS-level change; visually verify the bubble at 320/375/390/420/760px, portrait crop, and the card's links before marking complete.
