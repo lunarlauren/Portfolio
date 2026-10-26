@@ -73,7 +73,7 @@ const caseHighlights={
  "Navigator App":[["THE CONTEXT","A shipped app used by cruise passengers."],["MY CONTRIBUTION","Booking, account information, and Wi-Fi guidance."]],
  "Stateroom TV App":[["THE CONTEXT","A shipped experience used in guest staterooms."],["MY FOCUS","Readable information and remote-control navigation."]],
  "Forktactics":[["THE IDEA","Make planning a week of dinners feel less exhausting."],["THE STATUS","An independent, evolving product prototype."]],
- "Fallout 76 — What I'd Design":[["THE IDEA","Explore design ideas inside a game world I know well."],["THE APPROACH","Concept work informed by the game's visual language."]],
+ "Fallout 76 ;  What I'd Design":[["THE IDEA","Explore design ideas inside a game world I know well."],["THE APPROACH","Concept briefs informed by the game's visual language."]],
  "Illustration & Experiments":[["THE SPACE","Personal work driven by curiosity."],["MY FOCUS","Character, composition, and visual exploration."]]
 };
 // Handoff: these labels summarize documented contributions, not invented outcomes.
@@ -88,7 +88,8 @@ const projectEvidence={
  "Navigator App":["Holland America Line · Guest experience","Booking, account and Wi-Fi guidance UI","Shipped product contribution"],
  "Stateroom TV App":["Holland America Line · Guest experience","TV interface and remote navigation","Shipped product contribution"],
  "Forktactics":["Independent · Meal planning","Product concept, interaction design and iteration","Evolving prototype"],
- "Fallout 76 ;  What I'd Design":["Unofficial Fallout 76 fan work","Independent concept direction and visual planning","Speculative proposals · not shipped"]
+ "Fallout 76 ;  What I'd Design":["Unofficial Fallout 76 fan work","Independent concept direction and visual planning","Speculative proposals · not shipped"],
+ "Illustration & Experiments":["Independent · Personal creative practice","Illustration and visual exploration","Ongoing practice · gallery briefs planned"]
 };
 const evidenceMarkup=p=>{
  const evidence=projectEvidence[p.title];
