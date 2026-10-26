@@ -16,6 +16,12 @@ A lightweight portfolio of product UX, visual design, and illustration. The prod
 
 The sticky header deliberately switches between a **single row at 421–650px** and a **two-row grid at 420px and below**. The smaller layout preserves readable labels and 44px targets for Work, Playground, About, Contact, and the theme toggle. The case-study chapter index uses corresponding sticky offsets (64px / 110px) and heading scroll margins so keyboard and touch navigation should not hide chapter headings behind the header. These values are kept together at the end of `public/styles.css`; update both the header and chapter-index offsets when changing header dimensions. The source smoke test checks these declarations, **not** their rendered geometry. Still verify 320, 375, 420, 421, 650 and 760px widths, both themes, keyboard focus, and chapter scrolling in a browser before release.
 
+### Professional project archive metadata (October 26, 2026)
+
+Professional archive cards now show **My contribution** and **Delivery** in a compact description list. Both labels reuse the existing `projectEvidence` map in `public/script.js`, which also powers the three-part case-study overview. This makes shipped work (including **Hoylu Mobile Insights**) distinguishable from design contributions whose release status has not been confirmed. Keep this map synchronized with approved `public/content.js` copy; do **not** infer shipment, metrics, research, or implementation from image briefs. The archive metadata is intentionally omitted from Playground cards.
+
+The visual treatment uses the existing stationery filing tabs and shared `--ink`, `--muted`, and `--line` tokens, with a single-column facts layout on narrow screens. The smoke check verifies the shared lookup and markup, but a real browser is still required to assess wrapping, keyboard navigation, contrast, and responsive behavior.
+
 ## UX case-study editing guide
 
 Each project in `window.PORTFOLIO` should make the designer's **reasoning** as clear as the final visual work:
