@@ -144,6 +144,18 @@ assert.match(script, /"Fallout 76 ;  What I'd Design":\[\["THE IDEA"/, 'Fallout 
 
 
 
+// Archive labels reuse the same reviewed role/delivery source as case-study
+// overviews. An unlabeled project would make its status harder to assess.
+assert.match(script, /archiveFactsMarkup\(evidence\)/, 'Project cards must render role/delivery facts');
+assert.match(script, /projectCard\(project,index,company\.id,projectEvidence\[project\.title\]\)/, 'Professional cards must use reviewed evidence');
+assert.match(script, /<dl class="project-card-facts">/, 'Role and delivery facts should use description-list semantics');
+for (const project of data.companies.flatMap(company => company.projects)) {
+  assert.ok(script.includes(JSON.stringify(project.title) + ':['), `${project.title}: missing shared evidence label`);
+}
+assert.match(css, /\.work \.project-card-facts\s*\{/, 'Archive facts must have an intentional layout');
+assert.match(css, /\.work \.project-card-facts dd\s*\{/, 'Archive values must have readable styles');
+assert.match(script, /"Mobile Insights":\["Hoylu · Construction software","Mobile UX and visual design","Shipped product contribution"\]/, 'Mobile Insights must be labeled shipped on archive and detail pages');
+
 // Static responsive guards: these do not prove browser layout or screen-reader behavior.
 assert.match(css, /@media\(min-width:421px\) and \(max-width:650px\)/, 'Mid-size header should remain single-row');
 assert.match(css, /@media\(max-width:420px\)\{\s*\/\* The earlier two-row grid is intentional/, 'Smallest screens should retain two-row navigation');
