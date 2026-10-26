@@ -806,3 +806,16 @@ html[data-theme="dark"] .case-section-links button:hover{background:#29455d}
  .notebook-project-index .featured-project-context p{font-size:14px;line-height:1.55}
  .notebook-project-index .featured-project .project-visual{aspect-ratio:16/10}
 }
+
+
+/* Notebook hero — expressive typography with legible mobile-first spacing.
+   Keep the existing portrait asset; owner-supplied doodles can replace accents. */
+html:not([data-theme="dark"]) .hero h1{color:var(--brand-ink)}
+html:not([data-theme="dark"]) .hero h1 em{color:var(--brand-pink);font-style:normal}
+.notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(17px,2vw,23px);font-style:italic;line-height:1.25;transform:rotate(-2deg);background:var(--notebook-paper);padding:5px 12px;border-bottom:2px solid var(--notebook-pink);margin:6px 0 14px}
+.notebook-hero-note span{font-size:25px;font-style:normal}
+html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
+@media(max-width:760px){
+ .hero .notebook-hero-note{font-size:16px;max-width:100%;transform:rotate(-1deg)}
+ .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
+}
