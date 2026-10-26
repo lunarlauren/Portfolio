@@ -942,3 +942,18 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-view .case-section-links{top:110px;padding-block:8px}
  .case-view .case-prose h2[id]{scroll-margin-top:188px}
 }
+
+
+/* Mobile case-study reading: keep editorial copy legible without changing
+   project claims or the intentional image placeholders. */
+@media(max-width:600px){
+ .case-view .case-head,.case-view .case-prose{min-width:0;overflow-wrap:break-word}
+ .case-view .case-head h1{overflow-wrap:anywhere;hyphens:auto}
+ .case-view .case-prose p,.case-view .case-process-note p{line-height:1.7}
+ .case-view .case-section-links{scroll-padding-inline:12px;-webkit-overflow-scrolling:touch}
+ .case-view .case-section-links button{min-height:44px}
+ .case-view .case-hero-visual img,.case-view .case-gallery img{max-width:100%;height:auto}
+}
+@media(prefers-reduced-motion:reduce){
+ .case-view .case-section-links{scroll-behavior:auto}
+}
