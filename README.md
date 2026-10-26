@@ -148,3 +148,7 @@ Returning from a project case study now focuses the relevant Work or Playground 
 
 ### Pass 15 — release cache and route focus
 Updated HTML query versions for CSS and JavaScript to ensure new deployments request the latest assets. Case-study exit now restores heading focus only for explicit `#work` and `#playground` returns; other destinations retain native hash navigation. Source-level JavaScript parsing checked. Browser QA, deployed-asset verification, and cross-device testing are still required before sign-off.
+
+
+### Case-study landmark and return navigation (accessibility pass)
+The dynamically rendered case-study `role="main"` is named by its visible `#case-title` heading; the homepage `<main>` is hidden while a case study is open. The project overview's context, contribution, and delivery labels form a named group. Preserve the **shipped** designation for Hoylu Mobile Insights and the evidence boundaries in every case study when editing these templates. Returning to a project card uses standard `scrollTo({behavior:"auto"})` before restoring keyboard focus. `scripts/check-content.mjs` guards these source-level contracts, but real keyboard/screen-reader and responsive browser QA are still required.
