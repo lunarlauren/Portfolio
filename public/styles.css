@@ -963,10 +963,6 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
    artwork and its caption. Keep the portrait as the About link instead. */
 .portrait-mobile-link{display:block;position:relative;z-index:2;border-radius:10px}
 .portrait-mobile-link:focus-visible{outline:3px solid var(--brand-navy);outline-offset:4px}
-@media(hover:hover) and (pointer:fine){
- .portrait-mobile-link{pointer-events:none}
- .portrait-mobile-link:focus-visible{outline:none}
-}
 @media(hover:none), (pointer:coarse){
  .hero-feature .portrait-bubble,
  .hero-feature .portrait-interaction:hover .portrait-bubble,
