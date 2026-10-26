@@ -1278,10 +1278,20 @@ html[data-theme="dark"] .playground .section-head>p{
  --notebook-dot-step:30px;
  --notebook-dot-radius:1px;
 }
-html:not([data-theme="dark"]) :is(.hero,.work,.about){
+/* Paint the dots on the full-width page, not individual max-width
+   sections. One continuous coordinate system prevents seams and gutters. */
+html:not([data-theme="dark"]) body{
+ background-color:var(--notebook-paper);
  background-image:radial-gradient(circle,var(--notebook-dot-color) var(--notebook-dot-radius),transparent 1.4px);
  background-size:var(--notebook-dot-step) var(--notebook-dot-step);
  background-position:0 0;
+}
+html:not([data-theme="dark"]) :is(.hero,.work,.about){
+ background-image:none;
+ background-color:transparent;
+}
+@media(min-width:1024px){
+ html:not([data-theme="dark"]) .hero{background-image:none}
 }
 @media(max-width:600px){
  html:not([data-theme="dark"]) :is(.hero .hero-description,.work .section-head>p,.about .about-copy p){
