@@ -115,7 +115,18 @@ caseView.querySelectorAll("[data-case-jump]").forEach(button=>{
   heading.focus({preventScroll:true});
  });
 });
-document.title=p.title+" — Lauren Leven";window.scrollTo({top:0,behavior:"auto"});caseView.focus({preventScroll:true})}// Keep focus and scroll position predictable during hash navigation.
+document.title=p.title+" — Lauren Leven";window.scrollTo({top:0,behavior:"auto"});caseView.focus({preventScroll:true})}// Remember where a visitor opened a case study so Back returns to the
+// same project card, rather than dumping them at the beginning of Work.
+// This is intentionally in-memory: a directly linked case study has no opener.
+let caseOpener=null;
+let caseOpenerScroll=0;
+document.addEventListener("click",event=>{
+ const link=event.target.closest('a[href^="#project/"]');
+ if(!link||!main.contains(link))return;
+ caseOpener=link;
+ caseOpenerScroll=window.scrollY;
+});
+// Keep focus and scroll position predictable during hash navigation.
 let previousHash=safeHash();
 function routeWithMotion(){
  const nextHash=safeHash();
@@ -125,8 +136,14 @@ function routeWithMotion(){
  // Other destinations (e.g. About or the top of the page) keep native hash focus.
  if(leavingProject&&(nextHash==="work"||nextHash==="playground")){
   requestAnimationFrame(()=>{
-   const heading=$(nextHash==="playground"?"#playground-title":"#work-title");
-   if(heading&&!main.hidden){heading.tabIndex=-1;heading.focus({preventScroll:true});}
+   if(caseOpener&&caseOpener.isConnected&&!main.hidden){
+    window.scrollTo({top:caseOpenerScroll,behavior:"instant"});
+    caseOpener.focus({preventScroll:true});
+   }else{
+    const heading=$(nextHash==="playground"?"#playground-title":"#work-title");
+    if(heading&&!main.hidden){heading.tabIndex=-1;heading.focus({preventScroll:true});}
+   }
+   caseOpener=null;
   });
  }
  previousHash=nextHash;
