@@ -122,6 +122,8 @@ window.addEventListener("hashchange",routeWithMotion);route();
 // with both hash routes and ordinary scrolling, without rewriting browser history.
 function initSectionNavigation(){
  const links=[...document.querySelectorAll('.site-header nav a[href^="#"]')];
+ const contactLink=document.getElementById("contact-link");
+ const contactCTA=document.getElementById("email-link");
  const sections=links.map(link=>({link,section:document.querySelector(link.getAttribute("href"))}))
    .filter(entry=>entry.section);
  if(!sections.length)return;
@@ -140,6 +142,16 @@ function initSectionNavigation(){
    if(!active&&hash.startsWith("company/"))active="work";
    // On the landing hero, highlight Work as the next primary destination.
    if(!active)active="work";
+  }
+  // Contact is a mailto action rather than an anchor section. At the bottom
+  // of a short page, its CTA can never reach the usual top-of-screen threshold.
+  // Mark Contact current when the CTA is visible near the page's end.
+  const atPageEnd=window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-24;
+  const contactVisible=contactCTA&&!main.hidden&&contactCTA.getBoundingClientRect().top<window.innerHeight*.82;
+  if(!hash.startsWith("project/")&&atPageEnd&&contactVisible)active="contact";
+  if(contactLink){
+   if(active==="contact")contactLink.setAttribute("aria-current","location");
+   else contactLink.removeAttribute("aria-current");
   }
   for(const {link,section} of sections){
    if(section.id===active)link.setAttribute("aria-current","location");
