@@ -1271,25 +1271,17 @@ html[data-theme="dark"] .playground .section-head>p{
 }
 
 
-/* Dot-grid notebook: a consistent paper texture for every light-theme
-   section, independent of typography baselines. Dark mode stays unruled.
-   The pink margin is a separate layer so it never shifts with the dots. */
+/* Dot-grid paper: blue dots only, without ruled-paper margin.
+   Independent of text baselines; dark mode remains unruled. */
 :root{
  --notebook-dot-color:rgba(100,169,218,.32);
  --notebook-dot-step:30px;
  --notebook-dot-radius:1px;
 }
 html:not([data-theme="dark"]) :is(.hero,.work,.about){
- background-image:
-  linear-gradient(to right,
-   transparent 0,
-   transparent var(--notebook-margin-offset),
-   rgba(240,91,159,var(--notebook-margin-opacity)) var(--notebook-margin-offset),
-   rgba(240,91,159,var(--notebook-margin-opacity)) calc(var(--notebook-margin-offset) + 2px),
-   transparent calc(var(--notebook-margin-offset) + 2px)),
-  radial-gradient(circle,var(--notebook-dot-color) var(--notebook-dot-radius),transparent 1.4px);
- background-size:100% 100%,var(--notebook-dot-step) var(--notebook-dot-step);
- background-position:0 0,0 0;
+ background-image:radial-gradient(circle,var(--notebook-dot-color) var(--notebook-dot-radius),transparent 1.4px);
+ background-size:var(--notebook-dot-step) var(--notebook-dot-step);
+ background-position:0 0;
 }
 @media(max-width:600px){
  html:not([data-theme="dark"]) :is(.hero .hero-description,.work .section-head>p,.about .about-copy p){
