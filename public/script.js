@@ -45,7 +45,7 @@ const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>St
 // Never generate or infer research findings, decisions, or results in the UI.
 const processTeaser=p=>{
  const text=String(p.process||"").trim();
- return text.match(/^.*?[.!?](?=\\s|$)/)?.[0]||text;
+ return text.match(/^.*?[.!?](?=\s|$)/)?.[0]||text;
 };
 const projectCard=(p,i,group)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p><p class="project-card-process"><strong>Design thinking</strong> '+esc(processTeaser(p))+'</p><span class="project-card-cta">Read the case study <span aria-hidden="true">→</span></span></a></article>';// Single source of truth for project discovery. No company gate or repeated
 // featured/company lists: each professional project appears exactly once.
