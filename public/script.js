@@ -62,6 +62,16 @@ gallery.innerHTML=professionalProjects.map(({company,project,index},order)=>
 ).join("");
 $("#work").append(gallery);
 
+// Populate the independent-work section from the same project data used by
+// case-study routing. An empty #play-grid otherwise leaves a blank dark panel.
+const playGrid=$("#play-grid");
+if(playGrid&&Array.isArray(data.playground)){
+ playGrid.innerHTML=data.playground.map((project,index)=>
+  projectCard(project,index,"playground")
+ ).join("");
+}
+
+
 // Short, factual takeaways help visitors skim without replacing the full case study.
 const caseHighlights={
  "Connected Planning":[["THE PROBLEM","Project information can be hard to follow across teams."],["MY FOCUS","Project context and clearer paths into the details."]],
