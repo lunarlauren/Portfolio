@@ -156,3 +156,7 @@ The dynamically rendered case-study `role="main"` is named by its visible `#case
 
 ### Mobile case-study reading pass (2026-10-26)
 Added scoped <=600px text wrapping, line-height, 44px chapter targets, and responsive case-study image sizing without changing content, image placeholders, or theme tokens. Refreshed the stylesheet query version. Source checks: CSS braces balanced; `public/script.js` and `public/content.js` parse as JavaScript; HTML points to the new stylesheet version. **Not verified:** browser layout, keyboard/screen-reader interactions, contrast measurements, deployed site, or the native Node test suite.
+
+
+### Phone featured-card clarity (2026-10-26)
+Based on a supplied iPhone screenshot, hide the redundant bottom “Scroll to explore” link and portrait speech bubble at <=600px. The featured art remains a Work link; the portrait remains an About link. Keep both keyboard-accessible and preserve the desktop bubble. CSS version updated. Source checks passed: stylesheet braces, JS parsing, expected markup/selectors. Actual updated browser appearance and deployed assets are **not** verified.
