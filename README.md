@@ -29,8 +29,9 @@ The case-study view presents these as **Challenge & role → Process & design de
 ## Evidence and decision notes (October 2026)
 
 The professional project index uses each project's `summary` for the problem and
-`process` for a short, visually clamped design-approach preview. Each card has
-**one** case-study link, rather than duplicate tab stops to the same destination.
+the first sentence of `process` for a short **Design thinking** preview. The
+`processTeaser` helper reuses the existing copy instead of inventing research or
+outcomes. Each card has **one** case-study link, avoiding duplicate tab stops.
 
 Case studies may include two optional, plain-text fields in `public/content.js`:
 `evidence` (what is confirmed and what supporting research/metrics are absent)
