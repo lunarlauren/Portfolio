@@ -923,16 +923,22 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  border-bottom:1px solid var(--line);
 }
 .case-view .case-prose h2[id]{scroll-margin-top:154px}
-@media(max-width:650px){
- .case-view .case-section-links{top:100px;padding-block:8px}
- .case-view .case-prose h2[id]{scroll-margin-top:180px}
- /* Restore the intentional single-row mobile header. The later two-row
-    override is removed in the subsequent consolidation pass. */
+/* Responsive header and case-study index: the header is one row from 421–650px,
+   but two rows at <=420px so navigation text never needs to shrink to 10px.
+   Sticky chapter offsets account for each header height without covering headings. */
+@media(min-width:421px) and (max-width:650px){
+ .case-view .case-section-links{top:64px;padding-block:8px}
+ .case-view .case-prose h2[id]{scroll-margin-top:142px}
  .site-header{display:flex;flex-wrap:nowrap;gap:8px;min-height:56px;padding:8px 10px}
  .site-header .header-actions{display:flex;flex:1 1 auto;min-width:0;gap:6px;justify-content:flex-end}
  .site-header .header-actions nav{display:flex;width:auto;flex:0 1 auto;gap:clamp(6px,2vw,12px);justify-content:flex-end}
- .site-header .header-actions nav a{font-size:clamp(10px,2.8vw,12px);padding:0;white-space:nowrap}
- .site-header .header-contact{padding:0;font-size:clamp(10px,2.8vw,12px)}
- .site-header .theme-toggle{width:36px;min-width:36px;height:44px;min-height:44px;flex:0 0 36px}
+ .site-header .header-actions nav a{font-size:clamp(11px,2.8vw,13px);padding:0;white-space:nowrap}
+ .site-header .header-contact{padding:0;font-size:clamp(11px,2.8vw,13px)}
+ .site-header .theme-toggle{width:44px;min-width:44px;height:44px;min-height:44px;flex:0 0 44px}
  .site-header .header-actions nav a[aria-current="location"]{padding:0}
+}
+@media(max-width:420px){
+ /* The earlier two-row grid is intentional. Keep its 44px touch targets. */
+ .case-view .case-section-links{top:110px;padding-block:8px}
+ .case-view .case-prose h2[id]{scroll-margin-top:188px}
 }
