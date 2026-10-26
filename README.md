@@ -61,3 +61,9 @@ The visual direction is a college-ruled creative notebook: warm paper, subtle bl
 The URL hash is the application's router. **Never use `href="#case-..."` for in-page chapter jumps inside a case study.** Chapter controls use `data-case-jump` buttons, `scrollIntoView`, and heading focus without changing the hash. Case-study back navigation returns to `#work`; the old `#company/...` route remains for existing deep links.
 
 This redesign is in progress. Before calling it finished, verify at mobile widths (including 320px), test all project routes and chapter jumps in a real browser, check dark mode and reduced-motion behavior, inspect contrast and keyboard focus, and confirm the actual deployment separately from GitHub commits.
+
+
+### Hero and project index cleanup (pass 4)
+The hero heading uses CSS tokens rather than inline color declarations. The `.notebook-hero-note` annotation is text-only and can later be accompanied by owner-drawn sticker assets. Preserve the original portrait asset. The professional gallery is data-driven; avoid duplicating `companyGrid` declarations or maintaining a separate featured list. Keep cache-busting stylesheet and script URLs in `public/index.html` synchronized with changes.
+
+**Pending verification:** JavaScript syntax check, narrow-mobile layout, real-browser chapter navigation, keyboard access, dark-mode contrast, and deployed Cloudflare version. No claim of a passing test without executing it.
