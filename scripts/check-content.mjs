@@ -57,4 +57,11 @@ assert.match(patientPortal.evidence, /not been supplied/i, 'Patient portal must 
 assert.match(patientPortal.tradeoffs, /flexibility for individual practices/i, 'Patient portal must explain its documented UX design tension');
 assert.match(script, /Evidence & boundaries/, 'Case studies must label the evidence boundary');
 assert.match(script, /Design tension & rationale/, 'Case studies must distinguish rationale from tested results');
+const navigator = data.companies.find(company => company.id === 'holland-america')?.projects.find(project => project.title === 'Navigator App');
+assert.ok(navigator, 'Missing Holland America Navigator case study');
+assert.match(navigator.outcome, /shipped app/i, 'Navigator must retain its shipped status');
+assert.match(navigator.evidence, /passenger feedback/i, 'Navigator should identify its documented feedback source');
+assert.match(navigator.evidence, /not documented here/i, 'Navigator must distinguish feedback from unverified validation or impact');
+assert.match(navigator.tradeoffs, /tradeoff/i, 'Navigator should explain the mobile UX rationale');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
