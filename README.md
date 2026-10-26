@@ -27,12 +27,13 @@ The visual treatment uses the existing stationery filing tabs and shared `--ink`
 Each project in `window.PORTFOLIO` should make the designer's **reasoning** as clear as the final visual work:
 
 1. `summary` — the hook, written for someone scanning the portfolio.
-2. `details` — audience, problem, constraints and the user's actual role.
-3. `process` — evidence or feedback **only when documented**, plus explorations, decisions, tradeoffs and iterations that can be substantiated.
-4. `outcome` — what was delivered or shipped and what was learned. Use measurable impact only when verified.
-5. `image` / `gallery` — approved project visuals. Empty image fields intentionally render descriptive `imageBrief` / `galleryBriefs` placeholders; those briefs are **not evidence of completed artifacts**.
+2. `audience` / `constraints` — short, source-backed professional-project facts displayed in the case-study sidebar. Label hypothetical audience scenarios as **design framing**, never as validated personas or research findings.
+3. `details` — problem, context, the designer's actual role and the people affected.
+4. `process` — evidence or feedback **only when documented**, plus explorations, decisions, tradeoffs and iterations that can be substantiated.
+5. `outcome` — what was delivered or shipped and what was learned. Use measurable impact only when verified.
+6. `image` / `gallery` — approved project visuals. Empty image fields intentionally render descriptive `imageBrief` / `galleryBriefs` placeholders; those briefs are **not evidence of completed artifacts**.
 
-The case-study view presents these as **Challenge & role → Process & design decisions → Deliverables & learning**. Preserve that sequence when adding projects. Keep `projectEvidence` and `caseHighlights` in `public/script.js` aligned with any verified status or scope changes in `public/content.js`.
+The case-study view presents these as **Challenge & role → Process & design decisions → Deliverables & learning**. `caseFactsMarkup` in `public/script.js` renders an accessible `<dl>` for discipline, context and optional audience/constraints; the responsive two-column layout is scoped to `.case-view .case-facts` in `public/styles.css`. Playground projects may omit the optional fields. Preserve that sequence when adding projects. Keep `projectEvidence` and `caseHighlights` in `public/script.js` aligned with any verified status or scope changes in `public/content.js`.
 
 **Evidence guardrails:** Never invent user interviews, usability tests, adoption numbers, conversion lifts, shipped features, or collaborators. Clearly distinguish concept/prototype work from shipped contributions. The user has confirmed **Hoylu Mobile Insights shipped**; do not describe its delivery as concept-only. The Holland America Line Navigator and stateroom TV contributions are also described as shipped. For Stateroom TV, the remote-control interaction model and Voyage Tracker scope are documented; the case study explicitly separates interface rationale from any unprovided guest research, tests, or impact measures. For Alcon **AI-Assisted IOL Planning**, the UX/UI workflow and connection between patient scans, model predictions, and another tool are documented, but clinical testing, safety validation, deployment, and impact are **not** verified; never present suggested labels or clinician review states as implemented safeguards. If the delivery status or outcome is unknown, say so rather than implying success.
 
