@@ -52,8 +52,7 @@ gallery.setAttribute("role","list");
 gallery.setAttribute("aria-label","Professional design projects");
 gallery.innerHTML=professionalProjects.map(({company,project,index},order)=>
  '<div class="featured-project" role="listitem"><p class="eyebrow">PROJECT '+String(order+1).padStart(2,"0")+' / '+esc(company.name)+' · '+esc(project.type)+'</p>'+
- projectCard(project,index,company.id)+
- '<div class="featured-project-context">'+(project.process?'<p><strong>Design approach</strong> '+esc(project.process)+'</p>':'')+'</div></div>'
+ projectCard(project,index,company.id)+'</div>'
 ).join("");
 $("#work").append(gallery);
 
