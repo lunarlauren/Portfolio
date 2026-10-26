@@ -160,3 +160,9 @@ Added scoped <=600px text wrapping, line-height, 44px chapter targets, and respo
 
 ### Phone featured-card clarity (2026-10-26)
 Based on a supplied iPhone screenshot, hide the redundant bottom “Scroll to explore” link and portrait speech bubble at <=600px. The featured art remains a Work link; the portrait remains an About link. Keep both keyboard-accessible and preserve the desktop bubble. CSS version updated. Source checks passed: stylesheet braces, JS parsing, expected markup/selectors. Actual updated browser appearance and deployed assets are **not** verified.
+
+
+### Mobile Insights process and source-check maintenance (2026-10-26)
+The shipped Hoylu **Mobile Insights** case study now opens with the design audience/scenario, the designer's UX/UI role, the phone-sized information constraint, and the decision tension. Its process copy explains hierarchy and navigation rationale without claiming a specific explored variant shipped. Evidence notes explicitly mark research, iteration history, collaboration/implementation handoff, and metrics as undocumented; add those details only when verified source material is supplied. Keep the shipped status in both `public/content.js` and the `projectEvidence` overview in `public/script.js`.
+
+`scripts/check-content.mjs` no longer pins an obsolete CSS cache token (the stylesheet version changes across deployments). It now checks the presence of a versioned CSS reference, the Mobile Insights role/audience/evidence boundary, the mobile sticky project-name markup, and the Playground light-theme contrast override after the generic notebook-paper rule. **Validation:** 192 source-level assertions passed in an in-memory V8 runner with Node assertion/VM shims; `public/content.js` and `public/script.js` parsed, and CSS braces balanced. **Not run:** the native Node smoke command, browser/device tests, screen-reader or contrast measurements, or Cloudflare deployment checks.
