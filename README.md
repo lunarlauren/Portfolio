@@ -105,3 +105,7 @@ Project cards show the project identity, preview, and short summary. The longer 
 
 ### Pass 9 — mobile interaction and landmarks
 The dynamic case-study container is a named region rather than a second `main` landmark. Mobile project navigation, case-study chapter buttons, back/next links, and header controls have explicit minimum touch target heights and focus-visible outlines. Verify actual 320px wrapping and tab order in a browser before release.
+
+
+### Pass 10 — narrow-screen navigation
+At widths up to 420px the header uses a two-row CSS grid: logo, Contact, and theme toggle on top; Work, Playground, and About underneath. The hero headline, decorative star, and project cards also have narrow-width safeguards. The earlier mobile header overrides remain candidates for consolidation after real-browser visual QA. Verify 320px, 375px, 390px, and 420px, including zoomed text, before considering this complete.
