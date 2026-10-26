@@ -841,3 +841,18 @@ html[data-theme="dark"] .case-process-note h3{color:#f2f7fc}
 .project-card .project-card-process{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;line-height:1.55;color:var(--muted)}
 .project-card-process strong{display:block;color:var(--ink);font-size:11px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
 html[data-theme="dark"] .project-card-process strong{color:#f2f7fc}
+
+
+/* Mobile interaction quality: keep tappable controls comfortable and avoid
+   paper decoration interfering with focus or text. */
+@media(max-width:760px){
+ .site-header nav a,.header-contact,.theme-toggle{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+ .notebook-project-index .project-card-link{display:block;min-height:44px}
+ .notebook-project-index .featured-project{isolation:isolate}
+ .case-section-links button{min-height:44px;touch-action:manipulation}
+ .case-next-nav a,.case-back{min-height:44px;display:inline-flex;align-items:center}
+}
+.notebook-project-index .project-card-link:focus-visible,
+.case-section-links button:focus-visible,
+.case-next-nav a:focus-visible,
+.case-back:focus-visible{outline:3px solid var(--notebook-pink);outline-offset:4px}
