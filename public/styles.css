@@ -731,23 +731,16 @@ html[data-theme="dark"] .case-evidence-item strong{color:#f2f7fc}
 .featured-project .project-card h3{font-size:clamp(26px,2.5vw,38px);line-height:1.12}
 .featured-project .project-card p{font-size:15px;line-height:1.65;max-width:58ch}
 .featured-project .project-card-link:focus-visible{border-radius:12px}
-.featured-projects-grid+.eyebrow{margin:0 0 18px;color:var(--muted)}
 @media(max-width:760px){
  .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
  .featured-project .project-visual{aspect-ratio:16/10}
 }
 html[data-theme="dark"] .featured-project>.eyebrow,
-html[data-theme="dark"] .featured-projects-grid+.eyebrow{color:#d3e2ef}
 
 
 /* Featured project context: reveal documented UX reasoning without extra navigation.
    Long case-study paragraphs are visually clamped here; the full text remains in the case study. */
-.featured-project-context{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}
-.featured-project-context p{margin:0 0 12px;color:var(--muted);font-size:14px;line-height:1.6;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
-.featured-project-context strong{color:var(--ink);font-weight:700;margin-right:.4em}
 .featured-case-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;text-underline-offset:4px;min-height:44px}
-html[data-theme="dark"] .featured-project-context p{color:#d3e2ef}
-html[data-theme="dark"] .featured-project-context strong{color:#f2f7fc}
 
 
 /* NOTEBOOK VISUAL SYSTEM — pass 1
@@ -794,16 +787,12 @@ html[data-theme="dark"] .case-section-links button:hover{background:#29455d}
 .notebook-project-index{counter-reset:project;align-items:stretch}
 .notebook-project-index .featured-project{position:relative;display:flex;flex-direction:column;gap:0;min-width:0}
 .notebook-project-index .featured-project .project-card{flex:1}
-.notebook-project-index .featured-project-context{margin-top:auto}
-.notebook-project-index .featured-project-context p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
-.notebook-project-index .featured-project-context strong{display:block;text-transform:uppercase;font-size:11px;letter-spacing:.12em;margin-bottom:5px}
 .notebook-project-index .featured-project .eyebrow{font-size:11px;letter-spacing:.08em}
 .notebook-project-index .featured-project .project-card-link{height:auto}
 @media(max-width:760px){
  .notebook-project-index{gap:22px}
  .notebook-project-index .featured-project{padding:16px 16px 20px}
  .notebook-project-index .featured-project .project-card h3{font-size:clamp(25px,7vw,34px)}
- .notebook-project-index .featured-project-context p{font-size:14px;line-height:1.55}
  .notebook-project-index .featured-project .project-visual{aspect-ratio:16/10}
 }
 
