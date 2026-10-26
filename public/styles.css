@@ -1016,3 +1016,21 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .hero-feature{padding:clamp(20px,5vw,28px);min-height:clamp(340px,90vw,440px)}
  .hero-feature .feature-top,.hero-feature .feature-bottom{line-height:1.5}
 }
+
+
+/* Playground contrast: notebook paper behind generic section intros must not
+   leak into the dark "Beyond the brief" section in light theme. */
+html:not([data-theme="dark"]) .playground .section-head>p,
+html[data-theme="dark"] .playground .section-head>p{
+ background:transparent;
+ color:#e7edf7;
+ -webkit-box-decoration-break:initial;
+ box-decoration-break:initial;
+}
+@media(max-width:760px){
+ /* More readable transitions without the large blank bands between sections. */
+ .playground.wrap{padding-block:clamp(52px,10vw,72px)}
+ .playground .section-head{margin-bottom:clamp(26px,6vw,42px)}
+ .playground .section-head>p{font-size:clamp(17px,4.2vw,20px);line-height:1.6;max-width:36ch}
+ .about.wrap{padding-block:clamp(52px,10vw,76px)}
+}
