@@ -47,8 +47,28 @@ const processTeaser=p=>{
  const text=String(p.process||"").trim();
  return text.match(/^.*?[.!?](?=\s|$)/)?.[0]||text;
 };
-const projectCard=(p,i,group)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p>'+(processTeaser(p)?'<p class="project-card-process"><strong>Design approach</strong> '+esc(processTeaser(p))+'</p>':"")+'<span class="project-card-cta">Read the case study <span aria-hidden="true">→</span></span></a></article>';// Single source of truth for project discovery. No company gate or repeated
+// Optional archive facts let a recruiter distinguish role from delivery before
+// opening a case study. Only render reviewed labels, never inferred metrics.
+const archiveFactsMarkup=evidence=>evidence?
+ '<dl class="project-card-facts"><div><dt>My contribution</dt><dd>'+esc(evidence[1])+'</dd></div><div><dt>Delivery</dt><dd>'+esc(evidence[2])+'</dd></div></dl>':"";
+const projectCard=(p,i,group,evidence)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p>'+archiveFactsMarkup(evidence)+(processTeaser(p)?'<p class="project-card-process"><strong>Design approach</strong> '+esc(processTeaser(p))+'</p>':"")+'<span class="project-card-cta">Read the case study <span aria-hidden="true">→</span></span></a></article>';// Single source of truth for project discovery. No company gate or repeated
 // featured/company lists: each professional project appears exactly once.
+// Shared, editorially verified role/delivery labels power both the archive
+// cards and the case-study overview. Keep them in sync with content.js.
+const projectEvidence={
+ "Connected Planning":["Hoylu · Construction software","Product UX and visual design","Product design contribution"],
+ "Mobile Insights":["Hoylu · Construction software","Mobile UX and visual design","Shipped product contribution"],
+ "Campaigns & Events":["Hoylu · Marketing and events","Event signage and campaign visual design","Produced design assets"],
+ "Motion & Storytelling":["Hoylu · Product communications","Storyboard and motion design planning","Storyboard deliverable"],
+ "Customizable Patient Portal":["Alcon · Healthcare","UX/UI for patient and practice workflows","Design contribution"],
+ "AI-Assisted IOL Planning":["Alcon · Clinical software","UX/UI for connected clinical workflows","Design contribution"],
+ "Navigator App":["Holland America Line · Guest experience","Booking, account and Wi-Fi guidance UI","Shipped product contribution"],
+ "Stateroom TV App":["Holland America Line · Guest experience","TV interface and remote navigation","Shipped product contribution"],
+ "Forktactics":["Independent · Meal planning","Product concept, interaction design and iteration","Evolving prototype"],
+ "Fallout 76 ;  What I'd Design":["Unofficial Fallout 76 fan work","Independent concept direction and visual planning","Speculative proposals · not shipped"],
+ "Illustration & Experiments":["Independent · Personal creative practice","Illustration and visual exploration","Ongoing practice · gallery briefs planned"]
+};
+
 const professionalProjects=data.companies.flatMap(company=>
  company.projects.map((project,index)=>({company,project,index}))
 );
@@ -58,7 +78,7 @@ gallery.setAttribute("role","list");
 gallery.setAttribute("aria-label","Professional design projects");
 gallery.innerHTML=professionalProjects.map(({company,project,index},order)=>
  '<div class="featured-project client-file client-file--'+esc(company.id)+'" role="listitem"><p class="eyebrow"><span class="client-file-label">'+esc(company.name)+'</span> <span class="client-file-number">FILE '+String(order+1).padStart(2,"0")+'</span> · '+esc(project.type)+'</p>'+
- projectCard(project,index,company.id)+'</div>'
+ projectCard(project,index,company.id,projectEvidence[project.title])+'</div>'
 ).join("");
 $("#work").append(gallery);
 
@@ -88,19 +108,7 @@ const caseHighlights={
 };
 // Handoff: these labels summarize documented contributions, not invented outcomes.
 // Update alongside content.js when the scope or delivery status is confirmed.
-const projectEvidence={
- "Connected Planning":["Hoylu · Construction software","Product UX and visual design","Product design contribution"],
- "Mobile Insights":["Hoylu · Construction software","Mobile UX and visual design","Shipped product contribution"],
- "Campaigns & Events":["Hoylu · Marketing and events","Event signage and campaign visual design","Produced design assets"],
- "Motion & Storytelling":["Hoylu · Product communications","Storyboard and motion design planning","Storyboard deliverable"],
- "Customizable Patient Portal":["Alcon · Healthcare","UX/UI for patient and practice workflows","Design contribution"],
- "AI-Assisted IOL Planning":["Alcon · Clinical software","UX/UI for connected clinical workflows","Design contribution"],
- "Navigator App":["Holland America Line · Guest experience","Booking, account and Wi-Fi guidance UI","Shipped product contribution"],
- "Stateroom TV App":["Holland America Line · Guest experience","TV interface and remote navigation","Shipped product contribution"],
- "Forktactics":["Independent · Meal planning","Product concept, interaction design and iteration","Evolving prototype"],
- "Fallout 76 ;  What I'd Design":["Unofficial Fallout 76 fan work","Independent concept direction and visual planning","Speculative proposals · not shipped"],
- "Illustration & Experiments":["Independent · Personal creative practice","Illustration and visual exploration","Ongoing practice · gallery briefs planned"]
-};
+
 const evidenceMarkup=p=>{
  const evidence=projectEvidence[p.title];
  if(!evidence)return "";
