@@ -55,7 +55,7 @@ gallery.setAttribute("aria-label","Professional design projects");
 gallery.innerHTML=professionalProjects.map(({company,project,index},order)=>
  '<div class="featured-project" role="listitem"><p class="eyebrow">PROJECT '+String(order+1).padStart(2,"0")+' / '+esc(company.name)+' · '+esc(project.type)+'</p>'+
  projectCard(project,index,company.id)+
- '<div class="featured-project-context"><p><strong>Design approach</strong> '+esc(project.process)+'</p></div></div>'
+ '<div class="featured-project-context">'+(project.process?'<p><strong>Design approach</strong> '+esc(project.process)+'</p>':'')+'</div></div>'
 ).join("");
 companyGrid.before(gallery);
 // Retain legacy company deep links, but hide the duplicate company index on home.
