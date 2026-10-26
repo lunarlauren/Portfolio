@@ -26,6 +26,23 @@ The case-study view presents these as **Challenge & role → Process & design de
 
 **Evidence guardrails:** Never invent user interviews, usability tests, adoption numbers, conversion lifts, shipped features, or collaborators. Clearly distinguish concept/prototype work from shipped contributions. The user has confirmed **Hoylu Mobile Insights shipped**; do not describe its delivery as concept-only. The Holland America Line Navigator and stateroom TV contributions are also described as shipped. If the delivery status or outcome is unknown, say so rather than implying success.
 
+## Evidence and decision notes (October 2026)
+
+The professional project index uses each project's `summary` for the problem and
+`process` for a short, visually clamped design-approach preview. Each card has
+**one** case-study link, rather than duplicate tab stops to the same destination.
+
+Case studies may include two optional, plain-text fields in `public/content.js`:
+`evidence` (what is confirmed and what supporting research/metrics are absent)
+and `tradeoffs` (design tensions and rationale, without implying unverified tests
+or decisions). `processNotesMarkup` renders these in labeled callouts. Currently
+Hoylu **Mobile Insights** uses both, and its delivery remains explicitly **shipped**.
+
+Do not treat descriptive image briefs as completed wireframes, test artifacts, or
+verified outcomes. Add actual discovery, iterations, collaboration details, and
+results only when supported by owner-approved materials. Update
+`scripts/check-content.mjs` whenever new structured case-study fields are added.
+
 ## Local preview and checks
 
 From the repository root:
