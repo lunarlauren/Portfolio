@@ -42,6 +42,7 @@ function initInventory(){
 initInventory();
 
 const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const safeHash=()=>{try{return decodeURIComponent(location.hash.slice(1))}catch{return "work"}};const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">':'<span class="visual-label visual-brief"><span class="brief-kicker">IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';const projectCard=(p,i,group)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+visual(p)+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p></a></article>';const companyGrid=$("#company-grid");
+const companyGrid=$("#company-grid");
 // Single source of truth for project discovery. No company gate or repeated
 // featured/company lists: each professional project appears exactly once.
 const collection=$("#collection");
@@ -69,7 +70,7 @@ function openCompany(id){
   companyGrid.parentNode.insertBefore(collection,companyGrid);
   collection.hidden=false;collection.dataset.active=id;
   collection.setAttribute("aria-label",c.name+" projects");
-  // The company button expands this region; keep focus on the trigger for predictable keyboard navigation.
+  // Legacy company deep links remain supported; the homepage no longer uses this extra navigation layer.
   collection.innerHTML='<div class="collection-nav"><span class="eyebrow">SELECTED WORK / '+esc(c.projects.length)+' PROJECTS</span></div><div class="collection-head"><div><p class="eyebrow">'+esc(c.category)+'</p><h3>'+esc(c.name)+'</h3><p>'+esc(c.description)+'</p></div></div><div class="projects-grid">'+c.projects.map((p,i)=>projectCard(p,i,c.id)).join("")+'</div>';
   document.querySelectorAll(".company-card").forEach(btn=>{const active=btn.dataset.company===id;btn.setAttribute("aria-expanded",String(active));});
   // Keep other company cards visible for quick switching.
