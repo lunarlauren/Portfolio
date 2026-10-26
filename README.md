@@ -90,3 +90,9 @@ The hero heading uses CSS tokens rather than inline color declarations. The `.no
 The obsolete company expansion renderer has been retired. Work is a single data-driven gallery; legacy company hashes redirect to `#work`. Case-study text has notebook-paper treatment but images remain on solid surfaces. Project previews omit missing process copy rather than showing empty headings.
 
 **Required before release:** run a JavaScript syntax check, verify project and chapter navigation in a browser, inspect 320px mobile and desktop layouts, keyboard/focus behavior, reduced motion, and dark-mode contrast. GitHub commits do not establish deployment.
+
+
+### Pass 7 — Work gallery DOM simplification
+The Work gallery now mounts directly inside `#work`; the retired `#company-grid` and `#collection` elements and their script references have been removed. The `#company/...` hash still redirects to `#work` for existing links. Do not reintroduce empty company navigation containers.
+
+A JavaScript parse check was performed on the updated `public/script.js` source. Browser rendering, interaction testing, and deployment status remain unverified.
