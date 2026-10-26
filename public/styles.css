@@ -1186,3 +1186,43 @@ html[data-theme="dark"] .playground .section-head>p{
   background:rgba(153,202,235,.1);
  }
 }
+
+
+/* Viewport-conscious desktop sections: fit the editorial sections within a
+   typical laptop screen without clipping content at zoom or short heights. */
+@media(min-width:1024px){
+ .about.wrap{
+  padding-top:clamp(24px,3.5vh,42px);
+  padding-bottom:clamp(24px,3.5vh,42px);
+ }
+ .about h2{
+  font-size:clamp(46px,5.4vw,76px);
+  line-height:1.02;
+  margin-top:8px;
+ }
+ .about-bottom{
+  margin-top:clamp(20px,3vh,32px);
+  row-gap:clamp(14px,2vh,24px);
+ }
+ .about-copy p{
+  font-size:clamp(15px,1.1vw,17px);
+  line-height:1.55;
+  margin-bottom:.9em;
+ }
+ .creative-inventory .inventory-heading{margin-bottom:10px}
+ .creative-inventory .inventory-grid{padding:27px 12px 9px}
+ .creative-inventory .inventory-grid::before{top:10px}
+ .creative-inventory .inventory-item{min-height:86px;padding:6px 4px;gap:4px}
+ .creative-inventory .inventory-icon{font-size:clamp(29px,2.7vw,40px)}
+ .creative-inventory .inventory-inspect{min-height:0;padding:13px 18px 15px}
+ .creative-inventory .inventory-inspect strong{margin:3px 0;font-size:25px}
+ .creative-inventory .inventory-inspect p{font-size:13px;line-height:1.4}
+ .about-bottom .text-link{align-self:end}
+}
+@media(min-width:1024px) and (max-height:780px){
+ .about.wrap{padding-block:20px}
+ .about h2{font-size:clamp(42px,4.8vw,64px)}
+ .about-bottom{margin-top:16px}
+ .creative-inventory .inventory-item{min-height:72px}
+ .creative-inventory .inventory-icon{font-size:32px}
+}
