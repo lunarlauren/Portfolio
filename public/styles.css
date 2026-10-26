@@ -719,3 +719,22 @@ html[data-theme="dark"] .case-evidence-item strong{color:#f2f7fc}
 
 /* Contact is a mail link, but participates in the current-section indicator near the footer. */
 .site-header .header-contact[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+
+
+/* Featured case studies: direct entry to the work, before company browsing.
+   Use existing project-card components and tokens so light/dark themes stay aligned. */
+.featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,44px);margin-bottom:clamp(42px,6vw,76px)}
+.featured-project{min-width:0}
+.featured-project>.eyebrow{margin:0 0 12px;color:var(--muted);line-height:1.5}
+.featured-project .project-card-link{display:block;height:100%;text-decoration:none}
+.featured-project .project-visual{aspect-ratio:16/10;min-height:0;border-radius:12px}
+.featured-project .project-card h3{font-size:clamp(26px,2.5vw,38px);line-height:1.12}
+.featured-project .project-card p{font-size:15px;line-height:1.65;max-width:58ch}
+.featured-project .project-card-link:focus-visible{border-radius:12px}
+.featured-projects-grid+.eyebrow{margin:0 0 18px;color:var(--muted)}
+@media(max-width:760px){
+ .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
+ .featured-project .project-visual{aspect-ratio:16/10}
+}
+html[data-theme="dark"] .featured-project>.eyebrow,
+html[data-theme="dark"] .featured-projects-grid+.eyebrow{color:#d3e2ef}
