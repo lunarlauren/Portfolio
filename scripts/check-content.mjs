@@ -41,6 +41,13 @@ for (const project of projects) {
 for (const id of ['main', 'work', 'playground', 'about']) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `Missing #${id} navigation target`);
 }
+// Connected Planning: describe the design tension without upgrading rationale to research findings.
+const connectedPlanning = data.companies.find(company => company.id === 'hoylu')?.projects.find(project => project.title === 'Connected Planning');
+assert.ok(connectedPlanning, 'Missing Hoylu Connected Planning case study');
+assert.match(connectedPlanning.evidence, /do not establish a specific research method/i, 'Connected Planning must distinguish confirmed contribution from undocumented research');
+assert.match(connectedPlanning.tradeoffs, /breadth versus detail/i, 'Connected Planning must explain its UX design tension');
+assert.match(connectedPlanning.outcome, /not independently verified/i, 'Connected Planning must not imply unverified delivery or impact');
+
 const mobile = data.companies.find(company => company.id === 'hoylu')?.projects.find(project => project.title === 'Mobile Insights');
 assert.ok(mobile, 'Missing Hoylu Mobile Insights case study');
 assert.match(mobile.outcome, /shipped/i, 'Mobile Insights was confirmed shipped');
