@@ -753,12 +753,10 @@ html[data-theme="dark"] .featured-project-context strong{color:#f2f7fc}
 /* NOTEBOOK VISUAL SYSTEM — pass 1
    Decorative ruled paper lives behind content, never over screenshots.
    Future illustrated sticker assets can replace .notebook-sticker without layout changes. */
-:root{--notebook-blue:#9fcbe9;--notebook-pink:#f05b9f;--notebook-paper:#fffdf8;--notebook-rule:rgba(100,169,218,.22)}
+:root{--notebook-blue:#9fcbe9;--notebook-pink:#f05b9f;--notebook-paper:#fffdf8;--notebook-rule:rgba(100,169,218,.22);--notebook-margin-offset:29px;--notebook-margin-opacity:.55}
 html:not([data-theme="dark"]) body{background:var(--notebook-paper)}
-html:not([data-theme="dark"]) .hero,
-html:not([data-theme="dark"]) .work,
-html:not([data-theme="dark"]) .about{
- background-image:linear-gradient(90deg,transparent 0,transparent 29px,rgba(240,91,159,.55) 29px,rgba(240,91,159,.55) 31px,transparent 31px),
+html:not([data-theme="dark"]) :is(.hero,.work,.about){
+ background-image:linear-gradient(90deg,transparent 0,transparent var(--notebook-margin-offset),rgba(240,91,159,var(--notebook-margin-opacity)) var(--notebook-margin-offset),rgba(240,91,159,var(--notebook-margin-opacity)) calc(var(--notebook-margin-offset) + 2px),transparent calc(var(--notebook-margin-offset) + 2px)),
  repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px);
  background-position:0 0;background-size:100% 32px;
 }
@@ -775,11 +773,7 @@ html:not([data-theme="dark"]) .featured-project:nth-child(even){box-shadow:-4px 
 .notebook-sticker.sticker-pop{animation:notebook-sticker-pop .38s cubic-bezier(.2,1.8,.5,1)}
 @keyframes notebook-sticker-pop{0%{transform:rotate(12deg) scale(1)}45%{transform:rotate(-10deg) scale(1.18)}100%{transform:rotate(12deg) scale(1)}}
 @media(max-width:760px){
- html:not([data-theme="dark"]) .hero,
- html:not([data-theme="dark"]) .work,
- html:not([data-theme="dark"]) .about{
-  background-image:linear-gradient(90deg,transparent 0,transparent 13px,rgba(240,91,159,.45) 13px,rgba(240,91,159,.45) 15px,transparent 15px),repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px)
- }
+ :root{--notebook-margin-offset:13px;--notebook-margin-opacity:.45}
  .notebook-sticker{width:44px;height:44px;font-size:24px;right:12px;top:8px}
 }
 html[data-theme="dark"] .notebook-sticker{background:#f7bf56;color:#203344}
