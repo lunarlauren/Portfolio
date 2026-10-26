@@ -1302,40 +1302,49 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
 }
 
 
-/* Client filing system: color is an index, never the only identifier.
-   Repeated tabs identify each client across their case-study cards. */
+/* Stationery file-folder tabs: the client name is the actual projecting
+   tab, not a tiny decorative dash. Keep the file number on the card itself. */
 .client-file{
- --file-accent:#7b99b5;
- --file-ink:#233b51;
- --file-tint:#e8f0f8;
+ --file-accent:#357caa;
+ --file-ink:#174b70;
+ --file-tint:#dceefa;
  position:relative;
- border-top:4px solid var(--file-accent)!important;
+ margin-top:22px;
+ border:1px solid #d5e3ed!important;
+ border-top:2px solid var(--file-accent)!important;
+ border-radius:0 12px 14px 14px;
+ overflow:visible;
 }
 .client-file--hoylu{--file-accent:#357caa;--file-ink:#174b70;--file-tint:#dceefa}
-.client-file--alcon{--file-accent:#b35c90;--file-ink:#79365e;--file-tint:#f9e4ef}
-.client-file--holland-america{--file-accent:#338777;--file-ink:#165d50;--file-tint:#dcf2e9}
-.client-file::before{
- content:"";
- position:absolute;
- top:-4px;
- right:clamp(16px,2vw,26px);
- width:44px;
- height:10px;
- background:var(--file-accent);
- border-radius:0 0 5px 5px;
- pointer-events:none;
+.client-file--alcon{--file-accent:#a74b7f;--file-ink:#79365e;--file-tint:#f9e4ef}
+.client-file--holland-america{--file-accent:#247767;--file-ink:#165d50;--file-tint:#dcf2e9}
+.client-file::before{content:none}
+.client-file>.eyebrow{
+ position:relative;
+ margin-top:8px;
+ margin-bottom:12px;
+ font-size:11px;
+ letter-spacing:.055em;
 }
 .client-file .client-file-label{
- display:inline-block;
- padding:5px 9px;
- margin-right:5px;
- background:var(--file-tint);
- color:var(--file-ink);
- border-radius:4px;
+ position:absolute;
+ left:0;
+ bottom:calc(100% + 25px);
+ display:flex;
+ align-items:center;
+ min-width:116px;
+ height:27px;
+ padding:4px 22px 4px 13px;
+ margin:0;
+ background:var(--file-accent);
+ color:#fff;
+ border-radius:6px 0 0 0;
+ clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,0 100%);
  font-size:11px;
  font-weight:800;
- letter-spacing:.055em;
+ letter-spacing:.075em;
  text-transform:uppercase;
+ white-space:nowrap;
 }
 .client-file .client-file-number{
  font-variant-numeric:tabular-nums;
@@ -1345,13 +1354,8 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
  border-color:var(--file-accent);
  background:color-mix(in srgb,var(--file-tint) 45%,#e8f1f6);
 }
-html[data-theme="dark"] .client-file{
- --file-ink:#f3f7fc;
- --file-tint:#30465b;
-}
-html[data-theme="dark"] .client-file--alcon{--file-tint:#533349}
-html[data-theme="dark"] .client-file--holland-america{--file-tint:#244e48}
+html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-color:var(--file-accent)!important}
 @media(max-width:600px){
- .client-file::before{right:16px;width:34px;height:8px}
- .client-file .client-file-label{font-size:10px}
+ .client-file{margin-top:19px}
+ .client-file .client-file-label{min-width:102px;height:24px;font-size:10px;bottom:calc(100% + 24px)}
 }
