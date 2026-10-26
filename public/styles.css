@@ -970,9 +970,12 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .hero-feature .portrait-interaction{z-index:21}
  .hero-feature .portrait-mobile-link{pointer-events:auto;touch-action:manipulation}
 }
+/* At phone widths the entire featured illustration already links to Work.
+   Keep one editorial caption instead of a second CTA competing with the portrait. */
 @media(max-width:600px){
- .hero-feature .feature-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;max-width:100%;width:100%}
- .hero-feature .feature-bottom>span{max-width:52%;overflow-wrap:normal}
- .hero-feature .feature-bottom>a{max-width:34%;line-height:1.3;align-self:flex-end}
+ .hero-feature .feature-bottom{display:block;max-width:100%;width:100%;padding-right:0}
+ .hero-feature .feature-bottom>span{display:block;max-width:56%;line-height:1.35}
+ .hero-feature .feature-bottom>a{display:none}
  .hero-feature .portrait-interaction{bottom:0}
+ .hero-feature .portrait-bubble{display:none}
 }
