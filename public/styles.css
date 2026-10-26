@@ -1269,3 +1269,25 @@ html[data-theme="dark"] .playground .section-head>p{
   text-underline-offset:5px;
  }
 }
+
+
+/* The 32px page ruling cannot follow a multi-size display headline's baselines.
+   On desktop, keep the notebook margin but give the Work heading a clean field.
+   Rules belong to body copy, not behind large serif lettering. */
+@media(min-width:1024px){
+ html:not([data-theme="dark"]) .work{
+  background-image:linear-gradient(
+   to right,
+   transparent 0,
+   transparent var(--notebook-margin-offset),
+   rgba(240,91,159,var(--notebook-margin-opacity)) var(--notebook-margin-offset),
+   rgba(240,91,159,var(--notebook-margin-opacity)) calc(var(--notebook-margin-offset) + 2px),
+   transparent calc(var(--notebook-margin-offset) + 2px)
+  );
+  background-size:100% 100%;
+ }
+ html:not([data-theme="dark"]) .work .section-head>p{
+  background-image:none;
+  line-height:1.6;
+ }
+}
