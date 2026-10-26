@@ -1271,23 +1271,30 @@ html[data-theme="dark"] .playground .section-head>p{
 }
 
 
-/* The 32px page ruling cannot follow a multi-size display headline's baselines.
-   On desktop, keep the notebook margin but give the Work heading a clean field.
-   Rules belong to body copy, not behind large serif lettering. */
-@media(min-width:1024px){
- html:not([data-theme="dark"]) .work{
-  background-image:linear-gradient(
-   to right,
+/* Dot-grid notebook: a consistent paper texture for every light-theme
+   section, independent of typography baselines. Dark mode stays unruled.
+   The pink margin is a separate layer so it never shifts with the dots. */
+:root{
+ --notebook-dot-color:rgba(100,169,218,.32);
+ --notebook-dot-step:30px;
+ --notebook-dot-radius:1px;
+}
+html:not([data-theme="dark"]) :is(.hero,.work,.about){
+ background-image:
+  linear-gradient(to right,
    transparent 0,
    transparent var(--notebook-margin-offset),
    rgba(240,91,159,var(--notebook-margin-opacity)) var(--notebook-margin-offset),
    rgba(240,91,159,var(--notebook-margin-opacity)) calc(var(--notebook-margin-offset) + 2px),
-   transparent calc(var(--notebook-margin-offset) + 2px)
-  );
-  background-size:100% 100%;
- }
- html:not([data-theme="dark"]) .work .section-head>p{
+   transparent calc(var(--notebook-margin-offset) + 2px)),
+  radial-gradient(circle,var(--notebook-dot-color) var(--notebook-dot-radius),transparent 1.4px);
+ background-size:100% 100%,var(--notebook-dot-step) var(--notebook-dot-step);
+ background-position:0 0,0 0;
+}
+@media(max-width:600px){
+ html:not([data-theme="dark"]) :is(.hero .hero-description,.work .section-head>p,.about .about-copy p){
+  /* Prevent a second local ruled pattern from fighting the page dot grid. */
   background-image:none;
-  line-height:1.6;
+  padding-bottom:0;
  }
 }
