@@ -1391,3 +1391,26 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
 @media(max-width:420px){
  .work .project-card-facts{grid-template-columns:minmax(0,1fr)}
 }
+
+
+/* Case-study facts: definition-list semantics with a compact phone layout.
+   Audience/scenario and constraints are source-backed editorial summaries,
+   not evidence that user interviews or usability tests occurred. */
+.case-view .case-facts{
+ margin:0;
+ padding:0;
+ min-width:0;
+}
+.case-view .case-fact{min-width:0}
+.case-view .case-fact-label,
+.case-view .case-fact-value{margin:0}
+.case-view .case-fact-value{overflow-wrap:break-word}
+@media(max-width:760px){
+ .case-view .case-facts{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(16px,3vw,24px);
+ }
+ .case-view .case-fact{padding-left:11px}
+ .case-view .case-fact-value{font-size:clamp(13px,3.5vw,16px)}
+}
