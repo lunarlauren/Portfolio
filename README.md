@@ -55,3 +55,12 @@ The Work section shows four featured case studies directly before the company co
 When updating the featured list, confirm exact project titles against `public/content.js` and keep the selection small enough to scan on mobile. Do not add speculative delivery badges or outcomes. Featured-card layout rules live near the end of `public/styles.css` under the “Featured case studies” comment.
 
 **QA specific to this change:** Verify that all four cards appear, their links open the correct case study, the company collection remains accessible, and focus/scroll behavior works when returning from a case study. Test at 320–390px widths, tablet, desktop, both themes, and keyboard-only navigation. CSS/markup inspection alone does not establish visual or accessibility compliance.
+
+
+## Notebook redesign — incremental implementation
+
+The visual direction is a college-ruled creative notebook: warm paper, subtle blue rules, a pink margin, and replaceable illustrated stickers. The notebook tokens and light-mode backgrounds live under **NOTEBOOK VISUAL SYSTEM** in `public/styles.css`. The star sticker is a temporary accessible button in `public/index.html`, with its repeatable animation initialized near the end of `public/script.js`. Replace the glyph with approved owner-drawn artwork later; preserve the button label, hit area, keyboard support, and reduced-motion behavior.
+
+The URL hash is the application's router. **Never use `href="#case-..."` for in-page chapter jumps inside a case study.** Chapter controls use `data-case-jump` buttons, `scrollIntoView`, and heading focus without changing the hash. Case-study back navigation returns to `#work`; the old `#company/...` route remains for existing deep links.
+
+This redesign is in progress. Before calling it finished, verify at mobile widths (including 320px), test all project routes and chapter jumps in a real browser, check dark mode and reduced-motion behavior, inspect contrast and keyboard focus, and confirm the actual deployment separately from GitHub commits.
