@@ -1133,17 +1133,21 @@ html[data-theme="dark"] .playground .section-head>p{
   background-size:100% 100%;
  }
  .hero .hero-feature{position:relative}
+ /* Give the footer its own text column; the portrait occupies the
+    opposite corner and can no longer cover either caption. */
  .hero .hero-feature .feature-bottom{
   display:flex;
-  align-items:flex-end;
-  gap:12px;
-  width:calc(100% - 155px);
-  max-width:calc(100% - 155px);
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  width:calc(100% - 150px);
+  max-width:calc(100% - 150px);
   padding-right:0;
   box-sizing:border-box;
  }
- .hero .hero-feature .feature-bottom>span{max-width:56%}
- .hero .hero-feature .feature-bottom>a{max-width:44%;line-height:1.35}
- .hero .hero-feature .portrait-interaction{right:0;bottom:-18px;width:138px;max-width:138px}
- .hero .hero-foot{margin-top:22px}
+ .hero .hero-feature .feature-bottom>span,
+ .hero .hero-feature .feature-bottom>a{max-width:100%;line-height:1.35}
+ .hero .hero-feature .feature-bottom>a{min-height:32px}
+ .hero .hero-feature .portrait-interaction{right:0;bottom:0;width:132px;max-width:132px}
+ .hero .hero-foot{margin-top:12px}
 }
