@@ -834,3 +834,10 @@ html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);backgroun
 .case-process-note p{margin:0;line-height:1.65;max-width:72ch}
 html[data-theme="dark"] .case-process-note{background:#25394d}
 html[data-theme="dark"] .case-process-note h3{color:#f2f7fc}
+
+
+/* Recruiter scan path: challenge (summary) followed by one existing process
+   sentence. This is a preview of documented copy, not generated evidence. */
+.project-card .project-card-process{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;line-height:1.55;color:var(--muted)}
+.project-card-process strong{display:block;color:var(--ink);font-size:11px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
+html[data-theme="dark"] .project-card-process strong{color:#f2f7fc}
