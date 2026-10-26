@@ -106,4 +106,13 @@ assert.match(stateroom.tradeoffs, /design tension/i, 'Stateroom must describe a 
 assert.match(stateroom.outcome, /not verified for publication/i, 'Stateroom must distinguish delivery from unverified impact');
 
 
+// Independent product work: distinguish hands-on prototype iteration from formal user validation.
+const forktactics = data.playground.find(project => project.title === 'Forktactics');
+assert.ok(forktactics, 'Missing Forktactics case study');
+assert.match(forktactics.evidence, /independent, AI-assisted working prototype/i, 'Forktactics must identify its prototype status');
+assert.match(forktactics.evidence, /No recruited user interviews, formal usability study/i, 'Forktactics must not imply formal user research');
+assert.match(forktactics.tradeoffs, /automation versus control/i, 'Forktactics must explain the planning UX tradeoff');
+assert.match(forktactics.outcome, /not been independently validated/i, 'Forktactics must not imply verified savings or usability impact');
+
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
