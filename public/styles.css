@@ -913,3 +913,26 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-section-links{display:flex;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;padding-bottom:6px}
  .case-section-links button{flex:0 0 auto;white-space:nowrap}
 }
+
+/* Case-study chapter index stays available during longer reads.
+   The offset clears the sticky site header; scroll margins clear both bars. */
+.case-view .case-section-links{
+ position:sticky;top:72px;z-index:15;
+ padding:10px 0;margin-inline:0;
+ background:var(--paper);
+ border-bottom:1px solid var(--line);
+}
+.case-view .case-prose h2[id]{scroll-margin-top:154px}
+@media(max-width:650px){
+ .case-view .case-section-links{top:100px;padding-block:8px}
+ .case-view .case-prose h2[id]{scroll-margin-top:180px}
+ /* Restore the intentional single-row mobile header. The later two-row
+    override is removed in the subsequent consolidation pass. */
+ .site-header{display:flex;flex-wrap:nowrap;gap:8px;min-height:56px;padding:8px 10px}
+ .site-header .header-actions{display:flex;flex:1 1 auto;min-width:0;gap:6px;justify-content:flex-end}
+ .site-header .header-actions nav{display:flex;width:auto;flex:0 1 auto;gap:clamp(6px,2vw,12px);justify-content:flex-end}
+ .site-header .header-actions nav a{font-size:clamp(10px,2.8vw,12px);padding:0;white-space:nowrap}
+ .site-header .header-contact{padding:0;font-size:clamp(10px,2.8vw,12px)}
+ .site-header .theme-toggle{width:36px;min-width:36px;height:44px;min-height:44px;flex:0 0 36px}
+ .site-header .header-actions nav a[aria-current="location"]{padding:0}
+}
