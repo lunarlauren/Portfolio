@@ -32,6 +32,11 @@ for (const project of projects) {
   }
   if (project.gallery) assert.ok(Array.isArray(project.gallery), `${project.title}: gallery must be an array`);
   if (project.galleryBriefs) assert.ok(Array.isArray(project.galleryBriefs), `${project.title}: galleryBriefs must be an array`);
+  for (const key of ['evidence', 'tradeoffs']) {
+    if (project[key] !== undefined) {
+      assert.ok(typeof project[key] === 'string' && project[key].trim(), `${project.title}: invalid ${key}`);
+    }
+  }
 }
 for (const id of ['main', 'work', 'playground', 'about']) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `Missing #${id} navigation target`);
@@ -41,4 +46,9 @@ assert.ok(mobile, 'Missing Hoylu Mobile Insights case study');
 assert.match(mobile.outcome, /shipped/i, 'Mobile Insights was confirmed shipped');
 assert.doesNotMatch(mobile.outcome, /mobile ux concepts/i, 'Do not describe Mobile Insights as concept-only');
 assert.match(script, /"Mobile Insights":\["Hoylu · Construction software","Mobile UX and visual design","Shipped product contribution"\]/);
+assert.match(mobile.evidence, /shipped Mobile Insights experience/i, 'Evidence must retain shipped status');
+assert.match(mobile.evidence, /not been provided/i, 'Do not imply undocumented research or metrics');
+assert.match(mobile.tradeoffs, /design tension/i, 'Describe the UX tradeoff without inventing testing');
+assert.match(script, /processNotesMarkup\\(p\\)/, 'Case study must render evidence and tradeoff notes');
+assert.match(script, /Design approach/, 'Project previews must expose design rationale');
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
