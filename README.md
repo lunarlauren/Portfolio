@@ -117,3 +117,7 @@ Removed four superseded mobile header blocks (old 650px/390px/365px rules, inclu
 
 ### Pass 12 — hero portrait layout
 The portrait now has bounded mobile widths, and its speech bubble stays aligned with the portrait on touch devices rather than inheriting desktop offsets. The featured-card footer reserves space for the portrait. This is a CSS-level change; visually verify the bubble at 320/375/390/420/760px, portrait crop, and the card's links before marking complete.
+
+
+### Pass 13 — route landmarks and process previews
+When the homepage is hidden on a project route, the case-study view takes the `main` landmark; when the homepage is shown, the case-study view is hidden. Project-card process previews are only rendered when source copy exists. The portrait's About link has an explicit keyboard focus outline in both themes. JavaScript parsing was checked, but actual screen-reader/browser route behavior still requires QA.
