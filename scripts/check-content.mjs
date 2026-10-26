@@ -82,6 +82,15 @@ assert.match(patientPortal.evidence, /not been supplied/i, 'Patient portal must 
 assert.match(patientPortal.tradeoffs, /flexibility for individual practices/i, 'Patient portal must explain its documented UX design tension');
 assert.match(script, /Evidence & boundaries/, 'Case studies must label the evidence boundary');
 assert.match(script, /Design tension & rationale/, 'Case studies must distinguish rationale from tested results');
+// Clinical AI case study: distinguish documented UX scope from clinical validation.
+const iolPlanning = data.companies.find(company => company.id === 'alcon')?.projects.find(project => project.title === 'AI-Assisted IOL Planning');
+assert.ok(iolPlanning, 'Missing Alcon IOL planning case study');
+assert.match(iolPlanning.details, /patient measurements and scans/i, 'IOL planning must preserve documented clinical context');
+assert.match(iolPlanning.process, /design consideration, not a claim/i, 'IOL planning must not present rationale as validated implementation');
+assert.match(iolPlanning.evidence, /No approved research findings.*safety validation.*deployment status/i, 'IOL planning must identify missing research, validation, and delivery evidence');
+assert.match(iolPlanning.tradeoffs, /UX tension/i, 'IOL planning must articulate its information-design tradeoff');
+assert.match(iolPlanning.outcome, /has not been verified for publication/i, 'IOL planning must not imply shipped clinical results');
+
 const navigator = data.companies.find(company => company.id === 'holland-america')?.projects.find(project => project.title === 'Navigator App');
 assert.ok(navigator, 'Missing Holland America Navigator case study');
 assert.match(navigator.outcome, /shipped app/i, 'Navigator must retain its shipped status');
