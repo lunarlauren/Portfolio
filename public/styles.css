@@ -1151,3 +1151,26 @@ html[data-theme="dark"] .playground .section-head>p{
  .hero .hero-feature .portrait-interaction{right:0;bottom:0;width:132px;max-width:132px}
  .hero .hero-foot{margin-top:12px}
 }
+
+
+/* Desktop Work-section composition: bring case studies closer to the hero,
+   align the intro with the grid and keep honest image placeholders understated. */
+@media(min-width:1024px){
+ .hero.wrap{padding-bottom:32px}
+ .work.wrap{padding-top:clamp(32px,4vw,56px)}
+ .work .section-head{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(260px,.85fr);
+  align-items:end;
+  column-gap:clamp(36px,5vw,88px);
+  margin-bottom:clamp(24px,3vw,40px);
+ }
+ .work .section-head h2{margin-bottom:0;font-size:clamp(42px,4vw,64px);line-height:1.06}
+ .work .section-head>p{max-width:34ch;margin:0 0 5px;line-height:1.6}
+ .work .featured-projects-grid{gap:clamp(20px,2.5vw,36px)}
+ .work .notebook-project-index .featured-project{padding:clamp(18px,2vw,26px)}
+ .work .notebook-project-index .project-visual{aspect-ratio:16/8;min-height:0}
+ .work .notebook-project-index .project-visual:not(:has(img)){
+  background:rgba(153,202,235,.1);
+ }
+}
