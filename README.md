@@ -101,3 +101,7 @@ A JavaScript parse check was performed on the updated `public/script.js` source.
 
 ### Pass 8 — scan-first project cards
 Project cards show the project identity, preview, and short summary. The longer design-process explanation belongs in the case study, not repeated in the index. The obsolete `.featured-project-context` styles and related selector rules were removed from `public/styles.css`. Keep this division of content when adding new projects.
+
+
+### Pass 9 — mobile interaction and landmarks
+The dynamic case-study container is a named region rather than a second `main` landmark. Mobile project navigation, case-study chapter buttons, back/next links, and header controls have explicit minimum touch target heights and focus-visible outlines. Verify actual 320px wrapping and tab order in a browser before release.
