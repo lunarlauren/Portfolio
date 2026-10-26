@@ -819,3 +819,17 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
  .hero .notebook-hero-note{font-size:16px;max-width:100%;transform:rotate(-1deg)}
  .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
 }
+
+
+/* Notebook case-study chapters: paper styling is limited to the reading surface.
+   Screenshots and diagrams stay on solid backgrounds for accurate inspection. */
+html:not([data-theme="dark"]) .case-view{--case-paper:#fffdf8}
+html:not([data-theme="dark"]) .case-head{position:relative;background:var(--case-paper);border-left:3px solid var(--notebook-pink);padding:clamp(16px,3vw,32px);box-shadow:5px 6px 0 rgba(153,202,235,.23)}
+html:not([data-theme="dark"]) .case-head .eyebrow{color:#76546c}
+html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px);border-radius:12px;padding:clamp(16px,3vw,30px)}
+.case-prose h2{line-height:1.2}
+.case-section-links{display:flex;flex-wrap:wrap;gap:10px}
+.case-section-links button{background:var(--paper);transition:transform .16s ease,box-shadow .16s ease}
+.case-section-links button:active{transform:translateY(2px)}
+@media(prefers-reduced-motion:reduce){.case-section-links button{transition:none}}
+@media(max-width:760px){.case-section-links{gap:8px}.case-section-links button{flex:1 1 auto;font-size:13px}.case-prose h2[id]{scroll-margin-top:70px}}
