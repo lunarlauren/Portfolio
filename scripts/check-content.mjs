@@ -50,5 +50,11 @@ assert.match(mobile.evidence, /shipped Mobile Insights experience/i, 'Evidence m
 assert.match(mobile.evidence, /not been provided/i, 'Do not imply undocumented research or metrics');
 assert.match(mobile.tradeoffs, /design tension/i, 'Describe the UX tradeoff without inventing testing');
 assert.match(script, /processNotesMarkup\(p\)/, 'Case study must render evidence and tradeoff notes');
-assert.match(script, /Design thinking/, 'Project previews must expose design rationale');
+assert.match(script, /Design approach/, 'Project previews must expose design rationale');
+const patientPortal = data.companies.find(company => company.id === 'alcon')?.projects.find(project => project.title === 'Customizable Patient Portal');
+assert.ok(patientPortal, 'Missing Alcon patient portal case study');
+assert.match(patientPortal.evidence, /not been supplied/i, 'Patient portal must not imply undocumented research or metrics');
+assert.match(patientPortal.tradeoffs, /flexibility for individual practices/i, 'Patient portal must explain its documented UX design tension');
+assert.match(script, /Evidence & boundaries/, 'Case studies must label the evidence boundary');
+assert.match(script, /Design tension & rationale/, 'Case studies must distinguish rationale from tested results');
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
