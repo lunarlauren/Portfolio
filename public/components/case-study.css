@@ -134,9 +134,9 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 .case-view .case-head{max-width:100%}
 .case-view .case-head h1{
  font-size:var(--case-type-title);line-height:1.08;letter-spacing:-.04em;
- max-width:18ch;margin-block:18px 20px;overflow-wrap:normal;
+ max-width:18ch;margin-block:18px 20px;overflow-wrap:normal;text-wrap:balance;
 }
-.case-view .case-intro{font-size:var(--case-type-lead);line-height:1.55;max-width:68ch}
+.case-view .case-intro{font-size:var(--case-type-lead);line-height:1.55;max-width:68ch;text-wrap:pretty}
 .case-view .case-prose h2{font-size:var(--case-type-section);line-height:1.17;letter-spacing:-.035em}
 .case-view .case-prose p,.case-view .case-process-note p{
  font-size:var(--case-type-body);line-height:1.7;font-weight:400;
