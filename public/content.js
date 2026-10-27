@@ -23,11 +23,11 @@ window.PORTFOLIO = {
           evidence:"Confirmed scope: product UX and visual design contributions to Hoylu's construction-planning experience. The case-study materials supplied here do not establish a specific research method, tested prototype, launch date, or measured outcome for this project.",
           tradeoffs:"The central design tension was breadth versus detail: show enough of the overall plan to preserve context while making the next relevant item easy to find. The hierarchy and navigation described here are design considerations; no winning variant or validated improvement is claimed.",
           outcome:"Product UX and visual design contributions to Hoylu's construction-planning experience, focused on organizing project information and connecting the overall picture to individual planning details. Delivery scope and performance impact beyond these contributions are not independently verified for this case study.",
-          imageBrief:"Hero composition: a polished desktop construction-planning interface showing a project overview, linked schedule items, and a focused detail panel. Use realistic but anonymized sample data.",
+          imageBrief:"ILLUSTRATIVE / Proposed desktop planning interface with project overview, linked schedule items, and focused detail. Use fictional project data; not a screenshot of a verified shipped flow.",
           galleryBriefs:[
-            "Before-and-after information architecture: disconnected boards versus a unified project hierarchy, with clear labels and arrows.",
-            "Three-screen UX sequence: project overview → planning item → stakeholder detail, annotated with key interaction decisions.",
-            "Responsive UI mockups: desktop planning workspace beside a compact tablet or mobile review state."
+            "ILLUSTRATIVE / Side-by-side information architecture concepts comparing fragmented and unified navigation. Not a documented before-and-after or validated iteration.",
+            "ILLUSTRATIVE / Proposed three-screen sequence: project overview → planning item → stakeholder detail. Annotations explain design rationale, not verified implementation decisions.",
+            "ILLUSTRATIVE / Proposed responsive desktop and mobile planning states; not screenshots of delivered interfaces."
           ]
         },
         {
@@ -123,11 +123,11 @@ window.PORTFOLIO = {
           evidence:"Documented scope: my UX/UI contribution concerned a clinician-facing IOL planning workflow involving patient measurements, scans, AI model training or predictions, and a downstream application. No approved research findings, clinician usability tests, safety validation, deployment status, or outcome metrics have been provided for this case study.",
           tradeoffs:"The UX tension was between showing enough clinical source context to interpret a prediction and avoiding an overloaded interface. Distinguishing measurements, model-generated information, and the downstream handoff was my design rationale; the available project record does not establish which alternatives were implemented, tested, or preferred by clinicians.",
           outcome:"UX/UI design contribution to a connected IOL planning workflow. The documented design focus was information provenance and the relationship between the clinician-facing workflow, patient record, and downstream tool. Whether these specific designs shipped or improved clinical decisions has not been verified for publication.",
-          imageBrief:"Hero to design: connected clinical application screens with anonymized patient scan thumbnails, a model-training or review interface, and predicted IOL information flowing into a patient record. Label predictions clearly as AI-generated.",
+          imageBrief:"ILLUSTRATIVE / Proposed clinical interface concept showing fictional measurements, scan thumbnails, model review, and AI-labeled predictions. Not an implemented or clinically validated screen.",
           galleryBriefs:[
-            "System flow diagram: patient data and scans → clinician-guided model training → prediction → patient file → connected application.",
-            "Clinician interface concept: anonymized measurements, scan previews, training/review controls, and clear model-output labeling.",
-            "Patient record detail: side-by-side source measurements and predicted IOL information, with visual cues separating AI output from clinician-reviewed data."
+            "ILLUSTRATIVE / Proposed system-flow explanation: measurements and scans → model workflow → prediction → patient file → connected application. Not verified implementation architecture.",
+            "ILLUSTRATIVE / Proposed clinician interface with fictional measurements, scan previews, review controls, and labeled model outputs; not a tested workflow.",
+            "ILLUSTRATIVE / Proposed patient-record concept distinguishing source measurements from model predictions. Not a deployed patient record or clinically validated presentation."
           ]
         }
       ]
