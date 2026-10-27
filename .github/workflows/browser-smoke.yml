@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check UX content, delivery status, and component contracts
+        run: node scripts/check-content.mjs
       - name: Install Playwright
         run: |
           npm install --no-save playwright
