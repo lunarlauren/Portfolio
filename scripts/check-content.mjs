@@ -156,6 +156,14 @@ assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="lo
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
 assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
 
+// Pass 5: keyboard focus, touch targets, and reduced-motion contracts.
+assert.match(navigationCss, /:focus-visible/, 'Header navigation must expose keyboard focus');
+assert.match(navigationCss, /@media\(forced-colors:active\)/, 'Focus must remain visible in forced-colors mode');
+assert.match(caseCss, /\.case-view \.case-section-links button\{\s*min-height:44px;/, 'Case chapter controls must meet the 44px touch target');
+assert.match(caseCss, /\.case-view \.case-section-links button:focus-visible/, 'Case chapter controls must show focus');
+assert.match(stationeryCss, /@media\(prefers-reduced-motion:reduce\)/, 'Stationery interactions must honor reduced motion');
+assert.match(stationeryCss, /transition:none;/, 'Reduced motion must disable highlight transitions');
+
 // The pastel folder tabs were previously white-on-color (< 3.2:1).
 // Measure their shared ink against each client accent; geometry and theme
 // behavior remain unchanged. This checks tokens, not computed browser styles.
