@@ -314,7 +314,7 @@ body {color:var(--ink)}
 .hero h1 em{color:var(--brand-pink);font-style:normal}
 
 html,body{max-width:100%;overflow-x:clip}
-@media(max-width:760px){.hero{min-width:0} .hero-feature{min-width:0} .hero-feature .feature-bottom{padding-right:0;max-width:68%} .hero-feature .portrait-interaction{right:0;bottom:0;width:34%;max-width:145px} .hero-feature .portrait-interaction .hero-portrait{width:100%;max-width:100%} .hero-feature .portrait-bubble{right:0;bottom:105%;max-width:min(185px,55vw)}}
+@media(max-width:760px){.hero{min-width:0}.hero-feature{min-width:0}}
 
 .company-grid[data-active]:not([data-active=""]) .company-card[aria-expanded="true"]{display:none}
 .company-grid[data-active]:not([data-active=""]){margin-top:18px}
