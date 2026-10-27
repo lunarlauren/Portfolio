@@ -509,43 +509,6 @@ html[data-theme="dark"] .case-evidence-item strong{color:color-mix(in srgb,var(-
 }
 
 
-/* Mobile header: override the older two-row grid without disturbing desktop navigation.
-   Keep all destinations and the theme switch in a single horizontally scroll-free row. */
-@media(max-width:650px){
- .site-header{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:6px;padding:8px 10px;min-height:56px}
- .site-header .wordmark{flex:0 0 auto;display:flex;align-items:center}
- .site-header .wordmark img{width:28px;height:auto;max-height:34px}
- .site-header .header-actions{display:flex;flex:1 1 auto;min-width:0;align-items:center;justify-content:flex-end;gap:5px}
- .site-header .header-actions nav{display:flex;flex:0 1 auto;min-width:0;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:clamp(3px,1vw,7px)}
- .site-header .header-actions nav a{font-size:clamp(0.625rem,2.65vw,0.75rem);min-height:44px;display:inline-flex;align-items:center;white-space:nowrap;letter-spacing:-.02em}
- .site-header .header-contact{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:clamp(0.625rem,2.65vw,0.75rem);min-height:44px;padding:0 4px;white-space:nowrap}
- .site-header .header-contact span{display:none}
- .site-header .theme-toggle{flex:0 0 34px;width:34px;min-width:34px;height:44px;min-height:44px;display:grid;place-items:center}
- .site-header .header-actions nav a[aria-current="location"]{padding-inline:6px}
-}
-
-
-/* Compact mobile navigation: no competing pill outlines.
-   The current section uses a short underline; contact remains a text link. */
-@media(max-width:650px){
- .site-header{gap:10px;padding-inline:14px}
- .site-header .header-actions{gap:clamp(7px,2vw,12px)}
- .site-header .header-actions nav{gap:clamp(10px,2.8vw,17px)}
- .site-header .header-actions nav a,
- .site-header .header-contact{
-  padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;
-  font-size:clamp(0.6875rem,2.85vw,0.8125rem);line-height:1.2;
- }
- .site-header .header-actions nav a[aria-current="location"],
- html[data-theme="dark"] .site-header .header-actions nav a[aria-current="location"]{
-  padding:0;background:transparent;box-shadow:none;border:0;border-radius:0;
-  color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;
- }
- .site-header .header-contact{min-width:auto;width:auto;min-height:44px;text-decoration:none}
- .site-header .theme-toggle{border-radius:50%;width:36px;min-width:36px;flex-basis:36px;height:36px;min-height:36px}
-}
-
-
 /* Mobile first impression: show a slice of the illustrated featured-work card
    above the fold rather than making visitors scroll past a full text introduction. */
 @media(max-width:650px){
