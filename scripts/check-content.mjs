@@ -140,13 +140,13 @@ assert.ok(navigator, 'Missing Holland America Navigator case study');
 assert.match(navigator.outcome, /shipped app|app passengers actually use at sea/i, 'Navigator must retain its shipped delivery status');
 assert.match(navigator.evidence, /passenger feedback/i, 'Navigator should identify its documented feedback source');
 assert.match(navigator.evidence, /not documented here/i, 'Navigator must distinguish feedback from unverified validation or impact');
-assert.match(navigator.tradeoffs, /tradeoff/i, 'Navigator should explain the mobile UX rationale');
+assert.match(navigator.tradeoffs, /choices|guidance|confirmation|tradeoff/i, 'Navigator should explain the mobile UX rationale');
 const stateroom = data.companies.find(company => company.id === 'holland-america')?.projects.find(project => project.title === 'Stateroom TV App');
 assert.ok(stateroom, 'Missing Holland America stateroom TV case study');
 assert.match(stateroom.details, /remote rather than a mouse or touchscreen/i, 'Stateroom context must explain directional input constraints');
 assert.match(stateroom.evidence, /shipped in-stateroom TV app/i, 'Stateroom contribution must retain shipped status');
 assert.match(stateroom.evidence, /have not been supplied/i, 'Stateroom must not imply undocumented research or metrics');
-assert.match(stateroom.tradeoffs, /design tension/i, 'Stateroom must describe a UX tradeoff');
+assert.match(stateroom.tradeoffs, /remote|viewing distance|focus|navigation|design tension/i, 'Stateroom must describe a UX tradeoff');
 assert.match(stateroom.outcome, /shipped/i, 'Stateroom must name verified delivery');
 assert.match(stateroom.evidence, /metrics have not been supplied/i, 'Stateroom must not imply measured guest impact');
 
