@@ -820,7 +820,7 @@ html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);backgroun
 .case-section-links button{background:var(--paper);transition:transform .16s ease,box-shadow .16s ease}
 .case-section-links button:active{transform:translateY(2px)}
 
-@media(max-width:760px){.case-section-links{gap:8px}.case-section-links button{flex:1 1 auto;font-size:13px}.case-prose h2[id]{scroll-margin-top:70px}}
+@media(max-width:760px){.case-section-links{gap:8px}.case-section-links button{font-size:13px}.case-prose h2[id]{scroll-margin-top:70px}}
 
 
 /* Case-study editorial notes: clearly separate documented evidence from design
