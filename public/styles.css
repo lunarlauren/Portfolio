@@ -196,7 +196,7 @@ html,body{max-width:100%;overflow-x:clip}
 body{font-size:var(--type-body);line-height:1.6}
 .site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.case-facts,.case-fact-label,.brief-kicker,.project-visual .visual-label,.project-visual:not(:has(img)) .visual-label{font-size:var(--type-xs);line-height:1.5}
 .project-card p,.company-description,.case-back,footer{font-size:var(--type-sm);line-height:1.6}
-.hero-description,.about-bottom p,.case-prose p{line-height:1.65}
+.hero-description,.about-bottom p,.case-prose p{line-height:var(--leading-reading,1.65)}
 @media(max-width:760px){.hero-description,.about-bottom p,.case-prose p{font-size:1rem}.project-card p{font-size:0.875rem}}
 
 .about-copy{min-width:0}
