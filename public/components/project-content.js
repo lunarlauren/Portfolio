@@ -16,11 +16,12 @@ const caseHighlights={
 // Handoff: these labels summarize documented contributions, not invented outcomes.
 // Update alongside content.js when the scope or delivery status is confirmed.
 
+// A description list pairs each project claim with its label for screen readers.
 const evidenceMarkup=p=>{
  const evidence=projectEvidence[p.title];
  if(!evidence)return "";
  const labels=["CONTEXT","MY CONTRIBUTION","DELIVERY"];
- return '<div class="case-evidence" role="group" aria-label="Project overview">'+evidence.map((value,i)=>'<div class="case-evidence-item"><span class="case-evidence-label">'+labels[i]+'</span><strong>'+esc(value)+'</strong></div>').join("")+'</div>';
+ return '<dl class="case-evidence" aria-label="Project overview">'+evidence.map((value,i)=>'<div class="case-evidence-item"><dt class="case-evidence-label">'+labels[i]+'</dt><dd class="case-evidence-value"><strong>'+esc(value)+'</strong></dd></div>').join("")+'</dl>';
 };
 const highlightMarkup=p=>{const items=caseHighlights[p.title]||[];return items.length?'<div class="case-highlights" role="group" aria-label="Project at a glance">'+items.map(([label,value])=>'<div class="case-highlight"><span class="case-highlight-label">'+esc(label)+'</span><p>'+esc(value)+'</p></div>').join("")+'</div>':""};
 // Optional editorial notes distinguish design reasoning from research evidence
