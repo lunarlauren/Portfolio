@@ -72,7 +72,7 @@ html:not([data-theme="dark"]) .case-view{--case-paper:#fffdf8}
 html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px);border-radius:12px;padding:clamp(16px,3vw,30px)}
 .case-prose h2{line-height:1.2}
 .case-section-links{display:flex;flex-wrap:wrap;gap:10px}
-.case-section-links button{background:var(--paper);transition:transform .16s ease,box-shadow .16s ease}
+.case-section-links button{transition:transform .16s ease,box-shadow .16s ease}
 .case-section-links button:active{transform:translateY(2px)}
 /* Hover is unavailable on touch screens: keyboard focus gets the same
    tactile surface feedback without relying on a color-only state. */
@@ -118,7 +118,6 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-view .case-head h1{overflow-wrap:anywhere;hyphens:auto}
  .case-view .case-prose p,.case-view .case-process-note p{line-height:1.7}
  .case-view .case-section-links{scroll-padding-inline:12px;-webkit-overflow-scrolling:touch}
- .case-view .case-section-links button{min-height:44px}
  .case-view .case-hero-visual img,.case-view .case-gallery img{max-width:100%;height:auto}
 }
 @media(prefers-reduced-motion:reduce){
