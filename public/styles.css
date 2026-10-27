@@ -15,7 +15,6 @@
 .project-visual:not(:has(img)):before,.project-visual:not(:has(img)):after {display:none}
 .project-visual:not(:has(img)) .placeholder-mark {display:none}
 .project-visual:not(:has(img)) .visual-label {position:static;background:none;color:color-mix(in srgb,var(--palette-navy) 75%,var(--palette-paper));border:1px solid color-mix(in srgb,var(--palette-navy) 50%,var(--palette-paper));padding:13px 17px;letter-spacing:.15em;font-size:0.6875rem;text-align:center}
-.case-hero-visual:not(:has(img)):before {content:"HERO IMAGE PLACEHOLDER";font:700 clamp(12px,2vw,18px) 'Newsreader';letter-spacing:.13em;color:color-mix(in srgb,var(--palette-navy) 75%,var(--palette-paper));border:1px solid color-mix(in srgb,var(--palette-navy) 50%,var(--palette-paper));padding:15px 20px;text-align:center}
 .playground.wrap {max-width:none;padding:clamp(80px,9vw,120px) max(clamp(20px,5vw,72px),calc((100vw - 1176px)/2));color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));border:0;position:relative;overflow:hidden}
 .playground:before {content:"";position:absolute;inset:0;pointer-events:none}
 .playground>.section-head,.playground>.play-grid {position:relative;z-index:1}
