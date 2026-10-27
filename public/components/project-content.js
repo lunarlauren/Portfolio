@@ -43,12 +43,12 @@ const evidenceMarkup=p=>{
 const highlightMarkup=p=>{const items=caseHighlights[p.title]||[];return items.length?'<div class="case-highlights" role="group" aria-label="Project at a glance">'+items.map(([label,value])=>'<div class="case-highlight"><span class="case-highlight-label">'+esc(label)+'</span><p>'+esc(value)+'</p></div>').join("")+'</div>':""};
 // Optional editorial notes distinguish design reasoning from research evidence
 // and verified outcomes. Render only fields explicitly supplied in content.js.
-const processNotesMarkup=p=>{
+const processNotesMarkup=(p,chapterNumber=3)=>{
  // Keep documented scope and design reasoning visually distinct. Neither
  // kind implies that an interview, experiment, or outcome was verified.
  const notes=[["evidence","Evidence & boundaries",p.evidence],["rationale","Design tension & rationale",p.tradeoffs]]
   .filter(([, ,value])=>typeof value==="string"&&value.trim());
- return notes.length?'<h2 id="case-evidence-notes">03 / Evidence &amp; tradeoffs</h2><div class="case-process-notes">'+notes.map(([kind,heading,value])=>
+ return notes.length?'<h2 id="case-evidence-notes">'+String(chapterNumber).padStart(2,"0")+' / Evidence &amp; tradeoffs</h2><div class="case-process-notes">'+notes.map(([kind,heading,value])=>
   '<section class="case-process-note" data-note-kind="'+kind+'"><h3>'+esc(heading)+'</h3><p>'+esc(value)+'</p></section>'
  ).join("")+'</div>':"";
 };
