@@ -5,9 +5,13 @@
 .hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
 .hero .hero-copy h1 em{display:inline-block;max-width:100%}
 .hero .hero-description{max-width:54ch;text-wrap:pretty;line-height:1.6}
+/* Inline emphasis avoids overflow at tablet and phone widths. */
 @media(max-width:760px){
- .hero .hero-copy h1{font-size:clamp(2.375rem,8.4vw,3.625rem);line-height:1.08;max-width:14ch}
  .hero .hero-copy h1 em{display:inline;overflow-wrap:normal}
+}
+/* Tablet-only scale: phone rules below own their breakpoint outright. */
+@media(min-width:601px) and (max-width:760px){
+ .hero .hero-copy h1{font-size:clamp(2.375rem,8.4vw,3.625rem);line-height:1.08;max-width:14ch}
  .hero .notebook-hero-note{font-size:clamp(0.9375rem,3.7vw,1.1875rem);line-height:1.4}
  .hero .hero-description{font-size:clamp(1rem,3.8vw,1.125rem);line-height:1.6;max-width:43ch}
 }
