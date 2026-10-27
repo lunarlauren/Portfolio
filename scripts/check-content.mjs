@@ -202,4 +202,18 @@ assert.ok(genericPaperRule >= 0 && playgroundContrastRule > genericPaperRule, 'P
 assert.match(css.slice(playgroundContrastRule, playgroundContrastRule + 260), /background:transparent/, 'Playground intro must not inherit paper background');
 assert.match(script, /class="case-section-context" aria-hidden="true"/, 'Sticky case-study navigation must identify the current project');
 
+// Editorial integrity: proposed visuals must not masquerade as documented
+// iterations, shipped screens, implementation architecture or clinical evidence.
+for (const title of ['Connected Planning', 'AI-Assisted IOL Planning']) {
+  const project = professionalProjects.find(item => item.title === title);
+  assert.ok(project, `${title}: project must exist`);
+  for (const brief of [project.imageBrief, ...(project.galleryBriefs || [])]) {
+    assert.match(brief, /^ILLUSTRATIVE \/ /, `${title}: planned art needs an explicit illustrative label`);
+  }
+}
+const planning = professionalProjects.find(item => item.title === 'Connected Planning');
+assert.doesNotMatch(planning.galleryBriefs.join(' '), /Before-and-after information architecture:/, 'Do not imply a documented before/after comparison');
+assert.match(script, /Process &amp; rationale/, 'Case-study navigation should identify design rationale');
+assert.match(script, /02 \/ Process & design rationale/, 'Case-study heading should not imply verified design decisions');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
