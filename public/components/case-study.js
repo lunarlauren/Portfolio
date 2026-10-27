@@ -5,11 +5,26 @@ function renderCaseStudy(hash){
 const parts=hash.split("/"),group=parts[1],i=Number(parts[2]);const company=data.companies.find(c=>c.id===group);const projects=company?company.projects:group==="playground"?data.playground:null;const p=projects?.[i];if(!p||!Number.isInteger(i)||i<0){history.replaceState(null,"","/#work");route();return}main.hidden=true;caseView.hidden=false;$(".skip-link").href="#case-study";const returnHash=company?"#work":"#playground";const details=p.details||p.summary;const nextProject=projects.length>1?projects[(i+1)%projects.length]:null;const nextIndex=projects.length>1?(i+1)%projects.length:0;const nextHref=casePath(group,nextIndex);const processNotes=processNotesMarkup(p);const gallery=Array.isArray(p.gallery)?p.gallery:[];const briefs=Array.isArray(p.galleryBriefs)?p.galleryBriefs:[];const galleryItems=gallery.length?gallery.map((img,j)=>visual({title:p.title,image:img,imageBrief:briefs[j]})).join(""):(briefs.length?briefs.map(brief=>visual({title:p.title,imageBrief:brief})).join(""):visual({title:p.title,imageBrief:p.imageBrief}));caseView.innerHTML='<a class="case-back" href="'+returnHash+'">← Back to '+(company?"work":"playground")+'</a><header class="case-head"><p class="eyebrow">'+esc(company?.name||"PERSONAL WORK")+' / '+esc(p.type)+'</p><h1 id="case-title">'+esc(p.title)+'</h1><p class="case-intro">'+esc(p.summary)+'</p></header>'+evidenceMarkup(p)+'<div class="case-hero-visual">'+(p.image?'<img src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title)+'">':'<div class="hero-image-brief"><span class="brief-kicker">HERO IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved hero visual.")+'</span></div>')+'</div>'+highlightMarkup(p)+'<nav class="case-section-links" aria-label="On this case study"><button type="button" data-case-jump="case-challenge">Challenge &amp; role</button>'+(p.process?'<button type="button" data-case-jump="case-process">Process &amp; rationale</button>':"")+(processNotes?'<button type="button" data-case-jump="case-evidence-notes">Evidence &amp; tradeoffs</button>':"")+(p.outcome?'<button type="button" data-case-jump="case-outcome">Deliverables &amp; learning</button>':"")+'</nav><div class="case-body">'+caseFactsMarkup(p,company)+'<div class="case-prose"><h2 id="case-challenge">01 / The challenge & my role</h2><p>'+esc(details)+'</p>'+(p.process?'<h2 id="case-process">02 / Process & design rationale</h2><p>'+esc(p.process)+'</p>':'')+processNotes+(p.outcome?'<h2 id="case-outcome">'+(processNotes?'04':'03')+' / Deliverables & learning</h2><p>'+esc(p.outcome)+'</p>':'')+'</div></div><div class="case-gallery" role="group" aria-label="Project image gallery">'+galleryItems+'</div><nav class="case-next-nav" aria-label="Case study navigation"><a class="case-next" href="'+returnHash+'">← Explore more work</a>'+(nextProject?'<a class="case-next" href="'+nextHref+'">Next: '+esc(nextProject.title)+' →</a>':'')+'</nav>';// Section navigation must not change the URL hash: hashes are reserved for routing.
 const caseJumpButtons=[...caseView.querySelectorAll("[data-case-jump]")];
 const caseJumpHeadings=caseJumpButtons.map(button=>document.getElementById(button.dataset.caseJump));
+const chapterNav=caseView.querySelector(".case-section-links");
+// Keep the active chapter visible in the horizontally scrolling phone index.
+// Only scroll the tab strip: scrollIntoView would move the reading page too.
+function revealCurrentCaseTab(button){
+ const navBounds=chapterNav.getBoundingClientRect();
+ const tabBounds=button.getBoundingClientRect();
+ const edge=16; // Leave room for the focus outline.
+ let delta=0;
+ if(tabBounds.left<navBounds.left+edge)delta=tabBounds.left-navBounds.left-edge;
+ else if(tabBounds.right>navBounds.right-edge)delta=tabBounds.right-navBounds.right+edge;
+ if(delta)chapterNav.scrollLeft+=delta;
+}
 function setCurrentCaseSection(id){
+ const active=caseJumpButtons.find(button=>button.dataset.caseJump===id);
+ if(!active||active.getAttribute("aria-current")==="location")return;
  caseJumpButtons.forEach(button=>{
-  if(button.dataset.caseJump===id)button.setAttribute("aria-current","location");
+  if(button===active)button.setAttribute("aria-current","location");
   else button.removeAttribute("aria-current");
  });
+ revealCurrentCaseTab(active);
 }
 caseJumpButtons.forEach(button=>{
  button.addEventListener("click",()=>{
