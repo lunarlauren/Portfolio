@@ -201,6 +201,8 @@ assert.ok(workCss.includes('font-size:clamp(var(--type-h3),2.6vw,2.375rem)'), 'A
 
 // Pass 8: mobile rhythm and single-row navigation guardrails.
 const heroCss = read('../public/components/hero-polish.css');
+// Keep the mobile hero's discipline line from leaving an isolated final word.
+assert.ok(heroCss.includes('letter-spacing:.075em;text-wrap:balance'), 'Mobile hero eyebrow should balance wrapped text');
 assert.match(heroCss, /\.hero\.wrap\{[^}]*min-height:0;[^}]*padding-bottom:clamp\(/, 'Mobile hero must not reserve a viewport of empty space');
 assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
 assert.ok(navigationCss.includes('gap:clamp(7px,2.2vw,13px)'), 'Phone navigation spacing should remain intentional');
