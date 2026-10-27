@@ -7,7 +7,6 @@
  --paper-shadow:4px 6px 0 rgba(32,51,68,.09);
  --paper-shadow-dark:4px 6px 0 rgba(0,0,0,.18);
 }
-html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
 
 
 /* Six-color art direction: neutral tints and shadows derive from these
