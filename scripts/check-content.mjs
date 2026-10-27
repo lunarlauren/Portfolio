@@ -156,6 +156,13 @@ assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="lo
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
 assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
 
+// Pass 7: routed metadata and mobile chapter navigation contracts.
+for (const key of ['og:title','og:description','og:url','twitter:title','twitter:description']) {
+ assert.ok(caseStudy.includes('setMeta(\'meta[' + (key.startsWith('og:') ? 'property' : 'name') + '="' + key + '"]\''), 'Case-study routing must update ' + key);
+}
+assert.match(caseStudy, /if\(active\.getAttribute\("aria-current"\)==="location"\)\{/, 'Already-active chapters must remain revealable');
+assert.match(caseStudy, /revealCurrentCaseTab\(active\);/, 'Chapter navigation must reveal active tabs');
+
 // Pass 6: production stylesheet ownership and duplicate-rule guardrails.
 assert.doesNotMatch(caseCss, /html\[data-theme="dark"\] \.case-evidence-item\{/, 'Evidence theme colors should use shared tokens, not duplicate dark rules');
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence geometry must remain in the scoped component');
