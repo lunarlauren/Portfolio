@@ -1642,3 +1642,30 @@ html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
 html[data-theme="dark"] .client-file--hoylu{--file-highlight:rgba(83,167,222,.46)}
 html[data-theme="dark"] .client-file--alcon{--file-highlight:rgba(231,125,178,.45)}
 html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,186,156,.43)}
+
+
+/* Stationery ink system: client-colored Work highlights, rose ink for
+   personal notes, and cool violet ink on the night-side Playground.
+   Highlight only the title's actual text width, not its whole column. */
+.playground .play-grid .project-card-link h3{
+ display:table;
+ background-image:linear-gradient(transparent 70%,rgba(179,151,230,.42) 70%);
+ background-repeat:no-repeat;
+ background-size:0 100%;
+ transition:background-size .3s ease;
+}
+@media(hover:hover){
+ .playground .play-grid .project-card-link:hover h3{background-size:100% 100%}
+}
+.playground .play-grid .project-card-link:focus-visible h3{
+ background-size:100% 100%;
+}
+.playground .project-card-cta{
+ background-image:linear-gradient(#c6a6f0,#c6a6f0);
+}
+.about-copy>.text-link{
+ background-image:linear-gradient(var(--notebook-pink),var(--notebook-pink));
+}
+@media(prefers-reduced-motion:reduce){
+ .playground .play-grid .project-card-link h3{transition:none}
+}
