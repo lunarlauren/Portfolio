@@ -67,3 +67,7 @@ The legacy stylesheet now keeps the final notebook margin values in its first no
 ### Typography tokens (rem)
 
 The canonical type scale is in `public/components/foundations.css`: `--type-h1`, `--type-h2`, `--type-h3`, `--type-paragraph`, `--type-eyebrow`, `--type-lead`, `--type-body`, `--type-sm`, and `--type-xs`. Display and body font families are `--font-display` and `--font-body`. Semantic `h1`/`h2`/`h3`/`p`/`.eyebrow` defaults use low-specificity `:where()` rules so existing page-specific typography remains intact. Font-size declarations using `px` were converted to equivalent `rem` values (16px = 1rem), including clamp endpoints; responsive viewport units were retained. Some legacy `font` shorthand declarations and other non-font measurements still use px and should be audited separately. Test heading wrapping, navigation, case studies, and text zoom in both themes before treating the migration as fully verified.
+
+### Portfolio image dimensions
+
+Prepare project card and gallery thumbnail artwork at **1600 × 1000 pixels (16:10)**. The `.collection .project-visual` and featured project image frames use a shared 16:10 aspect ratio across breakpoints. Images use `object-fit: cover`, so keep essential UI and text away from crop edges. Text-only placeholder visuals intentionally remain content-sized. Full case-study screenshots may retain their native aspect ratios to preserve legibility.
