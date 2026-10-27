@@ -205,6 +205,7 @@ html[data-theme="dark"] .work .client-file .project-card-cta{
  --archive-preview-edge:#bccbd4;
  --archive-preview-text:#526477;
  --archive-facts-edge:var(--line);
+ --archive-focus-edge:var(--file-accent);
  background-color:var(--archive-surface);
  border:1px solid var(--archive-edge)!important;
  box-shadow:var(--archive-shadow);
@@ -217,6 +218,7 @@ html[data-theme="dark"] .work .featured-project.client-file{
  --archive-preview-edge:#52677c;
  --archive-preview-text:#d5e0eb;
  --archive-facts-edge:color-mix(in srgb,var(--palette-blue) 35%,var(--palette-navy));
+ --archive-focus-edge:color-mix(in srgb,var(--file-accent) 75%,white);
 }
 .work .featured-project.client-file .project-visual:not(:has(img)){
  background:var(--archive-preview);
@@ -250,7 +252,7 @@ html[data-theme="dark"] .work .featured-project.client-file{
  .work .featured-project.client-file:hover{--file-lift:-5px;box-shadow:6px 11px 0 color-mix(in srgb,var(--file-accent) 18%,transparent)}
  .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
 }
-.work .featured-project.client-file:focus-within{--file-lift:-3px;outline:2px solid var(--file-accent);outline-offset:4px}
+.work .featured-project.client-file:focus-within{--file-lift:-3px;outline:2px solid var(--archive-focus-edge);outline-offset:4px}
 .work .featured-project.client-file:active{--file-lift:1px;box-shadow:2px 3px 0 color-mix(in srgb,var(--file-accent) 22%,transparent)}
 .work .client-file .client-file-label{transition:transform .24s cubic-bezier(.2,.75,.25,1)}
 @media(prefers-reduced-motion:reduce){
