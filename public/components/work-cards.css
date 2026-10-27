@@ -230,3 +230,21 @@ html[data-theme="dark"] .work .featured-project.client-file{
  margin-top:0;
  padding-top:12px;
 }
+
+/* Tactile archive: folders respond like paper, not floating UI tiles.
+   Focus and touch retain the same accessible affordance as hover. */
+.work .featured-project.client-file{
+ --file-lift:0px;
+ transform:translateY(var(--file-lift));
+ transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .24s ease,border-color .24s ease;
+}
+@media(hover:hover) and (pointer:fine){
+ .work .featured-project.client-file:hover{--file-lift:-5px;box-shadow:6px 11px 0 color-mix(in srgb,var(--file-accent) 18%,transparent)}
+ .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
+}
+.work .featured-project.client-file:focus-within{--file-lift:-3px;outline:2px solid var(--file-accent);outline-offset:4px}
+.work .featured-project.client-file:active{--file-lift:1px;box-shadow:2px 3px 0 color-mix(in srgb,var(--file-accent) 22%,transparent)}
+.work .client-file .client-file-label{transition:transform .24s cubic-bezier(.2,.75,.25,1)}
+@media(prefers-reduced-motion:reduce){
+ .work .featured-project.client-file,.work .client-file .client-file-label{transition:none!important;animation:none!important}
+}
