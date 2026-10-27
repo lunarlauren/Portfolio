@@ -5,7 +5,7 @@
 @media(max-width:760px) {.hero {padding-block:55px 80px} .hero h1 {font-size:clamp(50px,12vw,78px)} .hero-actions {gap:18px} .case-body {grid-template-columns:1fr} .case-gallery {grid-template-columns:1fr} .case-gallery .project-visual {min-height:220px} .case-view {padding-block:28px 70px}}
 @media(prefers-reduced-motion:reduce) {.hero-feature:hover .feature-art,.primary-link:hover {transform:none}}
 .company-grid {grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row;align-items:stretch}
-.company-card {min-width:0;overflow-wrap:anywhere;min-height:clamp(290px,28vw,390px)}
+.company-card {min-width:0;overflow-wrap:anywhere;min-height:clamp(290px,28vw,390px);background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease;touch-action:manipulation}
 .company-card.featured {grid-column:1/-1}
 .company-name {font-size:clamp(36px,5vw,78px);line-height:1.02}
 .company-card:not(.featured) .company-name {font-size:clamp(32px,4vw,60px)}
@@ -35,13 +35,12 @@ body {background:var(--paper)}
 .eyebrow-divider {color:#8da6b5}
 .hero h1 em,.about h2 em,.section-head h2 em {color:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue))}
 
-.company-card {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
 .company-card.featured {color:#fff}
 .project-visual {background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
 
 .project-visual:not(:has(img)),.case-hero-visual:not(:has(img)) {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))!important;border-color:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
 .project-visual:not(:has(img)) .visual-label,.case-hero-visual:not(:has(img)):before {color:#42647a;border-color:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
-.hero-feature {color:var(--brand-ink)}
+.hero-feature {color:var(--brand-ink);overflow:visible;isolation:isolate;background:var(--brand-sky)}
 .hero-feature .feature-top,.hero-feature .feature-bottom {color:var(--brand-ink)}
 .art-tile-one {background:#f4c6cb}
 .art-tile-two {background:#c3e5df}
@@ -56,7 +55,6 @@ body {background:var(--paper)}
 
 .project-card:nth-child(3n+2) .project-visual {background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
 
-.hero-feature {overflow:visible;isolation:isolate}
 .hero-feature:before {border-radius:inherit}
 .hero-feature .feature-bottom {padding-right:24%;z-index:4}
 @media(max-width:760px) {.hero-feature .feature-bottom {padding-right:30%}}
@@ -90,7 +88,6 @@ body {color:var(--ink)}
 .hero-description,.case-intro,.section-head>p,.project-card p {color:var(--muted)}
 .hero-foot {color:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper))}
 .hero .status-dot {background:var(--brand-pink)}
-.hero-feature {background:var(--brand-sky)}
 .hero-feature:before {background:linear-gradient(145deg,color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue)) 12%,color-mix(in srgb,var(--palette-paper) 60%,var(--palette-blue)) 100%)}
 .primary-link {background:var(--brand-navy);color:#fff}
 .primary-link:hover {background:color-mix(in srgb,var(--palette-navy) 80%,var(--palette-blue))}
@@ -131,7 +128,6 @@ body {color:var(--ink)}
 @keyframes gallery-reveal {from {opacity:0;transform:translate3d(0,18px,0)} to {opacity:1;transform:translate3d(0,0,0)}}
 @keyframes detail-reveal {from {opacity:0;transform:translate3d(0,22px,0)} to {opacity:1;transform:translate3d(0,0,0)}}
 @media(prefers-reduced-motion:no-preference) {.collection {animation:gallery-reveal .5s var(--motion-ease) both} .collection .collection-nav {animation:gallery-reveal .42s var(--motion-ease) .04s both} .collection .collection-head {animation:gallery-reveal .55s var(--motion-ease) .09s both} .collection .project-card {animation:gallery-reveal .62s var(--motion-ease) both;animation-delay:calc(.16s + var(--i,0)*.075s)} .case-view:not([hidden]) .case-head {animation:detail-reveal .6s var(--motion-ease) .06s both} .case-view:not([hidden]) .case-hero-visual {animation:detail-reveal .7s var(--motion-ease) .13s both} .case-view:not([hidden]) .case-body {animation:detail-reveal .7s var(--motion-ease) .2s both} .case-view:not([hidden]) .case-gallery {animation:detail-reveal .7s var(--motion-ease) .25s both}}
-.company-card {transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
 .company-card:hover {transform:translateY(-7px);box-shadow:0 22px 42px #20334420}
 .company-card .card-top span:last-child,.company-card .card-bottom span:last-child {display:inline-block;transition:transform .4s var(--motion-ease)}
 .company-card:hover .card-top span:last-child,.company-card:focus-visible .card-top span:last-child {transform:translate(3px,-3px)}
@@ -181,7 +177,6 @@ html,body{max-width:100%;overflow-x:clip}
 @media(forced-colors:active){.company-card,.project-card-link,.primary-link{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
 
 .site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
-.company-card{touch-action:manipulation}
 @media(max-width:760px){.site-header nav{flex-wrap:wrap}.company-name,.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot,.company-description{opacity:1;text-shadow:none}.project-visual:not(:has(img)){border-style:solid}}
 
@@ -717,8 +712,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 
 
-/* Hero portrait: keep the illustration and speech bubble within the card on
-   touch screens. Hover-only placement previously pushed the bubble outward. */
+/* Responsive featured-art layout and caption sizing. */
 @media(max-width:760px){
  .hero-feature{isolation:isolate;overflow:visible}
  .hero-feature .feature-bottom{padding-right:0;max-width:62%}
@@ -727,7 +721,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  .hero-feature{min-height:300px}
  .hero-feature .feature-bottom{max-width:58%}
 }
-/* Keyboard users should be able to reveal the portrait note without hover. */
 
 
 /* Legacy header fallback. The production mobile header is one row via
