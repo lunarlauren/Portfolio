@@ -65,6 +65,16 @@ html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);backgroun
 .case-section-links{display:flex;flex-wrap:wrap;gap:10px}
 .case-section-links button{background:var(--paper);transition:transform .16s ease,box-shadow .16s ease}
 .case-section-links button:active{transform:translateY(2px)}
+/* Hover is unavailable on touch screens: keyboard focus gets the same
+   tactile surface feedback without relying on a color-only state. */
+.case-section-links button:focus-visible{
+ background:var(--surface-blush);
+ text-decoration:underline;
+ text-underline-offset:4px;
+}
+html[data-theme="dark"] .case-section-links button:focus-visible{
+ background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));
+}
 
 @media(max-width:760px){.case-section-links button{font-size:0.8125rem}.case-prose h2[id]{scroll-margin-top:70px}}
 
