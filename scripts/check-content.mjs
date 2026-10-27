@@ -159,6 +159,14 @@ assert.match(html, /\/components\/case-study\.css\?v=/, 'Case-study component st
 assert.match(caseCss, /\.case-view \.case-fact-value\{\s*font-weight:400/, 'Sidebar values should read as supporting text rather than bold headings');
 assert.match(caseCss, /--case-type-title:/, 'Case-study type scale should remain component-scoped');
 assert.match(projectContent, /const processNotesMarkup=/, 'Evidence and tradeoff notes must have a shared renderer');
+const renderProcessNotes = vm.runInNewContext(projectContent + '\nprocessNotesMarkup', { esc: value => String(value) });
+const exampleNotes = renderProcessNotes({ evidence:'Documented scope only', tradeoffs:'Design reasoning only' });
+assert.match(exampleNotes, /data-note-kind="evidence"/, 'Evidence boundaries need their own semantic presentation hook');
+assert.match(exampleNotes, /data-note-kind="rationale"/, 'Tradeoffs need their own semantic presentation hook');
+assert.ok(exampleNotes.indexOf('Documented scope only') < exampleNotes.indexOf('Design reasoning only'), 'Evidence must precede rationale');
+assert.equal(renderProcessNotes({}), '', 'Projects without evidence or rationale should not show an empty chapter');
+assert.match(caseCss, /\.case-view \.case-process-note\[data-note-kind="evidence"\]/, 'Evidence styling must remain in the case-study component');
+assert.match(caseCss, /\.case-view \.case-process-note\[data-note-kind="rationale"\]/, 'Rationale styling must remain in the case-study component');
 // A separate evidence chapter makes the research/assumption boundary discoverable
 // without upgrading design rationale into documented testing or outcomes.
 assert.match(projectContent, /<h2 id="case-evidence-notes">03 \/ Evidence &amp; tradeoffs<\/h2>/, 'Evidence notes need a visible chapter heading');
