@@ -169,7 +169,7 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
 @media(max-width:760px){
  .work .featured-project.client-file .project-visual:not(:has(img)){
   min-height:110px;
-  padding:14px;
+  padding:var(--space-2);
  }
 }
 html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(:has(img)){
