@@ -44,6 +44,19 @@ assert.match(visualBriefKicker('PLANNED / Character studies'), /PLANNED ARTWORK/
 assert.match(visualBriefKicker('Show the prototype, clearly labeled PROTOTYPE'), /PROTOTYPE/);
 assert.match(script, /visualBriefKicker\(p\.imageBrief\)/, 'Archive and gallery placeholders must disclose their status');
 assert.match(caseStudy, /visualBriefKicker\(p\.imageBrief\)/, 'Case-study hero placeholders must disclose their status');
+// Delivery badges are driven by reviewed metadata, never by an illustration
+// or a case-study title. Concept/design-only work must not gain a shipped label.
+const deliveryStampMarkup = vm.runInNewContext(projectContent + '\\ndeliveryStampMarkup', {
+ projectEvidence: {
+  'Mobile Insights': ['Hoylu', 'UX/UI', 'Shipped product contribution'],
+  'Connected Planning': ['Hoylu', 'UX/UI', 'Product design contribution']
+ }
+});
+assert.match(deliveryStampMarkup({title:'Mobile Insights'}), /SHIPPED PRODUCT CONTRIBUTION/);
+assert.equal(deliveryStampMarkup({title:'Connected Planning'}), '');
+assert.match(caseStudy, /deliveryStampMarkup\\(p\\)/, 'Case-study cover must render verified delivery status');
+assert.match(caseCss, /\\.case-view \\.case-delivery-stamp\\{/, 'Shipped badge styling must remain scoped to case studies');
+
 
 const context = { window: {} };
 vm.runInNewContext(content, context, { filename: 'public/content.js' });
