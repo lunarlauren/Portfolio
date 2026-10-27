@@ -185,6 +185,12 @@ const exampleNotes = renderProcessNotes({ evidence:'Documented scope only', trad
 assert.match(exampleNotes, /data-note-kind="evidence"/, 'Evidence boundaries need their own semantic presentation hook');
 assert.match(exampleNotes, /data-note-kind="rationale"/, 'Tradeoffs need their own semantic presentation hook');
 assert.ok(exampleNotes.indexOf('Documented scope only') < exampleNotes.indexOf('Design reasoning only'), 'Evidence must precede rationale');
+// Visible qualifiers must distinguish the limits of evidence from design
+// judgment without implying that undocumented user research occurred.
+assert.match(exampleNotes, /class="case-process-note-kicker">Evidence status<\/span>/, 'Evidence note must disclose its status');
+assert.match(exampleNotes, /class="case-process-note-kicker">Design reasoning · not test evidence<\/span>/, 'Tradeoffs must not masquerade as tested findings');
+assert.match(caseCss, /\.case-view \.case-process-note-kicker\{/, 'Evidence qualifier styling belongs to the case-study component');
+assert.equal((exampleNotes.match(/class="case-process-note-kicker"/g)||[]).length,2, 'Both note kinds need visible qualifiers');
 assert.equal(renderProcessNotes({}), '', 'Projects without evidence or rationale should not show an empty chapter');
 assert.match(renderProcessNotes({evidence:'Scope only'},2), /<h2 id="case-evidence-notes">02 \/ Evidence &amp; tradeoffs<\/h2>/, 'Evidence must be chapter 02 when process is omitted');
 assert.match(renderProcessNotes({evidence:'Scope only'},3), /<h2 id="case-evidence-notes">03 \/ Evidence &amp; tradeoffs<\/h2>/, 'Evidence remains chapter 03 when process exists');
