@@ -156,6 +156,13 @@ assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="lo
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
 assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
 
+// Pass 10: one archive geometry with theme-specific color tokens.
+assert.match(workCss, /--archive-surface:var\(--palette-paper\)/, 'Archive paper surface must have a light token');
+assert.match(workCss, /--archive-surface:color-mix\(in srgb,var\(--palette-navy\)/, 'Archive paper surface must have a dark token');
+assert.match(workCss, /background-color:var\(--archive-surface\)/, 'Archive card background must use its theme token');
+assert.match(workCss, /border:1px solid var\(--archive-edge\)!important/, 'Archive card border must use its theme token');
+assert.match(workCss, /color:var\(--file-cta-ink,var\(--file-accent\)\)/, 'Archive CTA must use a shared theme color');
+
 // Pass 9: hero type hierarchy and archive title token contracts.
 assert.ok(heroPolishCss.includes('max-width:54ch;text-wrap:pretty;line-height:1.6'), 'Desktop hero copy must retain a readable measure');
 assert.ok(heroPolishCss.includes('line-height:1.65;max-width:38ch'), 'Mobile hero copy must retain a readable line length');
