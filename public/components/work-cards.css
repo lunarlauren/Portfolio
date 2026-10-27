@@ -102,8 +102,8 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  box-shadow:var(--paper-shadow);
 }
 .work .featured-project.client-file .archive-project-title{
- margin:var(--space-1) 0 18px;
- font-size:clamp(1.6875rem,2.6vw,2.375rem);
+ margin:var(--space-1) 0 var(--space-3);
+ font-size:clamp(var(--type-h3),2.6vw,2.375rem);
  line-height:1.1;
  letter-spacing:-.035em;
  text-wrap:balance;
