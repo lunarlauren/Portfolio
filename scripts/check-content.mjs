@@ -75,11 +75,12 @@ for (const project of projects) {
     }
   }
 }
-// Case-study reading contract: make the intended audience and the real
-// design constraints visible without inventing discovery or validation.
+// Professional stories need an explicit audience, constraints, evidence
+// boundary and design tradeoff. Missing research should be disclosed, not
+// filled with invented interviews or metrics to satisfy this contract.
 const professionalProjects = data.companies.flatMap(company => company.projects);
 for (const project of professionalProjects) {
-  for (const key of ['audience', 'constraints']) {
+  for (const key of ['audience', 'constraints', 'evidence', 'tradeoffs']) {
     assert.ok(typeof project[key] === 'string' && project[key].trim(), `${project.title}: missing ${key}`);
   }
 }
