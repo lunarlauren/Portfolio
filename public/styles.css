@@ -1468,7 +1468,9 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  margin-top:14px;
 }
 html[data-theme="dark"] .work .featured-project.client-file{
- border-color:color-mix(in srgb,var(--palette-navy) 75%,var(--palette-blue))!important;
+ /* Opaque paper surface masks the page's dot grid behind each file. */
+ background-color:color-mix(in srgb,var(--palette-navy) 83%,#243d52);
+ border-color:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue))!important;
  box-shadow:var(--paper-shadow-dark);
 }
 html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(:has(img)){
