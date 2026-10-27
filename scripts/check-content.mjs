@@ -156,6 +156,12 @@ assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="lo
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
 assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
 
+// Pass 11: keep chapter navigation target lookup centralized.
+assert.ok(caseStudy.includes('const caseJumpTargets=new Map('), 'Case study must cache chapter targets per render');
+assert.ok(caseStudy.includes('const heading=caseJumpTargets.get(button.dataset.caseJump)'), 'Chapter click handlers must reuse cached targets');
+assert.ok(caseStudy.includes('const caseJumpHeadings=[...caseJumpTargets.values()]'), 'Reading-progress tracking must reuse chapter targets');
+assert.ok(!caseStudy.includes('const heading=document.getElementById(button.dataset.caseJump)'), 'Avoid duplicate chapter DOM lookups');
+
 // Pass 10: one archive geometry with theme-specific color tokens.
 assert.match(workCss, /--archive-surface:var\(--palette-paper\)/, 'Archive paper surface must have a light token');
 assert.match(workCss, /--archive-surface:color-mix\(in srgb,var\(--palette-navy\)/, 'Archive paper surface must have a dark token');
