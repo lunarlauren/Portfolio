@@ -9,6 +9,14 @@ const content = read('../public/content.js');
 const script = read('../public/script.js');
 const html = read('../public/index.html');
 const css = read('../public/styles.css');
+// Read the actual owners of these rules after the component extraction.
+// Assertions against only script.js/styles.css silently become stale otherwise.
+const caseStudy = read('../public/components/case-study.js');
+const projectContent = read('../public/components/project-content.js');
+const caseCss = read('../public/components/case-study.css');
+const workCss = read('../public/components/work-cards.css');
+new vm.Script(caseStudy, { filename: 'public/components/case-study.js' });
+new vm.Script(projectContent, { filename: 'public/components/project-content.js' });
 const context = { window: {} };
 vm.runInNewContext(content, context, { filename: 'public/content.js' });
 new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not available here
@@ -47,15 +55,15 @@ for (const project of professionalProjects) {
     assert.ok(typeof project[key] === 'string' && project[key].trim(), `${project.title}: missing ${key}`);
   }
 }
-assert.match(script, /const caseFactsMarkup=/, 'Case studies must share a named facts renderer');
-assert.match(script, /caseFactsMarkup\(p,company\)/, 'Case study must display the facts');
-assert.match(script, /<dl class="case-facts"/, 'Facts should be a semantic description list');
-assert.match(script, /<dt class="case-fact-label"/, 'Fact labels should use dt elements');
-assert.match(script, /<dd class="case-fact-value"/, 'Fact values should use dd elements');
-assert.match(css, /\.case-view \.case-facts\s*\{/, 'Case facts must have scoped layout styles');
-assert.match(css, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Case facts should have a narrow-screen two-column layout');
-assert.match(css, /@media\(max-width:480px\)\{\s*\.case-view \.case-facts\{\s*grid-template-columns:minmax\(0,1fr\)/, 'Phone case facts must switch to one readable column');
-assert.match(css, /\.case-view \.case-process-note\{\s*border-radius:0/, 'Evidence notes should have intentional square stationery edges');
+assert.match(projectContent, /const caseFactsMarkup=/, 'Case studies must share a named facts renderer');
+assert.match(caseStudy, /caseFactsMarkup\(p,company\)/, 'Case study must display the facts');
+assert.match(projectContent, /<dl class="case-facts"/, 'Facts should be a semantic description list');
+assert.match(projectContent, /<dt class="case-fact-label"/, 'Fact labels should use dt elements');
+assert.match(projectContent, /<dd class="case-fact-value"/, 'Fact values should use dd elements');
+assert.match(caseCss, /\.case-view \.case-facts\s*\{/, 'Case facts must have scoped layout styles');
+assert.match(caseCss, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Case facts should have a narrow-screen two-column layout');
+assert.match(caseCss, /@media\(max-width:480px\)\{\s*\.case-view \.case-facts\{\s*grid-template-columns:minmax\(0,1fr\)/, 'Phone case facts must switch to one readable column');
+assert.match(caseCss, /\.case-view \.case-process-note\{\s*border-radius:0/, 'Evidence notes should have intentional square stationery edges');
 
 for (const id of ['main', 'work', 'playground', 'about']) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `Missing #${id} navigation target`);
@@ -101,14 +109,14 @@ assert.match(mobile.imageBrief, /ILLUSTRATIVE \/.*not a screenshot of shipped sc
 assert.ok(mobile.galleryBriefs.every(brief => brief.startsWith('ILLUSTRATIVE /')), 'Mobile Insights gallery briefs must be labeled illustrative');
 assert.match(mobile.galleryBriefs[0], /project manager/i, 'Illustrative mobile flow must use the same audience scenario as the case study');
 assert.match(mobile.galleryBriefs[1], /not a record of verified iteration rounds/i, 'Illustrative wireframes must not imply documented iterations');
-assert.match(script, /processNotesMarkup\(p\)/, 'Case study must render evidence and tradeoff notes');
+assert.match(caseStudy, /processNotesMarkup\(p\)/, 'Case study must render evidence and tradeoff notes');
 assert.match(script, /Design approach/, 'Project previews must expose design rationale');
 const patientPortal = data.companies.find(company => company.id === 'alcon')?.projects.find(project => project.title === 'Customizable Patient Portal');
 assert.ok(patientPortal, 'Missing Alcon patient portal case study');
 assert.match(patientPortal.evidence, /not been supplied/i, 'Patient portal must not imply undocumented research or metrics');
 assert.match(patientPortal.tradeoffs, /flexibility for individual practices/i, 'Patient portal must explain its documented UX design tension');
-assert.match(script, /Evidence & boundaries/, 'Case studies must label the evidence boundary');
-assert.match(script, /Design tension & rationale/, 'Case studies must distinguish rationale from tested results');
+assert.match(projectContent, /Evidence & boundaries/, 'Case studies must label the evidence boundary');
+assert.match(projectContent, /Design tension & rationale/, 'Case studies must distinguish rationale from tested results');
 // Clinical AI case study: distinguish documented UX scope from clinical validation.
 const iolPlanning = data.companies.find(company => company.id === 'alcon')?.projects.find(project => project.title === 'AI-Assisted IOL Planning');
 assert.ok(iolPlanning, 'Missing Alcon IOL planning case study');
@@ -162,7 +170,7 @@ assert.match(illustration.tradeoffs, /expression versus clarity/i, 'Illustration
 assert.match(illustration.outcome, /does not claim a completed illustrated series/i, 'Illustration must not imply undocumented outcomes');
 assert.ok(illustration.galleryBriefs.every(brief => brief.startsWith('PLANNED /')), 'Illustration gallery placeholders must be labeled as planned');
 assert.match(script, /"Illustration & Experiments":\["Independent · Personal creative practice"/, 'Illustration overview must disclose independent status');
-assert.match(script, /"Fallout 76 ;  What I'd Design":\[\["THE IDEA"/, 'Fallout highlight key must match the case-study title');
+assert.match(projectContent, /"Fallout 76 ;  What I'd Design":\[\["THE IDEA"/, 'Fallout highlight key must match the case-study title');
 
 
 
@@ -174,8 +182,8 @@ assert.match(script, /<dl class="project-card-facts">/, 'Role and delivery facts
 for (const project of data.companies.flatMap(company => company.projects)) {
   assert.ok(script.includes(JSON.stringify(project.title) + ':['), `${project.title}: missing shared evidence label`);
 }
-assert.match(css, /\.work \.project-card-facts\s*\{/, 'Archive facts must have an intentional layout');
-assert.match(css, /\.work \.project-card-facts dd\s*\{/, 'Archive values must have readable styles');
+assert.match(workCss, /\.work \.project-card-facts\s*\{/, 'Archive facts must have an intentional layout');
+assert.match(workCss, /\.work \.project-card-facts dd\s*\{/, 'Archive values must have readable styles');
 assert.match(script, /"Mobile Insights":\["Hoylu · Construction software","Mobile UX and visual design","Shipped product contribution"\]/, 'Mobile Insights must be labeled shipped on archive and detail pages');
 
 // Static responsive guards: these do not prove browser layout or screen-reader behavior.
@@ -190,8 +198,8 @@ assert.match(html, /styles\.css\?v=[a-zA-Z0-9-]+/, 'HTML must reference a versio
 // Case-study accessibility: the visible title names the active main landmark,
 // and evidence is a labeled group rather than an unnamed generic container.
 assert.match(script, /caseView\.setAttribute\("aria-labelledby","case-title"\)/, 'Case-study main landmark must have a name');
-assert.match(script, /<h1 id="case-title">/, 'Case-study title must label its main landmark');
-assert.match(script, /class="case-evidence" role="group" aria-label="Project overview"/, 'Evidence overview must have valid grouping semantics');
+assert.match(caseStudy, /<h1 id="case-title">/, 'Case-study title must label its main landmark');
+assert.match(projectContent, /class="case-evidence" role="group" aria-label="Project overview"/, 'Evidence overview must have valid grouping semantics');
 assert.doesNotMatch(script, /behavior:"instant"/, 'Scroll restoration should use a standard behavior value');
 
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
@@ -200,7 +208,7 @@ const genericPaperRule = css.indexOf('html:not([data-theme="dark"]) .section-hea
 const playgroundContrastRule = css.lastIndexOf('html:not([data-theme="dark"]) .playground .section-head>p');
 assert.ok(genericPaperRule >= 0 && playgroundContrastRule > genericPaperRule, 'Playground contrast override must follow the notebook-paper rule');
 assert.match(css.slice(playgroundContrastRule, playgroundContrastRule + 260), /background:transparent/, 'Playground intro must not inherit paper background');
-assert.match(script, /class="case-section-context" aria-hidden="true"/, 'Sticky case-study navigation must identify the current project');
+assert.match(caseStudy, /class="case-section-context" aria-hidden="true"/, 'Sticky case-study navigation must identify the current project');
 
 // Editorial integrity: speculative artwork is not an artifact of delivery,
 // a documented iteration, or a screenshot. This includes visual-design work,
@@ -229,7 +237,18 @@ for (const title of ['Navigator App', 'Stateroom TV App']) {
 }
 const planning = professionalProjects.find(item => item.title === 'Connected Planning');
 assert.doesNotMatch(planning.galleryBriefs.join(' '), /Before-and-after information architecture:/, 'Do not imply a documented before/after comparison');
-assert.match(script, /Process &amp; rationale/, 'Case-study navigation should identify design rationale');
-assert.match(script, /02 \/ Process & design rationale/, 'Case-study heading should not imply verified design decisions');
+assert.match(caseStudy, /Process &amp; rationale/, 'Case-study navigation should identify design rationale');
+assert.match(caseStudy, /02 \/ Process & design rationale/, 'Case-study heading should not imply verified design decisions');
+
+// Guard the component load order and the lighter sidebar hierarchy without
+// claiming that source checks prove actual text contrast or browser reflow.
+const helperIndex = html.indexOf('src="/components/project-content.js');
+const rendererIndex = html.indexOf('src="/components/case-study.js');
+const routerIndex = html.indexOf('src="/script.js');
+assert.ok(helperIndex >= 0 && helperIndex < rendererIndex && rendererIndex < routerIndex, 'Case-study helpers, renderer, and router must load in order');
+assert.match(html, /\/components\/case-study\.css\?v=/, 'Case-study component stylesheet must be loaded');
+assert.match(caseCss, /\.case-view \.case-fact-value\{\s*font-weight:400/, 'Sidebar values should read as supporting text rather than bold headings');
+assert.match(caseCss, /--case-type-title:/, 'Case-study type scale should remain component-scoped');
+assert.match(projectContent, /const processNotesMarkup=/, 'Evidence and tradeoff notes must have a shared renderer');
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
