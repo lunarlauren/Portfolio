@@ -3,7 +3,7 @@
 ## Source of truth
 Edit the production-facing site in `public/`; the root-level HTML/CSS/JS files are legacy copies. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
-Styles begin in `public/components/foundations.css`, then `public/components/homepage-base.css`, then the legacy `public/styles.css`, with scoped additions in `public/components/...`. Client folder tabs use a shared dark-ink token (`--file-label-ink`) against blue, pink, and green accents; maintain at least **4.5:1 contrast** for the small tab labels in both themes. Prefer existing color and type tokens, preserve the stationery visual language, and check both light/dark modes. Avoid appending competing overrides to the base stylesheet.
+Styles begin in `public/components/foundations.css`, then `public/components/homepage-base.css`, then `public/components/case-study-base.css`, then the legacy `public/styles.css`, with scoped additions in `public/components/...`. Client folder tabs use a shared dark-ink token (`--file-label-ink`) against blue, pink, and green accents; maintain at least **4.5:1 contrast** for the small tab labels in both themes. Prefer existing color and type tokens, preserve the stationery visual language, and check both light/dark modes. Avoid appending competing overrides to the base stylesheet.
 
 ## Editorial and UX evidence rules
 Each professional case study should make **context/problem, intended audience and constraints, actual role, evidence/discovery where documented, explorations and rationale, implementation/collaboration when verified, and outcomes or learning** easy to find. If a fact is missing, say so; do not manufacture interviews, iterations, tests, conversion metrics, or launch claims.
@@ -30,6 +30,7 @@ Think of the site like a set of labeled drawers:
 | A project story, evidence or approved image | `public/content.js` |
 | Fonts, starting colors, focus and basic layout | `public/components/foundations.css` |
 | Early homepage layout, hero and card rules | `public/components/homepage-base.css` |
+| Initial case-study layout and typography | `public/components/case-study-base.css` |
 | Older component styling and later overrides | `public/styles.css` (legacy; edit carefully) |
 | About portrait size and mobile layout | `public/components/about.css` |
 | Header and navigation appearance | `public/components/navigation.css` |
@@ -50,3 +51,7 @@ The first global rules were moved into `public/components/foundations.css` witho
 ### Homepage CSS extraction
 
 `homepage-base.css` contains the earliest homepage, hero, card, and responsive rules in their original sequence. Later declarations in `styles.css` and the dedicated component stylesheets can still override these rules. This extraction is organizational, not a complete removal of duplicates; validate actual computed styles before consolidating overlapping selectors.
+
+### Case-study base extraction
+
+`public/components/case-study-base.css` holds the earliest case-study layout rules. It loads before the legacy stylesheet so later overrides remain effective. The final case-study styling is also in `public/components/case-study.css`. Do not delete either without browser-based visual comparison.
