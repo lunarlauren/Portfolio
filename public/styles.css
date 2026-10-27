@@ -1588,7 +1588,7 @@ html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
    No arbitrary rotation or competing shadow directions. */
 .work .featured-project.client-file .archive-project-title{
  display:table;
- background-image:linear-gradient(transparent 68%,rgba(255,210,92,.48) 68%);
+ background-image:linear-gradient(transparent 68%,var(--file-highlight,rgba(255,210,92,.48)) 68%);
  background-repeat:no-repeat;
  background-size:0% 100%;
  transition:background-size .3s ease;
@@ -1633,3 +1633,12 @@ html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
 @media(min-width:1024px){
  .work .section-head{margin-bottom:clamp(14px,1.8vw,24px)}
 }
+
+/* Highlighter ink follows the client filing color. These translucent
+   tints retain legibility in light and dark modes. */
+.client-file--hoylu{--file-highlight:rgba(83,167,222,.34)}
+.client-file--alcon{--file-highlight:rgba(231,125,178,.36)}
+.client-file--holland-america{--file-highlight:rgba(80,186,156,.35)}
+html[data-theme="dark"] .client-file--hoylu{--file-highlight:rgba(83,167,222,.46)}
+html[data-theme="dark"] .client-file--alcon{--file-highlight:rgba(231,125,178,.45)}
+html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,186,156,.43)}
