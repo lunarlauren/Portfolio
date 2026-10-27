@@ -156,6 +156,12 @@ assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="lo
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
 assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
 
+// Pass 9: hero type hierarchy and archive title token contracts.
+assert.ok(heroPolishCss.includes('max-width:54ch;text-wrap:pretty;line-height:1.6'), 'Desktop hero copy must retain a readable measure');
+assert.ok(heroPolishCss.includes('line-height:1.65;max-width:38ch'), 'Mobile hero copy must retain a readable line length');
+assert.ok(heroPolishCss.includes('margin:var(--space-4) 0 var(--space-3)'), 'Mobile headline should use shared spacing tokens');
+assert.ok(workCss.includes('font-size:clamp(var(--type-h3),2.6vw,2.375rem)'), 'Archive headings must reference the shared type scale');
+
 // Pass 8: mobile rhythm and single-row navigation guardrails.
 const heroCss = read('../public/components/hero-polish.css');
 assert.ok(heroCss.includes('.hero.wrap{min-height:0;padding-bottom:'), 'Mobile hero must not reserve a viewport of empty space');
