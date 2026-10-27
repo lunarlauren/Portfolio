@@ -1584,31 +1584,54 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
 html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
 
 
-/* Stationery interactions: ink-highlighter, paperclip, and gentle filing-in.
-   No arbitrary rotation or competing shadow directions. */
-.work .featured-project.client-file .archive-project-title{
+/* Stationery interaction system
+   Client-colored highlighters, violet Playground ink, and rose personal notes.
+   No ornamental clips; reduced-motion visitors receive immediate states. */
+.client-file--hoylu{--file-highlight:rgba(83,167,222,.34)}
+.client-file--alcon{--file-highlight:rgba(231,125,178,.36)}
+.client-file--holland-america{--file-highlight:rgba(80,186,156,.35)}
+html[data-theme="dark"] .client-file--hoylu{--file-highlight:rgba(83,167,222,.46)}
+html[data-theme="dark"] .client-file--alcon{--file-highlight:rgba(231,125,178,.45)}
+html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,186,156,.43)}
+
+:is(.work .featured-project.client-file .archive-project-title,
+    .playground .play-grid .project-card-link h3){
  display:table;
- background-image:linear-gradient(transparent 68%,var(--file-highlight,rgba(255,210,92,.48)) 68%);
+ background-image:linear-gradient(transparent 68%,var(--highlight-ink) 68%);
  background-repeat:no-repeat;
- background-size:0% 100%;
+ background-size:0 100%;
  transition:background-size .3s ease;
 }
-@media(hover:hover){
- .work .featured-project.client-file:hover .archive-project-title{background-size:100% 100%}
+.work .featured-project.client-file .archive-project-title{
+ --highlight-ink:var(--file-highlight,rgba(255,210,92,.48));
 }
-.work .featured-project.client-file:focus-within .archive-project-title{background-size:100% 100%}
+.playground .play-grid .project-card-link h3{
+ --highlight-ink:rgba(179,151,230,.42);
+}
+@media(hover:hover){
+ .work .featured-project.client-file:hover .archive-project-title,
+ .playground .play-grid .project-card-link:hover h3{background-size:100% 100%}
+}
+.work .featured-project.client-file:focus-within .archive-project-title,
+.playground .play-grid .project-card-link:focus-visible h3{background-size:100% 100%}
+
 .about-copy>.text-link,
 .playground .project-card-cta{
  text-decoration:none;
- background-image:linear-gradient(var(--notebook-pink),var(--notebook-pink));
+ background-image:linear-gradient(var(--underline-ink),var(--underline-ink));
  background-size:0 2px;
  background-position:left bottom;
  background-repeat:no-repeat;
  transition:background-size .24s ease;
 }
+.about-copy>.text-link{--underline-ink:var(--notebook-pink)}
+.playground .project-card-cta{--underline-ink:#c6a6f0}
 .about-copy>.text-link:is(:hover,:focus-visible),
 .playground .project-card-link:is(:hover,:focus-visible) .project-card-cta{
  background-size:100% 2px;
+}
+@media(min-width:1024px){
+ .work .section-head{margin-bottom:clamp(14px,1.8vw,24px)}
 }
 @media(prefers-reduced-motion:no-preference){
  .work .featured-project.client-file,
@@ -1624,48 +1647,7 @@ html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
  }
 }
 @media(prefers-reduced-motion:reduce){
- .work .featured-project.client-file .archive-project-title,
- .about-copy>.text-link,.playground .project-card-cta{transition:none}
-}
-
-/* Folder tabs are the only physical attachment on these cards.
-   Tighten the editorial heading-to-archive transition on desktop. */
-@media(min-width:1024px){
- .work .section-head{margin-bottom:clamp(14px,1.8vw,24px)}
-}
-
-/* Highlighter ink follows the client filing color. These translucent
-   tints retain legibility in light and dark modes. */
-.client-file--hoylu{--file-highlight:rgba(83,167,222,.34)}
-.client-file--alcon{--file-highlight:rgba(231,125,178,.36)}
-.client-file--holland-america{--file-highlight:rgba(80,186,156,.35)}
-html[data-theme="dark"] .client-file--hoylu{--file-highlight:rgba(83,167,222,.46)}
-html[data-theme="dark"] .client-file--alcon{--file-highlight:rgba(231,125,178,.45)}
-html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,186,156,.43)}
-
-
-/* Stationery ink system: client-colored Work highlights, rose ink for
-   personal notes, and cool violet ink on the night-side Playground.
-   Highlight only the title's actual text width, not its whole column. */
-.playground .play-grid .project-card-link h3{
- display:table;
- background-image:linear-gradient(transparent 70%,rgba(179,151,230,.42) 70%);
- background-repeat:no-repeat;
- background-size:0 100%;
- transition:background-size .3s ease;
-}
-@media(hover:hover){
- .playground .play-grid .project-card-link:hover h3{background-size:100% 100%}
-}
-.playground .play-grid .project-card-link:focus-visible h3{
- background-size:100% 100%;
-}
-.playground .project-card-cta{
- background-image:linear-gradient(#c6a6f0,#c6a6f0);
-}
-.about-copy>.text-link{
- background-image:linear-gradient(var(--notebook-pink),var(--notebook-pink));
-}
-@media(prefers-reduced-motion:reduce){
- .playground .play-grid .project-card-link h3{transition:none}
+ :is(.work .featured-project.client-file .archive-project-title,
+     .playground .play-grid .project-card-link h3,
+     .about-copy>.text-link,.playground .project-card-cta){transition:none}
 }
