@@ -70,9 +70,8 @@ body {background:var(--paper);color:var(--ink)}
 .playground .section-head h2:after {color:color-mix(in srgb,var(--palette-pink) 70%,var(--palette-paper))}
 .hero-feature .feature-top a,.hero-feature .feature-bottom a {color:inherit;text-decoration:none}
 .hero-feature .feature-top a:hover,.hero-feature .feature-bottom a:hover {text-decoration:underline}
-.hero-feature .feature-art {cursor:pointer}
 .company-grid .company-card[data-company="holland-america"] .card-top,.company-grid .company-card[data-company="holland-america"] .card-bottom {color:#fff}
-.hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
+.hero-feature .feature-art {cursor:pointer;text-decoration:none;color:inherit;z-index:0}
 .hero-feature .feature-art .art-center {text-decoration:none}
 .hero-feature .feature-top,.hero-feature .feature-bottom {position:relative;z-index:2}
 :root {--paper:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));--line:#cbdde7;--teal:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));--brand-pink:#f15c9d;--brand-navy:var(--brand-ink);--brand-sky:color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy))}
