@@ -376,3 +376,17 @@ html[data-theme="dark"] .case-view{
  .case-view .case-section-links button:focus-visible{outline-color:Highlight}
  .case-view .case-section-links button[aria-current="location"]{border-color:Highlight}
 }
+
+/* Provenance travels with illustrative art, even after a file replaces its brief.
+   The label is not a shipping-status badge and must never imply tested UI. */
+.project-visual:has(> .visual-image-status),
+.case-hero-visual:has(> .visual-image-status){position:relative}
+.project-visual > .visual-image-status,
+.case-hero-visual > .visual-image-status{
+ position:absolute;inset-inline-start:12px;bottom:12px;z-index:2;
+ max-width:calc(100% - 24px);box-sizing:border-box;
+ padding:7px 10px;border:1px solid var(--line);border-radius:4px;
+ background:var(--paper);color:var(--ink);
+ font:700 0.6875rem/1.4 'DM Sans',system-ui,sans-serif;
+ letter-spacing:.06em;pointer-events:none;
+}
