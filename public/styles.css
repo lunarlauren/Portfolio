@@ -795,23 +795,10 @@ html[data-theme="dark"] .playground .section-head>p{
 }
 
 
-/* Desktop Work-section composition: bring case studies closer to the hero,
-   align the intro with the grid and keep honest image placeholders understated. */
+/* Desktop Work archive spacing: heading layout and type live in work-cards.css. */
 @media(min-width:1024px){
  .hero.wrap{padding-bottom:32px}
  .work.wrap{padding-top:clamp(32px,4vw,56px)}
- .work .section-head{
-  display:grid;
-  /* Match the project cards' exact column tracks and gutter. */
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  align-items:start;
-  column-gap:clamp(20px,2.5vw,36px);
-  margin-bottom:clamp(24px,3vw,40px);
- }
- .work .section-head h2{margin-bottom:0;font-size:clamp(2.625rem,4vw,4rem);line-height:1.06}
- /* Align to the second card horizontally, but center the paragraph
-    vertically against the full eyebrow + headline block. */
- .work .section-head>p{justify-self:start;align-self:center;max-width:34ch;margin:0;line-height:1.6}
  .work .featured-projects-grid{gap:clamp(20px,2.5vw,36px)}
  .work .notebook-project-index .featured-project{padding:clamp(18px,2vw,26px)}
  .work .notebook-project-index .project-visual{aspect-ratio:16/10;min-height:0}
@@ -850,15 +837,10 @@ html[data-theme="dark"] .playground .section-head>p{
 }
 
 
-/* Editorial system / 2026-10-26
-   One spacing rhythm for section intros and cards, rather than isolated
-   optical offsets. The Work heading shares the exact tracks of its cards.
-   Keep project placeholders honest; make the case-study titles the focal point. */
+/* Editorial section rhythm. Work heading layout is owned by work-cards.css. */
 @media(min-width:1024px){
  .work.wrap,.playground.wrap{padding-block:clamp(42px,5vw,68px)}
- .work .section-head,.playground .section-head{margin-bottom:clamp(28px,3vw,42px)}
- .work .section-head{column-gap:clamp(20px,2.5vw,36px)}
- .work .section-head>p{align-self:center;max-width:38ch}
+ .playground .section-head{margin-bottom:clamp(28px,3vw,42px)}
  .playground .section-head{
   display:grid;
   grid-template-columns:minmax(0,2fr) minmax(0,1fr);
@@ -870,7 +852,7 @@ html[data-theme="dark"] .playground .section-head>p{
 }
 @media(min-width:1024px) and (max-height:800px){
  .work.wrap,.playground.wrap{padding-block:36px}
- .work .section-head,.playground .section-head{margin-bottom:26px}
+ .playground .section-head{margin-bottom:26px}
 }
 /* Consistent keyboard affordances across the light and night sections. */
 :is(.work,.playground) .project-card-link:focus-visible{
