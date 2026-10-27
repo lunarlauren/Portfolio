@@ -15,6 +15,7 @@ const caseStudy = read('../public/components/case-study.js');
 const projectContent = read('../public/components/project-content.js');
 const caseCss = read('../public/components/case-study.css');
 const workCss = read('../public/components/work-cards.css');
+const stationeryCss = read('../public/components/stationery.css');
 new vm.Script(caseStudy, { filename: 'public/components/case-study.js' });
 new vm.Script(projectContent, { filename: 'public/components/project-content.js' });
 const context = { window: {} };
@@ -250,5 +251,36 @@ assert.match(html, /\/components\/case-study\.css\?v=/, 'Case-study component st
 assert.match(caseCss, /\.case-view \.case-fact-value\{\s*font-weight:400/, 'Sidebar values should read as supporting text rather than bold headings');
 assert.match(caseCss, /--case-type-title:/, 'Case-study type scale should remain component-scoped');
 assert.match(projectContent, /const processNotesMarkup=/, 'Evidence and tradeoff notes must have a shared renderer');
+// A separate evidence chapter makes the research/assumption boundary discoverable
+// without upgrading design rationale into documented testing or outcomes.
+assert.match(projectContent, /<h2 id="case-evidence-notes">03 \/ Evidence &amp; tradeoffs<\/h2>/, 'Evidence notes need a visible chapter heading');
+assert.match(caseStudy, /data-case-jump="case-evidence-notes"/, 'Chapter navigation must link to the evidence boundary');
+assert.match(caseStudy, /const processNotes=processNotesMarkup\(p\)/, 'Evidence chapter must render from existing documented notes');
+assert.match(caseStudy, /\(processNotes\?'04':'03'\)/, 'Outcome chapter number must follow optional evidence chapter');
+
+// The pastel folder tabs were previously white-on-color (< 3.2:1).
+// Measure their shared ink against each client accent; geometry and theme
+// behavior remain unchanged. This checks tokens, not computed browser styles.
+const tokenHex = (source, name) => {
+ const match = source.match(new RegExp('--' + name + ':\\\\s*(#[0-9a-fA-F]{6})\\\\s*;'));
+ assert.ok(match, 'Missing hex color token: ' + name);
+ return match[1];
+};
+const luminance = hex => {
+ const channels = hex.slice(1).match(/../g).map(channel => parseInt(channel,16)/255)
+  .map(value => value <= .04045 ? value/12.92 : ((value+.055)/1.055)**2.4);
+ return channels[0]*.2126 + channels[1]*.7152 + channels[2]*.0722;
+};
+const contrastRatio = (a,b) => {
+ const [lighter,darker] = [luminance(a),luminance(b)].sort((x,y)=>y-x);
+ return (lighter+.05)/(darker+.05);
+};
+assert.match(workCss, /\.client-file \.client-file-label\{[^}]*color:var\(--file-label-ink\)/, 'Client tabs must use their accessible ink token');
+const tabInk = tokenHex(workCss, 'file-label-ink');
+for (const accent of ['blue','pink','green']) {
+ const tabColor = tokenHex(stationeryCss, 'palette-' + accent);
+ assert.ok(contrastRatio(tabInk,tabColor) >= 4.5, accent + ' client tab must meet WCAG AA normal-text contrast');
+}
+
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and Mobile Insights delivery status`);
