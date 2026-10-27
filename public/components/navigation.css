@@ -46,3 +46,18 @@
  .site-header .header-actions nav a,.site-header .header-contact{font-size:0.6875rem}
  .site-header .theme-toggle{flex-basis:40px;width:40px;min-width:40px;height:44px;min-height:44px}
 }
+
+/* Footer chrome lives alongside navigation chrome. */
+footer.wrap{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:16px;min-height:92px;
+ padding-block:24px 32px;
+ border-top:1px solid var(--site-chrome-edge);
+ font-size:var(--type-sm,0.875rem);
+ color:var(--muted);
+}
+footer.wrap a{color:var(--ink);font-weight:600;text-decoration:none;text-underline-offset:4px}
+footer.wrap a:hover,footer.wrap a:focus-visible{text-decoration:underline}
+@media(max-width:600px){
+ footer.wrap{min-height:76px;padding:20px max(24px,env(safe-area-inset-right)) 24px max(24px,env(safe-area-inset-left));font-size:0.8125rem}
+}
