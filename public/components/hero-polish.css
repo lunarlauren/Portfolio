@@ -29,3 +29,14 @@
  .hero .hero-feature{margin-bottom:0}
 }
 
+
+/* Desktop fold: shorten the editorial introduction without flattening its character.
+   Keep this after the legacy desktop hero rules; mobile retains its own rhythm. */
+@media(min-width:1024px){
+ .hero.wrap{padding-block:clamp(26px,3.5vh,46px);gap:clamp(28px,3vw,52px)}
+ .hero .hero-copy h1{font-size:clamp(3.25rem,4.45vw,4.75rem);line-height:1.01;margin-block:14px 12px}
+ .hero .notebook-hero-note{margin-block:4px 10px}
+ .hero .hero-description{font-size:clamp(1rem,1.05vw,1.125rem);line-height:1.5}
+ .hero .hero-actions{margin-top:16px}
+ .hero .hero-feature{height:clamp(370px,49vh,510px)}
+}
