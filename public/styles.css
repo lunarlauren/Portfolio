@@ -412,7 +412,7 @@ html{scroll-padding-top:82px}
 .playground .sparkle-button .night-sparkles span:nth-child(3){font-size:10px}
 .playground .sparkle-button:hover .night-sparkles{transform:rotate(-8deg) scale(1.07)}
 .playground .sparkle-button.sparkle-pop .night-sparkles{animation:sparkle-pop .3s ease-out}
-@media(prefers-reduced-motion:reduce){.playground .sparkle-button.sparkle-pop .night-sparkles{animation:none}}
+
 
 .playground .section-head .playground-title{display:block!important;position:relative;z-index:2;visibility:visible!important;opacity:1!important;color:#fff!important;font:600 clamp(35px,5vw,66px)/1.1 'Newsreader',Georgia,serif!important;margin:14px 0 0!important;max-width:100%;height:auto!important;overflow:visible!important}
 .playground .section-head .playground-title::before,.playground .section-head .playground-title::after{content:none!important;display:none!important}
