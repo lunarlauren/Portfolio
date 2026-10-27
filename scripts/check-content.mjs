@@ -202,6 +202,10 @@ assert.match(caseCss, /\.case-view \.case-section-links button:focus-visible/, '
 assert.match(stationeryCss, /@media\(prefers-reduced-motion:reduce\)/, 'Stationery interactions must honor reduced motion');
 assert.match(stationeryCss, /transition:none;/, 'Reduced motion must disable highlight transitions');
 
+// Pass 12: chapter controls expose an equivalent focus state in both themes.
+assert.match(caseCss, /\.case-section-links button:focus-visible\{[^}]*background:var\(--surface-blush\);[^}]*text-decoration:underline;/, 'Keyboard focus must provide tactile feedback beyond the outline');
+assert.match(caseCss, /html\[data-theme="dark"\] \.case-section-links button:focus-visible\{[^}]*background:color-mix\(/, 'Dark-mode chapter focus must use a theme-aware surface');
+
 // The pastel folder tabs were previously white-on-color (< 3.2:1).
 // Measure their shared ink against each client accent; geometry and theme
 // behavior remain unchanged. This checks tokens, not computed browser styles.
