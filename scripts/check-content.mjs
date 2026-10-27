@@ -214,7 +214,7 @@ assert.match(stationeryCss, /transition:none;/, 'Reduced motion must disable hig
 
 // Pass 15: footer must paint a solid themed surface, not expose notebook dots.
 assert.ok(navigationCss.includes('background:var(--site-chrome-bg);'), 'Footer must reset inherited background layers');
-assert.match(css, /html\\[data-theme="dark"\\]\\{\\s*--site-chrome-bg:/, 'Dark theme must supply a dedicated chrome surface');
+assert.match(css, /html\[data-theme="dark"\]\s*\{[^}]*--site-chrome-bg\s*:/, 'Dark theme must supply a dedicated chrome surface');
 
 // Pass 13: leaving a case study must never strand focus in hidden content.
 assert.match(script, /if\(leavingProject&&nextHash!=="work"&&nextHash!=="playground"\)/, 'Non-gallery case-study exits must restore focus');
