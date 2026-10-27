@@ -112,6 +112,26 @@ try{
   assert.equal(chrome.footerImage,"none",theme+" footer must not show the page texture");
   assert.equal(chrome.footerColor,chrome.headerColor,theme+" header and footer should share the paper surface");
  }
+ // Editorial chapters are optional. Keep numbering contiguous when a future
+ // case study has evidence notes but no process section, or neither section.
+ const optional=await browser.newPage();
+ optional.on("pageerror",error=>errors.push(error.message));
+ await optional.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await optional.evaluate(()=>{
+  const project=window.PORTFOLIO.companies.find(company=>company.id==="hoylu").projects[0];
+  project.process="";
+  renderCaseStudy("case/hoylu/0");
+ });
+ assert.match(await optional.locator("#case-evidence-notes").innerText(),/^02 \/ Evidence & tradeoffs/);
+ assert.match(await optional.locator("#case-outcome").innerText(),/^03 \/ Deliverables & learning/);
+ await optional.evaluate(()=>{
+  const project=window.PORTFOLIO.companies.find(company=>company.id==="hoylu").projects[0];
+  project.evidence="";project.tradeoffs="";
+  renderCaseStudy("case/hoylu/0");
+ });
+ assert.equal(await optional.locator("#case-evidence-notes").count(),0);
+ assert.match(await optional.locator("#case-outcome").innerText(),/^02 \/ Deliverables & learning/);
+ await optional.close();
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  mobile.on("pageerror",error=>errors.push(error.message));
  await mobile.goto(origin+"/case-studies/alcon/ai-assisted-iol-planning/");
