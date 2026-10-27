@@ -424,7 +424,7 @@ html{scroll-padding-top:82px}
 .about-copy{max-width:62ch}
 .about-copy p{margin:0 0 1.25em}
 .about-bottom .creative-inventory{min-width:0;margin:0}
-.about-bottom .text-link{grid-column:1/-1;justify-self:start;margin:0;white-space:normal}
+.about-bottom .text-link{grid-column:1;grid-row:2;justify-self:start;align-self:start;margin:0;white-space:normal}
 .inventory-heading{gap:12px}
 .inventory-heading h3{margin:5px 0 0}
 .inventory-heading p{max-width:155px;text-align:right}
@@ -1519,4 +1519,17 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
 }
 @media(hover:hover) and (prefers-reduced-motion:no-preference){
  .playground .play-grid .project-card-link:hover .project-visual{box-shadow:none}
+}
+
+/* About layout: the contact invitation belongs directly to the bio, not
+   at the bottom of the taller inventory column. Preserve one-column flow. */
+@media(min-width:901px){
+ .about .about-bottom{
+  grid-template-rows:auto auto;
+  row-gap:clamp(18px,2vw,28px);
+  align-content:start;
+ }
+ .about .about-bottom .about-copy{grid-column:1;grid-row:1}
+ .about .about-bottom .creative-inventory{grid-column:2;grid-row:1 / span 2}
+ .about .about-bottom>.text-link{grid-column:1;grid-row:2;align-self:start}
 }
