@@ -54,8 +54,12 @@ const processNotesMarkup=p=>{
 // These fields summarize documented context; a design scenario is not a
 // claim that persona research or testing took place.
 const caseFactsMarkup=(p,company)=>{
+ // Reuse the reviewed contribution label from the project overview rather
+ // than inferring a role from discipline or repeating unverified claims.
+ const reviewedRole=projectEvidence[p.title]?.[1];
  const facts=[
   ["Discipline",p.type],
+  ["My role",reviewedRole],
   ["Context",company?.name||"Independent"],
   ["Audience / scenario",p.audience],
   ["Key constraints",p.constraints]
