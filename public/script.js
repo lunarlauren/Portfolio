@@ -107,6 +107,19 @@ function routeWithMotion(){
    caseOpener=null;
   });
  }
+ // A routed case study is removed from the accessibility tree on exit.
+ // For other destinations, move focus to the visible section so keyboard
+ // and screen-reader users aren't left focused inside the hidden view.
+ if(leavingProject&&nextHash!=="work"&&nextHash!=="playground"){
+  requestAnimationFrame(()=>{
+   const id=nextHash.split("/")[0];
+   const destination=document.getElementById(id)||main;
+   if(!main.hidden&&destination){
+    if(!destination.hasAttribute("tabindex"))destination.setAttribute("tabindex","-1");
+    destination.focus({preventScroll:true});
+   }
+  });
+ }
  previousHash=nextHash;
 }
 document.addEventListener("click",event=>{
