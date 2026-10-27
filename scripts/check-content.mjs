@@ -152,6 +152,11 @@ assert.match(caseStudy, /<nav class="case-section-links" aria-label="On this cas
 // accessible name truthful when no approved images have been supplied.
 assert.match(caseStudy, /const galleryLabel=gallery\.length&&gallery\.every\(Boolean\)/, 'Gallery label must reflect whether actual images are present');
 assert.match(caseStudy, /Visual briefs and image placeholders/, 'Placeholder-only galleries must not claim to be image galleries');
+// When approved images arrive gradually, do not discard still-unfilled
+// editorial brief slots or announce the mixed gallery as images-only.
+assert.match(caseStudy, /const galleryCount=Math\.max\(gallery\.length,briefs\.length\)/, 'Gallery must retain unmatched visual briefs');
+assert.match(caseStudy, /Array\.from\(\{length:galleryCount\}/, 'Gallery must render all image and brief slots');
+assert.match(caseStudy, /briefs\.length<=gallery\.length\?"Project image gallery"/, 'An incomplete gallery must not be labeled images-only');
 
 // Guard the component load order and the lighter sidebar hierarchy without
 // claiming that source checks prove actual text contrast or browser reflow.
