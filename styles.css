@@ -420,84 +420,91 @@ footer a {
   text-decoration:none
 }
 
+/* Motion and responsive behavior */
 @keyframes rise {
   from {
-  opacity:0;
-  transform:translateY(16px)
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-to {
-  opacity:1;
-  transform:translateY(0)}
-}
-
-@media(max-width:760px) {
+@media (max-width: 760px) {
   .site-header {
-  align-items:start
-}
+    align-items: start;
+  }
 
-.site-header nav {
-  justify-content:flex-end;
-  gap:12px 18px
-}
-
-.hero {
-  padding-block:70px
-}
-
-.hero h1 {
-  font-size:clamp(52px,12vw,90px)
-}
-
-.section-head,
-.about-bottom {
-  display:block
-}
-
-.section-head>p {
-  margin-top:20px
-}
-
-.company-grid,
-.projects-grid,
-.play-grid {
-  grid-template-columns:1fr
-}
-
-.company-card.featured {
-  grid-column:auto
-}
-
-.company-card,
-.company-card.featured {
-  min-height:300px
-}
-
-.about-bottom .text-link {
-  display:inline-block;
-  margin-top:22px
-}
-
-.project-visual {
-  height:260px}
-}
-
-@media(max-width:400px) {
   .site-header nav {
-  font-size:12px
+    justify-content: flex-end;
+    gap: 12px 18px;
+  }
+
+  .hero {
+    padding-block: 70px;
+  }
+
+  .hero h1 {
+    font-size: clamp(52px, 12vw, 90px);
+  }
+
+  .section-head,
+  .about-bottom {
+    display: block;
+  }
+
+  .section-head > p {
+    margin-top: 20px;
+  }
+
+  .company-grid,
+  .projects-grid,
+  .play-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .company-card.featured {
+    grid-column: auto;
+  }
+
+  .company-card,
+  .company-card.featured {
+    min-height: 300px;
+  }
+
+  .about-bottom .text-link {
+    display: inline-block;
+    margin-top: 22px;
+  }
+
+  .project-visual {
+    height: 260px;
+  }
 }
 
-.hero h1 {
-  font-size:48px
+@media (max-width: 400px) {
+  .site-header nav {
+    font-size: 12px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .round-link {
+    width: 50px;
+    height: 50px;
+  }
 }
 
-.round-link {
-  width:50px;
-  height:50px}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-  animation-duration:.01ms!important;
-  transition-duration:.01ms!important;
-  scroll-behavior:auto!important}}
