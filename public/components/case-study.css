@@ -96,3 +96,13 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  border-bottom:1px solid var(--line);
 }
 .case-view .case-prose h2[id]{scroll-margin-top:154px}
+
+/* Sticky index offsets account for the responsive site header. */
+@media(min-width:421px) and (max-width:650px){
+ .case-view .case-section-links{top:64px;padding-block:8px}
+ .case-view .case-prose h2[id]{scroll-margin-top:142px}
+}
+@media(max-width:420px){
+ .case-view .case-section-links{top:110px;padding-block:8px}
+ .case-view .case-prose h2[id]{scroll-margin-top:188px}
+}
