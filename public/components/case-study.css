@@ -315,7 +315,7 @@ html[data-theme="dark"] .case-view{
   background:var(--case-reading-bg);
   border-bottom:1px solid var(--case-fact-border);
  }
- .case-view .case-section-links button{font-size:0.75rem;padding:9px 12px;min-height:44px}
+ .case-view .case-section-links button{font-size:0.75rem;padding:9px 12px}
  .case-view .case-prose h2[id]{scroll-margin-top:140px}
 }
 @media(max-width:420px){
