@@ -30,7 +30,6 @@
 .company-grid>.company-card {height:100%}
 
 body {background:var(--paper)}
-.hero-description,.case-intro {color:var(--muted)}
 .status-dot {background:#377b91}
 .eyebrow-divider {color:#8da6b5}
 .hero h1 em,.about h2 em,.section-head h2 em {color:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue))}
