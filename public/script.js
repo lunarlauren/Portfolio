@@ -83,7 +83,9 @@ let caseOpener=null;
 let caseOpenerScroll=0;
 document.addEventListener("click",event=>{
  const link=event.target.closest('a[href^="/case-studies/"]');
- if(!link||!main.contains(link))return;
+ // Only remember an opener for same-tab navigation. Modified clicks open
+ // another browsing context and must not overwrite this page's return target.
+ if(!link||!main.contains(link)||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||link.target==="_blank"||link.hasAttribute("download"))return;
  caseOpener=link;
  caseOpenerScroll=window.scrollY;
 });
