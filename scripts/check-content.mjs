@@ -262,7 +262,7 @@ assert.match(caseStudy, /\(processNotes\?'04':'03'\)/, 'Outcome chapter number m
 // Measure their shared ink against each client accent; geometry and theme
 // behavior remain unchanged. This checks tokens, not computed browser styles.
 const tokenHex = (source, name) => {
- const match = source.match(new RegExp('--' + name + ':\\\\s*(#[0-9a-fA-F]{6})\\\\s*;'));
+ const match = source.match(new RegExp('--' + name + ':\\s*(#[0-9a-fA-F]{6})\\s*;'));
  assert.ok(match, 'Missing hex color token: ' + name);
  return match[1];
 };
