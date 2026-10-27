@@ -15,8 +15,24 @@ const caseStudy = read('../public/components/case-study.js');
 const projectContent = read('../public/components/project-content.js');
 const caseCss = read('../public/components/case-study.css');
 const navigationCss = read('../public/components/navigation.css');
+const heroPolishCss = read('../public/components/hero-polish.css');
 const workCss = read('../public/components/work-cards.css');
 const stationeryCss = read('../public/components/stationery.css');
+// Component ownership and stylesheet order are part of the visual contract.
+const stylesheetOrder = ['styles.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'case-study.css'];
+let previousPosition = -1;
+for (const name of stylesheetOrder) {
+ const match = html.indexOf('/' + (name === 'styles.css' ? name : 'components/' + name));
+ assert.ok(match > previousPosition, name + ' must load after the preceding stylesheet');
+ previousPosition = match;
+}
+assert.doesNotMatch(css, /\/\* Problem-solving hero: shared layout in both themes/, 'Extracted hero polish must not return to legacy CSS');
+assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must remain in its component');
+assert.doesNotMatch(css, /\/\* Case-study handoff: quick factual overview/, 'Case evidence must not return to legacy CSS');
+assert.match(caseCss, /\.case-evidence-item\{/, 'Case evidence must remain in case-study component');
+assert.match(navigationCss, /footer\.wrap\{/, 'Footer chrome must remain with navigation');
+assert.doesNotMatch(css, /footer\.wrap\{/, 'Footer chrome must not be duplicated in legacy CSS');
+
 new vm.Script(caseStudy, { filename: 'public/components/case-study.js' });
 new vm.Script(projectContent, { filename: 'public/components/project-content.js' });
 const context = { window: {} };
