@@ -222,3 +222,11 @@ html[data-theme="dark"] .work .featured-project.client-file{
 .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
  color:var(--archive-preview-text);
 }
+
+/* A facts block followed by the design approach is one section break,
+   not two stacked horizontal rules. Keep the facts' lower rule. */
+.work .client-file .project-card-facts + .project-card-process{
+ border-top:0;
+ margin-top:0;
+ padding-top:12px;
+}
