@@ -156,6 +156,11 @@ assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="lo
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
 assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
 
+// Pass 6: production stylesheet ownership and duplicate-rule guardrails.
+assert.doesNotMatch(caseCss, /html\[data-theme="dark"\] \.case-evidence-item\{/, 'Evidence theme colors should use shared tokens, not duplicate dark rules');
+assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence geometry must remain in the scoped component');
+assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*padding:var\(--space-4/, 'Evidence spacing must use the shared scale');
+
 // Pass 5: keyboard focus, touch targets, and reduced-motion contracts.
 assert.match(navigationCss, /:focus-visible/, 'Header navigation must expose keyboard focus');
 assert.match(navigationCss, /@media\(forced-colors:active\)/, 'Focus must remain visible in forced-colors mode');
