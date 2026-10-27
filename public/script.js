@@ -41,7 +41,17 @@ function initInventory(){
 }
 initInventory();
 
-const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const safeHash=()=>{try{return decodeURIComponent(location.hash.slice(1))}catch{return "work"}};const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">':'<span class="visual-label visual-brief"><span class="brief-kicker">IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';// Use the first existing process sentence for a short, evidence-safe preview.
+const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const safeHash=()=>{try{return decodeURIComponent(location.hash.slice(1))}catch{return "work"}};
+const casePath=(group,index)=>"/case-studies/"+slug(group)+"/"+slug(String(index))+"/";
+const caseRoute=()=>{
+ const match=location.pathname.match(/^\/case-studies\/([^/]+)\/([0-9]+)\/?$/);
+ if(match){try{return "project/"+decodeURIComponent(match[1])+"/"+match[2]}catch{return "work"}}
+ return safeHash();
+};
+const navigateCase=(url)=>{
+ history.pushState({caseStudy:true},"",url);
+ routeWithMotion();
+};const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">':'<span class="visual-label visual-brief"><span class="brief-kicker">IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';// Use the first existing process sentence for a short, evidence-safe preview.
 // Never generate or infer research findings, decisions, or results in the UI.
 const processTeaser=p=>{
  const text=String(p.process||"").trim();
@@ -51,7 +61,7 @@ const processTeaser=p=>{
 // opening a case study. Only render reviewed labels, never inferred metrics.
 const archiveFactsMarkup=evidence=>evidence?
  '<dl class="project-card-facts"><div><dt>My contribution</dt><dd>'+esc(evidence[1])+'</dd></div><div><dt>Delivery</dt><dd>'+esc(evidence[2])+'</dd></div></dl>':"";
-const projectCard=(p,i,group,evidence)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="#project/'+slug(group)+'/'+slug(String(i))+'" aria-label="View '+esc(p.title)+' case study">'+(group==="playground"?visual(p):'<h3 class="archive-project-title">'+esc(p.title)+'</h3>'+visual(p))+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div>'+(group==="playground"?'<h3>'+esc(p.title)+'</h3>':"")+'<p>'+esc(p.summary)+'</p>'+archiveFactsMarkup(evidence)+(processTeaser(p)?'<p class="project-card-process"><strong>Design approach</strong> '+esc(processTeaser(p))+'</p>':"")+'<span class="project-card-cta">Read the case study <span aria-hidden="true">→</span></span></a></article>';// Single source of truth for project discovery. No company gate or repeated
+const projectCard=(p,i,group,evidence)=>'<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="'+casePath(group,i)+'" aria-label="View '+esc(p.title)+' case study">'+(group==="playground"?visual(p):'<h3 class="archive-project-title">'+esc(p.title)+'</h3>'+visual(p))+'<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div>'+(group==="playground"?'<h3>'+esc(p.title)+'</h3>':"")+'<p>'+esc(p.summary)+'</p>'+archiveFactsMarkup(evidence)+(processTeaser(p)?'<p class="project-card-process"><strong>Design approach</strong> '+esc(processTeaser(p))+'</p>':"")+'<span class="project-card-cta">Read the case study <span aria-hidden="true">→</span></span></a></article>';// Single source of truth for project discovery. No company gate or repeated
 // featured/company lists: each professional project appears exactly once.
 // Shared, editorially verified role/delivery labels power both the archive
 // cards and the case-study overview. Keep them in sync with content.js.
@@ -139,7 +149,7 @@ const caseFactsMarkup=(p,company)=>{
   '<div class="case-fact"><dt class="case-fact-label">'+esc(label)+'</dt><dd class="case-fact-value">'+esc(value)+'</dd></div>'
  ).join("")+'</dl>';
 };
-const main=$("#main"),caseView=document.createElement("section");caseView.className="case-view wrap";caseView.hidden=true;caseView.id="case-study";caseView.setAttribute("role","main");caseView.setAttribute("aria-labelledby","case-title");caseView.tabIndex=-1;main.after(caseView);function route(){const hash=safeHash();if(!hash.startsWith("project/")){$(".skip-link").href="#main";main.hidden=false;caseView.hidden=true;if(hash.startsWith("company/")){location.replace("#work");return}document.title="Lauren Leven — Visual & Product Designer";return}const parts=hash.split("/"),group=parts[1],i=Number(parts[2]);const company=data.companies.find(c=>c.id===group);const projects=company?company.projects:group==="playground"?data.playground:null;const p=projects?.[i];if(!p||!Number.isInteger(i)||i<0){location.hash="work";return}main.hidden=true;caseView.hidden=false;$(".skip-link").href="#case-study";const returnHash=company?"#work":"#playground";const details=p.details||p.summary;const nextProject=projects.length>1?projects[(i+1)%projects.length]:null;const nextIndex=projects.length>1?(i+1)%projects.length:0;const nextHref="#project/"+slug(group)+"/"+slug(String(nextIndex));const gallery=Array.isArray(p.gallery)?p.gallery:[];const briefs=Array.isArray(p.galleryBriefs)?p.galleryBriefs:[];const galleryItems=gallery.length?gallery.map((img,j)=>visual({title:p.title,image:img,imageBrief:briefs[j]})).join(""):(briefs.length?briefs.map(brief=>visual({title:p.title,imageBrief:brief})).join(""):visual({title:p.title,imageBrief:p.imageBrief}));caseView.innerHTML='<a class="case-back" href="'+returnHash+'">← Back to '+(company?"work":"playground")+'</a><header class="case-head"><p class="eyebrow">'+esc(company?.name||"PERSONAL WORK")+' / '+esc(p.type)+'</p><h1 id="case-title">'+esc(p.title)+'</h1><p class="case-intro">'+esc(p.summary)+'</p></header>'+evidenceMarkup(p)+'<div class="case-hero-visual">'+(p.image?'<img src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title)+'">':'<div class="hero-image-brief"><span class="brief-kicker">HERO IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved hero visual.")+'</span></div>')+'</div>'+highlightMarkup(p)+'<nav class="case-section-links" aria-label="On this case study"><span class="case-section-context" aria-hidden="true">'+esc(p.title)+'</span><button type="button" data-case-jump="case-challenge">Challenge &amp; role</button>'+(p.process?'<button type="button" data-case-jump="case-process">Process &amp; rationale</button>':"")+(p.outcome?'<button type="button" data-case-jump="case-outcome">Deliverables &amp; learning</button>':"")+'</nav><div class="case-body">'+caseFactsMarkup(p,company)+'<div class="case-prose"><h2 id="case-challenge">01 / The challenge & my role</h2><p>'+esc(details)+'</p>'+(p.process?'<h2 id="case-process">02 / Process & design rationale</h2><p>'+esc(p.process)+'</p>':'')+processNotesMarkup(p)+(p.outcome?'<h2 id="case-outcome">03 / Deliverables & learning</h2><p>'+esc(p.outcome)+'</p>':'')+'</div></div><div class="case-gallery" role="group" aria-label="Project image gallery">'+galleryItems+'</div><nav class="case-next-nav" aria-label="Case study navigation"><a class="case-next" href="'+returnHash+'">← Explore more work</a>'+(nextProject?'<a class="case-next" href="'+nextHref+'">Next: '+esc(nextProject.title)+' →</a>':'')+'</nav>';// Section navigation must not change the URL hash: hashes are reserved for routing.
+const main=$("#main"),caseView=document.createElement("section");caseView.className="case-view wrap";caseView.hidden=true;caseView.id="case-study";caseView.setAttribute("role","main");caseView.setAttribute("aria-labelledby","case-title");caseView.tabIndex=-1;main.after(caseView);function route(){const hash=caseRoute();if(!hash.startsWith("project/")){$(".skip-link").href="#main";main.hidden=false;caseView.hidden=true;if(hash.startsWith("company/")){location.replace("#work");return}document.title="Lauren Leven — Visual & Product Designer";return}const parts=hash.split("/"),group=parts[1],i=Number(parts[2]);const company=data.companies.find(c=>c.id===group);const projects=company?company.projects:group==="playground"?data.playground:null;const p=projects?.[i];if(!p||!Number.isInteger(i)||i<0){history.replaceState(null,"","/#work");route();return}main.hidden=true;caseView.hidden=false;$(".skip-link").href="#case-study";const returnHash=company?"#work":"#playground";const details=p.details||p.summary;const nextProject=projects.length>1?projects[(i+1)%projects.length]:null;const nextIndex=projects.length>1?(i+1)%projects.length:0;const nextHref=casePath(group,nextIndex);const gallery=Array.isArray(p.gallery)?p.gallery:[];const briefs=Array.isArray(p.galleryBriefs)?p.galleryBriefs:[];const galleryItems=gallery.length?gallery.map((img,j)=>visual({title:p.title,image:img,imageBrief:briefs[j]})).join(""):(briefs.length?briefs.map(brief=>visual({title:p.title,imageBrief:brief})).join(""):visual({title:p.title,imageBrief:p.imageBrief}));caseView.innerHTML='<a class="case-back" href="'+returnHash+'">← Back to '+(company?"work":"playground")+'</a><header class="case-head"><p class="eyebrow">'+esc(company?.name||"PERSONAL WORK")+' / '+esc(p.type)+'</p><h1 id="case-title">'+esc(p.title)+'</h1><p class="case-intro">'+esc(p.summary)+'</p></header>'+evidenceMarkup(p)+'<div class="case-hero-visual">'+(p.image?'<img src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title)+'">':'<div class="hero-image-brief"><span class="brief-kicker">HERO IMAGE TO DESIGN</span><span>'+esc(p.imageBrief||"Add an approved hero visual.")+'</span></div>')+'</div>'+highlightMarkup(p)+'<nav class="case-section-links" aria-label="On this case study"><span class="case-section-context" aria-hidden="true">'+esc(p.title)+'</span><button type="button" data-case-jump="case-challenge">Challenge &amp; role</button>'+(p.process?'<button type="button" data-case-jump="case-process">Process &amp; rationale</button>':"")+(p.outcome?'<button type="button" data-case-jump="case-outcome">Deliverables &amp; learning</button>':"")+'</nav><div class="case-body">'+caseFactsMarkup(p,company)+'<div class="case-prose"><h2 id="case-challenge">01 / The challenge & my role</h2><p>'+esc(details)+'</p>'+(p.process?'<h2 id="case-process">02 / Process & design rationale</h2><p>'+esc(p.process)+'</p>':'')+processNotesMarkup(p)+(p.outcome?'<h2 id="case-outcome">03 / Deliverables & learning</h2><p>'+esc(p.outcome)+'</p>':'')+'</div></div><div class="case-gallery" role="group" aria-label="Project image gallery">'+galleryItems+'</div><nav class="case-next-nav" aria-label="Case study navigation"><a class="case-next" href="'+returnHash+'">← Explore more work</a>'+(nextProject?'<a class="case-next" href="'+nextHref+'">Next: '+esc(nextProject.title)+' →</a>':'')+'</nav>';// Section navigation must not change the URL hash: hashes are reserved for routing.
 const caseJumpButtons=[...caseView.querySelectorAll("[data-case-jump]")];
 const caseJumpHeadings=caseJumpButtons.map(button=>document.getElementById(button.dataset.caseJump));
 function setCurrentCaseSection(id){
@@ -179,15 +189,15 @@ document.title=p.title+" — Lauren Leven";window.scrollTo({top:0,behavior:"auto
 let caseOpener=null;
 let caseOpenerScroll=0;
 document.addEventListener("click",event=>{
- const link=event.target.closest('a[href^="#project/"]');
+ const link=event.target.closest('a[href^="/case-studies/"]');
  if(!link||!main.contains(link))return;
  caseOpener=link;
  caseOpenerScroll=window.scrollY;
 });
 // Keep focus and scroll position predictable during hash navigation.
-let previousHash=safeHash();
+let previousHash=caseRoute();
 function routeWithMotion(){
- const nextHash=safeHash();
+ const nextHash=caseRoute();
  const leavingProject=previousHash.startsWith("project/")&&!nextHash.startsWith("project/");
  route();
  // Restore focus only for explicit return-to-gallery navigation.
@@ -206,6 +216,20 @@ function routeWithMotion(){
  }
  previousHash=nextHash;
 }
+document.addEventListener("click",event=>{
+ const link=event.target.closest('a[href^="/case-studies/"]');
+ if(!link||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+ event.preventDefault();
+ navigateCase(link.getAttribute("href"));
+});
+document.addEventListener("click",event=>{
+ const link=event.target.closest('a[href="#work"],a[href="#playground"]');
+ if(!link||!location.pathname.startsWith("/case-studies/")||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+ event.preventDefault();
+ history.pushState(null,"","/"+link.getAttribute("href"));
+ routeWithMotion();
+});
+window.addEventListener("popstate",routeWithMotion);
 window.addEventListener("hashchange",routeWithMotion);route();
 // Navigation handoff: keep the header's current-section indicator synchronized
 // with both hash routes and ordinary scrolling, without rewriting browser history.
@@ -217,7 +241,7 @@ function initSectionNavigation(){
    .filter(entry=>entry.section);
  if(!sections.length)return;
  function updateCurrent(){
-  const hash=safeHash();
+  const hash=caseRoute();
   let active=null;
   if(hash.startsWith("project/")){
    active="work";
