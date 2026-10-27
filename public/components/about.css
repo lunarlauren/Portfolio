@@ -45,7 +45,6 @@
     width: clamp(118px, 29%, 172px);
     margin: 0 0 12px 20px;
   }
-  .about .about-portrait figcaption { font-size: 0.6875rem; }
   .about .creative-inventory { margin-top: 10px; }
 }
 
@@ -63,14 +62,23 @@
    remains expressive; supporting text and inventory labels stay quieter. */
 .about .about-copy p{
  max-width:59ch;
+ margin:0 0 1.25em;
  font-size:var(--type-body,1rem);
  line-height:1.65;
  text-wrap:pretty;
 }
-.about .about-intro p{margin-bottom:0}
 .about .inventory-heading>p{font-size:0.8125rem;line-height:1.5}
 .about .about-portrait figcaption{line-height:1.45}
 @media(max-width:600px){
- .about .about-copy p{line-height:1.65}
  .about .about-portrait{margin-bottom:16px}
+}
+
+/* These desktop type rules used to live in styles.css. Keep the compact
+   viewport override last so it can actually win the cascade at laptop heights. */
+@media(min-width:1024px){
+ .about h2{line-height:1.02;margin-top:8px}
+ .about .about-copy p{margin-bottom:.9em}
+}
+@media(min-width:1024px) and (max-height:780px){
+ .about h2{font-size:clamp(2.5rem,4vw,3.5rem)}
 }
