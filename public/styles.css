@@ -1303,7 +1303,7 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
 /* Paper continuity: header and footer belong to the same page surface.
    Keep geometry identical across themes; only surface tokens change. */
 :root{--site-chrome-bg:var(--notebook-paper,#fffdf8);--site-chrome-edge:var(--line)}
-html[data-theme="dark"]{--site-chrome-bg:var(--notebook-paper,var(--palette-navy));--site-chrome-edge:var(--line)}
+html[data-theme="dark"]{--site-chrome-bg:var(--paper);--site-chrome-edge:var(--line)}
 .site-header,
 html[data-theme="dark"] .site-header{
  background:var(--site-chrome-bg);
@@ -1324,4 +1324,15 @@ footer.wrap a{color:var(--ink);font-weight:600;text-decoration:none;text-underli
 footer.wrap a:hover,footer.wrap a:focus-visible{text-decoration:underline}
 @media(max-width:600px){
  footer.wrap{min-height:76px;padding:20px max(24px,env(safe-area-inset-right)) 24px max(24px,env(safe-area-inset-left));font-size:13px}
+}
+
+/* Dark chrome must follow the dark paper, not the light notebook token.
+   Keep navigation legible when theme is switched while scrolled. */
+html[data-theme="dark"] .site-header .header-actions nav a,
+html[data-theme="dark"] .site-header .header-contact{
+ color:var(--ink);
+}
+html[data-theme="dark"] .site-header .header-actions nav a:hover,
+html[data-theme="dark"] .site-header .header-contact:hover{
+ color:var(--brand-pink);
 }
