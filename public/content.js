@@ -42,11 +42,13 @@ window.PORTFOLIO = {
           evidence:"Confirmed: I contributed UX/UI design to Hoylu's shipped Mobile Insights experience. Interview findings, usability-test results, specific iteration rounds, implementation handoff details, collaboration records, and usage metrics have not been provided for this case study; none are presented as verified evidence.",
           tradeoffs:"The design tension was between a fast status check and the context needed to understand an insight. I explored what to prioritize on a small screen and where a person could go for more detail. This explains my design reasoning; it does not claim that a particular variant was tested or measured.",
           outcome:"Shipped UX/UI contribution to Hoylu's mobile insights experience, focused on legible information hierarchy and useful next steps on smaller screens. This case study describes my design contribution and delivery status; adoption or performance metrics have not been verified for publication.",
-          imageBrief:"Hero composition: three mobile screens displaying a construction project dashboard, an insight detail, and a status update; include realistic charts and clear labels.",
+          // These are proposed portfolio illustrations, not source artifacts from
+          // the shipped product. Do not present them as screenshots or tested flows.
+          imageBrief:"ILLUSTRATIVE / Proposed hero mockup (not a screenshot of shipped screens): three mobile views explaining an insight overview, supporting detail, and a status update. Use fictional project data.",
           galleryBriefs:[
-            "Mobile user-flow diagram showing how a site lead moves from an alert to the affected planning item.",
-            "Side-by-side early wireframe and refined high-fidelity screen with annotations on hierarchy and spacing.",
-            "Close-up component sheet: insight cards, status chips, filters, and accessible interaction states."
+            "ILLUSTRATIVE / Proposed user-flow diagram: a project manager moves from a status insight to supporting project detail. Not a documented shipped flow.",
+            "ILLUSTRATIVE / Wireframe-to-layout comparison explaining information hierarchy; not a record of verified iteration rounds.",
+            "ILLUSTRATIVE / Component study of insight cards, status chips, filters, and touch states; not verified production UI."
           ]
         },
         {
