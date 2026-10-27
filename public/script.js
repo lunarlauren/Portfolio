@@ -42,11 +42,24 @@ function initInventory(){
 initInventory();
 
 const data=window.PORTFOLIO;const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));const slug=s=>encodeURIComponent(s);const safeHash=()=>{try{return decodeURIComponent(location.hash.slice(1))}catch{return "work"}};
-const casePath=(group,index)=>"/case-studies/"+slug(group)+"/"+slug(String(index))+"/";
+// Stable, human-readable case-study paths derived from project titles.
+const projectSlug=title=>String(title).toLowerCase().normalize("NFKD")
+ .replace(/[\u0300-\u036f]/g,"").replace(/&/g," and ")
+ .replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const casePath=(group,index)=>{
+ const company=data.companies.find(c=>c.id===group);
+ const project=(company?.projects||(group==="playground"?data.playground:[]))?.[index];
+ return project?"/case-studies/"+slug(group)+"/"+projectSlug(project.title)+"/":"/#work";
+};
 const caseRoute=()=>{
- const match=location.pathname.match(/^\/case-studies\/([^/]+)\/([0-9]+)\/?$/);
- if(match){try{return "project/"+decodeURIComponent(match[1])+"/"+match[2]}catch{return "work"}}
- return safeHash();
+ const match=location.pathname.match(/^\/case-studies\/([^/]+)\/([^/]+)\/?$/);
+ if(!match)return safeHash();
+ let group;
+ try{group=decodeURIComponent(match[1])}catch{return "work"}
+ const company=data.companies.find(c=>c.id===group);
+ const projects=company?.projects||(group==="playground"?data.playground:null);
+ const index=projects?.findIndex(p=>projectSlug(p.title)===match[2])??-1;
+ return index>=0?"project/"+group+"/"+index:"work";
 };
 const navigateCase=(url)=>{
  history.pushState({caseStudy:true},"",url);
