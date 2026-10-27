@@ -177,7 +177,7 @@ html,body{max-width:100%;overflow-x:clip}
 @media(forced-colors:active){.company-card,.project-card-link,.primary-link{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
 
 .site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
-@media(max-width:760px){.site-header nav{flex-wrap:wrap}.company-name,.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
+@media(max-width:760px){.company-name,.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot,.company-description{opacity:1;text-shadow:none}.project-visual:not(:has(img)){border-style:solid}}
 
 .skip-link{position:fixed;top:0;left:12px;transform:translateY(-150%);z-index:9999;background:#fff;color:#203344;border:2px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));border-radius:8px;text-decoration:none}
@@ -200,7 +200,7 @@ body{font-size:var(--type-body);line-height:1.6}
 .site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.case-facts,.case-fact-label,.brief-kicker,.project-visual .visual-label,.project-visual:not(:has(img)) .visual-label{font-size:var(--type-xs);line-height:1.5}
 .project-card p,.company-description,.case-back,footer{font-size:var(--type-sm);line-height:1.6}
 .hero-description,.about-bottom p,.case-prose p{line-height:1.65}
-@media(max-width:760px){.site-header nav{font-size:0.8125rem}.hero-description,.about-bottom p,.case-prose p{font-size:1rem}.project-card p{font-size:0.875rem}}
+@media(max-width:760px){.hero-description,.about-bottom p,.case-prose p{font-size:1rem}.project-card p{font-size:0.875rem}}
 
 .about-copy{min-width:0}
 .about-copy p{line-height:1.7}
@@ -675,17 +675,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 
 
-/* Narrow tablet header fallback (phone widths are owned by navigation.css).
-   Sticky case-study offsets live in components/case-study.css. */
-@media(min-width:601px) and (max-width:650px){
- .site-header{display:flex;flex-wrap:nowrap;gap:8px;min-height:56px;padding:8px 10px}
- .site-header .header-actions{display:flex;flex:1 1 auto;min-width:0;gap:6px;justify-content:flex-end}
- .site-header .header-actions nav{display:flex;width:auto;flex:0 1 auto;gap:clamp(6px,2vw,12px);justify-content:flex-end}
- .site-header .header-actions nav a{font-size:clamp(0.6875rem,2.8vw,0.8125rem);padding:0;white-space:nowrap}
- .site-header .header-contact{padding:0;font-size:clamp(0.6875rem,2.8vw,0.8125rem)}
- .site-header .theme-toggle{width:44px;min-width:44px;height:44px;min-height:44px;flex:0 0 44px}
- .site-header .header-actions nav a[aria-current="location"]{padding:0}
-}
 /* On phones, keep the featured illustration caption short and uncluttered. */
 @media(max-width:600px){
  .hero-feature .feature-bottom{display:block;max-width:100%;width:100%;padding-right:0}
