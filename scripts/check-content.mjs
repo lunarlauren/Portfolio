@@ -169,14 +169,16 @@ assert.match(exampleNotes, /data-note-kind="evidence"/, 'Evidence boundaries nee
 assert.match(exampleNotes, /data-note-kind="rationale"/, 'Tradeoffs need their own semantic presentation hook');
 assert.ok(exampleNotes.indexOf('Documented scope only') < exampleNotes.indexOf('Design reasoning only'), 'Evidence must precede rationale');
 assert.equal(renderProcessNotes({}), '', 'Projects without evidence or rationale should not show an empty chapter');
+assert.match(renderProcessNotes({evidence:'Scope only'},2), /<h2 id="case-evidence-notes">02 \/ Evidence &amp; tradeoffs<\/h2>/, 'Evidence must be chapter 02 when process is omitted');
+assert.match(renderProcessNotes({evidence:'Scope only'},3), /<h2 id="case-evidence-notes">03 \/ Evidence &amp; tradeoffs<\/h2>/, 'Evidence remains chapter 03 when process exists');
 assert.match(caseCss, /\.case-view \.case-process-note\[data-note-kind="evidence"\]/, 'Evidence styling must remain in the case-study component');
 assert.match(caseCss, /\.case-view \.case-process-note\[data-note-kind="rationale"\]/, 'Rationale styling must remain in the case-study component');
 // A separate evidence chapter makes the research/assumption boundary discoverable
 // without upgrading design rationale into documented testing or outcomes.
-assert.match(projectContent, /<h2 id="case-evidence-notes">03 \/ Evidence &amp; tradeoffs<\/h2>/, 'Evidence notes need a visible chapter heading');
+assert.match(projectContent, /<h2 id="case-evidence-notes">'\+String\(chapterNumber\)\.padStart\(2,"0"\)/, 'Evidence chapter heading must use the actual chapter number');
 assert.match(caseStudy, /data-case-jump="case-evidence-notes"/, 'Chapter navigation must link to the evidence boundary');
-assert.match(caseStudy, /const processNotes=processNotesMarkup\(p\)/, 'Evidence chapter must render from existing documented notes');
-assert.match(caseStudy, /\(processNotes\?'04':'03'\)/, 'Outcome chapter number must follow optional evidence chapter');
+assert.match(caseStudy, /processNotes=processNotesMarkup\(p,hasProcess\?3:2\)/, 'Evidence chapter must follow the optional process chapter');
+assert.match(caseStudy, /outcomeChapter=2\+Number\(hasProcess\)\+Number\(Boolean\(processNotes\)\)/, 'Outcome chapter number must follow the sections actually rendered');
 
 // Pass 3: archive geometry is shared; only surface/focus tokens change by theme.
 assert.match(workCss, /--archive-facts-edge:var\(--line\)/, 'Light archive dividers need a shared token');
