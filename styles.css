@@ -1,10 +1,10 @@
 /* Portfolio styles
  * Sections: foundation, navigation, hero, work, projects, about, responsive.
- * Keep visual values unchanged during maintenance-only formatting passes.
+ * Shared design tokens keep colors, typography, and surfaces consistent.
  */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-  
+
 :root {
   --paper:#f5f3ee;
   --ink:#242c36;
@@ -14,7 +14,17 @@
   --clay:#c58b76;
   --lilac:#d5c9e8;
   --focus:#136dcd;
-  font-family:'DM Sans',system-ui,sans-serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --font-display:'Space Grotesk',sans-serif;
+  --surface-card:#e3e4de;
+  --surface-collection:#e9e8e1;
+  --surface-preview-a:#c8ddd6;
+  --surface-preview-b:#e5d2c6;
+  --surface-inverse:#fff;
+  --shadow-card:0 18px 30px #242c361a;
+  --content-width:1320px;
+  --page-gutter:clamp(20px,5vw,72px);
+  font-family:var(--font-body);
   color:var(--ink);
   background:var(--paper);
   font-synthesis:none
@@ -63,15 +73,15 @@ button:focus-visible,a:focus-visible {
 }
 
 .wrap {
-  max-width:1320px;
+  max-width:var(--content-width);
   margin:auto;
-  padding-inline:clamp(20px,5vw,72px)
+  padding-inline:var(--page-gutter)
 }
 
 .site-header {
-  max-width:1320px;
+  max-width:var(--content-width);
   margin:auto;
-  padding:24px clamp(20px,5vw,72px);
+  padding:24px var(--page-gutter);
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -80,7 +90,7 @@ button:focus-visible,a:focus-visible {
 
 .wordmark {
   text-decoration:none;
-  font:700 32px 'Space Grotesk',sans-serif;
+  font:700 32px var(--font-display);
   letter-spacing:-.1em
 }
 
@@ -128,7 +138,7 @@ button:focus-visible,a:focus-visible {
 }
 
 .hero h1 {
-  font:600 clamp(54px,9.2vw,132px)/.99 'Space Grotesk',sans-serif;
+  font:600 clamp(54px,9.2vw,132px)/.99 var(--font-display);
   letter-spacing:-.075em;
   max-width:1120px;
   margin:30px 0 44px
@@ -185,7 +195,7 @@ section.work,section.playground,section.about {
 
 .section-head h2,
 .about h2 {
-  font:600 clamp(35px,5vw,66px)/1.05 'Space Grotesk',sans-serif;
+  font:600 clamp(35px,5vw,66px)/1.05 var(--font-display);
   letter-spacing:-.055em;
   margin:14px 0 0
 }
@@ -210,7 +220,7 @@ section.work,section.playground,section.about {
   min-height:330px;
   border-radius:5px;
   padding:clamp(22px,3vw,40px);
-  background:#e3e4de;
+  background:var(--surface-card);
   color:var(--ink);
   display:flex;
   flex-direction:column;
@@ -223,13 +233,13 @@ section.work,section.playground,section.about {
 .company-card.featured {
   grid-column:span 2;
   background:var(--accent);
-  color:white;
+  color:var(--surface-inverse);
   min-height:420px
 }
 
 .company-card:hover {
   transform:translateY(-5px);
-  box-shadow:0 18px 30px #242c361a
+  box-shadow:var(--shadow-card)
 }
 
 .company-card:focus-visible {
@@ -251,7 +261,7 @@ section.work,section.playground,section.about {
 }
 
 .company-name {
-  font:600 clamp(44px,6vw,88px)/1 'Space Grotesk';
+  font:600 clamp(44px,6vw,88px)/1 var(--font-display);
   letter-spacing:-.065em;
   margin-top:auto
 }
@@ -273,7 +283,7 @@ section.work,section.playground,section.about {
 .collection {
   margin-top:20px;
   padding:clamp(20px,4vw,48px);
-  background:#e9e8e1;
+  background:var(--surface-collection);
   scroll-margin-top:20px
 }
 
@@ -285,7 +295,7 @@ section.work,section.playground,section.about {
 }
 
 .collection-head h3 {
-  font:600 50px 'Space Grotesk';
+  font:600 50px var(--font-display);
   letter-spacing:-.05em;
   margin:10px 0
 }
@@ -326,11 +336,11 @@ section.work,section.playground,section.about {
 }
 
 .project-card:nth-child(3n+2) .project-visual {
-  background:#c8ddd6
+  background:var(--surface-preview-a)
 }
 
 .project-card:nth-child(3n+3) .project-visual {
-  background:#e5d2c6
+  background:var(--surface-preview-b)
 }
 
 .project-visual img {
@@ -345,7 +355,7 @@ section.work,section.playground,section.about {
 }
 
 .placeholder-mark {
-  font:500 90px 'Space Grotesk';
+  font:500 90px var(--font-display);
   opacity:.35
 }
 
@@ -357,7 +367,7 @@ section.work,section.playground,section.about {
 }
 
 .project-card h4 {
-  font:600 25px 'Space Grotesk';
+  font:600 25px var(--font-display);
   letter-spacing:-.04em;
   margin:8px 0
 }
@@ -368,10 +378,7 @@ section.work,section.playground,section.about {
   font-size:14px
 }
 
-.playground {
-  border-top:1px solid var(--line)
-}
-
+.playground,
 .about {
   border-top:1px solid var(--line)
 }
