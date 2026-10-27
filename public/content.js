@@ -4,7 +4,9 @@
    Images: set image to a file in public/images; gallery can contain image paths.
    imageBrief and galleryBriefs appear as descriptive placeholders until then.
    audience and constraints are editorial summaries of documented context;
-   explicitly label design scenarios that are not validated research personas. */
+   explicitly label design scenarios that are not validated research personas.
+   ILLUSTRATIVE briefs request new explanatory artwork, not documented output;
+   approved-screen requests for shipped products must use real approved assets. */
 window.PORTFOLIO = {
   email: "bertinoln@gmail.com",
   companies: [
@@ -62,11 +64,11 @@ window.PORTFOLIO = {
           evidence:"Documented contribution: visual design for Hoylu event signage, presentation materials, and digital campaigns, with layout considerations for 65-inch and 40-inch displays. The materials available for this case study do not establish formal audience research, tested variants, event lead counts, or campaign performance.",
           tradeoffs:"The visual-design tradeoff was distance versus detail. A booth graphic needed to communicate a recognizable product message at a glance; a presentation or digital asset could carry more context. I used scale, type hierarchy, and consistent branding to adapt the message rather than treating every format as the same canvas. This describes my design rationale, not a measured comparison of alternatives.",
           outcome:"Created visual assets for Hoylu's event and digital communication formats, adapting the product story to environmental signage, presentations, and campaign graphics. The deliverables are design contributions; audience response, lead generation, and marketing impact have not been quantified here.",
-          imageBrief:"Hero composition: realistic trade-show booth mockup featuring large Hoylu signage, a screen, and a clear product message; use approved branding.",
+          imageBrief:"ILLUSTRATIVE / Proposed trade-show booth mockup with Hoylu signage, a screen, and a clear product message. Use approved branding; not a photograph of the delivered booth.",
           galleryBriefs:[
-            "Wide environmental mockup showing booth walls, screen placements, and scale relative to visitors.",
-            "Flat campaign asset lineup: LinkedIn banner, presentation cover, email graphic, and printed collateral.",
-            "Close-up typography and layout details showing how the visual system scales from large-format signage to digital."
+            "ILLUSTRATIVE / Proposed environmental mockup showing booth walls, screen placements, and scale relative to visitors; not an as-built event photograph.",
+            "ILLUSTRATIVE / Proposed campaign asset lineup: LinkedIn banner, presentation cover, email graphic, and printed collateral. Not evidence that every format was produced.",
+            "ILLUSTRATIVE / Proposed typography and layout study showing how a visual system could scale from large-format signage to digital; not a documented comparison of delivered variants."
           ]
         },
         {
@@ -80,11 +82,11 @@ window.PORTFOLIO = {
           evidence:"Documented scope: a short-form, approximately 30-second Hoylu product storyboard and motion-design planning. The intended viewer and communication needs are design framing, not findings from a recorded audience study. Interview findings, formal testing, review rounds, final animation delivery, and audience metrics have not been supplied.",
           tradeoffs:"The design tension was clarity versus coverage: explaining enough of the software's connected workflow to be meaningful while keeping individual frames readable in a short runtime. The frame-by-frame hierarchy and pacing described here are storyboard rationale, not a claim that alternatives were tested or that a finished video improved comprehension.",
           outcome:"Delivered work documented here: storyboard and motion-design planning for a short product explainer. Completion or release of a final animation, production implementation, and measured audience outcomes have not been verified.",
-          imageBrief:"Hero composition: cinematic 16:9 storyboard keyframe with connected project nodes, interface panels, and motion paths in Hoylu's visual language.",
+          imageBrief:"ILLUSTRATIVE / Proposed 16:9 storyboard keyframe with connected project nodes, interface panels, and motion paths. Not an exported frame from the documented storyboard.",
           galleryBriefs:[
-            "Six-frame storyboard strip showing the progression of a 30-second product explainer.",
-            "Motion style frames: typography, shapes, transitions, and color hierarchy on a dark and light background.",
-            "Production timeline or sequence diagram connecting narration beats to on-screen visuals."
+            "ILLUSTRATIVE / Proposed six-frame storyboard strip for an approximately 30-second explainer; not the original delivered storyboard or a finished animation.",
+            "ILLUSTRATIVE / Proposed motion style frames exploring typography, shapes, transitions, and color hierarchy; not verified production frames or documented iteration rounds.",
+            "ILLUSTRATIVE / Proposed narration-to-visual sequence diagram; not a documented production timeline or handoff artifact."
           ]
         }
       ]
@@ -105,11 +107,11 @@ window.PORTFOLIO = {
           evidence:"Documented scope: I contributed UX/UI design to a customizable patient portal and practice-facing setup experience. Research methods, usability findings, and adoption measures have not been supplied for this case study.",
           tradeoffs:"The design tension was between flexibility for individual practices and consistency for patients. My design rationale focused on separating practice configuration from the patient-facing information hierarchy; this is an explanation of the UX problem, not a claim of validated results.",
           outcome:"UX/UI design for a patient-facing portal and practice customization workflow. The design work addressed both sides of the experience: what a practice needs to configure and what a patient needs to understand.",
-          imageBrief:"Hero to design: two connected views; practice customization dashboard on desktop and a patient portal on mobile, showing surgery information, a document list, and clear next steps. Use fictional patient data.",
+          imageBrief:"ILLUSTRATIVE / Proposed paired views: practice customization on desktop and a patient portal on mobile, with surgery information, documents, and next steps. Use fictional patient data; not a shipped interface screenshot.",
           galleryBriefs:[
-            "Practice setup flow: configurable branding, information modules, and the resulting patient-facing preview.",
-            "Patient journey: surgery overview, preparation instructions, documents, and follow-up information in a clear sequence.",
-            "Document delivery detail: example surgery packet, read/download states, and a reassuring information hierarchy using fictional records."
+            "ILLUSTRATIVE / Proposed practice setup flow showing branding, information modules, and a patient-facing preview; not a documented tested or shipped flow.",
+            "ILLUSTRATIVE / Proposed patient information sequence: surgery overview, preparation instructions, documents, and follow-up. Not a validated patient journey or research finding.",
+            "ILLUSTRATIVE / Proposed document delivery states for a fictional surgery packet, with read/download controls and information hierarchy. Not verified production behavior."
           ]
         },
         {
