@@ -194,3 +194,31 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
 html[data-theme="dark"] .work .client-file .project-card-cta{
  color:color-mix(in srgb,var(--file-accent) 72%,white);
 }
+
+/* Shared archive surfaces: the theme swaps color tokens, not box geometry. */
+.work .featured-project.client-file{
+ --archive-surface:var(--palette-paper);
+ --archive-edge:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue));
+ --archive-shadow:var(--paper-shadow);
+ --archive-preview:color-mix(in srgb,var(--file-tint) 12%,#fffdf8);
+ --archive-preview-edge:#bccbd4;
+ --archive-preview-text:#526477;
+ background-color:var(--archive-surface);
+ border:1px solid var(--archive-edge)!important;
+ box-shadow:var(--archive-shadow);
+}
+html[data-theme="dark"] .work .featured-project.client-file{
+ --archive-surface:color-mix(in srgb,var(--palette-navy) 83%,#243d52);
+ --archive-edge:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));
+ --archive-shadow:var(--paper-shadow-dark);
+ --archive-preview:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
+ --archive-preview-edge:#52677c;
+ --archive-preview-text:#d5e0eb;
+}
+.work .featured-project.client-file .project-visual:not(:has(img)){
+ background:var(--archive-preview);
+ border:1px dashed var(--archive-preview-edge);
+}
+.work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
+ color:var(--archive-preview-text);
+}
