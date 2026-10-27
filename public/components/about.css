@@ -56,6 +56,9 @@
  .about .about-bottom .text-link{align-self:start;margin-top:clamp(12px,1.5vw,20px)}
 }
 
+/* Balance the two-line display heading without changing its intentional break. */
+.about h2{text-wrap:balance}
+
 /* ABOUT TYPE SCALE
    Keep one readable paragraph measure across breakpoints. The display title
    remains expressive; supporting text and inventory labels stay quieter. */
