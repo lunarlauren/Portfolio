@@ -116,11 +116,17 @@ document.addEventListener("click",event=>{
  navigateCase(link.getAttribute("href"));
 });
 document.addEventListener("click",event=>{
- const link=event.target.closest('a[href="#work"],a[href="#playground"]');
+ const link=event.target.closest('a[href^="#"]');
  if(!link||!location.pathname.startsWith("/case-studies/")||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+ const hash=link.getAttribute("href");
+ if(!["#top","#main","#work","#playground","#about"].includes(hash))return;
  event.preventDefault();
- history.pushState(null,"","/"+link.getAttribute("href"));
+ history.pushState(null,"","/"+hash);
  routeWithMotion();
+ requestAnimationFrame(()=>{
+  const destination=document.querySelector(hash);
+  if(destination&&!main.hidden)destination.scrollIntoView({behavior:"instant",block:"start"});
+ });
 });
 window.addEventListener("popstate",routeWithMotion);
 window.addEventListener("hashchange",routeWithMotion);route();
