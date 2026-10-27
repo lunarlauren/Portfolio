@@ -264,17 +264,6 @@ function initSectionNavigation(){
 initSectionNavigation();
 $("#year").textContent=new Date().getFullYear();if(data.email&&data.email!=="hello@example.com"){const mail="mailto:"+data.email;$("#contact-link").href=mail;$("#email-link").href=mail}else{$("#contact-link").href="#about";$("#email-link").href="#about";$("#email-link").textContent="Contact details coming soon ↗"}
 
-// Small, optional tactile details: no autoplay, no sound, no persistent state.
-const footerSecret=document.getElementById("footer-secret");
-const footerMessages=["✳","made with curiosity","one more little detail ♡","✳"];
-let secretIndex=0;
-footerSecret?.addEventListener("click",()=>{
- secretIndex=(secretIndex+1)%footerMessages.length;
- footerSecret.textContent=footerMessages[secretIndex];
- footerSecret.setAttribute("aria-label",footerMessages[secretIndex]==="✳"?"Reveal a little surprise":footerMessages[secretIndex]);
-});
-
-
 /* Reveal elements when they enter the viewport, without hiding content when JS fails. */
 function initReveals(){
  if(!("IntersectionObserver" in window)||window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)return;
