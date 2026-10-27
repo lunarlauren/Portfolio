@@ -37,13 +37,13 @@ new vm.Script(caseStudy, { filename: 'public/components/case-study.js' });
 new vm.Script(projectContent, { filename: 'public/components/project-content.js' });
 // Image briefs must never look like verified screenshots or documented design artifacts.
 // Exercise the actual editorial label helper, not a duplicate classifier in tests.
-const visualBriefKicker = vm.runInNewContext(projectContent + '\\nvisualBriefKicker', {});
+const visualBriefKicker = vm.runInNewContext(projectContent + '\nvisualBriefKicker', {});
 assert.match(visualBriefKicker('ILLUSTRATIVE / Proposed mobile UI'), /ILLUSTRATIVE/);
 assert.match(visualBriefKicker('Approved Navigator app screens'), /APPROVED PRODUCT IMAGE NEEDED/);
 assert.match(visualBriefKicker('PLANNED / Character studies'), /PLANNED ARTWORK/);
 assert.match(visualBriefKicker('Show the prototype, clearly labeled PROTOTYPE'), /PROTOTYPE/);
-assert.match(script, /visualBriefKicker\\(p\\.imageBrief\\)/, 'Archive and gallery placeholders must disclose their status');
-assert.match(caseStudy, /visualBriefKicker\\(p\\.imageBrief\\)/, 'Case-study hero placeholders must disclose their status');
+assert.match(script, /visualBriefKicker\(p\.imageBrief\)/, 'Archive and gallery placeholders must disclose their status');
+assert.match(caseStudy, /visualBriefKicker\(p\.imageBrief\)/, 'Case-study hero placeholders must disclose their status');
 
 const context = { window: {} };
 vm.runInNewContext(content, context, { filename: 'public/content.js' });
