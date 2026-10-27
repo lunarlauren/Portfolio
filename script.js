@@ -44,12 +44,16 @@
   companyGrid.innerHTML = data.companies.map(companyCard).join("");
   playGrid.innerHTML = data.playground.map(projectCard).join("");
 
+  // Index once: company selection does not need a linear search per click.
+  const companiesById = new Map(data.companies.map((company) => [company.id, company]));
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let activeButton = null;
 
   function closeCollection({ restoreFocus = false } = {}) {
     collection.hidden = true;
     collection.replaceChildren();
     collection.removeAttribute("data-active");
+    collection.removeAttribute("aria-labelledby");
     if (activeButton) {
       activeButton.setAttribute("aria-expanded", "false");
       if (restoreFocus) activeButton.focus();
@@ -58,7 +62,7 @@
   }
 
   function toggleCompany(button) {
-    const company = data.companies.find((item) => item.id === button.dataset.company);
+    const company = companiesById.get(button.dataset.company);
     if (!company) return;
 
     if (activeButton === button && !collection.hidden) {
@@ -73,7 +77,7 @@
       <div class="collection-head">
         <div>
           <p class="eyebrow">PROJECT COLLECTION</p>
-          <h3>${escapeHTML(company.name)}</h3>
+          <h3 tabindex="-1" id="collection-title">${escapeHTML(company.name)}</h3>
           <p>${escapeHTML(company.description)}</p>
         </div>
         <button class="close-collection" type="button" aria-label="Close collection">×</button>
@@ -81,20 +85,26 @@
       <div class="projects-grid">${company.projects.map(projectCard).join("")}</div>`;
     collection.dataset.active = company.id;
     collection.hidden = false;
+    collection.setAttribute("aria-labelledby", "collection-title");
     collection.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      behavior: reducedMotion.matches ? "auto" : "smooth",
       block: "start"
     });
+    // Move focus to the new content so keyboard and screen-reader users know it opened.
+    collection.querySelector("#collection-title").focus({ preventScroll: true });
   }
 
   // Delegation avoids a listener for every card and survives future re-renders.
   companyGrid.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
     const button = event.target.closest("[data-company]");
     if (button && companyGrid.contains(button)) toggleCompany(button);
   });
 
   collection.addEventListener("click", (event) => {
-    if (event.target.closest(".close-collection")) closeCollection({ restoreFocus: true });
+    if (event.target instanceof Element && event.target.closest(".close-collection")) {
+      closeCollection({ restoreFocus: true });
+    }
   });
 
   document.addEventListener("keydown", (event) => {
