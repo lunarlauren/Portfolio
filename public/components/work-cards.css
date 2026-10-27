@@ -5,7 +5,7 @@
    tab, not a tiny decorative dash. Keep the file number on the card itself. */
 .client-file{
  --file-accent:#357caa;
- --file-ink:#174b70;
+ --file-label-ink:#142331; /* At least 4.5:1 against all three client tabs. */
  --file-tint:#dceefa;
  position:relative;
  margin-top:32px;
@@ -14,9 +14,9 @@
  border-radius:0;
  overflow:visible;
 }
-.client-file--hoylu{--file-accent:var(--palette-blue);--file-ink:var(--palette-navy);--file-tint:color-mix(in srgb,var(--palette-blue) 15%,var(--palette-paper))}
-.client-file--alcon{--file-accent:var(--palette-pink);--file-ink:var(--palette-navy);--file-tint:color-mix(in srgb,var(--palette-pink) 15%,var(--palette-paper))}
-.client-file--holland-america{--file-accent:var(--palette-green);--file-ink:var(--palette-navy);--file-tint:color-mix(in srgb,var(--palette-green) 15%,var(--palette-paper))}
+.client-file--hoylu{--file-accent:var(--palette-blue);--file-tint:color-mix(in srgb,var(--palette-blue) 15%,var(--palette-paper))}
+.client-file--alcon{--file-accent:var(--palette-pink);--file-tint:color-mix(in srgb,var(--palette-pink) 15%,var(--palette-paper))}
+.client-file--holland-america{--file-accent:var(--palette-green);--file-tint:color-mix(in srgb,var(--palette-green) 15%,var(--palette-paper))}
 .client-file::before{content:none}
 .client-file>.eyebrow{
  position:static;
@@ -36,7 +36,7 @@
  padding:4px 22px 4px 13px;
  margin:0;
  background:var(--file-accent);
- color:#fff;
+ color:var(--file-label-ink);
  border-radius:0;
  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,0 100%);
  font-size:11px;
