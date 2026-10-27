@@ -1315,9 +1315,9 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
  border-radius:0;
  overflow:visible;
 }
-.client-file--hoylu{--file-accent:#357caa;--file-ink:#174b70;--file-tint:#dceefa}
-.client-file--alcon{--file-accent:#a74b7f;--file-ink:#79365e;--file-tint:#f9e4ef}
-.client-file--holland-america{--file-accent:#247767;--file-ink:#165d50;--file-tint:#dcf2e9}
+.client-file--hoylu{--file-accent:var(--palette-blue);--file-ink:var(--palette-navy);--file-tint:color-mix(in srgb,var(--palette-blue) 15%,var(--palette-paper))}
+.client-file--alcon{--file-accent:var(--palette-pink);--file-ink:var(--palette-navy);--file-tint:color-mix(in srgb,var(--palette-pink) 15%,var(--palette-paper))}
+.client-file--holland-america{--file-accent:var(--palette-green);--file-ink:var(--palette-navy);--file-tint:color-mix(in srgb,var(--palette-green) 15%,var(--palette-paper))}
 .client-file::before{content:none}
 .client-file>.eyebrow{
  position:static;
@@ -1584,15 +1584,25 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
 html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
 
 
+/* Six-color art direction: neutral tints and shadows derive from these
+   anchors rather than introducing new unrelated accent hues. */
+:root{
+ --palette-navy:#203344;
+ --palette-paper:#fffdf8;
+ --palette-pink:#f15c9d;
+ --palette-blue:#53a7de;
+ --palette-green:#50ba9c;
+ --palette-lavender:#b397e6;
+}
 /* Stationery interaction system
    Client-colored highlighters, violet Playground ink, and rose personal notes.
    No ornamental clips; reduced-motion visitors receive immediate states. */
-.client-file--hoylu{--file-highlight:rgba(83,167,222,.34)}
-.client-file--alcon{--file-highlight:rgba(231,125,178,.36)}
-.client-file--holland-america{--file-highlight:rgba(80,186,156,.35)}
-html[data-theme="dark"] .client-file--hoylu{--file-highlight:rgba(83,167,222,.46)}
-html[data-theme="dark"] .client-file--alcon{--file-highlight:rgba(231,125,178,.45)}
-html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,186,156,.43)}
+.client-file--hoylu{--file-highlight:color-mix(in srgb,var(--palette-blue) 35%,transparent)}
+.client-file--alcon{--file-highlight:color-mix(in srgb,var(--palette-pink) 35%,transparent)}
+.client-file--holland-america{--file-highlight:color-mix(in srgb,var(--palette-green) 35%,transparent)}
+html[data-theme="dark"] .client-file--hoylu{--file-highlight:color-mix(in srgb,var(--palette-blue) 48%,transparent)}
+html[data-theme="dark"] .client-file--alcon{--file-highlight:color-mix(in srgb,var(--palette-pink) 48%,transparent)}
+html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix(in srgb,var(--palette-green) 48%,transparent)}
 
 :is(.work .featured-project.client-file .archive-project-title,
     .playground .play-grid .project-card-link h3){
@@ -1606,7 +1616,7 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,1
  --highlight-ink:var(--file-highlight,rgba(255,210,92,.48));
 }
 .playground .play-grid .project-card-link h3{
- --highlight-ink:rgba(179,151,230,.42);
+ --highlight-ink:color-mix(in srgb,var(--palette-lavender) 42%,transparent);
 }
 @media(hover:hover){
  .work .featured-project.client-file:hover .archive-project-title,
@@ -1625,7 +1635,7 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,1
  transition:background-size .24s ease;
 }
 .about-copy>.text-link{--underline-ink:var(--notebook-pink)}
-.playground .project-card-cta{--underline-ink:#c6a6f0}
+.playground .project-card-cta{--underline-ink:var(--palette-lavender)}
 .about-copy>.text-link:is(:hover,:focus-visible),
 .playground .project-card-link:is(:hover,:focus-visible) .project-card-cta{
  background-size:100% 2px;
@@ -1747,4 +1757,16 @@ html[data-theme="dark"] body{
 html[data-theme="dark"] :is(.hero,.work,.about){
  background-color:transparent;
  background-image:none;
+}
+
+/* Inventory illustrations use the same six-color palette, not six
+   unrelated decorative hues. */
+.creative-inventory .inventory-item:nth-child(1) .inventory-icon,
+.creative-inventory .inventory-item:nth-child(4) .inventory-icon{color:var(--palette-pink)}
+.creative-inventory .inventory-item:nth-child(2) .inventory-icon,
+.creative-inventory .inventory-item:nth-child(6) .inventory-icon{color:var(--palette-blue)}
+.creative-inventory .inventory-item:nth-child(3) .inventory-icon{color:var(--palette-lavender)}
+.creative-inventory .inventory-item:nth-child(5) .inventory-icon{color:var(--palette-green)}
+html[data-theme="dark"] body{
+ background-image:radial-gradient(circle,color-mix(in srgb,var(--palette-blue) 25%,transparent) 1.15px,transparent 1.5px);
 }
