@@ -82,11 +82,23 @@ for (const project of projects) {
   }
   if (project.gallery) assert.ok(Array.isArray(project.gallery), `${project.title}: gallery must be an array`);
   if (project.galleryBriefs) assert.ok(Array.isArray(project.galleryBriefs), `${project.title}: galleryBriefs must be an array`);
-  for (const key of ['evidence', 'tradeoffs']) {
+  for (const key of ['evidence', 'tradeoffs', 'archiveApproach']) {
     if (project[key] !== undefined) {
       assert.ok(typeof project[key] === 'string' && project[key].trim(), `${project.title}: invalid ${key}`);
     }
   }
+}
+// Archive excerpts may override a rhetorical opening, but must remain authored
+// in content.js rather than being fabricated from a project's delivery label.
+const archiveTeaserSource = script.match(/const processTeaser=p=>\{[\s\S]*?\n\};/)?.[0];
+assert.ok(archiveTeaserSource, 'Archive teaser helper should be present');
+const archiveTeaser = vm.runInNewContext(archiveTeaserSource + '\nprocessTeaser');
+assert.equal(archiveTeaser({ archiveApproach: 'Focused on hierarchy.', process: 'Why? More context.' }), 'Focused on hierarchy.');
+assert.equal(archiveTeaser({ process: 'Mapped the flow. Then iterated.' }), 'Mapped the flow.');
+for (const title of ['Connected Planning', 'Mobile Insights']) {
+  const project = projects.find(p => p.title === title);
+  assert.ok(project?.archiveApproach, `${title}: use a reviewed action-oriented archive teaser`);
+  assert.equal(archiveTeaser(project), project.archiveApproach);
 }
 // Professional stories need an explicit audience, constraints, evidence
 // boundary and design tradeoff. Missing research should be disclosed, not
