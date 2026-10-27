@@ -277,3 +277,18 @@ html[data-theme="dark"] .work .featured-project.client-file{
  .work.wrap{padding-bottom:clamp(28px,7vw,44px)}
  .work .featured-projects-grid{margin-bottom:clamp(16px,4vw,28px)}
 }
+
+/* Mobile archive reading order: project identity first, contribution facts
+   second, and the design approach next. Avoid compressing the facts into
+   two narrow columns on phones; retain the visible CTA and placeholders. */
+@media(max-width:600px){
+ .work .featured-project.client-file .archive-project-title{
+  font-size:clamp(1.625rem,7vw,2.125rem);
+  line-height:1.12;
+  margin-bottom:var(--space-2);
+ }
+ .work .project-card-facts{grid-template-columns:minmax(0,1fr);gap:var(--space-2)}
+ .work .project-card-facts dt{font-size:var(--type-eyebrow,0.6875rem)}
+ .work .project-card-facts dd{font-size:var(--type-sm,0.875rem);line-height:1.5}
+ .work .client-file .project-card-facts + .project-card-process{padding-top:var(--space-2)}
+}
