@@ -182,7 +182,6 @@ html,body{max-width:100%;overflow-x:clip}
 
 .skip-link{position:fixed;top:0;left:12px;transform:translateY(-150%);z-index:9999;background:#fff;color:#203344;border:2px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));border-radius:8px;text-decoration:none}
 .skip-link:focus-visible{transform:translateY(12px);outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));outline-offset:2px}
-#work-title:focus,.collection-head h3:focus{outline:none}
 
 :root{--brand-pink-text:var(--palette-pink)}
 .hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
