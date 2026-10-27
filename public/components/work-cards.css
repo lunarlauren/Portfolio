@@ -182,7 +182,7 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
 /* Archive action: carry the folder's client color through to its CTA.
    An underline remains for recognition without relying on color alone. */
 .work .client-file .project-card-cta{
- color:var(--file-accent);
+ color:var(--file-cta-ink,var(--file-accent));
  text-decoration-color:currentColor;
  text-decoration-thickness:2px;
  text-underline-offset:4px;
@@ -192,9 +192,12 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
 .work .client-file .project-card-link:focus-visible .project-card-cta{
  text-decoration-thickness:3px;
 }
-html[data-theme="dark"] .work .client-file .project-card-cta{
- color:color-mix(in srgb,var(--file-accent) 72%,white);
+/* The CTA uses one rule in both themes; only its ink token changes. */
+.work .client-file{--file-cta-ink:var(--file-accent)}
+html[data-theme="dark"] .work .client-file{
+ --file-cta-ink:color-mix(in srgb,var(--file-accent) 72%,white);
 }
+.work .client-file .project-card-cta{color:var(--file-cta-ink)}
 
 /* Shared archive surfaces: the theme swaps color tokens, not box geometry. */
 .work .featured-project.client-file{
