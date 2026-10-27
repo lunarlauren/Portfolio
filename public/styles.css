@@ -28,9 +28,6 @@
 .playground .project-card-link:focus-visible {outline-color:#c6d4ff}
 @media(max-width:760px) {.company-grid {grid-template-columns:1fr} .company-card.featured {grid-column:auto} .playground.wrap {padding:75px 20px} .projects-grid,.play-grid {grid-template-columns:1fr}}
 .company-grid>.company-card {height:100%}
-.hero-feature:has(.hero-portrait) .feature-art {opacity:1;pointer-events:none}
-.hero-feature:has(.hero-portrait) .art-center {display:block}
-.hero-feature .hero-portrait {display:block;pointer-events:none;transition:transform .45s ease}
 @media(max-width:760px) {.hero-feature {min-height:430px}}
 body {background:var(--paper)}
 .hero-description,.case-intro {color:var(--muted)}
@@ -61,8 +58,6 @@ body {background:var(--paper)}
 
 .hero-feature {overflow:visible;isolation:isolate}
 .hero-feature:before {border-radius:inherit}
-.hero-feature .hero-portrait {width:48%;max-width:240px;max-height:none;height:auto;right:-13%;bottom:-17%;object-fit:contain;object-position:bottom right;z-index:5}
-.hero-feature:hover .hero-portrait {transform:translate(-3px,-6px) rotate(1deg)}
 .hero-feature .feature-bottom {padding-right:24%;z-index:4}
 @media(max-width:950px) {.hero-feature .hero-portrait {width:39%;max-width:220px;right:-5%;bottom:-12%}}
 @media(max-width:760px) {.hero-feature .hero-portrait {width:45%;max-width:195px;right:-3%;bottom:-10%} .hero-feature .feature-bottom {padding-right:30%}}
@@ -72,7 +67,6 @@ body {background:var(--paper)}
 .hero-feature .art-tile-three {background:#e7d6ff}
 .hero-feature .art-center span {color:var(--surface-blush)}
 .hero-feature .feature-art {filter:drop-shadow(0 14px 22px #f15c9d1c)}
-.hero-feature .hero-portrait {filter:drop-shadow(0 16px 13px #28465d38)}
 .company-card:not(.featured):nth-child(even) {background:#ffe3f1}
 .project-card:nth-child(3n+1) .project-visual {background:#ffd7eb}
 .project-card:nth-child(3n+3) .project-visual {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-pink))}
@@ -83,13 +77,6 @@ body {background:var(--paper)}
 .hero-feature .feature-top a,.hero-feature .feature-bottom a {color:inherit;text-decoration:none}
 .hero-feature .feature-top a:hover,.hero-feature .feature-bottom a:hover {text-decoration:underline}
 .hero-feature .feature-art {cursor:pointer}
-.portrait-interaction {position:absolute;z-index:6;right:-13%;bottom:-17%;width:48%;max-width:240px;aspect-ratio:1;display:flex;align-items:end;justify-content:end}
-.hero-feature .portrait-interaction .hero-portrait {right:auto;bottom:auto;width:100%;max-width:none;max-height:none;height:auto;object-fit:contain;pointer-events:auto;cursor:help;transform-origin:bottom center}
-.portrait-bubble {position:absolute;right:73%;bottom:73%;width:max-content;max-width:min(240px,65vw);padding:15px 17px;background:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-lavender));color:var(--brand-ink);border:2px solid var(--brand-pink);border-radius:17px 17px 5px 17px;box-shadow:0 12px 30px #2033442c;display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700;letter-spacing:0;line-height:1.3;opacity:0;visibility:hidden;transform:translateY(9px) scale(.96);transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none}
-.portrait-bubble:after {content:"";position:absolute;right:12px;bottom:-11px;width:17px;height:17px;background:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-lavender));border-right:2px solid var(--brand-pink);border-bottom:2px solid var(--brand-pink);transform:rotate(45deg)}
-.portrait-about-link {color:#bc3277;font-size:13px;text-decoration:underline;text-underline-offset:3px;position:relative;z-index:1}
-.portrait-interaction:hover .portrait-bubble,.portrait-interaction:focus-within .portrait-bubble {opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto}
-.portrait-interaction:hover .hero-portrait,.portrait-interaction:focus-within .hero-portrait {transform:translate(-3px,-6px) rotate(1deg)}
 @media(max-width:950px) {.portrait-interaction {width:39%;max-width:220px;right:-5%;bottom:-12%}}
 @media(max-width:760px) {.portrait-interaction {width:45%;max-width:195px;right:-3%;bottom:-10%} .portrait-bubble {right:52%;bottom:78%;font-size:12px;padding:11px 13px}}
 @media(hover:none) {.portrait-bubble {opacity:1;visibility:visible;transform:none;pointer-events:auto;right:55%;bottom:80%;padding:10px 12px;font-size:12px}}
@@ -98,17 +85,8 @@ body {background:var(--paper)}
 .hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
 .hero-feature .feature-art .art-center {text-decoration:none}
 .hero-feature .feature-top,.hero-feature .feature-bottom {position:relative;z-index:2}
-.hero-feature .portrait-interaction {z-index:20;overflow:visible;isolation:isolate}
-.hero-feature .portrait-interaction .hero-portrait {position:relative;z-index:1;display:block}
-.hero-feature .portrait-bubble {z-index:30;min-width:188px;width:max-content;max-width:230px;box-sizing:border-box;white-space:normal;text-align:left;background:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-lavender));border:2px solid var(--brand-pink);box-shadow:0 14px 30px #20334433;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
-.hero-feature .portrait-interaction:hover .portrait-bubble,.hero-feature .portrait-interaction:focus-within .portrait-bubble {opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
-.hero-feature .portrait-bubble a {display:inline-block;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:760px) {.hero-feature .portrait-bubble {min-width:160px;max-width:190px}}
 @media(hover:none) {.hero-feature .portrait-bubble {opacity:1;visibility:visible;transform:none;pointer-events:auto}}
-.hero-feature .portrait-interaction {bottom:-9%}
-.hero-feature .portrait-bubble {bottom:100%;right:-8%;border-radius:18px}
-.hero-feature .portrait-bubble::before {content:"";position:absolute;left:0;right:0;top:100%;height:30px;background:transparent}
-.hero-feature .portrait-bubble::after {pointer-events:none}
 @media(max-width:950px) {.hero-feature .portrait-interaction {bottom:-7%} .hero-feature .portrait-bubble {bottom:100%;right:4%}}
 @media(max-width:760px) {.hero-feature .portrait-interaction {bottom:-5%} .hero-feature .portrait-bubble {bottom:100%;right:0}}
 :root {--paper:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));--line:#cbdde7;--teal:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));--brand-pink:#f15c9d;--brand-navy:var(--brand-ink);--brand-sky:color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy))}
@@ -127,8 +105,6 @@ body {color:var(--ink)}
 .primary-link {background:var(--brand-navy);color:#fff}
 .primary-link:hover {background:color-mix(in srgb,var(--palette-navy) 80%,var(--palette-blue))}
 .quiet-link:hover,.text-link:hover,.site-header nav a:hover {color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
-.hero-feature .portrait-bubble a {color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
-.hero-feature .portrait-bubble {color:var(--brand-navy);border-color:var(--brand-pink)}
 .company-grid .company-card[data-company="hoylu"] {background:color-mix(in srgb,var(--palette-paper) 55%,var(--palette-pink));color:var(--brand-navy)}
 .company-grid .company-card[data-company="alcon"] {background:var(--surface-cream);color:var(--brand-navy)}
 .company-grid .company-card[data-company="holland-america"] {background:var(--surface-navy);color:#fff}
@@ -350,8 +326,6 @@ html[data-theme="dark"] .inventory-grid:before{color:#e6b4d1}
 
 html[data-theme="dark"] .inventory-icon{filter:drop-shadow(2px 5px 0 rgba(0,0,0,.2))}
 
-html[data-theme="dark"] .portrait-bubble{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-paper));color:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));border-color:#62778a}
-html[data-theme="dark"] .portrait-bubble a{color:#ffd1e7}
 html[data-theme="dark"] .feature-top,html[data-theme="dark"] .feature-bottom{color:var(--ink)}
 html[data-theme="dark"] 
 
@@ -758,23 +732,15 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
    touch screens. Hover-only placement previously pushed the bubble outward. */
 @media(max-width:760px){
  .hero-feature{isolation:isolate;overflow:visible}
- .hero-feature .portrait-interaction{right:0;bottom:0;width:clamp(105px,32%,145px);max-width:145px}
- .hero-feature .portrait-interaction .hero-portrait{display:block;width:100%;height:auto;max-width:100%}
- .hero-feature .portrait-bubble{right:0;bottom:calc(100% + 8px);min-width:0;width:max-content;max-width:min(180px,56vw);font-size:12px;line-height:1.4}
  .hero-feature .feature-bottom{padding-right:0;max-width:62%}
 }
 @media(max-width:420px){
  .hero-feature{min-height:300px}
- .hero-feature .portrait-interaction{width:clamp(100px,34%,130px)}
- .hero-feature .portrait-bubble{max-width:min(160px,52vw);right:0;bottom:calc(100% + 4px)}
  .hero-feature .feature-bottom{max-width:58%}
 }
 @media(hover:none) and (max-width:760px){
- .hero-feature .portrait-bubble{opacity:1;visibility:visible;pointer-events:auto;transform:none}
 }
 /* Keyboard users should be able to reveal the portrait note without hover. */
-.hero-feature .portrait-about-link:focus-visible{outline:3px solid var(--brand-navy);outline-offset:3px;border-radius:3px}
-html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline-color:#fff}
 
 
 /* Legacy header fallback. The production mobile header is one row via
@@ -801,8 +767,6 @@ html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline
 @media(hover:none), (pointer:coarse){
  .hero-feature .portrait-bubble,
  .hero-feature .portrait-interaction:hover .portrait-bubble,
- .hero-feature .portrait-interaction:focus-within .portrait-bubble{display:none}
- .hero-feature .portrait-interaction{z-index:21}
  .hero-feature .portrait-mobile-link{pointer-events:auto;touch-action:manipulation}
 }
 /* At phone widths the entire featured illustration already links to Work.
@@ -811,8 +775,6 @@ html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline
  .hero-feature .feature-bottom{display:block;max-width:100%;width:100%;padding-right:0}
  .hero-feature .feature-bottom>span{display:block;max-width:56%;line-height:1.35}
  .hero-feature .feature-bottom>a{display:none}
- .hero-feature .portrait-interaction{bottom:0}
- .hero-feature .portrait-bubble{display:none}
 }
 
 
@@ -960,7 +922,6 @@ html[data-theme="dark"] .playground .section-head>p{
  .hero .hero-feature .feature-bottom>span,
  .hero .hero-feature .feature-bottom>a{max-width:100%;line-height:1.35}
  .hero .hero-feature .feature-bottom>a{min-height:32px}
- .hero .hero-feature .portrait-interaction{right:0;bottom:0;width:132px;max-width:132px}
  .hero .hero-foot{margin-top:12px}
 }
 
