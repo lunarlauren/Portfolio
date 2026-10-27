@@ -223,6 +223,18 @@ html[data-theme="dark"] .case-view{
  padding:clamp(22px,3vw,34px);
 }
 
+/* Editorial reading width: keep long-form reasoning comfortable to scan,
+   while the project facts retain their own narrow sidebar column. */
+.case-view .case-prose{
+ min-width:0;
+ max-width:74ch;
+}
+.case-view .case-prose p,
+.case-view .case-process-note p{
+ max-width:68ch;
+ overflow-wrap:break-word;
+}
+
 /* Mobile reading sheet: rule the paragraphs, not the headings or chapter tabs. */
 @media(max-width:760px){
  .case-view .case-prose{
