@@ -212,6 +212,10 @@ assert.match(caseCss, /\.case-view \.case-section-links button:focus-visible/, '
 assert.match(stationeryCss, /@media\(prefers-reduced-motion:reduce\)/, 'Stationery interactions must honor reduced motion');
 assert.match(stationeryCss, /transition:none;/, 'Reduced motion must disable highlight transitions');
 
+// Pass 15: footer must paint a solid themed surface, not expose notebook dots.
+assert.match(navigationCss, /footer\\.wrap\\{[^}]*background:var\\(--site-chrome-bg\\);/, 'Footer must reset inherited background layers');
+assert.match(css, /html\\[data-theme="dark"\\]\\{\\s*--site-chrome-bg:/, 'Dark theme must supply a dedicated chrome surface');
+
 // Pass 13: leaving a case study must never strand focus in hidden content.
 assert.match(script, /if\(leavingProject&&nextHash!=="work"&&nextHash!=="playground"\)/, 'Non-gallery case-study exits must restore focus');
 assert.match(script, /destination\.focus\(\{preventScroll:true\}\)/, 'Focus must move to a visible destination');
