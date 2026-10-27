@@ -130,7 +130,9 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{margin-block:clamp(24px,6vw,44px)}
  .case-view .case-prose{padding:clamp(22px,5vw,34px)}
  .case-view .case-prose h2:not(:first-child){margin-top:2em}
- .case-view .case-section-links{align-items:center;gap:8px;scroll-padding-inline:16px}
+ .case-view .case-section-links{align-items:center;gap:8px;scroll-padding-inline:0}
+ /* The chapter tabs themselves provide context; don't inset them behind a label. */
+ .case-view .case-section-context{display:none}
  .case-view .case-section-context{display:block;flex:0 0 auto;max-width:min(44vw,220px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 12px/1.4 'DM Sans',system-ui,sans-serif;color:var(--ink);border-right:1px solid var(--line);padding-right:12px}
  .case-view .case-section-links button{padding-inline:14px}
 }
