@@ -299,3 +299,28 @@ html[data-theme="dark"] .case-evidence-label{color:color-mix(in srgb,var(--palet
 html[data-theme="dark"] .case-evidence-item strong{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
 
 
+
+/* Case-study evidence and gallery: consistent editorial spacing, not dashboard tiles.
+   Keep image frames stable while their contents load. */
+.case-view .case-evidence{
+ align-items:stretch;
+ gap:var(--space-3,1rem);
+}
+.case-view .case-evidence-item{
+ border-radius:0;
+ border-left:3px solid var(--case-cover-accent);
+ padding:var(--space-4,1.5rem);
+}
+.case-view .case-gallery{
+ align-items:start;
+ gap:var(--space-4,1.5rem);
+}
+.case-view .case-gallery img{
+ display:block;
+ max-width:100%;
+ height:auto;
+}
+@media(max-width:760px){
+ .case-view .case-evidence-item{padding:var(--space-3,1rem)}
+ .case-view .case-gallery{grid-template-columns:minmax(0,1fr)}
+}
