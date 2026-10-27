@@ -1582,3 +1582,62 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
  --paper-shadow-dark:4px 6px 0 rgba(0,0,0,.18);
 }
 html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
+
+
+/* Stationery interactions: ink-highlighter, paperclip, and gentle filing-in.
+   No arbitrary rotation or competing shadow directions. */
+.work .featured-project.client-file .archive-project-title{
+ display:table;
+ background-image:linear-gradient(transparent 68%,rgba(255,210,92,.48) 68%);
+ background-repeat:no-repeat;
+ background-size:0% 100%;
+ transition:background-size .3s ease;
+}
+@media(hover:hover){
+ .work .featured-project.client-file:hover .archive-project-title{background-size:100% 100%}
+}
+.work .featured-project.client-file:focus-within .archive-project-title{background-size:100% 100%}
+.work .featured-project.client-file::after{
+ content:"";
+ position:absolute;
+ right:22px;
+ top:16px;
+ width:13px;
+ height:29px;
+ border:2px solid #8293a3;
+ border-radius:8px 8px 6px 6px;
+ transform:rotate(13deg);
+ opacity:.7;
+ pointer-events:none;
+}
+.work .featured-project.client-file .archive-project-title{max-width:calc(100% - 26px)}
+.about-copy>.text-link,
+.playground .project-card-cta{
+ text-decoration:none;
+ background-image:linear-gradient(var(--notebook-pink),var(--notebook-pink));
+ background-size:0 2px;
+ background-position:left bottom;
+ background-repeat:no-repeat;
+ transition:background-size .24s ease;
+}
+.about-copy>.text-link:is(:hover,:focus-visible),
+.playground .project-card-link:is(:hover,:focus-visible) .project-card-cta{
+ background-size:100% 2px;
+}
+@media(prefers-reduced-motion:no-preference){
+ .work .featured-project.client-file,
+ .playground .play-grid>.project-card{
+  animation:archive-file-in .48s cubic-bezier(.2,.7,.2,1) both;
+ }
+ .work .featured-project.client-file:nth-child(2),
+ .playground .play-grid>.project-card:nth-child(2){animation-delay:90ms}
+ .playground .play-grid>.project-card:nth-child(3){animation-delay:160ms}
+ @keyframes archive-file-in{
+  from{opacity:.72;translate:0 9px}
+  to{opacity:1;translate:0 0}
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .work .featured-project.client-file .archive-project-title,
+ .about-copy>.text-link,.playground .project-card-cta{transition:none}
+}
