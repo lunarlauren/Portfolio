@@ -47,6 +47,7 @@ try{
  assert.match(await page.title(),/Connected Planning/);
  assert.equal(await page.locator("#main").isHidden(),true);
  assert.equal(await page.locator("#case-title").innerText(),"Connected Planning");
+ assert.equal(await page.locator('.case-gallery').getAttribute('aria-label'),'Visual briefs and image placeholders','Planned case-study visuals must not be announced as an approved image gallery');
  assert.equal(await page.locator(".case-facts dt").allTextContents().then(labels=>labels.some(label=>label.trim()==="My role")),true,"Case facts should expose the designer's actual contribution");
  assert.match(await page.locator(".case-facts").innerText(),/Product UX and visual design/,"Role must use reviewed project metadata");
  assert.equal(await page.locator(".case-delivery-stamp").count(),0,"Design contributions without verified shipping must not get a shipped stamp");
