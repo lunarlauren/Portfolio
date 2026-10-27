@@ -49,3 +49,12 @@
   .about .about-portrait figcaption { font-size: 0.6875rem; }
   .about .creative-inventory { margin-top: 10px; }
 }
+
+/* A self-contained introduction prevents later paragraphs from flowing around
+   the portrait. The rest of the biography reads as one clean text column. */
+.about .about-intro{display:flow-root;margin-bottom:clamp(12px,1.5vw,20px)}
+.about .about-intro p{margin-bottom:0}
+@media(min-width:901px){
+ .about h2{font-size:clamp(2.625rem,4.3vw,3.75rem)}
+ .about .about-bottom .text-link{align-self:start;margin-top:clamp(12px,1.5vw,20px)}
+}
