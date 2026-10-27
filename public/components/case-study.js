@@ -15,11 +15,21 @@ function revealCurrentCaseTab(button){
  let delta=0;
  if(tabBounds.left<navBounds.left+edge)delta=tabBounds.left-navBounds.left-edge;
  else if(tabBounds.right>navBounds.right-edge)delta=tabBounds.right-navBounds.right+edge;
- if(delta)chapterNav.scrollLeft+=delta;
+ if(delta){
+  // A programmatic scroll must not create an animated tab-strip chase.
+  // The active tab should become visible immediately for keyboard users.
+  chapterNav.scrollLeft+=delta;
+ }
 }
 function setCurrentCaseSection(id){
  const active=caseJumpButtons.find(button=>button.dataset.caseJump===id);
- if(!active||active.getAttribute("aria-current")==="location")return;
+ if(!active)return;
+ // A user can manually scroll the tab strip away from the active chapter.
+ // Re-reveal it when the chapter is selected, even if aria-current is unchanged.
+ if(active.getAttribute("aria-current")==="location"){
+  revealCurrentCaseTab(active);
+  return;
+ }
  caseJumpButtons.forEach(button=>{
   if(button===active)button.setAttribute("aria-current","location");
   else button.removeAttribute("aria-current");
