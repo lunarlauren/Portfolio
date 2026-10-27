@@ -147,7 +147,7 @@ window.PORTFOLIO = {
           constraints:"Making choices, confirmation and connection guidance understandable to guests using a mobile app.",
           summary:"On a cruise, even simple tasks have unfamiliar steps. I worked on making bookings, account details, and Wi-Fi guidance easier to navigate.",
           details:"I worked on the parts of a cruise app people actually need while they're trying to enjoy their trip: booking dinner, choosing excursions, and checking purchases. These flows needed to make choices and confirmations clear to passengers who might be using the app for the first time while onboard.",
-          process:"Passenger feedback showed that connecting to the ship's Wi-Fi was confusing. I worked on visual cues to help make that step easier to recognize. For dining and excursion bookings, I worked through the screens from browsing to confirmation, focusing on the details passengers needed at each point.",
+          process:"Passenger feedback pointed to confusion around connecting to the ship's Wi-Fi, so I worked on visual cues to make that step easier to recognize. For dining and excursion bookings, I worked through the screens from browsing to confirmation, focusing on the details passengers needed at each point.",
           // Evidence boundary: passenger Wi-Fi confusion was reported, but no
           // interview count, test method, or before/after metric is documented.
           evidence:"Documented project context: passenger feedback identified confusion around connecting to the ship's Wi-Fi. I contributed visual guidance for that step and designed and prototyped booking and account flows. The feedback source, sample size, validation method, and post-release impact are not documented here.",
