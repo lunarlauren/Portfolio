@@ -39,6 +39,15 @@
  border-radius:0;
  border-left-width:3px;
 }
+/* Two kinds of editorial annotation: a dark rule marks the evidence
+   boundary; the cover accent marks design reasoning. The visible headings
+   carry the distinction even without color (including forced-colors mode). */
+.case-view .case-process-note[data-note-kind="evidence"]{
+ border-left-color:var(--ink);
+}
+.case-view .case-process-note[data-note-kind="rationale"]{
+ border-left-color:var(--case-cover-accent);
+}
 .case-view .case-process-note h3{
  font-size:var(--case-type-small);
  line-height:1.45;
