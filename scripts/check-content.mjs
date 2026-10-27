@@ -79,7 +79,7 @@ assert.match(workCss, /\.work \.project-card-facts\s*\{/, 'Archive facts must ha
 assert.match(workCss, /\.work \.project-card-facts dd\s*\{/, 'Archive values must have readable styles');
 
 // Static responsive guards: these do not prove browser layout or screen-reader behavior.
-assert.match(navigationCss, /@media\(max-width:600px\)\{\s*\.site-header\{\s*display:flex/, 'Production mobile header must remain one row');
+assert.match(navigationCss, /@media\(max-width:650px\)\{\s*\.site-header\{\s*display:flex/, 'Production mobile header must remain one row');
 assert.match(navigationCss, /@media\(max-width:360px\)/, 'Narrow-phone header must have an explicit layout');
 assert.match(caseCss, /@media\(max-width:420px\)\{\s*\.case-view \.case-section-links\{top:64px/, 'Phone chapter index must clear the production one-row header');
 assert.match(caseCss, /\.case-view \.case-section-links\{\s*top:64px/, 'Mobile chapter index must clear the one-row header');
