@@ -23,9 +23,25 @@ await new Promise(resolve=>server.listen(0,"127.0.0.1",resolve));
 const origin="http://127.0.0.1:"+server.address().port;
 const browser=await chromium.launch({headless:true});
 const errors=[];
+// Compare against the actual homepage tags rather than hard-coding copy that
+// editors may legitimately revise. Case routes must restore these on return.
+const readMetadata=page=>page.evaluate(()=>{
+ const selectors=[
+  'meta[name="description"]','meta[property="og:title"]',
+  'meta[property="og:description"]','meta[property="og:url"]',
+  'meta[name="twitter:title"]','meta[name="twitter:description"]'
+ ];
+ return {
+  title:document.title,
+  canonical:document.querySelector('link[rel="canonical"]')?.getAttribute("href"),
+  tags:selectors.map(selector=>document.querySelector(selector)?.getAttribute("content"))
+ };
+});
 try{
  const page=await browser.newPage();
  page.on("pageerror",error=>errors.push(error.message));
+ await page.goto(origin+"/");
+ const homepageMetadata=await readMetadata(page);
  await page.goto(origin+"/case-studies/hoylu/connected-planning/");
  await page.locator("#case-title").waitFor();
  assert.match(await page.title(),/Connected Planning/);
@@ -60,10 +76,12 @@ try{
  await page.locator(".case-back").click();
  assert.match(page.url(),/\/#work$/);
  assert.equal(await page.locator("#main").isVisible(),true);
+ assert.deepEqual(await readMetadata(page),homepageMetadata,"Returning from a case study must restore homepage title, canonical, and social previews");
  await page.locator(".project-card-link[href='/case-studies/hoylu/connected-planning/']").first().click();
  await page.locator('a[href="#about"]').first().click();
  assert.match(page.url(),/\/#about$/);
  assert.equal(await page.locator("#main").isVisible(),true);
+ assert.deepEqual(await readMetadata(page),homepageMetadata,"Navigating from a case study to About must also restore homepage metadata");
  // The footer surface must reach the viewport edges, not stop at .wrap's
  // 1320px content width (which would expose the notebook dots on desktop).
  await page.setViewportSize({width:1440,height:900});
