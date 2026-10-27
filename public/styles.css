@@ -200,7 +200,6 @@ body{font-size:var(--type-body);line-height:1.6}
 @media(max-width:760px){.hero-description,.about-bottom p,.case-prose p{font-size:1rem}.project-card p{font-size:0.875rem}}
 
 .about-copy{min-width:0}
-.about-copy p{line-height:1.7}
 .about-copy p:last-child{margin-bottom:0}
 
 .creative-inventory{width:100%;margin:32px 0;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none}
