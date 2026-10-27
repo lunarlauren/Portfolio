@@ -47,3 +47,14 @@
 }
 
 
+
+/* Chapter navigation controls. The paper surface matches the later
+   notebook override formerly applied in the base stylesheet. */
+/* Case study chapter buttons: scroll within the routed page without changing its hash. */
+.case-section-links button{appearance:none;font:inherit;cursor:pointer;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:11px 16px;min-height:44px;text-align:left}
+.case-section-links button:hover{background:var(--surface-blush)}
+.case-section-links button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.case-prose h2[id]{scroll-margin-top:96px}
+html[data-theme="dark"] .case-section-links button:hover{background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue))}
+
+
