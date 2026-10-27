@@ -52,7 +52,16 @@ if("IntersectionObserver" in window&&caseJumpHeadings.some(Boolean)){
 }
 if(caseJumpButtons.length)setCurrentCaseSection(caseJumpButtons[0].dataset.caseJump);
 document.title=p.title+" — Lauren Leven";
- document.querySelector('link[rel="canonical"]')?.setAttribute("href",location.origin+casePath(group,i));
- document.querySelector('meta[name="description"]')?.setAttribute("content",p.summary);
+ const pageUrl=location.origin+casePath(group,i);
+ // Keep share previews aligned with the routed project, not the homepage.
+ // Static crawlers still require server-rendered metadata for reliable previews.
+ const setMeta=(selector,value)=>document.querySelector(selector)?.setAttribute("content",value);
+ document.querySelector('link[rel="canonical"]')?.setAttribute("href",pageUrl);
+ setMeta('meta[name="description"]',p.summary);
+ setMeta('meta[property="og:title"]',document.title);
+ setMeta('meta[property="og:description"]',p.summary);
+ setMeta('meta[property="og:url"]',pageUrl);
+ setMeta('meta[name="twitter:title"]',document.title);
+ setMeta('meta[name="twitter:description"]',p.summary);
  window.scrollTo({top:0,behavior:"auto"});caseView.focus({preventScroll:true})}
 
