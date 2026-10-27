@@ -177,3 +177,20 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
 }
 html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{color:#d5e0eb}
 
+
+/* Archive action: carry the folder's client color through to its CTA.
+   An underline remains for recognition without relying on color alone. */
+.work .client-file .project-card-cta{
+ color:var(--file-accent);
+ text-decoration-color:currentColor;
+ text-decoration-thickness:2px;
+ text-underline-offset:4px;
+ transition:color .18s ease,text-decoration-thickness .18s ease;
+}
+.work .client-file .project-card-link:hover .project-card-cta,
+.work .client-file .project-card-link:focus-visible .project-card-cta{
+ text-decoration-thickness:3px;
+}
+html[data-theme="dark"] .work .client-file .project-card-cta{
+ color:color-mix(in srgb,var(--file-accent) 72%,white);
+}
