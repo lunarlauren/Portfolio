@@ -1,8 +1,17 @@
 # Lauren Leven — design portfolio
 
-A lightweight portfolio of product UX, visual design, and illustration. The production-facing static site is in **`public/`** and is configured as a Cloudflare Worker with static assets. The root-level `index.html`, `script.js`, `content.js`, and `styles.css` are older files; **do not edit those to change the live portfolio**.
+A lightweight portfolio of product UX, visual design, and illustration. The production-facing static site is in **`public/`** and is configured as a Cloudflare Worker with static assets. The obsolete root-level prototype files were removed on October 27, 2026 to prevent accidental edits to a non-deployed version. **All website changes belong in `public/`**.
 
 > **Developer handoff:** See [docs/HANDOFF.md](docs/HANDOFF.md) for the current file map, UX evidence boundaries, and validation checklist.
+
+## Source of truth
+
+- **Live site:** `https://portfolio.bertinoln.workers.dev/`
+- **Deployment configuration:** `wrangler.jsonc` → `assets.directory: ./public`
+- **Website entry point:** `public/index.html` (not a root-level HTML file)
+- **Case-study layout and tabs:** `public/components/case-study.css`; mobile right-edge fade is in `public/styles.css`
+- **Validation:** run `node scripts/check-content.mjs` before merging or deploying. This does not replace browser testing.
+- **Do not recreate root-level website files.** Historical versions remain recoverable in Git history.
 
 ## Project map
 
