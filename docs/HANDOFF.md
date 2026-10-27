@@ -55,3 +55,7 @@ The first global rules were moved into `public/components/foundations.css` witho
 ### Case-study base extraction
 
 `public/components/case-study-base.css` holds the earliest case-study layout rules. It loads before the legacy stylesheet so later overrides remain effective. The final case-study styling is also in `public/components/case-study.css`. Do not delete either without browser-based visual comparison.
+
+### Removed hero portrait legacy CSS
+
+The hero portrait and speech bubble were retired when the illustration moved into About. Their obsolete selectors have now been removed from `public/styles.css`. The About portrait's active rules are in `public/components/about.css`. Dark-mode token declarations overridden later in the same stylesheet have been pruned; theme overrides elsewhere remain and need browser QA before broader merging.
