@@ -294,9 +294,7 @@ html[data-theme="dark"] .case-view{
 .case-evidence-label{display:block;margin-bottom:8px;font:700 11px/1.4 'DM Sans',system-ui,sans-serif;letter-spacing:.1em;color:var(--muted)}
 .case-evidence-item strong{display:block;font-size:clamp(0.8125rem,1.2vw,1rem);line-height:1.5;font-weight:600;color:var(--ink);overflow-wrap:break-word}
 @media(max-width:760px){.case-evidence{grid-template-columns:1fr;gap:10px}.case-evidence-item{padding:14px 16px}}
-html[data-theme="dark"] .case-evidence-item{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-blue));border-color:#718ba2}
-html[data-theme="dark"] .case-evidence-label{color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue))}
-html[data-theme="dark"] .case-evidence-item strong{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
+/* Evidence colors inherit the shared --case-fact-* theme tokens above. */
 
 
 
