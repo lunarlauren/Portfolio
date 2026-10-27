@@ -19,3 +19,24 @@ Source assertions **do not** prove browser behavior, screen-reader usability, co
 
 ## Safe changes
 Prefer small commits and avoid rewriting the case-study renderer unless necessary. Add or adjust regression assertions alongside changes to UX evidence, navigation, or semantics. Use a PR for changes with broad routing, content-schema, or stylesheet impact. Record the exact checks run; never claim live or visual QA without performing it.
+
+## Start here: editing without breaking things
+
+Think of the site like a set of labeled drawers:
+
+| Want to change… | Open this file |
+| --- | --- |
+| Homepage words, About portrait or section order | `public/index.html` |
+| A project story, evidence or approved image | `public/content.js` |
+| Main colors and shared typography | `public/styles.css` (large legacy file; edit carefully) |
+| About portrait size and mobile layout | `public/components/about.css` |
+| Header and navigation appearance | `public/components/navigation.css` |
+| Work cards and folders | `public/components/work-cards.css` |
+| Case-study page appearance | `public/components/case-study.css` |
+| Theme and stationery styling | `public/components/stationery.css` |
+
+**Safe editing recipe:** Change one thing; keep a copy of the old value; check a narrow phone width and a desktop width in both themes; run the repository tests; commit only when CI passes. A passing syntax check is **not** a passing browser test. Do not change project outcomes or claim user testing without evidence.
+
+**CSS rule of thumb:** Search for the selector across all stylesheets before editing. The base stylesheet contains historical overrides; the later-loaded component files can override it. Prefer cleaning up the original rule rather than adding a second competing rule at the bottom. Keep comments about *why* a rule exists, not a narration of every CSS property.
+
+**About portrait:** Its HTML is in the About section of `public/index.html`; its layout is isolated in `public/components/about.css`. The hero's abstract featured-art placeholder stays in place until an approved product visual is supplied.
