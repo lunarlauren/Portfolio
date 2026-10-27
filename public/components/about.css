@@ -1,0 +1,34 @@
+/* ABOUT PORTRAIT
+   Edit this small file to change how Lauren's illustration sits beside her bio.
+   The image and caption live in public/index.html inside .about-copy.
+   Colors come from the shared theme so dark mode keeps working. */
+
+.about-portrait {
+  float: right;
+  width: clamp(120px, 34%, 210px);
+  margin: 0 0 16px 24px;
+  text-align: center;
+}
+
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 14px #28465d26);
+}
+
+.about-portrait figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Small phones: put the portrait above the text instead of squeezing it. */
+@media (max-width: 480px) {
+  .about-portrait {
+    float: none;
+    width: min(190px, 65%);
+    margin: 0 auto 22px;
+  }
+}
