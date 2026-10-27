@@ -15,7 +15,7 @@
 /* Mobile hero: quiet editorial hierarchy, no decorative sticker or oversized copy. */
 @media(max-width:600px){
  .hero .notebook-sticker{display:none!important}
- .hero.wrap{padding-top:clamp(28px,7vw,42px);gap:28px}
+ .hero.wrap{min-height:0;padding-top:clamp(28px,7vw,42px);padding-bottom:clamp(20px,5vw,32px);gap:28px}
  .hero .hero-copy>.eyebrow{font-size:0.625rem;line-height:1.5;letter-spacing:.075em}
  .hero .hero-copy h1{font-size:clamp(2.375rem,8.5vw,2.875rem);line-height:1.08;margin:var(--space-4) 0 var(--space-3);max-width:16ch;letter-spacing:-.04em}
  .hero .notebook-hero-note{display:block;font-size:clamp(0.9375rem,3.8vw,1.0625rem);line-height:1.45;margin:var(--space-2) 0 var(--space-3);padding:0 0 var(--space-2);border-bottom-width:1px}
@@ -23,12 +23,7 @@
  .hero .hero-description{font-size:var(--type-body);line-height:1.65;max-width:38ch;text-wrap:pretty}
  .hero .hero-actions{margin-top:var(--space-4);gap:var(--space-2)}
  .hero .hero-actions .primary-link{min-height:48px}
-}
-
-/* Pass 8 / mobile rhythm: the featured illustration should lead directly
-   into the work index, rather than leaving a second screen of empty dots.
-   These rules are theme-neutral and retain the existing paper/card treatment. */
-@media(max-width:600px){
- .hero.wrap{min-height:0;padding-bottom:clamp(20px,5vw,32px)}
+ /* Keep the illustration close to the work index on small screens. */
  .hero .hero-feature{margin-bottom:0}
 }
+
