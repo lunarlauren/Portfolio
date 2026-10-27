@@ -125,7 +125,7 @@ document.addEventListener("click",event=>{
  routeWithMotion();
  requestAnimationFrame(()=>{
   const destination=document.querySelector(hash);
-  if(destination&&!main.hidden)destination.scrollIntoView({behavior:"instant",block:"start"});
+  if(destination&&!main.hidden)destination.scrollIntoView({behavior:"auto",block:"start"});
  });
 });
 window.addEventListener("popstate",routeWithMotion);
