@@ -29,7 +29,7 @@
 @media(max-width:760px) {.company-grid {grid-template-columns:1fr} .company-card.featured {grid-column:auto} .playground.wrap {padding:75px 20px} .projects-grid,.play-grid {grid-template-columns:1fr}}
 .company-grid>.company-card {height:100%}
 
-body {background:var(--paper)}
+body {background:var(--paper);color:var(--ink)}
 .status-dot {background:#377b91}
 .eyebrow-divider {color:#8da6b5}
 .hero h1 em,.about h2 em,.section-head h2 em {color:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue))}
@@ -77,7 +77,7 @@ body {background:var(--paper)}
 .hero-feature .feature-art .art-center {text-decoration:none}
 .hero-feature .feature-top,.hero-feature .feature-bottom {position:relative;z-index:2}
 :root {--paper:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));--line:#cbdde7;--teal:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));--brand-pink:#f15c9d;--brand-navy:var(--brand-ink);--brand-sky:color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy))}
-body {color:var(--ink)}
+
 .hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {font-family:'Newsreader',Georgia,serif}
 .hero h1 {letter-spacing:-.045em;line-height:1.04}
 .section-head h2,.about h2,.company-name,.case-head h1 {letter-spacing:-.035em;line-height:1.1}
