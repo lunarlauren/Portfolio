@@ -324,3 +324,18 @@ html[data-theme="dark"] .case-evidence-item strong{color:color-mix(in srgb,var(-
  .case-view .case-evidence-item{padding:var(--space-3,1rem)}
  .case-view .case-gallery{grid-template-columns:minmax(0,1fr)}
 }
+
+/* Interaction accessibility: chapter controls must remain easy to target
+   at every breakpoint, including narrow phones and touch devices. */
+@media(max-width:760px){
+ .case-view .case-section-links button{
+  min-height:44px;
+  padding-block:10px;
+ }
+}
+.case-view .case-section-links button:focus-visible{
+ outline:3px solid var(--focus);
+ outline-offset:3px;
+ position:relative;
+ z-index:1;
+}
