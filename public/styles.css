@@ -1414,3 +1414,27 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  .case-view .case-fact{padding-left:11px}
  .case-view .case-fact-value{font-size:clamp(13px,3.5vw,16px)}
 }
+
+
+/* Case-study reading: long audience/constraint descriptions need a full
+   line on narrow phones. Keep two columns at tablet widths, but avoid
+   120px-wide text columns at 320–480px and 200% browser zoom. */
+@media(max-width:480px){
+ .case-view .case-facts{
+  grid-template-columns:minmax(0,1fr);
+  gap:14px;
+ }
+ .case-view .case-fact{padding-left:12px}
+}
+
+/* Evidence and tradeoff notes should resemble editorial annotations,
+   not rounded dashboard alerts. Retain theme-specific surface colors. */
+.case-view .case-process-note{
+ border-radius:0;
+ border-left-width:3px;
+}
+.case-view .case-process-note h3{
+ font-size:clamp(14px,1.8vw,17px);
+ line-height:1.45;
+ letter-spacing:.01em;
+}
