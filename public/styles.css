@@ -78,8 +78,8 @@ body {background:var(--paper);color:var(--ink)}
 :root {--paper:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));--line:#cbdde7;--teal:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));--brand-pink:#f15c9d;--brand-navy:var(--brand-ink);--brand-sky:color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy))}
 
 .hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {font-family:'Newsreader',Georgia,serif}
-.hero h1 {letter-spacing:-.045em;line-height:1.04}
-.section-head h2,.about h2,.company-name,.case-head h1 {letter-spacing:-.035em;line-height:1.1}
+.hero h1 {line-height:1.04}
+.section-head h2,.about h2,.company-name,.case-head h1 {line-height:1.1}
 .eyebrow,.hero-foot,.card-top,.card-bottom,.project-meta,.feature-top,.feature-bottom {font-family:'DM Sans',system-ui,sans-serif}
 .wordmark {display:inline-flex;align-items:center;line-height:1}
 .wordmark img {display:block;width:40px;height:auto}
