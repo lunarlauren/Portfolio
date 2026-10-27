@@ -51,10 +51,14 @@ const highlightMarkup=p=>{const items=caseHighlights[p.title]||[];return items.l
 const processNotesMarkup=(p,chapterNumber=3)=>{
  // Keep documented scope and design reasoning visually distinct. Neither
  // kind implies that an interview, experiment, or outcome was verified.
- const notes=[["evidence","Evidence & boundaries",p.evidence],["rationale","Design tension & rationale",p.tradeoffs]]
-  .filter(([, ,value])=>typeof value==="string"&&value.trim());
- return notes.length?'<h2 id="case-evidence-notes">'+String(chapterNumber).padStart(2,"0")+' / Evidence &amp; tradeoffs</h2><div class="case-process-notes">'+notes.map(([kind,heading,value])=>
-  '<section class="case-process-note" data-note-kind="'+kind+'"><h3>'+esc(heading)+'</h3><p>'+esc(value)+'</p></section>'
+ // These small visible labels make the claim type explicit at scan speed.
+ // "Evidence status" is not a claim that interviews or tests took place.
+ const notes=[
+  ["evidence","Evidence status","Evidence & boundaries",p.evidence],
+  ["rationale","Design reasoning · not test evidence","Design tension & rationale",p.tradeoffs]
+ ].filter(([, , ,value])=>typeof value==="string"&&value.trim());
+ return notes.length?'<h2 id="case-evidence-notes">'+String(chapterNumber).padStart(2,"0")+' / Evidence &amp; tradeoffs</h2><div class="case-process-notes">'+notes.map(([kind,kicker,heading,value])=>
+  '<section class="case-process-note" data-note-kind="'+kind+'"><span class="case-process-note-kicker">'+esc(kicker)+'</span><h3>'+esc(heading)+'</h3><p>'+esc(value)+'</p></section>'
  ).join("")+'</div>':"";
 };
 // A semantic project-facts list makes audience and constraints scannable.
