@@ -9,7 +9,7 @@ A lightweight portfolio of product UX, visual design, and illustration. The prod
 - **Live site:** `https://portfolio.bertinoln.workers.dev/`
 - **Deployment configuration:** `wrangler.jsonc` → `assets.directory: ./public`
 - **Website entry point:** `public/index.html` (not a root-level HTML file)
-- **Case-study layout and tabs:** `public/components/case-study.css`; mobile right-edge fade is in `public/styles.css`
+- **Case-study layout and tabs:** `public/components/case-study.css` and `public/components/case-study.js`; the mobile chapter strip intentionally has no fade mask
 - **Validation:** run `node scripts/check-content.mjs` before merging or deploying. This does not replace browser testing.
 - **Do not recreate root-level website files.** Historical versions remain recoverable in Git history.
 
@@ -17,7 +17,7 @@ A lightweight portfolio of product UX, visual design, and illustration. The prod
 
 - `public/index.html` — page structure, header, hero, contact and theme toggle.
 - `public/content.js` — company/project data, UX case-study writing, image briefs and galleries.
-- `public/script.js` — project index, case-study rendering, hash routing, active navigation and interactions.
+- `public/script.js` — project index, archive facts, routing and homepage interactions. Case-study rendering lives in `public/components/case-study.js`; evidence helpers live in `public/components/project-content.js`.
 - `public/styles.css` — responsive styling, themes, layout and motion.
 - `public/LL logo.svg` and `public/laurenlevenportfolioheroportrait.png` — current brand and portrait assets.
 - `wrangler.jsonc` — Worker configuration; `assets.directory` points to `./public`.
@@ -31,7 +31,7 @@ The source smoke test guards these distinctions. It does not verify browser layo
 
 ### Responsive navigation handoff (October 26, 2026)
 
-The sticky header deliberately switches between a **single row at 421–650px** and a **two-row grid at 420px and below**. The smaller layout preserves readable labels and 44px targets for Work, Playground, About, Contact, and the theme toggle. The case-study chapter index uses corresponding sticky offsets (64px / 110px) and heading scroll margins so keyboard and touch navigation should not hide chapter headings behind the header. These values are kept together at the end of `public/styles.css`; update both the header and chapter-index offsets when changing header dimensions. The source smoke test checks these declarations, **not** their rendered geometry. Still verify 320, 375, 420, 421, 650 and 760px widths, both themes, keyboard focus, and chapter scrolling in a browser before release.
+The sticky header uses **one row at 650px and below**, with tighter spacing at 360px and below. Navigation links retain 44px hit heights; the theme toggle is 44px tall (40px wide on the narrowest phones). The case-study chapter index uses a 64px sticky offset and heading scroll margins so chapter headings are not hidden behind the header. Update `public/components/navigation.css` and `public/components/case-study.css` together when changing header dimensions. The source smoke test checks these declarations, **not** their rendered geometry. Still verify 320, 375, 420, 421, 650 and 760px widths, both themes, keyboard focus, and chapter scrolling in a browser before release.
 
 ### Professional project archive metadata (October 26, 2026)
 
@@ -41,7 +41,7 @@ The visual treatment uses the existing stationery filing tabs and shared `--ink`
 
 ### Case-study readability and illustration boundaries (October 26, 2026)
 
-- **Phone facts:** `public/styles.css` keeps the audience/constraints definition list in two columns at tablet widths, but switches to **one column at 480px and below**. Long descriptions must not be squeezed into narrow columns at 320px or under browser zoom. Evidence and tradeoff annotations now have square edges to match the stationery language. Keep light/dark surface colors intact.
+- **Phone facts:** `public/components/case-study.css` keeps the audience/constraints definition list in two columns at tablet widths, but switches to **one column at 480px and below**. Long descriptions must not be squeezed into narrow columns at 320px or under browser zoom. Evidence and tradeoff annotations now have square edges to match the stationery language. Keep light/dark surface colors intact.
 - **Shipped work versus illustrative art:** **Hoylu Mobile Insights is shipped**. Its `imageBrief` and `galleryBriefs` describe **proposed portfolio illustrations**, not screenshots, documented design iterations, usability-tested flows, or verified production components. The gallery explicitly uses the same project-manager audience scenario as the case-study copy. Do not substitute a speculative mockup for a shipped screenshot without keeping its illustrative status visible.
 - **Validation:** `scripts/check-content.mjs` now checks the illustration labels, audience consistency, iteration disclaimer, one-column phone breakpoint, and square process-note styling. These are **source checks only**; real browser, zoom, keyboard, screen-reader, and deployment checks remain required.
 
@@ -56,7 +56,7 @@ Each project in `window.PORTFOLIO` should make the designer's **reasoning** as c
 5. `outcome` — what was delivered or shipped and what was learned. Use measurable impact only when verified.
 6. `image` / `gallery` — approved project visuals. Empty image fields intentionally render descriptive `imageBrief` / `galleryBriefs` placeholders; those briefs are **not evidence of completed artifacts**.
 
-The case-study view presents these as **Challenge & role → Process & design rationale → Deliverables & learning**. `caseFactsMarkup` in `public/script.js` renders an accessible `<dl>` for discipline, context and optional audience/constraints; the responsive two-column layout is scoped to `.case-view .case-facts` in `public/styles.css`. Playground projects may omit the optional fields. Preserve that sequence when adding projects. Keep `projectEvidence` and `caseHighlights` in `public/script.js` aligned with any verified status or scope changes in `public/content.js`.
+The case-study view presents these as **Challenge & role → Process & design rationale → Deliverables & learning**. `caseFactsMarkup` in `public/components/project-content.js` renders an accessible `<dl>` for discipline, context and optional audience/constraints; the responsive two-column layout is scoped to `.case-view .case-facts` in `public/styles.css`. Playground projects may omit the optional fields. Preserve that sequence when adding projects. Keep `projectEvidence` in `public/script.js` and `caseHighlights` in `public/components/project-content.js` aligned with any verified status or scope changes in `public/content.js`.
 
 **Evidence guardrails:** Never invent user interviews, usability tests, adoption numbers, conversion lifts, shipped features, or collaborators. Clearly distinguish concept/prototype work from shipped contributions. The user has confirmed **Hoylu Mobile Insights shipped**; do not describe its delivery as concept-only. The Holland America Line Navigator and stateroom TV contributions are also described as shipped. For Stateroom TV, the remote-control interaction model and Voyage Tracker scope are documented; the case study explicitly separates interface rationale from any unprovided guest research, tests, or impact measures. For Alcon **AI-Assisted IOL Planning**, the UX/UI workflow and connection between patient scans, model predictions, and another tool are documented, but clinical testing, safety validation, deployment, and impact are **not** verified; never present suggested labels or clinician review states as implemented safeguards. If the delivery status or outcome is unknown, say so rather than implying success.
 
