@@ -148,6 +148,10 @@ assert.ok(genericPaperRule >= 0 && playgroundContrastRule > genericPaperRule, 'P
 assert.match(css.slice(playgroundContrastRule, playgroundContrastRule + 260), /background:transparent/, 'Playground intro must not inherit paper background');
 assert.doesNotMatch(caseStudy, /case-section-context/, 'Chapter navigation must not reintroduce the redundant project-title inset');
 assert.match(caseStudy, /<nav class="case-section-links" aria-label="On this case study">/, 'Sticky chapter navigation must retain an accessible name');
+// Visual briefs are editorial placeholders, not screenshots. Keep the gallery's
+// accessible name truthful when no approved images have been supplied.
+assert.match(caseStudy, /const galleryLabel=gallery\.length&&gallery\.every\(Boolean\)/, 'Gallery label must reflect whether actual images are present');
+assert.match(caseStudy, /Visual briefs and image placeholders/, 'Placeholder-only galleries must not claim to be image galleries');
 
 // Guard the component load order and the lighter sidebar hierarchy without
 // claiming that source checks prove actual text contrast or browser reflow.
