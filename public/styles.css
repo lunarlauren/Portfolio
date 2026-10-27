@@ -363,7 +363,7 @@ body{font-size:var(--type-body);line-height:1.6}
 .inventory-grid{position:relative;display:grid;align-items:center}
 .inventory-grid:before{content:"PERSONAL EFFECTS   /   06";position:absolute;top:10px;left:16px;font-size:10px;font-weight:700;letter-spacing:.15em;color:#8d6478}
 .inventory-item{--tilt:0deg;appearance:none;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;padding:8px 5px;background:transparent;border:1px solid transparent;border-radius:4px;color:#203344;font:inherit;font-size:12px;line-height:1.25;cursor:pointer;transform:rotate(var(--tilt))}
-.inventory-item:nth-child(1){--tilt:-5deg}.inventory-item:nth-child(2){--tilt:4deg;margin-top:18px}.inventory-item:nth-child(3){--tilt:-3deg}.inventory-item:nth-child(4){--tilt:5deg;margin-left:10px}.inventory-item:nth-child(5){--tilt:-6deg;margin-top:14px}.inventory-item:nth-child(6){--tilt:3deg}
+.inventory-item:nth-child(1),.inventory-item:nth-child(2),.inventory-item:nth-child(3),.inventory-item:nth-child(4),.inventory-item:nth-child(5),.inventory-item:nth-child(6){--tilt:0deg;margin:0}
 
 .inventory-item:focus-visible{outline:3px solid #155caa}
 .inventory-icon{display:grid;place-items:center;width:72px;height:72px;border:0;border-radius:0;background:transparent;color:#c23e7e;font-family:Newsreader,serif;font-size:48px;font-weight:500;line-height:1}
@@ -803,11 +803,11 @@ html[data-theme="dark"] .case-section-links button:hover{background:#29455d}
    Keep the existing portrait asset; owner-supplied doodles can replace accents. */
 html:not([data-theme="dark"]) .hero h1{color:var(--brand-ink)}
 html:not([data-theme="dark"]) .hero h1 em{color:var(--brand-pink);font-style:normal}
-.notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(17px,2vw,23px);font-style:italic;line-height:1.25;transform:rotate(-2deg);background:var(--notebook-paper);padding:5px 12px;border-bottom:2px solid var(--notebook-pink);margin:6px 0 14px}
+.notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(17px,2vw,23px);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;border-bottom:2px solid var(--notebook-pink);margin:6px 0 14px}
 .notebook-hero-note span{font-size:25px;font-style:normal}
 html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
 @media(max-width:760px){
- .hero .notebook-hero-note{font-size:16px;max-width:100%;transform:rotate(-1deg)}
+ .hero .notebook-hero-note{font-size:16px;max-width:100%;transform:none}
  .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
 }
 
