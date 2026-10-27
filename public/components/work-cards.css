@@ -258,3 +258,10 @@ html[data-theme="dark"] .work .featured-project.client-file{
 @media(prefers-reduced-motion:reduce){
  .work .featured-project.client-file,.work .client-file .client-file-label{transition:none!important;animation:none!important}
 }
+
+/* Pass 8: close the mobile work-to-playground handoff without compressing
+   individual project cards. The final card already provides its own padding. */
+@media(max-width:600px){
+ .work.wrap{padding-bottom:clamp(28px,7vw,44px)}
+ .work .featured-projects-grid{margin-bottom:clamp(16px,4vw,28px)}
+}
