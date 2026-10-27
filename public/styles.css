@@ -690,17 +690,8 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 .case-back:focus-visible{outline:3px solid var(--notebook-pink);outline-offset:4px}
 
 
-/* Small-screen header: give navigation its own row instead of squeezing four
-   links and the theme switch into a single 320px line. */
+/* Phone hero and project index sizing. Header layout belongs to components/navigation.css. */
 @media(max-width:420px){
- .site-header{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;grid-template-rows:44px 44px;gap:2px 8px;padding:6px 12px 8px;align-items:center}
- .site-header .wordmark{grid-column:1;grid-row:1;justify-self:start}
- .site-header .header-actions{display:contents}
- .site-header .theme-toggle{grid-column:3;grid-row:1;justify-self:end;min-width:44px;width:44px;height:44px;min-height:44px}
- .site-header .header-contact{grid-column:2;grid-row:1;justify-self:end;min-height:44px;padding:0 10px;font-size:0.8125rem}
- .site-header .header-actions nav{grid-column:1/-1;grid-row:2;display:flex;justify-content:space-between;align-items:center;gap:6px;min-width:0;width:100%}
- .site-header .header-actions nav a{font-size:0.8125rem;min-height:44px;padding:0 10px;white-space:nowrap}
- .site-header .header-actions nav a[aria-current="location"]{padding-inline:10px}
  .hero .hero-copy{min-width:0}
  .hero .hero-copy h1{font-size:clamp(2.3125rem,10.8vw,3rem);line-height:1.05;letter-spacing:-.045em}
  .hero .hero-description{max-width:100%;overflow-wrap:break-word}
@@ -721,10 +712,9 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 
 
-/* Legacy header fallback. The production mobile header is one row via
-   components/navigation.css, which loads after this stylesheet.
+/* Narrow tablet header fallback (phone widths are owned by navigation.css).
    Sticky case-study offsets live in components/case-study.css. */
-@media(min-width:421px) and (max-width:650px){
+@media(min-width:601px) and (max-width:650px){
  .site-header{display:flex;flex-wrap:nowrap;gap:8px;min-height:56px;padding:8px 10px}
  .site-header .header-actions{display:flex;flex:1 1 auto;min-width:0;gap:6px;justify-content:flex-end}
  .site-header .header-actions nav{display:flex;width:auto;flex:0 1 auto;gap:clamp(6px,2vw,12px);justify-content:flex-end}
