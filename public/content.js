@@ -12,14 +12,14 @@ window.PORTFOLIO = {
   companies: [
     {
       id:"hoylu", name:"Hoylu", category:"PRODUCT · BRAND · MOTION",
-      description:"Construction projects move fast. I design ways to make the moving parts easier to understand, both inside the product and beyond it.",
+      description:"Construction planning has a lot of moving pieces. At Hoylu, I worked on product UX and visual communication to help people see the bigger picture without losing the details.",
       accent:"#ffacd3", featured:true,
       projects:[
         {
           title:"Connected Planning", type:"Product UX",
           audience:"Construction teams coordinating plans and decisions (design context; not a research-validated persona).",
           constraints:"Interrelated schedules, stakeholders and planning details; preserving context while making detail findable.",
-          summary:"A project can have one schedule and a dozen different versions of what's happening. How do you bring everyone back to the same picture?",
+          summary:"When every team has a different piece of the plan, finding the full picture gets messy. I worked on making connected project information easier to follow.",
           details:"Construction teams work with a lot of information. The challenge is helping people find what they need when decisions are being made. At Hoylu, I worked on product design in a space where schedules, stakeholders, and planning conversations overlap. The central UX problem was how to make a complex, collaborative workflow feel coherent: what belongs to the project, how views relate, and where a person goes to understand the next decision.",
           process:"I explored how teams could move from a broad project picture to the detail behind an item without losing context. The design considerations included the needs of people coordinating plans and those carrying them out: clear hierarchy, relationships between views, and a way to follow changes and responsibilities. This describes my design focus, not a claim that a particular flow was user-tested or adopted.",
           evidence:"Confirmed scope: product UX and visual design contributions to Hoylu's construction-planning experience. The case-study materials supplied here do not establish a specific research method, tested prototype, launch date, or measured outcome for this project.",
@@ -36,7 +36,7 @@ window.PORTFOLIO = {
           title:"Mobile Insights", type:"UX / UI",
           audience:"Project managers checking project information away from a desktop (design scenario, not documented persona research).",
           constraints:"Small-screen readability and touch interaction; balancing quick status checks with supporting context.",
-          summary:"A project manager doesn't need a desktop dashboard squeezed onto a phone. They need to know what changed and what needs attention.",
+          summary:"A desktop dashboard doesn't belong on a phone unchanged. I focused on what project managers need to notice first—and how they can get to the details.",
           details:"Hoylu Mobile Insights is a shipped product experience. My role was UX/UI design for its mobile insights work, framed around project managers checking construction-project information away from a desktop. A dashboard cannot simply be squeezed onto a phone: status, changes, and supporting context compete for limited space. The challenge was to make short checks useful without stripping away the information needed to understand an insight. This audience scenario is design framing, not a claim of documented user research.",
           process:"I explored the mobile UX story as a sequence of questions: what should someone notice first, what context explains it, and where should they go for detail? My design focus included the hierarchy of insight cards, summary information, and supporting detail, alongside legibility and touch-friendly interaction. The key rationale was to prioritize a quick status check while preserving a path to deeper context. This describes design exploration, not verified test findings or a claim that every explored interaction shipped.",
           // Editorial evidence boundary: these notes distinguish confirmed delivery
@@ -93,14 +93,14 @@ window.PORTFOLIO = {
     },
     {
       id:"alcon",name:"Alcon",category:"HEALTHCARE PRODUCT UX",
-      description:"In healthcare, an unclear screen can create real uncertainty. My work focused on making complex information easier to follow.",
+      description:"Healthcare interfaces have to make complicated information feel manageable. My work at Alcon focused on clearer paths through patient and clinical experiences.",
       accent:"#fff0dc",
       projects:[
         {
           title:"Customizable Patient Portal",type:"UX/UI Design · Patient Experience",
           audience:"Patients preparing for surgery and medical-practice staff configuring the portal.",
           constraints:"Practice-level flexibility without sacrificing clarity and consistency for patients.",
-          summary:"Before surgery, patients have enough to think about. The portal should make the next step obvious.",
+          summary:"Patients already have plenty to think about before surgery. I worked on making the next step easier to find and understand.",
           details:"Preparing for a procedure comes with a lot of information, and patients need to find the right instructions without decoding a clinical system. I worked on a customizable patient portal that allowed medical practices to tailor the experience and share surgery-related documents and preparation information. The UX challenge was to support different practice needs while keeping the patient-facing experience consistent and easy to understand.",
           process:"I considered the relationship between what a practice configures and what a patient ultimately sees. Important documents, preparation steps, and other surgery information needed a hierarchy that made the next relevant item obvious. This required thinking about content grouping, navigation, and the balance between flexibility for practices and clarity for patients. I approached customization as part of the patient experience, not a separate settings exercise.",
           // Scope is documented; no interviews, tests, or adoption data are claimed.
@@ -136,7 +136,7 @@ window.PORTFOLIO = {
     },
     {
       id:"holland-america",name:"Holland America Line",category:"PRODUCT DESIGN · UX/UI",
-      description:"Two experiences used by passengers at sea. One lives on a phone; the other has to work from across the room.",
+      description:"Designing for guests at sea meant thinking beyond a typical app screen—from finding things on a phone to navigating a TV with a remote.",
       accent:"#203d64",
       projects:[
         {
@@ -162,7 +162,7 @@ window.PORTFOLIO = {
           title:"Stateroom TV App",type:"In-Room TV UX/UI · Guest Experience",
           audience:"Cruise guests viewing onboard information from across a room.",
           constraints:"Remote-control directional navigation, visible focus and television viewing distance.",
-          summary:"No touchscreen. No mouse. Just a remote, a television, and a guest who wants to find something quickly.",
+          summary:"No mouse. No touchscreen. Just a remote and a guest trying to find something. That changes every navigation decision.",
           details:"I contributed UX/UI design to Holland America Line's shipped stateroom TV experience, including onboard information such as Voyage Tracker. The audience was guests navigating from across the room with a remote rather than a mouse or touchscreen. That input constraint shaped the interface: readable information, clear focus states, and a directional path between controls all needed attention.",
           process:"I considered the interaction from the remote outward: where focus starts, how it moves between choices, and how a guest can tell which control is selected. For Voyage Tracker, I prioritized the main voyage information and considered how secondary details could remain accessible without competing for attention. This describes my interface-design approach; it is not a claim that a particular navigation pattern was validated through testing.",
           evidence:"Confirmed scope: I contributed interface design to the shipped in-stateroom TV app, including Voyage Tracker. User interviews, usability studies, remote-control test findings, and engagement metrics have not been supplied for this case study. The design rationale below should not be read as measured guest behavior.",
@@ -181,7 +181,7 @@ window.PORTFOLIO = {
   playground:[
     {
       title:"Forktactics",type:"Independent Product · UX/UI Design",
-      summary:"What if choosing dinner felt more like picking your favorites and less like starting a new chore every night?",
+      summary:"I got tired of the weekly 'what's for dinner?' spiral, so I started designing a meal planner that makes choosing food feel more like building a deck than doing homework.",
       details:"Dinner shouldn't require a fresh round of decision-making every single night. Forktactics began as my attempt to make weekly meal planning feel less like homework. I conceived and iterated on a product that helps people choose meals, review a week of dinners, and shop with less waste. The experience combines preference-based discovery, a weekly menu, budget awareness, and a grocery list that consolidates ingredients used by multiple recipes. It's a personal project I'm still building and refining.",
       process:"I wanted the weekly menu to feel like the heart of the experience, not a maze of settings. I iterated on meal discovery, swipe interactions, menu previews before committing, recipe swaps, ingredient consolidation, and a clear cooked/not-cooked state. I explored a few visual directions, including a trading-card-inspired theme. Along the way, I kept returning to practical issues such as small-screen overflow, swipe gestures competing with scrolling, and onboarding that asked too much of new users. Building an AI-assisted prototype helped me test ideas quickly, but the important design work was deciding which interactions genuinely made planning easier.",
       // Self-directed prototype evidence is not equivalent to participant research.
