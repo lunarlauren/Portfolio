@@ -1438,3 +1438,43 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  line-height:1.45;
  letter-spacing:.01em;
 }
+
+
+/* Archive-first card hierarchy: title before image, one quiet paper edge.
+   Client color lives in the projecting tab, not a second outlined frame. */
+.work .featured-project.client-file{
+ border:1px solid #d7e0e5!important;
+ border-top-color:#d7e0e5!important;
+ border-radius:0;
+ box-shadow:3px 4px 0 rgba(32,51,68,.07);
+}
+.work .featured-project.client-file .archive-project-title{
+ margin:8px 0 18px;
+ font-size:clamp(27px,2.6vw,38px);
+ line-height:1.1;
+ letter-spacing:-.035em;
+}
+.work .featured-project.client-file>.eyebrow{
+ margin-bottom:4px;
+ color:var(--muted);
+}
+.work .featured-project.client-file .project-visual:not(:has(img)){
+ border:1px solid #c8d9e3;
+ border-radius:0;
+ background:color-mix(in srgb,var(--file-tint) 24%,#f8faf9);
+}
+.work .featured-project.client-file .project-visual .visual-brief{
+ border:0;
+ box-shadow:none;
+}
+.work .featured-project.client-file .project-meta{
+ margin-top:14px;
+}
+html[data-theme="dark"] .work .featured-project.client-file{
+ border-color:#496073!important;
+ box-shadow:3px 4px 0 rgba(0,0,0,.16);
+}
+html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(:has(img)){
+ background:#203448;
+ border-color:#496073;
+}
