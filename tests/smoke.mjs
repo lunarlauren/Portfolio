@@ -31,6 +31,7 @@ try{
  assert.match(await page.title(),/Connected Planning/);
  assert.equal(await page.locator("#main").isHidden(),true);
  assert.equal(await page.locator("#case-title").innerText(),"Connected Planning");
+ assert.equal(await page.locator(".case-delivery-stamp").count(),0,"Design contributions without verified shipping must not get a shipped stamp");
  await page.locator(".case-section-links button").first().click();
  // Evidence boundaries must be easy to find and keyboard-focusable.
  await page.locator('[data-case-jump="case-evidence-notes"]').click();
@@ -40,6 +41,7 @@ try{
  assert.match(page.url(),/\/case-studies\/hoylu\/mobile-insights\//);
  assert.match(await page.locator(".case-prose").innerText(),/Mobile Insights is a shipped product experience/,"Mobile Insights case study should describe its actual delivery status");
  assert.match(await page.locator(".case-evidence").innerText(),/Shipped product contribution/,"The project overview must identify Mobile Insights as shipped");
+ assert.equal(await page.locator(".case-delivery-stamp").innerText(),"SHIPPED PRODUCT CONTRIBUTION","Shipped delivery must be visible above the fold");
  await page.goBack();
  assert.match(page.url(),/connected-planning/);
  await page.locator(".case-back").click();
