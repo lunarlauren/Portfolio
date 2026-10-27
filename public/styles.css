@@ -888,9 +888,9 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline-color:#fff}
 
 
-/* Responsive header and case-study index: the header is one row from 421–650px,
-   but two rows at <=420px so navigation text never needs to shrink to 10px.
-   Sticky chapter offsets account for each header height without covering headings. */
+/* Legacy header fallback. The production mobile header is one row via
+   components/navigation.css, which loads after this stylesheet.
+   Sticky case-study offsets live in components/case-study.css. */
 @media(min-width:421px) and (max-width:650px){
  .site-header{display:flex;flex-wrap:nowrap;gap:8px;min-height:56px;padding:8px 10px}
  .site-header .header-actions{display:flex;flex:1 1 auto;min-width:0;gap:6px;justify-content:flex-end}
@@ -978,7 +978,7 @@ html[data-theme="dark"] .playground .section-head>p{
  .playground.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
  .case-view .case-section-links{scrollbar-width:none}
  .case-view .case-section-links::-webkit-scrollbar{display:none}
- .case-view .case-section-links{mask-image:linear-gradient(to right,#000 0%,#000 calc(100% - 18px),transparent 100%)}
+ /* No one-sided fade: it obscured the final chapter and focus outline. */
 }
 @media(prefers-reduced-motion:reduce){
  :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.notebook-sticker,.case-section-links button):active{filter:none}
