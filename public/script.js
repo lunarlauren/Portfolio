@@ -22,9 +22,12 @@ const caseRoute=()=>{
 const navigateCase=(url)=>{
  history.pushState({caseStudy:true},"",url);
  routeWithMotion();
-};const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">'+illustrativeImageStatus(p.imageBrief):'<span class="visual-label visual-brief"><span class="brief-kicker">'+esc(visualBriefKicker(p.imageBrief))+'</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';// Use the first existing process sentence for a short, evidence-safe preview.
-// Never generate or infer research findings, decisions, or results in the UI.
+};const imageMarkup=(p)=>p.image?'<img loading="lazy" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title+' project preview')+'">'+illustrativeImageStatus(p.imageBrief):'<span class="visual-label visual-brief"><span class="brief-kicker">'+esc(visualBriefKicker(p.imageBrief))+'</span><span>'+esc(p.imageBrief||"Add an approved project image or design mockup here.")+'</span></span>';const visual=(p)=>'<div class="project-visual">'+imageMarkup(p)+'</div>';// Prefer a reviewed archiveApproach when the case study opens with a question
+// or context rather than an action. Otherwise reuse the first process sentence.
+// These are editorial excerpts, never inferred research, decisions, or results.
 const processTeaser=p=>{
+ const curated=String(p.archiveApproach||"").trim();
+ if(curated)return curated;
  const text=String(p.process||"").trim();
  return text.match(/^.*?[.!?](?=\s|$)/)?.[0]||text;
 };
