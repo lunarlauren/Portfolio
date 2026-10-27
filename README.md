@@ -2,6 +2,8 @@
 
 A lightweight portfolio of product UX, visual design, and illustration. The production-facing static site is in **`public/`** and is configured as a Cloudflare Worker with static assets. The root-level `index.html`, `script.js`, `content.js`, and `styles.css` are older files; **do not edit those to change the live portfolio**.
 
+> **Developer handoff:** See [docs/HANDOFF.md](docs/HANDOFF.md) for the current file map, UX evidence boundaries, and validation checklist.
+
 ## Project map
 
 - `public/index.html` — page structure, header, hero, contact and theme toggle.
