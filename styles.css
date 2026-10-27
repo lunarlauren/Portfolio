@@ -24,6 +24,12 @@
   --shadow-card:0 18px 30px #242c361a;
   --content-width:1320px;
   --page-gutter:clamp(20px,5vw,72px);
+  --type-label:11px;
+  --type-body-small:14px;
+  --type-section:clamp(35px,5vw,66px);
+  --type-project-title:25px;
+  --tracking-label:.12em;
+  --tracking-heading:-.055em;
   font-family:var(--font-body);
   color:var(--ink);
   background:var(--paper);
@@ -105,7 +111,7 @@ button:focus-visible,a:focus-visible {
   display:flex;
   flex-wrap:wrap;
   gap:clamp(12px,3vw,38px);
-  font-size:14px;
+  font-size:var(--type-body-small);
   font-weight:600
 }
 
@@ -119,7 +125,7 @@ button:focus-visible,a:focus-visible {
 }
 
 .eyebrow {
-  font-size:11px;
+  font-size:var(--type-label);
   letter-spacing:.16em;
   font-weight:700
 }
@@ -195,8 +201,8 @@ section.work,section.playground,section.about {
 
 .section-head h2,
 .about h2 {
-  font:600 clamp(35px,5vw,66px)/1.05 var(--font-display);
-  letter-spacing:-.055em;
+  font:600 var(--type-section)/1.05 var(--font-display);
+  letter-spacing:var(--tracking-heading);
   margin:14px 0 0
 }
 
@@ -251,9 +257,9 @@ section.work,section.playground,section.about {
   display:flex;
   justify-content:space-between;
   gap:12px;
-  font-size:11px;
+  font-size:var(--type-label);
   font-weight:700;
-  letter-spacing:.12em
+  letter-spacing:var(--tracking-label)
 }
 
 .card-top span:last-child {
@@ -354,6 +360,11 @@ section.work,section.playground,section.about {
   transform:scale(1.035)
 }
 
+/* Match the image interaction for keyboard navigation when cards gain links. */
+.project-card:focus-within img {
+  transform:scale(1.035)
+}
+
 .placeholder-mark {
   font:500 90px var(--font-display);
   opacity:.35
@@ -367,7 +378,7 @@ section.work,section.playground,section.about {
 }
 
 .project-card h4 {
-  font:600 25px var(--font-display);
+  font:600 var(--type-project-title) var(--font-display);
   letter-spacing:-.04em;
   margin:8px 0
 }
@@ -375,7 +386,7 @@ section.work,section.playground,section.about {
 .project-card p {
   color:var(--muted);
   line-height:1.55;
-  font-size:14px
+  font-size:var(--type-body-small)
 }
 
 .playground,
