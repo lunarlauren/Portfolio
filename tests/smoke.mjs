@@ -39,6 +39,7 @@ try{
  await page.locator(".case-next-nav a[href^='/case-studies/']").click();
  assert.match(page.url(),/\/case-studies\/hoylu\/mobile-insights\//);
  assert.match(await page.locator(".case-prose").innerText(),/Mobile Insights is a shipped product experience/,"Mobile Insights case study should describe its actual delivery status");
+ assert.match(await page.locator(".case-evidence").innerText(),/Shipped product contribution/,"The project overview must identify Mobile Insights as shipped");
  await page.goBack();
  assert.match(page.url(),/connected-planning/);
  await page.locator(".case-back").click();
@@ -48,6 +49,20 @@ try{
  await page.locator('a[href="#about"]').first().click();
  assert.match(page.url(),/\/#about$/);
  assert.equal(await page.locator("#main").isVisible(),true);
+ // Computed-style check catches a transparent footer in either theme.
+ // It does not replace visual or screenshot QA on the deployed site.
+ for(const theme of ["light","dark"]){
+  const chrome=await page.evaluate(theme=>{
+   document.documentElement.setAttribute("data-theme",theme);
+   const footer=getComputedStyle(document.querySelector("footer.wrap"));
+   const header=getComputedStyle(document.querySelector(".site-header"));
+   return {footerColor:footer.backgroundColor,footerImage:footer.backgroundImage,headerColor:header.backgroundColor};
+  },theme);
+  assert.notEqual(chrome.footerColor,"transparent",theme+" footer must be opaque");
+  assert.notEqual(chrome.footerColor,"rgba(0, 0, 0, 0)",theme+" footer must be opaque");
+  assert.equal(chrome.footerImage,"none",theme+" footer must not show the page texture");
+  assert.equal(chrome.footerColor,chrome.headerColor,theme+" header and footer should share the paper surface");
+ }
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  mobile.on("pageerror",error=>errors.push(error.message));
  await mobile.goto(origin+"/case-studies/alcon/ai-assisted-iol-planning/");
@@ -69,5 +84,5 @@ try{
  },null,{timeout:3000});
  await mobile.close();
  assert.deepEqual(errors,[],"Uncaught browser JavaScript errors");
- console.log("PASS: direct deep links, chapter navigation, next/back, home links, mobile layout, no page errors");
+ console.log("PASS: deep links, chapters, shipped status, opaque themed footer, mobile layout, no page errors");
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve))}
