@@ -59,9 +59,7 @@ body {background:var(--paper)}
 .hero-feature {overflow:visible;isolation:isolate}
 .hero-feature:before {border-radius:inherit}
 .hero-feature .feature-bottom {padding-right:24%;z-index:4}
-@media(max-width:950px) {.hero-feature .hero-portrait {width:39%;max-width:220px;right:-5%;bottom:-12%}}
 @media(max-width:760px) {.hero-feature .hero-portrait {width:45%;max-width:195px;right:-3%;bottom:-10%} .hero-feature .feature-bottom {padding-right:30%}}
-@media(prefers-reduced-motion:reduce) {.hero-feature:hover .hero-portrait {transform:none}}
 
 .hero-feature .art-tile-one {background:#ffb5d8}
 .hero-feature .art-tile-three {background:#e7d6ff}
@@ -77,18 +75,10 @@ body {background:var(--paper)}
 .hero-feature .feature-top a,.hero-feature .feature-bottom a {color:inherit;text-decoration:none}
 .hero-feature .feature-top a:hover,.hero-feature .feature-bottom a:hover {text-decoration:underline}
 .hero-feature .feature-art {cursor:pointer}
-@media(max-width:950px) {.portrait-interaction {width:39%;max-width:220px;right:-5%;bottom:-12%}}
-@media(max-width:760px) {.portrait-interaction {width:45%;max-width:195px;right:-3%;bottom:-10%} .portrait-bubble {right:52%;bottom:78%;font-size:12px;padding:11px 13px}}
-@media(hover:none) {.portrait-bubble {opacity:1;visibility:visible;transform:none;pointer-events:auto;right:55%;bottom:80%;padding:10px 12px;font-size:12px}}
-@media(prefers-reduced-motion:reduce) {.portrait-bubble {transition:none} .portrait-interaction:hover .hero-portrait {transform:none}}
 .company-grid .company-card[data-company="holland-america"] .card-top,.company-grid .company-card[data-company="holland-america"] .card-bottom {color:#fff}
 .hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
 .hero-feature .feature-art .art-center {text-decoration:none}
 .hero-feature .feature-top,.hero-feature .feature-bottom {position:relative;z-index:2}
-@media(max-width:760px) {.hero-feature .portrait-bubble {min-width:160px;max-width:190px}}
-@media(hover:none) {.hero-feature .portrait-bubble {opacity:1;visibility:visible;transform:none;pointer-events:auto}}
-@media(max-width:950px) {.hero-feature .portrait-interaction {bottom:-7%} .hero-feature .portrait-bubble {bottom:100%;right:4%}}
-@media(max-width:760px) {.hero-feature .portrait-interaction {bottom:-5%} .hero-feature .portrait-bubble {bottom:100%;right:0}}
 :root {--paper:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));--line:#cbdde7;--teal:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));--brand-pink:#f15c9d;--brand-navy:var(--brand-ink);--brand-sky:color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy))}
 body {color:var(--ink)}
 .hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {font-family:'Newsreader',Georgia,serif}
@@ -190,7 +180,7 @@ html,body{max-width:100%;overflow-x:clip}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(forced-colors:active){.company-card,.project-card-link,.primary-link,.portrait-bubble{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
 
-.site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next,.portrait-about-link{min-height:44px;display:inline-flex;align-items:center}
+.site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
 .company-card{touch-action:manipulation}
 @media(max-width:760px){.site-header nav{flex-wrap:wrap}.company-name,.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot,.company-description{opacity:1;text-shadow:none}.project-visual:not(:has(img)){border-style:solid}}
@@ -213,7 +203,7 @@ html,body{max-width:100%;overflow-x:clip}
 :root{--type-xs:12px;--type-sm:14px;--type-body:16px;--type-lead:18px}
 body{font-size:var(--type-body);line-height:1.6}
 .site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.case-facts,.case-fact-label,.brief-kicker,.project-visual .visual-label,.project-visual:not(:has(img)) .visual-label{font-size:var(--type-xs);line-height:1.5}
-.project-card p,.company-description,.case-back,.portrait-about-link,footer{font-size:var(--type-sm);line-height:1.6}
+.project-card p,.company-description,.case-back,footer{font-size:var(--type-sm);line-height:1.6}
 .hero-description,.about-bottom p,.case-prose p{line-height:1.65}
 @media(max-width:760px){.site-header nav{font-size:13px}.hero-description,.about-bottom p,.case-prose p{font-size:16px}.project-card p{font-size:14px}}
 
