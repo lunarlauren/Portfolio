@@ -57,6 +57,15 @@ try{
  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,"Unexpected mobile horizontal overflow");
  await mobile.setViewportSize({width:320,height:720});
  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,"Unexpected 320px horizontal overflow");
+ // Reading to the outcome should reveal its active tab in the narrow chapter strip.
+ await mobile.locator("#case-outcome").evaluate(node=>node.scrollIntoView({block:"start",behavior:"auto"}));
+ await mobile.waitForFunction(()=>{
+  const nav=document.querySelector(".case-section-links");
+  const tab=nav?.querySelector('[data-case-jump="case-outcome"][aria-current="location"]');
+  if(!tab)return false;
+  const a=tab.getBoundingClientRect(),b=nav.getBoundingClientRect();
+  return a.left>=b.left-2&&a.right<=b.right+2;
+ },null,{timeout:3000});
  await mobile.close();
  assert.deepEqual(errors,[],"Uncaught browser JavaScript errors");
  console.log("PASS: direct deep links, chapter navigation, next/back, home links, mobile layout, no page errors");
