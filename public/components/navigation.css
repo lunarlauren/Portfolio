@@ -52,8 +52,8 @@ footer.wrap{
  display:flex;align-items:center;justify-content:space-between;
  gap:16px;min-height:92px;
  padding-block:24px 32px;
- /* An opaque footer sheet covers the dotted page texture in both themes. */
- background-color:var(--site-chrome-bg);
+ /* Reset any inherited notebook texture as well as painting an opaque sheet. */
+ background:var(--site-chrome-bg);
  border-top:1px solid var(--site-chrome-edge);
  font-size:var(--type-sm,0.875rem);
  color:var(--muted);
