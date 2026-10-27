@@ -181,3 +181,15 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-view{--case-type-title:clamp(38px,8vw,56px);--case-type-lead:clamp(17px,4vw,20px);}
  .case-view .case-head h1{font-size:var(--case-type-title);line-height:1.1;overflow-wrap:break-word;hyphens:auto;}
 }
+
+/* Sidebar hierarchy: labels identify the field; values read as supporting copy. */
+.case-view .case-fact-value{
+ font-weight:400;
+ font-size:clamp(14px,1.05vw,16px);
+ line-height:1.6;
+ letter-spacing:0;
+}
+.case-view .case-fact-label{
+ font-weight:650;
+ letter-spacing:.09em;
+}
