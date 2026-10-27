@@ -1004,30 +1004,6 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
 
 /* Component styles extracted to ./components/stationery.css; load after this file. */
 
-/* Problem-solving hero: shared layout in both themes. */
-.hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
-.hero .hero-copy h1 em{display:inline-block;max-width:100%}
-.hero .hero-description{max-width:59ch;text-wrap:pretty}
-@media(max-width:760px){
- .hero .hero-copy h1{font-size:clamp(2.375rem,8.4vw,3.625rem);line-height:1.08;max-width:14ch}
- .hero .hero-copy h1 em{display:inline;overflow-wrap:normal}
- .hero .notebook-hero-note{font-size:clamp(0.9375rem,3.7vw,1.1875rem);line-height:1.4}
- .hero .hero-description{font-size:clamp(1rem,3.8vw,1.125rem);line-height:1.6;max-width:43ch}
-}
-
-/* Mobile hero: quiet editorial hierarchy, no decorative sticker or oversized copy. */
-@media(max-width:600px){
- .hero .notebook-sticker{display:none!important}
- .hero.wrap{padding-top:clamp(28px,7vw,42px);gap:28px}
- .hero .hero-copy>.eyebrow{font-size:0.625rem;line-height:1.5;letter-spacing:.075em}
- .hero .hero-copy h1{font-size:clamp(2.1875rem,8.5vw,2.6875rem);line-height:1.1;margin:22px 0 18px;max-width:16ch;letter-spacing:-.04em}
- .hero .notebook-hero-note{display:block;font-size:clamp(0.9375rem,3.8vw,1.0625rem);line-height:1.45;margin:12px 0 18px;padding:0 0 12px;border-bottom-width:1px}
- .hero .notebook-hero-note span{display:none}
- .hero .hero-description{font-size:1rem;max-width:42ch}
- .hero .hero-actions{margin-top:24px;gap:12px}
- .hero .hero-actions .primary-link{min-height:48px}
-}
-
 /* Paper continuity: header and footer belong to the same page surface.
    Keep geometry identical across themes; only surface tokens change. */
 :root{--site-chrome-bg:var(--notebook-paper,#fffdf8);--site-chrome-edge:var(--line)}
