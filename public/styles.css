@@ -727,8 +727,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  .hero-feature{min-height:300px}
  .hero-feature .feature-bottom{max-width:58%}
 }
-@media(hover:none) and (max-width:760px){
-}
 /* Keyboard users should be able to reveal the portrait note without hover. */
 
 
@@ -744,11 +742,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  .site-header .theme-toggle{width:44px;min-width:44px;height:44px;min-height:44px;flex:0 0 44px}
  .site-header .header-actions nav a[aria-current="location"]{padding:0}
 }
-@media(max-width:420px){
- /* The earlier two-row grid is intentional. Keep its 44px touch targets. */
-}
-
-
 /* On phones, keep the featured illustration caption short and uncluttered. */
 @media(max-width:600px){
  .hero-feature .feature-bottom{display:block;max-width:100%;width:100%;padding-right:0}
