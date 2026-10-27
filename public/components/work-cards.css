@@ -1,3 +1,32 @@
+/* WORK SECTION INTRO
+   The heading and summary use the same two tracks as the project archive.
+   Keep desktop typography here, not in legacy styles.css. The short-height
+   adjustment must follow the normal desktop rule to preserve laptop rhythm. */
+@media(min-width:1024px){
+ .work .section-head{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start;
+  column-gap:clamp(20px,2.5vw,36px);
+  margin-bottom:clamp(28px,3vw,42px);
+ }
+ .work .section-head h2{
+  margin-bottom:0;
+  font-size:clamp(2.625rem,4vw,4rem);
+  line-height:1.06;
+ }
+ .work .section-head>p{
+  justify-self:start;
+  align-self:center;
+  max-width:38ch;
+  margin:0;
+  line-height:var(--leading-body,1.6);
+ }
+}
+@media(min-width:1024px) and (max-height:800px){
+ .work .section-head{margin-bottom:26px}
+}
+
 /* Work archive cards: client folder tabs, verified contribution metadata,
    project previews, and dark-mode card surfaces. Loaded after base styles. */
 
