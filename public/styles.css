@@ -573,7 +573,7 @@ html:not([data-theme="dark"]) .hero h1 em{color:var(--brand-pink);font-style:nor
 .notebook-hero-note span{font-size:1.5625rem;font-style:normal}
 html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
 @media(max-width:760px){
- .hero .notebook-hero-note{font-size:1rem;max-width:100%;transform:none}
+ .hero .notebook-hero-note{font-size:1rem;max-width:100%}
  .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
 }
 
