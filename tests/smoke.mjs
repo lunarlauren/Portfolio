@@ -49,6 +49,16 @@ try{
  await page.locator('a[href="#about"]').first().click();
  assert.match(page.url(),/\/#about$/);
  assert.equal(await page.locator("#main").isVisible(),true);
+ // The footer surface must reach the viewport edges, not stop at .wrap's
+ // 1320px content width (which would expose the notebook dots on desktop).
+ await page.setViewportSize({width:1440,height:900});
+ const footerBounds=await page.locator("footer.wrap").evaluate(node=>{
+  const bounds=node.getBoundingClientRect();
+  return {left:bounds.left,width:bounds.width,viewport:document.documentElement.clientWidth};
+ });
+ assert.ok(Math.abs(footerBounds.left)<=1&&footerBounds.width>=footerBounds.viewport-2,"Footer paper must be full bleed at desktop widths");
+ await page.locator("footer.wrap a").focus();
+ assert.equal(await page.locator("footer.wrap a").evaluate(node=>getComputedStyle(node).outlineStyle),"solid","Footer link needs a visible keyboard focus outline");
  // Computed-style check catches a transparent footer in either theme.
  // It does not replace visual or screenshot QA on the deployed site.
  for(const theme of ["light","dark"]){
