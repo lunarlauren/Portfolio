@@ -3,7 +3,7 @@
 ## Source of truth
 Edit the production-facing site in `public/`; the root-level HTML/CSS/JS files are legacy copies. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
-Styles begin in `public/components/foundations.css`, then the legacy `public/styles.css`, with scoped additions in `public/components/...`. Client folder tabs use a shared dark-ink token (`--file-label-ink`) against blue, pink, and green accents; maintain at least **4.5:1 contrast** for the small tab labels in both themes. Prefer existing color and type tokens, preserve the stationery visual language, and check both light/dark modes. Avoid appending competing overrides to the base stylesheet.
+Styles begin in `public/components/foundations.css`, then `public/components/homepage-base.css`, then the legacy `public/styles.css`, with scoped additions in `public/components/...`. Client folder tabs use a shared dark-ink token (`--file-label-ink`) against blue, pink, and green accents; maintain at least **4.5:1 contrast** for the small tab labels in both themes. Prefer existing color and type tokens, preserve the stationery visual language, and check both light/dark modes. Avoid appending competing overrides to the base stylesheet.
 
 ## Editorial and UX evidence rules
 Each professional case study should make **context/problem, intended audience and constraints, actual role, evidence/discovery where documented, explorations and rationale, implementation/collaboration when verified, and outcomes or learning** easy to find. If a fact is missing, say so; do not manufacture interviews, iterations, tests, conversion metrics, or launch claims.
@@ -29,6 +29,7 @@ Think of the site like a set of labeled drawers:
 | Homepage words, About portrait or section order | `public/index.html` |
 | A project story, evidence or approved image | `public/content.js` |
 | Fonts, starting colors, focus and basic layout | `public/components/foundations.css` |
+| Early homepage layout, hero and card rules | `public/components/homepage-base.css` |
 | Older component styling and later overrides | `public/styles.css` (legacy; edit carefully) |
 | About portrait size and mobile layout | `public/components/about.css` |
 | Header and navigation appearance | `public/components/navigation.css` |
@@ -45,3 +46,7 @@ Think of the site like a set of labeled drawers:
 ## CSS cleanup progress
 
 The first global rules were moved into `public/components/foundations.css` without changing their order relative to the remaining styles. `public/styles.css` is still a large legacy file with overrides and should **not** be deleted or reordered wholesale. Future extraction should move coherent rule groups and verify computed styles, mobile overflow, dark mode, and the browser smoke tests before declaring a pass.
+
+### Homepage CSS extraction
+
+`homepage-base.css` contains the earliest homepage, hero, card, and responsive rules in their original sequence. Later declarations in `styles.css` and the dedicated component stylesheets can still override these rules. This extraction is organizational, not a complete removal of duplicates; validate actual computed styles before consolidating overlapping selectors.
