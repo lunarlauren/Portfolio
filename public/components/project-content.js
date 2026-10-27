@@ -10,6 +10,11 @@ const visualBriefKicker=brief=>{
  return "IMAGE TO ADD · NOT YET SUPPLIED";
 };
 
+// An approved *illustration* remains illustrative even after its file is added.
+// The source brief must be revised when a real approved product screenshot replaces it.
+const illustrativeImageStatus=brief=>/^ILLUSTRATIVE\s*\//i.test(String(brief||"").trim())
+ ?'<span class="visual-image-status">ILLUSTRATIVE VISUAL · NOT A PRODUCT SCREENSHOT</span>':"";
+
 // Short, factual takeaways help visitors skim without replacing the full case study.
 const caseHighlights={
  "Connected Planning":[["THE PROBLEM","Project information can be hard to follow across teams."],["MY FOCUS","Project context and clearer paths into the details."]],
