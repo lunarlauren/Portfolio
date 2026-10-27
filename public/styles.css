@@ -1713,3 +1713,23 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,1
   background:color-mix(in srgb,var(--inv-accent) 7%,transparent);
  }
 }
+
+/* Inventory illustrations: one consistent outlined visual language.
+   Existing item accent colors remain the source of personality. */
+.creative-inventory .inventory-icon{
+ display:grid;
+ place-items:center;
+ font-size:0;
+}
+.creative-inventory .inventory-icon svg{
+ display:block;
+ width:clamp(40px,5vw,52px);
+ height:clamp(40px,5vw,52px);
+ max-width:100%;
+ overflow:visible;
+ stroke:currentColor;
+ filter:none;
+}
+@media(max-width:460px){
+ .creative-inventory .inventory-icon svg{width:42px;height:42px}
+}
