@@ -66,7 +66,7 @@
  max-width:59ch;
  margin:0 0 1.25em;
  font-size:var(--type-body,1rem);
- line-height:1.65;
+ line-height:var(--leading-reading,1.65);
  text-wrap:pretty;
 }
 .about .inventory-heading>p{font-size:0.8125rem;line-height:1.5}
