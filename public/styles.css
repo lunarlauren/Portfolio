@@ -1478,3 +1478,45 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
  background:#203448;
  border-color:#496073;
 }
+
+
+/* Optical alignment audit: one straight baseline and one shadow direction.
+   Keep the stationery personality in color and paper, not accidental tilts. */
+.hero .notebook-hero-note{
+ transform:none;
+ border-bottom:2px solid var(--notebook-pink);
+ padding:5px 0 7px;
+ margin-inline:0;
+}
+.hero .notebook-hero-note::before,
+.hero .notebook-hero-note::after{transform:none}
+@media(min-width:761px){
+ .playground .play-grid{align-items:stretch}
+ .playground .play-grid>.project-card{display:flex;min-width:0}
+ .playground .play-grid .project-card-link{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+ }
+ .playground .play-grid .project-card-cta{margin-top:auto;padding-top:20px}
+ .playground .play-grid .project-card-process{margin-bottom:0}
+}
+@media(min-width:901px){
+ .about .about-bottom{align-items:start}
+ .about .about-copy,
+ .about .creative-inventory{align-self:start}
+ .about .creative-inventory .inventory-heading{
+  margin-top:0;
+  margin-bottom:12px;
+ }
+ .about .creative-inventory .inventory-heading h3{margin-top:3px}
+ .about .creative-inventory .inventory-heading>p{margin-top:5px}
+}
+html:not([data-theme="dark"]) .about .inventory-grid,
+html:not([data-theme="dark"]) .about .inventory-inspect{
+ box-shadow:none;
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .playground .play-grid .project-card-link:hover .project-visual{box-shadow:none}
+}
