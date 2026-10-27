@@ -18,7 +18,7 @@ const illustrativeImageStatus=brief=>/^ILLUSTRATIVE\s*\//i.test(String(brief||""
 // Short, factual takeaways help visitors skim without replacing the full case study.
 const caseHighlights={
  "Connected Planning":[["THE PROBLEM","Project information can be hard to follow across teams."],["MY FOCUS","Project context and clearer paths into the details."]],
- "Mobile Insights":[["THE QUESTION","What matters most when someone checks a project on their phone?"],["MY FOCUS","Readable insights and useful next steps on small screens."]],
+ "Mobile Insights":[["DELIVERY","Shipped product experience; my contribution was mobile UX/UI design."],["DESIGN FOCUS","Readable insight hierarchy with a path to supporting detail."]],
  "Campaigns & Events":[["THE CHALLENGE","One product story, very different viewing distances."],["MY CONTRIBUTION","Event signage and digital campaign visuals."]],
  "Motion & Storytelling":[["THE FORMAT","A product idea explained in roughly 30 seconds."],["MY CONTRIBUTION","Storyboarding and visual pacing."]],
  "Customizable Patient Portal":[["WHO IT'S FOR","Patients preparing for surgery and the practices supporting them."],["THE DESIGN TASK","Flexible practice setup without confusing patients."]],
