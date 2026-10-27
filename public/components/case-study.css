@@ -209,3 +209,33 @@ html[data-theme="dark"] .case-view{
 @media(max-width:760px){
  .case-view .case-head{padding:clamp(22px,5vw,34px)}
 }
+
+/* Shared surfaces: layout is identical across themes; only tokens vary. */
+.case-view{
+ --case-fact-bg:var(--paper);
+ --case-fact-border:var(--line);
+ --case-fact-label:var(--muted);
+ --case-fact-ink:var(--ink);
+ --case-reading-bg:var(--case-paper,#fffdf8);
+ --case-reading-rule:var(--notebook-rule,rgba(32,51,68,.1));
+}
+html[data-theme="dark"] .case-view{
+ --case-fact-bg:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-blue));
+ --case-fact-border:#718ba2;
+ --case-fact-label:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));
+ --case-fact-ink:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));
+ --case-reading-bg:color-mix(in srgb,var(--palette-navy) 88%,#0f1b26);
+ --case-reading-rule:color-mix(in srgb,var(--palette-blue) 20%,transparent);
+}
+.case-view .case-evidence-item{
+ background:var(--case-fact-bg);
+ border-color:var(--case-fact-border);
+}
+.case-view .case-evidence-label{color:var(--case-fact-label)}
+.case-view .case-evidence-item strong{color:var(--case-fact-ink)}
+.case-view .case-prose{
+ background-color:var(--case-reading-bg);
+ background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--case-reading-rule) 31px,var(--case-reading-rule) 32px);
+ border-radius:0;
+ padding:clamp(22px,3vw,34px);
+}
