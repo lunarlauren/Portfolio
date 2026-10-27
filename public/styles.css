@@ -762,7 +762,7 @@ html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:
 html:not([data-theme="dark"]) .hero-description,
 html:not([data-theme="dark"]) .section-head>p{background:transparent;box-decoration-break:initial;-webkit-box-decoration-break:initial}
 html:not([data-theme="dark"]) .featured-project{background:var(--notebook-paper);border:1px solid #d5e3ed;border-radius:16px;padding:clamp(14px,2vw,22px);box-shadow:4px 6px 0 rgba(153,202,235,.35)}
-html:not([data-theme="dark"]) .featured-project:nth-child(even){box-shadow:-4px 6px 0 rgba(240,91,159,.17)}
+html:not([data-theme="dark"]) .featured-project:nth-child(even){box-shadow:4px 6px 0 rgba(153,202,235,.35)}
 .notebook-sticker{position:absolute;z-index:2;right:clamp(14px,3vw,42px);top:12px;width:52px;height:52px;border:2px solid white;border-radius:16px;background:#ffcf4e;box-shadow:0 3px 0 #dcac39,0 5px 12px rgba(32,51,68,.15);transform:rotate(12deg);display:grid;place-items:center;font-size:28px;cursor:pointer;touch-action:manipulation}
 .notebook-sticker:active{transform:rotate(4deg) scale(.88)}
 .notebook-sticker.sticker-pop{animation:notebook-sticker-pop .38s cubic-bezier(.2,1.8,.5,1)}
@@ -1446,7 +1446,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  border:1px solid #d7e0e5!important;
  border-top-color:#d7e0e5!important;
  border-radius:0;
- box-shadow:3px 4px 0 rgba(32,51,68,.07);
+ box-shadow:4px 6px 0 rgba(32,51,68,.08);
 }
 .work .featured-project.client-file .archive-project-title{
  margin:8px 0 18px;
@@ -1472,7 +1472,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
 }
 html[data-theme="dark"] .work .featured-project.client-file{
  border-color:#496073!important;
- box-shadow:3px 4px 0 rgba(0,0,0,.16);
+ box-shadow:4px 6px 0 rgba(0,0,0,.16);
 }
 html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(:has(img)){
  background:#203448;
