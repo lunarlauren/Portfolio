@@ -27,6 +27,15 @@
  .work .section-head{margin-bottom:26px}
 }
 
+/* At intermediate widths the global section-head flex layout can squeeze
+   the process statement beside a long editorial title. Stack these tracks
+   before the desktop archive grid takes over. */
+@media(min-width:601px) and (max-width:1023px){
+ .work .section-head{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-3)}
+ .work .section-head>p{max-width:54ch;margin:0;line-height:var(--leading-body,1.6)}
+ .work .section-head h2{max-width:19ch;text-wrap:balance}
+}
+
 /* Work archive cards: client folder tabs, verified contribution metadata,
    project previews, and dark-mode card surfaces. Loaded after base styles. */
 
