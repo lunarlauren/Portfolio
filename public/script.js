@@ -118,6 +118,9 @@ function routeWithMotion(){
     if(!destination.hasAttribute("tabindex"))destination.setAttribute("tabindex","-1");
     destination.focus({preventScroll:true});
    }
+   // An opener from an earlier gallery visit must not be reused after
+   // navigating elsewhere and then opening a different case study.
+   caseOpener=null;
   });
  }
  previousHash=nextHash;
