@@ -474,18 +474,6 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mi
 @media(forced-colors:active){.inventory-item[aria-pressed="true"]{outline:2px solid Highlight;outline-offset:-3px}.skip-link{border-color:CanvasText}}
 
 
-/* Case-study handoff: quick factual overview for skimming hiring managers.
-   Keep values in script.js/projectEvidence aligned with confirmed project scope. */
-.case-evidence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px);margin:clamp(20px,3vw,36px) 0}
-.case-evidence-item{min-width:0;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
-.case-evidence-label{display:block;margin-bottom:8px;font:700 11px/1.4 'DM Sans',system-ui,sans-serif;letter-spacing:.1em;color:var(--muted)}
-.case-evidence-item strong{display:block;font-size:clamp(0.8125rem,1.2vw,1rem);line-height:1.5;font-weight:600;color:var(--ink);overflow-wrap:break-word}
-@media(max-width:760px){.case-evidence{grid-template-columns:1fr;gap:10px}.case-evidence-item{padding:14px 16px}}
-html[data-theme="dark"] .case-evidence-item{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-blue));border-color:#718ba2}
-html[data-theme="dark"] .case-evidence-label{color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue))}
-html[data-theme="dark"] .case-evidence-item strong{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
-
-
 /* Navigation: a persistent current-section cue works without relying on color alone. */
 .site-header nav a[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 
