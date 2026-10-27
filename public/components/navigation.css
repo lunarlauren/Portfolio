@@ -1,8 +1,9 @@
-/* Navigation: responsive one-row header and accessible footer brand mark.
-   Keep mobile layout decisions here rather than adding overrides elsewhere. */
+/* Navigation: the authoritative responsive header layout and footer mark.
+   The legacy stylesheet owns desktop chrome, while this file owns layout
+   at 650px and below. Keep mobile breakpoints and hit areas together. */
 .footer-mark{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
 .footer-mark img{display:block;object-fit:contain}
-@media(max-width:600px){
+@media(max-width:650px){
  .site-header{
   display:flex;align-items:center;justify-content:space-between;
   gap:8px;min-height:64px;
@@ -23,18 +24,25 @@
   min-height:44px;padding:0 1px;font-size:clamp(0.6875rem,2.9vw,0.8125rem);
   white-space:nowrap;
  }
+ .site-header .header-actions nav a[aria-current="location"]{
+  padding-inline:1px;background:transparent;box-shadow:none;border:0;border-radius:0;
+  color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;
+ }
+ .site-header .header-actions nav a,.site-header .header-contact{
+  background:transparent;box-shadow:none;border:0;border-radius:0;
+ }
  .site-header .header-contact{
-  min-height:40px;padding:0 4px;border:0;border-radius:0;
+  min-height:44px;padding:0 4px;border:0;border-radius:0;
   font-size:clamp(0.6875rem,2.9vw,0.8125rem);
  }
  .site-header .header-contact span{display:none}
  .site-header .theme-toggle{
-  flex:0 0 36px;width:36px;min-width:36px;height:36px;min-height:36px;
+  flex:0 0 44px;width:44px;min-width:44px;height:44px;min-height:44px;
  }
 }
 @media(max-width:360px){
  .site-header{gap:5px;padding-inline:9px}
  .site-header .header-actions,.site-header .header-actions nav{gap:5px}
  .site-header .header-actions nav a,.site-header .header-contact{font-size:0.6875rem}
- .site-header .theme-toggle{flex-basis:32px;width:32px;min-width:32px;height:32px;min-height:32px}
+ .site-header .theme-toggle{flex-basis:40px;width:40px;min-width:40px;height:44px;min-height:44px}
 }
