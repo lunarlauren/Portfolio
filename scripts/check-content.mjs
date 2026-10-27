@@ -286,4 +286,14 @@ for (const accent of ['blue','pink','green']) {
 }
 
 
+
+// Uploaded illustrative artwork must not silently read as shipped UI.
+// Exercise the shared classifier, then guard both render paths and its visible style.
+const provenanceFor = brief => vm.runInNewContext(projectContent + '\nillustrativeImageStatus(' + JSON.stringify(brief) + ')');
+assert.match(provenanceFor('ILLUSTRATIVE / Proposed flow'), /ILLUSTRATIVE VISUAL · NOT A PRODUCT SCREENSHOT/);
+assert.equal(provenanceFor('APPROVED / Actual shipped screen'), '');
+assert.ok(script.includes('illustrativeImageStatus(p.imageBrief)'), 'Archive/gallery images must retain illustrative status');
+assert.ok(caseStudy.includes('illustrativeImageStatus(p.imageBrief)'), 'Case-study hero images must retain illustrative status');
+assert.match(caseCss, /\.case-hero-visual > \.visual-image-status/, 'Illustrative hero label must have visible styling');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);
