@@ -59,3 +59,7 @@ The first global rules were moved into `public/components/foundations.css` witho
 ### Removed hero portrait legacy CSS
 
 The hero portrait and speech bubble were retired when the illustration moved into About. Their obsolete selectors have now been removed from `public/styles.css`. The About portrait's active rules are in `public/components/about.css`. Dark-mode token declarations overridden later in the same stylesheet have been pruned; theme overrides elsewhere remain and need browser QA before broader merging.
+
+### Theme token consolidation
+
+The legacy stylesheet now keeps the final notebook margin values in its first notebook token block, and the final dark-mode focus/muted/line values in the main dark-theme block. `--site-chrome-edge` inherits `var(--line)` in both themes; only the dark chrome background needs its own override. Continue to keep the CSS load order unchanged until visual regression checks are complete.
