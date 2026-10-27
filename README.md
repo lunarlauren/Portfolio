@@ -22,6 +22,12 @@ Professional archive cards now show **My contribution** and **Delivery** in a co
 
 The visual treatment uses the existing stationery filing tabs and shared `--ink`, `--muted`, and `--line` tokens, with a single-column facts layout on narrow screens. The smoke check verifies the shared lookup and markup, but a real browser is still required to assess wrapping, keyboard navigation, contrast, and responsive behavior.
 
+### Case-study readability and illustration boundaries (October 26, 2026)
+
+- **Phone facts:** `public/styles.css` keeps the audience/constraints definition list in two columns at tablet widths, but switches to **one column at 480px and below**. Long descriptions must not be squeezed into narrow columns at 320px or under browser zoom. Evidence and tradeoff annotations now have square edges to match the stationery language. Keep light/dark surface colors intact.
+- **Shipped work versus illustrative art:** **Hoylu Mobile Insights is shipped**. Its `imageBrief` and `galleryBriefs` describe **proposed portfolio illustrations**, not screenshots, documented design iterations, usability-tested flows, or verified production components. The gallery explicitly uses the same project-manager audience scenario as the case-study copy. Do not substitute a speculative mockup for a shipped screenshot without keeping its illustrative status visible.
+- **Validation:** `scripts/check-content.mjs` now checks the illustration labels, audience consistency, iteration disclaimer, one-column phone breakpoint, and square process-note styling. These are **source checks only**; real browser, zoom, keyboard, screen-reader, and deployment checks remain required.
+
 ## UX case-study editing guide
 
 Each project in `window.PORTFOLIO` should make the designer's **reasoning** as clear as the final visual work:
