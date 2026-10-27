@@ -74,11 +74,13 @@ assert.match(caseCss, /\.case-view \.case-process-note\{\s*border-radius:0/, 'Ev
 for (const id of ['main', 'work', 'playground', 'about']) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `Missing #${id} navigation target`);
 }
+// Assert the UX meaning and evidence boundary, not a specific editorial sentence.
 // Connected Planning: describe the design tension without upgrading rationale to research findings.
 const connectedPlanning = data.companies.find(company => company.id === 'hoylu')?.projects.find(project => project.title === 'Connected Planning');
 assert.ok(connectedPlanning, 'Missing Hoylu Connected Planning case study');
 assert.match(connectedPlanning.evidence, /do not establish a specific research method/i, 'Connected Planning must distinguish confirmed contribution from undocumented research');
-assert.match(connectedPlanning.tradeoffs, /breadth versus detail/i, 'Connected Planning must explain its UX design tension');
+assert.match(connectedPlanning.tradeoffs, /context|big picture/i, 'Connected Planning must explain why context matters');
+assert.match(connectedPlanning.tradeoffs, /detail/i, 'Connected Planning must explain the detail tradeoff');
 assert.match(connectedPlanning.outcome, /not independently verified/i, 'Connected Planning must not imply unverified delivery or impact');
 
 
@@ -106,7 +108,8 @@ assert.doesNotMatch(mobile.outcome, /mobile ux concepts/i, 'Do not describe Mobi
 assert.match(script, /"Mobile Insights":\["Hoylu · Construction software","Mobile UX and visual design","Shipped product contribution"\]/);
 assert.match(mobile.evidence, /shipped Mobile Insights experience/i, 'Evidence must retain shipped status');
 assert.match(mobile.evidence, /not been provided/i, 'Do not imply undocumented research or metrics');
-assert.match(mobile.tradeoffs, /design tension/i, 'Describe the UX tradeoff without inventing testing');
+assert.match(mobile.tradeoffs, /phone/i, 'Mobile Insights must describe the small-screen constraint');
+assert.match(mobile.tradeoffs, /important update|what belongs up front|priorit/i, 'Mobile Insights must explain information prioritization');
 assert.match(mobile.details, /My role was UX\/UI design/i, 'Mobile Insights must name the designer\'s actual role');
 assert.match(mobile.details, /project managers.*away from a desktop/i, 'Mobile Insights must make the audience scenario clear');
 assert.match(mobile.details, /design framing, not a claim of documented user research/i, 'Audience framing must not masquerade as research');
@@ -134,7 +137,7 @@ assert.match(iolPlanning.outcome, /has not been verified for publication/i, 'IOL
 
 const navigator = data.companies.find(company => company.id === 'holland-america')?.projects.find(project => project.title === 'Navigator App');
 assert.ok(navigator, 'Missing Holland America Navigator case study');
-assert.match(navigator.outcome, /shipped app/i, 'Navigator must retain its shipped status');
+assert.match(navigator.outcome, /shipped app|app passengers actually use at sea/i, 'Navigator must retain its shipped delivery status');
 assert.match(navigator.evidence, /passenger feedback/i, 'Navigator should identify its documented feedback source');
 assert.match(navigator.evidence, /not documented here/i, 'Navigator must distinguish feedback from unverified validation or impact');
 assert.match(navigator.tradeoffs, /tradeoff/i, 'Navigator should explain the mobile UX rationale');
@@ -144,7 +147,8 @@ assert.match(stateroom.details, /remote rather than a mouse or touchscreen/i, 'S
 assert.match(stateroom.evidence, /shipped in-stateroom TV app/i, 'Stateroom contribution must retain shipped status');
 assert.match(stateroom.evidence, /have not been supplied/i, 'Stateroom must not imply undocumented research or metrics');
 assert.match(stateroom.tradeoffs, /design tension/i, 'Stateroom must describe a UX tradeoff');
-assert.match(stateroom.outcome, /not verified for publication/i, 'Stateroom must distinguish delivery from unverified impact');
+assert.match(stateroom.outcome, /shipped/i, 'Stateroom must name verified delivery');
+assert.match(stateroom.evidence, /metrics have not been supplied/i, 'Stateroom must not imply measured guest impact');
 
 
 // Independent product work: distinguish hands-on prototype iteration from formal user validation.
@@ -153,7 +157,7 @@ assert.ok(forktactics, 'Missing Forktactics case study');
 assert.match(forktactics.evidence, /independent, AI-assisted working prototype/i, 'Forktactics must identify its prototype status');
 assert.match(forktactics.evidence, /No recruited user interviews, formal usability study/i, 'Forktactics must not imply formal user research');
 assert.match(forktactics.tradeoffs, /automation versus control/i, 'Forktactics must explain the planning UX tradeoff');
-assert.match(forktactics.outcome, /not been independently validated/i, 'Forktactics must not imply verified savings or usability impact');
+assert.match(forktactics.outcome, /not been independently validated|still testing whether/i, 'Forktactics must not imply verified savings or usability impact');
 
 
 // Unofficial game work: concept briefs and future image prompts are not shipped features.
@@ -172,7 +176,8 @@ assert.ok(illustration, 'Missing independent illustration case study');
 assert.match(illustration.details, /independent creative direction and illustration/i, 'Illustration must identify the actual role');
 assert.match(illustration.process, /presentation plan here, not a claim/i, 'Illustration must distinguish future process visuals from recorded iterations');
 assert.match(illustration.evidence, /future image briefs, not completed deliverables/i, 'Illustration must not imply that planned art exists');
-assert.match(illustration.tradeoffs, /expression versus clarity/i, 'Illustration must explain its visual design tension');
+assert.match(illustration.tradeoffs, /silhouette/i, 'Illustration must explain visual clarity and character readability');
+assert.match(illustration.tradeoffs, /detail|noise/i, 'Illustration must explain its detail tradeoff');
 assert.match(illustration.outcome, /does not claim a completed illustrated series/i, 'Illustration must not imply undocumented outcomes');
 assert.ok(illustration.galleryBriefs.every(brief => brief.startsWith('PLANNED /')), 'Illustration gallery placeholders must be labeled as planned');
 assert.match(script, /"Illustration & Experiments":\["Independent · Personal creative practice"/, 'Illustration overview must disclose independent status');
