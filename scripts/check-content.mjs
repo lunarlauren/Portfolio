@@ -14,6 +14,7 @@ const css = read('../public/styles.css');
 const caseStudy = read('../public/components/case-study.js');
 const projectContent = read('../public/components/project-content.js');
 const caseCss = read('../public/components/case-study.css');
+const navigationCss = read('../public/components/navigation.css');
 const workCss = read('../public/components/work-cards.css');
 const stationeryCss = read('../public/components/stationery.css');
 new vm.Script(caseStudy, { filename: 'public/components/case-study.js' });
@@ -188,10 +189,13 @@ assert.match(workCss, /\.work \.project-card-facts dd\s*\{/, 'Archive values mus
 assert.match(script, /"Mobile Insights":\["Hoylu · Construction software","Mobile UX and visual design","Shipped product contribution"\]/, 'Mobile Insights must be labeled shipped on archive and detail pages');
 
 // Static responsive guards: these do not prove browser layout or screen-reader behavior.
-assert.match(css, /@media\(min-width:421px\) and \(max-width:650px\)/, 'Mid-size header should remain single-row');
-assert.match(css, /@media\(max-width:420px\)\{\s*\/\* The earlier two-row grid is intentional/, 'Smallest screens should retain two-row navigation');
-assert.match(css, /\.case-view \.case-section-links\{top:110px/, 'Small-screen sticky chapter index must clear the two-row header');
-assert.match(css, /\.case-view \.case-section-links\{top:64px/, 'Mid-size sticky chapter index must clear the one-row header');
+assert.match(navigationCss, /@media\(max-width:600px\)\{\s*\.site-header\{\s*display:flex/, 'Production mobile header must remain one row');
+assert.match(navigationCss, /@media\(max-width:360px\)/, 'Narrow-phone header must have an explicit layout');
+assert.match(caseCss, /@media\(max-width:420px\)\{\s*\.case-view \.case-section-links\{top:64px/, 'Phone chapter index must clear the production one-row header');
+assert.match(caseCss, /\.case-view \.case-section-links\{\s*top:64px/, 'Mobile chapter index must clear the one-row header');
+assert.match(caseStudy, /function revealCurrentCaseTab\(button\)/, 'Current chapter should remain visible in the phone tab strip');
+assert.match(caseStudy, /chapterNav\.scrollLeft\+=delta/, 'Reveal must scroll the strip without scrolling the document');
+assert.doesNotMatch(css, /\.case-view \.case-section-links\{mask-image:/, 'Do not restore the one-sided fade that obscured chapter controls');
 // The version is intentionally updated with each CSS deployment. Do not pin a
 // smoke test to one historic cache-busting token: that made routine releases fail.
 assert.match(html, /styles\.css\?v=[a-zA-Z0-9-]+/, 'HTML must reference a versioned stylesheet');
