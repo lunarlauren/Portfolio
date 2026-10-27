@@ -4,7 +4,7 @@
 /* Problem-solving hero: shared layout in both themes. */
 .hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
 .hero .hero-copy h1 em{display:inline-block;max-width:100%}
-.hero .hero-description{max-width:59ch;text-wrap:pretty}
+.hero .hero-description{max-width:54ch;text-wrap:pretty;line-height:1.6}
 @media(max-width:760px){
  .hero .hero-copy h1{font-size:clamp(2.375rem,8.4vw,3.625rem);line-height:1.08;max-width:14ch}
  .hero .hero-copy h1 em{display:inline;overflow-wrap:normal}
@@ -20,8 +20,8 @@
  .hero .hero-copy h1{font-size:clamp(2.375rem,8.5vw,2.875rem);line-height:1.08;margin:var(--space-4) 0 var(--space-3);max-width:16ch;letter-spacing:-.04em}
  .hero .notebook-hero-note{display:block;font-size:clamp(0.9375rem,3.8vw,1.0625rem);line-height:1.45;margin:var(--space-2) 0 var(--space-3);padding:0 0 var(--space-2);border-bottom-width:1px}
  .hero .notebook-hero-note span{display:none}
- .hero .hero-description{font-size:1rem;max-width:42ch}
- .hero .hero-actions{margin-top:24px;gap:12px}
+ .hero .hero-description{font-size:var(--type-body);line-height:1.65;max-width:38ch;text-wrap:pretty}
+ .hero .hero-actions{margin-top:var(--space-4);gap:var(--space-2)}
  .hero .hero-actions .primary-link{min-height:48px}
 }
 
