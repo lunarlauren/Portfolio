@@ -12,6 +12,10 @@ The case-study chapter index exposes **Evidence & tradeoffs** as a separate read
 
 **Hoylu Mobile Insights is shipped**; preserve that in its content, archive card, and project overview. An illustrative Mobile Insights mockup is **not** a screenshot of the shipped product. Keep `ILLUSTRATIVE /` or `PLANNED /` labels on speculative art briefs. Navigator and Stateroom TV request approved real imagery; do not silently replace those requests with generated screenshots. Confirm ownership and permission before publishing client assets.
 
+### Illustrative impact copy is separate from published outcomes
+
+Nine fictional impact-writing samples are retained in [ILLUSTRATIVE_IMPACT_EXAMPLES.md](./ILLUSTRATIVE_IMPACT_EXAMPLES.md) for editorial reference only. **Do not paste those numbers into `public/content.js` or describe them as observed results.** The public case-study `outcome` field must contain only documented contributions, delivery status, or clearly qualified learning. `scripts/check-content.mjs` rejects fictional-result markers in published outcomes. If verified metrics become available, record the evidence source, sample/baseline, timeframe, and your role before publishing.
+
 ## Validation and release
 Run `node scripts/check-content.mjs` for source-level editorial, accessibility-markup, component-order, and delivery-status checks. Run `node --check` on changed JavaScript. For browser checks, install Playwright/Chromium and run `node tests/smoke.mjs` (see that file for setup). The browser suite includes evidence-heading keyboard focus, shipped Mobile Insights labeling, and 320px horizontal-overflow checks; these remain unverified until Chromium runs. The GitHub Actions browser-smoke workflow now runs the content check before browser tests.
 
