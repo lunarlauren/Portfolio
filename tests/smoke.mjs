@@ -34,6 +34,17 @@ try{
  assert.equal(await page.locator(".case-facts dt").allTextContents().then(labels=>labels.some(label=>label.trim()==="My role")),true,"Case facts should expose the designer's actual contribution");
  assert.match(await page.locator(".case-facts").innerText(),/Product UX and visual design/,"Role must use reviewed project metadata");
  assert.equal(await page.locator(".case-delivery-stamp").count(),0,"Design contributions without verified shipping must not get a shipped stamp");
+ // Distinguish documented evidence boundaries from design reasoning without
+ // using color alone: the visible headings remain different in both themes.
+ assert.deepEqual(await page.locator(".case-process-note").evaluateAll(nodes=>nodes.map(node=>node.dataset.noteKind)),["evidence","rationale"]);
+ for(const theme of ["light","dark"]){
+  const borders=await page.evaluate(theme=>{
+   document.documentElement.dataset.theme=theme;
+   return [...document.querySelectorAll(".case-process-note")].map(node=>getComputedStyle(node).borderLeftColor);
+  },theme);
+  assert.notEqual(borders[0],borders[1],theme+" evidence and rationale need distinct annotation rules");
+ }
+ await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
  await page.locator(".case-section-links button").first().click();
  // Evidence boundaries must be easy to find and keyboard-focusable.
  await page.locator('[data-case-jump="case-evidence-notes"]').click();
