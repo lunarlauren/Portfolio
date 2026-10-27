@@ -51,6 +51,9 @@
 footer.wrap{
  display:flex;align-items:center;justify-content:space-between;
  gap:16px;min-height:92px;
+ /* Full-bleed paper prevents the dotted canvas showing beside the 1320px .wrap. */
+ max-width:none;
+ padding-inline:max(clamp(20px,5vw,72px),calc((100vw - 1176px)/2));
  padding-block:24px 32px;
  /* Reset any inherited notebook texture as well as painting an opaque sheet. */
  background:var(--site-chrome-bg);
@@ -58,7 +61,7 @@ footer.wrap{
  font-size:var(--type-sm,0.875rem);
  color:var(--muted);
 }
-footer.wrap a{color:var(--ink);font-weight:600;text-decoration:none;text-underline-offset:4px}
+footer.wrap a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:600;text-decoration:none;text-underline-offset:4px}
 footer.wrap a:hover,footer.wrap a:focus-visible{text-decoration:underline}
 @media(max-width:600px){
  footer.wrap{min-height:76px;padding:20px max(24px,env(safe-area-inset-right)) 24px max(24px,env(safe-area-inset-left));font-size:0.8125rem}
@@ -67,12 +70,14 @@ footer.wrap a:hover,footer.wrap a:focus-visible{text-decoration:underline}
 /* Keyboard navigation: a consistent focus treatment for header controls.
    Do not rely on hover or the active-page underline to show keyboard focus. */
 .site-header :is(.wordmark,nav a,.header-contact,.theme-toggle):focus-visible,
-.footer-mark:focus-visible{
+.footer-mark:focus-visible,
+footer.wrap a:focus-visible{
  outline:3px solid var(--focus);
  outline-offset:3px;
  border-radius:4px;
 }
 @media(forced-colors:active){
  .site-header :is(.wordmark,nav a,.header-contact,.theme-toggle):focus-visible,
- .footer-mark:focus-visible{outline-color:Highlight}
+ .footer-mark:focus-visible,
+ footer.wrap a:focus-visible{outline-color:Highlight}
 }
