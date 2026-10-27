@@ -202,6 +202,12 @@ assert.match(caseCss, /\.case-view \.case-section-links button:focus-visible/, '
 assert.match(stationeryCss, /@media\(prefers-reduced-motion:reduce\)/, 'Stationery interactions must honor reduced motion');
 assert.match(stationeryCss, /transition:none;/, 'Reduced motion must disable highlight transitions');
 
+// Pass 13: leaving a case study must never strand focus in hidden content.
+assert.match(script, /if\(leavingProject&&nextHash!=="work"&&nextHash!=="playground"\)/, 'Non-gallery case-study exits must restore focus');
+assert.match(script, /destination\.focus\(\{preventScroll:true\}\)/, 'Focus must move to a visible destination');
+assert.match(script, /caseOpener=null;\s*\}\);\s*\}\s*previousHash=nextHash;/, 'Non-gallery exits must discard stale project openers');
+assert.match(caseCss, /@media\(forced-colors:active\)\{[\s\S]*?\.case-view \.case-section-links button\[aria-current="location"\]\{border-color:Highlight\}/, 'Chapter selection must remain visible in forced colors');
+
 // Pass 12: chapter controls expose an equivalent focus state in both themes.
 assert.match(caseCss, /\.case-section-links button:focus-visible\{[^}]*background:var\(--surface-blush\);[^}]*text-decoration:underline;/, 'Keyboard focus must provide tactile feedback beyond the outline');
 assert.match(caseCss, /html\[data-theme="dark"\] \.case-section-links button:focus-visible\{[^}]*background:color-mix\(/, 'Dark-mode chapter focus must use a theme-aware surface');
