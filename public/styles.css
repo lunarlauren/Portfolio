@@ -995,7 +995,12 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
 /* Paper continuity: header and footer belong to the same page surface.
    Keep geometry identical across themes; only surface tokens change. */
 :root{--site-chrome-bg:var(--notebook-paper,#fffdf8);--site-chrome-edge:var(--line)}
-html[data-theme="dark"]{--site-chrome-bg:var(--paper)}
+/* Give the sticky navigation its own opaque sheet in dark mode instead of
+   blending into the dotted page background while scrolling. */
+html[data-theme="dark"]{
+ --site-chrome-bg:color-mix(in srgb,var(--palette-navy) 76%,var(--palette-blue));
+ --site-chrome-edge:color-mix(in srgb,var(--palette-blue) 40%,var(--palette-navy));
+}
 .site-header,
 html[data-theme="dark"] .site-header{
  background:var(--site-chrome-bg);
