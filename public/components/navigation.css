@@ -17,12 +17,12 @@
  }
  .site-header .header-actions nav{
   display:flex;align-items:center;justify-content:flex-end;
-  gap:clamp(6px,2vw,12px);width:auto;min-width:0;
+  gap:clamp(7px,2.2vw,13px);width:auto;min-width:0;
  }
  .site-header .header-actions nav a{
   display:inline-flex;align-items:center;justify-content:center;
   min-height:44px;padding:0 1px;font-size:clamp(0.6875rem,2.9vw,0.8125rem);
-  white-space:nowrap;
+  line-height:1.25;white-space:nowrap;
  }
  .site-header .header-actions nav a[aria-current="location"]{
   padding-inline:1px;background:transparent;box-shadow:none;border:0;border-radius:0;
