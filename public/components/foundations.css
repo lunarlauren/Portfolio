@@ -46,6 +46,8 @@ section.work,section.playground,section.about {padding-block:85px}
  --type-h2:clamp(2.1875rem,5vw,4.125rem);
  --type-h3:clamp(1.5rem,2.5vw,2rem);
  --type-paragraph:var(--type-body);
+ --leading-body:1.6;
+ --leading-reading:1.65;
  /* Shared rhythm: reuse these values rather than inventing one-off gaps. */
  --space-1:0.5rem;
  --space-2:0.75rem;
@@ -55,7 +57,7 @@ section.work,section.playground,section.about {padding-block:85px}
  --space-6:3rem;
 }
 :where(body,button,input,textarea,select){font-family:var(--font-body)}
-:where(p){font-size:var(--type-paragraph);line-height:1.6}
+:where(p){font-size:var(--type-paragraph);line-height:var(--leading-body)}
 :where(h1,h2,h3){font-family:var(--font-display);font-weight:600}
 :where(h1){font-size:var(--type-h1);line-height:1.05}
 :where(h2){font-size:var(--type-h2);line-height:1.1}
