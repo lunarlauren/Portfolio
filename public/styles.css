@@ -892,8 +892,6 @@ html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline
    but two rows at <=420px so navigation text never needs to shrink to 10px.
    Sticky chapter offsets account for each header height without covering headings. */
 @media(min-width:421px) and (max-width:650px){
- .case-view .case-section-links{top:64px;padding-block:8px}
- .case-view .case-prose h2[id]{scroll-margin-top:142px}
  .site-header{display:flex;flex-wrap:nowrap;gap:8px;min-height:56px;padding:8px 10px}
  .site-header .header-actions{display:flex;flex:1 1 auto;min-width:0;gap:6px;justify-content:flex-end}
  .site-header .header-actions nav{display:flex;width:auto;flex:0 1 auto;gap:clamp(6px,2vw,12px);justify-content:flex-end}
@@ -904,8 +902,6 @@ html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline
 }
 @media(max-width:420px){
  /* The earlier two-row grid is intentional. Keep its 44px touch targets. */
- .case-view .case-section-links{top:110px;padding-block:8px}
- .case-view .case-prose h2[id]{scroll-margin-top:188px}
 }
 
 
