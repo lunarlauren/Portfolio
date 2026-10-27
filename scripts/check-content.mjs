@@ -202,14 +202,30 @@ assert.ok(genericPaperRule >= 0 && playgroundContrastRule > genericPaperRule, 'P
 assert.match(css.slice(playgroundContrastRule, playgroundContrastRule + 260), /background:transparent/, 'Playground intro must not inherit paper background');
 assert.match(script, /class="case-section-context" aria-hidden="true"/, 'Sticky case-study navigation must identify the current project');
 
-// Editorial integrity: proposed visuals must not masquerade as documented
-// iterations, shipped screens, implementation architecture or clinical evidence.
-for (const title of ['Connected Planning', 'AI-Assisted IOL Planning']) {
+// Editorial integrity: speculative artwork is not an artifact of delivery,
+// a documented iteration, or a screenshot. This includes visual-design work,
+// where a polished mockup can otherwise look like an event photograph.
+// Shipped Navigator and Stateroom TV request approved real screens instead.
+const illustrativeProjects = [
+  'Connected Planning',
+  'Mobile Insights',
+  'Campaigns & Events',
+  'Motion & Storytelling',
+  'Customizable Patient Portal',
+  'AI-Assisted IOL Planning'
+];
+for (const title of illustrativeProjects) {
   const project = professionalProjects.find(item => item.title === title);
   assert.ok(project, `${title}: project must exist`);
-  for (const brief of [project.imageBrief, ...(project.galleryBriefs || [])]) {
+  assert.ok(project.galleryBriefs?.length, `${title}: planned gallery must exist`);
+  for (const brief of [project.imageBrief, ...project.galleryBriefs]) {
     assert.match(brief, /^ILLUSTRATIVE \/ /, `${title}: planned art needs an explicit illustrative label`);
   }
+}
+for (const title of ['Navigator App', 'Stateroom TV App']) {
+  const project = professionalProjects.find(item => item.title === title);
+  assert.ok(project, `${title}: shipped project must exist`);
+  assert.match(project.imageBrief, /^Approved /, `${title}: request approved shipped-product imagery, not fabricated screenshots`);
 }
 const planning = professionalProjects.find(item => item.title === 'Connected Planning');
 assert.doesNotMatch(planning.galleryBriefs.join(' '), /Before-and-after information architecture:/, 'Do not imply a documented before/after comparison');
