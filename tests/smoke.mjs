@@ -38,7 +38,7 @@ try{
  assert.equal(await page.locator(".case-section-links button[aria-current='location']").count()>0,true);
  await page.locator(".case-next-nav a[href^='/case-studies/']").click();
  assert.match(page.url(),/\/case-studies\/hoylu\/mobile-insights\//);
- assert.match(await page.locator(".case-evidence").innerText(),/Shipped product contribution/,"Mobile Insights is shipped, not a concept");
+ assert.match(await page.locator(".case-prose").innerText(),/Mobile Insights is a shipped product experience/,"Mobile Insights case study should describe its actual delivery status");
  await page.goBack();
  assert.match(page.url(),/connected-planning/);
  await page.locator(".case-back").click();
