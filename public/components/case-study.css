@@ -107,6 +107,23 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 }
 
 
+/* Chapter index: clear active state and a paper-tab hover response.
+   Use a non-color cue (underline) for the current chapter. */
+.case-view .case-section-links button{
+ text-underline-offset:5px;
+ transition:background-color .18s ease,border-color .18s ease,transform .18s ease;
+}
+.case-view .case-section-links button[aria-current="location"]{
+ background:var(--surface-blush);
+ font-weight:700;
+}
+html[data-theme="dark"] .case-view .case-section-links button[aria-current="location"]{
+ background:color-mix(in srgb,var(--palette-blue) 18%,var(--palette-navy));
+}
+@media(prefers-reduced-motion:reduce){
+ .case-view .case-section-links button{transition:none}
+}
+
 /* Mobile editorial rhythm and project identity. The sticky chapter bar repeats
    the actual case-study title so readers retain context deep into a long page. */
 @media(max-width:760px){
