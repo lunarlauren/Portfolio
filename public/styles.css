@@ -442,7 +442,7 @@ html{scroll-padding-top:82px}
 .theme-toggle-icon{font-size:17px;line-height:1}
 @media(max-width:480px){.theme-toggle{min-width:40px;padding:7px}.theme-toggle-label{display:none}}
 html[data-theme="dark"]{--paper:color-mix(in srgb,var(--palette-navy) 65%,black);--brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--muted:color-mix(in srgb,var(--palette-paper) 68%,var(--palette-blue));--line:color-mix(in srgb,var(--palette-navy) 70%,var(--palette-blue));--teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));--lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));--focus:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));--surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));--surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));color-scheme:dark;background:var(--paper)}
-html[data-theme="dark"] body{background:var(--paper);color:var(--ink)}
+html[data-theme="dark"] body{color:var(--ink)}
 html[data-theme="dark"] .site-header{background:rgba(17,29,42,.96);border-color:var(--line);box-shadow:0 4px 18px rgba(0,0,0,.16)}
 html[data-theme="dark"] .hero h1{color:var(--ink)!important}
 html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
@@ -1746,10 +1746,9 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix
    Section backgrounds remain transparent to avoid visible seams. */
 html[data-theme="dark"] body{
  background-color:var(--paper);
- background-image:radial-gradient(circle,rgba(137,171,199,.23) 1.15px,transparent 1.5px);
+ background-image:radial-gradient(circle,color-mix(in srgb,var(--palette-blue) 25%,transparent) 1.15px,transparent 1.5px);
  background-size:var(--notebook-dot-step,31px) var(--notebook-dot-step,31px);
  background-position:0 0;
- background-attachment:scroll;
 }
 html[data-theme="dark"] :is(.hero,.work,.about){
  background-color:transparent;
@@ -1764,6 +1763,4 @@ html[data-theme="dark"] :is(.hero,.work,.about){
 .creative-inventory .inventory-item:nth-child(6) .inventory-icon{color:var(--palette-blue)}
 .creative-inventory .inventory-item:nth-child(3) .inventory-icon{color:var(--palette-lavender)}
 .creative-inventory .inventory-item:nth-child(5) .inventory-icon{color:var(--palette-green)}
-html[data-theme="dark"] body{
- background-image:radial-gradient(circle,color-mix(in srgb,var(--palette-blue) 25%,transparent) 1.15px,transparent 1.5px);
-}
+
