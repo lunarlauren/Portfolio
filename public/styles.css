@@ -1533,3 +1533,44 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
  .about .about-bottom .creative-inventory{grid-column:2;grid-row:1 / span 2}
  .about .about-bottom>.text-link{grid-column:1;grid-row:2;align-self:start}
 }
+
+/* Portfolio-first placeholder treatment. Until approved images are available,
+   briefs are quiet production notes, not the dominant artwork on the page. */
+.work .featured-project.client-file .project-visual:not(:has(img)){
+ aspect-ratio:auto;
+ min-height:132px;
+ max-height:none;
+ padding:clamp(14px,2vw,24px);
+ display:flex;
+ align-items:center;
+ justify-content:flex-start;
+ background:color-mix(in srgb,var(--file-tint) 12%,#fffdf8);
+ border:1px dashed #bccbd4;
+}
+.work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
+ max-width:54ch;
+ margin:0;
+ text-align:left;
+ font-size:12px;
+ line-height:1.5;
+ letter-spacing:normal;
+ color:#526477;
+}
+.work .featured-project.client-file .project-visual:not(:has(img)) .brief-kicker{
+ display:block;
+ margin-bottom:7px;
+ font-size:10px;
+ line-height:1.3;
+ letter-spacing:.09em;
+}
+@media(max-width:760px){
+ .work .featured-project.client-file .project-visual:not(:has(img)){
+  min-height:110px;
+  padding:14px;
+ }
+}
+html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(:has(img)){
+ background:#203448;
+ border-color:#52677c;
+}
+html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{color:#d5e0eb}
