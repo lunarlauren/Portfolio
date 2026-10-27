@@ -27,12 +27,13 @@ button:focus-visible,a:focus-visible {outline:3px solid var(--focus);outline-off
 .round-link:hover {transform:translateY(5px)}
 section.work,section.playground,section.about {padding-block:85px}
 .section-head {display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:36px}
-.section-head h2,.about h2 {font:600 clamp(35px,5vw,66px)/1.05 'Newsreader',sans-serif;letter-spacing:-.055em;margin:14px 0 0}
+.section-head h2,.about h2 {font-family:var(--font-display);font-size:var(--type-h2);font-weight:600;line-height:1.05;letter-spacing:-.055em;margin:14px 0 0}
 .section-head>p {max-width:330px;color:var(--muted);line-height:1.6;margin:0}
 
 /* TYPOGRAPHY SYSTEM
-   One place to adjust type scale. rem values follow the visitor's root font size.
-   Semantic defaults use :where() so component and responsive overrides still win. */
+   Shared type tokens. Component headings reference these rather than defining
+   separate pixel-based scales. rem values respect the visitor's font settings.
+   Semantic defaults use :where() so deliberate component variants still win. */
 :root {
  --font-body:'DM Sans',system-ui,sans-serif;
  --font-display:'Newsreader',Georgia,serif;
