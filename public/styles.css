@@ -490,24 +490,6 @@ html[data-theme="dark"] .case-evidence-item strong{color:color-mix(in srgb,var(-
 .site-header nav a[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 
 
-/* Mobile navigation affordance: a compact pill is easier to spot than a 2px underline. */
-@media(max-width:650px){
- .site-header .header-actions nav a[aria-current="location"]{
-  color:#203344;
-  background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));
-  border-radius:999px;
-  padding-inline:10px;
-  text-decoration:none;
-  box-shadow:inset 0 0 0 1px #c94581;
- }
- html[data-theme="dark"] .site-header .header-actions nav a[aria-current="location"]{
-  color:#fff;
-  background:#74375a;
-  box-shadow:inset 0 0 0 1px #f1a8cf;
- }
-}
-
-
 /* Mobile first impression: show a slice of the illustrated featured-work card
    above the fold rather than making visitors scroll past a full text introduction. */
 @media(max-width:650px){
