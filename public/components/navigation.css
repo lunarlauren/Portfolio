@@ -1,9 +1,7 @@
-/* Navigation component: mobile header layout and footer mark. */
-/* Mobile screenshot refinement: compact two-row navigation with full-size
-   touch targets; brand mark replaces the unrelated footer sticker. */
+/* Navigation: responsive one-row header and accessible footer brand mark.
+   Keep mobile layout decisions here rather than adding overrides elsewhere. */
 .footer-mark{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
 .footer-mark img{display:block;object-fit:contain}
-/* One-row mobile navigation: prioritize destinations over a tall toolbar. */
 @media(max-width:600px){
  .site-header{
   display:flex;align-items:center;justify-content:space-between;
