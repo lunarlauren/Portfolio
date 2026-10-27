@@ -283,8 +283,7 @@ html[data-theme="dark"] .case-view{
  .case-view .case-prose h2[id]{scroll-margin-top:140px}
 }
 @media(max-width:420px){
- .case-view .case-section-links{top:64px;padding-block:8px}
- .case-view .case-prose h2[id]{scroll-margin-top:140px}
+ .case-view .case-section-links{padding-block:8px}
 }
 
 /* Case-study handoff: quick factual overview for skimming hiring managers.
