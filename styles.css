@@ -33,6 +33,7 @@
   --duration-interaction:.25s;
   --duration-image:.4s;
   --duration-entrance:.55s;
+  --tap-target:44px;
   font-family:var(--font-body);
   color:var(--ink);
   background:var(--paper);
@@ -302,7 +303,7 @@ section.work,section.playground,section.about {
 }
 
 .collection-head h3 {
-  font:600 50px var(--font-display);
+  font:600 clamp(30px,5vw,50px) var(--font-display);
   letter-spacing:-.05em;
   margin:10px 0
 }
@@ -317,8 +318,8 @@ section.work,section.playground,section.about {
   background:transparent;
   border:1px solid var(--ink);
   border-radius:50%;
-  width:44px;
-  height:44px;
+  width:var(--tap-target);
+  height:var(--tap-target);
   cursor:pointer;
   font-size:25px
 }
@@ -458,6 +459,14 @@ footer a {
   }
 
   .site-header nav {
+    min-width: 0;
+  }
+
+  .collection-head {
+    align-items: flex-start;
+  }
+
+  .site-header nav {
     justify-content: flex-end;
     gap: 12px 18px;
   }
@@ -502,9 +511,22 @@ footer a {
   .project-visual {
     height: 260px;
   }
+
+  .collection-head h3 {
+    overflow-wrap: anywhere;
+  }
 }
 
 @media (max-width: 400px) {
+  .site-header {
+    flex-wrap: wrap;
+  }
+
+  .site-header nav {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .site-header nav {
     font-size: 12px;
   }
