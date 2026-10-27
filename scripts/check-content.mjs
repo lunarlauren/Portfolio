@@ -209,7 +209,8 @@ const genericPaperRule = css.indexOf('html:not([data-theme="dark"]) .section-hea
 const playgroundContrastRule = css.lastIndexOf('html:not([data-theme="dark"]) .playground .section-head>p');
 assert.ok(genericPaperRule >= 0 && playgroundContrastRule > genericPaperRule, 'Playground contrast override must follow the notebook-paper rule');
 assert.match(css.slice(playgroundContrastRule, playgroundContrastRule + 260), /background:transparent/, 'Playground intro must not inherit paper background');
-assert.match(caseStudy, /class="case-section-context" aria-hidden="true"/, 'Sticky case-study navigation must identify the current project');
+assert.doesNotMatch(caseStudy, /case-section-context/, 'Chapter navigation must not reintroduce the redundant project-title inset');
+assert.match(caseStudy, /<nav class="case-section-links" aria-label="On this case study">/, 'Sticky chapter navigation must retain an accessible name');
 
 // Editorial integrity: speculative artwork is not an artifact of delivery,
 // a documented iteration, or a screenshot. This includes visual-design work,
