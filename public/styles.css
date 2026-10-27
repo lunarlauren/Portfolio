@@ -819,7 +819,7 @@ html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);backgroun
 .case-section-links{display:flex;flex-wrap:wrap;gap:10px}
 .case-section-links button{background:var(--paper);transition:transform .16s ease,box-shadow .16s ease}
 .case-section-links button:active{transform:translateY(2px)}
-@media(prefers-reduced-motion:reduce){.case-section-links button{transition:none}}
+
 @media(max-width:760px){.case-section-links{gap:8px}.case-section-links button{flex:1 1 auto;font-size:13px}.case-prose h2[id]{scroll-margin-top:70px}}
 
 
@@ -1653,11 +1653,7 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix
   to{opacity:1;translate:0 0}
  }
 }
-@media(prefers-reduced-motion:reduce){
- :is(.work .featured-project.client-file .archive-project-title,
-     .playground .play-grid .project-card-link h3,
-     .about-copy>.text-link,.playground .project-card-cta){transition:none}
-}
+
 
 /* Mobile screenshot refinement: compact two-row navigation with full-size
    touch targets; brand mark replaces the unrelated footer sticker. */
