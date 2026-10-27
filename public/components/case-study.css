@@ -239,3 +239,39 @@ html[data-theme="dark"] .case-view{
  border-radius:0;
  padding:clamp(22px,3vw,34px);
 }
+
+/* Mobile reading sheet: rule the paragraphs, not the headings or chapter tabs. */
+@media(max-width:760px){
+ .case-view .case-prose{
+  background-image:none;
+  padding:clamp(20px,5vw,30px);
+ }
+ .case-view .case-prose h2{
+  position:relative;
+  background:var(--case-reading-bg);
+  font-size:clamp(25px,6.3vw,34px);
+  line-height:1.2;
+  overflow-wrap:break-word;
+  margin-bottom:18px;
+ }
+ .case-view .case-prose p{
+  background-image:none;
+  line-height:1.7;
+  margin-bottom:22px;
+ }
+ .case-view .case-section-links{
+  top:64px;
+  max-width:100%;
+  padding:9px 0;
+  gap:8px;
+  background:var(--case-reading-bg);
+  border-bottom:1px solid var(--case-fact-border);
+ }
+ .case-view .case-section-context{max-width:28vw;font-size:11px;padding-right:10px}
+ .case-view .case-section-links button{font-size:12px;padding:9px 12px;min-height:40px}
+ .case-view .case-prose h2[id]{scroll-margin-top:140px}
+}
+@media(max-width:420px){
+ .case-view .case-section-links{top:64px;padding-block:8px}
+ .case-view .case-prose h2[id]{scroll-margin-top:140px}
+}
