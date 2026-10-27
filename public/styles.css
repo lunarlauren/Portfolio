@@ -1286,3 +1286,16 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
  .hero .hero-description{font-size:clamp(16px,3.8vw,18px);line-height:1.6;max-width:43ch}
 }
 @media(max-width:390px){.hero .hero-copy h1{font-size:clamp(35px,9.4vw,40px)}}
+
+/* Mobile hero: quiet editorial hierarchy, no decorative sticker or oversized copy. */
+@media(max-width:600px){
+ .hero .notebook-sticker{display:none!important}
+ .hero.wrap{padding-top:clamp(28px,7vw,42px);gap:28px}
+ .hero .hero-copy>.eyebrow{font-size:10px;line-height:1.5;letter-spacing:.075em}
+ .hero .hero-copy h1{font-size:clamp(35px,8.5vw,43px);line-height:1.1;margin:22px 0 18px;max-width:16ch;letter-spacing:-.04em}
+ .hero .notebook-hero-note{display:block;font-size:clamp(15px,3.8vw,17px);line-height:1.45;margin:12px 0 18px;padding:0 0 12px;border-bottom-width:1px}
+ .hero .notebook-hero-note span{display:none}
+ .hero .hero-description{font-size:16px;line-height:1.6;max-width:42ch}
+ .hero .hero-actions{margin-top:24px;gap:12px}
+ .hero .hero-actions .primary-link{min-height:48px}
+}
