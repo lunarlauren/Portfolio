@@ -212,6 +212,8 @@ html[data-theme="dark"] .case-view{
  background:var(--case-fact-bg);
  border-color:var(--case-fact-border);
 }
+/* A description list keeps the overview accessible without default <dd> indentation. */
+.case-view .case-evidence-value{margin:0}
 .case-view .case-evidence-label{color:var(--case-fact-label)}
 .case-view .case-evidence-item strong{color:var(--case-fact-ink)}
 .case-view .case-prose{
