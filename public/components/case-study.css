@@ -145,3 +145,39 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 }
 
 
+
+/* Case-study type scale: restrained editorial hierarchy across breakpoints.
+   Scope to the case-study view so the homepage display typography stays intact. */
+.case-view{
+ --case-type-title:clamp(42px,5.2vw,76px);
+ --case-type-lead:clamp(18px,1.55vw,22px);
+ --case-type-body:clamp(15px,1.05vw,17px);
+ --case-type-meta:12px;
+}
+.case-view .case-head{max-width:100%;}
+.case-view .case-head h1{
+ font-size:var(--case-type-title);
+ line-height:1.08;
+ letter-spacing:-.04em;
+ max-width:18ch;
+ margin-block:18px 20px;
+ overflow-wrap:normal;
+}
+.case-view .case-intro{
+ font-size:var(--case-type-lead);
+ line-height:1.55;
+ max-width:68ch;
+}
+.case-view .case-head .eyebrow,
+.case-view .case-back,
+.case-view .case-evidence-label{font-size:var(--case-type-meta);}
+.case-view .case-evidence-item strong{
+ font-size:clamp(14px,1vw,16px);
+ line-height:1.45;
+}
+.case-view .case-prose p,
+.case-view .case-process-note p{font-size:var(--case-type-body);line-height:1.7;}
+@media(max-width:760px){
+ .case-view{--case-type-title:clamp(38px,8vw,56px);--case-type-lead:clamp(17px,4vw,20px);}
+ .case-view .case-head h1{font-size:var(--case-type-title);line-height:1.1;overflow-wrap:break-word;hyphens:auto;}
+}
