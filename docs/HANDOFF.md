@@ -63,3 +63,7 @@ The hero portrait and speech bubble were retired when the illustration moved int
 ### Theme token consolidation
 
 The legacy stylesheet now keeps the final notebook margin values in its first notebook token block, and the final dark-mode focus/muted/line values in the main dark-theme block. `--site-chrome-edge` inherits `var(--line)` in both themes; only the dark chrome background needs its own override. Continue to keep the CSS load order unchanged until visual regression checks are complete.
+
+### Typography tokens (rem)
+
+The canonical type scale is in `public/components/foundations.css`: `--type-h1`, `--type-h2`, `--type-h3`, `--type-paragraph`, `--type-eyebrow`, `--type-lead`, `--type-body`, `--type-sm`, and `--type-xs`. Display and body font families are `--font-display` and `--font-body`. Semantic `h1`/`h2`/`h3`/`p`/`.eyebrow` defaults use low-specificity `:where()` rules so existing page-specific typography remains intact. Font-size declarations using `px` were converted to equivalent `rem` values (16px = 1rem), including clamp endpoints; responsive viewport units were retained. Some legacy `font` shorthand declarations and other non-font measurements still use px and should be audited separately. Test heading wrapping, navigation, case studies, and text zoom in both themes before treating the migration as fully verified.
