@@ -1733,3 +1733,18 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:rgba(80,1
 @media(max-width:460px){
  .creative-inventory .inventory-icon svg{width:42px;height:42px}
 }
+
+/* Night stationery: the same full-width dot grid as light paper,
+   recolored to a muted blue-gray so the texture stays behind the work.
+   Section backgrounds remain transparent to avoid visible seams. */
+html[data-theme="dark"] body{
+ background-color:var(--paper);
+ background-image:radial-gradient(circle,rgba(137,171,199,.23) 1.15px,transparent 1.5px);
+ background-size:var(--notebook-dot-step,31px) var(--notebook-dot-step,31px);
+ background-position:0 0;
+ background-attachment:scroll;
+}
+html[data-theme="dark"] :is(.hero,.work,.about){
+ background-color:transparent;
+ background-image:none;
+}
