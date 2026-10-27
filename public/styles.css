@@ -1333,8 +1333,3 @@ html[data-theme="dark"] .site-header .header-contact:hover{
  color:var(--brand-pink);
 }
 
-/* About portrait: personal introduction belongs beside the biography, not over the work preview. */
-.about-portrait{float:right;width:clamp(120px,34%,210px);margin:0 0 16px 24px;text-align:center}
-.about-portrait img{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 14px #28465d26)}
-.about-portrait figcaption{font-size:12px;line-height:1.4;color:var(--muted);margin-top:8px}
-@media(max-width:480px){.about-portrait{float:none;width:min(190px,65%);margin:0 auto 22px}}
