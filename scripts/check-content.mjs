@@ -142,6 +142,13 @@ assert.match(caseStudy, /data-case-jump="case-evidence-notes"/, 'Chapter navigat
 assert.match(caseStudy, /const processNotes=processNotesMarkup\(p\)/, 'Evidence chapter must render from existing documented notes');
 assert.match(caseStudy, /\(processNotes\?'04':'03'\)/, 'Outcome chapter number must follow optional evidence chapter');
 
+// Pass 3: archive geometry is shared; only surface/focus tokens change by theme.
+assert.match(workCss, /--archive-facts-edge:var\(--line\)/, 'Light archive dividers need a shared token');
+assert.match(workCss, /--archive-facts-edge:color-mix\(/, 'Dark archive dividers need an explicit token');
+assert.match(workCss, /--archive-focus-edge:color-mix\(/, 'Dark archive focus needs a visible token');
+assert.match(workCss, /outline:2px solid var\(--archive-focus-edge\)/, 'Archive focus must consume the theme token');
+assert.match(workCss, /text-wrap:balance/, 'Archive headings must balance across card widths');
+
 // The pastel folder tabs were previously white-on-color (< 3.2:1).
 // Measure their shared ink against each client accent; geometry and theme
 // behavior remain unchanged. This checks tokens, not computed browser styles.
