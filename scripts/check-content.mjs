@@ -156,6 +156,13 @@ assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="lo
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
 assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
 
+// Pass 8: mobile rhythm and single-row navigation guardrails.
+const heroCss = read('../public/components/hero-polish.css');
+assert.ok(heroCss.includes('.hero.wrap{min-height:0;padding-bottom:'), 'Mobile hero must not reserve a viewport of empty space');
+assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
+assert.ok(navigationCss.includes('gap:clamp(7px,2.2vw,13px)'), 'Phone navigation spacing should remain intentional');
+assert.ok(navigationCss.includes('min-height:44px;padding:0 1px'), 'Phone navigation links must retain 44px hit height');
+
 // Pass 7: routed metadata and mobile chapter navigation contracts.
 for (const key of ['og:title','og:description','og:url','twitter:title','twitter:description']) {
  assert.ok(caseStudy.includes('setMeta(\'meta[' + (key.startsWith('og:') ? 'property' : 'name') + '="' + key + '"]\''), 'Case-study routing must update ' + key);
