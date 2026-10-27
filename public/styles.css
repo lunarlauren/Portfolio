@@ -712,9 +712,8 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 
 
-/* Responsive featured-art layout and caption sizing. */
+/* Responsive featured-art caption sizing. The base hero-feature already owns isolation and overflow. */
 @media(max-width:760px){
- .hero-feature{isolation:isolate;overflow:visible}
  .hero-feature .feature-bottom{padding-right:0;max-width:62%}
 }
 @media(max-width:420px){
