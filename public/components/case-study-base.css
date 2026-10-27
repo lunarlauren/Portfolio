@@ -6,7 +6,7 @@
 .case-view {background:var(--paper);min-height:70vh;padding-block:40px 110px}
 .case-back {display:inline-flex;align-items:center;gap:10px;margin-bottom:54px;font-size:0.8125rem;font-weight:700;text-decoration:none}
 .case-head {max-width:950px}
-.case-head h1 {font:600 clamp(48px,8vw,112px)/1.01 'Newsreader',sans-serif;letter-spacing:-.07em;margin:15px 0 24px}
+.case-head h1 {font-family:var(--font-display);font-size:clamp(3rem,8vw,7rem);font-weight:600;line-height:1.01;letter-spacing:-.07em;margin:15px 0 24px}
 .case-intro {font-size:clamp(1.1875rem,2.3vw,1.8125rem);line-height:1.45;color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-paper));max-width:850px}
 .case-hero-visual {height:clamp(300px,48vw,640px);margin-block:55px;background:#c8ddd6;display:grid;place-items:center;overflow:hidden;position:relative}
 .case-hero-visual img {width:100%;height:100%;object-fit:cover}
