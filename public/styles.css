@@ -959,9 +959,6 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
  background-image:none;
  background-color:transparent;
 }
-@media(min-width:1024px){
- html:not([data-theme="dark"]) .hero{background-image:none}
-}
 @media(max-width:600px){
  html:not([data-theme="dark"]) :is(.hero .hero-description,.work .section-head>p,.about .about-copy p){
   /* Prevent a second local ruled pattern from fighting the page dot grid. */
