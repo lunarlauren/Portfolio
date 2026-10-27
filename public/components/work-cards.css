@@ -204,6 +204,7 @@ html[data-theme="dark"] .work .client-file .project-card-cta{
  --archive-preview:color-mix(in srgb,var(--file-tint) 12%,#fffdf8);
  --archive-preview-edge:#bccbd4;
  --archive-preview-text:#526477;
+ --archive-facts-edge:var(--line);
  background-color:var(--archive-surface);
  border:1px solid var(--archive-edge)!important;
  box-shadow:var(--archive-shadow);
@@ -215,6 +216,7 @@ html[data-theme="dark"] .work .featured-project.client-file{
  --archive-preview:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  --archive-preview-edge:#52677c;
  --archive-preview-text:#d5e0eb;
+ --archive-facts-edge:color-mix(in srgb,var(--palette-blue) 35%,var(--palette-navy));
 }
 .work .featured-project.client-file .project-visual:not(:has(img)){
  background:var(--archive-preview);
@@ -222,6 +224,11 @@ html[data-theme="dark"] .work .featured-project.client-file{
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
  color:var(--archive-preview-text);
+}
+
+/* One readable metadata divider across both paper themes. */
+.work .featured-project.client-file .project-card-facts{
+ border-block-color:var(--archive-facts-edge);
 }
 
 /* A facts block followed by the design approach is one section break,
