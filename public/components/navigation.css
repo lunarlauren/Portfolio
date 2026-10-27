@@ -61,3 +61,16 @@ footer.wrap a:hover,footer.wrap a:focus-visible{text-decoration:underline}
 @media(max-width:600px){
  footer.wrap{min-height:76px;padding:20px max(24px,env(safe-area-inset-right)) 24px max(24px,env(safe-area-inset-left));font-size:0.8125rem}
 }
+
+/* Keyboard navigation: a consistent focus treatment for header controls.
+   Do not rely on hover or the active-page underline to show keyboard focus. */
+.site-header :is(.wordmark,nav a,.header-contact,.theme-toggle):focus-visible,
+.footer-mark:focus-visible{
+ outline:3px solid var(--focus);
+ outline-offset:3px;
+ border-radius:4px;
+}
+@media(forced-colors:active){
+ .site-header :is(.wordmark,nav a,.header-contact,.theme-toggle):focus-visible,
+ .footer-mark:focus-visible{outline-color:Highlight}
+}
