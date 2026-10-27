@@ -18,7 +18,7 @@ const caseJumpButtons=[...caseView.querySelectorAll("[data-case-jump]")];
 const caseJumpTargets=new Map(caseJumpButtons.map(button=>[
  button.dataset.caseJump,document.getElementById(button.dataset.caseJump)
 ]));
-const caseJumpHeadings=[...caseJumpTargets.values()];
+const caseJumpHeadings=[...caseJumpTargets.values()].filter(Boolean);
 const chapterNav=caseView.querySelector(".case-section-links");
 // Keep the active chapter visible in the horizontally scrolling phone index.
 // Only scroll the tab strip: scrollIntoView would move the reading page too.
@@ -63,16 +63,16 @@ caseJumpButtons.forEach(button=>{
 // The case-study index follows reading progress, not just button taps.
 // Disconnect on the next route to avoid observing removed headings.
 if(window.caseSectionObserver)window.caseSectionObserver.disconnect();
-if("IntersectionObserver" in window&&caseJumpHeadings.some(Boolean)){
+if("IntersectionObserver" in window&&caseJumpHeadings.length>0){
  window.caseSectionObserver=new IntersectionObserver(()=>{
   const threshold=Math.min(220,window.innerHeight*.3);
-  let current=caseJumpHeadings.find(Boolean)?.id;
+  let current=caseJumpHeadings[0]?.id;
   for(const heading of caseJumpHeadings){
    if(heading&&heading.getBoundingClientRect().top<=threshold)current=heading.id;
   }
   if(current)setCurrentCaseSection(current);
  },{rootMargin:"-20% 0px -55% 0px",threshold:0});
- caseJumpHeadings.filter(Boolean).forEach(heading=>window.caseSectionObserver.observe(heading));
+ caseJumpHeadings.forEach(heading=>window.caseSectionObserver.observe(heading));
 }
 if(caseJumpButtons.length)setCurrentCaseSection(caseJumpButtons[0].dataset.caseJump);
 document.title=p.title+" — Lauren Leven";
