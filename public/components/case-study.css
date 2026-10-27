@@ -66,7 +66,7 @@ html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);backgroun
 .case-section-links button{background:var(--paper);transition:transform .16s ease,box-shadow .16s ease}
 .case-section-links button:active{transform:translateY(2px)}
 
-@media(max-width:760px){.case-section-links button{font-size:13px}.case-prose h2[id]{scroll-margin-top:70px}}
+@media(max-width:760px){.case-section-links button{font-size:0.8125rem}.case-prose h2[id]{scroll-margin-top:70px}}
 
 
 /* Case-study reading index: show the active chapter without color alone. */
@@ -230,7 +230,7 @@ html[data-theme="dark"] .case-view{
  .case-view .case-prose h2{
   position:relative;
   background:var(--case-reading-bg);
-  font-size:clamp(25px,6.3vw,34px);
+  font-size:clamp(1.5625rem,6.3vw,2.125rem);
   line-height:1.2;
   overflow-wrap:break-word;
   margin-bottom:18px;
@@ -248,7 +248,7 @@ html[data-theme="dark"] .case-view{
   background:var(--case-reading-bg);
   border-bottom:1px solid var(--case-fact-border);
  }
- .case-view .case-section-links button{font-size:12px;padding:9px 12px;min-height:40px}
+ .case-view .case-section-links button{font-size:0.75rem;padding:9px 12px;min-height:40px}
  .case-view .case-prose h2[id]{scroll-margin-top:140px}
 }
 @media(max-width:420px){

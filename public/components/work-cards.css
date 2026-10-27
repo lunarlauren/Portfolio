@@ -22,7 +22,7 @@
  position:static;
  margin-top:8px;
  margin-bottom:12px;
- font-size:11px;
+ font-size:0.6875rem;
  letter-spacing:.055em;
 }
 .client-file .client-file-label{
@@ -39,7 +39,7 @@
  color:var(--file-label-ink);
  border-radius:0;
  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,0 100%);
- font-size:11px;
+ font-size:0.6875rem;
  font-weight:800;
  letter-spacing:.075em;
  text-transform:uppercase;
@@ -56,7 +56,7 @@
 html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-color:var(--file-accent)!important}
 @media(max-width:600px){
  .client-file{margin-top:29px}
- .client-file .client-file-label{min-width:102px;height:24px;font-size:10px;top:-25px}
+ .client-file .client-file-label{min-width:102px;height:24px;font-size:0.625rem;top:-25px}
 }
 
 /* Archive metadata: distinguish the designer's actual contribution from
@@ -73,7 +73,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
 .work .project-card-facts dt{
  margin-bottom:4px;
  color:var(--muted);
- font-size:10px;
+ font-size:0.625rem;
  font-weight:800;
  letter-spacing:.1em;
  line-height:1.4;
@@ -82,7 +82,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
 .work .project-card-facts dd{
  margin:0;
  color:var(--ink);
- font-size:12px;
+ font-size:0.75rem;
  font-weight:600;
  line-height:1.45;
  overflow-wrap:break-word;
@@ -103,7 +103,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
 }
 .work .featured-project.client-file .archive-project-title{
  margin:8px 0 18px;
- font-size:clamp(27px,2.6vw,38px);
+ font-size:clamp(1.6875rem,2.6vw,2.375rem);
  line-height:1.1;
  letter-spacing:-.035em;
 }
@@ -153,7 +153,7 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
  max-width:54ch;
  margin:0;
  text-align:left;
- font-size:12px;
+ font-size:0.75rem;
  line-height:1.5;
  letter-spacing:normal;
  color:#526477;
@@ -161,7 +161,7 @@ html[data-theme="dark"] .work .featured-project.client-file .project-visual:not(
 .work .featured-project.client-file .project-visual:not(:has(img)) .brief-kicker{
  display:block;
  margin-bottom:7px;
- font-size:10px;
+ font-size:0.625rem;
  line-height:1.3;
  letter-spacing:.09em;
 }

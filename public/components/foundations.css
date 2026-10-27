@@ -17,15 +17,39 @@ button:focus-visible,a:focus-visible {outline:3px solid var(--focus);outline-off
 .site-header nav {font-weight:600}
 .site-header nav a {text-decoration:none}
 .site-header nav a:hover,.text-link:hover {color:var(--teal)}
-.eyebrow {font-size:11px;letter-spacing:.16em;font-weight:700}
+.eyebrow {font-size:0.6875rem;letter-spacing:.16em;font-weight:700}
 .status-dot {display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
 .hero h1 {font:600 clamp(54px,9.2vw,132px)/.99 'Newsreader',sans-serif}
 .hero h1 em,.about h2 em {font-style:normal;color:var(--teal)}
 .hero-bottom {display:flex;justify-content:space-between;align-items:end;gap:30px}
-.hero-bottom p {font-size:clamp(17px,2vw,22px);line-height:1.5;max-width:590px}
-.round-link {display:grid;place-items:center;border:1px solid var(--ink);border-radius:50%;width:64px;height:64px;flex-shrink:0;text-decoration:none;font-size:28px;transition:transform .25s,background .25s}
+.hero-bottom p {font-size:clamp(1.0625rem,2vw,1.375rem);line-height:1.5;max-width:590px}
+.round-link {display:grid;place-items:center;border:1px solid var(--ink);border-radius:50%;width:64px;height:64px;flex-shrink:0;text-decoration:none;font-size:1.75rem;transition:transform .25s,background .25s}
 .round-link:hover {transform:translateY(5px)}
 section.work,section.playground,section.about {padding-block:85px}
 .section-head {display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:36px}
 .section-head h2,.about h2 {font:600 clamp(35px,5vw,66px)/1.05 'Newsreader',sans-serif;letter-spacing:-.055em;margin:14px 0 0}
 .section-head>p {max-width:330px;color:var(--muted);line-height:1.6;margin:0}
+
+/* TYPOGRAPHY SYSTEM
+   One place to adjust type scale. rem values follow the visitor's root font size.
+   Semantic defaults use :where() so component and responsive overrides still win. */
+:root {
+ --font-body:'DM Sans',system-ui,sans-serif;
+ --font-display:'Newsreader',Georgia,serif;
+ --type-xs:0.75rem;
+ --type-sm:0.875rem;
+ --type-body:1rem;
+ --type-lead:1.125rem;
+ --type-eyebrow:0.6875rem;
+ --type-h1:clamp(3.375rem,9.2vw,8.25rem);
+ --type-h2:clamp(2.1875rem,5vw,4.125rem);
+ --type-h3:clamp(1.5rem,2.5vw,2rem);
+ --type-paragraph:var(--type-body);
+}
+:where(body,button,input,textarea,select){font-family:var(--font-body)}
+:where(p){font-size:var(--type-paragraph);line-height:1.6}
+:where(h1,h2,h3){font-family:var(--font-display);font-weight:600}
+:where(h1){font-size:var(--type-h1);line-height:1.05}
+:where(h2){font-size:var(--type-h2);line-height:1.1}
+:where(h3){font-size:var(--type-h3);line-height:1.2}
+:where(.eyebrow){font-family:var(--font-body);font-size:var(--type-eyebrow);font-weight:700;letter-spacing:.16em;text-transform:uppercase}

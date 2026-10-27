@@ -22,12 +22,12 @@
  }
  .site-header .header-actions nav a{
   display:inline-flex;align-items:center;justify-content:center;
-  min-height:44px;padding:0 1px;font-size:clamp(11px,2.9vw,13px);
+  min-height:44px;padding:0 1px;font-size:clamp(0.6875rem,2.9vw,0.8125rem);
   white-space:nowrap;
  }
  .site-header .header-contact{
   min-height:40px;padding:0 4px;border:0;border-radius:0;
-  font-size:clamp(11px,2.9vw,13px);
+  font-size:clamp(0.6875rem,2.9vw,0.8125rem);
  }
  .site-header .header-contact span{display:none}
  .site-header .theme-toggle{
@@ -37,6 +37,6 @@
 @media(max-width:360px){
  .site-header{gap:5px;padding-inline:9px}
  .site-header .header-actions,.site-header .header-actions nav{gap:5px}
- .site-header .header-actions nav a,.site-header .header-contact{font-size:11px}
+ .site-header .header-actions nav a,.site-header .header-contact{font-size:0.6875rem}
  .site-header .theme-toggle{flex-basis:32px;width:32px;min-width:32px;height:32px;min-height:32px}
 }
