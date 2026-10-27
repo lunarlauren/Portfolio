@@ -41,6 +41,10 @@ for (const project of projects) {
   for (const key of ['title', 'type', 'summary', 'details', 'process', 'outcome']) {
     assert.ok(typeof project[key] === 'string' && project[key].trim(), `${project.title || 'Untitled'}: missing ${key}`);
   }
+  // A published outcome must never quietly include fictional impact-writing samples.
+  // Keep those examples in docs/ILLUSTRATIVE_IMPACT_EXAMPLES.md until verified.
+  assert.doesNotMatch(project.outcome, /DEMO RESULT|FICTIONAL|hypothetical (?:usability|prototype|study)|imagined concept test/i,
+    `${project.title}: invented impact examples must not appear in published outcomes`);
   if (project.gallery) assert.ok(Array.isArray(project.gallery), `${project.title}: gallery must be an array`);
   if (project.galleryBriefs) assert.ok(Array.isArray(project.galleryBriefs), `${project.title}: galleryBriefs must be an array`);
   for (const key of ['evidence', 'tradeoffs']) {
