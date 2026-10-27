@@ -49,7 +49,6 @@ body {background:var(--paper);color:var(--ink)}
 .playground.wrap {background:var(--night-bg)}
 
 .section-head h2 em,.about h2 em {color:color-mix(in srgb,var(--palette-navy) 25%,var(--palette-pink))}
-.company-card:not(.featured):nth-child(odd) {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
 
 .project-card:nth-child(3n+2) .project-visual {background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
 
@@ -61,7 +60,6 @@ body {background:var(--paper);color:var(--ink)}
 .hero-feature .art-tile-three {background:#e7d6ff}
 .hero-feature .art-center span {color:var(--surface-blush)}
 .hero-feature .feature-art {filter:drop-shadow(0 14px 22px #f15c9d1c)}
-.company-card:not(.featured):nth-child(even) {background:#ffe3f1}
 .project-card:nth-child(3n+1) .project-visual {background:#ffd7eb}
 .project-card:nth-child(3n+3) .project-visual {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-pink))}
 
@@ -89,6 +87,10 @@ body {background:var(--paper);color:var(--ink)}
 .primary-link {background:var(--brand-navy);color:#fff}
 .primary-link:hover {background:color-mix(in srgb,var(--palette-navy) 80%,var(--palette-blue))}
 .quiet-link:hover,.text-link:hover,.site-header nav a:hover {color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
+/* Fallback card palette for unbranded entries; company-specific colors below
+   take precedence through the more specific data-company selector. */
+.company-card:not(.featured):nth-child(odd) {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
+.company-card:not(.featured):nth-child(even) {background:#ffe3f1}
 .company-grid .company-card[data-company="hoylu"] {background:color-mix(in srgb,var(--palette-paper) 55%,var(--palette-pink));color:var(--brand-navy)}
 .company-grid .company-card[data-company="alcon"] {background:var(--surface-cream);color:var(--brand-navy)}
 .company-grid .company-card[data-company="holland-america"] {background:var(--surface-navy);color:#fff}
