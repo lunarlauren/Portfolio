@@ -65,6 +65,20 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix
 .playground .project-card-link:is(:hover,:focus-visible) .project-card-cta{
  background-size:100% 2px;
 }
+/* Respect motion preferences without losing the tactile highlighter
+   and underline feedback: their final states remain visible immediately. */
+@media(prefers-reduced-motion:reduce){
+ :is(.work .featured-project.client-file .archive-project-title,
+     .playground .play-grid .project-card-link h3,
+     .about-copy>.text-link,
+     .playground .project-card-cta){
+  transition:none;
+ }
+ .work .featured-project.client-file,
+ .playground .play-grid>.project-card{
+  animation:none;
+ }
+}
 @media(min-width:1024px){
  .work .section-head{margin-bottom:clamp(14px,1.8vw,24px)}
 }
