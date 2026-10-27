@@ -149,6 +149,13 @@ assert.match(workCss, /--archive-focus-edge:color-mix\(/, 'Dark archive focus ne
 assert.match(workCss, /outline:2px solid var\(--archive-focus-edge\)/, 'Archive focus must consume the theme token');
 assert.match(workCss, /text-wrap:balance/, 'Archive headings must balance across card widths');
 
+// Pass 4: reading hierarchy, chapter state and mobile gallery contracts.
+assert.match(caseCss, /text-wrap:balance/, 'Case-study cover titles should balance');
+assert.match(caseCss, /max-width:74ch/, 'Long-form reading measure should be constrained');
+assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="location"\]/, 'Active chapter needs a visible tab state');
+assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
+assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
+
 // The pastel folder tabs were previously white-on-color (< 3.2:1).
 // Measure their shared ink against each client accent; geometry and theme
 // behavior remain unchanged. This checks tokens, not computed browser styles.
