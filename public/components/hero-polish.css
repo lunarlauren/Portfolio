@@ -25,3 +25,10 @@
  .hero .hero-actions .primary-link{min-height:48px}
 }
 
+/* Pass 8 / mobile rhythm: the featured illustration should lead directly
+   into the work index, rather than leaving a second screen of empty dots.
+   These rules are theme-neutral and retain the existing paper/card treatment. */
+@media(max-width:600px){
+ .hero.wrap{min-height:0;padding-bottom:clamp(20px,5vw,32px)}
+ .hero .hero-feature{margin-bottom:0}
+}
