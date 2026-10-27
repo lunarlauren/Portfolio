@@ -801,20 +801,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 }
 
 
-/* Notebook case-study chapters: paper styling is limited to the reading surface.
-   Screenshots and diagrams stay on solid backgrounds for accurate inspection. */
-html:not([data-theme="dark"]) .case-view{--case-paper:#fffdf8}
-html:not([data-theme="dark"]) .case-head{position:relative;background:var(--case-paper);border-left:3px solid var(--notebook-pink);padding:clamp(16px,3vw,32px);box-shadow:var(--paper-shadow)}
-html:not([data-theme="dark"]) .case-head .eyebrow{color:#76546c}
-html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px);border-radius:12px;padding:clamp(16px,3vw,30px)}
-.case-prose h2{line-height:1.2}
-.case-section-links{display:flex;flex-wrap:wrap;gap:10px}
-.case-section-links button{background:var(--paper);transition:transform .16s ease,box-shadow .16s ease}
-.case-section-links button:active{transform:translateY(2px)}
-
-@media(max-width:760px){.case-section-links button{font-size:13px}.case-prose h2[id]{scroll-margin-top:70px}}
-
-
 /* Case-study editorial notes: clearly separate documented evidence from design
    rationale. No interactions or hover-only content are required to read them. */
 .project-card-cta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:4px}
@@ -902,27 +888,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 html[data-theme="dark"] .hero-feature .portrait-about-link:focus-visible{outline-color:#fff}
 
 
-/* Case-study reading index: show the active chapter without color alone. */
-.case-section-links button[aria-current="location"]{
- border-color:var(--ink);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;
-}
-html[data-theme="dark"] .case-section-links button[aria-current="location"]{
- border-color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));
-}
-@media(max-width:760px){
- .case-section-links{display:flex;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;padding-bottom:6px}
- .case-section-links button{flex:0 0 auto;white-space:nowrap}
-}
-
-/* Case-study chapter index stays available during longer reads.
-   The offset clears the sticky site header; scroll margins clear both bars. */
-.case-view .case-section-links{
- position:sticky;top:72px;z-index:15;
- padding:10px 0;margin-inline:0;
- background:var(--paper);
- border-bottom:1px solid var(--line);
-}
-.case-view .case-prose h2[id]{scroll-margin-top:154px}
 /* Responsive header and case-study index: the header is one row from 421–650px,
    but two rows at <=420px so navigation text never needs to shrink to 10px.
    Sticky chapter offsets account for each header height without covering headings. */
