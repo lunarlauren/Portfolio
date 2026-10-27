@@ -28,7 +28,7 @@ const highlightMarkup=p=>{const items=caseHighlights[p.title]||[];return items.l
 const processNotesMarkup=p=>{
  const notes=[["Evidence & boundaries",p.evidence],["Design tension & rationale",p.tradeoffs]]
   .filter(([,value])=>typeof value==="string"&&value.trim());
- return notes.length?'<div class="case-process-notes">'+notes.map(([heading,value])=>
+ return notes.length?'<h2 id="case-evidence-notes">03 / Evidence &amp; tradeoffs</h2><div class="case-process-notes">'+notes.map(([heading,value])=>
   '<section class="case-process-note"><h3>'+esc(heading)+'</h3><p>'+esc(value)+'</p></section>'
  ).join("")+'</div>':"";
 };
