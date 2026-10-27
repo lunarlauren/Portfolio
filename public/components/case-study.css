@@ -177,3 +177,20 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-view{--case-type-title:clamp(38px,8vw,56px);--case-type-lead:clamp(17px,4vw,20px)}
  .case-view .case-head h1{line-height:1.1;overflow-wrap:break-word;hyphens:auto}
 }
+
+/* Dark stationery cover: a real surface, not text floating on the night canvas.
+   Match the light-mode inset while keeping night-mode contrast and depth. */
+html[data-theme="dark"] .case-view .case-head{
+ position:relative;
+ background:color-mix(in srgb,var(--palette-navy) 72%,#0f1b26);
+ border:1px solid color-mix(in srgb,var(--palette-blue) 32%,#243746);
+ border-left:3px solid var(--palette-pink);
+ padding:clamp(24px,3.4vw,44px);
+ box-shadow:var(--paper-shadow-dark,4px 6px 0 rgba(0,0,0,.2));
+}
+html[data-theme="dark"] .case-view .case-head h1{color:var(--palette-paper)}
+html[data-theme="dark"] .case-view .case-head .eyebrow{color:#cbdce9}
+html[data-theme="dark"] .case-view .case-intro{color:#c7d6e3}
+@media(max-width:760px){
+ html[data-theme="dark"] .case-view .case-head{padding:clamp(22px,5vw,34px)}
+}
