@@ -32,9 +32,13 @@ try{
  assert.equal(await page.locator("#main").isHidden(),true);
  assert.equal(await page.locator("#case-title").innerText(),"Connected Planning");
  await page.locator(".case-section-links button").first().click();
+ // Evidence boundaries must be easy to find and keyboard-focusable.
+ await page.locator('[data-case-jump="case-evidence-notes"]').click();
+ assert.equal(await page.locator("#case-evidence-notes").evaluate(node=>document.activeElement===node),true,"Evidence heading should receive focus");
  assert.equal(await page.locator(".case-section-links button[aria-current='location']").count()>0,true);
  await page.locator(".case-next-nav a[href^='/case-studies/']").click();
  assert.match(page.url(),/\/case-studies\/hoylu\/mobile-insights\//);
+ assert.match(await page.locator(".case-evidence").innerText(),/Shipped product contribution/,"Mobile Insights is shipped, not a concept");
  await page.goBack();
  assert.match(page.url(),/connected-planning/);
  await page.locator(".case-back").click();
@@ -51,6 +55,8 @@ try{
  assert.equal(await mobile.locator("#case-title").innerText(),"AI-Assisted IOL Planning");
  assert.equal(await mobile.locator(".case-section-links button").first().isVisible(),true);
  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,"Unexpected mobile horizontal overflow");
+ await mobile.setViewportSize({width:320,height:720});
+ assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,"Unexpected 320px horizontal overflow");
  await mobile.close();
  assert.deepEqual(errors,[],"Uncaught browser JavaScript errors");
  console.log("PASS: direct deep links, chapter navigation, next/back, home links, mobile layout, no page errors");
