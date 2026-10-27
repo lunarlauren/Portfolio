@@ -1,7 +1,7 @@
 /* FOUNDATIONS: Fonts, global colors, focus styles, layout helpers and headings.
    Change one value at a time. Other component styles load after this file. */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400..800&display=swap');
-:root {--paper:var(--palette-paper);--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 78%,var(--palette-paper));--line:color-mix(in srgb,var(--palette-blue) 23%,var(--palette-paper));--teal:color-mix(in srgb,var(--palette-blue) 58%,var(--palette-navy));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-pink) 22%,var(--palette-paper));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none;--brand-pink:var(--palette-pink);--brand-ink:var(--palette-navy);--surface-blush:color-mix(in srgb,var(--palette-pink) 10%,var(--palette-paper));--surface-cream:color-mix(in srgb,var(--palette-pink) 7%,var(--palette-paper));--surface-navy:color-mix(in srgb,var(--palette-blue) 22%,var(--palette-navy));--night-bg:color-mix(in srgb,var(--palette-navy) 85%,black)}
+:root {--paper:var(--palette-paper);--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 78%,var(--palette-paper));--line:color-mix(in srgb,var(--palette-blue) 23%,var(--palette-paper));--teal:color-mix(in srgb,var(--palette-blue) 58%,var(--palette-navy));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-pink) 22%,var(--palette-paper));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));font-family:var(--font-body);color:var(--ink);background:var(--paper);font-synthesis:none;--brand-pink:var(--palette-pink);--brand-ink:var(--palette-navy);--surface-blush:color-mix(in srgb,var(--palette-pink) 10%,var(--palette-paper));--surface-cream:color-mix(in srgb,var(--palette-pink) 7%,var(--palette-paper));--surface-navy:color-mix(in srgb,var(--palette-blue) 22%,var(--palette-navy));--night-bg:color-mix(in srgb,var(--palette-navy) 85%,black)}
 * {box-sizing:border-box}
 html {scroll-behavior:smooth}
 body {margin:0}
@@ -13,13 +13,13 @@ button:focus-visible,a:focus-visible {outline:3px solid var(--focus);outline-off
 .skip-link:focus {top:12px}
 .wrap {max-width:1320px;margin:auto;padding-inline:clamp(20px,5vw,72px)}
 .site-header {margin:auto;display:flex;justify-content:space-between;align-items:center}
-.wordmark {text-decoration:none;font:700 32px 'Newsreader',sans-serif;letter-spacing:-.1em}
+.wordmark {text-decoration:none;font-family:var(--font-display);font-size:2rem;font-weight:700;letter-spacing:-.1em}
 .site-header nav {font-weight:600}
 .site-header nav a {text-decoration:none}
 .site-header nav a:hover,.text-link:hover {color:var(--teal)}
-.eyebrow {font-size:0.6875rem;letter-spacing:.16em;font-weight:700}
+.eyebrow {font-size:var(--type-eyebrow);letter-spacing:.16em;font-weight:700}
 .status-dot {display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
-.hero h1 {font:600 clamp(54px,9.2vw,132px)/.99 'Newsreader',sans-serif}
+.hero h1 {font-family:var(--font-display);font-size:var(--type-h1);font-weight:600;line-height:.99}
 .hero h1 em,.about h2 em {font-style:normal;color:var(--teal)}
 .hero-bottom {display:flex;justify-content:space-between;align-items:end;gap:30px}
 .hero-bottom p {font-size:clamp(1.0625rem,2vw,1.375rem);line-height:1.5;max-width:590px}
