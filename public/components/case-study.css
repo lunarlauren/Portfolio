@@ -19,7 +19,6 @@
   gap:clamp(16px,3vw,24px);
  }
  .case-view .case-fact{padding-left:11px}
- .case-view .case-fact-value{font-size:clamp(13px,3.5vw,16px)}
 }
 
 
@@ -41,7 +40,7 @@
  border-left-width:3px;
 }
 .case-view .case-process-note h3{
- font-size:clamp(14px,1.8vw,17px);
+ font-size:var(--case-type-small);
  line-height:1.45;
  letter-spacing:.01em;
 }
@@ -131,8 +130,6 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-view{padding-top:clamp(28px,6vw,48px)}
  .case-view .case-back{margin-bottom:clamp(22px,5vw,36px)}
  .case-view .case-head{padding:clamp(22px,5vw,34px)}
- .case-view .case-head h1{font-size:clamp(40px,9vw,66px);line-height:1.08;margin-block:18px 22px}
- .case-view .case-intro{line-height:1.6}
  .case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{margin-block:clamp(24px,6vw,44px)}
  .case-view .case-prose{padding:clamp(22px,5vw,34px)}
  .case-view .case-prose h2:not(:first-child){margin-top:2em}
@@ -146,50 +143,37 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 
 
 
-/* Case-study type scale: restrained editorial hierarchy across breakpoints.
-   Scope to the case-study view so the homepage display typography stays intact. */
+/* Unified case-study typography tokens.
+   Display / section / lead / body / supporting / metadata. */
 .case-view{
  --case-type-title:clamp(42px,5.2vw,76px);
+ --case-type-section:clamp(27px,2.65vw,40px);
  --case-type-lead:clamp(18px,1.55vw,22px);
- --case-type-body:clamp(15px,1.05vw,17px);
- --case-type-meta:12px;
+ --case-type-body:var(--type-body,16px);
+ --case-type-small:var(--type-sm,14px);
+ --case-type-meta:var(--type-xs,12px);
 }
-.case-view .case-head{max-width:100%;}
+.case-view .case-head{max-width:100%}
 .case-view .case-head h1{
- font-size:var(--case-type-title);
- line-height:1.08;
- letter-spacing:-.04em;
- max-width:18ch;
- margin-block:18px 20px;
- overflow-wrap:normal;
+ font-size:var(--case-type-title);line-height:1.08;letter-spacing:-.04em;
+ max-width:18ch;margin-block:18px 20px;overflow-wrap:normal;
 }
-.case-view .case-intro{
- font-size:var(--case-type-lead);
- line-height:1.55;
- max-width:68ch;
+.case-view .case-intro{font-size:var(--case-type-lead);line-height:1.55;max-width:68ch}
+.case-view .case-prose h2{font-size:var(--case-type-section);line-height:1.17;letter-spacing:-.035em}
+.case-view .case-prose p,.case-view .case-process-note p{
+ font-size:var(--case-type-body);line-height:1.7;font-weight:400;
 }
-.case-view .case-head .eyebrow,
-.case-view .case-back,
-.case-view .case-evidence-label{font-size:var(--case-type-meta);}
-.case-view .case-evidence-item strong{
- font-size:clamp(14px,1vw,16px);
- line-height:1.45;
+.case-view .case-head .eyebrow,.case-view .case-back,
+.case-view .case-evidence-label,.case-view .case-fact-label,
+.case-view .case-highlight-label{font-size:var(--case-type-meta)}
+.case-view .case-fact-value,.case-view .case-evidence-item strong{
+ font-size:var(--case-type-small);line-height:1.6;
 }
-.case-view .case-prose p,
-.case-view .case-process-note p{font-size:var(--case-type-body);line-height:1.7;}
+.case-view .case-fact-value{font-weight:400;letter-spacing:0}
+.case-view .case-fact-label{font-weight:650;letter-spacing:.09em}
+.case-view .case-evidence-item strong{font-weight:600;line-height:1.5}
+.case-view .case-section-links button{font-size:var(--case-type-small)}
 @media(max-width:760px){
- .case-view{--case-type-title:clamp(38px,8vw,56px);--case-type-lead:clamp(17px,4vw,20px);}
- .case-view .case-head h1{font-size:var(--case-type-title);line-height:1.1;overflow-wrap:break-word;hyphens:auto;}
-}
-
-/* Sidebar hierarchy: labels identify the field; values read as supporting copy. */
-.case-view .case-fact-value{
- font-weight:400;
- font-size:clamp(14px,1.05vw,16px);
- line-height:1.6;
- letter-spacing:0;
-}
-.case-view .case-fact-label{
- font-weight:650;
- letter-spacing:.09em;
+ .case-view{--case-type-title:clamp(38px,8vw,56px);--case-type-lead:clamp(17px,4vw,20px)}
+ .case-view .case-head h1{line-height:1.1;overflow-wrap:break-word;hyphens:auto}
 }
