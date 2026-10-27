@@ -208,7 +208,10 @@ assert.match(html, /styles\.css\?v=[a-zA-Z0-9-]+/, 'HTML must reference a versio
 // and evidence is a labeled group rather than an unnamed generic container.
 assert.match(script, /caseView\.setAttribute\("aria-labelledby","case-title"\)/, 'Case-study main landmark must have a name');
 assert.match(caseStudy, /<h1 id="case-title">/, 'Case-study title must label its main landmark');
-assert.match(projectContent, /class="case-evidence" role="group" aria-label="Project overview"/, 'Evidence overview must have valid grouping semantics');
+assert.match(projectContent, /<dl class="case-evidence" aria-label="Project overview"/, 'Project overview must use a semantic description list');
+assert.match(projectContent, /<dt class="case-evidence-label"/, 'Project overview labels must use dt elements');
+assert.match(projectContent, /<dd class="case-evidence-value"/, 'Project overview values must use dd elements');
+assert.match(caseCss, /\.case-view \.case-evidence-value\{margin:0\}/, 'Overview values must not inherit default dd indentation');
 assert.doesNotMatch(script, /behavior:"instant"/, 'Scroll restoration should use a standard behavior value');
 
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
