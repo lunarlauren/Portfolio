@@ -936,10 +936,9 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
 }
 
 
-/* Optical alignment audit: one straight baseline and one shadow direction.
-   Keep the stationery personality in color and paper, not accidental tilts. */
+/* Optical alignment: the hero note uses the shared no-rotation baseline.
+   Preserve its intentional border, padding, and margin adjustments. */
 .hero .notebook-hero-note{
- transform:none;
  border-bottom:2px solid var(--notebook-pink);
  padding:5px 0 7px;
  margin-inline:0;
