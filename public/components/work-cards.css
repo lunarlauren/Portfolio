@@ -64,9 +64,9 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
 .work .project-card-facts{
  display:grid;
  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
- gap:10px 16px;
- margin:16px 0 4px;
- padding:12px 0;
+ gap:var(--space-2) var(--space-3);
+ margin:var(--space-3) 0 4px;
+ padding:var(--space-2) 0;
  border-block:1px solid var(--line);
 }
 .work .project-card-facts>div{min-width:0}
@@ -102,7 +102,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  box-shadow:var(--paper-shadow);
 }
 .work .featured-project.client-file .archive-project-title{
- margin:8px 0 18px;
+ margin:var(--space-1) 0 18px;
  font-size:clamp(1.6875rem,2.6vw,2.375rem);
  line-height:1.1;
  letter-spacing:-.035em;
@@ -122,7 +122,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  box-shadow:none;
 }
 .work .featured-project.client-file .project-meta{
- margin-top:14px;
+ margin-top:var(--space-2);
 }
 html[data-theme="dark"] .work .featured-project.client-file{
  /* Opaque paper surface masks the page's dot grid behind each file. */
