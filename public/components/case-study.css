@@ -46,7 +46,6 @@
 }
 
 
-
 /* Chapter navigation controls. The paper surface matches the later
    notebook override formerly applied in the base stylesheet. */
 /* Case study chapter buttons: scroll within the routed page without changing its hash. */
@@ -55,7 +54,6 @@
 .case-section-links button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 .case-prose h2[id]{scroll-margin-top:96px}
 html[data-theme="dark"] .case-section-links button:hover{background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue))}
-
 
 
 /* Extracted case-study reading surfaces and sticky chapter index. */
@@ -69,7 +67,6 @@ html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);backgroun
 .case-section-links button:active{transform:translateY(2px)}
 
 @media(max-width:760px){.case-section-links button{font-size:13px}.case-prose h2[id]{scroll-margin-top:70px}}
-
 
 
 /* Case-study reading index: show the active chapter without color alone. */
@@ -94,16 +91,6 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 }
 .case-view .case-prose h2[id]{scroll-margin-top:154px}
 
-/* Sticky index offsets account for the responsive site header. */
-@media(min-width:421px) and (max-width:650px){
- .case-view .case-section-links{top:64px;padding-block:8px}
- .case-view .case-prose h2[id]{scroll-margin-top:142px}
-}
-@media(max-width:420px){
- .case-view .case-section-links{top:110px;padding-block:8px}
- .case-view .case-prose h2[id]{scroll-margin-top:188px}
-}
-
 /* Mobile reading: responsive typography, image sizing, and chapter context. */
 /* Mobile case-study reading: keep editorial copy legible without changing
    project claims or the intentional image placeholders. */
@@ -120,10 +107,8 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 }
 
 
-
 /* Mobile editorial rhythm and project identity. The sticky chapter bar repeats
    the actual case-study title so readers retain context deep into a long page. */
-.case-section-context{display:none}
 @media(max-width:760px){
  .case-view{padding-top:clamp(28px,6vw,48px)}
  .case-view .case-back{margin-bottom:clamp(22px,5vw,36px)}
@@ -132,14 +117,8 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-view .case-prose h2:not(:first-child){margin-top:2em}
  .case-view .case-section-links{align-items:center;gap:8px;scroll-padding-inline:0}
  /* The chapter tabs themselves provide context; don't inset them behind a label. */
- .case-view .case-section-context{display:none}
- .case-view .case-section-context{display:block;flex:0 0 auto;max-width:min(44vw,220px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 12px/1.4 'DM Sans',system-ui,sans-serif;color:var(--ink);border-right:1px solid var(--line);padding-right:12px}
  .case-view .case-section-links button{padding-inline:14px}
 }
-@media(max-width:420px){
- .case-view .case-section-context{max-width:36vw}
-}
-
 
 
 /* Unified case-study typography tokens.
@@ -269,7 +248,6 @@ html[data-theme="dark"] .case-view{
   background:var(--case-reading-bg);
   border-bottom:1px solid var(--case-fact-border);
  }
- .case-view .case-section-context{max-width:28vw;font-size:11px;padding-right:10px}
  .case-view .case-section-links button{font-size:12px;padding:9px 12px;min-height:40px}
  .case-view .case-prose h2[id]{scroll-margin-top:140px}
 }
