@@ -57,8 +57,9 @@ try{
  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,"Unexpected mobile horizontal overflow");
  await mobile.setViewportSize({width:320,height:720});
  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,"Unexpected 320px horizontal overflow");
- // Reading to the outcome should reveal its active tab in the narrow chapter strip.
- await mobile.locator("#case-outcome").evaluate(node=>node.scrollIntoView({block:"start",behavior:"auto"}));
+ // Selecting the outcome chapter should reveal its active tab in the narrow strip.
+ // A programmatic document scroll is not a reliable IntersectionObserver trigger.
+ await mobile.locator('[data-case-jump="case-outcome"]').click();
  await mobile.waitForFunction(()=>{
   const nav=document.querySelector(".case-section-links");
   const tab=nav?.querySelector('[data-case-jump="case-outcome"][aria-current="location"]');
