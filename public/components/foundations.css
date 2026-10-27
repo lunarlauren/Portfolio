@@ -1,0 +1,31 @@
+/* FOUNDATIONS: Fonts, global colors, focus styles, layout helpers and headings.
+   Change one value at a time. Other component styles load after this file. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400..800&display=swap');
+:root {--paper:var(--palette-paper);--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 78%,var(--palette-paper));--line:color-mix(in srgb,var(--palette-blue) 23%,var(--palette-paper));--teal:color-mix(in srgb,var(--palette-blue) 58%,var(--palette-navy));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-pink) 22%,var(--palette-paper));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none;--brand-pink:var(--palette-pink);--brand-ink:var(--palette-navy);--surface-blush:color-mix(in srgb,var(--palette-pink) 10%,var(--palette-paper));--surface-cream:color-mix(in srgb,var(--palette-pink) 7%,var(--palette-paper));--surface-navy:color-mix(in srgb,var(--palette-blue) 22%,var(--palette-navy));--night-bg:color-mix(in srgb,var(--palette-navy) 85%,black)}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {margin:0}
+button,a {touch-action:manipulation}
+a {color:inherit}
+button {font:inherit}
+button:focus-visible,a:focus-visible {outline:3px solid var(--focus);outline-offset:5px}
+.skip-link {padding:12px}
+.skip-link:focus {top:12px}
+.wrap {max-width:1320px;margin:auto;padding-inline:clamp(20px,5vw,72px)}
+.site-header {margin:auto;display:flex;justify-content:space-between;align-items:center}
+.wordmark {text-decoration:none;font:700 32px 'Newsreader',sans-serif;letter-spacing:-.1em}
+.site-header nav {font-weight:600}
+.site-header nav a {text-decoration:none}
+.site-header nav a:hover,.text-link:hover {color:var(--teal)}
+.eyebrow {font-size:11px;letter-spacing:.16em;font-weight:700}
+.status-dot {display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
+.hero h1 {font:600 clamp(54px,9.2vw,132px)/.99 'Newsreader',sans-serif}
+.hero h1 em,.about h2 em {font-style:normal;color:var(--teal)}
+.hero-bottom {display:flex;justify-content:space-between;align-items:end;gap:30px}
+.hero-bottom p {font-size:clamp(17px,2vw,22px);line-height:1.5;max-width:590px}
+.round-link {display:grid;place-items:center;border:1px solid var(--ink);border-radius:50%;width:64px;height:64px;flex-shrink:0;text-decoration:none;font-size:28px;transition:transform .25s,background .25s}
+.round-link:hover {transform:translateY(5px)}
+section.work,section.playground,section.about {padding-block:85px}
+.section-head {display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:36px}
+.section-head h2,.about h2 {font:600 clamp(35px,5vw,66px)/1.05 'Newsreader',sans-serif;letter-spacing:-.055em;margin:14px 0 0}
+.section-head>p {max-width:330px;color:var(--muted);line-height:1.6;margin:0}
