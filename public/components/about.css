@@ -41,7 +41,6 @@
     column-gap: clamp(36px, 5vw, 80px);
     align-items: start;
   }
-  .about .about-copy p { max-width: 59ch; }
   .about .about-portrait {
     width: clamp(118px, 29%, 172px);
     margin: 0 0 12px 20px;
@@ -57,4 +56,21 @@
 @media(min-width:901px){
  .about h2{font-size:clamp(2.625rem,4.3vw,3.75rem)}
  .about .about-bottom .text-link{align-self:start;margin-top:clamp(12px,1.5vw,20px)}
+}
+
+/* ABOUT TYPE SCALE
+   Keep one readable paragraph measure across breakpoints. The display title
+   remains expressive; supporting text and inventory labels stay quieter. */
+.about .about-copy p{
+ max-width:59ch;
+ font-size:var(--type-body,1rem);
+ line-height:1.65;
+ text-wrap:pretty;
+}
+.about .about-intro p{margin-bottom:0}
+.about .inventory-heading>p{font-size:0.8125rem;line-height:1.5}
+.about .about-portrait figcaption{line-height:1.45}
+@media(max-width:600px){
+ .about .about-copy p{line-height:1.65}
+ .about .about-portrait{margin-bottom:16px}
 }
