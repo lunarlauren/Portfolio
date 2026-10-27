@@ -106,6 +106,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  font-size:clamp(1.6875rem,2.6vw,2.375rem);
  line-height:1.1;
  letter-spacing:-.035em;
+ text-wrap:balance;
 }
 .work .featured-project.client-file>.eyebrow{
  margin-bottom:4px;
