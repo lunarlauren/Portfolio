@@ -54,6 +54,8 @@ assert.match(script, /<dt class="case-fact-label"/, 'Fact labels should use dt e
 assert.match(script, /<dd class="case-fact-value"/, 'Fact values should use dd elements');
 assert.match(css, /\.case-view \.case-facts\s*\{/, 'Case facts must have scoped layout styles');
 assert.match(css, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Case facts should have a narrow-screen two-column layout');
+assert.match(css, /@media\(max-width:480px\)\{\s*\.case-view \.case-facts\{\s*grid-template-columns:minmax\(0,1fr\)/, 'Phone case facts must switch to one readable column');
+assert.match(css, /\.case-view \.case-process-note\{\s*border-radius:0/, 'Evidence notes should have intentional square stationery edges');
 
 for (const id of ['main', 'work', 'playground', 'about']) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `Missing #${id} navigation target`);
@@ -95,6 +97,10 @@ assert.match(mobile.details, /My role was UX\/UI design/i, 'Mobile Insights must
 assert.match(mobile.details, /project managers.*away from a desktop/i, 'Mobile Insights must make the audience scenario clear');
 assert.match(mobile.details, /design framing, not a claim of documented user research/i, 'Audience framing must not masquerade as research');
 assert.match(mobile.evidence, /implementation handoff details, collaboration records/i, 'Do not invent Mobile Insights implementation or collaboration specifics');
+assert.match(mobile.imageBrief, /ILLUSTRATIVE \/.*not a screenshot of shipped screens/i, 'Mobile Insights mockup must not impersonate shipped UI');
+assert.ok(mobile.galleryBriefs.every(brief => brief.startsWith('ILLUSTRATIVE /')), 'Mobile Insights gallery briefs must be labeled illustrative');
+assert.match(mobile.galleryBriefs[0], /project manager/i, 'Illustrative mobile flow must use the same audience scenario as the case study');
+assert.match(mobile.galleryBriefs[1], /not a record of verified iteration rounds/i, 'Illustrative wireframes must not imply documented iterations');
 assert.match(script, /processNotesMarkup\(p\)/, 'Case study must render evidence and tradeoff notes');
 assert.match(script, /Design approach/, 'Project previews must expose design rationale');
 const patientPortal = data.companies.find(company => company.id === 'alcon')?.projects.find(project => project.title === 'Customizable Patient Portal');
