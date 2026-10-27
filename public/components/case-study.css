@@ -163,6 +163,23 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
  font-size:var(--case-type-title);line-height:1.08;letter-spacing:-.04em;
  max-width:18ch;margin-block:18px 20px;overflow-wrap:normal;text-wrap:balance;
 }
+/* Delivery stamp: a factual, immediately visible distinction between
+   shipped product contributions and prototypes/concept explorations.
+   The shared cover tokens keep it readable in both color themes. */
+.case-view .case-delivery-stamp{
+ display:table;
+ max-width:100%;
+ margin:0 0 var(--space-3,1rem);
+ padding:8px 12px;
+ border:1px solid var(--case-cover-border);
+ border-left:3px solid var(--case-cover-accent);
+ background:color-mix(in srgb,var(--case-cover-accent) 12%,var(--case-cover-bg));
+ color:var(--case-cover-title);
+ font-size:var(--case-type-meta);
+ font-weight:700;
+ letter-spacing:.07em;
+ line-height:1.5;
+}
 .case-view .case-intro{font-size:var(--case-type-lead);line-height:1.55;max-width:68ch;text-wrap:pretty}
 .case-view .case-prose h2{font-size:var(--case-type-section);line-height:1.17;letter-spacing:-.035em}
 .case-view .case-prose p,.case-view .case-process-note p{
