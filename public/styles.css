@@ -59,7 +59,7 @@ body {background:var(--paper)}
 .hero-feature {overflow:visible;isolation:isolate}
 .hero-feature:before {border-radius:inherit}
 .hero-feature .feature-bottom {padding-right:24%;z-index:4}
-@media(max-width:760px) {.hero-feature .hero-portrait {width:45%;max-width:195px;right:-3%;bottom:-10%} .hero-feature .feature-bottom {padding-right:30%}}
+@media(max-width:760px) {.hero-feature .feature-bottom {padding-right:30%}}
 
 .hero-feature .art-tile-one {background:#ffb5d8}
 .hero-feature .art-tile-three {background:#e7d6ff}
@@ -178,7 +178,7 @@ html,body{max-width:100%;overflow-x:clip}
 :where(a,button,[tabindex="-1"]):focus-visible{outline:3px solid var(--focus,color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy)));outline-offset:4px}
 :where(.collection,.case-view)[tabindex="-1"]:focus{outline:none}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-@media(forced-colors:active){.company-card,.project-card-link,.primary-link,.portrait-bubble{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
+@media(forced-colors:active){.company-card,.project-card-link,.primary-link{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
 
 .site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
 .company-card{touch-action:manipulation}
@@ -296,7 +296,7 @@ html{scroll-padding-top:82px}
 .theme-toggle:hover{background:var(--surface-blush)}
 .theme-toggle-icon{font-size:17px;line-height:1}
 @media(max-width:480px){.theme-toggle{min-width:40px;padding:7px}.theme-toggle-label{display:none}}
-html[data-theme="dark"]{--paper:color-mix(in srgb,var(--palette-navy) 65%,black);--brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--muted:color-mix(in srgb,var(--palette-paper) 68%,var(--palette-blue));--line:color-mix(in srgb,var(--palette-navy) 70%,var(--palette-blue));--teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));--lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));--focus:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));--surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));--surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));color-scheme:dark;background:var(--paper)}
+html[data-theme="dark"]{--paper:color-mix(in srgb,var(--palette-navy) 65%,black);--brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));--lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));--brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));--surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));--surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));color-scheme:dark;background:var(--paper)}
 html[data-theme="dark"] body{color:var(--ink)}
 html[data-theme="dark"] .site-header{background:rgba(17,29,42,.96);border-color:var(--line);box-shadow:0 4px 18px rgba(0,0,0,.16)}
 html[data-theme="dark"] .hero h1{color:var(--ink)!important}
@@ -750,17 +750,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 
 
-/* Screenshot QA: on touch screens the speech balloon covered the featured
-   artwork and its caption. Keep the portrait as the About link instead. */
-.portrait-mobile-link{display:block;position:relative;z-index:2;border-radius:10px}
-.portrait-mobile-link:focus-visible{outline:3px solid var(--brand-navy);outline-offset:4px}
-@media(hover:none), (pointer:coarse){
- .hero-feature .portrait-bubble,
- .hero-feature .portrait-interaction:hover .portrait-bubble,
- .hero-feature .portrait-mobile-link{pointer-events:auto;touch-action:manipulation}
-}
-/* At phone widths the entire featured illustration already links to Work.
-   Keep one editorial caption instead of a second CTA competing with the portrait. */
+/* On phones, keep the featured illustration caption short and uncluttered. */
 @media(max-width:600px){
  .hero-feature .feature-bottom{display:block;max-width:100%;width:100%;padding-right:0}
  .hero-feature .feature-bottom>span{display:block;max-width:56%;line-height:1.35}
