@@ -1597,20 +1597,6 @@ html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
  .work .featured-project.client-file:hover .archive-project-title{background-size:100% 100%}
 }
 .work .featured-project.client-file:focus-within .archive-project-title{background-size:100% 100%}
-.work .featured-project.client-file::after{
- content:"";
- position:absolute;
- right:22px;
- top:16px;
- width:13px;
- height:29px;
- border:2px solid #8293a3;
- border-radius:8px 8px 6px 6px;
- transform:rotate(13deg);
- opacity:.7;
- pointer-events:none;
-}
-.work .featured-project.client-file .archive-project-title{max-width:calc(100% - 26px)}
 .about-copy>.text-link,
 .playground .project-card-cta{
  text-decoration:none;
@@ -1640,4 +1626,10 @@ html[data-theme="dark"] .case-head{box-shadow:var(--paper-shadow-dark)}
 @media(prefers-reduced-motion:reduce){
  .work .featured-project.client-file .archive-project-title,
  .about-copy>.text-link,.playground .project-card-cta{transition:none}
+}
+
+/* Folder tabs are the only physical attachment on these cards.
+   Tighten the editorial heading-to-archive transition on desktop. */
+@media(min-width:1024px){
+ .work .section-head{margin-bottom:clamp(14px,1.8vw,24px)}
 }
