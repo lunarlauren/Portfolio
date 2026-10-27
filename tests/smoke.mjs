@@ -31,7 +31,7 @@ try{
  assert.match(await page.title(),/Connected Planning/);
  assert.equal(await page.locator("#main").isHidden(),true);
  assert.equal(await page.locator("#case-title").innerText(),"Connected Planning");
- assert.equal(await page.locator(".case-facts dt").allInnerTexts().then(labels=>labels.includes("My role")),true,"Case facts should expose the designer's actual contribution");
+ assert.equal(await page.locator(".case-facts dt").allTextContents().then(labels=>labels.some(label=>label.trim()==="My role")),true,"Case facts should expose the designer's actual contribution");
  assert.match(await page.locator(".case-facts").innerText(),/Product UX and visual design/,"Role must use reviewed project metadata");
  assert.equal(await page.locator(".case-delivery-stamp").count(),0,"Design contributions without verified shipping must not get a shipped stamp");
  await page.locator(".case-section-links button").first().click();
