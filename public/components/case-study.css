@@ -62,8 +62,6 @@ html[data-theme="dark"] .case-section-links button:hover{background:color-mix(in
 /* Notebook case-study chapters: paper styling is limited to the reading surface.
    Screenshots and diagrams stay on solid backgrounds for accurate inspection. */
 html:not([data-theme="dark"]) .case-view{--case-paper:#fffdf8}
-html:not([data-theme="dark"]) .case-head{position:relative;background:var(--case-paper);border-left:3px solid var(--notebook-pink);padding:clamp(16px,3vw,32px);box-shadow:var(--paper-shadow)}
-html:not([data-theme="dark"]) .case-head .eyebrow{color:#76546c}
 html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px);border-radius:12px;padding:clamp(16px,3vw,30px)}
 .case-prose h2{line-height:1.2}
 .case-section-links{display:flex;flex-wrap:wrap;gap:10px}
@@ -129,7 +127,6 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 @media(max-width:760px){
  .case-view{padding-top:clamp(28px,6vw,48px)}
  .case-view .case-back{margin-bottom:clamp(22px,5vw,36px)}
- .case-view .case-head{padding:clamp(22px,5vw,34px)}
  .case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{margin-block:clamp(24px,6vw,44px)}
  .case-view .case-prose{padding:clamp(22px,5vw,34px)}
  .case-view .case-prose h2:not(:first-child){margin-top:2em}
@@ -178,19 +175,37 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
  .case-view .case-head h1{line-height:1.1;overflow-wrap:break-word;hyphens:auto}
 }
 
-/* Dark stationery cover: a real surface, not text floating on the night canvas.
-   Match the light-mode inset while keeping night-mode contrast and depth. */
-html[data-theme="dark"] .case-view .case-head{
- position:relative;
- background:color-mix(in srgb,var(--palette-navy) 72%,#0f1b26);
- border:1px solid color-mix(in srgb,var(--palette-blue) 32%,#243746);
- border-left:3px solid var(--palette-pink);
- padding:clamp(24px,3.4vw,44px);
- box-shadow:var(--paper-shadow-dark,4px 6px 0 rgba(0,0,0,.2));
+
+/* One case-study cover component; themes change tokens, never geometry. */
+.case-view{
+ --case-cover-bg:var(--case-paper,#fffdf8);
+ --case-cover-border:color-mix(in srgb,var(--palette-blue) 23%,var(--palette-paper));
+ --case-cover-accent:var(--notebook-pink,var(--palette-pink));
+ --case-cover-shadow:var(--paper-shadow);
+ --case-cover-title:var(--ink);
+ --case-cover-kicker:#76546c;
+ --case-cover-lead:var(--muted);
 }
-html[data-theme="dark"] .case-view .case-head h1{color:var(--palette-paper)}
-html[data-theme="dark"] .case-view .case-head .eyebrow{color:#cbdce9}
-html[data-theme="dark"] .case-view .case-intro{color:#c7d6e3}
+html[data-theme="dark"] .case-view{
+ --case-cover-bg:color-mix(in srgb,var(--palette-navy) 72%,#0f1b26);
+ --case-cover-border:color-mix(in srgb,var(--palette-blue) 32%,#243746);
+ --case-cover-accent:var(--palette-pink);
+ --case-cover-shadow:var(--paper-shadow-dark);
+ --case-cover-title:var(--palette-paper);
+ --case-cover-kicker:#cbdce9;
+ --case-cover-lead:#c7d6e3;
+}
+.case-view .case-head{
+ position:relative;
+ background:var(--case-cover-bg);
+ border:1px solid var(--case-cover-border);
+ border-left:3px solid var(--case-cover-accent);
+ padding:clamp(24px,3.4vw,44px);
+ box-shadow:var(--case-cover-shadow);
+}
+.case-view .case-head h1{color:var(--case-cover-title)}
+.case-view .case-head .eyebrow{color:var(--case-cover-kicker)}
+.case-view .case-intro{color:var(--case-cover-lead)}
 @media(max-width:760px){
- html[data-theme="dark"] .case-view .case-head{padding:clamp(22px,5vw,34px)}
+ .case-view .case-head{padding:clamp(22px,5vw,34px)}
 }
