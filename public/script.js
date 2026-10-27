@@ -73,8 +73,29 @@ if(playGrid&&Array.isArray(data.playground)){
 }
 
 
-const main=$("#main"),caseView=document.createElement("section");caseView.className="case-view wrap";caseView.hidden=true;caseView.id="case-study";caseView.setAttribute("role","main");caseView.setAttribute("aria-labelledby","case-title");caseView.tabIndex=-1;main.after(caseView);function route(){const hash=caseRoute();if(!hash.startsWith("project/")){$(".skip-link").href="#main";main.hidden=false;caseView.hidden=true;if(hash.startsWith("company/")){location.replace("#work");return}document.title="Lauren Leven — Visual & Product Designer";
- document.querySelector('link[rel="canonical"]')?.setAttribute("href",location.origin+"/");
+const main=$("#main"),caseView=document.createElement("section");caseView.className="case-view wrap";caseView.hidden=true;caseView.id="case-study";caseView.setAttribute("role","main");caseView.setAttribute("aria-labelledby","case-title");caseView.tabIndex=-1;main.after(caseView);
+// A case-study route temporarily replaces SEO/share metadata. Preserve the
+// actual homepage values from index.html so browser Back, archive links, and
+// hash navigation cannot leave a different project's preview behind.
+const homeMetaSelectors=[
+ 'meta[name="description"]','meta[property="og:title"]',
+ 'meta[property="og:description"]','meta[property="og:url"]',
+ 'meta[name="twitter:title"]','meta[name="twitter:description"]'
+];
+const homeMetadata={
+ title:document.title,
+ canonical:document.querySelector('link[rel="canonical"]')?.getAttribute("href"),
+ tags:homeMetaSelectors.map(selector=>[selector,document.querySelector(selector)?.getAttribute("content")])
+};
+function restoreHomeMetadata(){
+ document.title=homeMetadata.title;
+ if(homeMetadata.canonical!==null)document.querySelector('link[rel="canonical"]')?.setAttribute("href",homeMetadata.canonical);
+ for(const [selector,value] of homeMetadata.tags){
+  if(value!==null)document.querySelector(selector)?.setAttribute("content",value);
+ }
+}
+function route(){const hash=caseRoute();if(!hash.startsWith("project/")){$(".skip-link").href="#main";main.hidden=false;caseView.hidden=true;if(hash.startsWith("company/")){location.replace("#work");return}
+ restoreHomeMetadata();
  return}return renderCaseStudy(hash)}
 // Remember where a visitor opened a case study so Back returns to the
 // same project card, rather than dumping them at the beginning of Work.
