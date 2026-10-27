@@ -346,3 +346,9 @@ html[data-theme="dark"] .case-view{
  position:relative;
  z-index:1;
 }
+/* System high-contrast themes can suppress custom surface colors.
+   Keep the chapter focus ring and selected-state border legible. */
+@media(forced-colors:active){
+ .case-view .case-section-links button:focus-visible{outline-color:Highlight}
+ .case-view .case-section-links button[aria-current="location"]{border-color:Highlight}
+}
