@@ -27,6 +27,12 @@ const caseHighlights={
 // Handoff: these labels summarize documented contributions, not invented outcomes.
 // Update alongside content.js when the scope or delivery status is confirmed.
 
+// Only verified shipped projects receive a cover stamp. Reuse the reviewed
+// delivery value shown on archive cards and in the overview; never infer
+// shipping status from an image brief, prototype, or design rationale.
+const deliveryStampMarkup=p=>projectEvidence[p.title]?.[2]==="Shipped product contribution"
+ ?'<p class="case-delivery-stamp">SHIPPED PRODUCT CONTRIBUTION</p>':"";
+
 // A description list pairs each project claim with its label for screen readers.
 const evidenceMarkup=p=>{
  const evidence=projectEvidence[p.title];
