@@ -51,7 +51,6 @@
 /* A self-contained introduction prevents later paragraphs from flowing around
    the portrait. The rest of the biography reads as one clean text column. */
 .about .about-intro{display:flow-root;margin-bottom:clamp(12px,1.5vw,20px)}
-.about .about-intro p{margin-bottom:0}
 @media(min-width:901px){
  .about h2{font-size:clamp(2.625rem,4.3vw,3.75rem)}
  .about .about-bottom .text-link{align-self:start;margin-top:clamp(12px,1.5vw,20px)}
@@ -82,3 +81,7 @@
 @media(min-width:1024px) and (max-height:780px){
  .about h2{font-size:clamp(2.5rem,4vw,3.5rem)}
 }
+
+/* Same specificity as the body rule: declare last so the first paragraph
+   does not add an extra gap inside its flow-root portrait wrapper. */
+.about .about-intro p{margin-bottom:0}
