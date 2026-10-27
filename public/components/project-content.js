@@ -1,4 +1,15 @@
 /* Case-study content presentation helpers. No routing or DOM initialization. */
+// Placeholders are editorial instructions, not evidence of shipped UI or research.
+// Use the same visible status label on archive cards and case-study imagery.
+const visualBriefKicker=brief=>{
+ const note=String(brief||"").trim();
+ if(/^ILLUSTRATIVE\s*\//i.test(note))return "ILLUSTRATIVE · NOT A PRODUCT SCREENSHOT";
+ if(/^PLANNED\s*\//i.test(note)||/^Planned hero:/i.test(note))return "PLANNED ARTWORK · NOT YET SUPPLIED";
+ if(/^Approved\b/i.test(note))return "APPROVED PRODUCT IMAGE NEEDED";
+ if(/\bPROTOTYPE\b/i.test(note))return "PROTOTYPE IMAGE NEEDED";
+ return "IMAGE TO ADD · NOT YET SUPPLIED";
+};
+
 // Short, factual takeaways help visitors skim without replacing the full case study.
 const caseHighlights={
  "Connected Planning":[["THE PROBLEM","Project information can be hard to follow across teams."],["MY FOCUS","Project context and clearer paths into the details."]],
