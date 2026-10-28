@@ -141,6 +141,24 @@ assert.match(motionHighlights, /STORYBOARD APPROACH[\s\S]*visual beats[\s\S]*leg
 assert.doesNotMatch(motionHighlights, /tested|validated|measured|shipped|completed animation/i);
 
 
+// Case-study cover copy must describe documented format constraints and
+// design reasoning, never claim measured campaign or clinical outcomes.
+const campaignProject = projects.find(project => project.title === 'Campaigns & Events');
+const campaignHighlights = renderHighlights(campaignProject);
+assert.match(campaignProject.process, /65-inch and 40-inch displays/);
+assert.match(campaignProject.tradeoffs, /booth wall[\\s\\S]*presentation/i);
+assert.match(campaignHighlights, /DESIGN TRADEOFF[\\s\\S]*booth wall[\\s\\S]*presentations/);
+assert.match(campaignHighlights, /MY DESIGN WORK[\\s\\S]*event signage[\\s\\S]*digital campaign/);
+assert.doesNotMatch(campaignHighlights, /tested|validated|leads|conversion|improved/i);
+
+const iolProject = projects.find(project => project.title === 'AI-Assisted IOL Planning');
+const iolHighlights = renderHighlights(iolProject);
+assert.match(iolProject.process, /measurements and scans[\\s\\S]*model-training or prediction workflow/);
+assert.match(iolProject.evidence, /No approved research findings[\\s\\S]*deployment status/);
+assert.match(iolHighlights, /INFORMATION PROVENANCE[\\s\\S]*patient measurements[\\s\\S]*model-generated predictions/);
+assert.match(iolHighlights, /WORKFLOW RATIONALE[\\s\\S]*patient file[\\s\\S]*connected application/);
+assert.doesNotMatch(iolHighlights, /tested|validated|shipped|clinically proven|improved/i);
+
 // Archive excerpts may override a rhetorical opening, but must remain authored
 // in content.js rather than being fabricated from a project's delivery label.
 const archiveTeaserSource = script.match(/const processTeaser=p=>\{[\s\S]*?\n\};/)?.[0];
