@@ -184,7 +184,11 @@ assert.match(renderHighlights({title:'Mobile Insights'}), /Shipped product exper
 // dashboard was ported, that every explored interaction shipped, or that
 // engagement improved. Keep the archive teaser and outcome inside that scope.
 const mobileInsights = projects.find(project => project.title === 'Mobile Insights');
-assert.match(mobileInsights.summary, /designed Mobile Insights[\s\S]*readable project-status summaries/i);
+// The archive teaser should open with the design tension, then state the
+// verified UX/UI contribution and shipped status—not imply a tested flow.
+assert.match(mobileInsights.summary, /^On a small screen, [^.]+\./i);
+assert.match(mobileInsights.summary, /project-status summaries[\s\S]*supporting context/i);
+assert.match(mobileInsights.summary, /contributed UX\/UI design[\s\S]*shipped Mobile Insights experience/i);
 assert.doesNotMatch(mobileInsights.summary, /desktop dashboard|users (needed|preferred)|research (showed|proved)/i);
 assert.match(mobileInsights.outcome, /Mobile Insights shipped with my UX\/UI design contribution/i);
 assert.match(mobileInsights.outcome, /production interaction states[\s\S]*engineering handoff details[\s\S]*usage metrics are not verified/i);
