@@ -130,6 +130,36 @@ const context = { window: {} };
 vm.runInNewContext(content, context, { filename: 'public/content.js' });
 new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not available here
 
+// A missing/renamed case-study URL must not show the Work archive while
+// retaining a broken /case-studies/... address. Exercise the real route()
+// branch with a small DOM/history stub; this is not browser navigation QA.
+{
+ const start=script.indexOf('function route(){');
+ const end=script.indexOf('// Remember where a visitor opened a case study',start);
+ assert.ok(start>=0&&end>start,'Router branch must remain discoverable');
+ const routeSource=script.slice(start,end);
+ const exerciseRoute=(pathname,hash)=>{
+  const replaced=[],events=[],main={hidden:true},caseView={hidden:false},skip={href:'#case-study'};
+  vm.runInNewContext(routeSource+'\nroute()',{
+   caseRoute:()=>hash,location:{pathname},history:{replaceState:(...args)=>replaced.push(args)},
+   window:{caseSectionObserver:null},$:()=>skip,main,caseView,
+   restoreHomeMetadata:()=>events.push('home'),renderCaseStudy:()=>events.push('case')
+  });
+  return {replaced,events,main,caseView,skip};
+ };
+ const missing=exerciseRoute('/case-studies/hoylu/old-title/','work');
+ assert.equal(missing.replaced.length,1,'Unknown case-study URLs should be normalized');
+ assert.equal(missing.replaced[0][2],'/#work','Broken URLs should resolve to the Work archive');
+ assert.equal(missing.main.hidden,false,'The archive should be visible after recovery');
+ assert.equal(missing.caseView.hidden,true,'The old case-study view should be hidden');
+ assert.equal(missing.skip.href,'#main','Skip link should target the visible main landmark');
+ assert.deepEqual(missing.events,['home'],'Homepage metadata should be restored');
+ assert.equal(exerciseRoute('/','work').replaced.length,0,'Ordinary homepage routes should not be rewritten');
+ const valid=exerciseRoute('/case-studies/hoylu/mobile-insights/','project/hoylu/1');
+ assert.equal(valid.replaced.length,0,'Valid case-study routes must remain unchanged');
+ assert.deepEqual(valid.events,['case'],'Valid case studies must still render');
+}
+
 const data = context.window.PORTFOLIO;
 assert.ok(data && Array.isArray(data.companies) && Array.isArray(data.playground));
 const ids = data.companies.map(company => company.id);
