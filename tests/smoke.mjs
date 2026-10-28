@@ -42,6 +42,20 @@ try{
  page.on("pageerror",error=>errors.push(error.message));
  await page.goto(origin+"/");
  const homepageMetadata=await readMetadata(page);
+ // The hero illustration and About headshot have different editorial jobs.
+ // Confirm both local assets actually load; source-level path checks alone
+ // would not catch a broken encoded filename or missing image response.
+ const heroPortrait=page.locator(".hero-portrait-art");
+ await heroPortrait.scrollIntoViewIfNeeded();
+ await page.waitForFunction(()=>document.querySelector(".hero-portrait-art")?.naturalWidth>0);
+ assert.match(await heroPortrait.getAttribute("src"),/laurenlevenportfolioheroportrait\\.png$/);
+ const aboutHeadshot=page.locator(".about-portrait img");
+ await aboutHeadshot.scrollIntoViewIfNeeded();
+ await page.waitForFunction(()=>document.querySelector(".about-portrait img")?.naturalWidth>0);
+ assert.match(await aboutHeadshot.getAttribute("src"),/Headshot%20Lauren%20Leven\\.png$/);
+ assert.notEqual(await heroPortrait.getAttribute("src"),await aboutHeadshot.getAttribute("src"),
+  "The About photograph must remain distinct from the illustrated hero");
+
  await page.goto(origin+"/case-studies/hoylu/connected-planning/");
  await page.locator("#case-title").waitFor();
  assert.match(await page.title(),/Connected Planning/);
