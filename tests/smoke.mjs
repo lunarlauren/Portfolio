@@ -115,6 +115,10 @@ try{
  assert.equal(await page.locator('.site-header nav a[href="#about"]').getAttribute("aria-current"),null,"About must not remain current on a case-study route");
  await page.locator(".case-back").click();
  await page.locator("#main").waitFor({state:"visible"});
+ // Leaving a case study restores focus/scroll to the opener in an animation
+ // frame. Wait for that restoration before deliberately scrolling to the
+ // footer, or its pending scroll can override our test's scrollTo(bottom).
+ await page.waitForFunction(()=>document.activeElement?.classList.contains("project-card-link"));
  // The Contact link opens mail, not an in-page location. Preserve the visual
  // near-footer underline without misreporting aria-current to screen readers.
  await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
