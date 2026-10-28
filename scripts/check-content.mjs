@@ -121,8 +121,8 @@ for (const [group,evidence] of [
   assert.match(card, new RegExp('id="' + prefix + '-' + suffix + '"'));
  }
  if (evidence) {
-  assert.match(card, /<dt>My contribution<\\/dt><dd>Mobile UX and visual design<\\/dd>/);
-  assert.match(card, /<dt>Delivery<\\/dt><dd>Shipped product contribution<\\/dd>/);
+  assert.match(card, /<dt>My contribution<\/dt><dd>Mobile UX and visual design<\/dd>/);
+  assert.match(card, /<dt>Delivery<\/dt><dd>Shipped product contribution<\/dd>/);
  } else {
   assert.doesNotMatch(card, /-facts"/, 'No dangling facts ID on independent cards');
  }
