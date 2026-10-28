@@ -22,7 +22,7 @@ const stationeryCss = read('../public/components/stationery.css');
 // actual inline controller: OS changes follow only without a manual choice,
 // and cross-tab updates refresh the toggle and browser theme color.
 {
- const inlineTheme=html.match(/<footer[\\s\\S]*?<script>([\\s\\S]*?)<\\/script>/)?.[1];
+ const inlineTheme=html.match(/<footer[\s\S]*?<script>([\s\S]*?)<\/script>/)?.[1];
  assert.ok(inlineTheme,'Homepage theme controller must remain discoverable');
  new vm.Script(inlineTheme,{filename:'homepage-theme.js'});
  const state={dark:false,stored:null,theme:null,color:null,pressed:null};
