@@ -23,7 +23,7 @@ const caseHighlights={
  "Motion & Storytelling":[["THE FORMAT","A product idea explained in roughly 30 seconds."],["MY CONTRIBUTION","Storyboarding and visual pacing."]],
  "Customizable Patient Portal":[["WHO IT'S FOR","Patients preparing for surgery and the practices supporting them."],["THE DESIGN TASK","Flexible practice setup without confusing patients."]],
  "AI-Assisted IOL Planning":[["THE CHALLENGE","Keep clinical measurements distinct from AI-generated predictions."],["MY FOCUS","Clear information hierarchy and handoffs between tools."]],
- "Navigator App":[["THE CONTEXT","A shipped app used by cruise passengers."],["MY CONTRIBUTION","Booking, account information, and Wi-Fi guidance."]],
+ "Navigator App":[["DOCUMENTED INPUT","Passenger feedback identified confusion around connecting to ship Wi-Fi."],["MY DESIGN WORK","Prototyped booking and account flows; designed Wi-Fi guidance."]],
  "Stateroom TV App":[["THE CONTEXT","A shipped experience used in guest staterooms."],["MY FOCUS","Readable information and remote-control navigation."]],
  "Forktactics":[["THE IDEA","Make planning a week of dinners feel less exhausting."],["THE STATUS","An independent, evolving product prototype."]],
  "Fallout 76 ;  What I'd Design":[["THE IDEA","Explore design ideas inside a game world I know well."],["THE APPROACH","Concept briefs informed by the game's visual language."]],
