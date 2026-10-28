@@ -99,23 +99,35 @@ const renderProjectCard = vm.runInNewContext(
   esc: value => String(value),
   visual: () => '<div>image</div>',
   processTeaser: project => project.process || '',
-  archiveFactsMarkup: () => '<dl>role and delivery</dl>',
+  archiveFactsMarkup: (evidence,id) => evidence ? '<dl id="' + id + '"><dt>My contribution</dt><dd>' + evidence[1] + '</dd><dt>Delivery</dt><dd>' + evidence[2] + '</dd></dl>' : '',
   casePath: () => '/case-studies/hoylu/connected-planning/'
  }
 );
-for (const group of ['hoylu', 'playground']) {
+// The professional card's accessible description includes its challenge,
+// reviewed role, and delivery; speculative/independent cards without reviewed
+// facts must not point to a missing description target.
+for (const [group,evidence] of [
+ ['hoylu',['Hoylu context','Mobile UX and visual design','Shipped product contribution']],
+ ['playground',undefined]
+]) {
  const card = renderProjectCard({
   title: 'Sample project', type: 'Product UX',
   summary: 'The challenge and audience context.', process: 'I explored information hierarchy.'
- }, 0, group, ['context', 'role', 'status']);
+ }, 0, group, evidence);
  const prefix = 'project-card-' + group + '-0';
  assert.match(card, new RegExp('aria-labelledby="' + prefix + '-title ' + prefix + '-cta"'));
- assert.match(card, new RegExp('aria-describedby="' + prefix + '-summary"'));
- for (const suffix of ['title', 'summary', 'cta']) {
+ assert.match(card, new RegExp('aria-describedby="' + prefix + '-summary' + (evidence ? ' ' + prefix + '-facts' : '') + '"'));
+ for (const suffix of ['title', 'summary', 'cta', ...(evidence ? ['facts'] : [])]) {
   assert.match(card, new RegExp('id="' + prefix + '-' + suffix + '"'));
  }
- assert.doesNotMatch(card, /aria-label=/, 'A card-wide label would mask the summary and role');
- assert.match(card, /The challenge and audience context\./, 'Challenge copy remains available to assistive technology');
+ if (evidence) {
+  assert.match(card, /<dt>My contribution<\\/dt><dd>Mobile UX and visual design<\\/dd>/);
+  assert.match(card, /<dt>Delivery<\\/dt><dd>Shipped product contribution<\\/dd>/);
+ } else {
+  assert.doesNotMatch(card, /-facts"/, 'No dangling facts ID on independent cards');
+ }
+ assert.doesNotMatch(card, /aria-label=/, 'A card-wide label would mask its context');
+ assert.match(card, /The challenge and audience context\\./);
 }
 
 assert.match(caseStudy, /visualBriefKicker\(p\.imageBrief\)/, 'Case-study hero placeholders must disclose their status');
@@ -339,7 +351,7 @@ for (const id of ['main', 'work', 'playground', 'about']) {
 // overviews. An unlabeled project would make its status harder to assess.
 assert.match(script, /archiveFactsMarkup\(evidence\)/, 'Project cards must render role/delivery facts');
 assert.match(script, /projectCard\(project,index,company\.id,projectEvidence\[project\.title\]\)/, 'Professional cards must use reviewed evidence');
-assert.match(script, /<dl class="project-card-facts">/, 'Role and delivery facts should use description-list semantics');
+assert.match(script, /<dl id="'\+id\+'" class="project-card-facts">/, 'Role and delivery facts should use description-list semantics');
 assert.match(workCss, /\.work \.project-card-facts\s*\{/, 'Archive facts must have an intentional layout');
 assert.match(workCss, /\.work \.project-card-facts dd\s*\{/, 'Archive values must have readable styles');
 
