@@ -105,6 +105,12 @@ try{
  assert.match(page.url(),/\/#about$/);
  assert.equal(await page.locator("#main").isVisible(),true);
  assert.deepEqual(await readMetadata(page),homepageMetadata,"Navigating from a case study to About must also restore homepage metadata");
+ // The Contact link opens mail, not an in-page location. Preserve the visual
+ // near-footer underline without misreporting aria-current to screen readers.
+ await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
+ await page.waitForFunction(()=>document.querySelector(".header-contact")?.hasAttribute("data-section-active"));
+ assert.equal(await page.locator(".header-contact").getAttribute("aria-current"),null,"Mailto Contact must not announce a current page location");
+ assert.match(await page.locator(".header-contact").evaluate(node=>getComputedStyle(node).textDecorationLine),/underline/,"Near-footer Contact should remain visibly underlined");
  // The footer surface must reach the viewport edges, not stop at .wrap's
  // 1320px content width (which would expose the notebook dots on desktop).
  await page.setViewportSize({width:1440,height:900});
