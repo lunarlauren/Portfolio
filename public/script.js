@@ -238,7 +238,10 @@ function initSectionNavigation(){
   const contactRect=contactCTA?.getBoundingClientRect();
   const contactVisible=contactRect&&!main.hidden&&contactRect.top<window.innerHeight*.82&&contactRect.bottom>0;
   const nearEnd=document.documentElement.scrollHeight-(window.scrollY+window.innerHeight)<Math.max(96,window.innerHeight*.2);
-  if(!hash.startsWith("project/")&&contactVisible&&nearEnd)active="contact";
+  // On tall About layouts the email CTA may scroll above the viewport before
+  // the footer is reached. Once About is the active section, the end-of-page
+  // position still represents the Contact destination.
+  if(!hash.startsWith("project/")&&nearEnd&&(contactVisible||active==="about"))active="contact";
   if(contactLink){
    // Contact opens an email composer; it is not a page location. Keep the
    // visual underline near the footer without announcing a false aria-current.
