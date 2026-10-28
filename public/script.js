@@ -116,6 +116,11 @@ function restoreHomeMetadata(){
  }
 }
 function route(){const hash=caseRoute();if(!hash.startsWith("project/")){
+ // An unknown or renamed deep link currently resolves to the Work archive.
+ // Normalize the URL as well, so the homepage never appears under a stale
+ // /case-studies/... address (and its canonical/share metadata stay truthful).
+ // Replace rather than push: Back should not revisit the broken address.
+ if(location.pathname.startsWith("/case-studies/"))history.replaceState(null,"","/#work");
  // Chapter tracking belongs only to the visible case study. Disconnect on
  // exit so a hidden heading cannot keep updating the old chapter index.
  if(window.caseSectionObserver){window.caseSectionObserver.disconnect();window.caseSectionObserver=null;}
