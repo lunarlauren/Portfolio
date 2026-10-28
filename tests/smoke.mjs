@@ -42,6 +42,14 @@ try{
  page.on("pageerror",error=>errors.push(error.message));
  await page.goto(origin+"/");
  const homepageMetadata=await readMetadata(page);
+ // Accessible link navigation should expose challenge, reviewed contribution,
+ // and the visible design approach—not just a generic case-study action.
+ const cardDescriptions=await page.locator('.work .project-card-link').first().evaluate(link=>
+  link.getAttribute('aria-describedby').split(/\s+/).map(id=>document.getElementById(id)?.textContent.trim())
+ );
+ assert.equal(cardDescriptions.length,3,'Professional card should describe challenge, facts, and process');
+ assert.ok(cardDescriptions.every(Boolean),'Every card description ID must resolve');
+ assert.match(cardDescriptions[2],/Design approach/,'Process teaser must be included in the accessible description');
  // The hero illustration and About headshot have different editorial jobs.
  // Confirm both local assets actually load; source-level path checks alone
  // would not catch a broken encoded filename or missing image response.

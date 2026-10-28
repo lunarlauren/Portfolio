@@ -116,9 +116,9 @@ const renderProjectCard = vm.runInNewContext(
   casePath: () => '/case-studies/hoylu/connected-planning/'
  }
 );
-// The professional card's accessible description includes its challenge,
-// reviewed role, and delivery; speculative/independent cards without reviewed
-// facts must not point to a missing description target.
+// Project-card descriptions include the challenge and the visible process teaser.
+// Reviewed professional cards also expose role/delivery; absent facts or process
+// must never leave dangling accessible-description references.
 for (const [group,evidence] of [
  ['hoylu',['Hoylu context','Mobile UX and visual design','Shipped product contribution']],
  ['playground',undefined]
@@ -129,8 +129,8 @@ for (const [group,evidence] of [
  }, 0, group, evidence);
  const prefix = 'project-card-' + group + '-0';
  assert.match(card, new RegExp('aria-labelledby="' + prefix + '-title ' + prefix + '-cta"'));
- assert.match(card, new RegExp('aria-describedby="' + prefix + '-summary' + (evidence ? ' ' + prefix + '-facts' : '') + '"'));
- for (const suffix of ['title', 'summary', 'cta', ...(evidence ? ['facts'] : [])]) {
+ assert.match(card, new RegExp('aria-describedby="' + prefix + '-summary' + (evidence ? ' ' + prefix + '-facts' : '') + ' ' + prefix + '-process"'));
+ for (const suffix of ['title', 'summary', 'cta', ...(evidence ? ['facts'] : []), 'process']) {
   assert.match(card, new RegExp('id="' + prefix + '-' + suffix + '"'));
  }
  if (evidence) {
@@ -141,7 +141,14 @@ for (const [group,evidence] of [
  }
  assert.doesNotMatch(card, /aria-label=/, 'A card-wide label would mask its context');
  assert.match(card, /The challenge and audience context\./);
+ assert.match(card, /<strong>Design approach<\/strong> I explored information hierarchy\./);
 }
+// Optional process fields must not create a dangling aria-describedby ID.
+const noProcessCard = renderProjectCard({
+ title:'Sample project',type:'Product UX',summary:'A concise challenge.',process:''
+},1,'playground',undefined);
+assert.match(noProcessCard,/aria-describedby="project-card-playground-1-summary"/);
+assert.doesNotMatch(noProcessCard,/-process"/);
 
 assert.match(caseStudy, /visualBriefKicker\(p\.imageBrief\)/, 'Case-study hero placeholders must disclose their status');
 // Delivery badges are driven by reviewed metadata, never by an illustration
