@@ -342,6 +342,36 @@ for (const key of ['og:title','og:description','og:url','twitter:title','twitter
 assert.match(caseStudy, /if\(active\.getAttribute\("aria-current"\)==="location"\)\{\s*if\(reveal\)revealCurrentCaseTab\(active\);/, 'Observer updates must not hijack manually scrolled tabs');
 assert.match(caseStudy, /setCurrentCaseSection\(heading\.id,\{reveal:true\}\)/, 'Explicit chapter jumps must reveal their tab');
 assert.match(caseStudy, /revealCurrentCaseTab\(active\);/, 'Chapter navigation must reveal active tabs');
+// Exercise the real chapter-state helper, not just its source shape: passive
+// reading-progress updates must not drag the horizontally browsed tab strip.
+const sectionStateStart = caseStudy.indexOf('function setCurrentCaseSection(');
+const sectionStateEnd = caseStudy.indexOf('\ncaseJumpButtons.forEach(button=>{', sectionStateStart);
+assert.ok(sectionStateStart >= 0 && sectionStateEnd > sectionStateStart, 'Chapter state helper must be present');
+const sectionStateSource = caseStudy.slice(sectionStateStart, sectionStateEnd);
+const makeChapterButton = id => ({
+ dataset: {caseJump: id},
+ attributes: {},
+ getAttribute(name) { return this.attributes[name] ?? null; },
+ setAttribute(name, value) { this.attributes[name] = value; },
+ removeAttribute(name) { delete this.attributes[name]; }
+});
+const firstChapterButton = makeChapterButton('chapter-one');
+const secondChapterButton = makeChapterButton('chapter-two');
+let chapterReveals = 0;
+const setCurrentChapter = new Function('caseJumpButtons', 'revealCurrentCaseTab',
+ sectionStateSource + '\nreturn setCurrentCaseSection;')(
+ [firstChapterButton, secondChapterButton], () => { chapterReveals++; }
+);
+setCurrentChapter('chapter-one');
+setCurrentChapter('chapter-two');
+assert.equal(chapterReveals, 0, 'Observer chapter changes must not scroll the mobile tab strip');
+assert.equal(secondChapterButton.getAttribute('aria-current'), 'location', 'Observer still updates the active chapter');
+setCurrentChapter('chapter-two', {reveal:true});
+assert.equal(chapterReveals, 1, 'Explicit selection must reveal an already-active chapter');
+setCurrentChapter('chapter-one', {reveal:true});
+assert.equal(chapterReveals, 2, 'Explicit selection must reveal a newly active chapter');
+assert.equal(secondChapterButton.getAttribute('aria-current'), null, 'Only one chapter may be current');
+
 
 // Pass 6: production stylesheet ownership and duplicate-rule guardrails.
 assert.doesNotMatch(caseCss, /html\[data-theme="dark"\] \.case-evidence-item\{/, 'Evidence theme colors should use shared tokens, not duplicate dark rules');
