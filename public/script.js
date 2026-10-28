@@ -39,14 +39,19 @@ const archiveFactsMarkup=evidence=>evidence?
 // Professional cards lead with the challenge; playground cards stay visual-first.
 const projectCard=(p,i,group,evidence)=>{
  const professional=group!=="playground";
- const title='<h3'+(professional?' class="archive-project-title"':'')+'>'+esc(p.title)+'</h3>';
+ // A short accessible link name plus a challenge summary is more useful than
+ // an aria-label that hides all the card's editorial context from link navigation.
+ // IDs are unique across client groups and the independent-work gallery.
+ const cardId='project-card-'+projectSlug(group)+'-'+Number(i);
+ const titleId=cardId+'-title',summaryId=cardId+'-summary',ctaId=cardId+'-cta';
+ const title='<h3 id="'+titleId+'"'+(professional?' class="archive-project-title"':'')+'>'+esc(p.title)+'</h3>';
  const preview=professional?title+visual(p):visual(p);
  const meta='<div class="project-meta"><span>'+esc(p.type)+'</span><span aria-hidden="true">↗</span></div>';
- const summary='<p>'+(professional?'<strong class="project-card-summary-label">The challenge</strong> ':'')+esc(p.summary)+'</p>';
+ const summary='<p id="'+summaryId+'">'+(professional?'<strong class="project-card-summary-label">The challenge</strong> ':'')+esc(p.summary)+'</p>';
  const approach=processTeaser(p);
  const process=approach?'<p class="project-card-process"><strong>Design approach</strong> '+esc(approach)+'</p>':"";
- const cta='<span class="project-card-cta">Read the case study <span aria-hidden="true">→</span></span>';
- return '<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="'+casePath(group,i)+'" aria-label="View '+esc(p.title)+' case study">'+preview+meta+(professional?'':title)+summary+archiveFactsMarkup(evidence)+process+cta+'</a></article>';
+ const cta='<span id="'+ctaId+'" class="project-card-cta">Read the case study <span aria-hidden="true">→</span></span>';
+ return '<article class="project-card" style="--i:'+Number(i)+'"><a class="project-card-link" href="'+casePath(group,i)+'" aria-labelledby="'+titleId+' '+ctaId+'" aria-describedby="'+summaryId+'">'+preview+meta+(professional?'':title)+summary+archiveFactsMarkup(evidence)+process+cta+'</a></article>';
 };
 // Single source of truth for project discovery. No company gate or repeated
 // featured/company lists: each professional project appears exactly once.
