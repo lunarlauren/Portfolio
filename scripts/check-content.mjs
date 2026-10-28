@@ -72,6 +72,19 @@ const heroFeatureMarkup = html.match(/<div class="hero-feature" id="hero-feature
 assert.ok(heroFeatureMarkup, 'Homepage must retain the illustrated hero panel');
 assert.match(heroFeatureMarkup, /<img class="hero-portrait-art"[^>]+alt="[^"]+"/, 'Hero portrait must have useful alternative text');
 assert.doesNotMatch(heroFeatureMarkup, /<(?:a|button)\b/, 'Visually reordered portrait panel must not contain keyboard-focusable controls');
+
+// Preserve the intentionally distinct portraits: illustration introduces
+// visual craft in the hero; the real headshot identifies the designer in About.
+// Neither image is a case-study product screenshot or editorial placeholder.
+assert.match(heroFeatureMarkup, /src="\/laurenlevenportfolioheroportrait\.png"/,
+ 'Hero must retain Lauren\'s illustrated portrait');
+const aboutPortraitMarkup = html.match(/<figure class="about-portrait">[\s\S]*?<\/figure>/)?.[0];
+assert.ok(aboutPortraitMarkup, 'About must retain its portrait and caption');
+assert.match(aboutPortraitMarkup, /src="\/Headshot%20Lauren%20Leven\.png"/,
+ 'About should use Lauren\'s actual headshot, not repeat the hero illustration');
+assert.match(aboutPortraitMarkup, /alt="Portrait photograph of Lauren Leven"/,
+ 'About headshot must have a factual accessible description');
+
 assert.doesNotMatch(css, /\/\* Case-study handoff: quick factual overview/, 'Case evidence must not return to legacy CSS');
 assert.match(caseCss, /\.case-evidence-item\{/, 'Case evidence must remain in case-study component');
 assert.match(navigationCss, /footer\.wrap\{/, 'Footer chrome must remain with navigation');
