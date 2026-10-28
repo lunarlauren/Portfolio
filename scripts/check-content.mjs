@@ -362,7 +362,7 @@ for (const id of ['main', 'work', 'playground', 'about']) {
 }
 // Archive labels reuse the same reviewed role/delivery source as case-study
 // overviews. An unlabeled project would make its status harder to assess.
-assert.match(script, /archiveFactsMarkup\(evidence\)/, 'Project cards must render role/delivery facts');
+assert.match(script, /archiveFactsMarkup\(evidence,factsId\)/, 'Project cards must render role/delivery facts with a unique description target');
 assert.match(script, /projectCard\(project,index,company\.id,projectEvidence\[project\.title\]\)/, 'Professional cards must use reviewed evidence');
 assert.match(script, /<dl id="'\+id\+'" class="project-card-facts">/, 'Role and delivery facts should use description-list semantics');
 assert.match(workCss, /\.work \.project-card-facts\s*\{/, 'Archive facts must have an intentional layout');
