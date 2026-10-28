@@ -38,8 +38,9 @@ function revealCurrentCaseTab(button){
 function setCurrentCaseSection(id,{reveal=false}={}){
  const active=caseJumpButtons.find(button=>button.dataset.caseJump===id);
  if(!active)return;
- // IntersectionObserver can fire while someone is manually browsing tabs.
- // Don't pull the strip back for an unchanged chapter; explicit taps may reveal it.
+ // Reading progress updates the active state without stealing the horizontal
+ // scroll position from someone browsing other chapter tabs. Only a deliberate
+ // chapter selection (or initial render) requests a tab-strip reveal.
  if(active.getAttribute("aria-current")==="location"){
   if(reveal)revealCurrentCaseTab(active);
   return;
@@ -48,7 +49,7 @@ function setCurrentCaseSection(id,{reveal=false}={}){
   if(button===active)button.setAttribute("aria-current","location");
   else button.removeAttribute("aria-current");
  });
- revealCurrentCaseTab(active);
+ if(reveal)revealCurrentCaseTab(active);
 }
 caseJumpButtons.forEach(button=>{
  button.addEventListener("click",()=>{
