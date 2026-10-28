@@ -62,18 +62,44 @@ caseJumpButtons.forEach(button=>{
  });
 });
 // The case-study index follows reading progress, not just button taps.
-// Disconnect on the next route to avoid observing removed headings.
+// Both observers and the fallback use the same viewport threshold, so the
+// current chapter is consistent in browsers with or without IntersectionObserver.
+function updateCurrentCaseSectionFromScroll(){
+ const threshold=Math.min(220,window.innerHeight*.3);
+ let current=caseJumpHeadings[0]?.id;
+ for(const heading of caseJumpHeadings){
+  if(heading&&heading.getBoundingClientRect().top<=threshold)current=heading.id;
+ }
+ if(current)setCurrentCaseSection(current);
+}
+// Disconnect old listeners before replacing caseView's content on another route.
 if(window.caseSectionObserver)window.caseSectionObserver.disconnect();
+if(window.caseSectionScrollCleanup){
+ window.caseSectionScrollCleanup();
+ window.caseSectionScrollCleanup=null;
+}
 if("IntersectionObserver" in window&&caseJumpHeadings.length>0){
- window.caseSectionObserver=new IntersectionObserver(()=>{
-  const threshold=Math.min(220,window.innerHeight*.3);
-  let current=caseJumpHeadings[0]?.id;
-  for(const heading of caseJumpHeadings){
-   if(heading&&heading.getBoundingClientRect().top<=threshold)current=heading.id;
-  }
-  if(current)setCurrentCaseSection(current);
- },{rootMargin:"-20% 0px -55% 0px",threshold:0});
+ window.caseSectionObserver=new IntersectionObserver(updateCurrentCaseSectionFromScroll,
+  {rootMargin:"-20% 0px -55% 0px",threshold:0});
  caseJumpHeadings.forEach(heading=>window.caseSectionObserver.observe(heading));
+}else if(caseJumpHeadings.length>0){
+ // Older/limited browsers still get a current chapter while reading. Only
+ // calculate layout once per animation frame, and remove listeners on exit.
+ let pending=false;
+ const onScroll=()=>{
+  if(pending)return;
+  pending=true;
+  requestAnimationFrame(()=>{
+   pending=false;
+   updateCurrentCaseSectionFromScroll();
+  });
+ };
+ window.addEventListener("scroll",onScroll,{passive:true});
+ window.addEventListener("resize",onScroll);
+ window.caseSectionScrollCleanup=()=>{
+  window.removeEventListener("scroll",onScroll);
+  window.removeEventListener("resize",onScroll);
+ };
 }
 if(caseJumpButtons.length)setCurrentCaseSection(caseJumpButtons[0].dataset.caseJump,{reveal:true});
 document.title=p.title+" — Lauren Leven";
