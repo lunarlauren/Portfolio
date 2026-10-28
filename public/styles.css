@@ -516,8 +516,7 @@ html[data-theme="dark"] .featured-project>.eyebrow,
 
 
 /* NOTEBOOK VISUAL SYSTEM — pass 1
-   Decorative ruled paper lives behind content, never over screenshots.
-   Future illustrated sticker assets can replace .notebook-sticker without layout changes. */
+   Decorative ruled paper lives behind content, never over screenshots. */
 :root{--notebook-blue:color-mix(in srgb,var(--palette-paper) 45%,var(--palette-blue));--notebook-pink:#f05b9f;--notebook-paper:#fffdf8;--notebook-rule:rgba(100,169,218,.22);--notebook-margin-offset:13px;--notebook-margin-opacity:.45}
 html:not([data-theme="dark"]) body{background:var(--notebook-paper)}
 html:not([data-theme="dark"]) :is(.hero,.work,.about){
@@ -535,16 +534,6 @@ html:not([data-theme="dark"]) .hero-description,
 html:not([data-theme="dark"]) .section-head>p{background:transparent;box-decoration-break:initial;-webkit-box-decoration-break:initial}
 html:not([data-theme="dark"]) .featured-project{background:var(--notebook-paper);border:1px solid color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));border-radius:16px;padding:clamp(14px,2vw,22px);box-shadow:var(--paper-shadow)}
 /* Client folder shadows use the shared paper-depth token; no alternating overrides. */
-.notebook-sticker{position:absolute;z-index:2;right:clamp(14px,3vw,42px);top:12px;width:52px;height:52px;border:2px solid white;border-radius:16px;background:#ffcf4e;box-shadow:0 3px 0 #dcac39,0 5px 12px rgba(32,51,68,.15);transform:rotate(12deg);display:grid;place-items:center;font-size:1.75rem;cursor:pointer;touch-action:manipulation}
-.notebook-sticker:active{transform:rotate(4deg) scale(.88)}
-.notebook-sticker.sticker-pop{animation:notebook-sticker-pop .38s cubic-bezier(.2,1.8,.5,1)}
-@keyframes notebook-sticker-pop{0%{transform:rotate(12deg) scale(1)}45%{transform:rotate(-10deg) scale(1.18)}100%{transform:rotate(12deg) scale(1)}}
-@media(max-width:760px){
-  .notebook-sticker{width:44px;height:44px;font-size:1.5rem;right:12px;top:8px}
-}
-html[data-theme="dark"] .notebook-sticker{background:#f7bf56;color:#203344}
-@media(prefers-reduced-motion:reduce){.notebook-sticker.sticker-pop{animation:none}}
-
 
 /* Notebook project index — one project per entry, with a clear editorial hierarchy.
    Cards use existing approved imagery or descriptive placeholders from content.js. */
@@ -624,7 +613,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  .hero .hero-copy h1{font-size:clamp(2.3125rem,10.8vw,3rem);line-height:1.05;letter-spacing:-.045em}
  .hero .hero-description{max-width:100%;overflow-wrap:break-word}
  .hero .hero-foot{flex-wrap:wrap;gap:8px 14px}
- .notebook-sticker{width:42px;height:42px;right:8px;top:8px}
  .notebook-project-index .featured-project{min-width:0}
  .notebook-project-index .project-card-link{overflow-wrap:break-word}
 }
@@ -685,11 +673,11 @@ html[data-theme="dark"] .playground .section-head>p{
 /* iPhone-quality touch foundation: crisp taps, predictable focus and safe-area
    spacing without changing the notebook identity or inventing app chrome. */
 @media(pointer:coarse){
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.notebook-sticker,.case-section-links button){
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button){
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
  }
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.notebook-sticker,.case-section-links button):active{
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active{
   filter:brightness(.96);
  }
 }
@@ -702,7 +690,7 @@ html[data-theme="dark"] .playground .section-head>p{
  /* No one-sided fade: it obscured the final chapter and focus outline. */
 }
 @media(prefers-reduced-motion:reduce){
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.notebook-sticker,.case-section-links button):active{filter:none}
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active{filter:none}
 }
 
 

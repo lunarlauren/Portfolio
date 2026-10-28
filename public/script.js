@@ -286,14 +286,3 @@ function initReveals(){
 initReveals();
 
 
-// Decorative notebook sticker: optional, repeatable tactile feedback.
-// Swap the button's star glyph for a commissioned illustration later.
-document.querySelectorAll("[data-sticker-placeholder]").forEach(sticker=>{
- sticker.addEventListener("click",()=>{
-  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)return;
-  sticker.classList.remove("sticker-pop");
-  void sticker.offsetWidth;
-  sticker.classList.add("sticker-pop");
- });
- sticker.addEventListener("animationend",()=>sticker.classList.remove("sticker-pop"));
-});
