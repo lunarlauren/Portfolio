@@ -488,8 +488,9 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mi
  .hero-feature{min-height:320px}
 }
 
-/* Contact is a mail link, but participates in the current-section indicator near the footer. */
-.site-header .header-contact[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+/* Contact opens mail rather than a page section. Keep the near-footer
+   underline visual-only; aria-current is reserved for actual locations. */
+.site-header .header-contact[data-section-active]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 
 
 /* Featured case studies: direct entry to the work, before company browsing.
