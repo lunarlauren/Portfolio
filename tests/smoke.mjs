@@ -48,11 +48,11 @@ try{
  const heroPortrait=page.locator(".hero-portrait-art");
  await heroPortrait.scrollIntoViewIfNeeded();
  await page.waitForFunction(()=>document.querySelector(".hero-portrait-art")?.naturalWidth>0);
- assert.match(await heroPortrait.getAttribute("src"),/laurenlevenportfolioheroportrait\\.png$/);
+ assert.match(await heroPortrait.getAttribute("src"),/laurenlevenportfolioheroportrait\.png$/);
  const aboutHeadshot=page.locator(".about-portrait img");
  await aboutHeadshot.scrollIntoViewIfNeeded();
  await page.waitForFunction(()=>document.querySelector(".about-portrait img")?.naturalWidth>0);
- assert.match(await aboutHeadshot.getAttribute("src"),/Headshot%20Lauren%20Leven\\.png$/);
+ assert.match(await aboutHeadshot.getAttribute("src"),/Headshot%20Lauren%20Leven\.png$/);
  assert.notEqual(await heroPortrait.getAttribute("src"),await aboutHeadshot.getAttribute("src"),
   "The About photograph must remain distinct from the illustrated hero");
 
