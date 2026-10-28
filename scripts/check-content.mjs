@@ -96,6 +96,14 @@ const renderHighlights = vm.runInNewContext(projectContent + '\n' + 'highlightMa
 const navigatorProject = projects.find(project => project.title === 'Navigator App');
 assert.match(navigatorProject.evidence, /passenger feedback identified confusion/i);
 assert.match(navigatorProject.evidence, /designed and prototyped booking and account flows/i);
+// The process chapter must show the documented design artifacts and the
+// implementation boundary, not imply that every prototype screen shipped.
+assert.match(navigatorProject.process, /designed and prototyped booking and account flows/i);
+assert.match(navigatorProject.process, /browsing through selection and confirmation/i);
+assert.match(navigatorProject.process, /engineering handoff details/i);
+assert.match(navigatorProject.process, /which prototype states shipped/i);
+assert.doesNotMatch(navigatorProject.process, /usability tests (showed|proved)|increased bookings|improved conversion/i);
+
 const navigatorHighlights = renderHighlights(navigatorProject);
 assert.match(navigatorHighlights, /DOCUMENTED INPUT/);
 assert.match(navigatorHighlights, /Passenger feedback identified confusion around connecting to ship Wi-Fi/);
