@@ -28,6 +28,12 @@ for (const name of stylesheetOrder) {
 }
 assert.doesNotMatch(css, /\/\* Problem-solving hero: shared layout in both themes/, 'Extracted hero polish must not return to legacy CSS');
 assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must remain in its component');
+// The mobile layout visually places the portrait before the hero CTAs.
+// Keeping the portrait panel noninteractive prevents a mismatched tab order.
+const heroFeatureMarkup = html.match(/<div class="hero-feature" id="hero-feature">[\\s\\S]*?<\\/div><\\/section>/)?.[0];
+assert.ok(heroFeatureMarkup, 'Homepage must retain the illustrated hero panel');
+assert.match(heroFeatureMarkup, /<img class="hero-portrait-art"[^>]+alt="[^"]+"/, 'Hero portrait must have useful alternative text');
+assert.doesNotMatch(heroFeatureMarkup, /<(?:a|button)\\b/, 'Visually reordered portrait panel must not contain keyboard-focusable controls');
 assert.doesNotMatch(css, /\/\* Case-study handoff: quick factual overview/, 'Case evidence must not return to legacy CSS');
 assert.match(caseCss, /\.case-evidence-item\{/, 'Case evidence must remain in case-study component');
 assert.match(navigationCss, /footer\.wrap\{/, 'Footer chrome must remain with navigation');
