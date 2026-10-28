@@ -271,17 +271,11 @@ html[data-theme="dark"] .work .featured-project.client-file{
  .work .featured-project.client-file,.work .client-file .client-file-label{transition:none!important;animation:none!important}
 }
 
-/* Pass 8: close the mobile work-to-playground handoff without compressing
-   individual project cards. The final card already provides its own padding. */
+/* Mobile archive: keep the section handoff compact without shrinking
+   cards, then show the challenge, contribution and approach at readable sizes. */
 @media(max-width:600px){
  .work.wrap{padding-bottom:clamp(28px,7vw,44px)}
  .work .featured-projects-grid{margin-bottom:clamp(16px,4vw,28px)}
-}
-
-/* Mobile archive reading order: project identity first, contribution facts
-   second, and the design approach next. Avoid compressing the facts into
-   two narrow columns on phones; retain the visible CTA and placeholders. */
-@media(max-width:600px){
  .work .featured-project.client-file .archive-project-title{
   font-size:clamp(1.625rem,7vw,2.125rem);
   line-height:1.12;
