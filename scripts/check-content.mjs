@@ -296,6 +296,11 @@ assert.match(caseCss, /\.case-view \.case-section-links button\[aria-current="lo
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence cards should retain the editorial paper shape');
 assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\(0,1fr\)\}/, 'Phone galleries should stack in one column');
 
+// A case-study observer must not follow hidden headings after a route exit.
+// The next case render still creates a fresh observer for its own chapters.
+assert.match(script, /if\(window\.caseSectionObserver\)\{window\.caseSectionObserver\.disconnect\(\);window\.caseSectionObserver=null;\}/, 'Leaving a case study must release its chapter observer');
+assert.match(caseStudy, /window\.caseSectionObserver=new IntersectionObserver\(/, 'Opening a case study must reattach chapter tracking');
+
 // Pass 11: keep chapter navigation target lookup centralized.
 assert.ok(caseStudy.includes('const caseJumpTargets=new Map('), 'Case study must cache chapter targets per render');
 assert.ok(caseStudy.includes('const heading=caseJumpTargets.get(button.dataset.caseJump)'), 'Chapter click handlers must reuse cached targets');
