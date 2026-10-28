@@ -64,7 +64,7 @@ Think of the site like a set of labeled drawers:
 
 **CSS rule of thumb:** Search for the selector across all stylesheets before editing. The base stylesheet contains historical overrides; the later-loaded component files can override it. Prefer cleaning up the original rule rather than adding a second competing rule at the bottom. Keep comments about *why* a rule exists, not a narration of every CSS property.
 
-**About portrait:** Its HTML is in the About section of `public/index.html`; its layout is isolated in `public/components/about.css`. The hero's abstract featured-art placeholder stays in place until an approved product visual is supplied.
+**Portrait ownership:** `public/index.html` uses the existing `/laurenlevenportfolioheroportrait.png` illustration in the hero and, for now, in About. The hero illustration is a noninteractive visual panel, not a featured-project link. At phone widths (≤600px), `public/components/hero-polish.css` uses `display: contents` on the generic `.hero-copy` wrapper to place the portrait immediately after the headline; the panel must remain free of links/buttons so keyboard focus proceeds to the visually following CTAs. The About crop/layout belongs to `public/components/about.css`. Replace the About image with the user's real headshot only after that image is supplied; do not replace the illustrated hero.
 
 ## CSS cleanup progress
 
@@ -78,9 +78,9 @@ The first global rules were moved into `public/components/foundations.css` witho
 
 `public/components/case-study-base.css` holds the earliest case-study layout rules. It loads before the legacy stylesheet so later overrides remain effective. The final case-study styling is also in `public/components/case-study.css`. Do not delete either without browser-based visual comparison.
 
-### Removed hero portrait legacy CSS
+### Hero illustration and retired legacy CSS
 
-The hero portrait and speech bubble were retired when the illustration moved into About. Their obsolete selectors have now been removed from `public/styles.css`. The About portrait's active rules are in `public/components/about.css`. Dark-mode token declarations overridden later in the same stylesheet have been pruned; theme overrides elsewhere remain and need browser QA before broader merging.
+The old hero portrait/speech-bubble implementation was removed from `public/styles.css`. The current hero uses the approved 3D illustration inside the featured-art frame, with responsive sizing and mobile content order owned by `public/components/hero-polish.css`. The About portrait remains independently styled in `public/components/about.css`. Keep the hero image's alt text meaningful, and avoid reintroducing redundant clickable links around the visual. Dark-mode token declarations overridden later in the same stylesheet have been pruned; theme overrides elsewhere still need browser QA before broader merging.
 
 ### Theme token consolidation
 
