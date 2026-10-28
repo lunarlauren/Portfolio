@@ -1,41 +1,31 @@
-/* Hero finishing layer.
-   Loaded after legacy styles to preserve the established cascade while
-   isolating hero typography and phone rhythm for the next design pass. */
-/* Problem-solving hero: shared layout in both themes. */
+/* Homepage hero finishing layer.
+   Loaded after the legacy stylesheet. Keep responsive hero ownership here
+   rather than layering new overrides in styles.css. */
+
+/* Shared headline rhythm and illustration treatment in both themes. */
 .hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
 .hero .hero-copy h1 em{display:inline-block;max-width:100%}
 .hero .hero-description{max-width:54ch;text-wrap:pretty;line-height:1.6}
-/* Inline emphasis avoids overflow at tablet and phone widths. */
+.hero .feature-art .hero-portrait-art{
+ position:relative;z-index:2;display:block;
+ width:min(90%,430px);height:100%;max-height:100%;object-fit:contain;
+ filter:drop-shadow(0 18px 22px rgba(25,45,65,.16));transform:rotate(8deg)
+}
+
+/* Allow the second headline line to wrap normally on smaller viewports. */
 @media(max-width:760px){
  .hero .hero-copy h1 em{display:inline;overflow-wrap:normal}
+ .hero .feature-art .hero-portrait-art{width:min(88%,360px)}
 }
-/* Tablet-only scale: phone rules below own their breakpoint outright. */
+
+/* Tablet retains the desktop composition, with a smaller editorial scale. */
 @media(min-width:601px) and (max-width:760px){
  .hero .hero-copy h1{font-size:clamp(2.375rem,8.4vw,3.625rem);line-height:1.08;max-width:14ch}
- .hero .notebook-hero-note{font-size:clamp(0.9375rem,3.7vw,1.1875rem);line-height:1.4}
+ .hero .notebook-hero-note{font-size:clamp(.9375rem,3.7vw,1.1875rem);line-height:1.4}
  .hero .hero-description{font-size:clamp(1rem,3.8vw,1.125rem);line-height:1.6;max-width:43ch}
 }
 
-/* Mobile hero: quiet editorial hierarchy, no decorative sticker or oversized copy. */
-@media(max-width:600px){
- .hero .notebook-sticker{display:none!important}
- .hero.wrap{min-height:0;padding-top:clamp(28px,7vw,42px);padding-bottom:clamp(20px,5vw,32px);gap:28px}
- /* Balance the long discipline label so the final word does not sit alone on phones. */
- .hero .hero-copy>.eyebrow{font-size:0.625rem;line-height:1.5;letter-spacing:.075em;text-wrap:balance}
- .hero .hero-copy h1{font-size:clamp(2.375rem,8.5vw,2.875rem);line-height:1.08;margin:var(--space-4) 0 var(--space-3);max-width:16ch;letter-spacing:-.04em}
- /* Inset the editorial subhead inside its paper strip; keep the underline clear of the text. */
- .hero .notebook-hero-note{display:block;font-size:clamp(0.9375rem,3.8vw,1.0625rem);line-height:1.45;margin:var(--space-2) 0 var(--space-3);padding:20px 24px 22px;box-sizing:border-box;border-bottom-width:1px}
- .hero .notebook-hero-note span{display:none}
- .hero .hero-description{font-size:var(--type-body);line-height:1.65;max-width:38ch;text-wrap:pretty}
- .hero .hero-actions{margin-top:var(--space-4);gap:var(--space-2)}
- .hero .hero-actions .primary-link{min-height:48px}
- /* Keep the illustration close to the work index on small screens. */
- .hero .hero-feature{margin-bottom:0}
-}
-
-
-/* Desktop fold: shorten the editorial introduction without flattening its character.
-   Keep this after the legacy desktop hero rules; mobile retains its own rhythm. */
+/* Desktop fold: preserve the side-by-side introduction and featured art. */
 @media(min-width:1024px){
  .hero.wrap{padding-block:clamp(26px,3.5vh,46px);gap:clamp(28px,3vw,52px)}
  .hero .hero-copy h1{font-size:clamp(3.25rem,4.45vw,4.75rem);line-height:1.01;margin-block:14px 12px}
@@ -45,43 +35,51 @@
  .hero .hero-feature{height:clamp(370px,49vh,510px)}
 }
 
-/* The portrait is illustrative content, not a second link to Work.
-   Keep its metadata legible and avoid suggesting a noninteractive image is clickable. */
-.hero .hero-feature .feature-art{cursor:default}
-.hero .hero-feature .feature-top .feature-mark{font-size:1.25rem;line-height:1;color:var(--palette-pink)}
-.hero .feature-art .hero-portrait-art{position:relative;z-index:2;display:block;width:min(90%,430px);height:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(25,45,65,.16));transform:rotate(8deg)}
-@media(max-width:760px){.hero .feature-art .hero-portrait-art{width:min(88%,360px)}}
-
-/* Mobile story order: place the illustrated portrait after the headline.
-   The feature panel has no focusable links, so visual reordering does not
-   move keyboard focus behind or ahead of the hero CTA links. */
+/* Phone editorial layout: headline → existing 3D portrait → one concise
+   explanation → one CTA. display:contents lets the image follow the headline
+   visually without moving DOM nodes or creating a focus-order mismatch.
+   The portrait panel is deliberately noninteractive. */
 @media(max-width:600px){
- .hero.wrap{display:flex;flex-direction:column;align-items:stretch;gap:0;padding-top:20px}
+ .hero .notebook-sticker{display:none!important}
+ .hero.wrap{
+  display:flex;flex-direction:column;align-items:stretch;gap:0;
+  min-height:0;padding-top:20px;padding-bottom:clamp(20px,5vw,32px)
+ }
  .hero .hero-copy{display:contents}
- .hero .hero-copy>.eyebrow{order:1;margin:0 0 10px}
- .hero .hero-copy>h1{order:2;margin:0 0 14px;font-size:clamp(2.15rem,8.2vw,2.875rem);line-height:1.06}
- .hero .hero-feature{order:3;min-height:0!important;height:clamp(210px,57vw,290px)!important;margin:0 0 18px;padding:16px 18px;overflow:hidden}
- .hero .feature-art{inset:8% 0 8%;height:auto;min-height:0}
- .hero .feature-art .hero-portrait-art{width:min(72%,250px);height:100%;transform:rotate(8deg)}
- .hero .feature-top,.hero .feature-bottom{font-size:.55rem}
- .hero .notebook-hero-note{order:4;margin:0 0 12px;padding:10px 0 12px;font-size:clamp(.95rem,3.6vw,1.0625rem)}
- .hero .hero-description{order:5;font-size:1rem;line-height:1.55}
- .hero .hero-actions{order:6;margin-top:18px}
- .hero .hero-foot{order:7;padding-top:22px}
-}
-
-/* Mobile editorial reduction: the portrait and two-line statement are the hero.
-   Remove decorative card chrome and duplicated supporting copy only on phones. */
-@media(max-width:600px){
- .hero .hero-copy>.eyebrow{font-size:.6rem;letter-spacing:.045em}
- .hero .hero-feature{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;height:clamp(230px,66vw,320px)!important;margin:0 0 14px}
+ .hero .hero-copy>.eyebrow{
+  order:1;margin:0 0 10px;font-size:.6rem;line-height:1.5;
+  letter-spacing:.045em;text-wrap:balance
+ }
+ .hero .hero-copy>h1{
+  order:2;margin:0 0 14px;max-width:16ch;
+  font-size:clamp(2.15rem,8.2vw,2.875rem);
+  line-height:1.06;letter-spacing:-.04em
+ }
+ .hero .hero-feature{
+  order:3;min-height:0!important;height:clamp(230px,66vw,320px)!important;
+  margin:0 0 14px;padding:0!important;overflow:hidden;
+  background:transparent!important;border:0!important;box-shadow:none!important
+ }
  .hero .hero-feature::before,.hero .hero-feature::after{display:none!important}
- .hero .feature-top,.hero .feature-bottom,.hero .art-orbit,.hero .art-tile{display:none!important}
- .hero .feature-art{inset:0!important;transform:none!important;filter:none!important;display:grid;place-items:center}
- .hero .feature-art .hero-portrait-art{width:min(94%,320px);height:100%;transform:none;filter:drop-shadow(0 12px 16px rgba(25,45,65,.12))}
+ .hero .feature-top,.hero .feature-bottom,
+ .hero .art-orbit,.hero .art-tile{display:none!important}
+ .hero .feature-art{
+  inset:0!important;height:auto;min-height:0;display:grid;place-items:center;
+  transform:none!important;filter:none!important
+ }
+ .hero .feature-art .hero-portrait-art{
+  width:min(94%,320px);height:100%;transform:none;
+  filter:drop-shadow(0 12px 16px rgba(25,45,65,.12))
+ }
+ /* The note repeats the introduction on phones; retain it on larger screens. */
  .hero .notebook-hero-note{display:none!important}
- .hero .hero-description{max-width:34ch;font-size:1rem;line-height:1.5;margin:0}
+ .hero .hero-description{
+  order:5;margin:0;max-width:34ch;font-size:1rem;
+  line-height:1.5;text-wrap:pretty
+ }
+ .hero .hero-actions{order:6;width:100%;margin-top:18px;gap:var(--space-2)}
+ .hero .hero-actions .primary-link{
+  width:100%;min-height:48px;justify-content:space-between;box-sizing:border-box
+ }
  .hero .hero-actions .quiet-link,.hero .hero-foot{display:none!important}
- .hero .hero-actions{width:100%;margin-top:18px}
- .hero .hero-actions .primary-link{width:100%;justify-content:space-between;box-sizing:border-box}
 }
