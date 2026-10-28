@@ -122,6 +122,25 @@ assert.match(stateroomHighlights, /DESIGN FOCUS[\s\S]*remote-first focus navigat
 assert.doesNotMatch(stateroomHighlights, /interviews|usability tests|engagement|improved/i, 'Stateroom highlights must not imply unsupported research or impact');
 
 
+// These two covers should expose specific design reasoning, not a generic
+// project description. Keep the claims inside the documented process scope.
+const connectedPlanning = projects.find(project => project.title === 'Connected Planning');
+const connectedHighlights = renderHighlights(connectedPlanning);
+assert.match(connectedPlanning.process, /project overview/i);
+assert.match(connectedPlanning.process, /relationships between views/i);
+assert.match(connectedHighlights, /THE CHALLENGE[\s\S]*related project information/);
+assert.match(connectedHighlights, /DESIGN RATIONALE[\s\S]*planning overview[\s\S]*supporting details/);
+assert.doesNotMatch(connectedHighlights, /tested|validated|measured|shipped/i);
+
+const motionStorytelling = projects.find(project => project.title === 'Motion & Storytelling');
+const motionHighlights = renderHighlights(motionStorytelling);
+assert.match(motionStorytelling.process, /short visual beats/i);
+assert.match(motionStorytelling.process, /pacing and legibility/i);
+assert.match(motionHighlights, /THE CONSTRAINT[\s\S]*30 seconds/);
+assert.match(motionHighlights, /STORYBOARD APPROACH[\s\S]*visual beats[\s\S]*legibility/);
+assert.doesNotMatch(motionHighlights, /tested|validated|measured|shipped|completed animation/i);
+
+
 // Archive excerpts may override a rhetorical opening, but must remain authored
 // in content.js rather than being fabricated from a project's delivery label.
 const archiveTeaserSource = script.match(/const processTeaser=p=>\{[\s\S]*?\n\};/)?.[0];
