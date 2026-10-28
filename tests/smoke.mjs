@@ -174,6 +174,23 @@ try{
  assert.equal(await optional.locator("#case-evidence-notes").count(),0);
  assert.match(await optional.locator("#case-outcome").innerText(),/^02 \/ Deliverables & learning/);
  await optional.close();
+ // Older/limited browsers may not expose IntersectionObserver. Chapter
+ // progress must still follow scrolling and release its listeners on exit.
+ const fallback=await browser.newPage();
+ fallback.on("pageerror",error=>errors.push(error.message));
+ await fallback.addInitScript(()=>{delete window.IntersectionObserver;});
+ await fallback.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await fallback.locator("#case-title").waitFor();
+ assert.equal(await fallback.evaluate(()=>"IntersectionObserver" in window),false,
+  "The fallback smoke case must actually disable IntersectionObserver");
+ await fallback.evaluate(()=>{
+  const heading=document.querySelector("#case-outcome");
+  window.scrollTo({top:heading.getBoundingClientRect().top+window.scrollY-100,behavior:"instant"});
+ });
+ await fallback.waitForFunction(()=>document.querySelector('[data-case-jump="case-outcome"]')?.getAttribute("aria-current")==="location");
+ await fallback.locator(".case-back").click();
+ await fallback.waitForFunction(()=>window.caseSectionScrollCleanup===null);
+ await fallback.close();
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  mobile.on("pageerror",error=>errors.push(error.message));
  await mobile.goto(origin+"/case-studies/alcon/ai-assisted-iol-planning/");
