@@ -14,7 +14,9 @@
  if(!button)return;
  let stored;
  try{stored=localStorage.getItem("portfolio-theme")}catch(e){}
- const systemDark=typeof window.matchMedia==="function"&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+ const systemScheme=typeof window.matchMedia==="function"?window.matchMedia("(prefers-color-scheme: dark)"):null;
+ const systemTheme=()=>systemScheme?.matches?"dark":"light";
+ const chosenTheme=()=>stored==="dark"||stored==="light"?stored:systemTheme();
  function setTheme(theme){
   const dark=theme==="dark";
   root.setAttribute("data-theme",dark?"dark":"light");
@@ -25,9 +27,22 @@
   button.querySelector(".theme-toggle-icon").textContent=dark?"☀":"☾";
   if(meta)meta.setAttribute("content",dark?"#111d2a":"#f7f9fa");
  }
- setTheme(stored==="dark"||stored==="light"?stored:(systemDark?"dark":"light"));
+ setTheme(chosenTheme());
+ // Follow OS appearance changes only until a visitor makes an explicit choice.
+ if(systemScheme){
+  const followSystem=()=>{if(stored!=="dark"&&stored!=="light")setTheme(systemTheme())};
+  if(typeof systemScheme.addEventListener==="function")systemScheme.addEventListener("change",followSystem);
+  else if(typeof systemScheme.addListener==="function")systemScheme.addListener(followSystem);
+ }
+ // Keep open portfolio tabs in sync; clearing the preference restores OS mode.
+ window.addEventListener("storage",event=>{
+  if(event.key!=="portfolio-theme")return;
+  stored=event.newValue;
+  setTheme(chosenTheme());
+ });
  button.addEventListener("click",function(){
   const next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+  stored=next;
   setTheme(next);
   try{localStorage.setItem("portfolio-theme",next)}catch(e){}
  });
