@@ -153,10 +153,10 @@ assert.match(renderHighlights({title:'Mobile Insights'}), /Shipped product exper
 // dashboard was ported, that every explored interaction shipped, or that
 // engagement improved. Keep the archive teaser and outcome inside that scope.
 const mobileInsights = projects.find(project => project.title === 'Mobile Insights');
-assert.match(mobileInsights.summary, /designed Mobile Insights[\\s\\S]*readable project-status summaries/i);
+assert.match(mobileInsights.summary, /designed Mobile Insights[\s\S]*readable project-status summaries/i);
 assert.doesNotMatch(mobileInsights.summary, /desktop dashboard|users (needed|preferred)|research (showed|proved)/i);
-assert.match(mobileInsights.outcome, /Mobile Insights shipped with my UX\\/UI design contribution/i);
-assert.match(mobileInsights.outcome, /production interaction states[\\s\\S]*engineering handoff details[\\s\\S]*usage metrics are not verified/i);
+assert.match(mobileInsights.outcome, /Mobile Insights shipped with my UX\/UI design contribution/i);
+assert.match(mobileInsights.outcome, /production interaction states[\s\S]*engineering handoff details[\s\S]*usage metrics are not verified/i);
 assert.doesNotMatch(mobileInsights.outcome, /increased adoption|improved engagement|validated in usability tests/i);
 
 // The patient portal and stateroom TV covers must show what was actually
