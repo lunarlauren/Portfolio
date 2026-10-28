@@ -237,8 +237,10 @@ function initSectionNavigation(){
   const nearEnd=document.documentElement.scrollHeight-(window.scrollY+window.innerHeight)<Math.max(96,window.innerHeight*.2);
   if(!hash.startsWith("project/")&&contactVisible&&nearEnd)active="contact";
   if(contactLink){
-   if(active==="contact")contactLink.setAttribute("aria-current","location");
-   else contactLink.removeAttribute("aria-current");
+   // Contact opens an email composer; it is not a page location. Keep the
+   // visual underline near the footer without announcing a false aria-current.
+   contactLink.toggleAttribute("data-section-active",active==="contact");
+   contactLink.removeAttribute("aria-current");
   }
   for(const {link,section} of sections){
    if(section.id===active)link.setAttribute("aria-current","location");
