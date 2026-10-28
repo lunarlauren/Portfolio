@@ -35,13 +35,13 @@ function revealCurrentCaseTab(button){
   chapterNav.scrollLeft+=delta;
  }
 }
-function setCurrentCaseSection(id){
+function setCurrentCaseSection(id,{reveal=false}={}){
  const active=caseJumpButtons.find(button=>button.dataset.caseJump===id);
  if(!active)return;
- // A user can manually scroll the tab strip away from the active chapter.
- // Re-reveal it when the chapter is selected, even if aria-current is unchanged.
+ // IntersectionObserver can fire while someone is manually browsing tabs.
+ // Don't pull the strip back for an unchanged chapter; explicit taps may reveal it.
  if(active.getAttribute("aria-current")==="location"){
-  revealCurrentCaseTab(active);
+  if(reveal)revealCurrentCaseTab(active);
   return;
  }
  caseJumpButtons.forEach(button=>{
@@ -55,7 +55,7 @@ caseJumpButtons.forEach(button=>{
   const heading=caseJumpTargets.get(button.dataset.caseJump);
   if(!heading)return;
   heading.setAttribute("tabindex","-1");
-  setCurrentCaseSection(heading.id);
+  setCurrentCaseSection(heading.id,{reveal:true});
   heading.scrollIntoView({behavior:window.matchMedia?.("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
   heading.focus({preventScroll:true});
  });
@@ -74,7 +74,7 @@ if("IntersectionObserver" in window&&caseJumpHeadings.length>0){
  },{rootMargin:"-20% 0px -55% 0px",threshold:0});
  caseJumpHeadings.forEach(heading=>window.caseSectionObserver.observe(heading));
 }
-if(caseJumpButtons.length)setCurrentCaseSection(caseJumpButtons[0].dataset.caseJump);
+if(caseJumpButtons.length)setCurrentCaseSection(caseJumpButtons[0].dataset.caseJump,{reveal:true});
 document.title=p.title+" — Lauren Leven";
  const pageUrl=location.origin+casePath(group,i);
  // Keep share previews aligned with the routed project, not the homepage.
