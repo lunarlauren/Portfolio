@@ -72,6 +72,14 @@ const heroFeatureMarkup = html.match(/<div class="hero-feature" id="hero-feature
 assert.ok(heroFeatureMarkup, 'Homepage must retain the illustrated hero panel');
 assert.match(heroFeatureMarkup, /<img class="hero-portrait-art"[^>]+alt="[^"]+"/, 'Hero portrait must have useful alternative text');
 assert.doesNotMatch(heroFeatureMarkup, /<(?:a|button)\b/, 'Visually reordered portrait panel must not contain keyboard-focusable controls');
+// The hero should direct attention to UX work, not add an unrelated keyboard
+// stop for a decorative animation. Keep the useful work CTA and portrait.
+const heroMarkup = html.match(/<section class="hero wrap" id="top">[\s\S]*?<\/section>/)?.[0];
+assert.ok(heroMarkup, 'Homepage must retain its introductory hero');
+assert.match(heroMarkup, /class="primary-link" href="#work"/, 'Hero must keep the primary work CTA');
+assert.doesNotMatch(heroMarkup, /<button\b|data-sticker-placeholder/, 'Decorative star must not be a hero control');
+assert.doesNotMatch(script, /data-sticker-placeholder|sticker-pop/, 'Removed decorative control must not leave JavaScript listeners');
+assert.doesNotMatch(css + heroPolishCss, /notebook-sticker|sticker-pop/, 'Removed decorative control must not leave unused CSS');
 
 // Preserve the intentionally distinct portraits: illustration introduces
 // visual craft in the hero; the real headshot identifies the designer in About.
