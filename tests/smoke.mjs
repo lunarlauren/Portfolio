@@ -105,6 +105,16 @@ try{
  assert.match(page.url(),/\/#about$/);
  assert.equal(await page.locator("#main").isVisible(),true);
  assert.deepEqual(await readMetadata(page),homepageMetadata,"Navigating from a case study to About must also restore homepage metadata");
+ // A case-study link uses pushState, which emits neither hashchange nor
+ // popstate. The header must identify Work rather than leaving About
+ // announced as the current location from the previous view.
+ await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="#about"]')?.getAttribute("aria-current")==="location");
+ await page.locator(".project-card-link[href='/case-studies/hoylu/connected-planning/']").first().click();
+ await page.locator("#case-title").waitFor();
+ await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="#work"]')?.getAttribute("aria-current")==="location");
+ assert.equal(await page.locator('.site-header nav a[href="#about"]').getAttribute("aria-current"),null,"About must not remain current on a case-study route");
+ await page.locator(".case-back").click();
+ await page.locator("#main").waitFor({state:"visible"});
  // The Contact link opens mail, not an in-page location. Preserve the visual
  // near-footer underline without misreporting aria-current to screen readers.
  await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
