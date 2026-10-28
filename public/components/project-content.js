@@ -21,10 +21,10 @@ const caseHighlights={
  "Mobile Insights":[["DELIVERY","Shipped product experience; my contribution was mobile UX/UI design."],["DESIGN FOCUS","Readable insight hierarchy with a path to supporting detail."]],
  "Campaigns & Events":[["THE CHALLENGE","One product story, very different viewing distances."],["MY CONTRIBUTION","Event signage and digital campaign visuals."]],
  "Motion & Storytelling":[["THE FORMAT","A product idea explained in roughly 30 seconds."],["MY CONTRIBUTION","Storyboarding and visual pacing."]],
- "Customizable Patient Portal":[["WHO IT'S FOR","Patients preparing for surgery and the practices supporting them."],["THE DESIGN TASK","Flexible practice setup without confusing patients."]],
+ "Customizable Patient Portal":[["MY DESIGN WORK","UX/UI for a patient portal and practice-facing customization."],["DESIGN TENSION","Flexible practice setup while keeping surgery information and next steps clear."]],
  "AI-Assisted IOL Planning":[["THE CHALLENGE","Keep clinical measurements distinct from AI-generated predictions."],["MY FOCUS","Clear information hierarchy and handoffs between tools."]],
  "Navigator App":[["DOCUMENTED INPUT","Passenger feedback identified confusion around connecting to ship Wi-Fi."],["MY DESIGN WORK","Prototyped booking and account flows; designed Wi-Fi guidance."]],
- "Stateroom TV App":[["THE CONTEXT","A shipped experience used in guest staterooms."],["MY FOCUS","Readable information and remote-control navigation."]],
+ "Stateroom TV App":[["SHIPPED CONTRIBUTION","Stateroom TV interface design, including Voyage Tracker."],["DESIGN FOCUS","Readable voyage information and remote-first focus navigation."]],
  "Forktactics":[["THE IDEA","Make planning a week of dinners feel less exhausting."],["THE STATUS","An independent, evolving product prototype."]],
  "Fallout 76 ;  What I'd Design":[["THE IDEA","Explore design ideas inside a game world I know well."],["THE APPROACH","Concept briefs informed by the game's visual language."]],
  "Illustration & Experiments":[["THE SPACE","Personal work driven by curiosity."],["MY FOCUS","Character, composition, and visual exploration."]]
