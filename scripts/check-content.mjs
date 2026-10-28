@@ -88,6 +88,23 @@ for (const project of projects) {
     }
   }
 }
+// The Navigator case-study preview should expose the one documented feedback
+// input and concrete prototyping work, without implying a formal study.
+const renderHighlights = vm.runInNewContext(projectContent + '\n' + 'highlightMarkup', {
+ esc: value => String(value)
+});
+const navigatorProject = projects.find(project => project.title === 'Navigator App');
+assert.match(navigatorProject.evidence, /passenger feedback identified confusion/i);
+assert.match(navigatorProject.evidence, /designed and prototyped booking and account flows/i);
+const navigatorHighlights = renderHighlights(navigatorProject);
+assert.match(navigatorHighlights, /DOCUMENTED INPUT/);
+assert.match(navigatorHighlights, /Passenger feedback identified confusion around connecting to ship Wi-Fi/);
+assert.match(navigatorHighlights, /MY DESIGN WORK/);
+assert.match(navigatorHighlights, /Prototyped booking and account flows; designed Wi-Fi guidance/);
+assert.doesNotMatch(navigatorHighlights, /interviews|usability tests|measured improvement/i);
+assert.match(caseStudy, /highlightMarkup\(p\)/, 'Case studies must render the editorial highlights');
+assert.match(renderHighlights({title:'Mobile Insights'}), /Shipped product experience/, 'Mobile Insights must retain its shipped status');
+
 // Archive excerpts may override a rhetorical opening, but must remain authored
 // in content.js rather than being fabricated from a project's delivery label.
 const archiveTeaserSource = script.match(/const processTeaser=p=>\{[\s\S]*?\n\};/)?.[0];
