@@ -45,13 +45,16 @@
  .hero .hero-feature{height:clamp(370px,49vh,510px)}
 }
 
-/* Portrait is the existing approved illustration from About, not a new asset.
-   Keep it inside the featured-art layer without obscuring the card's labels. */
+/* The portrait is illustrative content, not a second link to Work.
+   Keep its metadata legible and avoid suggesting a noninteractive image is clickable. */
+.hero .hero-feature .feature-art{cursor:default}
+.hero .hero-feature .feature-top .feature-mark{font-size:1.25rem;line-height:1;color:var(--palette-pink)}
 .hero .feature-art .hero-portrait-art{position:relative;z-index:2;display:block;width:min(90%,430px);height:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(25,45,65,.16));transform:rotate(8deg)}
 @media(max-width:760px){.hero .feature-art .hero-portrait-art{width:min(88%,360px)}}
 
-/* Mobile-first story order: show the illustrated portrait immediately after the
-   headline. display:contents preserves the desktop two-column DOM structure. */
+/* Mobile story order: place the illustrated portrait after the headline.
+   The feature panel has no focusable links, so visual reordering does not
+   move keyboard focus behind or ahead of the hero CTA links. */
 @media(max-width:600px){
  .hero.wrap{display:flex;flex-direction:column;align-items:stretch;gap:0;padding-top:20px}
  .hero .hero-copy{display:contents}
