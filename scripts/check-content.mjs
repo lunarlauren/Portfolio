@@ -162,6 +162,22 @@ new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not
 
 const data = context.window.PORTFOLIO;
 assert.ok(data && Array.isArray(data.companies) && Array.isArray(data.playground));
+// Exercise the actual slug resolver too: a valid shipped case must resolve,
+// while an outdated title or unknown client must take the archive fallback.
+{
+ const slugStart=script.indexOf('const projectSlug=');
+ const slugEnd=script.indexOf('\nconst casePath=',slugStart);
+ const routeStart=script.indexOf('const caseRoute=()=>{');
+ const routeEnd=script.indexOf('\nconst navigateCase=',routeStart);
+ assert.ok(slugStart>=0&&slugEnd>slugStart&&routeStart>=0&&routeEnd>routeStart);
+ const resolver=script.slice(slugStart,slugEnd)+'\n'+script.slice(routeStart,routeEnd)+'\ncaseRoute()';
+ const resolve=pathname=>vm.runInNewContext(resolver,{
+  location:{pathname},data,safeHash:()=> 'work'
+ });
+ assert.equal(resolve('/case-studies/hoylu/mobile-insights/'),'project/hoylu/1');
+ assert.equal(resolve('/case-studies/hoylu/old-title/'),'work');
+ assert.equal(resolve('/case-studies/unknown/mobile-insights/'),'work');
+}
 const ids = data.companies.map(company => company.id);
 assert.equal(new Set(ids).size, ids.length, 'Company IDs must be unique');
 
