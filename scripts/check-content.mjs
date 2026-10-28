@@ -320,17 +320,27 @@ assert.match(workCss, /background-color:var\(--archive-surface\)/, 'Archive card
 assert.match(workCss, /border:1px solid var\(--archive-edge\)!important/, 'Archive card border must use its theme token');
 assert.match(workCss, /color:var\(--file-cta-ink,var\(--file-accent\)\)/, 'Archive CTA must use a shared theme color');
 
-// Pass 9: hero type hierarchy and archive title token contracts.
+// Pass 9: hero hierarchy and archive title token contracts.
 assert.ok(heroPolishCss.includes('max-width:54ch;text-wrap:pretty;line-height:1.6'), 'Desktop hero copy must retain a readable measure');
-assert.ok(heroPolishCss.includes('line-height:1.65;max-width:38ch'), 'Mobile hero copy must retain a readable line length');
-assert.ok(heroPolishCss.includes('margin:var(--space-4) 0 var(--space-3)'), 'Mobile headline should use shared spacing tokens');
 assert.ok(workCss.includes('font-size:clamp(var(--type-h3),2.6vw,2.375rem)'), 'Archive headings must reference the shared type scale');
 
-// Pass 8: mobile rhythm and single-row navigation guardrails.
-const heroCss = read('../public/components/hero-polish.css');
-// Keep the mobile hero's discipline line from leaving an isolated final word.
-assert.ok(heroCss.includes('letter-spacing:.075em;text-wrap:balance'), 'Mobile hero eyebrow should balance wrapped text');
-assert.match(heroCss, /\.hero\.wrap\{[^}]*min-height:0;[^}]*padding-bottom:clamp\(/, 'Mobile hero must not reserve a viewport of empty space');
+// Pass 8: mobile rhythm, portrait prominence, and single-row navigation.
+// Test the *current* phone design contract, not obsolete pre-portrait spacing.
+// A single media block makes subsequent visual tuning less error-prone.
+assert.equal((heroPolishCss.match(/@media\(max-width:600px\)/g)||[]).length,1, 'Phone hero rules should have one owner');
+const phoneHeroCss = heroPolishCss.slice(heroPolishCss.indexOf('@media(max-width:600px)'));
+assert.match(phoneHeroCss, /\.hero\.wrap\{[^}]*min-height:0;[^}]*padding-bottom:clamp\(/, 'Phone hero must not reserve a viewport of empty space');
+assert.match(phoneHeroCss, /\.hero \.hero-copy\{display:contents\}/, 'Phone layout must keep the portrait in the editorial flow');
+for (const [selector,order] of [['h1',2],['feature',3],['description',5],['actions',6]]) {
+ const rule = selector==='h1' ? '\\.hero \\.hero-copy>h1' : '\\.hero \\.hero-'+selector;
+ assert.match(phoneHeroCss,new RegExp(rule+'\\{[^}]*order:'+order+';'), 'Phone hero order must preserve '+selector);
+}
+assert.match(phoneHeroCss, /\.hero \.hero-copy>\.eyebrow\{[^}]*text-wrap:balance/, 'Phone discipline line should wrap intentionally');
+assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*background:transparent!important/, 'Portrait should not inherit the busy featured-card surface');
+assert.match(phoneHeroCss, /\.hero \.notebook-hero-note\{display:none!important\}/, 'Phone intro should not repeat its message');
+assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link,\.hero \.hero-foot\{display:none!important\}/, 'Phone hero should have one primary action');
+assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*min-height:48px/, 'Primary action needs a touch-friendly height');
+assert.match(phoneHeroCss, /\.hero \.hero-description\{[^}]*max-width:34ch/, 'Phone body copy needs a readable measure');
 assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
 assert.ok(navigationCss.includes('gap:clamp(7px,2.2vw,13px)'), 'Phone navigation spacing should remain intentional');
 assert.ok(navigationCss.includes('min-height:44px;padding:0 1px'), 'Phone navigation links must retain 44px hit height');
