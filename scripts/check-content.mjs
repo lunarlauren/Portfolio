@@ -49,6 +49,37 @@ assert.match(visualBriefKicker('Approved Navigator app screens'), /APPROVED PROD
 assert.match(visualBriefKicker('PLANNED / Character studies'), /PLANNED ARTWORK/);
 assert.match(visualBriefKicker('Show the prototype, clearly labeled PROTOTYPE'), /PROTOTYPE/);
 assert.match(script, /visualBriefKicker\(p\.imageBrief\)/, 'Archive and gallery placeholders must disclose their status');
+// The entire project card is a link. Do not mask its title and challenge with
+// a generic aria-label: give link navigation a concise name and description.
+const cardStart = script.indexOf('const projectCard=');
+const cardEnd = script.indexOf('// Single source of truth', cardStart);
+assert.ok(cardStart >= 0 && cardEnd > cardStart, 'Project card renderer must remain discoverable');
+const renderProjectCard = vm.runInNewContext(
+ script.slice(cardStart, cardEnd) + '\nprojectCard',
+ {
+  projectSlug: value => String(value).replace(/[^a-z0-9]+/gi, '-'),
+  esc: value => String(value),
+  visual: () => '<div>image</div>',
+  processTeaser: project => project.process || '',
+  archiveFactsMarkup: () => '<dl>role and delivery</dl>',
+  casePath: () => '/case-studies/hoylu/connected-planning/'
+ }
+);
+for (const group of ['hoylu', 'playground']) {
+ const card = renderProjectCard({
+  title: 'Sample project', type: 'Product UX',
+  summary: 'The challenge and audience context.', process: 'I explored information hierarchy.'
+ }, 0, group, ['context', 'role', 'status']);
+ const prefix = 'project-card-' + group + '-0';
+ assert.match(card, new RegExp('aria-labelledby="' + prefix + '-title ' + prefix + '-cta"'));
+ assert.match(card, new RegExp('aria-describedby="' + prefix + '-summary"'));
+ for (const suffix of ['title', 'summary', 'cta']) {
+  assert.match(card, new RegExp('id="' + prefix + '-' + suffix + '"'));
+ }
+ assert.doesNotMatch(card, /aria-label=/, 'A card-wide label would mask the summary and role');
+ assert.match(card, /The challenge and audience context\./, 'Challenge copy remains available to assistive technology');
+}
+
 assert.match(caseStudy, /visualBriefKicker\(p\.imageBrief\)/, 'Case-study hero placeholders must disclose their status');
 // Delivery badges are driven by reviewed metadata, never by an illustration
 // or a case-study title. Concept/design-only work must not gain a shipped label.
