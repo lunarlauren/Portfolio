@@ -105,6 +105,23 @@ assert.doesNotMatch(navigatorHighlights, /interviews|usability tests|measured im
 assert.match(caseStudy, /highlightMarkup\(p\)/, 'Case studies must render the editorial highlights');
 assert.match(renderHighlights({title:'Mobile Insights'}), /Shipped product experience/, 'Mobile Insights must retain its shipped status');
 
+// The patient portal and stateroom TV covers must show what was actually
+// designed, while separating design priorities from documented delivery.
+const patientPortal = projects.find(project => project.title === 'Customizable Patient Portal');
+const patientPortalHighlights = renderHighlights(patientPortal);
+assert.match(patientPortal.evidence, /UX\/UI design to a customizable patient portal and practice-facing setup/i);
+assert.match(patientPortalHighlights, /MY DESIGN WORK[\s\S]*patient portal and practice-facing customization/);
+assert.match(patientPortalHighlights, /DESIGN TENSION[\s\S]*surgery information and next steps/);
+assert.doesNotMatch(patientPortalHighlights, /tested|validated|adoption|shipped/i, 'Patient portal highlights must not imply verified outcomes');
+
+const stateroomTV = projects.find(project => project.title === 'Stateroom TV App');
+const stateroomHighlights = renderHighlights(stateroomTV);
+assert.match(stateroomTV.evidence, /shipped in-stateroom TV app, including Voyage Tracker/i);
+assert.match(stateroomHighlights, /SHIPPED CONTRIBUTION[\s\S]*Voyage Tracker/);
+assert.match(stateroomHighlights, /DESIGN FOCUS[\s\S]*remote-first focus navigation/);
+assert.doesNotMatch(stateroomHighlights, /interviews|usability tests|engagement|improved/i, 'Stateroom highlights must not imply unsupported research or impact');
+
+
 // Archive excerpts may override a rhetorical opening, but must remain authored
 // in content.js rather than being fabricated from a project's delivery label.
 const archiveTeaserSource = script.match(/const processTeaser=p=>\{[\s\S]*?\n\};/)?.[0];
