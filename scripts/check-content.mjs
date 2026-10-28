@@ -25,16 +25,21 @@ const stationeryCss = read('../public/components/stationery.css');
  const inlineTheme=html.match(/<footer[\s\S]*?<script>([\s\S]*?)<\/script>/)?.[1];
  assert.ok(inlineTheme,'Homepage theme controller must remain discoverable');
  new vm.Script(inlineTheme,{filename:'homepage-theme.js'});
- const state={dark:false,stored:null,theme:null,color:null,pressed:null};
+ // Toggle buttons keep a stable name; the pressed state announces whether dark mode is on.
+ assert.match(html, /<button class="theme-toggle"[^>]*aria-label="Dark theme"[^>]*aria-pressed="false"/,
+  'Theme toggle needs a stable accessible name and an initial pressed state');
+ const state={dark:false,stored:null,theme:null,color:null,pressed:null,label:'Dark theme'};
  const root={style:{},setAttribute:(key,value)=>{if(key==='data-theme')state.theme=value},getAttribute:()=>state.theme};
  const icon={textContent:''};
- const button={setAttribute:(key,value)=>{if(key==='aria-pressed')state.pressed=value},querySelector:()=>icon,addEventListener:(name,callback)=>{if(name==='click')state.click=callback}};
+ const button={setAttribute:(key,value)=>{if(key==='aria-pressed')state.pressed=value;if(key==='aria-label')state.label=value},querySelector:()=>icon,addEventListener:(name,callback)=>{if(name==='click')state.click=callback}};
  const scheme={get matches(){return state.dark},addEventListener:(name,callback)=>{if(name==='change')state.schemeChange=callback}};
  const browser={matchMedia:()=>scheme,addEventListener:(name,callback)=>{if(name==='storage')state.storage=callback}};
  const document={documentElement:root,getElementById:()=>button,querySelector:()=>({setAttribute:(key,value)=>{if(key==='content')state.color=value}})};
  const localStorage={getItem:()=>state.stored,setItem:(key,value)=>{state.stored=value}};
  vm.runInNewContext(inlineTheme,{document,window:browser,localStorage});
  assert.equal(state.theme,'light','Default light OS preference must be honored');
+ assert.equal(state.pressed,'false','Light theme must expose the toggle as not pressed');
+ assert.equal(state.label,'Dark theme','Theme toggle must keep its accessible name in light mode');
  state.dark=true;state.schemeChange();
  assert.equal(state.theme,'dark','OS theme changes must apply without a stored choice');
  state.click();
@@ -43,10 +48,12 @@ const stationeryCss = read('../public/components/stationery.css');
  assert.equal(state.theme,'light','OS changes must not override a manual selection');
  state.storage({key:'portfolio-theme',newValue:'dark'});
  assert.equal(state.theme,'dark','Theme choices in another tab must synchronize');
+ assert.equal(state.label,'Dark theme','Cross-tab updates must not rename the toggle');
  assert.equal(state.pressed,'true','Toggle pressed state must reflect dark theme');
  assert.equal(state.color,'#111d2a','Browser chrome color must reflect dark theme');
  state.storage({key:'portfolio-theme',newValue:null});
  assert.equal(state.theme,'dark','Clearing preference must restore current OS theme');
+ assert.equal(state.label,'Dark theme','System-driven changes must not rename the toggle');
 }
 
 // Component ownership and stylesheet order are part of the visual contract.
