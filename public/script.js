@@ -127,6 +127,12 @@ function route(){const hash=caseRoute();if(!hash.startsWith("project/")){
  // Chapter tracking belongs only to the visible case study. Disconnect on
  // exit so a hidden heading cannot keep updating the old chapter index.
  if(window.caseSectionObserver){window.caseSectionObserver.disconnect();window.caseSectionObserver=null;}
+ // The scroll/resize fallback exists only in browsers without
+ // IntersectionObserver; remove its listeners when the case view is hidden.
+ if(window.caseSectionScrollCleanup){
+  window.caseSectionScrollCleanup();
+  window.caseSectionScrollCleanup=null;
+ }
  $(".skip-link").href="#main";main.hidden=false;caseView.hidden=true;if(hash.startsWith("company/")){location.replace("#work");return}
  restoreHomeMetadata();
  return}return renderCaseStudy(hash)}
