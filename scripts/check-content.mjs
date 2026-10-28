@@ -140,7 +140,7 @@ for (const [group,evidence] of [
   assert.doesNotMatch(card, /-facts"/, 'No dangling facts ID on independent cards');
  }
  assert.doesNotMatch(card, /aria-label=/, 'A card-wide label would mask its context');
- assert.match(card, /The challenge and audience context\\./);
+ assert.match(card, /The challenge and audience context\./);
 }
 
 assert.match(caseStudy, /visualBriefKicker\(p\.imageBrief\)/, 'Case-study hero placeholders must disclose their status');
