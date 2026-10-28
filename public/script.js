@@ -149,6 +149,9 @@ function routeWithMotion(){
  const nextHash=caseRoute();
  const leavingProject=previousHash.startsWith("project/")&&!nextHash.startsWith("project/");
  route();
+ // pushState does not fire popstate or hashchange; update the header's
+ // accessible current-location state after a programmatic route change.
+ window.dispatchEvent(new Event("portfolio:route"));
  // Restore focus only for explicit return-to-gallery navigation.
  // Other destinations (e.g. About or the top of the page) keep native hash focus.
  if(leavingProject&&(nextHash==="work"||nextHash==="playground")){
@@ -256,6 +259,7 @@ function initSectionNavigation(){
  window.addEventListener("scroll",scheduleUpdate,{passive:true});
  window.addEventListener("resize",scheduleUpdate);
  window.addEventListener("hashchange",scheduleUpdate);
+ window.addEventListener("portfolio:route",scheduleUpdate);
  updateCurrent();
 }
 initSectionNavigation();
