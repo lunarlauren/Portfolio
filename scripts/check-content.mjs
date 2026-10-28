@@ -339,7 +339,8 @@ assert.ok(navigationCss.includes('min-height:44px;padding:0 1px'), 'Phone naviga
 for (const key of ['og:title','og:description','og:url','twitter:title','twitter:description']) {
  assert.ok(caseStudy.includes('setMeta(\'meta[' + (key.startsWith('og:') ? 'property' : 'name') + '="' + key + '"]\''), 'Case-study routing must update ' + key);
 }
-assert.match(caseStudy, /if\(active\.getAttribute\("aria-current"\)==="location"\)\{/, 'Already-active chapters must remain revealable');
+assert.match(caseStudy, /if\(active\.getAttribute\("aria-current"\)==="location"\)\{\s*if\(reveal\)revealCurrentCaseTab\(active\);/, 'Observer updates must not hijack manually scrolled tabs');
+assert.match(caseStudy, /setCurrentCaseSection\(heading\.id,\{reveal:true\}\)/, 'Explicit chapter jumps must reveal their tab');
 assert.match(caseStudy, /revealCurrentCaseTab\(active\);/, 'Chapter navigation must reveal active tabs');
 
 // Pass 6: production stylesheet ownership and duplicate-rule guardrails.
