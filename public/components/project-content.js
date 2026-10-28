@@ -19,10 +19,10 @@ const illustrativeImageStatus=brief=>/^ILLUSTRATIVE\s*\//i.test(String(brief||""
 const caseHighlights={
  "Connected Planning":[["THE CHALLENGE","Keep related project information understandable across teams."],["DESIGN RATIONALE","Preserve the planning overview while making relationships and supporting details easier to follow."]],
  "Mobile Insights":[["DELIVERY","Shipped product experience; my contribution was mobile UX/UI design."],["DESIGN FOCUS","Readable insight hierarchy with a path to supporting detail."]],
- "Campaigns & Events":[["THE CHALLENGE","One product story, very different viewing distances."],["MY CONTRIBUTION","Event signage and digital campaign visuals."]],
+ "Campaigns & Events":[["DESIGN TRADEOFF","A booth wall needs a legible message at a distance; presentations can carry more supporting detail."],["MY DESIGN WORK","Adapted product messages for event signage, presentations, and digital campaign graphics."]],
  "Motion & Storytelling":[["THE CONSTRAINT","About 30 seconds to explain connected planning workflows."],["STORYBOARD APPROACH","Organized short visual beats to balance product detail, legibility, and pacing."]],
  "Customizable Patient Portal":[["MY DESIGN WORK","UX/UI for a patient portal and practice-facing customization."],["DESIGN TENSION","Flexible practice setup while keeping surgery information and next steps clear."]],
- "AI-Assisted IOL Planning":[["THE CHALLENGE","Keep clinical measurements distinct from AI-generated predictions."],["MY FOCUS","Clear information hierarchy and handoffs between tools."]],
+ "AI-Assisted IOL Planning":[["INFORMATION PROVENANCE","My UX/UI focus was distinguishing patient measurements and scans from model-generated predictions."],["WORKFLOW RATIONALE","Clarify how predicted information relates to the patient file and a connected application."]],
  "Navigator App":[["DOCUMENTED INPUT","Passenger feedback identified confusion around connecting to ship Wi-Fi."],["MY DESIGN WORK","Prototyped booking and account flows; designed Wi-Fi guidance."]],
  "Stateroom TV App":[["SHIPPED CONTRIBUTION","Stateroom TV interface design, including Voyage Tracker."],["DESIGN FOCUS","Readable voyage information and remote-first focus navigation."]],
  "Forktactics":[["THE IDEA","Make planning a week of dinners feel less exhausting."],["THE STATUS","An independent, evolving product prototype."]],
