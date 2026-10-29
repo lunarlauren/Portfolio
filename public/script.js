@@ -199,9 +199,12 @@ document.addEventListener("click",event=>{
  navigateCase(link.getAttribute("href"));
 });
 document.addEventListener("click",event=>{
- const link=event.target.closest('a[href^="#"]');
- if(!link||!location.pathname.startsWith("/case-studies/")||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
- const hash=link.getAttribute("href");
+ // The header, footer, and case-study return links use canonical /# anchors.
+ // Intercept only ordinary same-tab clicks while a case study is showing;
+ // native new-tab, modifier, and download actions must keep their real URL.
+ const link=event.target.closest('a[href^="/#"]');
+ if(!link||!location.pathname.startsWith("/case-studies/")||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||(link.target&&link.target!=="_self")||link.hasAttribute("download"))return;
+ const hash=link.hash;
  if(!["#top","#main","#work","#playground","#about"].includes(hash))return;
  event.preventDefault();
  history.pushState(null,"","/"+hash);
@@ -216,10 +219,10 @@ window.addEventListener("hashchange",routeWithMotion);route();
 // Navigation handoff: keep the header's current-section indicator synchronized
 // with both hash routes and ordinary scrolling, without rewriting browser history.
 function initSectionNavigation(){
- const links=[...document.querySelectorAll('.site-header nav a[href^="#"]')];
+ const links=[...document.querySelectorAll('.site-header nav a[href^="/#"]')];
  const contactLink=document.getElementById("contact-link");
  const contactCTA=document.getElementById("email-link");
- const sections=links.map(link=>({link,section:document.querySelector(link.getAttribute("href"))}))
+ const sections=links.map(link=>({link,section:document.querySelector(link.hash)}))
    .filter(entry=>entry.section);
  if(!sections.length)return;
  function updateCurrent(){
