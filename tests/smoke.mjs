@@ -42,6 +42,18 @@ try{
  page.on("pageerror",error=>errors.push(error.message));
  await page.goto(origin+"/");
  const homepageMetadata=await readMetadata(page);
+ // Persisted appearance must be applied before the stylesheet paints, not
+ // only by the late footer toggle controller (iOS Home Screen flash).
+ const initialTheme=await page.evaluate(()=>({
+  root:document.documentElement.getAttribute("data-theme"),
+  meta:document.querySelector('meta[name="theme-color"]').content,
+  background:document.documentElement.style.backgroundColor
+ }));
+ assert.ok(["light","dark"].includes(initialTheme.root));
+ assert.equal(initialTheme.meta,initialTheme.root==="dark"?"#111d2a":"#f7f9fa");
+ assert.ok(initialTheme.background,"Root background should be set before first paint");
+
+
  // The dark header/footer should be one opaque sheet with the page,
  // not a brighter blue band above the dotted hero.
  await page.evaluate(()=>document.documentElement.dataset.theme="dark");
@@ -105,8 +117,8 @@ try{
     const container=document.querySelector(".hero");
     const style=getComputedStyle(container);
     return {
-     artToHeadline:headline.top-illustration.bottom,
-     headlineToCopy:body.top-headline.bottom,
+     headlineToArt:illustration.top-headline.bottom,
+     artToCopy:body.top-illustration.bottom,
      copyToAction:action.top-body.bottom,
      actionWidth:action.width,actionHeight:action.height,
      available:container.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight),
@@ -114,10 +126,10 @@ try{
      overflow:document.documentElement.scrollWidth>innerWidth+2
     };
    },theme);
-   assert.ok(hero.artToHeadline>=15,
-    `${width}px ${theme}: Portrait should lead the headline without collision`);
-   assert.ok(hero.headlineToCopy>=18,
-    `${width}px ${theme}: Headline needs space before the introduction`);
+   assert.ok(hero.headlineToArt>=15,
+    `${width}px ${theme}: Headline and portrait should not collide`);
+   assert.ok(hero.artToCopy>=18,
+    `${width}px ${theme}: Portrait needs space before the introduction`);
    assert.ok(hero.copyToAction>=22,
     `${width}px ${theme}: CTA must not crowd the paragraph`);
    assert.ok(hero.actionWidth<=hero.available*.94,
