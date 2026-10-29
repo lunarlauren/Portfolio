@@ -117,3 +117,32 @@
   .about .about-copy > .text-link { margin-top: 10px; }
   .about .creative-inventory .inventory-heading h3 { font-size: clamp(1.875rem, 7vw, 2.25rem); }
 }
+
+/* Desktop biography and inventory alignment. */
+@media(min-width:901px){
+ .about .about-bottom{align-items:start}
+ .about .about-copy,
+ .about .creative-inventory{align-self:start}
+ .about .creative-inventory .inventory-heading{
+  margin-top:0;
+  margin-bottom:12px;
+ }
+ .about .creative-inventory .inventory-heading h3{margin-top:3px}
+ .about .creative-inventory .inventory-heading>p{margin-top:5px}
+}
+html:not([data-theme="dark"]) .about .inventory-grid,
+html:not([data-theme="dark"]) .about .inventory-inspect{
+ box-shadow:none;
+}
+/* About layout: the contact invitation belongs directly to the bio, not
+   at the bottom of the taller inventory column. Preserve one-column flow. */
+@media(min-width:901px){
+ .about .about-bottom{
+  grid-template-rows:auto auto;
+  row-gap:clamp(18px,2vw,28px);
+  align-content:start;
+ }
+ .about .about-bottom .about-copy{grid-column:1;grid-row:1}
+ .about .about-bottom .creative-inventory{grid-column:2;grid-row:1}
+}
+
