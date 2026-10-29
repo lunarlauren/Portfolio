@@ -114,15 +114,15 @@ assert.match(aboutPortraitMarkup, /alt="Portrait photograph of Lauren Leven"/,
 // Preserve the genuine photo, biography, and separate interactive inventory.
 const phoneAboutCss = aboutCss.slice(aboutCss.lastIndexOf('@media (max-width: 600px)'));
 assert.ok(phoneAboutCss.startsWith('@media (max-width: 600px)'), 'About needs a dedicated phone layout owner');
-assert.match(phoneAboutCss, /\\.about h2\\s*\\{[^}]*font-size:\\s*clamp\\(/,
+assert.match(phoneAboutCss, /\.about h2\s*\{[^}]*font-size:\s*clamp\(/,
  'Mobile About heading must have a smaller editorial type scale');
-assert.match(phoneAboutCss, /\\.about \\.about-portrait\\s*\\{[^}]*float:\\s*left/,
+assert.match(phoneAboutCss, /\.about \.about-portrait\s*\{[^}]*float:\s*left/,
  'Mobile headshot must sit with the introduction instead of standing alone');
-assert.match(phoneAboutCss, /\\.about \\.about-portrait img\\s*\\{[^}]*object-fit:\\s*cover/,
+assert.match(phoneAboutCss, /\.about \.about-portrait img\s*\{[^}]*object-fit:\s*cover/,
  'Small portrait should use a consistent cropped frame');
-assert.match(phoneAboutCss, /\\.about \\.about-copy p\\s*\\{[^}]*line-height:\\s*1\\.55/,
+assert.match(phoneAboutCss, /\.about \.about-copy p\s*\{[^}]*line-height:\s*1\.55/,
  'Mobile biography should retain legible reading leading');
-assert.match(html, /03 \\/ ABOUT ME/, 'About section label must describe its content');
+assert.match(html, /03 \/ ABOUT ME/, 'About section label must describe its content');
 assert.match(html, /class="creative-inventory" aria-labelledby="inventory-title"/,
  'About inventory must retain its accessible title and interaction');
 
