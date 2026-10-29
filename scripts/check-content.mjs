@@ -81,6 +81,21 @@ assert.doesNotMatch(heroMarkup, /<button\b|data-sticker-placeholder/, 'Decorativ
 assert.doesNotMatch(script, /data-sticker-placeholder|sticker-pop/, 'Removed decorative control must not leave JavaScript listeners');
 assert.doesNotMatch(css + heroPolishCss, /notebook-sticker|sticker-pop/, 'Removed decorative control must not leave unused CSS');
 
+// The homepage's progressive reveal must not hide editorial content if a browser
+// exposes an IntersectionObserver property that is not a callable constructor.
+assert.match(script, /typeof window\.IntersectionObserver!=="function"/,
+ 'Reveals must check that the observer constructor is callable');
+const revealStart=script.indexOf('function initReveals(){');
+const revealEnd=script.indexOf('\ninitReveals();',revealStart);
+assert.ok(revealStart>=0&&revealEnd>revealStart,'Reveal controller must remain discoverable');
+const revealController=script.slice(revealStart,revealEnd+'\ninitReveals();'.length);
+let revealAdds=0;
+vm.runInNewContext(revealController,{
+ window:{IntersectionObserver:undefined,matchMedia:()=>({matches:false})},
+ document:{querySelectorAll:()=>[{classList:{add:()=>{revealAdds++}}}]}
+});
+assert.equal(revealAdds,0,'Unsupported observers must leave section content visible');
+
 // Preserve the intentionally distinct portraits: illustration introduces
 // visual craft in the hero; the real headshot identifies the designer in About.
 // Neither image is a case-study product screenshot or editorial placeholder.
