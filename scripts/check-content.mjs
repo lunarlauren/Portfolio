@@ -208,6 +208,24 @@ assert.match(caseStudy, /deliveryStampMarkup\(p\)/, 'Case-study cover must rende
 assert.match(caseCss, /\.case-view \.case-delivery-stamp\{/, 'Shipped badge styling must remain scoped to case studies');
 
 
+// Keep authored UX reasoning visible on the case-study cover before image
+// placeholders, without inventing research, test results, or implementation.
+const renderCaseApproach = vm.runInNewContext(projectContent + '\ncaseApproachMarkup', {
+ esc: value => String(value).replace(/</g, '&lt;').replace(/>/g, '&gt;')
+});
+const approachSample = renderCaseApproach({archiveApproach:'I prioritized clear <status> and context.'});
+assert.match(approachSample, /class="case-approach-label">Design approach<\/span>/);
+assert.match(approachSample, /I prioritized clear &lt;status&gt; and context\./);
+assert.equal(renderCaseApproach({}), '', 'Missing authored approach must not produce an invented teaser');
+assert.equal(renderCaseApproach({archiveApproach:'   '}), '', 'Blank approach must not create an empty visual block');
+assert.ok(caseStudy.indexOf('caseApproachMarkup(p)') > caseStudy.indexOf('case-intro'),
+ 'Case-study cover must present authored approach after the challenge summary');
+assert.ok(caseStudy.indexOf('caseApproachMarkup(p)') < caseStudy.indexOf('evidenceMarkup(p)'),
+ 'Design approach must appear before the image and chapter navigation');
+assert.match(caseCss, /\.case-view \.case-approach\{/, 'Approach layout belongs to the case-study component');
+assert.match(caseCss, /@media\(max-width:600px\)\{[\s\S]*?\.case-view \.case-approach\{grid-template-columns:minmax\(0,1fr\)/,
+ 'Phone approach label and copy must stack without horizontal overflow');
+
 const context = { window: {} };
 vm.runInNewContext(content, context, { filename: 'public/content.js' });
 new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not available here

@@ -281,6 +281,33 @@ html[data-theme="dark"] .case-view{
  .case-view .case-head{padding:clamp(22px,5vw,34px)}
 }
 
+/* An authored approach line makes UX reasoning visible before any imagery.
+   Reuse cover tokens in both themes; the label stacks above text on phones. */
+.case-view .case-approach{
+ display:grid;
+ grid-template-columns:max-content minmax(0,1fr);
+ gap:clamp(12px,2vw,22px);
+ max-width:70ch;
+ margin:clamp(18px,2.4vw,28px) 0 0;
+ padding-top:clamp(14px,2vw,20px);
+ border-top:1px solid var(--case-cover-border);
+ color:var(--case-cover-lead);
+ font-size:var(--case-type-small);
+ line-height:1.55;
+}
+.case-view .case-approach-label{
+ color:var(--case-cover-kicker);
+ font-size:var(--case-type-meta);
+ font-weight:700;
+ letter-spacing:.08em;
+ text-transform:uppercase;
+ white-space:nowrap;
+}
+.case-view .case-approach-text{min-width:0;overflow-wrap:break-word}
+@media(max-width:600px){
+ .case-view .case-approach{grid-template-columns:minmax(0,1fr);gap:6px}
+}
+
 /* Shared surfaces: layout is identical across themes; only tokens vary. */
 .case-view{
  --case-fact-bg:var(--paper);

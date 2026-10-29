@@ -32,6 +32,13 @@ const caseHighlights={
 // Handoff: these labels summarize documented contributions, not invented outcomes.
 // Update alongside content.js when the scope or delivery status is confirmed.
 
+// An explicitly authored design-approach sentence belongs near the cover,
+// before image placeholders. Do not manufacture a process summary from research
+// or infer a validated outcome when archiveApproach is absent.
+const caseApproachMarkup=p=>typeof p.archiveApproach==="string"&&p.archiveApproach.trim()
+ ?'<p class="case-approach"><span class="case-approach-label">Design approach</span><span class="case-approach-text">'+esc(p.archiveApproach.trim())+'</span></p>'
+ :"";
+
 // Only verified shipped projects receive a cover stamp. Reuse the reviewed
 // delivery value shown on archive cards and in the overview; never infer
 // shipping status from an image brief, prototype, or design rationale.
