@@ -50,6 +50,18 @@ try{
  assert.equal(cardDescriptions.length,3,'Professional card should describe challenge, facts, and process');
  assert.ok(cardDescriptions.every(Boolean),'Every card description ID must resolve');
  assert.match(cardDescriptions[2],/Design approach/,'Process teaser must be included in the accessible description');
+ // Opening a case study in a new tab must not be hijacked by SPA routing.
+ // The original portfolio page should remain on the homepage.
+ const newTabCard=page.locator(".work .project-card-link").first();
+ await newTabCard.evaluate(link=>link.target="_blank");
+ const popupPromise=page.waitForEvent("popup");
+ await newTabCard.click();
+ const popup=await popupPromise;
+ await popup.locator("#case-title").waitFor();
+ assert.ok(popup.url().includes("/case-studies/hoylu/connected-planning/"));
+ assert.equal(new URL(page.url()).pathname,"/","New-tab navigation must leave the opener on the homepage");
+ await popup.close();
+ await newTabCard.evaluate(link=>link.removeAttribute("target"));
  // The hero illustration and About headshot have different editorial jobs.
  // Confirm both local assets actually load; source-level path checks alone
  // would not catch a broken encoded filename or missing image response.
