@@ -24,15 +24,6 @@
   line-height: 1.4;
 }
 
-/* Small phones: put the portrait above the text instead of squeezing it. */
-@media (max-width: 480px) {
-  .about-portrait {
-    float: none;
-    width: min(190px, 65%);
-    margin: 0 auto 22px;
-  }
-}
-
 /* Editorial hierarchy: keep the introduction readable and the interactive
    inventory secondary, without changing its buttons or inspection behavior. */
 @media (min-width: 901px) {
@@ -71,9 +62,6 @@
 }
 .about .inventory-heading>p{font-size:0.8125rem;line-height:1.5}
 .about .about-portrait figcaption{line-height:1.45}
-@media(max-width:600px){
- .about .about-portrait{margin-bottom:16px}
-}
 
 /* These desktop type rules used to live in styles.css. Keep the compact
    viewport override last so it can actually win the cascade at laptop heights. */
@@ -89,9 +77,9 @@
    does not add an extra gap inside its flow-root portrait wrapper. */
 .about .about-intro p{margin-bottom:0}
 
-/* Phone About layout: avoid a full-screen heading followed by a detached square
-   portrait. Let the actual headshot introduce the biography while the longer
-   text wraps naturally beneath it. All selectors stay inside About. */
+/* Phone About layout: use the available width for the heading; a fixed 12ch
+   measure forces extra lines even on normal phones. The headshot introduces
+   the biography while longer text wraps beneath it. All rules stay scoped. */
 @media (max-width: 600px) {
   .about.wrap { padding-block: clamp(32px, 7vw, 46px); }
   .about h2 {
@@ -99,7 +87,6 @@
     line-height: 1.07;
     letter-spacing: -.045em;
     margin: 10px 0 0;
-    max-width: 12ch;
   }
   .about .about-bottom { margin-top: 24px; row-gap: 22px; }
   .about .about-intro { display: flow-root; margin-bottom: 12px; }
