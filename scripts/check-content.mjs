@@ -590,6 +590,19 @@ assert.match(phoneHeroCss, /\.hero \.notebook-hero-note\{display:none!important\
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link,\.hero \.hero-foot\{display:none!important\}/, 'Phone hero should have one primary action');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*min-height:48px/, 'Primary action needs a touch-friendly height');
 assert.match(phoneHeroCss, /\.hero \.hero-description\{[^}]*max-width:34ch/, 'Phone body copy needs a readable measure');
+// Maintain the phone's editorial negative space without repeating the previous
+// edge-to-edge pink action. Geometry is checked separately in Chromium.
+assert.match(phoneHeroCss, /\.hero \.hero-copy>h1\{[^}]*line-height:1\.12/,
+ 'Phone headline needs open line spacing');
+assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*margin:0 0 24px/,
+ 'Illustration needs breathing room before the supporting paragraph');
+assert.match(phoneHeroCss, /\.hero \.hero-actions\{[^}]*margin-top:26px/,
+ 'Mobile CTA needs a distinct gap after the introduction');
+assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*width:auto;min-width:min\(100%,238px\)/,
+ 'Phone CTA should remain content-sized, not a full-width color bar');
+assert.match(html, /hero-polish\.css\?v=20261029-mobile-breathing-room/,
+ 'Homepage must load the updated hero stylesheet');
+
 assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
 assert.ok(navigationCss.includes('gap:clamp(7px,2.2vw,13px)'), 'Phone navigation spacing should remain intentional');
 assert.ok(navigationCss.includes('min-height:44px;padding:0 1px'), 'Phone navigation links must retain 44px hit height');

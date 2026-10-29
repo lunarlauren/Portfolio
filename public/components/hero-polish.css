@@ -38,25 +38,26 @@
 /* Phone editorial layout: headline → existing 3D portrait → one concise
    explanation → one CTA. display:contents lets the image follow the headline
    visually without moving DOM nodes or creating a focus-order mismatch.
-   The portrait panel is deliberately noninteractive. */
+   The portrait panel is deliberately noninteractive. Avoid a full-width
+   CTA and keep open space around the art so the two-color headline leads. */
 @media(max-width:600px){
  .hero.wrap{
   display:flex;flex-direction:column;align-items:stretch;gap:0;
-  min-height:0;padding-top:20px;padding-bottom:clamp(20px,5vw,32px)
+  min-height:0;padding-top:clamp(28px,7vw,38px);padding-bottom:clamp(36px,8vw,50px)
  }
  .hero .hero-copy{display:contents}
  .hero .hero-copy>.eyebrow{
-  order:1;margin:0 0 10px;font-size:.6rem;line-height:1.5;
+  order:1;margin:0 0 18px;font-size:.625rem;line-height:1.55;
   letter-spacing:.045em;text-wrap:balance
  }
  .hero .hero-copy>h1{
-  order:2;margin:0 0 14px;max-width:16ch;
-  font-size:clamp(2.15rem,8.2vw,2.875rem);
-  line-height:1.06;letter-spacing:-.04em
+  order:2;margin:0 0 clamp(18px,4.5vw,26px);max-width:16ch;
+  font-size:clamp(2.05rem,7.8vw,2.75rem);
+  line-height:1.12;letter-spacing:-.035em
  }
  .hero .hero-feature{
-  order:3;min-height:0!important;height:clamp(230px,66vw,320px)!important;
-  margin:0 0 14px;padding:0!important;overflow:hidden;
+  order:3;min-height:0!important;height:clamp(225px,61vw,300px)!important;
+  margin:0 0 24px;padding:0!important;overflow:hidden;
   background:transparent!important;border:0!important;box-shadow:none!important
  }
  .hero .hero-feature::before,.hero .hero-feature::after{display:none!important}
@@ -67,18 +68,19 @@
   transform:none!important;filter:none!important
  }
  .hero .feature-art .hero-portrait-art{
-  width:min(94%,320px);height:100%;transform:none;
+  width:min(89%,305px);height:100%;transform:none;
   filter:drop-shadow(0 12px 16px rgba(25,45,65,.12))
  }
  /* The note repeats the introduction on phones; retain it on larger screens. */
  .hero .notebook-hero-note{display:none!important}
  .hero .hero-description{
   order:5;margin:0;max-width:34ch;font-size:1rem;
-  line-height:1.5;text-wrap:pretty
+  line-height:1.62;text-wrap:pretty
  }
- .hero .hero-actions{order:6;width:100%;margin-top:18px;gap:var(--space-2)}
+ .hero .hero-actions{order:6;width:100%;align-items:flex-start;margin-top:26px;gap:var(--space-2)}
  .hero .hero-actions .primary-link{
-  width:100%;min-height:48px;justify-content:space-between;box-sizing:border-box
+  width:auto;min-width:min(100%,238px);min-height:48px;
+  justify-content:space-between;gap:24px;box-sizing:border-box
  }
  .hero .hero-actions .quiet-link,.hero .hero-foot{display:none!important}
 }

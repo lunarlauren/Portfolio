@@ -76,6 +76,46 @@ try{
  assert.notEqual(await heroPortrait.getAttribute("src"),await aboutHeadshot.getAttribute("src"),
   "The About photograph must remain distinct from the illustrated hero");
 
+ // The mobile introduction should give the illustration its own space and
+ // keep the action easy to find without turning it into a full-width slab.
+ // Measure both themes; the two use the same responsive geometry.
+ for(const width of [320,390]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const hero=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const q=selector=>document.querySelector(selector).getBoundingClientRect();
+    const headline=q(".hero h1"),illustration=q(".hero-feature");
+    const body=q(".hero-description"),action=q(".hero-actions .primary-link");
+    const container=document.querySelector(".hero");
+    const style=getComputedStyle(container);
+    return {
+     headlineToArt:illustration.top-headline.bottom,
+     artToCopy:body.top-illustration.bottom,
+     copyToAction:action.top-body.bottom,
+     actionWidth:action.width,actionHeight:action.height,
+     available:container.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight),
+     illustrationBottom:illustration.bottom,
+     overflow:document.documentElement.scrollWidth>innerWidth+2
+    };
+   },theme);
+   assert.ok(hero.headlineToArt>=15,
+    `${width}px ${theme}: Headline and portrait should not collide`);
+   assert.ok(hero.artToCopy>=18,
+    `${width}px ${theme}: Portrait needs space before the introduction`);
+   assert.ok(hero.copyToAction>=22,
+    `${width}px ${theme}: CTA must not crowd the paragraph`);
+   assert.ok(hero.actionWidth<=hero.available*.94,
+    `${width}px ${theme}: CTA should not fill the editorial column`);
+   assert.ok(hero.actionHeight>=48,
+    `${width}px ${theme}: CTA must remain a usable touch target`);
+   assert.ok(hero.illustrationBottom<844,
+    `${width}px ${theme}: Portrait should be visible within the first phone viewport`);
+   assert.equal(hero.overflow,false,
+    `${width}px ${theme}: Hero must not introduce horizontal scrolling`);
+  }
+ }
+
  // Regression for the compact About composition: a 12ch max-width on the
  // heading once created unnecessary extra lines on phones. Measure the actual
  // rendered width and confirm the photo still sits with the introduction.
