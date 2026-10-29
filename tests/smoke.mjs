@@ -76,6 +76,55 @@ try{
  assert.notEqual(await heroPortrait.getAttribute("src"),await aboutHeadshot.getAttribute("src"),
   "The About photograph must remain distinct from the illustrated hero");
 
+ // Regression for the compact About composition: a 12ch max-width on the
+ // heading once created unnecessary extra lines on phones. Measure the actual
+ // rendered width and confirm the photo still sits with the introduction.
+ for(const width of [320,390]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const layout=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const about=document.querySelector(".about");
+    const heading=about.querySelector("h2");
+    const portrait=about.querySelector(".about-portrait");
+    const caption=portrait.querySelector("figcaption");
+    const intro=about.querySelector(".about-intro p");
+    const inventory=about.querySelector(".creative-inventory");
+    const headingRect=heading.getBoundingClientRect();
+    const aboutStyle=getComputedStyle(about);
+    const available=about.clientWidth-parseFloat(aboutStyle.paddingLeft)-parseFloat(aboutStyle.paddingRight);
+    return {
+     available,headingWidth:headingRect.width,headingRight:headingRect.right,
+     headingHeight:headingRect.height,portraitFloat:getComputedStyle(portrait).float,
+     portraitWidth:portrait.getBoundingClientRect().width,
+     portraitTop:portrait.getBoundingClientRect().top,
+     introTop:intro.getBoundingClientRect().top,
+     captionDisplay:getComputedStyle(caption).display,
+     inventoryTop:inventory.getBoundingClientRect().top,
+     portraitBottom:portrait.getBoundingClientRect().bottom
+    };
+   },theme);
+   assert.ok(layout.headingWidth>=layout.available*.9,
+    `${width}px ${theme}: About heading must use the available text column`);
+   assert.ok(layout.headingRight<=width+1,
+    `${width}px ${theme}: About heading must not overflow the viewport`);
+   assert.ok(layout.headingHeight<310,
+    `${width}px ${theme}: About heading must not consume an entire phone screen`);
+   assert.equal(layout.portraitFloat,"left",`${width}px ${theme}: Headshot should sit beside the intro`);
+   assert.ok(layout.portraitWidth>=100&&layout.portraitWidth<=140,
+    `${width}px ${theme}: Headshot should remain a compact editorial portrait`);
+   assert.ok(Math.abs(layout.portraitTop-layout.introTop)<24,
+    `${width}px ${theme}: Headshot and introduction should start together`);
+   assert.equal(layout.captionDisplay,"none",`${width}px ${theme}: Avoid a repeated introduction`);
+   assert.ok(layout.inventoryTop>=layout.portraitBottom,
+    `${width}px ${theme}: Inventory must follow the photo instead of overlapping it`);
+  }
+ }
+ await page.setViewportSize({width:1280,height:720});
+ await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
+ assert.notEqual(await page.locator(".about-portrait figcaption").evaluate(node=>getComputedStyle(node).display),"none",
+  "Desktop About must retain the headshot caption");
+
  await page.goto(origin+"/case-studies/hoylu/connected-planning/");
  await page.locator("#case-title").waitFor();
  // Canonical homepage anchors must work when opened in another tab from a
