@@ -300,3 +300,31 @@ html[data-theme="dark"] .work .featured-project.client-file{
  line-height:1.4;
  text-transform:uppercase;
 }
+
+/* Archive collection gallery: card geometry, evidence briefs and theme contrast.
+   This is the sole owner of collection-specific presentation. */
+.collection .projects-grid{gap:clamp(22px,2.3vw,36px)}
+.collection .project-card{min-width:0}
+.collection .project-card-link{height:100%}
+.collection .project-visual{aspect-ratio:16/10;min-height:0}
+.collection .project-visual:not(:has(img)){padding:clamp(14px,1.7vw,24px)}
+.collection .project-visual .visual-brief{max-width:100%;font-size:clamp(0.75rem,1vw,0.875rem);line-height:1.45;letter-spacing:0;overflow-wrap:break-word}
+.collection .project-visual .brief-kicker{font-size:0.6875rem;letter-spacing:.08em;font-weight:700}
+.collection .project-meta{margin-top:16px;line-height:1.45}
+.collection .project-card h3,.collection .project-card h4{line-height:1.15;overflow-wrap:break-word}
+.collection .project-card p{font-size:0.9375rem;line-height:1.65;max-width:48ch}
+html[data-theme="dark"] .collection .project-card-link{color:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue))}
+html[data-theme="dark"] .collection .project-card p{color:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
+html[data-theme="dark"] .collection .project-meta{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
+html[data-theme="dark"] .collection .project-visual:not(:has(img)){background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-lavender))!important;border-color:#7e9db5}
+html[data-theme="dark"] .collection .project-visual .visual-brief,
+html[data-theme="dark"] .collection .project-visual .visual-label{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))!important}
+html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mix(in srgb,var(--palette-paper) 70%,var(--palette-blue))}
+@media(min-width:900px) and (max-width:1250px){
+ .collection .projects-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ .collection .projects-grid{grid-template-columns:1fr;gap:30px}
+ .collection .project-visual{aspect-ratio:16/10}
+ .collection .project-visual .visual-brief{font-size:0.8125rem}
+}
