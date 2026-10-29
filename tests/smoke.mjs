@@ -42,6 +42,17 @@ try{
  page.on("pageerror",error=>errors.push(error.message));
  await page.goto(origin+"/");
  const homepageMetadata=await readMetadata(page);
+ // Persisted appearance must be applied before the stylesheet paints, not
+ // only by the late footer toggle controller (iOS Home Screen flash).
+ const initialTheme=await page.evaluate(()=>({
+  root:document.documentElement.getAttribute("data-theme"),
+  meta:document.querySelector('meta[name="theme-color"]').content,
+  background:document.documentElement.style.backgroundColor
+ }));
+ assert.ok(["light","dark"].includes(initialTheme.root));
+ assert.equal(initialTheme.meta,initialTheme.root==="dark"?"#111d2a":"#f7f9fa");
+ assert.ok(initialTheme.background,"Root background should be set before first paint");
+
  // Accessible link navigation should expose challenge, reviewed contribution,
  // and the visible design approach—not just a generic case-study action.
  const cardDescriptions=await page.locator('.work .project-card-link').first().evaluate(link=>
