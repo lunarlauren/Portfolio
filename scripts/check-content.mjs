@@ -17,6 +17,7 @@ const caseCss = read('../public/components/case-study.css');
 const navigationCss = read('../public/components/navigation.css');
 const heroPolishCss = read('../public/components/hero-polish.css');
 const workCss = read('../public/components/work-cards.css');
+const aboutCss = read('../public/components/about.css');
 const stationeryCss = read('../public/components/stationery.css');
 // Theme state is part of the accessible light/dark experience. Exercise the
 // actual inline controller: OS changes follow only without a manual choice,
@@ -107,6 +108,23 @@ assert.match(aboutPortraitMarkup, /src="\/Headshot%20Lauren%20Leven\.png"/,
  'About should use Lauren\'s actual headshot, not repeat the hero illustration');
 assert.match(aboutPortraitMarkup, /alt="Portrait photograph of Lauren Leven"/,
  'About headshot must have a factual accessible description');
+
+// Phone About has one clear visual introduction rather than a full-screen
+// heading followed by a detached centered headshot and oversized body copy.
+// Preserve the genuine photo, biography, and separate interactive inventory.
+const phoneAboutCss = aboutCss.slice(aboutCss.lastIndexOf('@media (max-width: 600px)'));
+assert.ok(phoneAboutCss.startsWith('@media (max-width: 600px)'), 'About needs a dedicated phone layout owner');
+assert.match(phoneAboutCss, /\\.about h2\\s*\\{[^}]*font-size:\\s*clamp\\(/,
+ 'Mobile About heading must have a smaller editorial type scale');
+assert.match(phoneAboutCss, /\\.about \\.about-portrait\\s*\\{[^}]*float:\\s*left/,
+ 'Mobile headshot must sit with the introduction instead of standing alone');
+assert.match(phoneAboutCss, /\\.about \\.about-portrait img\\s*\\{[^}]*object-fit:\\s*cover/,
+ 'Small portrait should use a consistent cropped frame');
+assert.match(phoneAboutCss, /\\.about \\.about-copy p\\s*\\{[^}]*line-height:\\s*1\\.55/,
+ 'Mobile biography should retain legible reading leading');
+assert.match(html, /03 \\/ ABOUT ME/, 'About section label must describe its content');
+assert.match(html, /class="creative-inventory" aria-labelledby="inventory-title"/,
+ 'About inventory must retain its accessible title and interaction');
 
 assert.doesNotMatch(css, /\/\* Case-study handoff: quick factual overview/, 'Case evidence must not return to legacy CSS');
 assert.match(caseCss, /\.case-evidence-item\{/, 'Case evidence must remain in case-study component');
