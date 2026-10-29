@@ -78,25 +78,30 @@ if(window.caseSectionScrollCleanup){
  window.caseSectionScrollCleanup();
  window.caseSectionScrollCleanup=null;
 }
-if("IntersectionObserver" in window&&caseJumpHeadings.length>0){
+if(typeof window.IntersectionObserver==="function"&&caseJumpHeadings.length>0){
  window.caseSectionObserver=new IntersectionObserver(updateCurrentCaseSectionFromScroll,
   {rootMargin:"-20% 0px -55% 0px",threshold:0});
  caseJumpHeadings.forEach(heading=>window.caseSectionObserver.observe(heading));
 }else if(caseJumpHeadings.length>0){
  // Older/limited browsers still get a current chapter while reading. Only
  // calculate layout once per animation frame, and remove listeners on exit.
- let pending=false;
+ // Keep the frame handle so leaving a case study cancels queued work;
+ // removing listeners alone would still allow one stale callback to run.
+ let frameId=null;
  const onScroll=()=>{
-  if(pending)return;
-  pending=true;
-  requestAnimationFrame(()=>{
-   pending=false;
+  if(frameId!==null)return;
+  frameId=requestAnimationFrame(()=>{
+   frameId=null;
    updateCurrentCaseSectionFromScroll();
   });
  };
  window.addEventListener("scroll",onScroll,{passive:true});
  window.addEventListener("resize",onScroll);
  window.caseSectionScrollCleanup=()=>{
+  if(frameId!==null){
+   cancelAnimationFrame(frameId);
+   frameId=null;
+  }
   window.removeEventListener("scroll",onScroll);
   window.removeEventListener("resize",onScroll);
  };
