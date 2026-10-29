@@ -144,7 +144,7 @@ window.PORTFOLIO = {
     },
     {
       id:"holland-america",name:"Holland America Line",category:"PRODUCT DESIGN · UX/UI",
-      description:"Designing for guests at sea meant thinking beyond a typical app screen—from finding things on a phone to navigating a TV with a remote.",
+      description:"Designing for guests at sea meant thinking beyond a typical app screen, from finding things on a phone to navigating a TV with a remote.",
       accent:"#203d64",
       projects:[
         {
@@ -158,7 +158,7 @@ window.PORTFOLIO = {
           // Evidence boundary: passenger Wi-Fi confusion was reported, but no
           // interview count, test method, or before/after metric is documented.
           evidence:"Documented project context: passenger feedback identified confusion around connecting to the ship's Wi-Fi. I contributed visual guidance for that step and designed and prototyped booking and account flows. The feedback source, sample size, validation method, and post-release impact are not documented here.",
-          tradeoffs:"Someone using the app for the first time should know what to do next—and whether their booking actually worked. I focused on legible choices, guidance, and confirmations; this describes my design priorities, not a tested improvement in completion rates.",
+          tradeoffs:"Someone using the app for the first time should know what to do next and whether their booking actually worked. I focused on legible choices, guidance, and confirmations; this describes my design priorities, not a tested improvement in completion rates.",
           outcome:"My work contributed to Navigator, an app passengers actually use at sea. I designed and prototyped booking and account flows, plus Wi-Fi guidance informed by passenger feedback. The fun challenge was making unfamiliar onboard tasks feel less like a puzzle.",
           imageBrief:"Approved Navigator app screens showing dining reservations, shore excursions, or Wi-Fi connection guidance.",
           galleryBriefs:[
