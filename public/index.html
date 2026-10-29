@@ -33,6 +33,7 @@
   const dark=theme==="dark";
   root.setAttribute("data-theme",dark?"dark":"light");
   root.style.colorScheme=dark?"dark":"light";
+  root.style.backgroundColor=dark?"#111d2a":"#f7f9fa";
   button.setAttribute("aria-pressed",String(dark));
   // The toggle has one stable accessible name; aria-pressed communicates state.
   // Only the hover title describes the next action.
