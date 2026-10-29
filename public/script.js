@@ -145,7 +145,7 @@ document.addEventListener("click",event=>{
  const link=event.target.closest('a[href^="/case-studies/"]');
  // Only remember an opener for same-tab navigation. Modified clicks open
  // another browsing context and must not overwrite this page's return target.
- if(!link||!main.contains(link)||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||link.target==="_blank"||link.hasAttribute("download"))return;
+ if(!link||!main.contains(link)||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||(link.target&&link.target!=="_self")||link.hasAttribute("download"))return;
  caseOpener=link;
  caseOpenerScroll=window.scrollY;
 });
@@ -192,7 +192,9 @@ function routeWithMotion(){
 }
 document.addEventListener("click",event=>{
  const link=event.target.closest('a[href^="/case-studies/"]');
- if(!link||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+ // Preserve native new-tab, named-frame, and download behavior. Only route
+ // ordinary same-tab clicks through the SPA; modifier keys stay native too.
+ if(!link||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||(link.target&&link.target!=="_self")||link.hasAttribute("download"))return;
  event.preventDefault();
  navigateCase(link.getAttribute("href"));
 });
