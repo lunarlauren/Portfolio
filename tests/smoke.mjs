@@ -42,6 +42,21 @@ try{
  page.on("pageerror",error=>errors.push(error.message));
  await page.goto(origin+"/");
  const homepageMetadata=await readMetadata(page);
+ // The dark header/footer should be one opaque sheet with the page,
+ // not a brighter blue band above the dotted hero.
+ await page.evaluate(()=>document.documentElement.dataset.theme="dark");
+ const chromeColors=await page.evaluate(()=>({
+  page:getComputedStyle(document.documentElement).getPropertyValue("--paper").trim(),
+  header:getComputedStyle(document.querySelector(".site-header")).backgroundColor,
+  footer:getComputedStyle(document.querySelector("footer.wrap")).backgroundColor,
+  expected:getComputedStyle(document.body).backgroundColor
+ }));
+ assert.equal(chromeColors.header,chromeColors.expected,
+  "Dark sticky header must match the dark page surface");
+ assert.equal(chromeColors.footer,chromeColors.expected,
+  "Dark footer must match the dark page surface");
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // Accessible link navigation should expose challenge, reviewed contribution,
  // and the visible design approach—not just a generic case-study action.
  const cardDescriptions=await page.locator('.work .project-card-link').first().evaluate(link=>
