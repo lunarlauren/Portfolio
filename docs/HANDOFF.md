@@ -119,3 +119,7 @@ The canonical type scale is in `public/components/foundations.css`: `--type-h1`,
 ### Portfolio image dimensions
 
 Prepare project card and gallery thumbnail artwork at **1600 × 1000 pixels (16:10)**. The `.collection .project-visual` and featured project image frames use a shared 16:10 aspect ratio across breakpoints. Images use `object-fit: cover`, so keep essential UI and text away from crop edges. Text-only placeholder visuals intentionally remain content-sized. Full case-study screenshots may retain their native aspect ratios to preserve legibility.
+
+### Canonical homepage links from case studies
+
+Header navigation, the wordmark, footer Back to top, and generated case-study return links use absolute homepage hashes (for example, `/#work`). This is intentional: a relative `#work` opened in a new tab from `/case-studies/…/` would reopen that case-study URL instead of the Work archive. The router intercepts **only ordinary same-tab clicks** on these anchors while a case study is visible; modified clicks, `target` links, and downloads retain native browser behavior. The homepage hero's `#work` CTA remains relative because it is only visible on the homepage. The header scrollspy reads the link's `.hash` rather than using its full `href` as a CSS selector. If changing link URLs, update `tests/smoke.mjs` and verify browser Back/focus restoration and both themes.
