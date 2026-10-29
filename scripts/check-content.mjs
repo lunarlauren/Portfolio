@@ -191,6 +191,34 @@ assert.match(caseCss, /\.case-view \.case-delivery-stamp\{/, 'Shipped badge styl
 const context = { window: {} };
 vm.runInNewContext(content, context, { filename: 'public/content.js' });
 new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not available here
+// Case-study links are enhanced only for unmodified same-tab navigation.
+// Exercise the real delegated handler so target="_blank", named browsing
+// contexts, and download links retain native browser behavior.
+{
+ const start=script.indexOf('document.addEventListener("click",event=>{',script.indexOf('previousHash=nextHash;'));
+ const end=script.indexOf('\n});',start);
+ assert.ok(start>=0&&end>start,'Case-study link handler must remain discoverable');
+ const handlers=[],navigations=[];
+ vm.runInNewContext(script.slice(start,end+4),{
+  document:{addEventListener:(name,handler)=>{assert.equal(name,'click');handlers.push(handler)}},
+  navigateCase:href=>navigations.push(href)
+ });
+ assert.equal(handlers.length,1);
+ const click=(target='',download=false)=>{
+  let prevented=false;
+  const link={target,hasAttribute:name=>name==='download'&&download,getAttribute:()=>'/case-studies/hoylu/mobile-insights/'};
+  handlers[0]({target:{closest:()=>link},button:0,defaultPrevented:false,
+   metaKey:false,ctrlKey:false,shiftKey:false,altKey:false,
+   preventDefault:()=>{prevented=true}});
+  return prevented;
+ };
+ assert.equal(click(),true,'Same-tab case-study links should use SPA navigation');
+ assert.equal(click('_self'),true,'Explicit _self should use SPA navigation');
+ assert.equal(click('_blank'),false,'New-tab links must use native navigation');
+ assert.equal(click('previewFrame'),false,'Named browsing contexts must use native navigation');
+ assert.equal(click('',true),false,'Download links must use native behavior');
+ assert.equal(navigations.length,2,'Only same-tab links should reach SPA routing');
+}
 
 // A missing/renamed case-study URL must not show the Work archive while
 // retaining a broken /case-studies/... address. Exercise the real route()
