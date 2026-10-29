@@ -88,3 +88,45 @@
 /* Same specificity as the body rule: declare last so the first paragraph
    does not add an extra gap inside its flow-root portrait wrapper. */
 .about .about-intro p{margin-bottom:0}
+
+/* Phone About layout: avoid a full-screen heading followed by a detached square
+   portrait. Let the actual headshot introduce the biography while the longer
+   text wraps naturally beneath it. All selectors stay inside About. */
+@media (max-width: 600px) {
+  .about.wrap { padding-block: clamp(32px, 7vw, 46px); }
+  .about h2 {
+    font-size: clamp(2.55rem, 10vw, 3.125rem);
+    line-height: 1.07;
+    letter-spacing: -.045em;
+    margin: 10px 0 0;
+    max-width: 12ch;
+  }
+  .about .about-bottom { margin-top: 24px; row-gap: 22px; }
+  .about .about-intro { display: flow-root; margin-bottom: 12px; }
+  .about .about-portrait {
+    float: left;
+    width: clamp(104px, 29vw, 132px);
+    margin: 2px 18px 8px 0;
+    text-align: left;
+  }
+  .about .about-portrait img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 27%;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    filter: none;
+  }
+  /* The first sentence already introduces Lauren; avoid repeating that
+     introduction under a tiny photo. Keep the desktop caption intact. */
+  .about .about-portrait figcaption { display: none; }
+  .about .about-copy p {
+    font-size: clamp(.9375rem, 3.9vw, 1.0625rem);
+    line-height: 1.55;
+    margin-bottom: .85em;
+    max-width: 45ch;
+  }
+  .about .about-intro p { margin-bottom: 0; }
+  .about .about-copy > .text-link { margin-top: 10px; }
+  .about .creative-inventory .inventory-heading h3 { font-size: clamp(1.875rem, 7vw, 2.25rem); }
+}
