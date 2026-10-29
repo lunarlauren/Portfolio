@@ -291,7 +291,8 @@ function initReveals(){
    observer.unobserve(entry.target);
   });
  },{threshold:.08,rootMargin:"0px 0px -24px 0px"});
- document.querySelectorAll(".section-head,.about h2,.about-copy,.creative-inventory").forEach(el=>{
+ document.querySelectorAll(".section-head,.about h2,.about-copy,.creative-inventory,.work .project-card,.playground .project-card").forEach((el,index)=>{
+  if(el.matches(".project-card"))el.style.setProperty("--reveal-delay",Math.min(index%4,3)*70+"ms");
   el.classList.add("reveal-ready");
   observer.observe(el);
  });
@@ -299,3 +300,25 @@ function initReveals(){
 initReveals();
 
 
+
+/* A restrained scroll depth effect for the decorative hero portrait. */
+function initHeroParallax(){
+ const portrait=document.querySelector(".hero-portrait-art");
+ const hero=document.querySelector(".hero");
+ const reduced=window.matchMedia?.("(prefers-reduced-motion: reduce)");
+ if(!portrait||!hero||reduced?.matches)return;
+ let queued=false;
+ function update(){
+  queued=false;
+  const rect=hero.getBoundingClientRect();
+  if(rect.bottom<0||rect.top>innerHeight)return;
+  const offset=Math.max(-24,Math.min(24,(innerHeight*.45-(rect.top+rect.height*.5))*.075));
+  portrait.style.setProperty("--hero-parallax-y",offset.toFixed(1)+"px");
+ }
+ function schedule(){if(!queued){queued=true;requestAnimationFrame(update)}}
+ window.addEventListener("scroll",schedule,{passive:true});
+ window.addEventListener("resize",schedule,{passive:true});
+ reduced?.addEventListener?.("change",event=>{if(event.matches){portrait.style.removeProperty("--hero-parallax-y")}else schedule()});
+ schedule();
+}
+initHeroParallax();
