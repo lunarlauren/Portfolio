@@ -580,7 +580,7 @@ assert.equal((heroPolishCss.match(/@media\(max-width:600px\)/g)||[]).length,1, '
 const phoneHeroCss = heroPolishCss.slice(heroPolishCss.indexOf('@media(max-width:600px)'));
 assert.match(phoneHeroCss, /\.hero\.wrap\{[^}]*min-height:0;[^}]*padding-bottom:clamp\(/, 'Phone hero must not reserve a viewport of empty space');
 assert.match(phoneHeroCss, /\.hero \.hero-copy\{display:contents\}/, 'Phone layout must keep the portrait in the editorial flow');
-for (const [selector,order] of [['h1',2],['feature',3],['description',5],['actions',6]]) {
+for (const [selector,order] of [['h1',3],['feature',2],['description',5],['actions',6]]) {
  const rule = selector==='h1' ? '\\.hero \\.hero-copy>h1' : '\\.hero \\.hero-'+selector;
  assert.match(phoneHeroCss,new RegExp(rule+'\\{[^}]*order:'+order+';'), 'Phone hero order must preserve '+selector);
 }
@@ -594,13 +594,13 @@ assert.match(phoneHeroCss, /\.hero \.hero-description\{[^}]*max-width:34ch/, 'Ph
 // edge-to-edge pink action. Geometry is checked separately in Chromium.
 assert.match(phoneHeroCss, /\.hero \.hero-copy>h1\{[^}]*line-height:1\.12/,
  'Phone headline needs open line spacing');
-assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*margin:0 0 24px/,
- 'Illustration needs breathing room before the supporting paragraph');
+assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*margin:0 0 18px/,
+ 'Illustration needs breathing room before the headline');
 assert.match(phoneHeroCss, /\.hero \.hero-actions\{[^}]*margin-top:26px/,
  'Mobile CTA needs a distinct gap after the introduction');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*width:auto;min-width:min\(100%,238px\)/,
  'Phone CTA should remain content-sized, not a full-width color bar');
-assert.match(html, /hero-polish\.css\?v=20261029-mobile-breathing-room/,
+assert.match(html, /hero-polish\.css\?v=20261029-portrait-first/,
  'Homepage must load the updated hero stylesheet');
 
 assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
