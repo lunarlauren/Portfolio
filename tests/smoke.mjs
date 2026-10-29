@@ -97,6 +97,19 @@ try{
  assert.equal(await page.locator("#main").isHidden(),true);
  assert.equal(await page.locator("#case-title").innerText(),"Connected Planning");
  assert.equal(await page.locator('.case-gallery').getAttribute('aria-label'),'Visual briefs and image placeholders','Planned case-study visuals must not be announced as an image gallery');
+ // Until approved screenshots arrive, a descriptive visual brief should not
+ // occupy the same 640px cover height as a real image. Check both breakpoints
+ // and preserve the explicit illustrative-art label and readable brief text.
+ const brief=page.locator(".case-hero-visual:not(:has(img))");
+ assert.equal(await brief.count(),1,"An unsupplied case hero should retain its editorial brief");
+ assert.match(await brief.innerText(),/ILLUSTRATIVE.*NOT A PRODUCT SCREENSHOT/);
+ const desktopBriefHeight=await brief.evaluate(node=>node.getBoundingClientRect().height);
+ assert.ok(desktopBriefHeight>=200&&desktopBriefHeight<=340,"Desktop brief should be compact without clipping its copy");
+ await page.setViewportSize({width:390,height:844});
+ const phoneBriefHeight=await brief.evaluate(node=>node.getBoundingClientRect().height);
+ assert.ok(phoneBriefHeight>=190&&phoneBriefHeight<=320,"Phone brief should not bury the UX narrative");
+ assert.equal(await brief.evaluate(node=>node.scrollHeight<=node.clientHeight+2),true,"Brief text should not be vertically clipped");
+ await page.setViewportSize({width:1280,height:720});
  assert.equal(await page.locator(".case-facts dt").allTextContents().then(labels=>labels.some(label=>label.trim()==="My role")),true,"Case facts should expose the designer's actual contribution");
  assert.match(await page.locator(".case-facts").innerText(),/Product UX and visual design/,"Role must use reviewed project metadata");
  assert.equal(await page.locator(".case-delivery-stamp").count(),0,"Design contributions without verified shipping must not get a shipped stamp");
