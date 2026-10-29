@@ -105,8 +105,8 @@ try{
     const container=document.querySelector(".hero");
     const style=getComputedStyle(container);
     return {
-     headlineToArt:illustration.top-headline.bottom,
-     artToCopy:body.top-illustration.bottom,
+     artToHeadline:headline.top-illustration.bottom,
+     headlineToCopy:body.top-headline.bottom,
      copyToAction:action.top-body.bottom,
      actionWidth:action.width,actionHeight:action.height,
      available:container.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight),
@@ -114,10 +114,10 @@ try{
      overflow:document.documentElement.scrollWidth>innerWidth+2
     };
    },theme);
-   assert.ok(hero.headlineToArt>=15,
-    `${width}px ${theme}: Headline and portrait should not collide`);
-   assert.ok(hero.artToCopy>=18,
-    `${width}px ${theme}: Portrait needs space before the introduction`);
+   assert.ok(hero.artToHeadline>=15,
+    `${width}px ${theme}: Portrait should lead the headline without collision`);
+   assert.ok(hero.headlineToCopy>=18,
+    `${width}px ${theme}: Headline needs space before the introduction`);
    assert.ok(hero.copyToAction>=22,
     `${width}px ${theme}: CTA must not crowd the paragraph`);
    assert.ok(hero.actionWidth<=hero.available*.94,
