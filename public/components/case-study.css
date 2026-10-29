@@ -124,6 +124,21 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 }
 .case-view .case-prose h2[id]{scroll-margin-top:154px}
 
+/* Editorial briefs are useful context, but a missing image must not consume
+   a full screenshot-sized hero. Keep the text and its provenance visible while
+   bringing the UX challenge, process, and evidence closer to the first viewport.
+   Real supplied imagery keeps the full-height cover treatment from the base. */
+.case-view .case-hero-visual:not(:has(img)){
+ height:auto;
+ min-height:clamp(220px,28vw,320px);
+ margin-block:clamp(24px,4vw,40px);
+}
+@media(max-width:760px){
+ .case-view .case-hero-visual:not(:has(img)){
+  min-height:clamp(200px,50vw,240px);
+ }
+}
+
 /* Mobile reading: responsive typography, image sizing, and chapter context. */
 /* Mobile case-study reading: keep editorial copy legible without changing
    project claims or the intentional image placeholders. */
