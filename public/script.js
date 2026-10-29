@@ -276,7 +276,9 @@ $("#year").textContent=new Date().getFullYear();if(data.email&&data.email!=="hel
 
 /* Reveal elements when they enter the viewport, without hiding content when JS fails. */
 function initReveals(){
- if(!("IntersectionObserver" in window)||window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)return;
+ // A present-but-undefined observer (e.g. an incomplete polyfill) is not usable.
+ // Leave content visible rather than applying reveal-ready without an observer.
+ if(typeof window.IntersectionObserver!=="function"||window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)return;
  const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
    if(!entry.isIntersecting)return;

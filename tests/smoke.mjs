@@ -174,6 +174,19 @@ try{
  assert.equal(await optional.locator("#case-evidence-notes").count(),0);
  assert.match(await optional.locator("#case-outcome").innerText(),/^02 \/ Deliverables & learning/);
  await optional.close();
+ // Some browsers/polyfills expose IntersectionObserver as a property without
+ // providing a constructor. Do not hide Work/About behind reveal-ready in
+ // that state; the project archive must remain readable and navigable.
+ const limited=await browser.newPage();
+ limited.on("pageerror",error=>errors.push(error.message));
+ await limited.addInitScript(()=>{window.IntersectionObserver=undefined;});
+ await limited.goto(origin+"/");
+ assert.equal(await limited.evaluate(()=>typeof window.IntersectionObserver),"undefined");
+ assert.equal(await limited.locator(".reveal-ready").count(),0,
+  "Non-callable IntersectionObserver must leave homepage sections visible");
+ assert.ok(await limited.locator(".work .project-card-link").count()>0,
+  "Project stories must remain discoverable without reveal animation");
+ await limited.close();
  // Older/limited browsers may not expose IntersectionObserver. Chapter
  // progress must still follow scrolling and release its listeners on exit.
  const fallback=await browser.newPage();
