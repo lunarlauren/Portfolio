@@ -145,6 +145,13 @@ try{
  assert.match(await page.title(),/Connected Planning/);
  assert.equal(await page.locator("#main").isHidden(),true);
  assert.equal(await page.locator("#case-title").innerText(),"Connected Planning");
+ // Authored UX reasoning should be visible in the cover before a placeholder.
+ // This is design rationale, not a claim of interviews or verified results.
+ const approach=page.locator(".case-head .case-approach");
+ assert.equal(await approach.count(),1,"Professional case-study cover should expose its authored design approach");
+ assert.match(await approach.innerText(),/Design approach[\s\S]*overview useful/i);
+ assert.equal(await approach.evaluate(node=>Boolean(node.compareDocumentPosition(document.querySelector(".case-hero-visual"))&Node.DOCUMENT_POSITION_FOLLOWING)),true,
+  "The design approach must precede the visual brief in reading order");
  assert.equal(await page.locator('.case-gallery').getAttribute('aria-label'),'Visual briefs and image placeholders','Planned case-study visuals must not be announced as an image gallery');
  // Until approved screenshots arrive, a descriptive visual brief should not
  // occupy the same 640px cover height as a real image. Check both breakpoints
@@ -183,6 +190,8 @@ try{
  assert.match(await page.locator(".case-prose").innerText(),/Mobile Insights is a shipped product experience/,"Mobile Insights case study should describe its actual delivery status");
  assert.match(await page.locator(".case-evidence").innerText(),/Shipped product contribution/,"The project overview must identify Mobile Insights as shipped");
  assert.equal(await page.locator(".case-delivery-stamp").innerText(),"SHIPPED PRODUCT CONTRIBUTION","Shipped delivery must be visible above the fold");
+ assert.match(await page.locator(".case-head .case-approach").innerText(),/insight-card hierarchy/i,
+  "Shipped Mobile Insights should lead with its documented design focus, not invented research");
  await page.goBack();
  assert.match(page.url(),/connected-planning/);
  await page.locator(".case-back").click();
@@ -320,6 +329,9 @@ try{
  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,"Unexpected mobile horizontal overflow");
  await mobile.setViewportSize({width:320,height:720});
  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),true,"Unexpected 320px horizontal overflow");
+ assert.equal(await mobile.locator(".case-head .case-approach").count(),1,"Authored approach should remain visible at 320px");
+ assert.equal(await mobile.locator(".case-head .case-approach").evaluate(node=>getComputedStyle(node).gridTemplateColumns.trim().split(/\s+/).length),1,
+  "The mobile approach should stack label and copy in one column");
  // Selecting the outcome chapter should reveal its active tab in the narrow strip.
  // A programmatic document scroll is not a reliable IntersectionObserver trigger.
  await mobile.locator('[data-case-jump="case-outcome"]').click();
