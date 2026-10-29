@@ -1,6 +1,4 @@
 /* Case-study content presentation helpers. No routing or DOM initialization. */
-// Placeholders are editorial instructions, not evidence of shipped UI or research.
-// Use the same visible status label on archive cards and case-study imagery.
 const visualBriefKicker=brief=>{
  const note=String(brief||"").trim();
  if(/^ILLUSTRATIVE\s*\//i.test(note))return "ILLUSTRATIVE · NOT A PRODUCT SCREENSHOT";
@@ -10,12 +8,9 @@ const visualBriefKicker=brief=>{
  return "IMAGE TO ADD · NOT YET SUPPLIED";
 };
 
-// An approved *illustration* remains illustrative even after its file is added.
-// The source brief must be revised when a real approved product screenshot replaces it.
 const illustrativeImageStatus=brief=>/^ILLUSTRATIVE\s*\//i.test(String(brief||"").trim())
  ?'<span class="visual-image-status">ILLUSTRATIVE VISUAL · NOT A PRODUCT SCREENSHOT</span>':"";
 
-// Short, factual takeaways help visitors skim without replacing the full case study.
 const caseHighlights={
  "Connected Planning":[["THE CHALLENGE","Keep related project information understandable across teams."],["DESIGN RATIONALE","Preserve the planning overview while making relationships and supporting details easier to follow."]],
  "Mobile Insights":[["DELIVERY","Shipped product experience; my contribution was mobile UX/UI design."],["DESIGN FOCUS","Readable insight hierarchy with a path to supporting detail."]],
@@ -29,23 +24,14 @@ const caseHighlights={
  "Fallout 76 ;  What I'd Design":[["THE IDEA","Explore design ideas inside a game world I know well."],["THE APPROACH","Concept briefs informed by the game's visual language."]],
  "Illustration & Experiments":[["THE SPACE","Personal work driven by curiosity."],["MY FOCUS","Character, composition, and visual exploration."]]
 };
-// Handoff: these labels summarize documented contributions, not invented outcomes.
-// Update alongside content.js when the scope or delivery status is confirmed.
 
-// An explicitly authored design-approach sentence belongs near the cover,
-// before image placeholders. Do not manufacture a process summary from research
-// or infer a validated outcome when archiveApproach is absent.
 const caseApproachMarkup=p=>typeof p.archiveApproach==="string"&&p.archiveApproach.trim()
  ?'<p class="case-approach"><span class="case-approach-label">Design approach</span><span class="case-approach-text">'+esc(p.archiveApproach.trim())+'</span></p>'
  :"";
 
-// Only verified shipped projects receive a cover stamp. Reuse the reviewed
-// delivery value shown on archive cards and in the overview; never infer
-// shipping status from an image brief, prototype, or design rationale.
 const deliveryStampMarkup=p=>projectEvidence[p.title]?.[2]==="Shipped product contribution"
  ?'<p class="case-delivery-stamp">SHIPPED PRODUCT CONTRIBUTION</p>':"";
 
-// A description list pairs each project claim with its label for screen readers.
 const evidenceMarkup=p=>{
  const evidence=projectEvidence[p.title];
  if(!evidence)return "";
@@ -53,13 +39,7 @@ const evidenceMarkup=p=>{
  return '<dl class="case-evidence" aria-label="Project overview">'+evidence.map((value,i)=>'<div class="case-evidence-item"><dt class="case-evidence-label">'+labels[i]+'</dt><dd class="case-evidence-value"><strong>'+esc(value)+'</strong></dd></div>').join("")+'</dl>';
 };
 const highlightMarkup=p=>{const items=caseHighlights[p.title]||[];return items.length?'<div class="case-highlights" role="group" aria-label="Project at a glance">'+items.map(([label,value])=>'<div class="case-highlight"><span class="case-highlight-label">'+esc(label)+'</span><p>'+esc(value)+'</p></div>').join("")+'</div>':""};
-// Optional editorial notes distinguish design reasoning from research evidence
-// and verified outcomes. Render only fields explicitly supplied in content.js.
 const processNotesMarkup=(p,chapterNumber=3)=>{
- // Keep documented scope and design reasoning visually distinct. Neither
- // kind implies that an interview, experiment, or outcome was verified.
- // These small visible labels make the claim type explicit at scan speed.
- // "Evidence status" is not a claim that interviews or tests took place.
  const notes=[
   ["evidence","Evidence status","Evidence & boundaries",p.evidence],
   ["rationale","Design reasoning · not test evidence","Design tension & rationale",p.tradeoffs]
@@ -68,12 +48,7 @@ const processNotesMarkup=(p,chapterNumber=3)=>{
   '<section class="case-process-note" data-note-kind="'+kind+'"><span class="case-process-note-kicker">'+esc(kicker)+'</span><h3>'+esc(heading)+'</h3><p>'+esc(value)+'</p></section>'
  ).join("")+'</div>':"";
 };
-// A semantic project-facts list makes audience and constraints scannable.
-// These fields summarize documented context; a design scenario is not a
-// claim that persona research or testing took place.
 const caseFactsMarkup=(p,company)=>{
- // Reuse the reviewed contribution label from the project overview rather
- // than inferring a role from discipline or repeating unverified claims.
  const reviewedRole=projectEvidence[p.title]?.[1];
  const facts=[
   ["Discipline",p.type],
