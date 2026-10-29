@@ -188,7 +188,25 @@ try{
   window.scrollTo({top:heading.getBoundingClientRect().top+window.scrollY-100,behavior:"instant"});
  });
  await fallback.waitForFunction(()=>document.querySelector('[data-case-jump="case-outcome"]')?.getAttribute("aria-current")==="location");
- await fallback.locator(".case-back").click();
+ // Queue a fallback update, then leave synchronously before the next paint.
+ // Removing scroll listeners is insufficient if the queued frame survives.
+ const canceledFrame=await fallback.evaluate(()=>{
+  const originalCancel=window.cancelAnimationFrame;
+  let canceled=0;
+  window.cancelAnimationFrame=function(id){
+   canceled++;
+   return originalCancel.call(this,id);
+  };
+  try{
+   window.dispatchEvent(new Event("scroll"));
+   history.pushState(null,"","/#work");
+   route();
+  }finally{
+   window.cancelAnimationFrame=originalCancel;
+  }
+  return canceled;
+ });
+ assert.equal(canceledFrame,1,"Leaving a case study must cancel the pending chapter frame");
  await fallback.waitForFunction(()=>window.caseSectionScrollCleanup===null);
  await fallback.close();
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
