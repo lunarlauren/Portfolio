@@ -35,11 +35,11 @@
  .hero .hero-feature{height:clamp(370px,49vh,510px)}
 }
 
-/* Phone editorial layout: headline → existing 3D portrait → one concise
+/* Phone editorial layout: existing 3D portrait → headline → one concise
    explanation → one CTA. display:contents lets the image follow the headline
-   visually without moving DOM nodes or creating a focus-order mismatch.
-   The portrait panel is deliberately noninteractive. Avoid a full-width
-   CTA and keep open space around the art so the two-color headline leads. */
+   visually without moving DOM nodes; the portrait is noninteractive, so the
+   heading remains first in the document's semantic reading order. Avoid a full-width
+   CTA and keep open space around the art so the portrait leads. */
 @media(max-width:600px){
  .hero.wrap{
   display:flex;flex-direction:column;align-items:stretch;gap:0;
@@ -51,13 +51,13 @@
   letter-spacing:.045em;text-wrap:balance
  }
  .hero .hero-copy>h1{
-  order:2;margin:0 0 clamp(18px,4.5vw,26px);max-width:16ch;
+  order:3;margin:0 0 clamp(20px,5vw,28px);max-width:16ch;
   font-size:clamp(2.05rem,7.8vw,2.75rem);
   line-height:1.12;letter-spacing:-.035em
  }
  .hero .hero-feature{
-  order:3;min-height:0!important;height:clamp(225px,61vw,300px)!important;
-  margin:0 0 24px;padding:0!important;overflow:hidden;
+  order:2;min-height:0!important;height:clamp(225px,61vw,300px)!important;
+  margin:0 0 18px;padding:0!important;overflow:hidden;
   background:transparent!important;border:0!important;box-shadow:none!important
  }
  .hero .hero-feature::before,.hero .hero-feature::after{display:none!important}
