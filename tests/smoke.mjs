@@ -78,6 +78,21 @@ try{
 
  await page.goto(origin+"/case-studies/hoylu/connected-planning/");
  await page.locator("#case-title").waitFor();
+ // Canonical homepage anchors must work when opened in another tab from a
+ // deep-linked case study. The original case-study page must remain in place.
+ for(const selector of [".site-header nav a[href='/#work']", ".case-back"]){
+  const link=page.locator(selector);
+  await link.evaluate(node=>node.target="_blank");
+  const newTabPromise=page.waitForEvent("popup");
+  await link.click();
+  const newTab=await newTabPromise;
+  await newTab.waitForLoadState("domcontentloaded");
+  assert.equal(new URL(newTab.url()).pathname,"/","New-tab return link should open the homepage");
+  assert.equal(new URL(newTab.url()).hash,"#work","New-tab return link should target Work");
+  assert.match(page.url(),/connected-planning/,"New-tab return must not navigate the original case study");
+  await newTab.close();
+  await link.evaluate(node=>node.removeAttribute("target"));
+ }
  assert.match(await page.title(),/Connected Planning/);
  assert.equal(await page.locator("#main").isHidden(),true);
  assert.equal(await page.locator("#case-title").innerText(),"Connected Planning");
@@ -113,18 +128,18 @@ try{
  assert.equal(await page.locator("#main").isVisible(),true);
  assert.deepEqual(await readMetadata(page),homepageMetadata,"Returning from a case study must restore homepage title, canonical, and social previews");
  await page.locator(".project-card-link[href='/case-studies/hoylu/connected-planning/']").first().click();
- await page.locator('a[href="#about"]').first().click();
+ await page.locator('.site-header nav a[href="/#about"]').click();
  assert.match(page.url(),/\/#about$/);
  assert.equal(await page.locator("#main").isVisible(),true);
  assert.deepEqual(await readMetadata(page),homepageMetadata,"Navigating from a case study to About must also restore homepage metadata");
  // A case-study link uses pushState, which emits neither hashchange nor
  // popstate. The header must identify Work rather than leaving About
  // announced as the current location from the previous view.
- await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="#about"]')?.getAttribute("aria-current")==="location");
+ await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="/#about"]')?.getAttribute("aria-current")==="location");
  await page.locator(".project-card-link[href='/case-studies/hoylu/connected-planning/']").first().click();
  await page.locator("#case-title").waitFor();
- await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="#work"]')?.getAttribute("aria-current")==="location");
- assert.equal(await page.locator('.site-header nav a[href="#about"]').getAttribute("aria-current"),null,"About must not remain current on a case-study route");
+ await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="/#work"]')?.getAttribute("aria-current")==="location");
+ assert.equal(await page.locator('.site-header nav a[href="/#about"]').getAttribute("aria-current"),null,"About must not remain current on a case-study route");
  await page.locator(".case-back").click();
  await page.locator("#main").waitFor({state:"visible"});
  // Leaving a case study restores focus/scroll to the opener in an animation
