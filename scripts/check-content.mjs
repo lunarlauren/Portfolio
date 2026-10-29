@@ -116,6 +116,8 @@ const phoneAboutCss = aboutCss.slice(aboutCss.lastIndexOf('@media (max-width: 60
 assert.ok(phoneAboutCss.startsWith('@media (max-width: 600px)'), 'About needs a dedicated phone layout owner');
 assert.match(phoneAboutCss, /\.about h2\s*\{[^}]*font-size:\s*clamp\(/,
  'Mobile About heading must have a smaller editorial type scale');
+assert.doesNotMatch(phoneAboutCss, /max-width:\s*12ch/,
+ 'Mobile About heading should not be restricted to an unnecessarily narrow 12ch measure');
 assert.match(phoneAboutCss, /\.about \.about-portrait\s*\{[^}]*float:\s*left/,
  'Mobile headshot must sit with the introduction instead of standing alone');
 assert.match(phoneAboutCss, /\.about \.about-portrait img\s*\{[^}]*object-fit:\s*cover/,
