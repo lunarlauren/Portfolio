@@ -109,7 +109,7 @@ if(typeof window.IntersectionObserver==="function"&&caseJumpHeadings.length>0){
  };
 }
 if(caseJumpButtons.length)setCurrentCaseSection(caseJumpButtons[0].dataset.caseJump,{reveal:true});
-document.title=p.title+" — Lauren Leven";
+document.title=p.title+" | Lauren Leven";
  const pageUrl=location.origin+casePath(group,i);
  // Keep share previews aligned with the routed project, not the homepage.
  // Static crawlers still require server-rendered metadata for reliable previews.
