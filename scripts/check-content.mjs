@@ -29,7 +29,8 @@ const stationeryCss = read('../public/components/stationery.css');
 // Only actual focus targets should receive the global focus ring.
 {
  const staticText = ['.eyebrow', '.hero-description', '.section-head>p', '.about-copy p'];
- const rulesWithOutlines = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+ const allCss = [foundationsCss, homepageCss, css, navigationCss, workCss, caseCss, playgroundCss, aboutCss, stationeryCss].join('\n');
+ const rulesWithOutlines = [...allCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
   .filter(([, , declarations]) => /(?:^|;)\s*outline\s*:/.test(declarations));
  for (const textSelector of staticText) {
   assert.ok(!rulesWithOutlines.some(([, selectors]) =>
