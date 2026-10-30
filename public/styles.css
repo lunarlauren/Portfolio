@@ -298,13 +298,6 @@ html[data-theme="dark"] .inventory-icon{filter:drop-shadow(2px 5px 0 rgba(0,0,0,
 html[data-theme="dark"] .feature-top,html[data-theme="dark"] .feature-bottom{color:var(--ink)}
 html[data-theme="dark"] 
 
-.site-header{min-height:66px;gap:24px}
-.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2vw,28px);min-width:0}
-.site-header .header-actions nav{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
-.site-header .header-actions nav a{font-size:0.8125rem;font-weight:600;letter-spacing:0}
-.header-contact{display:inline-flex;align-items:center;gap:6px;justify-content:center;min-height:38px;padding:8px 14px;border:1px solid var(--ink);border-radius:999px;text-decoration:none;font-size:0.75rem;font-weight:700;white-space:nowrap}
-.header-contact:hover{background:var(--ink);color:var(--paper)}
-html[data-theme="dark"] .header-contact{color:var(--ink)}
 
 
 
@@ -428,8 +421,6 @@ html[data-theme="dark"] .skip-link:focus-visible{outline:3px solid color-mix(in 
 @media(forced-colors:active){.inventory-item[aria-pressed="true"]{outline:2px solid Highlight;outline-offset:-3px}.skip-link{border-color:CanvasText}}
 
 
-/* Navigation: a persistent current-section cue works without relying on color alone. */
-.site-header nav a[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 
 
 /* Mobile first impression: show a slice of the illustrated featured-work card
@@ -447,9 +438,6 @@ html[data-theme="dark"] .skip-link:focus-visible{outline:3px solid color-mix(in 
  .hero-feature{min-height:320px}
 }
 
-/* Contact opens mail rather than a page section. Keep the near-footer
-   underline visual-only; aria-current is reserved for actual locations. */
-.site-header .header-contact[data-section-active]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 
 
 /* Featured case studies: direct entry to the work, before company browsing.
@@ -554,7 +542,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 /* Mobile interaction quality: keep tappable controls comfortable and avoid
    paper decoration interfering with focus or text. */
 @media(max-width:760px){
- .site-header nav a,.header-contact,.theme-toggle{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+ 
  .notebook-project-index .project-card-link{display:block;min-height:44px}
  .notebook-project-index .featured-project{isolation:isolate}
  .case-section-links button{min-height:44px;touch-action:manipulation}
@@ -641,7 +629,6 @@ html[data-theme="dark"] .playground .section-head>p{
  }
 }
 @media(max-width:600px){
- .site-header{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
  .hero.wrap,.work.wrap,.about.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
  .playground.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
  .case-view .case-section-links{scrollbar-width:none}
