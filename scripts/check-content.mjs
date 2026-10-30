@@ -600,7 +600,9 @@ assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*background:transparent!i
 assert.match(phoneHeroCss, /\.hero \.notebook-hero-note\{display:none!important\}/, 'Phone intro should not repeat its message');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link,\.hero \.hero-foot\{display:none!important\}/, 'Phone hero should have one primary action');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*min-height:48px/, 'Primary action needs a touch-friendly height');
-assert.match(phoneHeroCss, /\.hero \.hero-description\{[^}]*max-width:34ch/, 'Phone body copy needs a readable measure');
+const phoneHeroMeasure = phoneHeroCss.match(/\.hero \.hero-description\{[^}]*max-width:(\d+)ch/);
+assert.ok(phoneHeroMeasure && Number(phoneHeroMeasure[1])>=30 && Number(phoneHeroMeasure[1])<=42,
+ 'Phone body copy needs a readable measure without pinning one editorial value');
 // Maintain the phone's editorial negative space without repeating the previous
 // edge-to-edge pink action. Geometry is checked separately in Chromium.
 assert.match(phoneHeroCss, /\.hero \.hero-copy>h1\{[^}]*line-height:1\.12/,
