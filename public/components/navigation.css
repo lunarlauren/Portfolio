@@ -21,6 +21,20 @@ html[data-theme="dark"]{
 .header-contact{display:inline-flex;align-items:center;gap:6px;justify-content:center;min-height:38px;padding:8px 14px;border:1px solid var(--ink);border-radius:999px;text-decoration:none;font-size:.75rem;font-weight:700;white-space:nowrap}
 .header-contact:hover{background:var(--ink);color:var(--paper)}
 html[data-theme="dark"] .header-contact{color:var(--ink)}
+html[data-theme="dark"] .header-contact{border-color:#c7d9e7}
+html[data-theme="dark"] .header-contact:hover{
+ background:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));
+ color:var(--brand-pink);
+}
+html[data-theme="dark"] .site-header .header-actions nav a,
+html[data-theme="dark"] .site-header .header-contact{color:var(--ink)}
+html[data-theme="dark"] .site-header .header-actions nav a:hover,
+html[data-theme="dark"] .site-header .header-contact:hover{color:var(--brand-pink)}
+html[data-theme="dark"] .theme-toggle:focus-visible,
+html[data-theme="dark"] .header-contact:focus-visible{
+ outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));
+ outline-offset:3px;
+}
 .site-header nav a[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 /* Contact is mail, so its section cue does not use aria-current. */
 .site-header .header-contact[data-section-active]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
