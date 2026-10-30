@@ -124,6 +124,8 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 }
 .case-view .case-prose h2[id]{scroll-margin-top:154px}
 
+.case-gallery .project-visual:not(:has(img)){min-height:270px}
+
 /* Editorial briefs are useful context, but a missing image must not consume
    a full screenshot-sized hero. Keep the text and its provenance visible while
    bringing the UX challenge, process, and evidence closer to the first viewport.

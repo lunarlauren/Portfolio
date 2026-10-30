@@ -1,0 +1,41 @@
+/* Shared no-image project visuals. Load after styles.css, before scoped card styles.
+   Real supplied images retain the cover treatment from homepage-base.css. */
+.project-visual{background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
+.project-card:nth-child(3n+1) .project-visual:has(img){background:#ffd7eb}
+.project-card:nth-child(3n+3) .project-visual:has(img){background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-pink))}
+
+/* Placeholder briefs are editorial notes, never simulated product screenshots.
+   Local client-file and Playground colors can override these without !important. */
+.project-visual:not(:has(img)){
+ --placeholder-surface:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ --placeholder-edge:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
+ --placeholder-text:#42647a;
+ display:flex;align-items:center;justify-content:center;
+ padding:clamp(18px,3vw,30px);
+ background:var(--placeholder-surface);border:2px dashed var(--placeholder-edge);
+}
+html[data-theme="dark"] .project-visual:not(:has(img)){
+ --placeholder-surface:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
+ --placeholder-edge:#496074;
+ --placeholder-text:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ background:var(--placeholder-surface);border-color:var(--placeholder-edge);
+}
+.project-visual .visual-label{font-size:var(--type-xs);line-height:1.5}
+.project-visual:not(:has(img)) .visual-label{
+ position:static;background:none;color:var(--placeholder-text);
+ border:1px solid var(--placeholder-edge);padding:13px 17px;
+ letter-spacing:.15em;text-align:center;
+}
+.project-visual .visual-brief{
+ position:static;display:flex;flex-direction:column;align-items:flex-start;
+ justify-content:center;gap:12px;width:100%;max-width:440px;
+ padding:0;background:transparent;border:0;
+ color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));
+ font-size:clamp(0.75rem,1.15vw,0.9375rem);line-height:1.5;
+ letter-spacing:0;font-weight:500;text-align:left;
+}
+html[data-theme="dark"] .project-visual .visual-brief{
+ color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));
+}
+@media(max-width:760px){.project-visual .visual-brief{font-size:0.8125rem}}
+@media(prefers-contrast:more){.project-visual:not(:has(img)){border-style:solid}}

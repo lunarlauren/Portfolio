@@ -18,6 +18,7 @@ const navigationCss = read('../public/components/navigation.css');
 const heroPolishCss = read('../public/components/hero-polish.css');
 const workCss = read('../public/components/work-cards.css');
 const playgroundCss = read('../public/components/playground.css');
+const visualPlaceholderCss = read('../public/components/visual-placeholders.css');
 const aboutCss = read('../public/components/about.css');
 const stationeryCss = read('../public/components/stationery.css');
 // Theme state is part of the accessible light/dark experience. Exercise the
@@ -59,13 +60,15 @@ const stationeryCss = read('../public/components/stationery.css');
 }
 
 // Component ownership and stylesheet order are part of the visual contract.
-const stylesheetOrder = ['styles.css', 'playground.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'case-study.css'];
+const stylesheetOrder = ['styles.css', 'visual-placeholders.css', 'playground.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'case-study.css'];
 let previousPosition = -1;
 for (const name of stylesheetOrder) {
  const match = html.indexOf('/' + (name === 'styles.css' ? name : 'components/' + name));
  assert.ok(match > previousPosition, name + ' must load after the preceding stylesheet');
  previousPosition = match;
 }
+assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual:not/, 'Placeholder dark tokens must stay in the shared component');
+assert.doesNotMatch(css, /^\.project-visual:not\(:has\(img\)\)/m, 'Shared placeholder rules must not return to legacy CSS');
 assert.doesNotMatch(css, /\/\* Problem-solving hero: shared layout in both themes/, 'Extracted hero polish must not return to legacy CSS');
 assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must remain in its component');
 // The mobile layout visually places the portrait before the hero CTAs.
