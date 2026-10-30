@@ -15,6 +15,19 @@ html[data-theme="dark"]{
 .site-header .wordmark img{width:36px;height:auto;max-height:38px}
 .site-header nav{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:clamp(9px,2vw,25px);font-size:.8125rem;line-height:1.3}
 .site-header nav a{white-space:nowrap;min-height:40px}
+.site-header{min-height:66px;gap:24px}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2vw,28px);min-width:0}
+.site-header .header-actions nav{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
+.site-header .header-actions nav a{font-size:.8125rem;font-weight:600;letter-spacing:0}
+.header-contact{display:inline-flex;align-items:center;gap:6px;justify-content:center;min-height:38px;padding:8px 14px;border:1px solid var(--ink);border-radius:999px;text-decoration:none;font-size:.75rem;font-weight:700;white-space:nowrap}
+.header-contact:hover{background:var(--ink);color:var(--paper)}
+html[data-theme="dark"] .header-contact{color:var(--ink)}
+.site-header nav a[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+/* Contact is mail, so its section cue does not use aria-current. */
+.site-header .header-contact[data-section-active]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+@media(max-width:760px){
+ .site-header nav a,.header-contact,.theme-toggle{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+}
 
 /* Theme switch: one owner for its base, dark, responsive and contrast states. */
 .theme-toggle{
