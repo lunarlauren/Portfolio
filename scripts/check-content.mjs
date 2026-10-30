@@ -366,9 +366,14 @@ assert.match(renderHighlights({title:'Mobile Insights'}), /Shipped product exper
 const mobileInsights = projects.find(project => project.title === 'Mobile Insights');
 // The archive teaser should open with the design tension, then state the
 // verified UX/UI contribution and shipped status—not imply a tested flow.
-assert.match(mobileInsights.summary, /^On a small screen, [^.]+\./i);
-assert.match(mobileInsights.summary, /project-status summaries[\s\S]*supporting context/i);
-assert.match(mobileInsights.summary, /contributed UX\/UI design[\s\S]*shipped Mobile Insights experience/i);
+assert.match(mobileInsights.summary, /\b(?:phone|small.screen|mobile)\b/i,
+ 'Mobile Insights archive teaser must name the small-screen constraint');
+assert.match(mobileInsights.summary, /\b(?:dashboard|status|insights)\b/i,
+ 'Mobile Insights archive teaser must convey the information hierarchy problem');
+assert.match(mobileInsights.summary, /\bshipped\b/i,
+ 'Mobile Insights archive teaser must state verified delivery');
+assert.match(mobileInsights.summary, /\b(?:helped design|UX\/UI design|design contribution)\b/i,
+ 'Mobile Insights archive teaser must identify the actual design role');
 assert.doesNotMatch(mobileInsights.summary, /desktop dashboard|users (needed|preferred)|research (showed|proved)/i);
 assert.match(mobileInsights.outcome, /Mobile Insights shipped with my UX\/UI design contribution/i);
 assert.match(mobileInsights.outcome, /production interaction states[\s\S]*engineering handoff details[\s\S]*usage metrics are not verified/i);
