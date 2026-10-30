@@ -66,8 +66,6 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:760px){.hero{min-width:0}.hero-feature{min-width:0}}
 
 
-:where(a,button,[tabindex="-1"]):focus-visible{outline:3px solid var(--focus,color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy)));outline-offset:4px}
-:where(.collection,.case-view)[tabindex="-1"]:focus{outline:none}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(forced-colors:active){.project-card-link,.primary-link{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
 
@@ -137,28 +135,10 @@ html[data-theme="dark"] .hero-foot span{color:inherit}
 @media(prefers-reduced-motion:reduce){.hero-actions .primary-link span{transition:none!important}.reveal-ready{animation:none!important}}
 
 
-/* Dark theme accessibility: legible controls, visible focus, and discernible states. */
-
-html[data-theme="dark"] :where(a,button):focus-visible{outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));outline-offset:4px}
-html[data-theme="dark"] .site-header nav a,
-html[data-theme="dark"] .site-header .header-contact,
-html[data-theme="dark"] .quiet-link,
-html[data-theme="dark"] .text-link,
-html[data-theme="dark"] .collection-back{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
-html[data-theme="dark"] .site-header nav a:hover,
-html[data-theme="dark"] .quiet-link:hover,
-html[data-theme="dark"] .text-link:hover,
-html[data-theme="dark"] .collection-back:hover{color:#ffc2df}
-html[data-theme="dark"] .eyebrow,
-html[data-theme="dark"] .hero-description,
-html[data-theme="dark"] .section-head>p,
-html[data-theme="dark"] .about-copy p,
-html[data-theme="dark"] .primary-link:focus-visible{outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));outline-offset:5px}
+/* Dark-theme color variables remain above; link colors and focus states
+   now live beside the components they affect. Do not outline static text. */
 @media(prefers-contrast:more){html[data-theme="dark"]{--line:#91adc3;--muted:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}}
 
-
-/* Accessibility: keyboard users must be able to reach the skip link, even over the sticky header. */
-:where(a,button):focus-visible{outline:3px solid var(--focus);outline-offset:4px}
 
 
 /* Mobile first impression: show a slice of the illustrated featured-work card

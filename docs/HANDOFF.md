@@ -188,3 +188,13 @@ The hero displays the supplied portrait without old orbit, tile, and caption chr
 **Example — change the skip link:** Find `.skip-link` in `foundations.css`. Its normal state is moved offscreen; its `:focus-visible` state becomes visible. Keep that behavior: it helps keyboard visitors skip navigation.
 
 **Safety checklist:** Run `node scripts/check-content.mjs`; then use the project's available browser smoke tests. Neither source checks nor successful CI prove that the live site was deployed or looks pixel-perfect. Never add made-up UX research, outcomes, or metrics to project descriptions; Hoylu Mobile Insights is shipped.
+
+## Dark-mode blue rectangle fix and CSS ownership (2026-10-30)
+
+The blue rectangles around the hero label, descriptive paragraph, and Work introduction were caused by a **comma-separated CSS selector mistake** in `public/styles.css`: ordinary text selectors were accidentally grouped with `.primary-link:focus-visible` and received a keyboard focus outline at all times. Do **not** hide every outline to fix this; keyboard visitors need visible focus indicators.
+
+- `components/foundations.css` owns the shared focus ring and dark-mode spacing; `--focus` is the theme-aware outline color. Only links, buttons, and intentionally focusable elements receive it.
+- `components/homepage-base.css` owns dark-theme quiet/text link colors; `components/navigation.css` owns header links; `components/work-cards.css` owns the archive back link. Their colors were extracted from the mixed dark-theme block in `styles.css`.
+- The source smoke check rejects accidental static-text outlines. It cannot prove rendered geometry or contrast. Check the hero and Work introduction in both themes, then use Tab to verify visible outlines on the CTA, navigation, and skip link before deploying.
+
+This change does not touch project narratives or claims. Hoylu Mobile Insights remains a **shipped contribution**; unverified UX research and results must not be invented.

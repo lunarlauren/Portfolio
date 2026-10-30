@@ -23,6 +23,25 @@ const playgroundCss = read('../public/components/playground.css');
 const visualPlaceholderCss = read('../public/components/visual-placeholders.css');
 const aboutCss = read('../public/components/about.css');
 const stationeryCss = read('../public/components/stationery.css');
+
+// Regression: a former dark-theme selector accidentally outlined ordinary
+// labels and paragraphs along with the focused CTA, drawing blue rectangles.
+// Only actual focus targets should receive the global focus ring.
+{
+ const staticText = ['.eyebrow', '.hero-description', '.section-head>p', '.about-copy p'];
+ const allCss = [foundationsCss, homepageCss, css, navigationCss, workCss, caseCss, playgroundCss, aboutCss, stationeryCss].join('\n');
+ const rulesWithOutlines = [...allCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+  .filter(([, , declarations]) => /(?:^|;)\s*outline\s*:/.test(declarations));
+ for (const textSelector of staticText) {
+  assert.ok(!rulesWithOutlines.some(([, selectors]) =>
+   selectors.split(',').map(s => s.trim()).includes('html[data-theme="dark"] ' + textSelector)),
+  'Dark theme must not outline static text: ' + textSelector);
+ }
+ assert.match(foundationsCss, /:where\(a,button,\[tabindex="-1"\]\):focus-visible/, 'Shared keyboard focus belongs in foundations.css');
+ assert.match(foundationsCss, /html\[data-theme="dark"\] \.primary-link:focus-visible/, 'Dark CTA focus must stay visible');
+ assert.doesNotMatch(css, /html\[data-theme="dark"\] \.hero-description\s*,/, 'Legacy dark text outline must not return');
+}
+
 // Theme state is part of the accessible light/dark experience. Exercise the
 // actual inline controller: OS changes follow only without a manual choice,
 // and cross-tab updates refresh the toggle and browser theme color.

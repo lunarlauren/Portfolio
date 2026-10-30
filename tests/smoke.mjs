@@ -69,6 +69,29 @@ try{
   "Dark footer must match the dark page surface");
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // Regression: blue boxes around ordinary hero/Work text were caused by
+ // a dark-mode outline rule accidentally sharing the CTA's selector list.
+ // Check computed styles in Chromium, not only source text, in both themes.
+ for(const theme of ["light","dark"]){
+  const staticOutlines=await page.evaluate(theme=>{
+   document.documentElement.dataset.theme=theme;
+   return [
+    [".hero .eyebrow","Hero label"],
+    [".hero-description","Hero introduction"],
+    [".work .section-head>p","Work introduction"],
+    [".about-copy p","About paragraph"]
+   ].map(([selector,name])=>{
+    const element=document.querySelector(selector);
+    return {name,found:!!element,outline:element?getComputedStyle(element).outlineStyle:null};
+   });
+  },theme);
+  for(const item of staticOutlines){
+   assert.equal(item.found,true,item.name+" should exist for outline regression");
+   assert.equal(item.outline,"none",theme+" must not draw a focus rectangle around "+item.name);
+  }
+ }
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // The After Hours section is deliberately a dark reading surface in both
  // page themes. Guard its visible heading and paper-free introduction after
  // extracting the component CSS from the legacy stylesheet.
