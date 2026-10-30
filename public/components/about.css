@@ -147,3 +147,32 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
  .about .about-bottom .creative-inventory{grid-column:2;grid-row:1}
 }
 
+
+/* About contact invitation: a clear, tactile action distinct from body copy. */
+.about .about-copy > .text-link{
+ display:inline-flex;align-items:center;justify-content:space-between;gap:20px;
+ width:fit-content;max-width:100%;box-sizing:border-box;
+ padding:15px 20px;border:1px solid #f08cba;border-radius:12px;
+ background:#f08cba;color:#172637;
+ font-weight:750;line-height:1.4;text-decoration:none;
+ box-shadow:0 5px 0 #a83f73;
+ transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.about .about-copy > .text-link:hover{
+ background:#ffa5cb;color:#172637;transform:translateY(-2px);
+ box-shadow:0 7px 0 #a83f73;
+}
+.about .about-copy > .text-link:focus-visible{
+ outline:3px solid var(--focus);outline-offset:5px;
+}
+@media(max-width:600px){
+ .about .about-copy > .text-link{
+  display:flex;width:100%;margin-top:22px;padding:17px 20px;
+  font-size:clamp(.9375rem,3.9vw,1.0625rem);
+  text-wrap:balance;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .about .about-copy > .text-link{transition:none}
+ .about .about-copy > .text-link:hover{transform:none}
+}
