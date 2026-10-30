@@ -40,7 +40,7 @@ html[data-theme="dark"] .playground .section-head>p{
 }
 
 /* Keyboard focus uses the shared ring, with higher contrast at night. */
-.playground .project-card-link:focus-visible{outline-color:#a7d9ff}
+.playground {--card-focus-color:#a7d9ff}
 
 /* Responsive rhythm: section padding, safe areas, and card stacking. */
 @media(max-width:760px){
