@@ -373,6 +373,19 @@ html[data-theme="dark"] .work .featured-project.client-file{
 .collection[data-active="holland-america"] .collection-head {background:var(--surface-navy);color:#fff}
 .collection[data-active="holland-america"] .collection-head p {color:inherit}
 .collection[data-active="alcon"] .collection-head p {color:inherit}
+/* Archive entry motion stays with the gallery; the view-transition rule
+   below suppresses the competing collection-header entrance when supported. */
+@keyframes gallery-reveal{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@media(prefers-reduced-motion:no-preference){
+ .collection{animation:gallery-reveal .5s var(--motion-ease) both}
+ .collection .collection-nav{animation:gallery-reveal .42s var(--motion-ease) .04s both}
+ .collection .collection-head{animation:gallery-reveal .55s var(--motion-ease) .09s both}
+ .collection .project-card{animation:gallery-reveal .62s var(--motion-ease) both;animation-delay:calc(.16s + var(--i,0)*.075s)}
+}
+@media(prefers-reduced-motion:reduce){
+ .collection,.collection .collection-nav,.collection .collection-head,.collection .project-card{animation:none!important}
+ .collection .project-card-link .project-visual,.project-card .project-meta span:last-child{transition:none!important}
+}
 @supports (view-transition-name:selected-company) {.collection .collection-head {animation:none}}
 
 /* Archive collection gallery: card geometry, evidence briefs and theme contrast.
@@ -403,7 +416,7 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mi
 }
 
 /* Active archive/playground card metadata: keep the arrow discoverable for
-   keyboard focus; the global reduced-motion guard disables its transition. */
+   keyboard focus; the reduced-motion guard above disables its transition. */
 .project-card .project-meta span:last-child{display:inline-block;transition:transform .4s var(--motion-ease)}
 .project-card-link:hover .project-meta span:last-child,
 .project-card-link:focus-visible .project-meta span:last-child{transform:translate(4px,-4px)}
@@ -411,3 +424,7 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mi
  .project-card .project-meta span:last-child{transition:transform .25s ease}
  .project-card-link:hover .project-meta span:last-child{transform:translate(4px,-3px)}
 }
+
+/* Shared project-card hover interaction is owned with card presentation. */
+@media(hover:hover) and (pointer:fine){.project-card-link:hover{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.project-card-link{transition:none!important}}

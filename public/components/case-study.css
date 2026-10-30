@@ -524,3 +524,15 @@ html[data-theme="dark"] .case-back{color:color-mix(in srgb,var(--palette-paper) 
 html[data-theme="dark"] .case-back:hover{color:#ffc2df}
 html[data-theme="dark"] .case-fact-label{color:#c6d5e2}
 html[data-theme="dark"] .case-prose p{color:#d7e3ed}
+
+/* Routed case-study entrance and its local reduced-motion fallback. */
+@keyframes detail-reveal{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@media(prefers-reduced-motion:no-preference){
+ .case-view:not([hidden]) .case-head{animation:detail-reveal .6s var(--motion-ease) .06s both}
+ .case-view:not([hidden]) .case-hero-visual{animation:detail-reveal .7s var(--motion-ease) .13s both}
+ .case-view:not([hidden]) .case-body{animation:detail-reveal .7s var(--motion-ease) .2s both}
+ .case-view:not([hidden]) .case-gallery{animation:detail-reveal .7s var(--motion-ease) .25s both}
+}
+@media(prefers-reduced-motion:reduce){
+ .case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}
+}

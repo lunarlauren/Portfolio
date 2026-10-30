@@ -14,6 +14,7 @@ const css = read('../public/styles.css');
 const caseStudy = read('../public/components/case-study.js');
 const projectContent = read('../public/components/project-content.js');
 const caseCss = read('../public/components/case-study.css');
+const foundationsCss = read('../public/components/foundations.css');
 const navigationCss = read('../public/components/navigation.css');
 const heroPolishCss = read('../public/components/hero-polish.css');
 const workCss = read('../public/components/work-cards.css');
@@ -517,10 +518,10 @@ assert.doesNotMatch(css, /\.featured-projects-grid\s*\{|\.notebook-project-index
 assert.match(workCss, /\.featured-projects-grid\{display:grid/, 'Work component must own archive grid');
 assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
-assert.match(html, /work-cards\.css\?v=20261030-company-retirement/, 'Archive CSS version must be refreshed');
+assert.match(html, /work-cards\.css\?v=20261030-motion-ownership/, 'Archive CSS version must be refreshed');
 
 // Collection navigation and active-client header rules are owned by work-cards.
-// Shared gallery animations and reduced-motion rules remain in the legacy sheet.
+// Motion is now owned by archive, case-study, Playground and shared foundations.
 assert.doesNotMatch(css, /^\.collection(?:-nav|-back|-head)(?:\s|\{|:|\[data-active)/m,
  'Collection navigation and client-header rules must not return to legacy CSS');
 assert.match(workCss, /\.collection-nav\s*\{display:flex/,
@@ -533,8 +534,31 @@ const collectionHover = workCss.indexOf('.collection .project-card-link:hover .p
 const collectionReducedHover = workCss.indexOf('@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}');
 assert.ok(collectionHover >= 0 && collectionReducedHover > collectionHover,
  'Collection hover motion must be disabled after its component override');
-assert.match(html, /styles\.css\?v=20261030-company-retirement/,
+assert.match(html, /styles\.css\?v=20261030-motion-ownership/,
  'Legacy CSS cache version must match the collection extraction');
+
+// Keep interaction motion in its component, and preserve accessible fallbacks.
+// These source checks guard ownership; Chromium tests still check behavior.
+assert.doesNotMatch(css, /gallery-reveal|detail-reveal|--motion-ease/,
+ 'Legacy CSS must not reintroduce cross-component motion');
+assert.ok(!css.includes('.play-grid .project-card-link:hover .project-visual'),
+ 'Playground preview motion must stay out of legacy CSS');
+assert.ok(foundationsCss.includes('--motion-ease:cubic-bezier(.22,1,.36,1)'),
+ 'Foundations must own the shared motion token');
+assert.ok(foundationsCss.includes('::view-transition-old(selected-company)'),
+ 'Foundations must retain the shared route transition');
+assert.ok(workCss.includes('@keyframes gallery-reveal') && workCss.includes('.collection .project-card{animation:gallery-reveal'),
+ 'Archive must own its card entrance animation');
+assert.ok(caseCss.includes('@keyframes detail-reveal') && caseCss.includes('.case-view:not([hidden]) .case-head{animation:detail-reveal'),
+ 'Case-study must own its entrance animation');
+assert.ok(playgroundCss.includes('.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)'),
+ 'Playground must own its preview hover');
+assert.ok(workCss.includes('.collection,.collection .collection-nav,.collection .collection-head,.collection .project-card{animation:none!important}'),
+ 'Archive reduced-motion override must remain');
+assert.ok(caseCss.includes('.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}'),
+ 'Case-study reduced-motion override must remain');
+assert.ok(playgroundCss.includes('.play-grid .project-card-link .project-visual{transition:none!important}'),
+ 'Playground reduced-motion override must remain');
 
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
 // This is a source-order guard only, not a measured color-contrast test.

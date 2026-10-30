@@ -84,3 +84,11 @@ html[data-theme="dark"] .playground .section-head>p{
 @media(hover:hover) and (prefers-reduced-motion:no-preference){
  .playground .play-grid .project-card-link:hover .project-visual{box-shadow:none}
 }
+
+/* Playground preview motion: preserve the existing night-card shadow override. */
+.play-grid .project-card-link .project-visual{transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
+.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px);box-shadow:0 15px 30px #20334419}
+@media(prefers-reduced-motion:reduce){
+ .play-grid .project-card-link .project-visual{transition:none!important}
+ .play-grid .project-card-link:hover .project-visual{transform:none}
+}
