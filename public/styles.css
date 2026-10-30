@@ -11,10 +11,6 @@
 .company-card:not(.featured) .company-name {font-size:clamp(2rem,4vw,3.75rem)}
 .projects-grid,.play-grid {grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));align-items:start}
 
-.project-visual:not(:has(img)) {border:2px dashed color-mix(in srgb,var(--palette-navy) 50%,var(--palette-paper));display:flex;align-items:center;justify-content:center}
-.project-visual:not(:has(img)):before,.project-visual:not(:has(img)):after {display:none}
-.project-visual:not(:has(img)) .placeholder-mark {display:none}
-.project-visual:not(:has(img)) .visual-label {position:static;background:none;color:color-mix(in srgb,var(--palette-navy) 75%,var(--palette-paper));border:1px solid color-mix(in srgb,var(--palette-navy) 50%,var(--palette-paper));padding:13px 17px;letter-spacing:.15em;font-size:0.6875rem;text-align:center}
 @media(max-width:760px) {.company-grid {grid-template-columns:1fr} .company-card.featured {grid-column:auto} .projects-grid,.play-grid {grid-template-columns:1fr}}
 .company-grid>.company-card {height:100%}
 
@@ -24,10 +20,9 @@ body {background:var(--paper);color:var(--ink)}
 .hero h1 em,.about h2 em,.section-head h2 em {color:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue))}
 
 .company-card.featured {color:#fff}
-.project-visual {background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
 
-.project-visual:not(:has(img)),.case-hero-visual:not(:has(img)) {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))!important;border-color:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
-.project-visual:not(:has(img)) .visual-label,.case-hero-visual:not(:has(img)):before {color:#42647a;border-color:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
+.case-hero-visual:not(:has(img)) {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))!important;border-color:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
+.case-hero-visual:not(:has(img)):before {color:#42647a;border-color:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
 .hero-feature {color:var(--brand-ink);overflow:visible;isolation:isolate;background:var(--brand-sky)}
 .hero-feature .feature-top,.hero-feature .feature-bottom {color:var(--brand-ink)}
 .art-tile-one {background:#f4c6cb}
@@ -40,7 +35,6 @@ body {background:var(--paper);color:var(--ink)}
 .section-head h2 em,.about h2 em {color:color-mix(in srgb,var(--palette-navy) 25%,var(--palette-pink))}
 .company-card:not(.featured):nth-child(odd) {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
 
-.project-card:nth-child(3n+2) .project-visual {background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
 
 .hero-feature:before {border-radius:inherit}
 .hero-feature .feature-bottom {padding-right:24%;z-index:4}
@@ -51,8 +45,6 @@ body {background:var(--paper);color:var(--ink)}
 .hero-feature .art-center span {color:var(--surface-blush)}
 .hero-feature .feature-art {filter:drop-shadow(0 14px 22px #f15c9d1c)}
 .company-card:not(.featured):nth-child(even) {background:#ffe3f1}
-.project-card:nth-child(3n+1) .project-visual {background:#ffd7eb}
-.project-card:nth-child(3n+3) .project-visual {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-pink))}
 
 .round-link:hover {background:#ffd3e8}
 .hero-feature .feature-top a,.hero-feature .feature-bottom a {color:inherit;text-decoration:none}
@@ -80,15 +72,12 @@ body {background:var(--paper);color:var(--ink)}
 .company-grid .company-card[data-company="hoylu"] {background:color-mix(in srgb,var(--palette-paper) 55%,var(--palette-pink));color:var(--brand-navy)}
 .company-grid .company-card[data-company="alcon"] {background:var(--surface-cream);color:var(--brand-navy)}
 .company-grid .company-card[data-company="holland-america"] {background:var(--surface-navy);color:#fff}
-.project-visual:not(:has(img)) {padding:clamp(18px,3vw,30px);background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))!important}
-.project-visual .visual-brief {position:static;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;width:100%;max-width:440px;padding:0;background:transparent;border:0!important;color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue))!important;font-size:clamp(0.75rem,1.15vw,0.9375rem);line-height:1.5;letter-spacing:0;font-weight:500;text-align:left}
 .brief-kicker {display:block;color:#9a3263;font-family:'DM Sans',system-ui,sans-serif;font-size:0.625rem;font-weight:700;letter-spacing:.14em;line-height:1.3}
 .case-hero-visual:not(:has(img)) {padding:clamp(25px,5vw,65px);background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border:2px dashed color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
 .case-hero-visual:not(:has(img))::before {content:none;display:none}
 .hero-image-brief {display:flex;flex-direction:column;gap:18px;max-width:720px;font:500 clamp(18px,2.4vw,31px)/1.45 'DM Sans',system-ui,sans-serif;color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));text-align:left}
 .hero-image-brief .brief-kicker {font-size:0.75rem}
-.case-gallery .project-visual:not(:has(img)) {min-height:270px}
-@media(max-width:760px) {.project-visual .visual-brief {font-size:0.8125rem} .case-hero-visual:not(:has(img)) {min-height:310px}}
+@media(max-width:760px) {.case-hero-visual:not(:has(img)) {min-height:310px}}
 .hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {font-variation-settings:"SOFT" 75,"WONK" 0;transition:font-variation-settings .38s ease,letter-spacing .38s ease}
 .hero h1,.section-head h2,.about h2,.case-head h1 {letter-spacing:-.025em}
 @media(hover:hover) {.hero h1:hover,.section-head h2:hover,.about h2:hover,.company-card:hover .company-name,.collection-head h3:hover,.project-card-link:hover h4,.case-head h1:hover,.case-prose h2:hover,.art-center:hover {font-variation-settings:"SOFT" 75,"WONK" 1}}
@@ -151,7 +140,7 @@ html,body{max-width:100%;overflow-x:clip}
 
 .site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:760px){.company-name,.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
-@media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot,.company-description{opacity:1;text-shadow:none}.project-visual:not(:has(img)){border-style:solid}}
+@media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot,.company-description{opacity:1;text-shadow:none}}
 
 .skip-link{position:fixed;top:0;left:12px;transform:translateY(-150%);z-index:9999;background:#fff;color:#203344;border:2px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));border-radius:8px;text-decoration:none}
 .skip-link:focus-visible{transform:translateY(12px);outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));outline-offset:2px}
@@ -168,7 +157,7 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* Type scale lives in components/foundations.css. */
 body{font-size:var(--type-body);line-height:1.6}
-.site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.case-facts,.case-fact-label,.brief-kicker,.project-visual .visual-label,.project-visual:not(:has(img)) .visual-label{font-size:var(--type-xs);line-height:1.5}
+.site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.case-facts,.case-fact-label,.brief-kicker{font-size:var(--type-xs);line-height:1.5}
 .project-card p,.company-description,.case-back,footer{font-size:var(--type-sm);line-height:1.6}
 .hero-description,.about-bottom p,.case-prose p{line-height:var(--leading-reading,1.65)}
 @media(max-width:760px){.hero-description,.about-bottom p,.case-prose p{font-size:1rem}.project-card p{font-size:0.875rem}}
