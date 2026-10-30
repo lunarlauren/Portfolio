@@ -1,7 +1,6 @@
 /* Case-study component: facts, responsive reading layout, process notes and hero briefs.
    Loaded after the base stylesheet to preserve the existing cascade. */
-/* Case-study editorial primitives extracted from the legacy sheet.
-   Keep shared structure here; theme switches should change colors, not geometry. */
+/* Case-study facts, navigation, highlights, and evidence notes. */
 @media(max-width:760px){
  .case-body{grid-template-columns:1fr}
  .case-gallery{grid-template-columns:1fr}
@@ -10,15 +9,13 @@
 }
 .case-facts{display:flex;flex-direction:column;gap:24px;line-height:1.4;letter-spacing:normal}
 .case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--brand-pink)}
-.case-fact-label{display:block;color:#7a6070;font:700 10px/1.3 'DM Sans',system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase}
-.case-fact-value{display:block;color:var(--ink);font:600 clamp(14px,1.3vw,17px)/1.45 'DM Sans',system-ui,sans-serif;letter-spacing:0}
+.case-fact-label{display:block;color:#7a6070;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase}
+.case-fact-value{display:block;color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;letter-spacing:0}
 .case-next-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-block:32px 48px}
-.case-next-nav .case-next{min-height:44px;display:inline-flex;align-items:center;text-decoration:none}
+.case-next-nav .case-next{text-decoration:none}
 .case-next-nav .case-next:last-child:not(:first-child){text-align:right;margin-left:auto}
-.case-prose{max-width:72ch}
 .case-prose h2{margin-top:1.8em;margin-bottom:.45em}
 .case-prose h2:first-child{margin-top:0}
-.case-prose p{max-width:68ch}
 @media(max-width:600px){
  .case-next-nav{align-items:stretch;flex-direction:column}
  .case-next-nav .case-next:last-child:not(:first-child){margin-left:0;text-align:left}
@@ -31,16 +28,15 @@
  .case-highlights{grid-template-columns:1fr;gap:20px;margin:24px 0;padding:20px 0}
  .case-highlight p{font-size:1.4375rem}
 }
-/* Process notes preserve their evidence/rationale labels and semantic source copy. */
+/* Evidence/rationale notes retain visible, text-based provenance labels. */
 .case-process-notes{display:grid;gap:14px;margin:22px 0 28px}
-.case-process-note{padding:clamp(16px,2vw,24px);border-left:4px solid var(--brand-pink);border-radius:0 12px 12px 0;background:var(--surface-blush)}
-.case-process-note h3{font-size:clamp(1rem,2vw,1.1875rem);line-height:1.35;margin:0 0 8px;color:var(--ink)}
-.case-process-note p{margin:0;line-height:1.65;max-width:72ch}
+.case-process-note{padding:clamp(16px,2vw,24px);border-left:3px solid var(--brand-pink);background:var(--surface-blush)}
+.case-process-note h3{margin:0 0 8px;color:var(--ink)}
+.case-process-note p{margin:0}
 html[data-theme="dark"] .case-process-note{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-lavender))}
 html[data-theme="dark"] .case-process-note h3{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
 
-/* Missing hero artwork is an editorial brief, never a fake shipped screenshot.
-   Explicit dark tokens replace the former light-only !important background. */
+/* A missing hero is a brief, not a shipped UI screenshot. Theme tokens replace !important. */
 .case-view .case-hero-visual:not(:has(img)){
  --case-hero-placeholder-bg:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
  --case-hero-placeholder-border:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
@@ -49,13 +45,12 @@ html[data-theme="dark"] .case-process-note h3{color:color-mix(in srgb,var(--pale
 }
 .case-view .case-hero-visual:not(:has(img))::before{content:none;display:none}
 .hero-image-brief{display:flex;flex-direction:column;gap:18px;max-width:720px;font:500 clamp(18px,2.4vw,31px)/1.45 'DM Sans',system-ui,sans-serif;color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));text-align:left}
-.hero-image-brief .brief-kicker{font-size:0.75rem}
-html[data-theme="dark"] .case-view .case-hero-visual,
-html[data-theme="dark"] .case-view .hero-image-brief{
+html[data-theme="dark"] .case-view .case-hero-visual{
  background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
  border-color:#496074;
 }
+html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
 html[data-theme="dark"] .case-view .case-hero-visual:not(:has(img)){
  --case-hero-placeholder-bg:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  --case-hero-placeholder-border:#496074;
