@@ -501,6 +501,16 @@ assert.match(projectContent, /<dd class="case-evidence-value"/, 'Project overvie
 assert.match(caseCss, /\.case-view \.case-evidence-value\{margin:0\}/, 'Overview values must not inherit default dd indentation');
 assert.doesNotMatch(script, /behavior:"instant"/, 'Scroll restoration should use a standard behavior value');
 
+
+// Archive presentation belongs to work-cards.css, not legacy overrides.
+// These structural checks do not replace browser geometry/contrast checks.
+assert.doesNotMatch(css, /\.featured-projects-grid\s*\{|\.notebook-project-index\s*\{|\.project-card-process\s*\{|\.project-card-cta\s*\{/,
+ 'Featured archive and process teaser rules must stay out of legacy CSS');
+assert.match(workCss, /\.featured-projects-grid\{display:grid/, 'Work component must own archive grid');
+assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
+assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
+assert.match(html, /work-cards\.css\?v=20261030-archive-ownership/, 'Archive CSS version must be refreshed');
+
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
 // This is a source-order guard only, not a measured color-contrast test.
 const genericPaperRule = css.indexOf('html:not([data-theme="dark"]) .section-head>p');
