@@ -450,9 +450,6 @@ html[data-theme="dark"] .skip-link:focus-visible{outline:3px solid color-mix(in 
  .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
  .featured-project .project-visual{aspect-ratio:16/10}
 }
-html[data-theme="dark"] .featured-project>.eyebrow,
-
-
 /* Featured project context: reveal documented UX reasoning without extra navigation.
    Long case-study paragraphs are visually clamped here; the full text remains in the case study. */
 .featured-case-link{display:inline-flex;align-items:center;gap:8px;font-size:0.875rem;font-weight:700;text-underline-offset:4px;min-height:44px}
