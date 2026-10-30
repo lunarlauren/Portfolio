@@ -174,3 +174,17 @@ The old `.company-grid`/`.company-card` chooser is not rendered by the current `
 
 ## Retired hero decoration CSS (2026-10-30)
 The hero displays the supplied portrait without old orbit, tile, and caption chrome at every viewport width. `hero-polish.css` hides the decorative markup; obsolete CSS was removed from `styles.css` and `homepage-base.css`. Keep active `.feature-art` positioning and portrait image rules. The separate portrait-first PR #17 was not edited.
+
+## CSS editing for beginners
+
+**Start here:** The website is in `public/`, not the repository root. CSS is the set of rules that controls how the site looks. A **selector** (such as `.skip-link`) chooses an element; a **property** (such as `color`) changes its appearance.
+
+1. To change **site-wide colors, fonts, spacing, or keyboard focus**, start in `public/components/foundations.css`. Variables beginning with `--` are reusable values. For example, `var(--ink)` means “use the current text color,” including dark mode.
+2. To change **a particular section**, edit its component file in `public/components/` (for example, `about.css`, `work-cards.css`, or `playground.css`). Look for the section name in the file comments.
+3. **Avoid editing `public/styles.css` for new features.** It is older code kept temporarily so existing pages continue looking the same. Move one related group of rules at a time into the correct component file.
+4. `@media(max-width:760px)` means “on screens 760 pixels wide or narrower.” `html[data-theme="dark"]` applies only to dark mode. `:focus-visible` means the visitor is navigating with a keyboard.
+5. Before changing a value, search the project for the selector and check for another rule later in the load order. Later rules can override earlier ones. Change one thing, then check desktop/mobile, light/dark, and keyboard Tab navigation.
+
+**Example — change the skip link:** Find `.skip-link` in `foundations.css`. Its normal state is moved offscreen; its `:focus-visible` state becomes visible. Keep that behavior: it helps keyboard visitors skip navigation.
+
+**Safety checklist:** Run `node scripts/check-content.mjs`; then use the project's available browser smoke tests. Neither source checks nor successful CI prove that the live site was deployed or looks pixel-perfect. Never add made-up UX research, outcomes, or metrics to project descriptions; Hoylu Mobile Insights is shipped.

@@ -76,3 +76,30 @@ section.work,section.playground,section.about {padding-block:85px}
 @media(prefers-reduced-motion:reduce){
  ::view-transition-old(*),::view-transition-new(*){animation-duration:.01ms!important}
 }
+
+/* SKIP TO CONTENT LINK
+   This is the link keyboard visitors reach first when pressing Tab.
+   Keep it offscreen until focused, then show it above the header.
+   --paper, --ink, and --focus automatically follow the light/dark theme. */
+.skip-link {
+ position:fixed;
+ top:0;
+ left:16px;
+ z-index:10000;
+ transform:translateY(-150%);
+ background:var(--paper);
+ color:var(--ink);
+ border:2px solid var(--focus);
+ border-radius:0 0 8px 8px;
+ text-decoration:none;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+ top:0;
+ transform:translateY(0);
+ outline:3px solid var(--focus);
+ outline-offset:2px;
+}
+@media (forced-colors:active) {
+ .skip-link {border-color:CanvasText}
+}

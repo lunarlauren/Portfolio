@@ -61,8 +61,6 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:760px){.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot{opacity:1;text-shadow:none}}
 
-.skip-link{position:fixed;top:0;left:12px;transform:translateY(-150%);z-index:9999;background:#fff;color:#203344;border:2px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));border-radius:8px;text-decoration:none}
-.skip-link:focus-visible{transform:translateY(12px);outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));outline-offset:2px}
 
 :root{--brand-pink-text:var(--palette-pink)}
 .hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
@@ -89,7 +87,6 @@ html[data-theme="dark"]{--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--
 html[data-theme="dark"] body{color:var(--ink)}
 html[data-theme="dark"] .hero h1{color:var(--ink)!important}
 html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
-html[data-theme="dark"] .skip-link{background:color-mix(in srgb,var(--palette-navy) 90%,var(--palette-blue));color:#fff}
 html[data-theme="dark"] .visual-label,html[data-theme="dark"] .visual-brief,html[data-theme="dark"] .brief-kicker{color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue))}
 
 
@@ -122,16 +119,12 @@ html[data-theme="dark"] .hero-description,
 html[data-theme="dark"] .section-head>p,
 html[data-theme="dark"] .about-copy p,
 html[data-theme="dark"] .primary-link:focus-visible{outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));outline-offset:5px}
-html[data-theme="dark"] .skip-link:focus-visible{outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));outline-offset:3px}
 @media(prefers-contrast:more){html[data-theme="dark"]{--line:#91adc3;--muted:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}}
 
 
 /* Accessibility: keyboard users must be able to reach the skip link, even over the sticky header. */
-.skip-link{position:fixed;top:0;left:16px;z-index:10000;transform:translateY(-150%);background:var(--paper);color:var(--ink);border:2px solid var(--focus);border-radius:0 0 8px 8px}
-.skip-link:focus,.skip-link:focus-visible{top:0;transform:translateY(0);outline:3px solid var(--focus);outline-offset:2px}
 :where(a,button):focus-visible{outline:3px solid var(--focus);outline-offset:4px}
 
-@media(forced-colors:active){.skip-link{border-color:CanvasText}}
 
 /* Mobile first impression: show a slice of the illustrated featured-work card
    above the fold rather than making visitors scroll past a full text introduction. */
