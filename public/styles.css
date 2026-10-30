@@ -220,11 +220,6 @@ body{font-size:var(--type-body);line-height:1.6}
 @media(max-width:460px){.inventory-heading{align-items:flex-start;flex-direction:column;gap:3px}.inventory-grid{gap:0;padding:26px 7px 12px;min-height:270px}.inventory-item{min-height:105px;padding:5px 2px}.inventory-icon{width:58px;height:58px;font-size:2.5625rem}.inventory-item:nth-child(2) .inventory-icon,.inventory-item:nth-child(3) .inventory-icon,.inventory-item:nth-child(4) .inventory-icon{font-size:2.6875rem}.inventory-item:nth-child(5) .inventory-icon{font-size:3.125rem}.inventory-item>span:last-child{font-size:0.6875rem}.inventory-inspect{padding:14px 15px}}
 
 
-.site-header{position:sticky;top:0;z-index:100;max-width:none;width:100%;box-sizing:border-box;padding:8px clamp(18px,4vw,56px);background:rgba(247,249,250,.95);border-bottom:1px solid rgba(32,51,68,.13);box-shadow:0 4px 18px rgba(32,51,68,.045);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.site-header .wordmark{display:inline-flex;align-items:center;flex:none}
-.site-header .wordmark img{width:36px;height:auto;max-height:38px}
-.site-header nav{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:clamp(9px,2vw,25px);font-size:0.8125rem;line-height:1.3}
-.site-header nav a{white-space:nowrap;min-height:40px}
 html{scroll-padding-top:82px}
 #work,#playground,#about,#top,#main{scroll-margin-top:82px}
 
@@ -287,7 +282,6 @@ html{scroll-padding-top:82px}
 @media(max-width:480px){.theme-toggle{min-width:40px;padding:7px}.theme-toggle-label{display:none}}
 html[data-theme="dark"]{--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));--muted:#c2d0df;--line:#536a80;--paper:color-mix(in srgb,var(--palette-navy) 65%,black);--brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));--lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));--brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));--surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));--surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));color-scheme:dark;background:var(--paper)}
 html[data-theme="dark"] body{color:var(--ink)}
-html[data-theme="dark"] .site-header{background:rgba(17,29,42,.96);border-color:var(--line);box-shadow:0 4px 18px rgba(0,0,0,.16)}
 html[data-theme="dark"] .hero h1{color:var(--ink)!important}
 html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
 html[data-theme="dark"] .skip-link{background:color-mix(in srgb,var(--palette-navy) 90%,var(--palette-blue));color:#fff}
@@ -891,24 +885,6 @@ html:not([data-theme="dark"]) :is(.hero,.work,.about){
 
 /* Component styles extracted to ./components/stationery.css; load after this file. */
 
-/* Paper continuity: header and footer belong to the same page surface.
-   Keep geometry identical across themes; only surface tokens change. */
-:root{--site-chrome-bg:var(--notebook-paper,#fffdf8);--site-chrome-edge:var(--line)}
-/* Keep dark chrome on the same paper surface as the hero. The previous
-   blue-mixed token made a conspicuous horizontal stripe above the page.
-   The opaque sheet still covers dotted content while scrolling. */
-html[data-theme="dark"]{
- --site-chrome-bg:var(--paper);
- --site-chrome-edge:color-mix(in srgb,var(--line) 55%,transparent);
-}
-.site-header,
-html[data-theme="dark"] .site-header{
- background:var(--site-chrome-bg);
- border-bottom-color:var(--site-chrome-edge);
- box-shadow:none;
- backdrop-filter:none;
- -webkit-backdrop-filter:none;
-}
 
 /* Dark chrome must follow the dark paper, not the light notebook token.
    Keep navigation legible when theme is switched while scrolled. */
