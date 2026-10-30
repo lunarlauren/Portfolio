@@ -535,6 +535,14 @@ assert.match(workCss, /\.project-card \.project-meta span:last-child\{display:in
 assert.doesNotMatch(css, /\.featured-projects-grid\s*\{|\.notebook-project-index\s*\{|\.project-card-process\s*\{|\.project-card-cta\s*\{/,
  'Featured archive and process teaser rules must stay out of legacy CSS');
 assert.match(workCss, /\.featured-projects-grid\{display:grid/, 'Work component must own archive grid');
+// Project grids and archive spacing have named owners, not late legacy copies.
+assert.ok(!css.includes('.projects-grid,.play-grid'), 'Legacy CSS must not redefine shared project columns');
+assert.ok(homepageCss.includes('grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))'), 'Homepage base owns responsive project columns');
+assert.ok(!css.includes('.work.wrap{padding-block:'), 'Legacy CSS must not redefine Work section spacing');
+assert.ok(workCss.includes('.work.wrap{padding-block:clamp(42px,5vw,68px)}'), 'Work component owns desktop section spacing');
+assert.ok(!css.includes('#collection[hidden]'), 'Legacy CSS must not own archive visibility');
+assert.ok(workCss.includes('#collection[hidden]{display:none!important}'), 'Inactive archive must remain hidden');
+assert.ok(workCss.includes('.collection-head h3{overflow-wrap:anywhere}'), 'Narrow collection headings must wrap');
 assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
 assert.match(html, /work-cards\.css\?v=20261030-motion-ownership/, 'Archive CSS version must be refreshed');
