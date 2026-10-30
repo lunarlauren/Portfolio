@@ -2,7 +2,7 @@
    Rules are intentionally kept in cascade order while consolidation continues.
    See docs/HANDOFF.md for the file map. */
 @media(max-width:950px) {.hero {grid-template-columns:1fr;min-height:0} .hero-feature {min-height:420px} .hero-foot {padding-top:48px} .hero h1 {font-size:clamp(3.625rem,10vw,5.9375rem)}}
-@media(max-width:760px) {.hero-feature {min-height:430px} .hero {padding-block:55px 80px} .hero h1 {font-size:clamp(3.125rem,12vw,4.875rem)} .hero-actions {gap:18px} .case-body {grid-template-columns:1fr} .case-gallery {grid-template-columns:1fr} .case-gallery .project-visual {min-height:220px} .case-view {padding-block:28px 70px}}
+@media(max-width:760px) {.hero-feature {min-height:430px} .hero {padding-block:55px 80px} .hero h1 {font-size:clamp(3.125rem,12vw,4.875rem)} .hero-actions {gap:18px}}
 @media(prefers-reduced-motion:reduce) {.hero-feature:hover .feature-art,.primary-link:hover {transform:none}}
 .company-grid {grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row;align-items:stretch}
 .company-card {min-width:0;overflow-wrap:anywhere;min-height:clamp(290px,28vw,390px);background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease;touch-action:manipulation}
@@ -21,8 +21,6 @@ body {background:var(--paper);color:var(--ink)}
 
 .company-card.featured {color:#fff}
 
-.case-hero-visual:not(:has(img)) {background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))!important;border-color:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
-.case-hero-visual:not(:has(img)):before {color:#42647a;border-color:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
 .hero-feature {color:var(--brand-ink);overflow:visible;isolation:isolate;background:var(--brand-sky)}
 .hero-feature .feature-top,.hero-feature .feature-bottom {color:var(--brand-ink)}
 .art-tile-one {background:#f4c6cb}
@@ -73,11 +71,6 @@ body {background:var(--paper);color:var(--ink)}
 .company-grid .company-card[data-company="alcon"] {background:var(--surface-cream);color:var(--brand-navy)}
 .company-grid .company-card[data-company="holland-america"] {background:var(--surface-navy);color:#fff}
 .brief-kicker {display:block;color:#9a3263;font-family:'DM Sans',system-ui,sans-serif;font-size:0.625rem;font-weight:700;letter-spacing:.14em;line-height:1.3}
-.case-hero-visual:not(:has(img)) {padding:clamp(25px,5vw,65px);background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border:2px dashed color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy))}
-.case-hero-visual:not(:has(img))::before {content:none;display:none}
-.hero-image-brief {display:flex;flex-direction:column;gap:18px;max-width:720px;font:500 clamp(18px,2.4vw,31px)/1.45 'DM Sans',system-ui,sans-serif;color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));text-align:left}
-.hero-image-brief .brief-kicker {font-size:0.75rem}
-@media(max-width:760px) {.case-hero-visual:not(:has(img)) {min-height:310px}}
 .hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {font-variation-settings:"SOFT" 75,"WONK" 0;transition:font-variation-settings .38s ease,letter-spacing .38s ease}
 .hero h1,.section-head h2,.about h2,.case-head h1 {letter-spacing:-.025em}
 @media(hover:hover) {.hero h1:hover,.section-head h2:hover,.about h2:hover,.company-card:hover .company-name,.collection-head h3:hover,.project-card-link:hover h4,.case-head h1:hover,.case-prose h2:hover,.art-center:hover {font-variation-settings:"SOFT" 75,"WONK" 1}}
@@ -111,10 +104,6 @@ body {background:var(--paper);color:var(--ink)}
 @media(prefers-reduced-motion:reduce) {.collection,.collection .collection-nav,.collection .collection-head,.collection .project-card,.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery {animation:none!important} .company-card,.company-card .card-top span:last-child,.company-card .card-bottom span:last-child,.collection .project-card-link .project-visual,.play-grid .project-card-link .project-visual,.project-card .project-meta span:last-child {transition:none!important} .company-card:hover,.collection .project-card-link:hover .project-visual,.play-grid .project-card-link:hover .project-visual {transform:none}}
 @supports (view-transition-name:selected-company) {::view-transition-old(selected-company),::view-transition-new(selected-company) {animation-duration:.68s;animation-timing-function:cubic-bezier(.22,1,.36,1);mix-blend-mode:normal}::view-transition-old(root) {animation:fade-away .22s ease both}::view-transition-new(root) {animation:fade-in .42s ease .1s both} @keyframes fade-away {to {opacity:0}} @keyframes fade-in {from {opacity:0} to {opacity:1}}}
 @media(prefers-reduced-motion:reduce) {::view-transition-old(*),::view-transition-new(*) {animation-duration:.01ms!important}}
-.case-facts {display:flex;flex-direction:column;gap:24px;line-height:1.4;letter-spacing:normal}
-.case-fact {display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--brand-pink)}
-.case-fact-label {display:block;color:#7a6070;font:700 10px/1.3 'DM Sans',system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase}
-.case-fact-value {display:block;color:var(--ink);font:600 clamp(14px,1.3vw,17px)/1.45 'DM Sans',system-ui,sans-serif;letter-spacing:0}
 .wordmark,.hero h1,.section-head h2,.about h2,.company-name,.collection-head h3,.placeholder-mark,.project-card h3,.art-center,.case-head h1,.case-prose h2,.project-card h3,.case-head h1,.case-prose h2,.art-center {font-variation-settings:normal}
 .hero h1,.case-head h1,.company-name {letter-spacing:-.045em}
 .collection[data-active="alcon"] .collection-head {background:var(--surface-cream);color:var(--brand-navy)}
@@ -168,14 +157,6 @@ html{scroll-padding-top:82px}
 #work,#playground,#about,#top,#main{scroll-margin-top:82px}
 
 
-.case-next-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-block:32px 48px}
-.case-next-nav .case-next{min-height:44px;display:inline-flex;align-items:center;text-decoration:none}
-.case-next-nav .case-next:last-child:not(:first-child){text-align:right;margin-left:auto}
-.case-prose{max-width:72ch}
-.case-prose h2{margin-top:1.8em;margin-bottom:.45em}
-.case-prose h2:first-child{margin-top:0}
-.case-prose p{max-width:68ch}
-@media(max-width:600px){.case-next-nav{align-items:stretch;flex-direction:column}.case-next-nav .case-next:last-child:not(:first-child){margin-left:0;text-align:left}}
 
 .company-card,.project-card-link{transition:transform .2s ease,box-shadow .2s ease}
 @media(hover:hover) and (pointer:fine){.company-card:hover,.project-card-link:hover{transform:translateY(-3px)}}
@@ -183,11 +164,6 @@ html{scroll-padding-top:82px}
 
 
 
-.case-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,3vw,32px);margin:clamp(24px,4vw,44px) 0;padding:clamp(18px,2.8vw,30px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.case-highlight{min-width:0;padding-left:clamp(12px,1.7vw,20px);border-left:3px solid var(--palette-pink)}
-.case-highlight-label{display:block;font-size:0.6875rem;letter-spacing:.12em;font-weight:700;color:var(--muted);margin-bottom:9px}
-.case-highlight p{font-family:Newsreader,Georgia,serif;font-size:clamp(1.3125rem,2.3vw,1.875rem);line-height:1.2;letter-spacing:-.025em;margin:0;max-width:28ch;color:var(--ink)}
-@media(max-width:600px){.case-highlights{grid-template-columns:1fr;gap:20px;margin:24px 0;padding:20px 0}.case-highlight p{font-size:1.4375rem}}
 
 html[data-theme="dark"]{--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));--muted:#c2d0df;--line:#536a80;--paper:color-mix(in srgb,var(--palette-navy) 65%,black);--brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));--lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));--brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));--surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));--surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));color-scheme:dark;background:var(--paper)}
 html[data-theme="dark"] body{color:var(--ink)}
@@ -199,10 +175,8 @@ html[data-theme="dark"] .company-card.featured{background:#4c2945;color:#fff}
 html[data-theme="dark"] .company-card:not(.featured){background:#1c3042;color:var(--ink)}
 html[data-theme="dark"] .company-card:not(.featured) .company-description{color:#c8d7e3}
 html[data-theme="dark"] .project-card-link,html[data-theme="dark"] .collection,html[data-theme="dark"] .case-view{color:var(--ink)}
-html[data-theme="dark"] .project-visual,html[data-theme="dark"] .hero-image-brief,html[data-theme="dark"] .case-hero-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
+html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
 html[data-theme="dark"] .visual-label,html[data-theme="dark"] .visual-brief,html[data-theme="dark"] .brief-kicker{color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue))}
-html[data-theme="dark"] .case-facts,html[data-theme="dark"] .case-fact,html[data-theme="dark"] .case-prose,html[data-theme="dark"] .case-head{color:var(--ink)}
-html[data-theme="dark"] .case-highlight p{color:var(--ink)}
 
 
 
@@ -363,12 +337,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
    rationale. No interactions or hover-only content are required to read them. */
 .project-card-cta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:0.875rem;font-weight:700;text-decoration:underline;text-underline-offset:4px}
 .project-card-link:hover .project-card-cta{text-decoration-thickness:2px}
-.case-process-notes{display:grid;gap:14px;margin:22px 0 28px}
-.case-process-note{padding:clamp(16px,2vw,24px);border-left:4px solid var(--brand-pink);border-radius:0 12px 12px 0;background:var(--surface-blush)}
-.case-process-note h3{font-size:clamp(1rem,2vw,1.1875rem);line-height:1.35;margin:0 0 8px;color:var(--ink)}
-.case-process-note p{margin:0;line-height:1.65;max-width:72ch}
-html[data-theme="dark"] .case-process-note{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-lavender))}
-html[data-theme="dark"] .case-process-note h3{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
 
 
 /* Recruiter scan path: challenge (summary) followed by one existing process
