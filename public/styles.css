@@ -111,8 +111,6 @@ html[data-theme="dark"] body{color:var(--ink)}
 html[data-theme="dark"] .hero h1{color:var(--ink)!important}
 html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
 html[data-theme="dark"] .skip-link{background:color-mix(in srgb,var(--palette-navy) 90%,var(--palette-blue));color:#fff}
-html[data-theme="dark"] .project-card-link,html[data-theme="dark"] .collection{color:var(--ink)}
-html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
 html[data-theme="dark"] .visual-label,html[data-theme="dark"] .visual-brief,html[data-theme="dark"] .brief-kicker{color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue))}
 
 html[data-theme="dark"] .feature-top,html[data-theme="dark"] .feature-bottom{color:var(--ink)}
@@ -146,11 +144,9 @@ html[data-theme="dark"] .quiet-link:hover,
 html[data-theme="dark"] .text-link:hover,
 html[data-theme="dark"] .collection-back:hover{color:#ffc2df}
 html[data-theme="dark"] .eyebrow,
-html[data-theme="dark"] .project-meta{color:#c6d5e2}
 html[data-theme="dark"] .hero-description,
 html[data-theme="dark"] .section-head>p,
 html[data-theme="dark"] .about-copy p,
-html[data-theme="dark"] .project-card p{color:#d7e3ed}
 html[data-theme="dark"] .primary-link:focus-visible{outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));outline-offset:5px}
 html[data-theme="dark"] .skip-link:focus-visible{outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));outline-offset:3px}
 @media(prefers-contrast:more){html[data-theme="dark"]{--line:#91adc3;--muted:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}}
