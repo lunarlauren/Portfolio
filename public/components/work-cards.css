@@ -1,3 +1,13 @@
+/* WORK SECTION SPACING
+   Keep the archive compact on desktops; shorter laptops use a fixed 36px
+   vertical gap. The later mobile rule controls phone padding separately. */
+@media(min-width:1024px){
+ .work.wrap{padding-block:clamp(42px,5vw,68px)}
+}
+@media(min-width:1024px) and (max-height:800px){
+ .work.wrap{padding-block:36px}
+}
+
 /* WORK SECTION INTRO
    The heading and summary use the same two tracks as the project archive.
    Keep desktop typography here, not in legacy styles.css. The short-height
@@ -356,6 +366,9 @@ html[data-theme="dark"] .work .featured-project.client-file{
 /* Collection navigation and client headers live with the archive gallery.
    The original collection-enter animation was dead: gallery-reveal already
    supersedes it, and the shared reduced-motion rule disables motion. */
+/* Hide the inactive collection entirely, including from keyboard layout.
+   The [hidden] attribute comes from the archive navigation script. */
+#collection[hidden]{display:none!important}
 .collection {margin-top:0;padding:0;background:transparent;scroll-margin-top:24px}
 .collection-nav {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
 .collection-back {display:inline-flex;align-items:center;gap:10px;color:var(--ink);font:700 14px 'DM Sans',system-ui,sans-serif;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:5px;transition:color .2s ease}
@@ -366,7 +379,11 @@ html[data-theme="dark"] .collection-back:hover{color:var(--night-link-hover)}
 .collection-head {margin-bottom:32px;padding:clamp(22px,4vw,42px);background:var(--surface-blush);border-radius:6px}
 .collection-head h3 {font-size:clamp(3rem,6vw,5.25rem);line-height:1.05}
 .collection .projects-grid {margin-bottom:12px}
-@media(max-width:760px) {.collection-nav {align-items:flex-start;flex-direction:column} .collection-head {padding:24px}}
+@media(max-width:760px) {
+ .collection-nav{align-items:flex-start;flex-direction:column}
+ .collection-head{padding:24px}
+ .collection-head h3{overflow-wrap:anywhere}
+}
 .collection .project-card-link .project-visual{transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
 .collection .project-card-link:hover .project-visual{transform:translateY(-5px);box-shadow:0 15px 30px #20334419}
 /* This hover rule now loads after legacy reduced-motion rules: repeat the
