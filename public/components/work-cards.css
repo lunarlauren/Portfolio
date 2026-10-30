@@ -366,6 +366,9 @@ html[data-theme="dark"] .work .featured-project.client-file{
 @media(max-width:760px) {.collection-nav {align-items:flex-start;flex-direction:column} .collection-head {padding:24px}}
 .collection .project-card-link .project-visual{transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
 .collection .project-card-link:hover .project-visual{transform:translateY(-5px);box-shadow:0 15px 30px #20334419}
+/* This hover rule now loads after legacy reduced-motion rules: repeat the
+   transform reset here so moving ownership never re-enables motion. */
+@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}
 .collection[data-active="alcon"] .collection-head {background:var(--surface-cream);color:var(--brand-navy)}
 .collection[data-active="holland-america"] .collection-head {background:var(--surface-navy);color:#fff}
 .collection[data-active="holland-america"] .collection-head p {color:inherit}
