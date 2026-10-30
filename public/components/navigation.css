@@ -44,30 +44,27 @@ html[data-theme="dark"]{
   gap:8px;min-height:64px;
   padding:8px max(12px,env(safe-area-inset-right)) 8px max(12px,env(safe-area-inset-left));
  }
-  .site-header .wordmark img{width:30px;height:auto}
+ .site-header .wordmark img{width:30px}
  .site-header .header-actions{
   display:flex;align-items:center;justify-content:flex-end;
   gap:clamp(5px,1.8vw,10px);width:auto;min-width:0;
  }
  .site-header .header-actions nav{
-  display:flex;align-items:center;justify-content:flex-end;
-  gap:clamp(7px,2.2vw,13px);width:auto;min-width:0;
+  gap:clamp(7px,2.2vw,13px);
  }
  .site-header .header-actions nav a{
-  display:inline-flex;align-items:center;justify-content:center;
   min-height:44px;padding:0 1px;font-size:clamp(0.6875rem,2.9vw,0.8125rem);
-  line-height:1.25;white-space:nowrap;
+  line-height:1.25;
  }
  .site-header .header-actions nav a[aria-current="location"]{
-  padding-inline:1px;color:inherit;
-  text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;
+  color:inherit;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:6px;
  }
  .site-header .header-actions nav a,.site-header .header-contact{
   background:transparent;box-shadow:none;border:0;border-radius:0;
  }
  .site-header .header-contact{
-  min-height:44px;padding:0 4px;
-  font-size:clamp(0.6875rem,2.9vw,0.8125rem);
+  padding:0 4px;font-size:clamp(0.6875rem,2.9vw,0.8125rem);
  }
  .site-header .header-contact span{display:none}
  .site-header .theme-toggle{
@@ -120,7 +117,7 @@ footer.wrap a:focus-visible{
 .standalone-refresh-indicator{
  position:fixed;z-index:200;top:max(12px,env(safe-area-inset-top));left:50%;
  transform:translate(-50%,-120%);opacity:0;pointer-events:none;
- padding:9px 16px;border-radius:999px;background:var(--site-chrome-bg,var(--paper));
+ padding:9px 16px;border-radius:999px;background:var(--site-chrome-bg);
  border:1px solid var(--line);color:var(--ink);font-size:.8125rem;font-weight:600;
  box-shadow:0 6px 18px rgba(0,0,0,.12);transition:opacity .15s,transform .15s;
 }
