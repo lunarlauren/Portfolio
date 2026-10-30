@@ -15,55 +15,34 @@ body {background:var(--paper);color:var(--ink)}
 
 
 .hero-feature {color:var(--brand-ink);overflow:visible;isolation:isolate;background:var(--brand-sky)}
-.hero-feature .feature-top,.hero-feature .feature-bottom {color:var(--brand-ink)}
-.art-tile-one {background:#f4c6cb}
-.art-tile-two {background:#c3e5df}
-.art-tile-three {background:color-mix(in srgb,var(--palette-paper) 70%,var(--palette-lavender))}
-.art-center {color:color-mix(in srgb,var(--palette-navy) 80%,var(--palette-blue))}
-.art-center span {color:#fff}
-.art-orbit {border-color:#497b9860}
 
 .section-head h2 em,.about h2 em {color:color-mix(in srgb,var(--palette-navy) 25%,var(--palette-pink))}
 
 
-.hero-feature:before {border-radius:inherit}
-.hero-feature .feature-bottom {padding-right:24%;z-index:4}
-@media(max-width:760px) {.hero-feature .feature-bottom {padding-right:30%}}
 
-.hero-feature .art-tile-one {background:#ffb5d8}
-.hero-feature .art-tile-three {background:#e7d6ff}
-.hero-feature .art-center span {color:var(--surface-blush)}
-.hero-feature .feature-art {filter:drop-shadow(0 14px 22px #f15c9d1c)}
 
-.round-link:hover {background:#ffd3e8}
-.hero-feature .feature-top a,.hero-feature .feature-bottom a {color:inherit;text-decoration:none}
-.hero-feature .feature-top a:hover,.hero-feature .feature-bottom a:hover {text-decoration:underline}
-.hero-feature .feature-art {cursor:pointer}
 .hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
-.hero-feature .feature-art .art-center {text-decoration:none}
-.hero-feature .feature-top,.hero-feature .feature-bottom {position:relative;z-index:2}
 :root {--paper:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));--line:#cbdde7;--teal:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));--brand-pink:#f15c9d;--brand-navy:var(--brand-ink);--brand-sky:color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy))}
 
-.hero h1,.section-head h2,.about h2,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {font-family:'Newsreader',Georgia,serif}
+.hero h1,.section-head h2,.about h2,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2 {font-family:'Newsreader',Georgia,serif}
 .hero h1 {line-height:1.04}
 .section-head h2,.about h2,.case-head h1 {line-height:1.1}
-.eyebrow,.hero-foot,.project-meta,.feature-top,.feature-bottom {font-family:'DM Sans',system-ui,sans-serif}
+.eyebrow,.hero-foot,.project-meta {font-family:'DM Sans',system-ui,sans-serif}
 .wordmark {display:inline-flex;align-items:center;line-height:1}
 .wordmark img {display:block;width:40px;height:auto}
 .hero-description,.case-intro,.section-head>p,.project-card p {color:var(--muted)}
 .hero-foot {color:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper))}
 .hero .status-dot {background:var(--brand-pink)}
-.hero-feature:before {background:linear-gradient(145deg,color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue)) 12%,color-mix(in srgb,var(--palette-paper) 60%,var(--palette-blue)) 100%)}
 .primary-link {background:var(--brand-navy);color:#fff}
 .primary-link:hover {background:color-mix(in srgb,var(--palette-navy) 80%,var(--palette-blue))}
 .quiet-link:hover,.text-link:hover,.site-header nav a:hover {color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
 .brief-kicker {display:block;color:#9a3263;font-family:'DM Sans',system-ui,sans-serif;font-size:0.625rem;font-weight:700;letter-spacing:.14em;line-height:1.3}
-.hero h1,.section-head h2,.about h2,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {font-variation-settings:"SOFT" 75,"WONK" 0;transition:font-variation-settings .38s ease,letter-spacing .38s ease}
+.hero h1,.section-head h2,.about h2,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2 {font-variation-settings:"SOFT" 75,"WONK" 0;transition:font-variation-settings .38s ease,letter-spacing .38s ease}
 .hero h1,.section-head h2,.about h2,.case-head h1 {letter-spacing:-.025em}
-@media(hover:hover) {.hero h1:hover,.section-head h2:hover,.about h2:hover,.collection-head h3:hover,.project-card-link:hover h4,.case-head h1:hover,.case-prose h2:hover,.art-center:hover {font-variation-settings:"SOFT" 75,"WONK" 1}}
+@media(hover:hover) {.hero h1:hover,.section-head h2:hover,.about h2:hover,.collection-head h3:hover,.project-card-link:hover h4,.case-head h1:hover,.case-prose h2:hover {font-variation-settings:"SOFT" 75,"WONK" 1}}
 .hero h1:focus-within,.section-head h2:focus-within,.about h2:focus-within,.project-card-link:focus-visible h4 {font-variation-settings:"SOFT" 75,"WONK" 1}
-@media(prefers-reduced-motion:reduce) {.hero h1,.section-head h2,.about h2,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {transition:none}}
-.wordmark,.hero h1,.section-head h2,.about h2,.collection-head h3,.placeholder-mark,.project-card h3,.art-center,.case-head h1,.case-prose h2 {font-variation-settings:normal}
+@media(prefers-reduced-motion:reduce) {.hero h1,.section-head h2,.about h2,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2 {transition:none}}
+.wordmark,.hero h1,.section-head h2,.about h2,.collection-head h3,.placeholder-mark,.project-card h3,.case-head h1,.case-prose h2 {font-variation-settings:normal}
 .hero h1,.case-head h1 {letter-spacing:-.045em}
 
 .hero h1{color:var(--brand-ink)}
@@ -78,7 +57,7 @@ html,body{max-width:100%;overflow-x:clip}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(forced-colors:active){.project-card-link,.primary-link{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
 
-.site-header nav a,.feature-project-link,.feature-bottom a,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
+.site-header nav a,.feature-project-link,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:760px){.collection-head h3,.case-head h1{overflow-wrap:anywhere}.project-card-link{display:block}}
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot{opacity:1;text-shadow:none}}
 
@@ -97,7 +76,7 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* Type scale lives in components/foundations.css. */
 body{font-size:var(--type-body);line-height:1.6}
-.site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.project-meta,.brief-kicker{font-size:var(--type-xs);line-height:1.5}
+.site-header nav,.eyebrow,.hero-foot,.project-meta,.brief-kicker{font-size:var(--type-xs);line-height:1.5}
 .project-card p,.case-back,footer{font-size:var(--type-sm);line-height:1.6}
 .hero-description,.about-bottom p{line-height:var(--leading-reading,1.65)}
 @media(max-width:760px){.hero-description,.about-bottom p{font-size:1rem}.project-card p{font-size:0.875rem}}
@@ -113,17 +92,12 @@ html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
 html[data-theme="dark"] .skip-link{background:color-mix(in srgb,var(--palette-navy) 90%,var(--palette-blue));color:#fff}
 html[data-theme="dark"] .visual-label,html[data-theme="dark"] .visual-brief,html[data-theme="dark"] .brief-kicker{color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue))}
 
-html[data-theme="dark"] .feature-top,html[data-theme="dark"] .feature-bottom{color:var(--ink)}
 
 html[data-theme="dark"] .primary-link,
 html[data-theme="dark"] .hero-actions .primary-link{background:color-mix(in srgb,var(--palette-paper) 30%,var(--palette-pink))!important;color:#182333!important;border:1px solid color-mix(in srgb,var(--palette-paper) 30%,var(--palette-pink))!important}
 html[data-theme="dark"] .primary-link:hover{background:#ffc0dc!important;color:#182333!important}
 html[data-theme="dark"] .hero-foot{color:#b7c7d7}
 html[data-theme="dark"] .hero-foot span{color:inherit}
-html[data-theme="dark"] .feature-top,
-html[data-theme="dark"] .feature-bottom{color:#172c42}
-html[data-theme="dark"] .feature-top a,
-html[data-theme="dark"] .feature-bottom a{color:#172c42}
 
 @media(hover:hover) and (pointer:fine){.hero-actions .primary-link span{display:inline-block;transition:transform .2s ease} .hero-actions .primary-link:hover span{transform:translate(4px,-3px)}}
 .reveal-ready{animation:reveal-enter .55s ease both}
@@ -208,24 +182,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 }
 
 
-/* Responsive featured-art caption sizing. The base hero-feature already owns isolation and overflow. */
-@media(max-width:760px){
- .hero-feature .feature-bottom{padding-right:0;max-width:62%}
-}
-@media(max-width:420px){
- .hero-feature{min-height:300px}
- .hero-feature .feature-bottom{max-width:58%}
-}
-
-
-/* On phones, keep the featured illustration caption short and uncluttered. */
-@media(max-width:600px){
- .hero-feature .feature-bottom{display:block;max-width:100%;width:100%;padding-right:0}
- .hero-feature .feature-bottom>span{display:block;max-width:56%;line-height:1.35}
- .hero-feature .feature-bottom>a{display:none}
-}
-
-
 /* Homepage phone rhythm: breathing room between the identity, statement,
    actions and featured illustration. Keep the notebook motif and artwork. */
 @media(max-width:600px){
@@ -237,8 +193,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
  .hero .hero-description{font-size:clamp(1.0625rem,4.3vw,1.25rem);line-height:1.65}
  .hero .hero-actions{gap:14px 18px;margin-top:clamp(28px,7vw,40px)}
  .hero .primary-link{min-height:52px}
- .hero-feature{padding:clamp(20px,5vw,28px);min-height:clamp(340px,90vw,440px)}
- .hero-feature .feature-top,.hero-feature .feature-bottom{line-height:1.5}
 }
 
 
@@ -306,29 +260,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
   box-sizing:border-box;
  }
  .hero .feature-art{height:100%;min-height:0}
-}
-
-
-/* Desktop screenshot QA: the portrait must not obscure card metadata; reserve
-   a clear footer lane and keep notebook rules out of the hero display type. */
-@media(min-width:1024px){
-  .hero .hero-feature{position:relative}
- /* Give the footer its own text column; the portrait occupies the
-    opposite corner and can no longer cover either caption. */
- .hero .hero-feature .feature-bottom{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:4px;
-  width:calc(100% - 150px);
-  max-width:calc(100% - 150px);
-  padding-right:0;
-  box-sizing:border-box;
- }
- .hero .hero-feature .feature-bottom>span,
- .hero .hero-feature .feature-bottom>a{max-width:100%;line-height:1.35}
- .hero .hero-feature .feature-bottom>a{min-height:32px}
- .hero .hero-foot{margin-top:12px}
 }
 
 

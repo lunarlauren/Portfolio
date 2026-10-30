@@ -534,8 +534,15 @@ const collectionHover = workCss.indexOf('.collection .project-card-link:hover .p
 const collectionReducedHover = workCss.indexOf('@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}');
 assert.ok(collectionHover >= 0 && collectionReducedHover > collectionHover,
  'Collection hover motion must be disabled after its component override');
-assert.match(html, /styles\.css\?v=20261030-motion-ownership/,
- 'Legacy CSS cache version must match the collection extraction');
+// Keep the cache-busting contract without pinning an unrelated historical
+// version string. This pass retires chrome already hidden by hero-polish.css.
+assert.match(html, /\/styles\.css\?v=[a-zA-Z0-9-]+/,
+ 'Legacy CSS must remain cache-versioned');
+assert.doesNotMatch(css + homepageCss,
+ /\.(?:art-orbit|art-tile|art-center)(?:-[a-z]+)?(?:\s|\{|:)/,
+ 'Hidden hero ornament CSS must not return to active stylesheets');
+assert.match(heroPolishCss, /\.hero \.art-orbit,\s*\.hero \.art-tile\s*\{display:none/,
+ 'Hero polish must continue hiding retired decorative elements');
 
 // Keep interaction motion in its component, and preserve accessible fallbacks.
 // These source checks guard ownership; Chromium tests still check behavior.
