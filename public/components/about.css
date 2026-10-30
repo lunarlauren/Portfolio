@@ -228,3 +228,23 @@
   .about .about-intro > p { grid-column: 1; grid-row: 1; }
   .about .ai-process { max-width: 70ch; }
 }
+
+/* Contact invitation: keep the label short and the arrow in its own visual
+   space. A restrained accent reads as a deliberate action, not a long banner. */
+@media (min-width: 601px) {
+  .about .about-copy > .text-link {
+    display: inline-flex;
+    width: auto;
+    max-width: min(100%, 460px);
+    gap: 12px;
+    padding: 13px 18px;
+    border-radius: 9px;
+    font-size: .9375rem;
+    line-height: 1.35;
+    box-shadow: 0 3px 0 #a83f73;
+    text-wrap: balance;
+  }
+  .about .about-copy > .text-link:hover {
+    box-shadow: 0 5px 0 #a83f73;
+  }
+}
