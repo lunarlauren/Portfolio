@@ -730,5 +730,9 @@ assert.equal(provenanceFor('APPROVED / Actual shipped screen'), '');
 assert.ok(script.includes('illustrativeImageStatus(p.imageBrief)'), 'Archive/gallery images must retain illustrative status');
 assert.ok(caseStudy.includes('illustrativeImageStatus(p.imageBrief)'), 'Case-study hero images must retain illustrative status');
 assert.match(caseCss, /\.case-hero-visual > \.visual-image-status/, 'Illustrative hero label must have visible styling');
+assert.match(caseCss, /--case-hero-placeholder-bg:/, 'Case-study component owns no-image hero surface tokens');
+assert.match(caseCss, /html\[data-theme="dark"\] \.case-view \.case-hero-visual:not\(:has\(img\)\)/, 'Dark case hero needs its own placeholder surface');
+assert.doesNotMatch(css, /\.case-hero-visual:not\(:has\(img\)\)/, 'Legacy CSS must not own case hero placeholders');
+assert.doesNotMatch(css, /\.case-process-note\s*\{/, 'Case-study process notes must be component-owned');
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);
