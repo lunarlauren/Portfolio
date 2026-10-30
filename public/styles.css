@@ -22,7 +22,21 @@ body {background:var(--paper);color:var(--ink)}
 
 
 .hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
-:root {--paper:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));--line:#cbdde7;--teal:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));--brand-pink:#f15c9d;--brand-navy:var(--brand-ink);--brand-sky:color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy))}
+/* LIGHT THEME COLORS
+   A --name is a reusable value; var(--name) reads that value. */
+:root {
+  --paper:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));
+  --ink:var(--brand-ink);
+  --muted:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));
+  --line:#cbdde7;
+  --teal:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));
+  --clay:var(--brand-pink);
+  --lilac:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));
+  --brand-pink:#f15c9d;
+  --brand-navy:var(--brand-ink);
+  --brand-sky:color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));
+  --focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));
+}
 
 .hero h1,.section-head h2,.about h2,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2 {font-family:'Newsreader',Georgia,serif}
 .hero h1 {line-height:1.04}
@@ -83,7 +97,28 @@ html{scroll-padding-top:82px}
 #work,#playground,#about,#top,#main{scroll-margin-top:82px}
 
 
-html[data-theme="dark"]{--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));--muted:#c2d0df;--line:#536a80;--paper:color-mix(in srgb,var(--palette-navy) 65%,black);--brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));--lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));--brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));--surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));--surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));color-scheme:dark;background:var(--paper)}
+/* DARK THEME COLORS
+   These are reusable variables: --paper is the background, --ink is text,
+   --muted is secondary text, and --focus is the keyboard highlight.
+   Change the values here instead of adding another dark-mode override. */
+html[data-theme="dark"] {
+  --focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));
+  --muted:#c2d0df;
+  --line:#536a80;
+  --paper:color-mix(in srgb,var(--palette-navy) 65%,black);
+  --brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));
+  --ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));
+  --teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));
+  --clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));
+  --lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));
+  --brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));
+  --brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));
+  --surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));
+  --surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));
+  --surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));
+  color-scheme:dark;
+  background:var(--paper);
+}
 html[data-theme="dark"] body{color:var(--ink)}
 html[data-theme="dark"] .hero h1{color:var(--ink)!important}
 html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
