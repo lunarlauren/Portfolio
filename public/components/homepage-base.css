@@ -1,7 +1,8 @@
 /* HOMEPAGE BASE
    These are the earliest homepage rules, in original cascade order.
    Later overrides may still live in styles.css and named component files.
-   Avoid adding a duplicate rule: search all CSS first. */
+   Avoid adding a duplicate rule: search all CSS first.
+   Hidden hero tile/orbit chrome is retired; keep the active portrait anchor. */
 .collection-head {display:flex;justify-content:space-between;gap:25px}
 .collection-head h3 {font:600 50px 'Newsreader';letter-spacing:-.05em;margin:10px 0}
 .collection-head p:last-child {max-width:540px;line-height:1.6}
@@ -38,20 +39,8 @@ footer a {text-decoration:none}
 .hero-foot {display:flex;gap:18px 24px;flex-wrap:wrap;margin-top:auto;padding-top:68px;font-size:0.625rem;font-weight:700;letter-spacing:.14em}
 .eyebrow-divider {margin-inline:10px}
 .hero-feature {position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;padding:25px;border-radius:3px}
-.hero-feature:before {content:"";position:absolute;inset:0;z-index:-2}
-.feature-top,.feature-bottom {display:flex;justify-content:space-between;gap:14px;align-items:center;font-size:0.625rem;font-weight:700;letter-spacing:.13em;z-index:1}
-.feature-top span:last-child {font-size:1.5rem}
 .feature-art {position:absolute;inset:14% 0 12%;display:grid;place-items:center;transform:rotate(-8deg);transition:transform .7s cubic-bezier(.2,.7,.2,1)}
 .hero-feature:hover .feature-art {transform:rotate(-2deg) scale(1.04)}
-.art-orbit {position:absolute;width:75%;aspect-ratio:1;border:1px solid #b3d5cd75;border-radius:50%}
-.art-orbit-one {transform:scaleX(.62) rotate(48deg)}
-.art-orbit-two {transform:scaleX(.62) rotate(-48deg)}
-.art-tile {position:absolute;display:block;box-shadow:0 24px 70px #0d222740;border:1px solid #ffffff60}
-.art-tile-one {width:45%;height:42%;transform:translate(-24%,-12%) rotate(-14deg)}
-.art-tile-two {width:44%;height:46%;transform:translate(25%,18%) rotate(15deg)}
-.art-tile-three {width:32%;height:30%;transform:translate(48%,-52%) rotate(28deg)}
-.art-center {z-index:1;font:700 clamp(32px,4vw,62px)/.9 'Newsreader',sans-serif;letter-spacing:-.08em;text-align:center;text-shadow:0 1px #ffffff20}
-.art-center span {display:block;font-size:3.4375rem;margin-top:18px}
 .section-head h2 em {font-style:normal;color:var(--teal)}
 .project-card-link {display:block;text-decoration:none;outline-offset:5px}
 .project-card-link:hover .project-visual {filter:saturate(1.12)}
