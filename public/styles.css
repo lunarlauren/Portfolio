@@ -652,7 +652,6 @@ html[data-theme="dark"] .playground .section-head>p{
   background-position:0 0;
   padding-bottom:2px;
  }
- html:not([data-theme="dark"]) .hero .hero-description{font-size:1.25rem}
 }
 
 
