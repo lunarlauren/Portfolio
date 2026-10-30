@@ -7,7 +7,16 @@
 .collection-head h3 {font:600 50px 'Newsreader';letter-spacing:-.05em;margin:10px 0}
 .collection-head p:last-child {max-width:540px;line-height:1.6}
 .close-collection {background:transparent;border:1px solid var(--ink);border-radius:50%;width:44px;height:44px;cursor:pointer;font-size:1.5625rem}
-.projects-grid,.play-grid {display:grid;gap:20px}
+/* SHARED PROJECT GRIDS
+   Both the Work collection and After Hours cards use this flexible grid.
+   auto-fit adds columns when space allows; the phone rule below uses one. */
+.projects-grid,
+.play-grid {
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+ gap:20px;
+ align-items:start;
+}
 .project-card {min-width:0}
 .project-visual {display:grid;place-items:center;overflow:hidden}
 
