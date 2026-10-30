@@ -127,6 +127,20 @@ try{
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
  await page.setViewportSize({width:1280,height:720});
 
+ // Reduced-motion visitors must not receive Playground preview or case entrance motion.
+ const reducedMotionPage=await browser.newPage({reducedMotion:"reduce"});
+ reducedMotionPage.on("pageerror",error=>errors.push(error.message));
+ await reducedMotionPage.goto(origin+"/");
+ const previewTransition=await reducedMotionPage.locator("#play-grid .project-card-link .project-visual").first()
+  .evaluate(node=>getComputedStyle(node).transitionProperty);
+ assert.equal(previewTransition,"none","Playground preview must not animate under reduced motion");
+ await reducedMotionPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await reducedMotionPage.locator(".case-view .case-head").waitFor();
+ const caseAnimation=await reducedMotionPage.locator(".case-view .case-head")
+  .evaluate(node=>getComputedStyle(node).animationName);
+ assert.equal(caseAnimation,"none","Case-study entrance must not animate under reduced motion");
+ await reducedMotionPage.close();
+
  // Accessible link navigation should expose challenge, reviewed contribution,
  // and the visible design approach—not just a generic case-study action.
  const cardDescriptions=await page.locator('.work .project-card-link').first().evaluate(link=>
