@@ -539,8 +539,10 @@ assert.match(html, /styles\.css\?v=20261030-motion-ownership/,
 
 // Keep interaction motion in its component, and preserve accessible fallbacks.
 // These source checks guard ownership; Chromium tests still check behavior.
-assert.doesNotMatch(css, /gallery-reveal|detail-reveal|--motion-ease|\\.play-grid \\.project-card-link:hover \\.project-visual/,
+assert.doesNotMatch(css, /gallery-reveal|detail-reveal|--motion-ease/,
  'Legacy CSS must not reintroduce cross-component motion');
+assert.ok(!css.includes('.play-grid .project-card-link:hover .project-visual'),
+ 'Playground preview motion must stay out of legacy CSS');
 assert.ok(foundationsCss.includes('--motion-ease:cubic-bezier(.22,1,.36,1)'),
  'Foundations must own the shared motion token');
 assert.ok(foundationsCss.includes('::view-transition-old(selected-company)'),
