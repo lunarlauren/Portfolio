@@ -20,8 +20,6 @@ html[data-theme="dark"] .project-visual:not(:has(img)){
  --placeholder-text:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
  background:var(--placeholder-surface);border-color:var(--placeholder-edge);
 }
-.project-visual:not(:has(img))::before,
-.project-visual:not(:has(img))::after,
 .project-visual:not(:has(img)) .placeholder-mark{display:none}
 .project-visual .visual-label{font-size:var(--type-xs);line-height:1.5}
 .project-visual:not(:has(img)) .visual-label{
