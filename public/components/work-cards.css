@@ -449,3 +449,10 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mi
   text-underline-offset:5px;
  }
 }
+
+/* Baseline dark surfaces and typography for shared cards.
+   More specific collection / client-file rules above retain precedence. */
+html[data-theme="dark"] .project-card-link,html[data-theme="dark"] .collection{color:var(--ink)}
+html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
+html[data-theme="dark"] .project-meta{color:#c6d5e2}
+html[data-theme="dark"] .project-card p{color:#d7e3ed}
