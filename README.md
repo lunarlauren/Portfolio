@@ -18,10 +18,16 @@ A lightweight portfolio of product UX, visual design, and illustration. The prod
 - `public/index.html` — page structure, header, hero, contact and theme toggle.
 - `public/content.js` — company/project data, UX case-study writing, image briefs and galleries.
 - `public/script.js` — project index, archive facts, routing and homepage interactions. Case-study rendering lives in `public/components/case-study.js`; evidence helpers live in `public/components/project-content.js`.
-- `public/styles.css` — responsive styling, themes, layout and motion.
+- `public/styles.css` — remaining **legacy** overrides only; do not add new global behavior here. Colors, focus rings, touch feedback, reduced motion, and forced-colors rules are in `public/components/foundations.css`. Section-specific styling belongs in its component file.
 - `public/LL logo.svg` and `public/laurenlevenportfolioheroportrait.png` — current brand and portrait assets.
 - `wrangler.jsonc` — Worker configuration; `assets.directory` points to `./public`.
 - `scripts/check-content.mjs` — dependency-free content and JavaScript smoke checks.
+
+### CSS accessibility ownership (October 30, 2026)
+
+For beginners: `@media` means “apply these rules only when the condition matches.” In `public/components/foundations.css`, `prefers-reduced-motion` avoids unnecessary animation, `pointer:coarse` provides touch feedback, `forced-colors` preserves borders when Windows overrides colors, and `prefers-contrast` strengthens secondary text. These settings are global and should **not** be copied into `styles.css`. The shared `button,a {touch-action:manipulation}` rule already covers the links and buttons in the touch-feedback list.
+
+When editing, keep the reduced-motion pressed-state rule **after** the touch pressed-state rule so the visitor's motion preference wins. Check desktop/mobile, both themes, keyboard Tab focus, forced colors, and reduced motion in a real browser before deployment. Source tests alone cannot confirm visual equivalence.
 
 ### UX evidence and illustration handoff (October 26, 2026)
 

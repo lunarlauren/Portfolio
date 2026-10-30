@@ -177,3 +177,56 @@ section.work,section.playground,section.about {padding-block:85px}
 @media (forced-colors:active) {
  .skip-link {border-color:CanvasText}
 }
+
+/* GLOBAL ACCESSIBILITY AND TOUCH BEHAVIOR
+   These are browser-wide safety rules, not decorations for a specific card.
+   Keep them here so individual components do not need to repeat them. */
+html,
+body {
+ max-width:100%;
+ overflow-x:clip; /* Prevent sideways page scrolling without hiding focus rings. */
+}
+
+/* High-contrast preferences strengthen dark-theme separators and secondary text. */
+@media (prefers-contrast:more) {
+ html[data-theme="dark"] {
+  --line:#91adc3;
+  --muted:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue));
+ }
+}
+
+/* Windows forced-colors mode uses system colors instead of decorative accents. */
+@media (forced-colors:active) {
+ .project-card-link,
+ .primary-link {border:1px solid CanvasText}
+ .status-dot {outline:1px solid CanvasText}
+}
+
+/* On touchscreens, a brief pressed state confirms a tap.
+   Links and buttons already have touch-action:manipulation above. */
+@media (pointer:coarse) {
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button) {
+  -webkit-tap-highlight-color:transparent;
+ }
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active {
+  filter:brightness(.96);
+ }
+}
+
+/* Reduced motion is a visitor preference, not a theme.
+   Apply it once globally; components may additionally disable their own
+   transforms or entrance effects. Keep this after the touch pressed state. */
+@media (prefers-reduced-motion:reduce) {
+ html {scroll-behavior:auto}
+ *,
+ *::before,
+ *::after {
+  scroll-behavior:auto!important;
+  animation-duration:.01ms!important;
+  animation-iteration-count:1!important;
+  transition-duration:.01ms!important;
+ }
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active {
+  filter:none;
+ }
+}
