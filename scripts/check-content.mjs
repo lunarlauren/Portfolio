@@ -506,7 +506,7 @@ assert.ok(genericPaperRule >= 0 && playgroundContrastRule >= 0,
  'Playground contrast rule must be present in the later-loaded component stylesheet');
 assert.match(playgroundCss.slice(playgroundContrastRule, playgroundContrastRule + 260),
  /background:transparent/, 'Playground intro must not inherit paper background');
-assert.doesNotMatch(css, /\\.playground\\s+\\.section-head>p/,
+assert.doesNotMatch(css, /\.playground\s+\.section-head>p/,
  'Playground paragraph rules must not return to legacy CSS');
 assert.doesNotMatch(css + playgroundCss, /sparkle-button|night-sparkles|night-twinkle/,
  'Removed sparkle interaction must not retain unused CSS');
