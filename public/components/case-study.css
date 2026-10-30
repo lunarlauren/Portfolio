@@ -93,10 +93,7 @@ html[data-theme="dark"] .case-view .case-hero-visual:not(:has(img)){
 
 /* Evidence and tradeoff notes should resemble editorial annotations,
    not rounded dashboard alerts. Retain theme-specific surface colors. */
-.case-view .case-process-note{
- border-radius:0;
- border-left-width:3px;
-}
+.case-view .case-process-note{border-radius:0}
 /* Two kinds of editorial annotation: a dark rule marks the evidence
    boundary; the cover accent marks design reasoning. The visible headings
    carry the distinction even without color (including forced-colors mode). */
@@ -131,9 +128,8 @@ html[data-theme="dark"] .case-view .case-hero-visual:not(:has(img)){
 /* Chapter navigation controls. The paper surface matches the later
    notebook override formerly applied in the base stylesheet. */
 /* Case study chapter buttons: scroll within the routed page without changing its hash. */
-.case-section-links button{appearance:none;font:inherit;cursor:pointer;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:11px 16px;min-height:44px;text-align:left}
+.case-section-links button{appearance:none;font:inherit;cursor:pointer;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:11px 16px;min-height:44px;touch-action:manipulation;text-align:left}
 .case-section-links button:hover{background:var(--surface-blush)}
-.case-prose h2[id]{scroll-margin-top:96px}
 html[data-theme="dark"] .case-section-links button:hover{background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue))}
 
 
@@ -142,7 +138,6 @@ html[data-theme="dark"] .case-section-links button:hover{background:color-mix(in
    Screenshots and diagrams stay on solid backgrounds for accurate inspection. */
 html:not([data-theme="dark"]) .case-view{--case-paper:#fffdf8}
 html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px);border-radius:12px;padding:clamp(16px,3vw,30px)}
-.case-prose h2{line-height:1.2}
 .case-section-links{display:flex;flex-wrap:wrap;gap:10px}
 .case-section-links button{transition:transform .16s ease,box-shadow .16s ease}
 .case-section-links button:active{transform:translateY(2px)}
@@ -157,7 +152,6 @@ html[data-theme="dark"] .case-section-links button:focus-visible{
  background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));
 }
 
-@media(max-width:760px){.case-section-links button{font-size:0.8125rem}.case-prose h2[id]{scroll-margin-top:70px}}
 
 
 /* Case-study reading index: show the active chapter without color alone. */
@@ -214,9 +208,9 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 @media(max-width:600px){
  .case-view .case-head,.case-view .case-prose{min-width:0;overflow-wrap:break-word}
  .case-view .case-head h1{overflow-wrap:anywhere;hyphens:auto}
- .case-view .case-prose p,.case-view .case-process-note p{line-height:1.7}
- .case-view .case-section-links{scroll-padding-inline:12px;-webkit-overflow-scrolling:touch}
- .case-view .case-hero-visual img,.case-view .case-gallery img{max-width:100%;height:auto}
+ .case-view .case-section-links{scroll-padding-inline:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .case-view .case-section-links::-webkit-scrollbar{display:none}
+ .case-view .case-hero-visual img{max-width:100%;height:auto}
 }
 @media(prefers-reduced-motion:reduce){
  .case-view .case-section-links{scroll-behavior:auto}
@@ -516,3 +510,17 @@ html[data-theme="dark"] .case-view{
  font:700 0.6875rem/1.4 'DM Sans',system-ui,sans-serif;
  letter-spacing:.06em;pointer-events:none;
 }
+
+/* Case-study typography and keyboard states belong here, not in styles.css.
+   Keep dark-mode colors explicit for readable evidence and return links. */
+.case-facts{font-size:var(--type-xs)}
+.case-fact-label{line-height:1.5}
+.case-next-nav a,.case-back{min-height:44px;display:inline-flex;align-items:center}
+.case-next-nav a:focus-visible,.case-back:focus-visible{
+ outline:3px solid var(--notebook-pink);outline-offset:4px;
+}
+html[data-theme="dark"] .case-view{color:var(--ink)}
+html[data-theme="dark"] .case-back{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
+html[data-theme="dark"] .case-back:hover{color:#ffc2df}
+html[data-theme="dark"] .case-fact-label{color:#c6d5e2}
+html[data-theme="dark"] .case-prose p{color:#d7e3ed}

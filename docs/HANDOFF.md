@@ -154,3 +154,7 @@ The `.collection` project gallery now lives in `public/components/work-cards.css
 
 ## Case-study CSS ownership (2026-10-30)
 Case-study hero image briefs, responsive case-gallery/body rules, fact labels, outcome highlights, next-project navigation, and evidence/rationale process notes now live in `public/components/case-study.css`. Do not reintroduce these rules into `public/styles.css`. Missing hero artwork is a **labeled editorial brief**, not proof of a shipped screenshot; its light/dark surfaces use `--case-hero-placeholder-bg` and `--case-hero-placeholder-border` instead of a light-only `!important`. The case-study component loads after the legacy stylesheet, preserving more-specific reading and typography overrides. Verify both themes and phone widths when modifying these tokens; preserve real images and Hoylu Mobile Insights' shipped contribution status.
+
+## Case-study typography and keyboard-state ownership (2026-10-30)
+
+The case-study component owns fact metadata sizing, long-form reading colors, dark-theme case links, 44px chapter/next navigation targets, and focus states. Shared typography tokens still originate in `components/foundations.css`. Avoid putting case-specific selectors back into `styles.css`; it should retain only truly shared type and theme rules. The mobile chapter strip intentionally hides its scrollbar without masking the last tab or keyboard outline. Case-study text and verified shipping labels were not changed. Test keyboard focus, text zoom, dark/light contrast, and 320–760px layouts when editing these rules.
