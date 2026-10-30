@@ -291,7 +291,7 @@ function initReveals(){
    observer.unobserve(entry.target);
   });
  },{threshold:.08,rootMargin:"0px 0px -24px 0px"});
- document.querySelectorAll(".section-head,.about h2,.about-copy,.creative-inventory,.work .project-card,.playground .project-card").forEach((el,index)=>{
+ document.querySelectorAll(".section-head,.about h2,.about-copy,.work .project-card,.playground .project-card").forEach((el,index)=>{
   if(el.matches(".project-card"))el.style.setProperty("--reveal-delay",Math.min(index%4,3)*70+"ms");
   el.classList.add("reveal-ready");
   observer.observe(el);
