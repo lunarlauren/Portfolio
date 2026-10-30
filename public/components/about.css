@@ -200,20 +200,24 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
 }
 .creative-inventory .inventory-item:nth-child(n){
  position:relative;min-height:122px;padding:13px 5px;gap:9px;
- border:1px solid rgba(211,229,243,.2);border-radius:14px;
- color:#f2f8ff;background:rgba(214,231,244,.075);
- backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
- box-shadow:inset 0 1px rgba(255,255,255,.12);
- transition:background .18s ease,border-color .18s ease,transform .18s ease;
+ border:1px solid rgba(219,235,246,.16);border-radius:20px;
+ color:#f2f8ff;background:rgba(180,203,220,.14);
+ backdrop-filter:blur(18px) saturate(90%);-webkit-backdrop-filter:blur(18px) saturate(90%);
+ box-shadow:inset 0 3px 8px rgba(9,24,41,.34),
+            inset 0 -2px 5px rgba(230,241,250,.09),
+            0 1px 0 rgba(255,255,255,.09);
+ transition:background .18s ease,box-shadow .18s ease,border-color .18s ease;
 }
 .creative-inventory .inventory-item:nth-child(n)::before{content:none}
 .creative-inventory .inventory-item:nth-child(n):hover{
- transform:translateY(-2px);border-color:rgba(231,241,251,.48);
- background:rgba(215,231,245,.15);box-shadow:inset 0 1px rgba(255,255,255,.2);
+ transform:none;border-color:rgba(231,241,251,.3);
+ background:rgba(196,216,232,.19);
+ box-shadow:inset 0 4px 10px rgba(9,24,41,.38),inset 0 -2px 5px rgba(230,241,250,.11);
 }
 .creative-inventory .inventory-item:nth-child(n)[aria-pressed="true"]{
- border:2px solid #f5a4cb;background:rgba(237,199,225,.17);
- box-shadow:inset 0 1px rgba(255,255,255,.25);
+ border:1px solid rgba(255,192,222,.65);background:rgba(226,178,205,.24);
+ box-shadow:inset 0 5px 12px rgba(19,22,39,.46),
+            inset 0 0 0 2px rgba(255,217,236,.14);
 }
 .creative-inventory .inventory-item>span:last-child{
  position:relative;color:#fff;font-weight:700;text-shadow:none;
@@ -236,13 +240,13 @@ html[data-theme="dark"] .creative-inventory .inventory-item:nth-child(n){
  color:#fff;border-color:rgba(211,229,243,.2);
 }
 html[data-theme="dark"] .creative-inventory .inventory-item:nth-child(n)[aria-pressed="true"]{
- border-color:#f5a4cb;background:rgba(237,199,225,.17);
- box-shadow:inset 0 1px rgba(255,255,255,.25);
+ border-color:rgba(255,192,222,.65);background:rgba(226,178,205,.24);
+ box-shadow:inset 0 5px 12px rgba(19,22,39,.46),inset 0 0 0 2px rgba(255,217,236,.14);
 }
 html[data-theme="dark"] .creative-inventory .inventory-inspect p{color:#dce7f1}
 @media(max-width:460px){
  .creative-inventory .inventory-grid{gap:8px;padding:43px 10px 16px;border-radius:18px 18px 0 0}
- .creative-inventory .inventory-item:nth-child(n){min-height:112px;padding:10px 3px;gap:6px;border-radius:12px}
+ .creative-inventory .inventory-item:nth-child(n){min-height:112px;padding:10px 3px;gap:6px;border-radius:17px}
  .creative-inventory .inventory-inspect{padding:20px;border-radius:0 0 18px 18px}
 }
 @media(prefers-reduced-motion:reduce){
