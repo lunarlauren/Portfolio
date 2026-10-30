@@ -156,7 +156,8 @@ try{
     const portrait=about.querySelector(".about-portrait");
     const caption=portrait.querySelector("figcaption");
     const intro=about.querySelector(".about-intro p");
-    const inventory=about.querySelector(".creative-inventory");
+    const aiNote=about.querySelector(".ai-process");
+     const copy=about.querySelector(".about-copy");
     const headingRect=heading.getBoundingClientRect();
     const aboutStyle=getComputedStyle(about);
     const available=about.clientWidth-parseFloat(aboutStyle.paddingLeft)-parseFloat(aboutStyle.paddingRight);
@@ -167,7 +168,9 @@ try{
      portraitTop:portrait.getBoundingClientRect().top,
      introTop:intro.getBoundingClientRect().top,
      captionDisplay:getComputedStyle(caption).display,
-     inventoryTop:inventory.getBoundingClientRect().top,
+     aiTop:aiNote.getBoundingClientRect().top,
+     copyRight:copy.getBoundingClientRect().right,
+     copyDisplay:getComputedStyle(copy.parentElement).display,
      portraitBottom:portrait.getBoundingClientRect().bottom
     };
    },theme);
@@ -183,8 +186,11 @@ try{
    assert.ok(Math.abs(layout.portraitTop-layout.introTop)<24,
     `${width}px ${theme}: Headshot and introduction should start together`);
    assert.equal(layout.captionDisplay,"none",`${width}px ${theme}: Avoid a repeated introduction`);
-   assert.ok(layout.inventoryTop>=layout.portraitBottom,
-    `${width}px ${theme}: Inventory must follow the photo instead of overlapping it`);
+   assert.equal(layout.copyDisplay,"block",`${width}px ${theme}: About should use a single reading column`);
+   assert.ok(layout.copyRight<=width+1,
+    `${width}px ${theme}: About copy must not overflow the viewport`);
+   assert.ok(layout.aiTop>=layout.portraitBottom,
+    `${width}px ${theme}: AI process note must follow the portrait without overlapping it`);
   }
  }
  await page.setViewportSize({width:1280,height:720});
