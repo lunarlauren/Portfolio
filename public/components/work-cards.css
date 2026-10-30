@@ -54,7 +54,6 @@
 .featured-project .project-card-link:focus-visible{border-radius:12px}
 @media(max-width:760px){
  .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
- .featured-project .project-visual{aspect-ratio:16/10}
 }
 /* Featured project context: reveal documented UX reasoning without extra navigation.
    Long case-study paragraphs are visually clamped here; the full text remains in the case study. */
@@ -90,7 +89,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 .notebook-project-index .project-card-link:focus-visible{outline:3px solid var(--notebook-pink);outline-offset:4px}
 @media(max-width:420px){
- .notebook-project-index .featured-project{min-width:0}
  .notebook-project-index .project-card-link{overflow-wrap:break-word}
 }
 @media(min-width:1024px){
@@ -355,6 +353,28 @@ html[data-theme="dark"] .work .featured-project.client-file{
  text-transform:uppercase;
 }
 
+/* Collection navigation and client headers live with the archive gallery.
+   The original collection-enter animation was dead: gallery-reveal already
+   supersedes it, and the shared reduced-motion rule disables motion. */
+.collection {margin-top:0;padding:0;background:transparent;scroll-margin-top:24px}
+.collection-nav {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+.collection-back {display:inline-flex;align-items:center;gap:10px;color:var(--ink);font:700 14px 'DM Sans',system-ui,sans-serif;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:5px;transition:color .2s ease}
+.collection-back:hover {color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
+.collection-head {margin-bottom:32px;padding:clamp(22px,4vw,42px);background:var(--surface-blush);border-radius:6px}
+.collection-head h3 {font-size:clamp(3rem,6vw,5.25rem);line-height:1.05}
+.collection .projects-grid {margin-bottom:12px}
+@media(max-width:760px) {.collection-nav {align-items:flex-start;flex-direction:column} .collection-head {padding:24px}}
+.collection .project-card-link .project-visual{transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
+.collection .project-card-link:hover .project-visual{transform:translateY(-5px);box-shadow:0 15px 30px #20334419}
+/* This hover rule now loads after legacy reduced-motion rules: repeat the
+   transform reset here so moving ownership never re-enables motion. */
+@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}
+.collection[data-active="alcon"] .collection-head {background:var(--surface-cream);color:var(--brand-navy)}
+.collection[data-active="holland-america"] .collection-head {background:var(--surface-navy);color:#fff}
+.collection[data-active="holland-america"] .collection-head p {color:inherit}
+.collection[data-active="alcon"] .collection-head p {color:inherit}
+@supports (view-transition-name:selected-company) {.collection .collection-head {animation:none}}
+
 /* Archive collection gallery: card geometry, evidence briefs and theme contrast.
    This is the sole owner of collection-specific presentation. */
 .collection .projects-grid{gap:clamp(22px,2.3vw,36px)}
@@ -379,6 +399,5 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mi
 }
 @media(max-width:760px){
  .collection .projects-grid{grid-template-columns:1fr;gap:30px}
- .collection .project-visual{aspect-ratio:16/10}
  .collection .project-visual .visual-brief{font-size:0.8125rem}
 }

@@ -509,7 +509,24 @@ assert.doesNotMatch(css, /\.featured-projects-grid\s*\{|\.notebook-project-index
 assert.match(workCss, /\.featured-projects-grid\{display:grid/, 'Work component must own archive grid');
 assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
-assert.match(html, /work-cards\.css\?v=20261030-archive-ownership/, 'Archive CSS version must be refreshed');
+assert.match(html, /work-cards\.css\?v=20261030-collection-extract/, 'Archive CSS version must be refreshed');
+
+// Collection navigation and active-client header rules are owned by work-cards.
+// Shared gallery animations and reduced-motion rules remain in the legacy sheet.
+assert.doesNotMatch(css, /^\.collection(?:-nav|-back|-head)(?:\s|\{|:|\[data-active)/m,
+ 'Collection navigation and client-header rules must not return to legacy CSS');
+assert.match(workCss, /\.collection-nav\s*\{display:flex/,
+ 'Work component must own collection navigation');
+assert.match(workCss, /\.collection\[data-active="alcon"\] \.collection-head/,
+ 'Work component must retain client header theme states');
+assert.doesNotMatch(css + workCss, /@keyframes collection-enter/,
+ 'Dead collection-enter keyframes must not return');
+const collectionHover = workCss.indexOf('.collection .project-card-link:hover .project-visual{transform:translateY(-5px)');
+const collectionReducedHover = workCss.indexOf('@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}');
+assert.ok(collectionHover >= 0 && collectionReducedHover > collectionHover,
+ 'Collection hover motion must be disabled after its component override');
+assert.match(html, /styles\.css\?v=20261030-collection-extract/,
+ 'Legacy CSS cache version must match the collection extraction');
 
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
 // This is a source-order guard only, not a measured color-contrast test.
