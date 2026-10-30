@@ -17,6 +17,7 @@ const caseCss = read('../public/components/case-study.css');
 const navigationCss = read('../public/components/navigation.css');
 const heroPolishCss = read('../public/components/hero-polish.css');
 const workCss = read('../public/components/work-cards.css');
+const homepageCss = read('../public/components/homepage-base.css');
 const playgroundCss = read('../public/components/playground.css');
 const visualPlaceholderCss = read('../public/components/visual-placeholders.css');
 const aboutCss = read('../public/components/about.css');
@@ -502,6 +503,13 @@ assert.match(caseCss, /\.case-view \.case-evidence-value\{margin:0\}/, 'Overview
 assert.doesNotMatch(script, /behavior:"instant"/, 'Scroll restoration should use a standard behavior value');
 
 
+// The old company chooser is no longer rendered by index.html or script.js.
+// Do not reintroduce its superseded CSS into the active project-card system.
+assert.doesNotMatch(css + homepageCss, /\.company-(?:grid|card|name|description)\b/,
+ 'Retired company chooser styles must not return');
+assert.match(workCss, /\.project-card \.project-meta span:last-child\{display:inline-block/,
+ 'Active project metadata arrow belongs to work-cards.css');
+
 // Archive presentation belongs to work-cards.css, not legacy overrides.
 // These structural checks do not replace browser geometry/contrast checks.
 assert.doesNotMatch(css, /\.featured-projects-grid\s*\{|\.notebook-project-index\s*\{|\.project-card-process\s*\{|\.project-card-cta\s*\{/,
@@ -509,7 +517,7 @@ assert.doesNotMatch(css, /\.featured-projects-grid\s*\{|\.notebook-project-index
 assert.match(workCss, /\.featured-projects-grid\{display:grid/, 'Work component must own archive grid');
 assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
-assert.match(html, /work-cards\.css\?v=20261030-collection-extract/, 'Archive CSS version must be refreshed');
+assert.match(html, /work-cards\.css\?v=20261030-company-retirement/, 'Archive CSS version must be refreshed');
 
 // Collection navigation and active-client header rules are owned by work-cards.
 // Shared gallery animations and reduced-motion rules remain in the legacy sheet.
@@ -525,7 +533,7 @@ const collectionHover = workCss.indexOf('.collection .project-card-link:hover .p
 const collectionReducedHover = workCss.indexOf('@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}');
 assert.ok(collectionHover >= 0 && collectionReducedHover > collectionHover,
  'Collection hover motion must be disabled after its component override');
-assert.match(html, /styles\.css\?v=20261030-collection-extract/,
+assert.match(html, /styles\.css\?v=20261030-company-retirement/,
  'Legacy CSS cache version must match the collection extraction');
 
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
