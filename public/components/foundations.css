@@ -1,7 +1,56 @@
 /* FOUNDATIONS: Fonts, global colors, focus styles, layout helpers and headings.
    Change one value at a time. Other component styles load after this file. */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400..800&display=swap');
-:root {--paper:var(--palette-paper);--ink:var(--brand-ink);--muted:color-mix(in srgb,var(--palette-navy) 78%,var(--palette-paper));--line:color-mix(in srgb,var(--palette-blue) 23%,var(--palette-paper));--teal:color-mix(in srgb,var(--palette-blue) 58%,var(--palette-navy));--clay:var(--brand-pink);--lilac:color-mix(in srgb,var(--palette-pink) 22%,var(--palette-paper));--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));font-family:var(--font-body);color:var(--ink);background:var(--paper);font-synthesis:none;--brand-pink:var(--palette-pink);--brand-ink:var(--palette-navy);--surface-blush:color-mix(in srgb,var(--palette-pink) 10%,var(--palette-paper));--surface-cream:color-mix(in srgb,var(--palette-pink) 7%,var(--palette-paper));--surface-navy:color-mix(in srgb,var(--palette-blue) 22%,var(--palette-navy));--night-bg:color-mix(in srgb,var(--palette-navy) 85%,black)}
+/* COLOR SETTINGS — edit these variables to change the whole site's palette.
+   --paper = page background, --ink = text, --muted = secondary text.
+   The dark-theme values below replace these when the theme toggle is on.
+   var(--name) means "reuse the value named --name". */
+:root {
+  --paper: color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue));
+  --ink: var(--brand-ink);
+  --muted: color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));
+  --line: #cbdde7;
+  --teal: color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));
+  --clay: var(--brand-pink);
+  --lilac: color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));
+  --focus: color-mix(in srgb,var(--palette-blue) 65%,var(--palette-navy));
+  --brand-pink: #f15c9d;
+  --brand-pink-text: var(--palette-pink);
+  --brand-ink: var(--palette-navy);
+  --brand-navy: var(--brand-ink);
+  --brand-sky: color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));
+  --surface-blush: color-mix(in srgb,var(--palette-pink) 10%,var(--palette-paper));
+  --surface-cream: color-mix(in srgb,var(--palette-pink) 7%,var(--palette-paper));
+  --surface-navy: color-mix(in srgb,var(--palette-blue) 22%,var(--palette-navy));
+  --night-bg: color-mix(in srgb,var(--palette-navy) 85%,black);
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+}
+/* DARK THEME COLORS (same variable names, different values)
+   These are reusable variables: --paper is the background, --ink is text,
+   --muted is secondary text, and --focus is the keyboard highlight.
+   Change the values here instead of adding another dark-mode override. */
+html[data-theme="dark"] {
+  --focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));
+  --muted:#c2d0df;
+  --line:#536a80;
+  --paper:color-mix(in srgb,var(--palette-navy) 65%,black);
+  --brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));
+  --ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));
+  --teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));
+  --clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));
+  --lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));
+  --brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));
+  --brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));
+  --surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));
+  --surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));
+  --surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));
+  color-scheme:dark;
+  background:var(--paper);
+}
+
 * {box-sizing:border-box}
 html {scroll-behavior:smooth}
 body {margin:0}
