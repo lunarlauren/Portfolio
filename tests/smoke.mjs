@@ -266,8 +266,12 @@ try{
  assert.match(await page.locator(".case-prose").innerText(),/Mobile Insights is a shipped product experience/,"Mobile Insights case study should describe its actual delivery status");
  assert.match(await page.locator(".case-evidence").innerText(),/Shipped product contribution/,"The project overview must identify Mobile Insights as shipped");
  assert.equal(await page.locator(".case-delivery-stamp").innerText(),"SHIPPED PRODUCT CONTRIBUTION","Shipped delivery must be visible above the fold");
- assert.match(await page.locator(".case-head .case-approach").innerText(),/insight-card hierarchy/i,
-  "Shipped Mobile Insights should lead with its documented design focus, not invented research");
+ const mobileApproach=await page.locator(".case-head .case-approach").innerText();
+ assert.match(mobileApproach,/Design approach/i);
+ assert.match(mobileApproach,/(?:stand out|priorit|hierarch|detail|tap)/i,
+  "Shipped Mobile Insights should show a concrete small-screen design rationale");
+ assert.doesNotMatch(mobileApproach,/\b(?:interviews proved|research showed|tested users)\b/i,
+  "Mobile Insights cover must not imply undocumented research");
  await page.goBack();
  assert.match(page.url(),/connected-planning/);
  await page.locator(".case-back").click();
