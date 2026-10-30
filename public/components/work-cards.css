@@ -360,6 +360,9 @@ html[data-theme="dark"] .work .featured-project.client-file{
 .collection-nav {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
 .collection-back {display:inline-flex;align-items:center;gap:10px;color:var(--ink);font:700 14px 'DM Sans',system-ui,sans-serif;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:5px;transition:color .2s ease}
 .collection-back:hover {color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
+/* Archive back link uses readable night-paper ink and a pink hover state. */
+html[data-theme="dark"] .collection-back{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
+html[data-theme="dark"] .collection-back:hover{color:#ffc2df}
 .collection-head {margin-bottom:32px;padding:clamp(22px,4vw,42px);background:var(--surface-blush);border-radius:6px}
 .collection-head h3 {font-size:clamp(3rem,6vw,5.25rem);line-height:1.05}
 .collection .projects-grid {margin-bottom:12px}
