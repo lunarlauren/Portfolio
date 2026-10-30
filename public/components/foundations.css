@@ -53,7 +53,7 @@ html[data-theme="dark"] {
 
 * {box-sizing:border-box}
 html {scroll-behavior:smooth}
-body {margin:0}
+body {margin:0;font-size:var(--type-body);line-height:var(--leading-body)}
 button,a {touch-action:manipulation}
 a {color:inherit}
 button {font:inherit}
@@ -80,7 +80,19 @@ html[data-theme="dark"] {
 .site-header nav {font-weight:600}
 .site-header nav a {text-decoration:none}
 .site-header nav a:hover,.text-link:hover {color:var(--teal)}
-.eyebrow {font-size:var(--type-eyebrow);letter-spacing:.16em;font-weight:700}
+/* Eyebrows are the small uppercase labels above sections and cards.
+   Their shared size and spacing live here; section-specific variants follow. */
+.eyebrow {
+ font-family:var(--font-body);
+ font-size:var(--type-xs);
+ line-height:1.5;
+ letter-spacing:.16em;
+ font-weight:700;
+ text-transform:uppercase;
+}
+.hero .eyebrow,.work .eyebrow,.about .eyebrow{color:var(--muted)}
+/* High-contrast mode keeps secondary labels fully legible. */
+@media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot{opacity:1;text-shadow:none}}
 .status-dot {display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
 .hero h1 {font-family:var(--font-display);font-size:var(--type-h1);font-weight:600;line-height:.99}
 .hero h1 em,.about h2 em {font-style:normal;color:var(--teal)}
@@ -126,7 +138,6 @@ section.work,section.playground,section.about {padding-block:85px}
 :where(h1){font-size:var(--type-h1);line-height:1.05}
 :where(h2){font-size:var(--type-h2);line-height:1.1}
 :where(h3){font-size:var(--type-h3);line-height:1.2}
-:where(.eyebrow){font-family:var(--font-body);font-size:var(--type-eyebrow);font-weight:700;letter-spacing:.16em;text-transform:uppercase}
 
 /* Shared archive/case route transitions; reduce motion across both views. */
 @supports (view-transition-name:selected-company) {
