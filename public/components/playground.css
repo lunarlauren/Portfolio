@@ -4,18 +4,14 @@
    here; shared card primitives and Work/archive rules remain in their owners. */
 
 /* Night-paper surface and editorial hierarchy. */
-.playground.wrap {max-width:none;padding:clamp(80px,9vw,120px) max(clamp(20px,5vw,72px),calc((100vw - 1176px)/2));color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));border:0;position:relative;overflow:hidden}
-.playground:before {content:"";position:absolute;inset:0;pointer-events:none}
+.playground.wrap {max-width:none;padding:clamp(80px,9vw,120px) max(clamp(20px,5vw,72px),calc((100vw - 1176px)/2));color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));background:var(--night-bg);border:0;position:relative;overflow:hidden}
+.playground:before {content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 85% 0%,#e65da35c,transparent 42%),radial-gradient(circle at 12% 95%,#497eab55,transparent 48%)}
 .playground>.section-head,.playground>.play-grid {position:relative;z-index:1}
 .playground .eyebrow {color:#a7b8d0}
-.playground .section-head h2 {color:#fff}
 .playground .project-card h3 {color:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue))}
 .playground .project-visual:not(:has(img)) {background:#1e3247!important;border-color:color-mix(in srgb,var(--palette-navy) 53%,var(--palette-paper))}
 .playground .project-visual:not(:has(img)) .visual-label {color:#c4d4e6;border-color:color-mix(in srgb,var(--palette-navy) 53%,var(--palette-paper))}
-.playground.wrap {background:var(--night-bg)}
-.playground:before {background:radial-gradient(circle at 85% 0%,#e65da35c,transparent 42%),radial-gradient(circle at 12% 95%,#497eab55,transparent 48%)}
 .playground .section-head>p,.playground .project-card p {color:#d0d9e5}
-.playground .project-meta {color:color-mix(in srgb,var(--palette-paper) 70%,var(--palette-pink))}
 .playground .project-visual .visual-brief {color:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))!important}
 .playground .project-visual .brief-kicker {color:#ffc4e0}
 
@@ -48,8 +44,7 @@ html[data-theme="dark"] .playground .section-head>p{
 
 /* Responsive rhythm: section padding, safe areas, and card stacking. */
 @media(max-width:760px){
- .playground.wrap{padding:75px 20px}
- .playground.wrap{padding-block:clamp(52px,10vw,72px)}
+ .playground.wrap{padding:clamp(52px,10vw,72px) 20px}
  .playground .section-head{margin-bottom:clamp(26px,6vw,42px)}
  .playground .section-head>p{font-size:clamp(1.0625rem,4.2vw,1.25rem);line-height:1.6;max-width:36ch}
 }
