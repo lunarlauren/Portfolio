@@ -39,8 +39,7 @@ footer a {text-decoration:none}
 .hero-foot {display:flex;gap:18px 24px;flex-wrap:wrap;margin-top:auto;padding-top:68px;font-size:0.625rem;font-weight:700;letter-spacing:.14em}
 .eyebrow-divider {margin-inline:10px}
 .hero-feature {position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;padding:25px;border-radius:3px}
-.feature-art {position:absolute;inset:14% 0 12%;display:grid;place-items:center;transform:rotate(-8deg);transition:transform .7s cubic-bezier(.2,.7,.2,1)}
-.hero-feature:hover .feature-art {transform:rotate(-2deg) scale(1.04)}
+.feature-art {position:absolute;inset:14% 0 12%;display:grid;place-items:center}
 .section-head h2 em {font-style:normal;color:var(--teal)}
 .project-card-link {display:block;text-decoration:none;outline-offset:5px}
 .project-card-link:hover .project-visual {filter:saturate(1.12)}
