@@ -54,7 +54,6 @@
 .featured-project .project-card-link:focus-visible{border-radius:12px}
 @media(max-width:760px){
  .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
- .featured-project .project-visual{aspect-ratio:16/10}
 }
 /* Featured project context: reveal documented UX reasoning without extra navigation.
    Long case-study paragraphs are visually clamped here; the full text remains in the case study. */
@@ -90,7 +89,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 .notebook-project-index .project-card-link:focus-visible{outline:3px solid var(--notebook-pink);outline-offset:4px}
 @media(max-width:420px){
- .notebook-project-index .featured-project{min-width:0}
  .notebook-project-index .project-card-link{overflow-wrap:break-word}
 }
 @media(min-width:1024px){
@@ -398,6 +396,5 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mi
 }
 @media(max-width:760px){
  .collection .projects-grid{grid-template-columns:1fr;gap:30px}
- .collection .project-visual{aspect-ratio:16/10}
  .collection .project-visual .visual-brief{font-size:0.8125rem}
 }
