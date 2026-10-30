@@ -213,11 +213,11 @@
   .about .about-bio { grid-column: 1; grid-row: 1; }
   .about .about-bio p { max-width: 59ch; margin: 0 0 1em; }
   .about .about-portrait {
-    float: none; grid-column: 2; grid-row: 1;
+    float: none; grid-column: 2; grid-row: 1 / span 2;
     width: 100%; max-width: 340px; margin: 0;
   }
   .about .about-portrait img { border-radius: 12px; border: 1px solid var(--line); }
-  .about .ai-process { max-width: 70ch; margin-top: 26px; }
+  .about .about-intro > .ai-process { grid-column: 1; grid-row: 2; max-width: 59ch; margin: 10px 0 0; }
 }
 /* Contact invitation: keep the label short and the arrow in its own visual
    space. A restrained accent reads as a deliberate action, not a long banner. */
