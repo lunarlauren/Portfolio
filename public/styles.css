@@ -138,18 +138,18 @@ html,body{max-width:100%;overflow-x:clip}
 .hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
 .hero .eyebrow,.work .eyebrow,.about .eyebrow{color:var(--muted)}
 
-.case-fact-label,.brief-kicker{font-size:0.75rem;line-height:1.5}
+.brief-kicker{font-size:0.75rem;line-height:1.5}
 .eyebrow,.project-meta,.card-top,.card-bottom{font-size:max(0.75rem,1em)}
-@media(max-width:760px){.case-fact-label,.brief-kicker{letter-spacing:.08em}}
+@media(max-width:760px){.brief-kicker{letter-spacing:.08em}}
 
 .collection:focus,.case-view:focus,#work-title:focus,.collection-head h3:focus{outline:none!important;box-shadow:none!important}
 
 /* Type scale lives in components/foundations.css. */
 body{font-size:var(--type-body);line-height:1.6}
-.site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.case-facts,.case-fact-label,.brief-kicker{font-size:var(--type-xs);line-height:1.5}
+.site-header nav,.eyebrow,.hero-foot,.feature-top,.feature-bottom,.card-top,.card-bottom,.project-meta,.brief-kicker{font-size:var(--type-xs);line-height:1.5}
 .project-card p,.company-description,.case-back,footer{font-size:var(--type-sm);line-height:1.6}
-.hero-description,.about-bottom p,.case-prose p{line-height:var(--leading-reading,1.65)}
-@media(max-width:760px){.hero-description,.about-bottom p,.case-prose p{font-size:1rem}.project-card p{font-size:0.875rem}}
+.hero-description,.about-bottom p{line-height:var(--leading-reading,1.65)}
+@media(max-width:760px){.hero-description,.about-bottom p{font-size:1rem}.project-card p{font-size:0.875rem}}
 
 
 
@@ -174,7 +174,7 @@ html[data-theme="dark"] .company-card{color:var(--ink)}
 html[data-theme="dark"] .company-card.featured{background:#4c2945;color:#fff}
 html[data-theme="dark"] .company-card:not(.featured){background:#1c3042;color:var(--ink)}
 html[data-theme="dark"] .company-card:not(.featured) .company-description{color:#c8d7e3}
-html[data-theme="dark"] .project-card-link,html[data-theme="dark"] .collection,html[data-theme="dark"] .case-view{color:var(--ink)}
+html[data-theme="dark"] .project-card-link,html[data-theme="dark"] .collection{color:var(--ink)}
 html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
 html[data-theme="dark"] .visual-label,html[data-theme="dark"] .visual-brief,html[data-theme="dark"] .brief-kicker{color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue))}
 
@@ -215,20 +215,16 @@ html[data-theme="dark"] .site-header nav a,
 html[data-theme="dark"] .site-header .header-contact,
 html[data-theme="dark"] .quiet-link,
 html[data-theme="dark"] .text-link,
-html[data-theme="dark"] .case-back,
 html[data-theme="dark"] .collection-back{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
 html[data-theme="dark"] .site-header nav a:hover,
 html[data-theme="dark"] .quiet-link:hover,
 html[data-theme="dark"] .text-link:hover,
-html[data-theme="dark"] .case-back:hover,
 html[data-theme="dark"] .collection-back:hover{color:#ffc2df}
 html[data-theme="dark"] .eyebrow,
-html[data-theme="dark"] .project-meta,
-html[data-theme="dark"] .case-fact-label{color:#c6d5e2}
+html[data-theme="dark"] .project-meta{color:#c6d5e2}
 html[data-theme="dark"] .hero-description,
 html[data-theme="dark"] .section-head>p,
 html[data-theme="dark"] .about-copy p,
-html[data-theme="dark"] .case-prose p,
 html[data-theme="dark"] .project-card p{color:#d7e3ed}
 html[data-theme="dark"] .company-card[data-company="hoylu"] .company-description,
 html[data-theme="dark"] .company-card[data-company="alcon"] .company-description,
@@ -353,13 +349,8 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  
  .notebook-project-index .project-card-link{display:block;min-height:44px}
  .notebook-project-index .featured-project{isolation:isolate}
- .case-section-links button{min-height:44px;touch-action:manipulation}
- .case-next-nav a,.case-back{min-height:44px;display:inline-flex;align-items:center}
 }
-.notebook-project-index .project-card-link:focus-visible,
-.case-section-links button:focus-visible,
-.case-next-nav a:focus-visible,
-.case-back:focus-visible{outline:3px solid var(--notebook-pink);outline-offset:4px}
+.notebook-project-index .project-card-link:focus-visible{outline:3px solid var(--notebook-pink);outline-offset:4px}
 
 
 /* Phone hero and project index sizing. Header layout belongs to components/navigation.css. */
@@ -428,9 +419,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 @media(max-width:600px){
  .hero.wrap,.work.wrap,.about.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
- .case-view .case-section-links{scrollbar-width:none}
- .case-view .case-section-links::-webkit-scrollbar{display:none}
- /* No one-sided fade: it obscured the final chapter and focus outline. */
 }
 @media(prefers-reduced-motion:reduce){
  :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active{filter:none}
