@@ -263,15 +263,6 @@ html[data-theme="dark"] .skip-link:focus-visible{outline:3px solid color-mix(in 
 
 
 
-/* NOTEBOOK VISUAL SYSTEM — pass 1
-   Decorative ruled paper lives behind content, never over screenshots. */
-:root{--notebook-blue:color-mix(in srgb,var(--palette-paper) 45%,var(--palette-blue));--notebook-pink:#f05b9f;--notebook-paper:#fffdf8;--notebook-rule:rgba(100,169,218,.22);--notebook-margin-offset:13px;--notebook-margin-opacity:.45}
-html:not([data-theme="dark"]) body{background:var(--notebook-paper)}
-html:not([data-theme="dark"]) :is(.hero,.work,.about){
- background-image:linear-gradient(90deg,transparent 0,transparent var(--notebook-margin-offset),rgba(240,91,159,var(--notebook-margin-opacity)) var(--notebook-margin-offset),rgba(240,91,159,var(--notebook-margin-opacity)) calc(var(--notebook-margin-offset) + 2px),transparent calc(var(--notebook-margin-offset) + 2px)),
- repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px);
- background-position:0 0;background-size:100% 32px;
-}
 html:not([data-theme="dark"]) .hero{border-radius:22px;position:relative}
 html:not([data-theme="dark"]) .hero-copy,
 html:not([data-theme="dark"]) .section-head{position:relative;z-index:1}
@@ -413,11 +404,7 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 /* Desktop screenshot QA: the portrait must not obscure card metadata; reserve
    a clear footer lane and keep notebook rules out of the hero display type. */
 @media(min-width:1024px){
- html:not([data-theme="dark"]) .hero{
-  background-image:linear-gradient(90deg,transparent 0,transparent var(--notebook-margin-offset),rgba(240,91,159,var(--notebook-margin-opacity)) var(--notebook-margin-offset),rgba(240,91,159,var(--notebook-margin-opacity)) calc(var(--notebook-margin-offset) + 2px),transparent calc(var(--notebook-margin-offset) + 2px));
-  background-size:100% 100%;
- }
- .hero .hero-feature{position:relative}
+  .hero .hero-feature{position:relative}
  /* Give the footer its own text column; the portrait occupies the
     opposite corner and can no longer cover either caption. */
  .hero .hero-feature .feature-bottom{
@@ -470,27 +457,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
   text-decoration-thickness:1px;
   text-underline-offset:5px;
  }
-}
-
-
-/* Dot-grid paper: blue dots only, without ruled-paper margin.
-   Independent of text baselines; dark mode remains unruled. */
-:root{
- --notebook-dot-color:rgba(100,169,218,.32);
- --notebook-dot-step:30px;
- --notebook-dot-radius:1px;
-}
-/* Paint the dots on the full-width page, not individual max-width
-   sections. One continuous coordinate system prevents seams and gutters. */
-html:not([data-theme="dark"]) body{
- background-color:var(--notebook-paper);
- background-image:radial-gradient(circle,var(--notebook-dot-color) var(--notebook-dot-radius),transparent 1.4px);
- background-size:var(--notebook-dot-step) var(--notebook-dot-step);
- background-position:0 0;
-}
-html:not([data-theme="dark"]) :is(.hero,.work,.about){
- background-image:none;
- background-color:transparent;
 }
 
 

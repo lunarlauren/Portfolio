@@ -98,6 +98,27 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix
 
 
 
+/* Full-width notebook surface, shared by light and dark themes.
+   Retired ruled-paper layers once competed with this dot grid in styles.css.
+   Keep section surfaces transparent so dots align across section gutters. */
+:root{
+ --notebook-paper:#fffdf8;
+ --notebook-pink:#f05b9f;
+ --notebook-dot-color:rgba(100,169,218,.32);
+ --notebook-dot-step:30px;
+ --notebook-dot-radius:1px;
+}
+html:not([data-theme="dark"]) body{
+ background-color:var(--notebook-paper);
+ background-image:radial-gradient(circle,var(--notebook-dot-color) var(--notebook-dot-radius),transparent 1.4px);
+ background-size:var(--notebook-dot-step) var(--notebook-dot-step);
+ background-position:0 0;
+}
+html:not([data-theme="dark"]) :is(.hero,.work,.about){
+ background-image:none;
+ background-color:transparent;
+}
+
 /* Night stationery: the same full-width dot grid as light paper,
    recolored to a muted blue-gray so the texture stays behind the work.
    Section backgrounds remain transparent to avoid visible seams. */

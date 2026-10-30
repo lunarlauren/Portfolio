@@ -690,6 +690,16 @@ assert.match(caseCss, /\.case-view \.case-section-links button\{\s*min-height:44
 assert.match(caseCss, /\.case-view \.case-section-links button:focus-visible/, 'Case chapter controls must show focus');
 assert.match(stationeryCss, /@media\(prefers-reduced-motion:reduce\)/, 'Stationery interactions must honor reduced motion');
 assert.match(stationeryCss, /transition:none;/, 'Reduced motion must disable highlight transitions');
+/* Notebook texture is owned by stationery.css. The legacy ruled-paper layer
+   was always overwritten by the later dot-grid rule, so keep it retired. */
+assert.doesNotMatch(css, /--notebook-(?:dot-(?:color|step|radius)|paper|pink|rule|margin-offset|margin-opacity)\s*:/,
+ 'Legacy stylesheet must not redefine stationery surface tokens');
+assert.doesNotMatch(css, /repeating-linear-gradient\(to bottom,transparent 0,transparent 31px/,
+ 'Retired ruled-paper background must not return');
+assert.match(stationeryCss, /html:not\(\[data-theme="dark"\]\) body\{[\s\S]*?background-image:radial-gradient/,
+ 'Stationery component must own light dot-grid surface');
+assert.match(stationeryCss, /html\[data-theme="dark"\] body\{[\s\S]*?background-image:radial-gradient/,
+ 'Stationery component must retain dark dot-grid surface');
 
 // Pass 15: footer must paint a solid themed surface, not expose notebook dots.
 assert.ok(navigationCss.includes('background:var(--site-chrome-bg);'), 'Footer must reset inherited background layers');
