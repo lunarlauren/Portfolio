@@ -171,3 +171,6 @@ The featured project grid, notebook index card layout, UX-process preview labels
 
 ### 2026-10-30 — Retired company chooser cleanup
 The old `.company-grid`/`.company-card` chooser is not rendered by the current `index.html`, `script.js`, or project content scripts. Its unused layout, color, dark-mode, and motion rules were removed from `styles.css` and `homepage-base.css` rather than migrated as dead CSS. Active project metadata arrow behavior now lives in `components/work-cards.css`; the shared reduced-motion guard remains in `styles.css`. Keep current client-file cards, documented UX-process previews, theme contrast, and intentional visual placeholders intact. Do not restore obsolete company selectors without introducing an actual accessible component and corresponding tests.
+
+## Retired hero decoration CSS (2026-10-30)
+The hero displays the supplied portrait without old orbit, tile, and caption chrome at every viewport width. `hero-polish.css` hides the decorative markup; obsolete CSS was removed from `styles.css` and `homepage-base.css`. Keep active `.feature-art` positioning and portrait image rules. The separate portrait-first PR #17 was not edited.
