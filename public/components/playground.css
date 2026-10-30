@@ -1,0 +1,86 @@
+/* AFTER HOURS / PLAYGROUND
+   This section is intentionally dark in BOTH page themes.
+   Keep its editorial surface, project-card contrast, and responsive layout
+   here; shared card primitives and Work/archive rules remain in their owners. */
+
+/* Night-paper surface and editorial hierarchy. */
+.playground.wrap {max-width:none;padding:clamp(80px,9vw,120px) max(clamp(20px,5vw,72px),calc((100vw - 1176px)/2));color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));background:var(--night-bg);border:0;position:relative;overflow:hidden}
+.playground:before {content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 85% 0%,#e65da35c,transparent 42%),radial-gradient(circle at 12% 95%,#497eab55,transparent 48%)}
+.playground>.section-head,.playground>.play-grid {position:relative;z-index:1}
+.playground .eyebrow {color:#a7b8d0}
+.playground .project-card h3 {color:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue))}
+.playground .project-visual:not(:has(img)) {background:#1e3247!important;border-color:color-mix(in srgb,var(--palette-navy) 53%,var(--palette-paper))}
+.playground .project-visual:not(:has(img)) .visual-label {color:#c4d4e6;border-color:color-mix(in srgb,var(--palette-navy) 53%,var(--palette-paper))}
+.playground .section-head>p,.playground .project-card p {color:#d0d9e5}
+.playground .project-visual .visual-brief {color:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))!important}
+.playground .project-visual .brief-kicker {color:#ffc4e0}
+
+/* The heading has no generated star; its title and color are explicit. */
+.playground .section-head h2{display:block!important;visibility:visible!important;opacity:1!important;color:#fff!important;position:relative;z-index:1}
+.playground .section-head h2::after{content:none!important}
+.playground .section-head .playground-title{display:block!important;position:relative;z-index:2;visibility:visible!important;opacity:1!important;color:#fff!important;font:600 clamp(35px,5vw,66px)/1.1 'Newsreader',Georgia,serif!important;margin:14px 0 0!important;max-width:100%;height:auto!important;overflow:visible!important}
+.playground .section-head .playground-title::before,.playground .section-head .playground-title::after{content:none!important;display:none!important}
+
+/* Keep project process evidence readable on the dark surface in either theme. */
+.playground .project-card .project-card-process{color:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue));border-top-color:#8da5bd}
+.playground .project-card .project-card-process strong{color:color-mix(in srgb,var(--palette-paper) 65%,var(--palette-pink))}
+.playground .project-card .project-card-cta{color:#f3f7ff}
+.playground .project-card .project-meta{color:#f4bfd9}
+.playground .project-card .project-card-process,
+.playground .project-card .project-card-process p{opacity:1}
+
+/* Light notebook paragraph rules must never paint over this night section.
+   Both selectors are intentional: specificity beats the generic paper rule. */
+html:not([data-theme="dark"]) .playground .section-head>p,
+html[data-theme="dark"] .playground .section-head>p{
+ background:transparent;
+ color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ -webkit-box-decoration-break:initial;
+ box-decoration-break:initial;
+}
+
+/* Keyboard focus uses the shared ring, with higher contrast at night. */
+.playground .project-card-link:focus-visible{outline-color:#a7d9ff}
+
+/* Responsive rhythm: section padding, safe areas, and card stacking. */
+@media(max-width:760px){
+ .playground.wrap{padding:clamp(52px,10vw,72px) 20px}
+ .playground .section-head{margin-bottom:clamp(26px,6vw,42px)}
+ .playground .section-head>p{font-size:clamp(1.0625rem,4.2vw,1.25rem);line-height:1.6;max-width:36ch}
+}
+@media(max-width:600px){
+ .playground.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+}
+@media(min-width:1024px){
+ .playground.wrap{padding-block:clamp(42px,5vw,68px)}
+ .playground .section-head{margin-bottom:clamp(28px,3vw,42px)}
+ .playground .section-head{
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(0,1fr);
+  gap:clamp(20px,2.5vw,36px);
+  align-items:center;
+ }
+ .playground .section-head>p{justify-self:start;max-width:38ch;margin:0}
+ .playground .section-head h2{margin-bottom:0}
+}
+@media(min-width:1024px) and (max-height:800px){
+ .playground.wrap{padding-block:36px}
+ .playground .section-head{margin-bottom:26px}
+}
+
+/* Stretch cards consistently on wider screens without hiding real imagery. */
+@media(min-width:761px){
+ .playground .play-grid{align-items:stretch}
+ .playground .play-grid>.project-card{display:flex;min-width:0}
+ .playground .play-grid .project-card-link{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+ }
+ .playground .play-grid .project-card-cta{margin-top:auto;padding-top:20px}
+ .playground .play-grid .project-card-process{margin-bottom:0}
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .playground .play-grid .project-card-link:hover .project-visual{box-shadow:none}
+}
