@@ -17,6 +17,7 @@ const caseCss = read('../public/components/case-study.css');
 const navigationCss = read('../public/components/navigation.css');
 const heroPolishCss = read('../public/components/hero-polish.css');
 const workCss = read('../public/components/work-cards.css');
+const playgroundCss = read('../public/components/playground.css');
 const aboutCss = read('../public/components/about.css');
 const stationeryCss = read('../public/components/stationery.css');
 // Theme state is part of the accessible light/dark experience. Exercise the
@@ -58,7 +59,7 @@ const stationeryCss = read('../public/components/stationery.css');
 }
 
 // Component ownership and stylesheet order are part of the visual contract.
-const stylesheetOrder = ['styles.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'case-study.css'];
+const stylesheetOrder = ['styles.css', 'playground.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'case-study.css'];
 let previousPosition = -1;
 for (const name of stylesheetOrder) {
  const match = html.indexOf('/' + (name === 'styles.css' ? name : 'components/' + name));
@@ -500,9 +501,15 @@ assert.doesNotMatch(script, /behavior:"instant"/, 'Scroll restoration should use
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
 // This is a source-order guard only, not a measured color-contrast test.
 const genericPaperRule = css.indexOf('html:not([data-theme="dark"]) .section-head>p');
-const playgroundContrastRule = css.lastIndexOf('html:not([data-theme="dark"]) .playground .section-head>p');
-assert.ok(genericPaperRule >= 0 && playgroundContrastRule > genericPaperRule, 'Playground contrast override must follow the notebook-paper rule');
-assert.match(css.slice(playgroundContrastRule, playgroundContrastRule + 260), /background:transparent/, 'Playground intro must not inherit paper background');
+const playgroundContrastRule = playgroundCss.indexOf('html:not([data-theme="dark"]) .playground .section-head>p');
+assert.ok(genericPaperRule >= 0 && playgroundContrastRule >= 0,
+ 'Playground contrast rule must be present in the later-loaded component stylesheet');
+assert.match(playgroundCss.slice(playgroundContrastRule, playgroundContrastRule + 260),
+ /background:transparent/, 'Playground intro must not inherit paper background');
+assert.doesNotMatch(css, /\\.playground\\s+\\.section-head>p/,
+ 'Playground paragraph rules must not return to legacy CSS');
+assert.doesNotMatch(css + playgroundCss, /sparkle-button|night-sparkles|night-twinkle/,
+ 'Removed sparkle interaction must not retain unused CSS');
 assert.doesNotMatch(caseStudy, /case-section-context/, 'Chapter navigation must not reintroduce the redundant project-title inset');
 assert.match(caseStudy, /<nav class="case-section-links" aria-label="On this case study">/, 'Sticky chapter navigation must retain an accessible name');
 // Visual briefs are editorial placeholders, not screenshots. Keep the gallery's
