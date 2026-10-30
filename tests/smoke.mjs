@@ -266,6 +266,19 @@ try{
  assert.match(await brief.innerText(),/ILLUSTRATIVE.*NOT A PRODUCT SCREENSHOT/);
  const desktopBriefHeight=await brief.evaluate(node=>node.getBoundingClientRect().height);
  assert.ok(desktopBriefHeight>=200&&desktopBriefHeight<=340,"Desktop brief should be compact without clipping its copy");
+ // The old light-only !important surface leaked into dark mode.
+ // Check computed surfaces and keep the no-image border visible.
+ const heroThemeSurfaces=await page.evaluate(()=>{
+  const node=document.querySelector(".case-hero-visual:not(:has(img))");
+  return ["light","dark"].map(theme=>{
+   document.documentElement.dataset.theme=theme;
+   const css=getComputedStyle(node);
+   return {theme,bg:css.backgroundColor,borderStyle:css.borderTopStyle};
+  });
+ });
+ assert.notEqual(heroThemeSurfaces[0].bg,heroThemeSurfaces[1].bg,"Hero placeholder must adapt to dark theme");
+ assert.ok(heroThemeSurfaces.every(surface=>surface.borderStyle==="dashed"),"Missing hero artwork needs a dashed editorial border in both themes");
+ await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
  await page.setViewportSize({width:390,height:844});
  const phoneBriefHeight=await brief.evaluate(node=>node.getBoundingClientRect().height);
  assert.ok(phoneBriefHeight>=190&&phoneBriefHeight<=320,"Phone brief should not bury the UX narrative");
