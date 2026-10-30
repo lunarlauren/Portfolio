@@ -289,3 +289,13 @@ html[data-theme="dark"] .creative-inventory .inventory-inspect p{color:#dce7f1}
 @media(max-width:600px){
  .about .ai-process{margin-top:34px;margin-bottom:30px;padding-left:17px}
 }
+
+/* About without the former inventory: give the biography the full reading width. */
+.about .about-bottom{
+ display:block;
+ max-width:76ch;
+}
+.about .about-copy{width:100%;max-width:76ch}
+@media(min-width:901px){
+ .about .about-bottom{display:block;max-width:76ch}
+}
