@@ -513,15 +513,15 @@ assert.match(html, /work-cards\.css\?v=20261030-collection-extract/, 'Archive CS
 
 // Collection navigation and active-client header rules are owned by work-cards.
 // Shared gallery animations and reduced-motion rules remain in the legacy sheet.
-assert.doesNotMatch(css, /^\\.collection(?:-nav|-back|-head)(?:\\s|\\{|:|\\[data-active)/m,
+assert.doesNotMatch(css, /^\.collection(?:-nav|-back|-head)(?:\s|\{|:|\[data-active)/m,
  'Collection navigation and client-header rules must not return to legacy CSS');
-assert.match(workCss, /\\.collection-nav\\s*\\{display:flex/,
+assert.match(workCss, /\.collection-nav\s*\{display:flex/,
  'Work component must own collection navigation');
-assert.match(workCss, /\\.collection\\[data-active="alcon"\\] \\.collection-head/,
+assert.match(workCss, /\.collection\[data-active="alcon"\] \.collection-head/,
  'Work component must retain client header theme states');
 assert.doesNotMatch(css + workCss, /@keyframes collection-enter/,
  'Dead collection-enter keyframes must not return');
-assert.match(html, /styles\\.css\\?v=20261030-collection-extract/,
+assert.match(html, /styles\.css\?v=20261030-collection-extract/,
  'Legacy CSS cache version must match the collection extraction');
 
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
