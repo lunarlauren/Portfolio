@@ -42,21 +42,21 @@
    CTA and keep open space around the art so the portrait leads. */
 @media(max-width:600px){
  .hero.wrap{
-  display:flex;flex-direction:column;align-items:stretch;gap:0;
+  display:flex;flex-direction:column;align-items:center;gap:0;
   min-height:0;padding-top:clamp(36px,9vw,48px);padding-bottom:clamp(36px,8vw,50px)
  }
  .hero .hero-copy{display:contents}
  .hero .hero-copy>.eyebrow{
-  order:1;margin:0 0 18px;font-size:.625rem;line-height:1.55;
+  order:1;margin:0 0 18px;font-size:.625rem;line-height:1.55;text-align:center;
   letter-spacing:.045em;text-wrap:balance
  }
  .hero .hero-copy>h1{
-  order:3;margin:0 0 clamp(20px,5vw,28px);max-width:16ch;
+  order:3;margin:0 0 clamp(20px,5vw,28px);max-width:100%;text-align:center;text-wrap:balance;
   font-size:clamp(2.05rem,7.8vw,2.75rem);
   line-height:1.12;letter-spacing:-.035em
  }
  .hero .hero-feature{
-  order:2;min-height:0!important;height:clamp(225px,61vw,300px)!important;
+  order:2;width:100%;min-height:0!important;height:clamp(225px,61vw,300px)!important;
   margin:0 0 18px;padding:0!important;overflow:hidden;
   background:transparent!important;border:0!important;box-shadow:none!important
  }
@@ -74,10 +74,10 @@
  /* The note repeats the introduction on phones; retain it on larger screens. */
  .hero .notebook-hero-note{display:none!important}
  .hero .hero-description{
-  order:5;margin:0;max-width:34ch;font-size:1rem;
+  order:5;margin:0;max-width:38ch;font-size:1rem;text-align:center;
   line-height:1.62;text-wrap:pretty
  }
- .hero .hero-actions{order:6;width:100%;align-items:flex-start;margin-top:26px;gap:var(--space-2)}
+ .hero .hero-actions{order:6;width:100%;align-items:center;justify-content:center;margin-top:26px;gap:var(--space-2)}
  .hero .hero-actions .primary-link{
   width:auto;min-width:min(100%,238px);min-height:48px;
   justify-content:space-between;gap:24px;box-sizing:border-box
