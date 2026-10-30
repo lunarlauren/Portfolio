@@ -24,6 +24,10 @@ html[data-theme="dark"]{
 html[data-theme="dark"] .header-contact:hover{
  background:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));
 }
+/* Dark navigation links outside .header-actions retain the same contrast.
+   Header-action links below have their own more specific color treatment. */
+html[data-theme="dark"] .site-header nav a{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
+html[data-theme="dark"] .site-header nav a:hover{color:#ffc2df}
 html[data-theme="dark"] .site-header .header-actions nav a,
 html[data-theme="dark"] .site-header .header-contact{color:var(--ink)}
 html[data-theme="dark"] .site-header .header-actions nav a:hover,
