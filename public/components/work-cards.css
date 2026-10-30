@@ -163,8 +163,8 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  display:flex;
  align-items:center;
  justify-content:flex-start;
- background:color-mix(in srgb,var(--file-tint) 12%,#fffdf8);
- border:1px dashed #bccbd4;
+ background:var(--archive-preview);
+ border:1px dashed var(--archive-preview-edge);
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
  max-width:54ch;
@@ -173,7 +173,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
  font-size:0.75rem;
  line-height:1.5;
  letter-spacing:normal;
- color:#526477;
+ color:var(--archive-preview-text);
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .brief-kicker{
  display:block;
@@ -232,14 +232,6 @@ html[data-theme="dark"] .work .featured-project.client-file{
  --archive-facts-edge:color-mix(in srgb,var(--palette-blue) 35%,var(--palette-navy));
  --archive-focus-edge:color-mix(in srgb,var(--file-accent) 75%,white);
 }
-.work .featured-project.client-file .project-visual:not(:has(img)){
- background:var(--archive-preview);
- border:1px dashed var(--archive-preview-edge);
-}
-.work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
- color:var(--archive-preview-text);
-}
-
 /* One readable metadata divider across both paper themes. */
 .work .featured-project.client-file .project-card-facts{
  border-block-color:var(--archive-facts-edge);
