@@ -111,7 +111,7 @@ assert.match(aboutPortraitMarkup, /alt="Portrait photograph of Lauren Leven"/,
 
 // Phone About has one clear visual introduction rather than a full-screen
 // heading followed by a detached centered headshot and oversized body copy.
-// Preserve the genuine photo, biography, and separate interactive inventory.
+// Preserve the genuine photo, biography, and one-column About reading order.
 const phoneAboutCss = aboutCss.slice(aboutCss.lastIndexOf('@media (max-width: 600px)'));
 assert.ok(phoneAboutCss.startsWith('@media (max-width: 600px)'), 'About needs a dedicated phone layout owner');
 assert.match(phoneAboutCss, /\.about h2\s*\{[^}]*font-size:\s*clamp\(/,
@@ -125,8 +125,14 @@ assert.match(phoneAboutCss, /\.about \.about-portrait img\s*\{[^}]*object-fit:\s
 assert.match(phoneAboutCss, /\.about \.about-copy p\s*\{[^}]*line-height:\s*1\.55/,
  'Mobile biography should retain legible reading leading');
 assert.match(html, /03 \/ ABOUT ME/, 'About section label must describe its content');
-assert.match(html, /class="creative-inventory" aria-labelledby="inventory-title"/,
- 'About inventory must retain its accessible title and interaction');
+assert.match(aboutCss, /\.about \.about-bottom\s*\{[^}]*display:\s*block/,
+ 'About should have one readable column after removing the inventory');
+assert.match(html, /class="ai-process" aria-labelledby="ai-process-title"/,
+ 'About should keep its accessible AI process note');
+assert.doesNotMatch(html, /creative-inventory|inventory-inspect|components\/inventory\.js/,
+ 'Removed inventory must not be rendered or loaded');
+assert.doesNotMatch(css+aboutCss+stationeryCss+script, /creative-inventory|\.inventory-(?:item|grid|heading|icon|inspect)/,
+ 'Removed inventory must not retain dead styles or reveal behavior');
 
 assert.doesNotMatch(css, /\/\* Case-study handoff: quick factual overview/, 'Case evidence must not return to legacy CSS');
 assert.match(caseCss, /\.case-evidence-item\{/, 'Case evidence must remain in case-study component');
