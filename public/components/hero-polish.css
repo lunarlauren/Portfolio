@@ -99,3 +99,31 @@
   .hero .hero-foot { margin-top: 0; padding-top: clamp(28px, 4vh, 52px); }
   .hero .hero-copy h1 { max-width: 16ch; }
 }
+
+/* Desktop art uses the same clean, unframed presentation as the phone.
+   Preserve the illustration itself; hide only its decorative container. */
+@media (min-width: 601px) {
+  .hero .hero-feature {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    overflow: visible;
+  }
+  .hero .hero-feature::before,
+  .hero .hero-feature::after,
+  .hero .feature-top,
+  .hero .feature-bottom,
+  .hero .art-orbit,
+  .hero .art-tile { display: none; }
+  .hero .feature-art {
+    inset: 0;
+    transform: none;
+    filter: none;
+  }
+  .hero .hero-feature:hover .feature-art { transform: none; }
+  .hero .feature-art .hero-portrait-art {
+    width: min(100%, 460px);
+    transform: none;
+  }
+}
