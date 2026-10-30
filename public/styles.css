@@ -193,7 +193,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
  .hero .hero-description{font-size:clamp(1.0625rem,4.3vw,1.25rem);line-height:1.65}
  .hero .hero-actions{gap:14px 18px;margin-top:clamp(28px,7vw,40px)}
  .hero .primary-link{min-height:52px}
- .hero-feature{padding:clamp(20px,5vw,28px);min-height:clamp(340px,90vw,440px)}
 }
 
 
