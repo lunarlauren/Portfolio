@@ -98,6 +98,35 @@ try{
  assert.equal(playGridColumns,1,"Playground cards must stack on narrow phones");
  await page.setViewportSize({width:1280,height:720});
 
+ // Archive CSS now belongs to work-cards.css. Check computed layout and
+ // card surfaces in both themes and at desktop/phone widths after extraction.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  const surfaces=[];
+  for(const theme of ["light","dark"]){
+   const archive=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const grid=document.querySelector(".work .featured-projects-grid");
+    const card=grid?.querySelector(".featured-project.client-file");
+    const process=card?.querySelector(".project-card-process");
+    return {
+     found:!!grid&&!!card&&!!process,
+     columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(" ").filter(Boolean).length:0,
+     surface:card?getComputedStyle(card).backgroundColor:null,
+     approachVisible:!!process&&getComputedStyle(process).display!=="none"
+    };
+   },theme);
+   assert.equal(archive.found,true,"Work archive and documented process teaser must render");
+   assert.equal(archive.columns,width<=760?1:2,"Work archive columns must match viewport width");
+   assert.notEqual(archive.surface,"rgba(0, 0, 0, 0)","Archive card must have a solid surface");
+   assert.equal(archive.approachVisible,true,"Documented design approach teaser must remain visible");
+   surfaces.push(archive.surface);
+  }
+  assert.notEqual(surfaces[0],surfaces[1],"Archive card must adapt to light and dark themes");
+ }
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+ await page.setViewportSize({width:1280,height:720});
+
  // Accessible link navigation should expose challenge, reviewed contribution,
  // and the visible design approach—not just a generic case-study action.
  const cardDescriptions=await page.locator('.work .project-card-link').first().evaluate(link=>
