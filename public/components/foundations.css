@@ -18,6 +18,11 @@ button {font:inherit}
    The primary CTA intentionally retains its wider ring. */
 html[data-theme="dark"] :where(a,button):focus-visible {outline-offset:4px}
 html[data-theme="dark"] .primary-link:focus-visible {outline-offset:5px}
+/* Reuse these colors for readable dark-theme links across components. */
+html[data-theme="dark"] {
+ --night-link-ink:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ --night-link-hover:#ffc2df;
+}
 .skip-link {padding:12px}
 .skip-link:focus {top:12px}
 .wrap {max-width:1320px;margin:auto;padding-inline:clamp(20px,5vw,72px)}
