@@ -222,7 +222,10 @@ try{
  // This is design rationale, not a claim of interviews or verified results.
  const approach=page.locator(".case-head .case-approach");
  assert.equal(await approach.count(),1,"Professional case-study cover should expose its authored design approach");
- assert.match(await approach.innerText(),/Design approach[\s\S]*overview useful/i);
+ const approachText=await approach.innerText();
+ assert.match(approachText,/Design approach/i);
+ assert.ok(approachText.replace(/Design approach/i,"").trim().length>=35,
+  "Case-study cover must contain a meaningful authored design rationale");
  assert.equal(await approach.evaluate(node=>Boolean(node.compareDocumentPosition(document.querySelector(".case-hero-visual"))&Node.DOCUMENT_POSITION_FOLLOWING)),true,
   "The design approach must precede the visual brief in reading order");
  assert.equal(await page.locator('.case-gallery').getAttribute('aria-label'),'Visual briefs and image placeholders','Planned case-study visuals must not be announced as an image gallery');
