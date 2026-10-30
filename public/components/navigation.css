@@ -1,6 +1,41 @@
-/* Navigation: the authoritative responsive header layout and footer mark.
-   The legacy stylesheet owns desktop chrome, while this file owns layout
-   at 650px and below. Keep mobile breakpoints and hit areas together. */
+/* Navigation owns header geometry, theme surfaces and Aero glass.
+   Opaque fallback keeps text legible where backdrop filters are unsupported. */
+:root{--site-chrome-bg:var(--notebook-paper,#fffdf8);--site-chrome-edge:var(--line)}
+html[data-theme="dark"]{
+ --site-chrome-bg:var(--paper);
+ --site-chrome-edge:color-mix(in srgb,var(--line) 55%,transparent);
+}
+.site-header{
+ position:sticky;top:0;z-index:100;max-width:none;width:100%;
+ box-sizing:border-box;padding:8px clamp(18px,4vw,56px);
+ background:var(--site-chrome-bg);border-bottom:1px solid var(--site-chrome-edge);
+ box-shadow:0 4px 18px rgba(16,39,61,.08);
+}
+.site-header .wordmark{display:inline-flex;align-items:center;flex:none}
+.site-header .wordmark img{width:36px;height:auto;max-height:38px}
+.site-header nav{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:clamp(9px,2vw,25px);font-size:.8125rem;line-height:1.3}
+.site-header nav a{white-space:nowrap;min-height:40px}
+@supports ((-webkit-backdrop-filter:blur(18px)) or (backdrop-filter:blur(18px))){
+ .site-header{
+  background:color-mix(in srgb,var(--site-chrome-bg) 76%,transparent);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  backdrop-filter:blur(20px) saturate(150%);
+  border-bottom-color:color-mix(in srgb,var(--site-chrome-edge) 65%,white 35%);
+ }
+ .site-header .theme-toggle{
+  background:color-mix(in srgb,var(--site-chrome-bg) 68%,transparent);
+  -webkit-backdrop-filter:blur(12px) saturate(130%);
+  backdrop-filter:blur(12px) saturate(130%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 4px 16px rgba(16,39,61,.12);
+ }
+}
+@media(forced-colors:active){
+ .site-header,.site-header .theme-toggle{
+  background:Canvas;border-color:CanvasText;
+  -webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none
+ }
+}
+
 .footer-mark{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
 .footer-mark img{display:block;object-fit:contain}
 @media(max-width:650px){
@@ -95,28 +130,3 @@ footer.wrap a:focus-visible{
 @media(prefers-reduced-motion:reduce){.standalone-refresh-indicator{transition:none}}
 
 
-/* Aero glass: translucent navigation chrome, with a readable opaque fallback.
-   Keep the page content legible through the surface in both themes. */
-.site-header{
- background:var(--site-chrome-bg);
-}
-@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
- .site-header{
-  background:color-mix(in srgb,var(--site-chrome-bg) 83%,transparent);
-  -webkit-backdrop-filter:blur(18px) saturate(145%);
-  backdrop-filter:blur(18px) saturate(145%);
-  border-bottom:1px solid color-mix(in srgb,var(--site-chrome-edge) 65%,white 35%);
- }
- .site-header .theme-toggle{
-  background:color-mix(in srgb,var(--site-chrome-bg) 67%,transparent);
-  -webkit-backdrop-filter:blur(12px) saturate(130%);
-  backdrop-filter:blur(12px) saturate(130%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 4px 16px rgba(16,39,61,.12);
- }
-}
-@media(forced-colors:active){
- .site-header,.site-header .theme-toggle{
-  background:Canvas;border-color:CanvasText;
-  -webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none
- }
-}
