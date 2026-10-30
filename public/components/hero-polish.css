@@ -84,3 +84,46 @@
  }
  .hero .hero-actions .quiet-link,.hero .hero-foot{display:none!important}
 }
+
+/* Desktop composition: anchor the copy and artwork on the same visual axis.
+   Do not change portrait-first ordering or sizing on phones. */
+@media (min-width: 1024px) {
+  .hero.wrap {
+    min-height: 0;
+    align-items: center;
+    padding-top: clamp(32px, 5vh, 64px);
+    padding-bottom: clamp(42px, 6vh, 76px);
+  }
+  .hero .hero-copy { justify-content: center; }
+  .hero .hero-feature { min-height: 0; align-self: center; }
+  .hero .hero-foot { margin-top: 0; padding-top: clamp(28px, 4vh, 52px); }
+  .hero .hero-copy h1 { max-width: 16ch; }
+}
+
+/* Desktop art uses the same clean, unframed presentation as the phone.
+   Preserve the illustration itself; hide only its decorative container. */
+@media (min-width: 601px) {
+  .hero .hero-feature {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    overflow: visible;
+  }
+  .hero .hero-feature::before,
+  .hero .hero-feature::after,
+  .hero .feature-top,
+  .hero .feature-bottom,
+  .hero .art-orbit,
+  .hero .art-tile { display: none; }
+  .hero .feature-art {
+    inset: 0;
+    transform: none;
+    filter: none;
+  }
+  .hero .hero-feature:hover .feature-art { transform: none; }
+  .hero .feature-art .hero-portrait-art {
+    width: min(100%, 460px);
+    transform: none;
+  }
+}

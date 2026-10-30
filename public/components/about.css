@@ -198,3 +198,53 @@
  .about.wrap{padding-block:20px}
  .about .about-bottom{margin-top:16px}
 }
+
+/* Desktop portrait is a true layout column, not a float in running copy.
+   Keep the mobile float treatment below 901px unchanged. */
+@media (min-width: 901px) {
+  .about .about-bottom { max-width: 1100px; }
+  .about .about-copy { max-width: none; }
+  .about .about-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+    column-gap: clamp(36px, 5vw, 80px);
+    align-items: center;
+    margin-bottom: clamp(24px, 3vw, 40px);
+  }
+  .about .about-intro p { max-width: 58ch; }
+  .about .about-portrait {
+    float: none;
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    max-width: 340px;
+    margin: 0;
+    justify-self: end;
+  }
+  .about .about-portrait img {
+    border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+  .about .about-intro > p { grid-column: 1; grid-row: 1; }
+  .about .ai-process { max-width: 70ch; }
+}
+
+/* Contact invitation: keep the label short and the arrow in its own visual
+   space. A restrained accent reads as a deliberate action, not a long banner. */
+@media (min-width: 601px) {
+  .about .about-copy > .text-link {
+    display: inline-flex;
+    width: auto;
+    max-width: min(100%, 460px);
+    gap: 12px;
+    padding: 13px 18px;
+    border-radius: 9px;
+    font-size: .9375rem;
+    line-height: 1.35;
+    box-shadow: 0 3px 0 #a83f73;
+    text-wrap: balance;
+  }
+  .about .about-copy > .text-link:hover {
+    box-shadow: 0 5px 0 #a83f73;
+  }
+}
