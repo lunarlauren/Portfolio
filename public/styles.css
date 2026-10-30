@@ -38,12 +38,9 @@ body {background:var(--paper);color:var(--ink)}
 .hero h1{color:var(--brand-ink)}
 .hero h1 em{color:var(--brand-pink);font-style:normal}
 
-html,body{max-width:100%;overflow-x:clip}
 @media(max-width:760px){.hero{min-width:0}.hero-feature{min-width:0}}
 
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-@media(forced-colors:active){.project-card-link,.primary-link{border:1px solid CanvasText}.status-dot{outline:1px solid CanvasText}}
 
 .site-header nav a,.feature-project-link,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:760px){.case-head h1{overflow-wrap:anywhere}}
@@ -82,7 +79,6 @@ html[data-theme="dark"] .hero-foot span{color:inherit}
 
 /* Dark-theme color variables remain above; link colors and focus states
    now live beside the components they affect. Do not outline static text. */
-@media(prefers-contrast:more){html[data-theme="dark"]{--line:#91adc3;--muted:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}}
 
 
 /* Mobile first impression: show a slice of the illustrated featured-work card
@@ -155,20 +151,8 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 
 /* iPhone-quality touch foundation: crisp taps, predictable focus and safe-area
    spacing without changing the notebook identity or inventing app chrome. */
-@media(pointer:coarse){
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button){
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
- }
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active{
-  filter:brightness(.96);
- }
-}
 @media(max-width:600px){
  .hero.wrap,.work.wrap,.about.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
-}
-@media(prefers-reduced-motion:reduce){
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active{filter:none}
 }
 
 
