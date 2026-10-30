@@ -69,6 +69,35 @@ try{
   "Dark footer must match the dark page surface");
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // The After Hours section is deliberately a dark reading surface in both
+ // page themes. Guard its visible heading and paper-free introduction after
+ // extracting the component CSS from the legacy stylesheet.
+ for(const theme of ["light","dark"]){
+  await page.evaluate(value=>{document.documentElement.dataset.theme=value},theme);
+  const night=await page.evaluate(()=>{
+   const section=document.querySelector("#playground");
+   const heading=section.querySelector("#playground-title");
+   const intro=section.querySelector(".section-head>p");
+   const css=getComputedStyle(section),title=getComputedStyle(heading);
+   return {
+    surface:css.backgroundColor,
+    headingVisible:title.display!=="none"&&title.visibility!=="hidden",
+    introBackground:getComputedStyle(intro).backgroundColor
+   };
+  });
+  assert.notEqual(night.surface,"rgba(0, 0, 0, 0)",
+   "Playground must retain its opaque night surface in "+theme+" theme");
+  assert.equal(night.headingVisible,true,"Playground heading must remain visible");
+  assert.equal(night.introBackground,"rgba(0, 0, 0, 0)",
+   "Playground intro must not inherit notebook paper in "+theme+" theme");
+ }
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+ await page.setViewportSize({width:390,height:844});
+ const playGridColumns=await page.locator("#play-grid").evaluate(grid=>
+  getComputedStyle(grid).gridTemplateColumns.trim().split(/\\s+/).length);
+ assert.equal(playGridColumns,1,"Playground cards must stack on narrow phones");
+ await page.setViewportSize({width:1280,height:720});
+
  // Accessible link navigation should expose challenge, reviewed contribution,
  // and the visible design approach—not just a generic case-study action.
  const cardDescriptions=await page.locator('.work .project-card-link').first().evaluate(link=>
