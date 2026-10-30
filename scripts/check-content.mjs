@@ -521,6 +521,10 @@ assert.match(workCss, /\.collection\[data-active="alcon"\] \.collection-head/,
  'Work component must retain client header theme states');
 assert.doesNotMatch(css + workCss, /@keyframes collection-enter/,
  'Dead collection-enter keyframes must not return');
+const collectionHover = workCss.indexOf('.collection .project-card-link:hover .project-visual{transform:translateY(-5px)');
+const collectionReducedHover = workCss.indexOf('@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}');
+assert.ok(collectionHover >= 0 && collectionReducedHover > collectionHover,
+ 'Collection hover motion must be disabled after its component override');
 assert.match(html, /styles\.css\?v=20261030-collection-extract/,
  'Legacy CSS cache version must match the collection extraction');
 
