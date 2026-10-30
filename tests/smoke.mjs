@@ -111,7 +111,7 @@ try{
     const process=card?.querySelector(".project-card-process");
     return {
      found:!!grid&&!!card&&!!process,
-     columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(/\\s+/).length:0,
+     columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(" ").filter(Boolean).length:0,
      surface:card?getComputedStyle(card).backgroundColor:null,
      approachVisible:!!process&&getComputedStyle(process).display!=="none"
     };
