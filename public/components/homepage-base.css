@@ -13,7 +13,9 @@
 
 .project-visual img {width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .project-card:hover img {transform:scale(1.035)}
-.project-meta {font-size:0.625rem;letter-spacing:.13em;font-weight:700;margin-top:20px}
+/* Card metadata is a small, readable label, shared by Work and Playground.
+   Archive-specific status colors stay in work-cards.css. */
+.project-meta {font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;letter-spacing:.13em;font-weight:700;margin-top:20px}
 .project-card h3 {font:600 25px 'Newsreader';letter-spacing:-.04em;margin:8px 0}
 .project-card p {color:var(--muted);line-height:1.55;font-size:0.875rem}
 .playground {border-top:1px solid var(--line)}
@@ -39,8 +41,8 @@ footer a {text-decoration:none}
 /* Dark-theme text links: colors live beside their homepage link styles. */
 html[data-theme="dark"] :is(.quiet-link,.text-link){color:var(--night-link-ink)}
 html[data-theme="dark"] :is(.quiet-link,.text-link):hover{color:var(--night-link-hover)}
-.hero-foot {display:flex;gap:18px 24px;flex-wrap:wrap;margin-top:auto;padding-top:68px;font-size:0.625rem;font-weight:700;letter-spacing:.14em}
-.eyebrow-divider {margin-inline:10px}
+.hero-foot {display:flex;gap:18px 24px;flex-wrap:wrap;margin-top:auto;padding-top:68px;font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;font-weight:700;letter-spacing:.14em;color:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper))}
+.eyebrow-divider {margin-inline:10px;color:#8da6b5}
 .hero-feature {position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;padding:25px;border-radius:3px}
 .feature-art {position:absolute;inset:14% 0 12%;display:grid;place-items:center}
 .section-head h2 em {font-style:normal;color:var(--teal)}

@@ -4,6 +4,23 @@
 .project-card:nth-child(3n+1) .project-visual:has(img){background:#ffd7eb}
 .project-card:nth-child(3n+3) .project-visual:has(img){background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-pink))}
 
+/* The small "illustrative brief" label appears in placeholder artwork.
+   Keep it distinct from a verified product screenshot or research artifact. */
+.brief-kicker {
+ display:block;
+ color:#9a3263;
+ font-family:var(--font-body);
+ font-size:var(--type-xs);
+ font-weight:700;
+ letter-spacing:.14em;
+ line-height:1.5;
+}
+@media(max-width:760px){.brief-kicker{letter-spacing:.08em}}
+/* Dark-mode labels use a brighter ink; individual sections may refine it. */
+html[data-theme="dark"] :is(.visual-label,.visual-brief,.brief-kicker){
+ color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));
+}
+
 /* Placeholder briefs are editorial notes, never simulated product screenshots.
    Local client-file and Playground colors can override these without !important. */
 .project-visual:not(:has(img)){
