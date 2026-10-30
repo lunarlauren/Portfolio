@@ -2,14 +2,6 @@
    These are the earliest homepage rules, in original cascade order.
    Later overrides may still live in styles.css and named component files.
    Avoid adding a duplicate rule: search all CSS first. */
-.company-grid {display:grid;gap:16px}
-.company-card {border:0;cursor:pointer;text-align:left;border-radius:5px;padding:clamp(22px,3vw,40px);color:var(--ink);display:flex;flex-direction:column;align-items:stretch;animation:rise .55s both;animation-delay:calc(var(--i)*90ms)}
-.company-card.featured {background:var(--accent);min-height:420px}
-.card-top,.card-bottom {display:flex;justify-content:space-between;gap:12px;font-size:0.6875rem;font-weight:700;letter-spacing:.12em}
-.card-top span:last-child {font-size:1.25rem}
-.company-name {font:600 clamp(44px,6vw,88px)/1 'Newsreader';letter-spacing:-.065em;margin-top:auto}
-.company-description {max-width:520px;line-height:1.5;margin:14px 0 34px}
-.card-bottom {margin-top:auto}
 .collection-head {display:flex;justify-content:space-between;gap:25px}
 .collection-head h3 {font:600 50px 'Newsreader';letter-spacing:-.05em;margin:10px 0}
 .collection-head p:last-child {max-width:540px;line-height:1.6}
@@ -32,7 +24,7 @@
 footer {border-top:1px solid var(--line);padding-block:30px;display:flex;justify-content:space-between;font-size:0.8125rem}
 footer a {text-decoration:none}
 @keyframes rise {from {opacity:0;transform:translateY(16px)} to {opacity:1;transform:translateY(0)}}
-@media(max-width:760px) {.section-head,.about-bottom {display:block} .section-head>p {margin-top:20px} .company-grid,.projects-grid,.play-grid {grid-template-columns:1fr} .company-card,.company-card.featured {min-height:300px} .about-bottom .text-link {display:inline-block;margin-top:22px} .project-visual {height:260px}}
+@media(max-width:760px) {.section-head,.about-bottom {display:block} .section-head>p {margin-top:20px} .projects-grid,.play-grid {grid-template-columns:1fr} .about-bottom .text-link {display:inline-block;margin-top:22px} .project-visual {height:260px}}
 @media(max-width:400px) {.hero h1 {font-size:3rem} .round-link {width:50px;height:50px}}
 @media(prefers-reduced-motion:reduce) {*,*::before,*::after {animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 .hero {display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:clamp(28px,5vw,72px);align-items:stretch;padding-block:clamp(48px,7vw,100px) clamp(72px,9vw,115px);min-height:min(780px,calc(100svh - 84px))}
