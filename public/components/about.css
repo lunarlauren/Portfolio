@@ -92,7 +92,7 @@
   .about .about-intro { display: flow-root; margin-bottom: 12px; }
   .about .about-portrait {
     float: left;
-    width: clamp(104px, 29vw, 132px);
+    width: clamp(100px, 27vw, 124px);
     margin: 2px 18px 8px 0;
     text-align: left;
   }
@@ -108,12 +108,13 @@
      introduction under a tiny photo. Keep the desktop caption intact. */
   .about .about-portrait figcaption { display: none; }
   .about .about-copy p {
+    text-wrap:pretty;
     font-size: clamp(.9375rem, 3.9vw, 1.0625rem);
     line-height: 1.55;
     margin-bottom: .85em;
     max-width: 45ch;
   }
-  .about .about-intro p { margin-bottom: 0; }
+  .about .about-intro p { margin-bottom: 0; text-wrap:pretty; }
   .about .about-copy > .text-link { margin-top: 10px; }
   .about .creative-inventory .inventory-heading h3 { font-size: clamp(1.875rem, 7vw, 2.25rem); }
 }
