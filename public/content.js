@@ -14,15 +14,15 @@ window.PORTFOLIO = {
   companies: [
     {
       id:"hoylu", name:"Hoylu", category:"PRODUCT · BRAND · MOTION",
-      description:"Construction planning has a lot of moving pieces. At Hoylu, I worked on product UX and visual communication to help people see the bigger picture without losing the details.",
+      description:"Construction projects are full of moving pieces, and everyone needs a slightly different view. At Hoylu, I worked on the product experience and the visuals that help those pieces make sense together.",
       accent:"#ffacd3", featured:true,
       projects:[
         {
           title:"Connected Planning", type:"Product UX",
           audience:"Construction teams coordinating plans and decisions (design context; not a research-validated persona).",
           constraints:"Interrelated schedules, stakeholders and planning details; preserving context while making detail findable.",
-          summary:"When every team has a different piece of the plan, finding the full picture gets messy. I worked on making connected project information easier to follow.",
-          archiveApproach:"I focused on keeping the overview useful, clarifying relationships between views, and providing a path into the details.",
+          summary:"When everyone holds a different piece of the plan, how do you see the whole thing? I worked on making those connections easier to follow.",
+          archiveApproach:"I kept coming back to one question: can someone see the big picture and still find the detail they need?",
           details:"A construction plan is rarely just one plan. Different people need different pieces of information, but those pieces still have to connect. At Hoylu, I worked on the UX and visual structure of connected planning: how someone gets oriented, understands the relationships between items, and follows the detail behind a decision. I worked on how people move between the overall plan and the details behind it.",
           process:"I started with a simple question: if someone notices a problem in the overall plan, how do they find the item behind it? That led me to focus on three decisions: keep the project overview useful, make relationships between views understandable, and give people a clear path into the details. These were design priorities, not findings from a documented usability test.",
           evidence:"Confirmed scope: product UX and visual design contributions to Hoylu's construction-planning experience. The case-study materials supplied here do not establish a specific research method, tested prototype, launch date, or measured outcome for this project.",
@@ -39,8 +39,8 @@ window.PORTFOLIO = {
           title:"Mobile Insights", type:"UX / UI",
           audience:"Project managers checking project information away from a desktop (design scenario, not documented persona research).",
           constraints:"Small-screen readability and touch interaction; balancing quick status checks with supporting context.",
-          summary:"On a small screen, project-status summaries need to stay readable without losing their supporting context. I contributed UX/UI design to Hoylu\'s shipped Mobile Insights experience.",
-          archiveApproach:"I focused on insight-card hierarchy, readable summaries, supporting detail, and touch-friendly interaction.",
+          summary:"A construction dashboard has a lot to say, and a phone has very little room. I helped design Hoylu\'s shipped Mobile Insights experience around that tension.",
+          archiveApproach:"I worked through what should stand out first, what could wait, and how to make the next tap feel obvious.",
           details:"Hoylu Mobile Insights is a shipped product experience. My role was UX/UI design for its mobile insights work, framed around project managers checking construction-project information away from a desktop. A dashboard cannot simply be squeezed onto a phone: status, changes, and supporting context compete for limited space. The challenge was to make short checks useful without stripping away the information needed to understand an insight. This describes the use case, not a research-validated persona.",
           process:"I explored the mobile UX story as a sequence of questions: what should someone notice first, what context explains it, and where should they go for detail? My design focus included the hierarchy of insight cards, summary information, and supporting detail, alongside legibility and touch-friendly interaction. The key rationale was to prioritize a quick status check while preserving a path to deeper context. Not every explored interaction is confirmed as shipped.",
           // Editorial evidence boundary: these notes distinguish confirmed delivery
@@ -62,7 +62,7 @@ window.PORTFOLIO = {
           audience:"Construction-technology event visitors and digital audiences (format-based design framing).",
           constraints:"Viewing distance, legibility and different display formats, including 65-inch and 40-inch screens.",
           summary:"A trade-show wall gets a few seconds. A campaign graphic gets even less. I designed for both.",
-          archiveApproach:"I adapted product messages across booth signage, presentations, and digital graphics, adjusting hierarchy for viewing distance and format.",
+          archiveApproach:"I thought about where someone would see each piece: across a busy room, on a presentation screen, or while scrolling past.",
           details:"At Hoylu, I worked on visual communications for a construction technology audience across marketing and event touchpoints. The challenge changes with the format: a social graphic has seconds to earn attention, while a booth wall must communicate from across a room. Both need a clear message, recognizable brand, and a useful visual hierarchy.",
           process:"I translated product messages into layouts for event booth signage, presentation assets, and digital campaign graphics. For large-format work, I considered viewing distance, display proportions, and how printed graphics relate to nearby screens, including 65-inch and 40-inch displays. I adjusted the information hierarchy for each setting: a short, legible message from across a room versus more supporting detail at screen-reading distance. I designed for those viewing conditions; I didn't run a comparative audience study.",
           // The formats and design scope are documented; event/campaign performance is not.
@@ -99,7 +99,7 @@ window.PORTFOLIO = {
     },
     {
       id:"alcon",name:"Alcon",category:"HEALTHCARE PRODUCT UX",
-      description:"Healthcare interfaces have to make complicated information feel manageable. My work at Alcon focused on clearer paths through patient and clinical experiences.",
+      description:"Healthcare comes with enough uncertainty already. At Alcon, I worked on patient and clinical interfaces that needed to explain complicated information clearly.",
       accent:"#fff0dc",
       projects:[
         {
@@ -107,7 +107,7 @@ window.PORTFOLIO = {
           audience:"Patients preparing for surgery and medical-practice staff configuring the portal.",
           constraints:"Practice-level flexibility without sacrificing clarity and consistency for patients.",
           summary:"Patients already have plenty to think about before surgery. I worked on making the next step easier to find and understand.",
-          archiveApproach:"I focused on the relationship between practice configuration and patient-facing information, prioritizing clear document grouping and next steps.",
+          archiveApproach:"I looked at how information moves from a practice to a patient, and where the next step might get lost along the way.",
           details:"Before surgery, people have enough on their minds. They shouldn't have to decipher a portal to find the next step. I worked on a customizable patient portal that allowed medical practices to tailor the experience and share surgery-related documents and preparation information. The UX challenge was to support different practice needs while keeping the patient-facing experience consistent and easy to understand.",
           process:"I considered the relationship between what a practice configures and what a patient ultimately sees. Important documents, preparation steps, and other surgery information needed a hierarchy that made the next relevant item obvious. This required thinking about content grouping, navigation, and the balance between flexibility for practices and clarity for patients. I approached customization as part of the patient experience, not a separate settings exercise.",
           // Scope is documented; no interviews, tests, or adoption data are claimed.
@@ -126,7 +126,7 @@ window.PORTFOLIO = {
           audience:"Clinicians working with patient measurements, scans and model-generated information.",
           constraints:"Distinguishing measured inputs from predictions and clarifying information passed between tools.",
           summary:"A prediction and a patient measurement aren't the same thing. A clinical interface needs to make that distinction unmistakable.",
-          archiveApproach:"I focused on distinguishing patient measurements from model-generated predictions and clarifying information passed between clinical tools.",
+          archiveApproach:"I paid particular attention to what was measured, what was predicted, and how to keep those two things from looking interchangeable.",
           details:"I worked on a clinician-facing UX/UI system related to intraocular lens (IOL) planning. Doctors could use patient measurements and scans to train an AI model on prescription decisions, with predicted information then associated with a patient's file and passed to another application. The interface needed to make the source information and generated predictions understandable within a clinical workflow.",
           process:"I approached the interface as a sequence of information states: patient measurements and scans, the model-training or prediction workflow, and information passed to the patient file and a connected application. My UX/UI focus was how to help a clinician recognize the source of each piece of information and understand the handoff between tools. Separating measured inputs from model-generated predictions was a design consideration, not a claim that a specific labeling system was implemented or clinically validated. Iteration rounds and review decisions have not been documented here.",
           // The workflow and UX/UI role are documented; clinical validation and launch status are not.
@@ -144,7 +144,7 @@ window.PORTFOLIO = {
     },
     {
       id:"holland-america",name:"Holland America Line",category:"PRODUCT DESIGN · UX/UI",
-      description:"Designing for guests at sea meant thinking beyond a typical app screen, from finding things on a phone to navigating a TV with a remote.",
+      description:"Designing for a cruise ship is its own little puzzle. One minute it's a phone in someone's hand; the next it's a TV they can only control with a remote.",
       accent:"#203d64",
       projects:[
         {
@@ -152,7 +152,7 @@ window.PORTFOLIO = {
           audience:"Cruise passengers using onboard booking, account and Wi-Fi guidance.",
           constraints:"Making choices, confirmation and connection guidance understandable to guests using a mobile app.",
           summary:"On a cruise, even simple tasks have unfamiliar steps. I worked on making bookings, account details, and Wi-Fi guidance easier to navigate.",
-          archiveApproach:"I designed booking and account flows, alongside visual Wi-Fi guidance informed by reported passenger confusion.",
+          archiveApproach:"I worked on booking and account flows, plus Wi-Fi guidance for the moments when a guest just wants to get connected.",
           details:"I worked on the parts of a cruise app people actually need while they're trying to enjoy their trip: booking dinner, choosing excursions, and checking purchases. These flows needed to make choices and confirmations clear to passengers who might be using the app for the first time while onboard.",
           process:"Passenger feedback identified confusion around connecting to the ship's Wi-Fi, so I designed visual guidance for that step. I also designed and prototyped booking and account flows, working from browsing through selection and confirmation for dining and excursions. My focus was making choices and confirmation states legible; the available project record does not establish usability-test findings, engineering handoff details, or which prototype states shipped.",
           // Evidence boundary: passenger Wi-Fi confusion was reported, but no
@@ -172,7 +172,7 @@ window.PORTFOLIO = {
           audience:"Cruise guests viewing onboard information from across a room.",
           constraints:"Remote-control directional navigation, visible focus and television viewing distance.",
           summary:"No mouse. No touchscreen. Just a remote and a guest trying to find something. That changes every navigation decision.",
-          archiveApproach:"I prioritized readable voyage information, visible focus, and predictable directional navigation for guests using a remote.",
+          archiveApproach:"I thought through every arrow-key press: where does focus go, what stays readable, and how does someone know what to do next?",
           details:"I contributed UX/UI design to Holland America Line's shipped stateroom TV experience, including onboard information such as Voyage Tracker. The audience was guests navigating from across the room with a remote rather than a mouse or touchscreen. That input constraint shaped the interface: readable information, clear focus states, and a directional path between controls all needed attention.",
           process:"I considered the interaction from the remote outward: where focus starts, how it moves between choices, and how a guest can tell which control is selected. For Voyage Tracker, I prioritized the main voyage information and considered how secondary details could remain accessible without competing for attention. This describes my interface-design approach; it is not a claim that a particular navigation pattern was validated through testing.",
           evidence:"Confirmed scope: I contributed interface design to the shipped in-stateroom TV app, including Voyage Tracker. User interviews, usability studies, remote-control test findings, and engagement metrics have not been supplied for this case study. The design rationale below should not be read as measured guest behavior.",
