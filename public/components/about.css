@@ -256,3 +256,28 @@ html[data-theme="dark"] .creative-inventory .inventory-inspect p{color:#dce7f1}
  .creative-inventory .inventory-item:nth-child(n)[aria-pressed="true"]{outline:2px solid Highlight}
  .creative-inventory .inventory-heading h3{color:CanvasText;background:none}
 }
+
+/* AI process: an editorial aside, not another competing CTA or card. */
+.about .ai-process{
+ clear:both;
+ margin:clamp(28px,4vw,46px) 0 clamp(26px,3vw,36px);
+ padding:clamp(20px,3vw,28px) 0 4px clamp(18px,2.5vw,26px);
+ border-left:3px solid var(--palette-pink,#ed88b7);
+}
+.about .ai-process .eyebrow{
+ margin:0 0 10px;font-size:.72rem;letter-spacing:.13em;
+ color:var(--muted);font-weight:750;
+}
+.about .ai-process h3{
+ margin:0 0 14px;font-family:Georgia,serif;
+ font-size:clamp(1.55rem,3vw,2.1rem);line-height:1.12;
+ letter-spacing:-.035em;text-wrap:balance;color:var(--ink);
+}
+.about .ai-process p:not(.eyebrow){
+ max-width:58ch;font-size:clamp(.94rem,1.4vw,1.04rem);
+ line-height:1.65;text-wrap:pretty;
+}
+.about .ai-process p:last-child{margin-bottom:0}
+@media(max-width:600px){
+ .about .ai-process{margin-top:34px;margin-bottom:30px;padding-left:17px}
+}
