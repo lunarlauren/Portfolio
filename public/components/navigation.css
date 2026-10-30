@@ -20,11 +20,9 @@ html[data-theme="dark"]{
 .site-header .header-actions nav a{font-weight:600;letter-spacing:0}
 .header-contact{display:inline-flex;align-items:center;gap:6px;justify-content:center;min-height:38px;padding:8px 14px;border:1px solid var(--ink);border-radius:999px;text-decoration:none;font-size:.75rem;font-weight:700;white-space:nowrap}
 .header-contact:hover{background:var(--ink);color:var(--paper)}
-html[data-theme="dark"] .header-contact{color:var(--ink)}
 html[data-theme="dark"] .header-contact{border-color:#c7d9e7}
 html[data-theme="dark"] .header-contact:hover{
  background:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));
- color:var(--brand-pink);
 }
 html[data-theme="dark"] .site-header .header-actions nav a,
 html[data-theme="dark"] .site-header .header-contact{color:var(--ink)}
