@@ -94,7 +94,7 @@ try{
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
  await page.setViewportSize({width:390,height:844});
  const playGridColumns=await page.locator("#play-grid").evaluate(grid=>
-  getComputedStyle(grid).gridTemplateColumns.trim().split(/\\s+/).length);
+  getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).length);
  assert.equal(playGridColumns,1,"Playground cards must stack on narrow phones");
  await page.setViewportSize({width:1280,height:720});
 
