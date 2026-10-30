@@ -156,7 +156,8 @@ try{
     const portrait=about.querySelector(".about-portrait");
     const caption=portrait.querySelector("figcaption");
     const intro=about.querySelector(".about-intro p");
-    const inventory=about.querySelector(".creative-inventory");
+    const aiNote=about.querySelector(".ai-process");
+     const copy=about.querySelector(".about-copy");
     const headingRect=heading.getBoundingClientRect();
     const aboutStyle=getComputedStyle(about);
     const available=about.clientWidth-parseFloat(aboutStyle.paddingLeft)-parseFloat(aboutStyle.paddingRight);
@@ -167,7 +168,9 @@ try{
      portraitTop:portrait.getBoundingClientRect().top,
      introTop:intro.getBoundingClientRect().top,
      captionDisplay:getComputedStyle(caption).display,
-     inventoryTop:inventory.getBoundingClientRect().top,
+     aiTop:aiNote.getBoundingClientRect().top,
+     copyRight:copy.getBoundingClientRect().right,
+     copyDisplay:getComputedStyle(copy.parentElement).display,
      portraitBottom:portrait.getBoundingClientRect().bottom
     };
    },theme);
@@ -183,8 +186,11 @@ try{
    assert.ok(Math.abs(layout.portraitTop-layout.introTop)<24,
     `${width}px ${theme}: Headshot and introduction should start together`);
    assert.equal(layout.captionDisplay,"none",`${width}px ${theme}: Avoid a repeated introduction`);
-   assert.ok(layout.inventoryTop>=layout.portraitBottom,
-    `${width}px ${theme}: Inventory must follow the photo instead of overlapping it`);
+   assert.equal(layout.copyDisplay,"block",`${width}px ${theme}: About should use a single reading column`);
+   assert.ok(layout.copyRight<=width+1,
+    `${width}px ${theme}: About copy must not overflow the viewport`);
+   assert.ok(layout.aiTop>=layout.portraitBottom,
+    `${width}px ${theme}: AI process note must follow the portrait without overlapping it`);
   }
  }
  await page.setViewportSize({width:1280,height:720});
@@ -216,7 +222,10 @@ try{
  // This is design rationale, not a claim of interviews or verified results.
  const approach=page.locator(".case-head .case-approach");
  assert.equal(await approach.count(),1,"Professional case-study cover should expose its authored design approach");
- assert.match(await approach.innerText(),/Design approach[\s\S]*overview useful/i);
+ const approachText=await approach.innerText();
+ assert.match(approachText,/Design approach/i);
+ assert.ok(approachText.replace(/Design approach/i,"").trim().length>=35,
+  "Case-study cover must contain a meaningful authored design rationale");
  assert.equal(await approach.evaluate(node=>Boolean(node.compareDocumentPosition(document.querySelector(".case-hero-visual"))&Node.DOCUMENT_POSITION_FOLLOWING)),true,
   "The design approach must precede the visual brief in reading order");
  assert.equal(await page.locator('.case-gallery').getAttribute('aria-label'),'Visual briefs and image placeholders','Planned case-study visuals must not be announced as an image gallery');
@@ -257,8 +266,12 @@ try{
  assert.match(await page.locator(".case-prose").innerText(),/Mobile Insights is a shipped product experience/,"Mobile Insights case study should describe its actual delivery status");
  assert.match(await page.locator(".case-evidence").innerText(),/Shipped product contribution/,"The project overview must identify Mobile Insights as shipped");
  assert.equal(await page.locator(".case-delivery-stamp").innerText(),"SHIPPED PRODUCT CONTRIBUTION","Shipped delivery must be visible above the fold");
- assert.match(await page.locator(".case-head .case-approach").innerText(),/insight-card hierarchy/i,
-  "Shipped Mobile Insights should lead with its documented design focus, not invented research");
+ const mobileApproach=await page.locator(".case-head .case-approach").innerText();
+ assert.match(mobileApproach,/Design approach/i);
+ assert.match(mobileApproach,/(?:stand out|priorit|hierarch|detail|tap)/i,
+  "Shipped Mobile Insights should show a concrete small-screen design rationale");
+ assert.doesNotMatch(mobileApproach,/\b(?:interviews proved|research showed|tested users)\b/i,
+  "Mobile Insights cover must not imply undocumented research");
  await page.goBack();
  assert.match(page.url(),/connected-planning/);
  await page.locator(".case-back").click();

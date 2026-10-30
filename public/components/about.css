@@ -24,19 +24,25 @@
   line-height: 1.4;
 }
 
-/* Editorial hierarchy: keep the introduction readable and the interactive
-   inventory secondary, without changing its buttons or inspection behavior. */
-@media (min-width: 901px) {
-  .about .about-bottom {
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
-    column-gap: clamp(36px, 5vw, 80px);
-    align-items: start;
-  }
-  .about .about-portrait {
-    width: clamp(118px, 29%, 172px);
-    margin: 0 0 12px 20px;
-  }
-  .about .creative-inventory { margin-top: 10px; }
+
+/* ABOUT LAYOUT
+   The inventory was removed. Keep the biography, AI note and contact action
+   in one readable column instead of retaining an unused two-column grid. */
+.about .about-bottom{
+ display:block;
+ max-width:76ch;
+ margin-top:clamp(32px,5vw,64px);
+}
+.about .about-copy{min-width:0;width:100%;max-width:76ch}
+.about .about-copy>.text-link{margin-top:clamp(22px,2.5vw,32px);white-space:normal}
+@media(min-width:901px){
+ .about .about-portrait{
+  width:clamp(118px,29%,172px);
+  margin:0 0 12px 20px;
+ }
+}
+@media(min-width:601px) and (max-width:900px){
+ .about .about-copy>.text-link{margin-top:24px}
 }
 
 /* A self-contained introduction prevents later paragraphs from flowing around
@@ -44,15 +50,15 @@
 .about .about-intro{display:flow-root;margin-bottom:clamp(12px,1.5vw,20px)}
 @media(min-width:901px){
  .about h2{font-size:clamp(2.625rem,4.3vw,3.75rem)}
- .about .about-bottom .text-link{align-self:start;margin-top:clamp(12px,1.5vw,20px)}
+ .about .about-bottom .text-link{margin-top:clamp(12px,1.5vw,20px)}
 }
 
 /* Balance the two-line display heading without changing its intentional break. */
 .about h2{text-wrap:balance}
 
 /* ABOUT TYPE SCALE
-   Keep one readable paragraph measure across breakpoints. The display title
-   remains expressive; supporting text and inventory labels stay quieter. */
+   Keep one readable paragraph measure across breakpoints; the display title
+   remains expressive while supporting copy stays comfortable to read. */
 .about .about-copy p{
  max-width:59ch;
  margin:0 0 1.25em;
@@ -60,7 +66,6 @@
  line-height:var(--leading-reading,1.65);
  text-wrap:pretty;
 }
-.about .inventory-heading>p{font-size:0.8125rem;line-height:1.5}
 .about .about-portrait figcaption{line-height:1.45}
 
 /* These desktop type rules used to live in styles.css. Keep the compact
@@ -88,7 +93,7 @@
     letter-spacing: -.045em;
     margin: 10px 0 0;
   }
-  .about .about-bottom { margin-top: 24px; row-gap: 22px; }
+  .about .about-bottom { margin-top: 24px; }
   .about .about-intro { display: flow-root; margin-bottom: 12px; }
   .about .about-portrait {
     float: left;
@@ -116,36 +121,8 @@
   }
   .about .about-intro p { margin-bottom: 0; text-wrap:pretty; }
   .about .about-copy > .text-link { margin-top: 10px; }
-  .about .creative-inventory .inventory-heading h3 { font-size: clamp(1.875rem, 7vw, 2.25rem); }
 }
 
-/* Desktop biography and inventory alignment. */
-@media(min-width:901px){
- .about .about-bottom{align-items:start}
- .about .about-copy,
- .about .creative-inventory{align-self:start}
- .about .creative-inventory .inventory-heading{
-  margin-top:0;
-  margin-bottom:12px;
- }
- .about .creative-inventory .inventory-heading h3{margin-top:3px}
- .about .creative-inventory .inventory-heading>p{margin-top:5px}
-}
-html:not([data-theme="dark"]) .about .inventory-grid,
-html:not([data-theme="dark"]) .about .inventory-inspect{
- box-shadow:none;
-}
-/* About layout: the contact invitation belongs directly to the bio, not
-   at the bottom of the taller inventory column. Preserve one-column flow. */
-@media(min-width:901px){
- .about .about-bottom{
-  grid-template-rows:auto auto;
-  row-gap:clamp(18px,2vw,28px);
-  align-content:start;
- }
- .about .about-bottom .about-copy{grid-column:1;grid-row:1}
- .about .about-bottom .creative-inventory{grid-column:2;grid-row:1}
-}
 
 
 /* About contact invitation: a clear, tactile action distinct from body copy. */
@@ -178,84 +155,6 @@ html:not([data-theme="dark"]) .about .inventory-inspect{
 }
 
 
-/* Frosted Aero inventory: material and depth, without neon or bloom. */
-.creative-inventory{
- --aero-edge:rgba(172,199,219,.38);
- --aero-ink:#f1f6fb;
- color:var(--aero-ink);
-}
-.creative-inventory .inventory-heading h3{color:var(--ink);background:none;-webkit-text-fill-color:currentColor}
-.creative-inventory .inventory-heading>p{color:var(--muted)}
-.creative-inventory .inventory-grid{
- position:relative;isolation:isolate;
- border:1px solid var(--aero-edge);border-bottom:0;
- border-radius:20px 20px 0 0;padding:48px 18px 22px;gap:12px;
- background:rgba(41,63,84,.76);
- backdrop-filter:blur(22px) saturate(115%);
- -webkit-backdrop-filter:blur(22px) saturate(115%);
- box-shadow:inset 0 1px rgba(255,255,255,.16),0 12px 28px rgba(7,18,32,.12);
-}
-.creative-inventory .inventory-grid::before{
- content:"PERSONAL EFFECTS  /  06";color:#c8d9e6;top:20px;left:22px;text-shadow:none;
-}
-.creative-inventory .inventory-item:nth-child(n){
- position:relative;min-height:122px;padding:13px 5px;gap:9px;
- border:1px solid rgba(219,235,246,.16);border-radius:20px;
- color:#f2f8ff;background:rgba(180,203,220,.14);
- backdrop-filter:blur(18px) saturate(90%);-webkit-backdrop-filter:blur(18px) saturate(90%);
- box-shadow:inset 0 3px 8px rgba(9,24,41,.34),
-            inset 0 -2px 5px rgba(230,241,250,.09),
-            0 1px 0 rgba(255,255,255,.09);
- transition:background .18s ease,box-shadow .18s ease,border-color .18s ease;
-}
-.creative-inventory .inventory-item:nth-child(n)::before{content:none}
-.creative-inventory .inventory-item:nth-child(n):hover{
- transform:none;border-color:rgba(231,241,251,.3);
- background:rgba(196,216,232,.19);
- box-shadow:inset 0 4px 10px rgba(9,24,41,.38),inset 0 -2px 5px rgba(230,241,250,.11);
-}
-.creative-inventory .inventory-item:nth-child(n)[aria-pressed="true"]{
- border:1px solid rgba(255,192,222,.65);background:rgba(226,178,205,.24);
- box-shadow:inset 0 5px 12px rgba(19,22,39,.46),
-            inset 0 0 0 2px rgba(255,217,236,.14);
-}
-.creative-inventory .inventory-item>span:last-child{
- position:relative;color:#fff;font-weight:700;text-shadow:none;
-}
-.creative-inventory .inventory-icon{position:relative;filter:none}
-.creative-inventory .inventory-inspect{
- border:1px solid var(--aero-edge);border-top:1px solid rgba(211,229,243,.3);
- border-radius:0 0 20px 20px;padding:22px 25px 25px;
- background:rgba(31,49,68,.9);
- backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
- color:var(--aero-ink);
- box-shadow:0 12px 28px rgba(7,18,32,.12);
-}
-.creative-inventory .inventory-inspect-tag{color:#efb4d3}
-.creative-inventory .inventory-inspect strong{color:#fff}
-.creative-inventory .inventory-inspect p{color:#dce7f1}
-html[data-theme="dark"] .creative-inventory .inventory-grid,
-html[data-theme="dark"] .creative-inventory .inventory-inspect{border-color:var(--aero-edge)}
-html[data-theme="dark"] .creative-inventory .inventory-item:nth-child(n){
- color:#fff;border-color:rgba(211,229,243,.2);
-}
-html[data-theme="dark"] .creative-inventory .inventory-item:nth-child(n)[aria-pressed="true"]{
- border-color:rgba(255,192,222,.65);background:rgba(226,178,205,.24);
- box-shadow:inset 0 5px 12px rgba(19,22,39,.46),inset 0 0 0 2px rgba(255,217,236,.14);
-}
-html[data-theme="dark"] .creative-inventory .inventory-inspect p{color:#dce7f1}
-/* Separate the biography CTA from the inventory section on phones. */
-@media(max-width:600px){
- .about .creative-inventory{margin-top:clamp(34px,9vw,54px)}
-}
-@media(prefers-reduced-motion:reduce){
- .creative-inventory .inventory-item:nth-child(n){transition:none}
- .creative-inventory .inventory-item:nth-child(n):hover{transform:none}
-}
-@media(forced-colors:active){
- .creative-inventory .inventory-item:nth-child(n)[aria-pressed="true"]{outline:2px solid Highlight}
- .creative-inventory .inventory-heading h3{color:CanvasText;background:none}
-}
 
 /* AI process: an editorial aside, not another competing CTA or card. */
 .about .ai-process{
@@ -290,12 +189,12 @@ html[data-theme="dark"] .creative-inventory .inventory-inspect p{color:#dce7f1}
  .about .ai-process{margin-top:34px;margin-bottom:30px;padding-left:17px}
 }
 
-/* About without the former inventory: give the biography the full reading width. */
-.about .about-bottom{
- display:block;
- max-width:76ch;
+/* Compact laptop rhythm belongs to About, not the legacy global sheet. */
+@media(min-width:1024px){
+ .about.wrap{padding-top:clamp(24px,3.5vh,42px);padding-bottom:clamp(24px,3.5vh,42px)}
+ .about .about-bottom{margin-top:clamp(20px,3vh,32px)}
 }
-.about .about-copy{width:100%;max-width:76ch}
-@media(min-width:901px){
- .about .about-bottom{display:block;max-width:76ch}
+@media(min-width:1024px) and (max-height:780px){
+ .about.wrap{padding-block:20px}
+ .about .about-bottom{margin-top:16px}
 }

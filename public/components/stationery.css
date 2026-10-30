@@ -1,4 +1,4 @@
-/* Component layer: stationery surfaces, project interactions, and inventory accents.
+/* Component layer: stationery surfaces and project interactions.
    Loaded after styles.css to preserve the original cascade order. */
 /* Shared physical-paper elevation: a single bottom-right offset.
    Shadows express stacked paper; UI controls and illustration lighting
@@ -97,33 +97,6 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix
 }
 
 
-/* Inventory interaction state (retained in stationery component). */
-@media(max-width:600px){
- .creative-inventory .inventory-inspect p{line-height:1.45}
- .creative-inventory .inventory-item[aria-pressed="true"]{
-  background:color-mix(in srgb,var(--inv-accent) 7%,transparent);
- }
-}
-
-/* Inventory illustrations: one consistent outlined visual language.
-   Existing item accent colors remain the source of personality. */
-.creative-inventory .inventory-icon{
- display:grid;
- place-items:center;
- font-size:0;
-}
-.creative-inventory .inventory-icon svg{
- display:block;
- width:clamp(40px,5vw,52px);
- height:clamp(40px,5vw,52px);
- max-width:100%;
- overflow:visible;
- stroke:currentColor;
- filter:none;
-}
-@media(max-width:460px){
- .creative-inventory .inventory-icon svg{width:42px;height:42px}
-}
 
 /* Night stationery: the same full-width dot grid as light paper,
    recolored to a muted blue-gray so the texture stays behind the work.
@@ -139,12 +112,4 @@ html[data-theme="dark"] :is(.hero,.work,.about){
  background-image:none;
 }
 
-/* Inventory illustrations use the same six-color palette, not six
-   unrelated decorative hues. */
-.creative-inventory .inventory-item:nth-child(1) .inventory-icon,
-.creative-inventory .inventory-item:nth-child(4) .inventory-icon{color:var(--palette-pink)}
-.creative-inventory .inventory-item:nth-child(2) .inventory-icon,
-.creative-inventory .inventory-item:nth-child(6) .inventory-icon{color:var(--palette-blue)}
-.creative-inventory .inventory-item:nth-child(3) .inventory-icon{color:var(--palette-lavender)}
-.creative-inventory .inventory-item:nth-child(5) .inventory-icon{color:var(--palette-green)}
 

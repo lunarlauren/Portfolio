@@ -24,6 +24,6 @@ jobs:
           node --check public/script.js
           node --check public/components/case-study.js
           node --check public/components/project-content.js
-          node --check public/components/inventory.js
+          node --check public/content.js
       - name: Test navigation in Chromium
         run: node tests/smoke.mjs

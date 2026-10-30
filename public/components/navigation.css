@@ -69,7 +69,8 @@ html[data-theme="dark"] .theme-toggle:hover{background:#3c5c73}
 
 @supports ((-webkit-backdrop-filter:blur(18px)) or (backdrop-filter:blur(18px))){
  .site-header{
-  background:color-mix(in srgb,var(--site-chrome-bg) 76%,transparent);
+  /* Opaque chrome prevents scrolled content showing through the header. */
+   background:var(--site-chrome-bg);
   -webkit-backdrop-filter:blur(20px) saturate(150%);
   backdrop-filter:blur(20px) saturate(150%);
   border-bottom-color:color-mix(in srgb,var(--site-chrome-edge) 65%,white 35%);
