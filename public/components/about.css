@@ -244,10 +244,26 @@ html[data-theme="dark"] .creative-inventory .inventory-item:nth-child(n)[aria-pr
  box-shadow:inset 0 5px 12px rgba(19,22,39,.46),inset 0 0 0 2px rgba(255,217,236,.14);
 }
 html[data-theme="dark"] .creative-inventory .inventory-inspect p{color:#dce7f1}
-@media(max-width:460px){
- .creative-inventory .inventory-grid{gap:8px;padding:43px 10px 16px;border-radius:18px 18px 0 0}
- .creative-inventory .inventory-item:nth-child(n){min-height:112px;padding:10px 3px;gap:6px;border-radius:17px}
- .creative-inventory .inventory-inspect{padding:20px;border-radius:0 0 18px 18px}
+/* Give touch controls room to breathe instead of squeezing three across. */
+@media(max-width:600px){
+ .creative-inventory .inventory-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;padding:52px 16px 22px;border-radius:18px 18px 0 0;
+ }
+ .creative-inventory .inventory-item:nth-child(n){
+  min-height:132px;padding:18px 10px;gap:10px;border-radius:19px;
+ }
+ .creative-inventory .inventory-item>span:last-child{
+  font-size:clamp(.8125rem,3.4vw,.9375rem);
+  line-height:1.3;text-align:center;text-wrap:balance;
+ }
+ .creative-inventory .inventory-inspect{
+  padding:23px 22px 25px;border-radius:0 0 18px 18px;
+ }
+}
+@media(max-width:360px){
+ .creative-inventory .inventory-grid{gap:10px;padding-inline:12px}
+ .creative-inventory .inventory-item:nth-child(n){min-height:122px;padding:14px 6px}
 }
 @media(prefers-reduced-motion:reduce){
  .creative-inventory .inventory-item:nth-child(n){transition:none}
