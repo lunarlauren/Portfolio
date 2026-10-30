@@ -63,16 +63,6 @@ body {background:var(--paper);color:var(--ink)}
 @media(hover:hover) {.hero h1:hover,.section-head h2:hover,.about h2:hover,.collection-head h3:hover,.project-card-link:hover h4,.case-head h1:hover,.case-prose h2:hover,.art-center:hover {font-variation-settings:"SOFT" 75,"WONK" 1}}
 .hero h1:focus-within,.section-head h2:focus-within,.about h2:focus-within,.project-card-link:focus-visible h4 {font-variation-settings:"SOFT" 75,"WONK" 1}
 @media(prefers-reduced-motion:reduce) {.hero h1,.section-head h2,.about h2,.collection-head h3,.project-card h3,.case-head h1,.case-prose h2,.art-center {transition:none}}
-:root {--motion-ease:cubic-bezier(.22,1,.36,1)}
-@keyframes gallery-reveal {from {opacity:0;transform:translate3d(0,18px,0)} to {opacity:1;transform:translate3d(0,0,0)}}
-@keyframes detail-reveal {from {opacity:0;transform:translate3d(0,22px,0)} to {opacity:1;transform:translate3d(0,0,0)}}
-@media(prefers-reduced-motion:no-preference) {.collection {animation:gallery-reveal .5s var(--motion-ease) both} .collection .collection-nav {animation:gallery-reveal .42s var(--motion-ease) .04s both} .collection .collection-head {animation:gallery-reveal .55s var(--motion-ease) .09s both} .collection .project-card {animation:gallery-reveal .62s var(--motion-ease) both;animation-delay:calc(.16s + var(--i,0)*.075s)} .case-view:not([hidden]) .case-head {animation:detail-reveal .6s var(--motion-ease) .06s both} .case-view:not([hidden]) .case-hero-visual {animation:detail-reveal .7s var(--motion-ease) .13s both} .case-view:not([hidden]) .case-body {animation:detail-reveal .7s var(--motion-ease) .2s both} .case-view:not([hidden]) .case-gallery {animation:detail-reveal .7s var(--motion-ease) .25s both}}
-
-.play-grid .project-card-link .project-visual {transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
-.play-grid .project-card-link:hover .project-visual {transform:translateY(-5px);box-shadow:0 15px 30px #20334419}
-@media(prefers-reduced-motion:reduce) {.collection,.collection .collection-nav,.collection .collection-head,.collection .project-card,.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery {animation:none!important} .collection .project-card-link .project-visual,.play-grid .project-card-link .project-visual,.project-card .project-meta span:last-child {transition:none!important} .collection .project-card-link:hover .project-visual,.play-grid .project-card-link:hover .project-visual {transform:none}}
-@supports (view-transition-name:selected-company) {::view-transition-old(selected-company),::view-transition-new(selected-company) {animation-duration:.68s;animation-timing-function:cubic-bezier(.22,1,.36,1);mix-blend-mode:normal}::view-transition-old(root) {animation:fade-away .22s ease both}::view-transition-new(root) {animation:fade-in .42s ease .1s both} @keyframes fade-away {to {opacity:0}} @keyframes fade-in {from {opacity:0} to {opacity:1}}}
-@media(prefers-reduced-motion:reduce) {::view-transition-old(*),::view-transition-new(*) {animation-duration:.01ms!important}}
 .wordmark,.hero h1,.section-head h2,.about h2,.collection-head h3,.placeholder-mark,.project-card h3,.art-center,.case-head h1,.case-prose h2 {font-variation-settings:normal}
 .hero h1,.case-head h1 {letter-spacing:-.045em}
 
@@ -115,8 +105,6 @@ body{font-size:var(--type-body);line-height:1.6}
 html{scroll-padding-top:82px}
 #work,#playground,#about,#top,#main{scroll-margin-top:82px}
 
-@media(hover:hover) and (pointer:fine){.project-card-link:hover{transform:translateY(-3px)}}
-@media(prefers-reduced-motion:reduce){.project-card-link{transition:none!important}}
 
 html[data-theme="dark"]{--focus:color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));--muted:#c2d0df;--line:#536a80;--paper:color-mix(in srgb,var(--palette-navy) 65%,black);--brand-ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--ink:color-mix(in srgb,var(--palette-paper) 93%,var(--palette-blue));--teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));--clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));--lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));--brand-pink:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));--surface-blush:color-mix(in srgb,var(--palette-pink) 12%,var(--palette-navy));--surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));--surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));color-scheme:dark;background:var(--paper)}
 html[data-theme="dark"] body{color:var(--ink)}
