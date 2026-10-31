@@ -5,26 +5,17 @@
 @media(max-width:950px) {.hero {grid-template-columns:1fr;min-height:0} .hero-feature {min-height:420px} .hero-foot {padding-top:48px} .hero h1 {font-size:clamp(3.625rem,10vw,5.9375rem)}}
 @media(max-width:760px) {.hero-feature {min-height:430px} .hero {padding-block:55px 80px} .hero h1 {font-size:clamp(3.125rem,12vw,4.875rem)} .hero-actions {gap:18px}}
 @media(prefers-reduced-motion:reduce) {.hero-feature:hover .feature-art,.primary-link:hover {transform:none}}
-body {background:var(--paper);color:var(--ink)}
-
 .hero-feature {color:var(--brand-ink);overflow:visible;isolation:isolate;background:var(--brand-sky)}
 
 .hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
 
 @media(max-width:760px){.hero{min-width:0}.hero-feature{min-width:0}}
 
-.site-header nav a,.feature-project-link,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
-@media(max-width:760px){.case-head h1{overflow-wrap:anywhere}}
 
-.collection:focus,.case-view:focus,#work-title:focus,.collection-head h3:focus{outline:none!important;box-shadow:none!important}
 
 /* Type scale lives in components/foundations.css. */
 
-html{scroll-padding-top:82px}
-#work,#playground,#about,#top,#main{scroll-margin-top:82px}
 
-
-html[data-theme="dark"] body{color:var(--ink)}
 html[data-theme="dark"] .hero h1{color:var(--ink)!important}
 html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
 
@@ -96,19 +87,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 }
 
 
-/* Playground contrast: notebook paper behind generic section intros must not
-   leak into the dark "Beyond the brief" section in light theme. */
-@media(max-width:760px){
- /* More readable transitions without the large blank bands between sections. */
- .about.wrap{padding-block:clamp(52px,10vw,76px)}
-}
-
-
-/* iPhone-quality touch foundation: crisp taps, predictable focus and safe-area
-   spacing without changing the notebook identity or inventing app chrome. */
-@media(max-width:600px){
- .hero.wrap,.work.wrap,.about.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
-}
 
 
 /* iPhone hero finishing pass: concise editorial spacing and a clear primary

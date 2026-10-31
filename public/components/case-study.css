@@ -536,3 +536,11 @@ html[data-theme="dark"] .case-prose p{color:#d7e3ed}
 @media(prefers-reduced-motion:reduce){
  .case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}
 }
+
+/* Case-study navigation retains touch targets and visible link focus.
+   The wrapper itself receives programmatic focus only. */
+.case-next{min-height:44px;display:inline-flex;align-items:center}
+.case-view:focus{outline:none!important;box-shadow:none!important}
+
+/* Long case-study titles wrap instead of overflowing on phones. */
+@media(max-width:760px){.case-head h1{overflow-wrap:anywhere}}

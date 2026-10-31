@@ -133,4 +133,10 @@ html[data-theme="dark"] :is(.hero,.work,.about){
  background-image:none;
 }
 
-
+/* Shared notebook gutters honor phone safe areas. */
+@media(max-width:600px){
+ .hero.wrap,.work.wrap,.about.wrap{
+  padding-left:max(24px,env(safe-area-inset-left));
+  padding-right:max(24px,env(safe-area-inset-right));
+ }
+}
