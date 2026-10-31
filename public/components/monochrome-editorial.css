@@ -9,6 +9,9 @@
  --paper:#f5f3ef;--ink:#171717;--brand-ink:#171717;--line:#c8c5c0;
  --surface-blush:#eeece8;--surface-cream:#f5f3ef;--surface-navy:#292929;
  --focus:#235f88;
+ /* Card surfaces belong with the editorial theme tokens. */
+ --editorial-card:#f7f6f3;--editorial-card-edge:#b7b5b1;
+ --editorial-card-glow:rgba(255,255,255,.88);--editorial-card-shadow:rgba(18,18,18,.10);
 }
 html[data-theme="dark"]{
  --editorial-paper:#151515;--editorial-ink:#f1f0ec;--editorial-rule:#565656;
@@ -18,6 +21,8 @@ html[data-theme="dark"]{
  --surface-blush:#242424;--surface-cream:#1d1d1d;--surface-navy:#292929;
  --focus:#a6d9ff;--muted:#c4c4c4;
  --editorial-accent:#a6d9ff;--editorial-action-ink:#111;
+ --editorial-card:#252525;--editorial-card-edge:#646464;
+ --editorial-card-glow:rgba(255,255,255,.12);--editorial-card-shadow:rgba(0,0,0,.44);
 }
 body{color:var(--ink)}
 .site-header{border-bottom:1px solid var(--line)}
@@ -44,8 +49,6 @@ body{color:var(--ink)}
 .site-header nav a:is(:hover,:focus-visible),.text-link:is(:hover,:focus-visible),.quiet-link:is(:hover,:focus-visible){
  color:var(--editorial-accent)!important
 }
-html[data-theme="dark"] .site-header nav a:is(:hover,:focus-visible),
-html[data-theme="dark"] .text-link:is(:hover,:focus-visible){color:var(--editorial-accent)!important}
 :where(.work,.playground,.about){border-top:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){
  .project-visual img,.project-card img,.play-grid img,.about-portrait img,
@@ -87,28 +90,12 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
 
 /* PROJECT IDENTITY: monochrome belongs to the site chrome, not the work.
    Keep authentic project imagery and existing client accents in full color. */
-.project-visual img,.project-card img,.play-grid img,
-.case-gallery img,.case-view .project-visual img{
- filter:none;
-}
-:is(.featured-project,.project-card,.play-grid > *):is(:hover,:focus-within) img{
+.project-visual img,.project-card img,.play-grid img,.case-gallery img{
  filter:none;
 }
 /* Client accents remain in work-cards.css; the archive skin below owns the border. */
 /* EDITORIAL SYSTEM — neutral surfaces everywhere except branded project media.
    The restrained glass treatment adds depth without reducing text contrast. */
-:root{
- --editorial-card:#f7f6f3;
- --editorial-card-edge:#b7b5b1;
- --editorial-card-glow:rgba(255,255,255,.88);
- --editorial-card-shadow:rgba(18,18,18,.10);
-}
-html[data-theme="dark"]{
- --editorial-card:#252525;
- --editorial-card-edge:#646464;
- --editorial-card-glow:rgba(255,255,255,.12);
- --editorial-card-shadow:rgba(0,0,0,.44);
-}
 .work :is(.featured-project.client-file,.notebook-project-index .featured-project){
  /* Single archive surface; preserve readable facts and keyboard focus tokens. */
  --archive-surface:var(--editorial-card);
@@ -151,7 +138,6 @@ html[data-theme="dark"]{
  box-shadow:inset 0 1px 0 var(--editorial-card-glow);
 }
 .work .featured-project .project-visual:has(img){background:transparent}
-.work .featured-project .project-visual img{filter:none}
 /* Align neutral site sections and controls without erasing project colors. */
 .about,.work{color:var(--ink)}
 .about .ai-process{border-color:var(--line)}
@@ -163,19 +149,7 @@ html[data-theme="dark"]{
  .work :is(.featured-project.client-file,.notebook-project-index .featured-project){transition:none!important}
 }
 
-/* FINAL CHROME CONSISTENCY: keep brand colors inside work, not site furniture. */
-:root{
- --site-chrome-bg:#f5f3ef;
- --site-chrome-edge:#c8c5c0;
- --notebook-paper:#f5f3ef;
- --notebook-dot-color:rgba(40,40,40,.14);
-}
-html[data-theme="dark"]{
- --site-chrome-bg:#151515;
- --site-chrome-edge:#565656;
- --notebook-paper:#151515;
- --notebook-dot-color:rgba(245,245,245,.14);
-}
+/* FINAL CHROME CONSISTENCY: navigation owns chrome, stationery owns paper dots. */
 /* Theme tokens supply the dots' contrast; the geometry is shared. */
 body{
  background-color:var(--paper);

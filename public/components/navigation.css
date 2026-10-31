@@ -1,9 +1,9 @@
-/* Navigation owns header geometry, theme surfaces and Aero glass.
+/* Navigation owns header geometry, opaque theme chrome and Aero glass.
    Opaque fallback keeps text legible where backdrop filters are unsupported. */
 :root{--site-chrome-bg:var(--notebook-paper,#fffdf8);--site-chrome-edge:var(--line)}
 html[data-theme="dark"]{
  --site-chrome-bg:var(--paper);
- --site-chrome-edge:color-mix(in srgb,var(--line) 55%,transparent);
+ --site-chrome-edge:var(--line);
 }
 .site-header{
  position:sticky;top:0;z-index:100;max-width:none;width:100%;

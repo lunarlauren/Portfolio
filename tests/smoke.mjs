@@ -69,6 +69,28 @@ try{
   "Dark footer must match the dark page surface");
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // Component token ownership must preserve actual chrome and notebook colors
+ // in both themes; source checks alone cannot catch a late override.
+ for(const theme of ["light","dark"]){
+  const tokens=await page.evaluate(theme=>{
+   document.documentElement.dataset.theme=theme;
+   const root=getComputedStyle(document.documentElement);
+   const value=name=>root.getPropertyValue(name).trim();
+   return {
+    paper:value("--paper"),notebook:value("--notebook-paper"),
+    edge:value("--site-chrome-edge"),line:value("--line"),
+    dots:value("--notebook-dot-color"),
+    texture:getComputedStyle(document.body).backgroundImage
+   };
+  },theme);
+  assert.equal(tokens.notebook,tokens.paper,theme+" notebook paper must follow the active paper token");
+  assert.equal(tokens.edge,tokens.line,theme+" chrome separator must use the opaque theme rule");
+  assert.equal(tokens.dots.replace(/\s/g,""),theme==="dark"?"rgba(245,245,245,.14)":"rgba(40,40,40,.14)",
+   theme+" notebook dots must retain the intended contrast");
+  assert.match(tokens.texture,/radial-gradient/,theme+" notebook texture must remain visible");
+ }
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // Regression: blue boxes around ordinary hero/Work text were caused by
  // a dark-mode outline rule accidentally sharing the CTA's selector list.
  // Check computed styles in Chromium, not only source text, in both themes.

@@ -941,5 +941,11 @@ assert.match(editorialCss, /--editorial-accent:#a6d9ff;--editorial-action-ink:#1
 assert.ok(editorialCss.includes('html[data-theme="dark"] .primary-link:is(:hover,:focus-visible)'), 'Dark CTA must override homepage hover');
 assert.match(editorialCss, /\.about \.about-copy>\.text-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/, 'About CTA must use shared action ink');
 assert.doesNotMatch(editorialCss, /color:#fff!important;|background:#a6d9ff!important;color:#111!important/, 'No duplicate literal action colors');
+// Theme token ownership: later editorial declarations must not mask component edits.
+assert.doesNotMatch(editorialCss, /--(?:site-chrome-bg|site-chrome-edge|notebook-paper|notebook-dot-color)\s*:/, 'Editorial skin must not duplicate navigation/stationery tokens');
+assert.match(stationeryCss, /--notebook-paper:var\(--paper\)/, 'Notebook surface follows the active paper theme');
+assert.match(stationeryCss, /html\[data-theme="dark"\]\{--notebook-dot-color:rgba\(245,245,245,\.14\)\}/, 'Dark notebook dots retain intended contrast');
+assert.match(navigationCss, /--site-chrome-edge:var\(--line\)/, 'Opaque chrome separator belongs to navigation');
+assert.doesNotMatch(editorialCss, /:is\(\.featured-project,\.project-card,\.play-grid > \*\):is\(:hover,:focus-within\) img/, 'Full-color project imagery must not need duplicate hover overrides');
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);
