@@ -33,51 +33,11 @@ html:not([data-theme="dark"]) .section-head>p{background:transparent;box-decorat
 /* Client folder shadows use the shared paper-depth token; no alternating overrides. */
 
 
-/* Notebook hero — expressive typography with legible mobile-first spacing.
-   Keep the existing portrait asset; owner-supplied doodles can replace accents. */
-html:not([data-theme="dark"]) .hero h1{color:var(--brand-ink)}
-html:not([data-theme="dark"]) .hero h1 em{color:var(--brand-pink);font-style:normal}
-.notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(1.0625rem,2vw,1.4375rem);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;border-bottom:2px solid var(--notebook-pink);margin:6px 0 14px}
-.notebook-hero-note span{font-size:1.5625rem;font-style:normal}
-html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
-@media(max-width:760px){
- .hero .notebook-hero-note{font-size:1rem;max-width:100%}
- .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
-}
-
 /* Phone hero and project index sizing. Header layout belongs to components/navigation.css. */
 @media(max-width:420px){
  .hero .hero-copy{min-width:0}
- .hero .hero-copy h1{font-size:clamp(2.3125rem,10.8vw,3rem);line-height:1.05;letter-spacing:-.045em}
  .hero .hero-description{max-width:100%;overflow-wrap:break-word}
  .hero .hero-foot{flex-wrap:wrap;gap:8px 14px}
-}
-
-
-/* Homepage phone rhythm: breathing room between the identity, statement,
-   actions and featured illustration. Keep the notebook motif and artwork. */
-@media(max-width:600px){
- .hero.wrap{padding-inline:clamp(24px,6vw,36px);padding-top:clamp(46px,10vw,64px);padding-bottom:72px;gap:clamp(32px,8vw,48px)}
- .hero-copy{min-width:0}
- .hero .eyebrow{line-height:1.7;letter-spacing:.1em;overflow-wrap:normal}
- .hero h1{margin-block:clamp(26px,6vw,38px)}
- .hero .notebook-hero-note{margin-block:clamp(22px,5vw,32px)}
- .hero .hero-description{font-size:clamp(1.0625rem,4.3vw,1.25rem);line-height:1.65}
- .hero .hero-actions{gap:14px 18px;margin-top:clamp(28px,7vw,40px)}
- .hero .primary-link{min-height:52px}
-}
-
-
-
-
-/* iPhone hero finishing pass: concise editorial spacing and a clear primary
-   action. Keep the lined copy treatment localized to body paragraphs. */
-@media(max-width:600px){
- .hero .hero-copy h1{margin-bottom:12px}
- .hero .notebook-hero-note{margin-top:12px;margin-bottom:22px}
- .hero .hero-actions{display:flex;flex-direction:column;align-items:stretch;gap:12px;margin-top:28px}
- .hero .hero-actions .primary-link{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:56px;padding:14px 20px;box-sizing:border-box}
- .hero .hero-actions .quiet-link{align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;padding-inline:4px}
 }
 
 
@@ -87,15 +47,5 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
    typical laptop screen without clipping content at zoom or short heights. */
 /* About viewport rhythm now lives in components/about.css. */
 
-
-/* Optical alignment: the hero note uses the shared no-rotation baseline.
-   Preserve its intentional border, padding, and margin adjustments. */
-.hero .notebook-hero-note{
- border-bottom:2px solid var(--notebook-pink);
- padding:5px 0 7px;
- margin-inline:0;
-}
-.hero .notebook-hero-note::before,
-.hero .notebook-hero-note::after{transform:none}
 
 /* Component styles extracted to ./components/stationery.css; load after this file. */

@@ -120,6 +120,14 @@ assert.match(heroPolishCss, /\.hero \.feature-art\{height:100%;min-height:0\}/,
  'Desktop hero art must retain its original fill height');
 assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
  'Reduced-motion CTA hover must remain with homepage button styles');
+// The hero notebook note and phone action sizing have one component owner.
+assert.doesNotMatch(css, /\.notebook-hero-note\s*\{|\.hero \.notebook-hero-note::before/,
+ 'Legacy CSS must not regain notebook note styles');
+assert.match(heroPolishCss, /\.notebook-hero-note\{display:inline-flex/, 'Hero component must own notebook note typography');
+assert.match(heroPolishCss, /\.hero \.notebook-hero-note::before/, 'Hero component must own note optical alignment');
+assert.match(heroPolishCss, /\.hero \.hero-actions\{[^}]*flex-direction:column/, 'Phone hero actions retain column layout');
+assert.match(heroPolishCss, /\.hero \.hero-actions \.primary-link\{[^}]*padding:14px 20px/, 'Phone CTA retains its effective touch padding');
+
 // The mobile layout visually places the portrait before the hero CTAs.
 // Keeping the portrait panel noninteractive prevents a mismatched tab order.
 const heroFeatureMarkup = html.match(/<div class="hero-feature" id="hero-feature">[\s\S]*?<\/div><\/section>/)?.[0];

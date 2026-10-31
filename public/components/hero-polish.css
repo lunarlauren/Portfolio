@@ -2,6 +2,30 @@
    Loaded after the legacy stylesheet. Keep responsive hero ownership here
    rather than layering new overrides in styles.css. */
 
+/* Notebook note: visible on tablet/desktop, hidden in the phone hero below.
+   Keep typography and optical alignment here rather than in legacy CSS. */
+/* Notebook hero — expressive typography with legible mobile-first spacing.
+   Keep the existing portrait asset; owner-supplied doodles can replace accents. */
+html:not([data-theme="dark"]) .hero h1{color:var(--brand-ink)}
+html:not([data-theme="dark"]) .hero h1 em{color:var(--brand-pink);font-style:normal}
+.notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(1.0625rem,2vw,1.4375rem);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;border-bottom:2px solid var(--notebook-pink);margin:6px 0 14px}
+.notebook-hero-note span{font-size:1.5625rem;font-style:normal}
+html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
+@media(max-width:760px){
+ .hero .notebook-hero-note{font-size:1rem;max-width:100%}
+ .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
+}
+
+/* Optical alignment: the hero note uses the shared no-rotation baseline.
+   Preserve its intentional border, padding, and margin adjustments. */
+.hero .notebook-hero-note{
+ border-bottom:2px solid var(--notebook-pink);
+ padding:5px 0 7px;
+ margin-inline:0;
+}
+.hero .notebook-hero-note::before,
+.hero .notebook-hero-note::after{transform:none}
+
 /* RESPONSIVE HERO OWNERSHIP
    The 950px/760px transitions belong with the final hero layout, not in
    styles.css. Keep these before the more specific phone and desktop rules. */
@@ -117,8 +141,9 @@
   order:5;margin:0;max-width:38ch;font-size:1rem;text-align:center;
   line-height:1.62;text-wrap:pretty
  }
- .hero .hero-actions{order:6;width:100%;align-items:center;justify-content:center;margin-top:26px;gap:var(--space-2)}
+ .hero .hero-actions{order:6;width:100%;flex-direction:column;align-items:center;justify-content:center;margin-top:26px;gap:var(--space-2)}
  .hero .hero-actions .primary-link{
+  display:flex;align-items:center;padding:14px 20px;
   width:auto;min-width:min(100%,238px);min-height:48px;
   justify-content:space-between;gap:24px;box-sizing:border-box
  }
