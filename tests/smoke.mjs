@@ -194,6 +194,33 @@ try{
     const meta=card?.querySelector(".project-meta");
     const link=card?.querySelector(".project-card-link");
      const title=card?.querySelector(".project-card h3.archive-project-title");
+     // Test actual painted client tabs and CTA ink, not just CSS token presence.
+     const rgb=value=>{
+      const canvas=document.createElement("canvas");
+      canvas.width=canvas.height=1;
+      const ctx=canvas.getContext("2d");
+      ctx.fillStyle=value;ctx.fillRect(0,0,1,1);
+      return [...ctx.getImageData(0,0,1,1).data].slice(0,3);
+     };
+     const luminance=value=>{
+      const [r,g,b]=rgb(value).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);
+      return .2126*r+.7152*g+.0722*b;
+     };
+     const contrast=(a,b)=>{
+      const [hi,lo]=[luminance(a),luminance(b)].sort((x,y)=>y-x);
+      return (hi+.05)/(lo+.05);
+     };
+     const clientInk=[...grid.querySelectorAll(".featured-project.client-file")].map(file=>{
+      const label=file.querySelector(".client-file-label");
+      const cta=file.querySelector(".project-card-cta");
+      if(!label||!cta)return null;
+      return {
+       labelContrast:contrast(getComputedStyle(label).color,getComputedStyle(label).backgroundColor),
+       ctaContrast:contrast(getComputedStyle(cta).color,getComputedStyle(file).backgroundColor),
+       ctaColor:getComputedStyle(cta).color,
+       cardColor:getComputedStyle(file).color
+      };
+     });
     return {
      visualPosition:visual?getComputedStyle(visual).position:null,
      visualOverflow:visual?getComputedStyle(visual).overflow:null,
@@ -206,7 +233,8 @@ try{
      processInk:process?getComputedStyle(process).color:null,
      cardInk:card?getComputedStyle(card).color:null,
      factsEdge:card?getComputedStyle(card).getPropertyValue("--archive-facts-edge").trim():null,
-     focusEdge:card?getComputedStyle(card).getPropertyValue("--archive-focus-edge").trim():null
+     focusEdge:card?getComputedStyle(card).getPropertyValue("--archive-focus-edge").trim():null,
+     clientInk
     };
    },theme);
    assert.equal(archive.found,true,"Work archive and documented process teaser must render");
@@ -219,6 +247,16 @@ try{
    assert.equal(archive.linkDisplay,"block","Work link geometry in "+theme+" at "+width+"px");
    assert.equal(archive.processInk,archive.cardInk,"Archive process copy must match readable card ink");
    assert.ok(archive.factsEdge&&archive.focusEdge,"Archive contrast and focus tokens must survive consolidation");
+   assert.ok(archive.clientInk.length>0&&archive.clientInk.every(Boolean),
+    "Every archive file needs a client tab and visible case-study CTA");
+   for(const client of archive.clientInk){
+    assert.ok(client.labelContrast>=4.5,
+     `${width}px ${theme}: client tab must meet 4.5:1 (got ${client.labelContrast.toFixed(2)})`);
+    assert.ok(client.ctaContrast>=4.5,
+     `${width}px ${theme}: archive CTA must meet 4.5:1 (got ${client.ctaContrast.toFixed(2)})`);
+    assert.notEqual(client.ctaColor,client.cardColor,
+     `${width}px ${theme}: CTA must not be flattened to generic card ink`);
+   }
    surfaces.push(archive.surface);
   }
   assert.notEqual(surfaces[0],surfaces[1],"Archive card must adapt to light and dark themes");
