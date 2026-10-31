@@ -62,6 +62,12 @@ html[data-theme="dark"]{
 @media(hover:none){
  .hero .feature-art .hero-portrait-art{filter:none}
 }
+/* Dark homepage CTA base is still higher-specificity and !important;
+   this override preserves the tested hover contrast until that base is refactored. */
+html[data-theme="dark"] .primary-link:is(:hover,:focus-visible),
+html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
+ background:var(--editorial-accent)!important;color:var(--editorial-action-ink)!important;border-color:var(--editorial-accent)!important
+}
 /* The illustrative placeholder is a separate readable surface. */
 .work .featured-project .project-visual:not(:has(img)){
  --placeholder-surface:var(--surface-blush);
