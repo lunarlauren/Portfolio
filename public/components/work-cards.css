@@ -49,6 +49,21 @@
 /* Work archive cards: client folder tabs, verified contribution metadata,
    project previews, and dark-mode card surfaces. Loaded after base styles. */
 
+/* SHARED PROJECT CARD PRIMITIVES — Work and After Hours use the same
+   structure. The final editorial layer owns image transition timing, color
+   and glass surfaces; Playground owns its deliberately dark contrast. */
+.project-card{min-width:0}
+.project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;height:auto;min-height:190px}
+.project-visual img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
+.project-card:hover img{transform:scale(1.035)}
+.project-meta{font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;letter-spacing:.13em;font-weight:700;margin-top:20px}
+.project-card h3{font:600 25px 'Newsreader';letter-spacing:-.04em;margin:8px 0}
+.project-card p{color:var(--muted);line-height:1.6;font-size:var(--type-sm)}
+.project-card-link{display:block;text-decoration:none;outline-offset:5px}
+.project-card-link:hover .project-visual{filter:saturate(1.12)}
+.project-card-link:hover h4{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.project-card .project-meta{display:flex;justify-content:space-between;gap:8px}
+
 /* WORK ARCHIVE OWNERSHIP (extracted from the legacy cascade)
    Base archive layout, documented UX approach teasers and keyboard states live
    here before the more specific client-file styles below. */
@@ -57,11 +72,10 @@
 .featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,44px);margin-bottom:clamp(42px,6vw,76px)}
 .featured-project{min-width:0}
 .featured-project>.eyebrow{margin:0 0 12px;color:var(--muted);line-height:1.5}
-.featured-project .project-card-link{display:block;height:100%;text-decoration:none}
-.featured-project .project-visual{aspect-ratio:16/10;min-height:0;border-radius:12px}
+.featured-project .project-card-link{height:100%}
+.featured-project .project-visual{aspect-ratio:16/10;min-height:0}
 .featured-project .project-card h3{font-size:clamp(1.625rem,2.5vw,2.375rem);line-height:1.12}
 .featured-project .project-card p{font-size:0.9375rem;line-height:1.65;max-width:58ch}
-.featured-project .project-card-link:focus-visible{border-radius:12px}
 @media(max-width:760px){
  .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
 }
@@ -69,18 +83,19 @@
    Long case-study paragraphs are visually clamped here; the full text remains in the case study. */
 .featured-case-link{display:inline-flex;align-items:center;gap:8px;font-size:0.875rem;font-weight:700;text-underline-offset:4px;min-height:44px}
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
-html:not([data-theme="dark"]) .featured-project{background:var(--notebook-paper);border:1px solid color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));border-radius:16px;padding:clamp(14px,2vw,22px);box-shadow:var(--paper-shadow)}
+html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
 /* Notebook project index — one project per entry, with a clear editorial hierarchy.
    Cards use existing approved imagery or descriptive placeholders from content.js. */
 .notebook-project-index{counter-reset:project;align-items:stretch}
-.notebook-project-index .featured-project{position:relative;display:flex;flex-direction:column;gap:0;min-width:0}
+.notebook-project-index .featured-project{position:relative;display:flex;flex-direction:column;gap:0}
 .notebook-project-index .featured-project .project-card{flex:1}
 .notebook-project-index .featured-project .eyebrow{font-size:0.6875rem;letter-spacing:.08em}
 .notebook-project-index .featured-project .project-card-link{height:auto}
 @media(max-width:760px){
  .notebook-project-index{gap:22px}
- .notebook-project-index .featured-project{padding:16px 16px 20px}
+ .notebook-project-index .featured-project{padding:16px 16px 20px;isolation:isolate}
  .notebook-project-index .featured-project .project-card h3{font-size:clamp(1.5625rem,7vw,2.125rem)}
+ .notebook-project-index .project-card-link{min-height:44px}
 }
 /* Case-study editorial notes: clearly separate documented evidence from design
    rationale. No interactions or hover-only content are required to read them. */
@@ -93,10 +108,6 @@ html:not([data-theme="dark"]) .featured-project{background:var(--notebook-paper)
 html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
 /* Mobile interaction quality: keep tappable controls comfortable and avoid
    paper decoration interfering with focus or text. */
-@media(max-width:760px){
- .notebook-project-index .project-card-link{display:block;min-height:44px}
- .notebook-project-index .featured-project{isolation:isolate}
-}
 .notebook-project-index .project-card-link:focus-visible{outline:3px solid var(--notebook-pink);outline-offset:4px}
 @media(max-width:420px){
  .notebook-project-index .project-card-link{overflow-wrap:break-word}
@@ -184,9 +195,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  line-height:1.45;
  overflow-wrap:break-word;
 }
-@media(max-width:420px){
- .work .project-card-facts{grid-template-columns:minmax(0,1fr)}
-}
 
 
 
@@ -203,7 +211,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  color:var(--muted);
 }
 .work .featured-project.client-file .project-visual .visual-brief{
- border:0;
  box-shadow:none;
 }
 .work .featured-project.client-file .project-meta{
@@ -217,7 +224,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 .work .featured-project.client-file .project-visual:not(:has(img)){
  aspect-ratio:auto;
  min-height:132px;
- max-height:none;
  padding:clamp(14px,2vw,24px);
  display:flex;
  align-items:center;
@@ -251,9 +257,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
    An underline remains for recognition without relying on color alone. */
 .work .client-file .project-card-cta{
  color:var(--file-cta-ink,var(--file-accent));
- text-decoration-color:currentColor;
  text-decoration-thickness:2px;
- text-underline-offset:4px;
  transition:color .18s ease,text-decoration-thickness .18s ease;
 }
 .work .client-file .project-card-link:hover .project-card-cta,

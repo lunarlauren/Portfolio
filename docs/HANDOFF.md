@@ -151,17 +151,17 @@ Think of the site like a set of labeled drawers:
 
 **Safe editing recipe:** Change one thing; keep a copy of the old value; check a narrow phone width and a desktop width in both themes; run the repository tests; commit only when CI passes. A passing syntax check is **not** a passing browser test. Do not change project outcomes or claim user testing without evidence.
 
-**CSS rule of thumb:** Search for the selector across all stylesheets before editing. The base stylesheet contains historical overrides; the later-loaded component files can override it. Prefer cleaning up the original rule rather than adding a second competing rule at the bottom. Keep comments about *why* a rule exists, not a narration of every CSS property.
+**CSS rule of thumb:** Search for a selector across component stylesheets before editing. `public/styles.css` is a 132-byte compatibility stub with no active rules; later-loaded components can still override one another. Edit the authoritative component rather than adding a competing late override. Keep comments about *why* a rule exists, not a narration of every CSS property.
 
 **Portrait ownership:** `public/index.html` uses `/laurenlevenportfolioheroportrait.png` in the hero and the separate `/Headshot%20Lauren%20Leven.png` photograph in About. The hero illustration is a noninteractive visual panel, not a featured-project link. At phone widths (≤600px), `public/components/hero-polish.css` uses `display: contents` on the generic `.hero-copy` wrapper to place the portrait immediately after the headline. The portrait panel has no links or buttons; the single visible primary CTA follows the short introduction in visual and keyboard focus order. The decorative orbit, tiles, badge, caption, and redundant note are hidden on phones only. The component's one phone media block replaces several overlapping historical overrides; keep future changes there and update the structural assertions in `scripts/check-content.mjs`. The About crop/layout belongs to `public/components/about.css`; preserve the actual headshot there and the illustrated hero above.
 
 ## CSS cleanup progress
 
-The first global rules were moved into `public/components/foundations.css` without changing their order relative to the remaining styles. `public/styles.css` is still a large legacy file with overrides and should **not** be deleted or reordered wholesale. Future extraction should move coherent rule groups and verify computed styles, mobile overflow, dark mode, and the browser smoke tests before declaring a pass.
+`public/styles.css` is now a comment-only compatibility stub. Further consolidation should target duplicated component rules, preserve the established stylesheet load order, and verify computed styles, mobile overflow, dark mode, and browser smoke tests.
 
 ### Homepage CSS extraction
 
-`homepage-base.css` contains the earliest homepage, hero, card, and responsive rules in their original sequence. Later declarations in `styles.css` and the dedicated component stylesheets can still override these rules. This extraction is organizational, not a complete removal of duplicates; validate actual computed styles before consolidating overlapping selectors.
+`homepage-base.css` owns homepage grids, hero actions, section typography, and entrance motion. Shared Work/After Hours card structure and image geometry now belong to `work-cards.css`, while `monochrome-editorial.css` owns final image transition timing, surfaces, and theme colors. The mobile 260px `.project-visual` height was dead because a later `height:auto` won the cascade; it was retired. Validate computed styles before further consolidation.
 
 ### Case-study base extraction
 
@@ -240,3 +240,7 @@ Dark-theme primary button colors, its small hover nudge, and the homepage's entr
 
 ### Archive editorial selector consolidation (2026-10-31)
 The final archive glass surface in `public/components/monochrome-editorial.css` now uses `.work :is(.featured-project.client-file,.notebook-project-index .featured-project)` for the common card, gloss, hover, ink, and reduced-motion rules. Both alternatives have the same class specificity as the original selectors, so the existing cascade and light/dark token values are preserved. The duplicate dark-only surface selector and repeated client-tab background/border-top declarations were retired; `work-cards.css` remains the owner of the client tab's background. Do not reintroduce parallel card selectors when updating the visual skin. The legacy `public/styles.css` is a compatibility stub with no active rules. Source checks verify ownership; Chromium and real-device checks are still required for visual equivalence.
+
+### 2026-10-31 — Shared project-card primitives and dead override cleanup
+
+`work-cards.css` now owns the common Work/After Hours card geometry, metadata typography, link affordances, and image cover crop previously split across two positions in `homepage-base.css`. Duplicate featured-link display/decoration, mobile facts stacking, obsolete focus radius, and superseded light card surface declarations were removed. The final editorial skin still controls card surfaces and image transition timing; `playground.css` still controls the always-dark After Hours contrast. The responsive facts list stacks at ≤600px, including ≤420px, without a duplicate media rule. Source and Chromium smoke tests guard card positioning, clipping, metadata, and keyboard-readable process content. No case-study narratives or delivery claims were changed; Mobile Insights remains shipped.
