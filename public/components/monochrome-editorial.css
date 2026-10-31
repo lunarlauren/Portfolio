@@ -1,0 +1,90 @@
+/* MONOCHROME EDITORIAL — isolated presentation layer.
+   Project imagery retains its original files; color is an interaction detail.
+   Keep contrast, keyboard access and reduced-motion behavior intact. */
+:root{
+ --editorial-paper:#f5f3ef;--editorial-ink:#171717;--editorial-rule:#c8c5c0;
+ --editorial-accent:#235f88;
+ --palette-paper:#f5f3ef;--palette-navy:#171717;--palette-blue:#bdbdbd;--palette-pink:#858585;
+ --notebook-pink:#555;--brand-pink:#555;--brand-sky:#e8e6e2;
+ --paper:#f5f3ef;--ink:#171717;--brand-ink:#171717;--line:#c8c5c0;
+ --surface-blush:#eeece8;--surface-cream:#f5f3ef;--surface-navy:#292929;
+ --focus:#235f88;
+}
+html[data-theme="dark"]{
+ --editorial-paper:#151515;--editorial-ink:#f1f0ec;--editorial-rule:#565656;
+ --palette-paper:#151515;--palette-navy:#efefef;--palette-blue:#777;--palette-pink:#aaa;
+ --notebook-pink:#aaa;--brand-pink:#dedede;--brand-sky:#252525;
+ --paper:#151515;--ink:#f1f0ec;--brand-ink:#f1f0ec;--line:#565656;
+ --surface-blush:#242424;--surface-cream:#1d1d1d;--surface-navy:#292929;
+ --focus:#a6d9ff;--muted:#c4c4c4;
+}
+body{background:var(--paper);color:var(--ink)}
+.site-header{border-bottom:1px solid var(--line)}
+.hero .hero-copy h1,.section-head h2,.about h2{letter-spacing:-.045em;text-wrap:balance}
+.hero .hero-copy h1 em,.section-head h2 em,.about h2 em{color:inherit!important;font-style:italic}
+.hero .notebook-hero-note{border-bottom-color:var(--line)}
+.hero-feature,.hero .feature-art{background:transparent!important;box-shadow:none!important}
+.hero .feature-art .hero-portrait-art{filter:grayscale(1) contrast(1.08);transition:filter .5s ease}
+.hero-feature:is(:hover,:focus-within) .hero-portrait-art{filter:grayscale(0)}
+.featured-projects-grid{gap:clamp(18px,2.5vw,34px)}
+.notebook-project-index .featured-project,
+html:not([data-theme="dark"]) .notebook-project-index .featured-project{
+ background:var(--paper);border:1px solid var(--line);box-shadow:none;border-radius:3px;
+}
+.featured-project .project-visual{overflow:hidden;border-radius:2px;background:#d8d6d2}
+.project-visual img,.project-card img,.play-grid img,.about-portrait img{
+ filter:grayscale(1);transition:filter .45s ease,transform .45s ease;
+}
+:is(.featured-project,.project-card,.play-grid > *):is(:hover,:focus-within) img,
+.about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
+.featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500}
+.primary-link,.header-contact{background:var(--ink)!important;color:var(--paper)!important;border-color:var(--ink)!important}
+.primary-link:is(:hover,:focus-visible),.header-contact:is(:hover,:focus-visible){
+ background:var(--editorial-accent)!important;color:#fff!important;border-color:var(--editorial-accent)!important
+}
+.site-header nav a:is(:hover,:focus-visible),.text-link:is(:hover,:focus-visible),.quiet-link:is(:hover,:focus-visible){
+ color:var(--editorial-accent)!important
+}
+html[data-theme="dark"] .site-header nav a:is(:hover,:focus-visible),
+html[data-theme="dark"] .text-link:is(:hover,:focus-visible){color:#a6d9ff!important}
+:where(.work,.playground,.about){border-top:1px solid var(--line)}
+@media(hover:none){
+ /* Touch users should see actual product colors, not inaccessible hover-only content. */
+ .project-visual img,.project-card img,.play-grid img{filter:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .project-visual img,.project-card img,.play-grid img,.about-portrait img,
+ .hero .feature-art .hero-portrait-art{transition:none!important}
+}
+
+/* CASE STUDY READING EXPERIENCE
+   Keep research and outcomes readable; avoid ornamental colored callouts. */
+.case-view{color:var(--ink)}
+.case-fact{border-left-color:var(--line)}
+.case-fact-label,.case-highlight-label{color:var(--muted)}
+.case-highlights{border-color:var(--line)}
+.case-highlight{border-left-color:var(--line)}
+.case-process-note{background:var(--surface-blush);border-left-color:var(--line)}
+.case-gallery .project-visual{background:var(--surface-blush);border-radius:2px}
+.case-gallery img,.case-view .project-visual img{
+ filter:grayscale(1);transition:filter .45s ease;
+}
+.case-gallery :is(a,figure,.project-visual):is(:hover,:focus-within) img,
+.case-view .project-visual:is(:hover,:focus-within) img{filter:none}
+
+/* Show the portrait in full color on touch devices too. */
+@media(hover:none){
+ .hero .feature-art .hero-portrait-art,
+ .case-gallery img,.case-view .project-visual img{filter:none}
+}
+/* Keep dark-mode interactions legible on dark surfaces. */
+html[data-theme="dark"]{
+ --editorial-accent:#a6d9ff;
+}
+html[data-theme="dark"] .primary-link:is(:hover,:focus-visible),
+html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
+ background:#a6d9ff!important;color:#111!important;border-color:#a6d9ff!important
+}
+@media(prefers-reduced-motion:reduce){
+ .case-gallery img,.case-view .project-visual img{transition:none!important}
+}
