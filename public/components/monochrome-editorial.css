@@ -148,3 +148,71 @@ html[data-theme="dark"] .work .featured-project.client-file{
 .work .featured-project .visual-placeholder{
  background:var(--surface-blush)!important;
 }
+
+/* EDITORIAL SYSTEM — neutral surfaces everywhere except branded project media.
+   The restrained glass treatment adds depth without reducing text contrast. */
+:root{
+ --editorial-card:#f7f6f3;
+ --editorial-card-edge:#b7b5b1;
+ --editorial-card-glow:rgba(255,255,255,.88);
+ --editorial-card-shadow:rgba(18,18,18,.10);
+}
+html[data-theme="dark"]{
+ --editorial-card:#252525;
+ --editorial-card-edge:#646464;
+ --editorial-card-glow:rgba(255,255,255,.12);
+ --editorial-card-shadow:rgba(0,0,0,.44);
+}
+.work .featured-project.client-file,
+.work .notebook-project-index .featured-project,
+html[data-theme="dark"] .work .featured-project.client-file{
+ --archive-surface:var(--editorial-card);
+ --archive-ink:var(--ink);
+ --archive-muted:var(--muted);
+ position:relative;
+ isolation:isolate;
+ background:var(--editorial-card)!important;
+ border:1px solid var(--editorial-card-edge)!important;
+ border-top:2px solid var(--file-accent,var(--editorial-card-edge))!important;
+ border-radius:12px;
+ box-shadow:0 12px 32px -22px var(--editorial-card-shadow),inset 0 1px 0 var(--editorial-card-glow);
+ transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+/* A glossy highlight sits behind content, never above it. */
+.work .featured-project.client-file::after,
+.work .notebook-project-index .featured-project::after{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
+ background:linear-gradient(145deg,rgba(255,255,255,.11),transparent 43%);
+}
+.work .featured-project.client-file:is(:hover,:focus-within),
+.work .notebook-project-index .featured-project:is(:hover,:focus-within){
+ box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
+}
+.work .featured-project.client-file :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title),
+.work .notebook-project-index .featured-project :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title){
+ color:var(--ink)!important;
+}
+.work .featured-project.client-file .client-file-label{
+ color:#151515!important;
+}
+.work .featured-project.client-file :is(.eyebrow,.project-card-facts dt,.project-card-summary-label),
+.work .notebook-project-index .featured-project :is(.eyebrow,.project-card-facts dt,.project-card-summary-label){
+ color:var(--muted)!important;
+}
+/* Featured image frames are tactile but do not tint the actual projects. */
+.work .featured-project .project-visual{
+ border:1px solid var(--editorial-card-edge);
+ box-shadow:inset 0 1px 0 var(--editorial-card-glow);
+}
+.work .featured-project .project-visual:has(img){background:transparent}
+.work .featured-project .project-visual img{filter:none}
+/* Align neutral site sections and controls without erasing project colors. */
+.about,.work{color:var(--ink)}
+.about .ai-process{border-color:var(--line)}
+.playground .play-grid .project-card-link{border-color:#666}
+@media(hover:none){
+ .work .featured-project.client-file,.work .notebook-project-index .featured-project{transition:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .work .featured-project.client-file,.work .notebook-project-index .featured-project{transition:none!important}
+}
