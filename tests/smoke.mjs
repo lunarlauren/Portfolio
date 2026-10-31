@@ -218,7 +218,10 @@ try{
        labelContrast:contrast(getComputedStyle(label).color,getComputedStyle(label).backgroundColor),
        ctaContrast:contrast(getComputedStyle(cta).color,getComputedStyle(file).backgroundColor),
        ctaColor:getComputedStyle(cta).color,
-       cardColor:getComputedStyle(file).color
+       cardColor:getComputedStyle(file).color,
+       cardBackground:getComputedStyle(file).backgroundColor,
+       labelColor:getComputedStyle(label).color,
+       labelBackground:getComputedStyle(label).backgroundColor
       };
      });
     return {
@@ -253,7 +256,7 @@ try{
     assert.ok(client.labelContrast>=4.5,
      `${width}px ${theme}: client tab must meet 4.5:1 (got ${client.labelContrast.toFixed(2)})`);
     assert.ok(client.ctaContrast>=4.5,
-     `${width}px ${theme}: archive CTA must meet 4.5:1 (got ${client.ctaContrast.toFixed(2)})`);
+     `${width}px ${theme}: archive CTA must meet 4.5:1 (got ${client.ctaContrast.toFixed(2)}; CTA ${client.ctaColor} on ${client.cardBackground})`);
     assert.notEqual(client.ctaColor,client.cardColor,
      `${width}px ${theme}: CTA must not be flattened to generic card ink`);
    }
