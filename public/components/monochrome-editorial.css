@@ -88,3 +88,40 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
 @media(prefers-reduced-motion:reduce){
  .case-gallery img,.case-view .project-visual img{transition:none!important}
 }
+
+/* CONTRAST SAFETY: archive cards can have their own light surface even when
+   the surrounding page is dark. Never inherit white text onto light cards. */
+.work .featured-project.client-file,
+.work .notebook-project-index .featured-project,
+html[data-theme="dark"] .work .featured-project.client-file{
+ --archive-surface:var(--paper);
+ --archive-ink:var(--ink);
+ --archive-muted:var(--muted);
+ --archive-facts-edge:var(--line);
+ --archive-focus-edge:var(--focus);
+ background:var(--paper)!important;
+ color:var(--ink)!important;
+ border-color:var(--line)!important;
+}
+.work .featured-project.client-file :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title),
+.work .notebook-project-index .featured-project :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title){
+ color:var(--ink)!important;
+}
+.work .featured-project.client-file :is(.eyebrow,.project-card-facts dt,.project-card-summary-label),
+.work .notebook-project-index .featured-project :is(.eyebrow,.project-card-facts dt,.project-card-summary-label){
+ color:var(--muted)!important;
+}
+/* The illustrative placeholder is a separate readable surface. */
+.work .featured-project .project-visual:not(:has(img)),
+.work .featured-project .visual-placeholder{
+ --placeholder-surface:var(--surface-blush);
+ --placeholder-text:var(--ink);
+ --placeholder-edge:var(--line);
+ background:var(--surface-blush)!important;
+ color:var(--ink)!important;
+ border-color:var(--line)!important;
+}
+.work .featured-project .project-visual:not(:has(img)) *,
+.work .featured-project .visual-placeholder *{
+ color:var(--ink)!important;
+}
