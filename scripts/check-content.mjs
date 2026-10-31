@@ -810,7 +810,11 @@ assert.match(html, /hero-polish\.css\?v=[a-zA-Z0-9-]+/,
  'Homepage must load the updated hero stylesheet');
 
 assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
-assert.ok(navigationCss.includes('gap:clamp(7px,2.2vw,13px)'), 'Phone navigation spacing should remain intentional');
+assert.ok(navigationCss.includes('gap:clamp(8px,2.4vw,18px)'), 'Phone navigation spacing should remain intentional');
+assert.match(navigationCss, /grid-template-rows:44px 44px/, 'Phone header must use two rows');
+assert.match(navigationCss, /grid-row:1\/3/, 'Logo must span the two rows');
+assert.match(navigationCss, /--mobile-site-header-height:110px/, 'Phone header height must be shared');
+assert.match(caseCss, /top:var\(--mobile-site-header-height,110px\)/, 'Case chapter strip must clear the phone header');
 assert.ok(navigationCss.includes('min-height:44px;padding:0 1px'), 'Phone navigation links must retain 44px hit height');
 
 // Pass 7: routed metadata and mobile chapter navigation contracts.
