@@ -30,14 +30,17 @@ footer a {text-decoration:none}
 .hero h1 {font-size:clamp(3.75rem,7.2vw,6.75rem);margin:28px 0 30px;max-width:850px;line-height:1.04;letter-spacing:-.045em;color:var(--brand-ink)}
 .hero-description {font-size:clamp(1.125rem,1.65vw,1.4375rem);line-height:1.48;max-width:590px;color:var(--muted);margin:0}
 .hero-actions {display:flex;align-items:center;flex-wrap:wrap;gap:24px;margin-top:38px}
-.primary-link {display:inline-flex;align-items:center;gap:30px;padding:17px 23px;text-decoration:none;font-weight:700;border-radius:3px;transition:transform .25s,background .25s;background:var(--brand-navy);color:#fff}
-.primary-link:hover {transform:translateY(-3px);background:color-mix(in srgb,var(--palette-navy) 80%,var(--palette-blue))}
+.primary-link {display:inline-flex;align-items:center;gap:30px;padding:17px 23px;text-decoration:none;font-weight:700;border-radius:3px;transition:transform .25s,background .25s;background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+.primary-link:hover {transform:translateY(-3px)}
+.primary-link:is(:hover,:focus-visible){background:var(--editorial-accent);color:var(--editorial-action-ink);border-color:var(--editorial-accent)}
 .quiet-link {font-size:0.875rem;font-weight:700;text-underline-offset:5px}
-/* Keep hover color beside the links it affects; dark theme uses its own tokens. */
-.quiet-link:hover,.text-link:hover{color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
-/* Dark-theme text links: colors live beside their homepage link styles. */
+/* Homepage quiet-link hover/focus uses the editorial accent token. */
+.text-link:hover{color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
+.quiet-link:is(:hover,:focus-visible){color:var(--editorial-accent)}
+/* Dark resting ink and accent states remain beside homepage link geometry. */
 html[data-theme="dark"] :is(.quiet-link,.text-link){color:var(--night-link-ink)}
-html[data-theme="dark"] :is(.quiet-link,.text-link):hover{color:var(--night-link-hover)}
+html[data-theme="dark"] .text-link:hover{color:var(--night-link-hover)}
+html[data-theme="dark"] .quiet-link:is(:hover,:focus-visible){color:var(--editorial-accent)}
 .hero-foot {display:flex;gap:18px 24px;flex-wrap:wrap;margin-top:auto;padding-top:68px;font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;font-weight:700;letter-spacing:.14em;color:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper))}
 .hero .status-dot {background:var(--brand-pink)}
 .eyebrow-divider {margin-inline:10px;color:#8da6b5}
@@ -49,7 +52,7 @@ html[data-theme="dark"] :is(.quiet-link,.text-link):hover{color:var(--night-link
 
 /* HOMEPAGE INTERACTION STATES
    Keep progressive entrance effects beside the homepage button geometry.
-   Final CTA colors live in monochrome-editorial.css. The script only adds reveal-ready when an observer exists;
+   CTA colors resolve through shared editorial tokens. The script only adds reveal-ready when an observer exists;
    visitors requesting less motion see the content immediately. */
 @media(hover:hover) and (pointer:fine){.hero-actions .primary-link span{display:inline-block;transition:transform .2s ease} .hero-actions .primary-link:hover span{transform:translate(4px,-3px)}}
 
