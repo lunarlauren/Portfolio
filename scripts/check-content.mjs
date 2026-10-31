@@ -661,10 +661,14 @@ assert.ok(playgroundCss.includes('.play-grid .project-card-link .project-visual{
 
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
 // This is a source-order guard only, not a measured color-contrast test.
-const genericPaperRule = css.indexOf('html:not([data-theme="dark"]) .section-head>p');
+const genericPaperRule = stationeryCss.indexOf('html:not([data-theme="dark"]) .section-head>p');
 const playgroundContrastRule = playgroundCss.indexOf('html:not([data-theme="dark"]) .playground .section-head>p');
 assert.ok(genericPaperRule >= 0 && playgroundContrastRule >= 0,
- 'Playground contrast rule must be present in the later-loaded component stylesheet');
+ 'Stationery paper heading and Playground night contrast rules must have component owners');
+assert.doesNotMatch(css, /\.section-head\s*\{|\.section-head>p\s*\{/, 'Retired legacy stylesheet must not contain heading rules');
+assert.doesNotMatch(playgroundCss, /\\n\/\* Beyond the Brief/, 'Escaped newline text must not invalidate Playground selectors');
+assert.match(playgroundCss, /\.playground\.wrap \{[^}]*background:#171717;/, 'After Hours must have a stable neutral night surface');
+assert.match(playgroundCss, /\.playground \.project-card \.project-card-process\{color:#e0e0e0;/, 'After Hours process text must be legible in both themes');
 assert.match(playgroundCss.slice(playgroundContrastRule, playgroundContrastRule + 260),
  /background:transparent/, 'Playground intro must not inherit paper background');
 assert.doesNotMatch(css, /\.playground\s+\.section-head>p/,
