@@ -221,7 +221,12 @@ try{
        cardColor:getComputedStyle(file).color,
        cardBackground:getComputedStyle(file).backgroundColor,
        labelColor:getComputedStyle(label).color,
-       labelBackground:getComputedStyle(label).backgroundColor
+       labelBackground:getComputedStyle(label).backgroundColor,
+       fileClass:file.className,
+       fileCtaToken:getComputedStyle(file).getPropertyValue("--file-cta-ink").trim(),
+       ctaToken:getComputedStyle(cta).getPropertyValue("--file-cta-ink").trim(),
+       fileAccent:getComputedStyle(file).getPropertyValue("--file-accent").trim(),
+       fileInk:getComputedStyle(file).getPropertyValue("--ink").trim()
       };
      });
     return {
@@ -256,7 +261,7 @@ try{
     assert.ok(client.labelContrast>=4.5,
      `${width}px ${theme}: client tab must meet 4.5:1 (got ${client.labelContrast.toFixed(2)})`);
     assert.ok(client.ctaContrast>=4.5,
-     `${width}px ${theme}: archive CTA must meet 4.5:1 (got ${client.ctaContrast.toFixed(2)}; CTA ${client.ctaColor} on ${client.cardBackground})`);
+     `${width}px ${theme}: archive CTA must meet 4.5:1 (got ${client.ctaContrast.toFixed(2)}; CTA ${client.ctaColor} on ${client.cardBackground}; file ${client.fileClass}; token ${client.fileCtaToken}; inherited ${client.ctaToken}; accent ${client.fileAccent}; ink ${client.fileInk})`);
     assert.notEqual(client.ctaColor,client.cardColor,
      `${width}px ${theme}: CTA must not be flattened to generic card ink`);
    }
