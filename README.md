@@ -41,7 +41,7 @@ The source smoke test guards these distinctions. It does not verify browser layo
 
 ### Responsive navigation handoff (October 26, 2026)
 
-The sticky header uses **one row at 650px and below**, with tighter spacing at 360px and below. Navigation links retain 44px hit heights; the theme toggle is 44px tall (40px wide on the narrowest phones). The case-study chapter index uses a 64px sticky offset and heading scroll margins so chapter headings are not hidden behind the header. Update `public/components/navigation.css` and `public/components/case-study.css` together when changing header dimensions. The source smoke test checks these declarations, **not** their rendered geometry. Still verify 320, 375, 420, 421, 650 and 760px widths, both themes, keyboard focus, and chapter scrolling in a browser before release.
+The sticky header uses **two rows at 650px and below**, with tighter spacing at 360px and below. Visible and keyboard order match: logo, Work/Playground/About, Contact, then theme. All controls retain 44px hit heights. The case-study chapter index uses the shared 110px phone header offset and additional heading scroll margin to clear both sticky bars. Update `public/components/navigation.css` and `public/components/case-study.css` together when changing header dimensions. The source smoke test checks these declarations, **not** their rendered geometry. Still verify 320, 375, 420, 421, 650 and 760px widths, both themes, keyboard focus, and chapter scrolling in a browser before release.
 
 ### Professional project archive metadata (October 26, 2026)
 
