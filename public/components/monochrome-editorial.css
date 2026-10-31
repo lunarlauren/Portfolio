@@ -56,3 +56,35 @@ html[data-theme="dark"] .text-link:is(:hover,:focus-visible){color:#a6d9ff!impor
  .project-visual img,.project-card img,.play-grid img,.about-portrait img,
  .hero .feature-art .hero-portrait-art{transition:none!important}
 }
+
+/* CASE STUDY READING EXPERIENCE
+   Keep research and outcomes readable; avoid ornamental colored callouts. */
+.case-view{color:var(--ink)}
+.case-fact{border-left-color:var(--line)}
+.case-fact-label,.case-highlight-label{color:var(--muted)}
+.case-highlights{border-color:var(--line)}
+.case-highlight{border-left-color:var(--line)}
+.case-process-note{background:var(--surface-blush);border-left-color:var(--line)}
+.case-gallery .project-visual{background:var(--surface-blush);border-radius:2px}
+.case-gallery img,.case-view .project-visual img{
+ filter:grayscale(1);transition:filter .45s ease;
+}
+.case-gallery :is(a,figure,.project-visual):is(:hover,:focus-within) img,
+.case-view .project-visual:is(:hover,:focus-within) img{filter:none}
+
+/* Show the portrait in full color on touch devices too. */
+@media(hover:none){
+ .hero .feature-art .hero-portrait-art,
+ .case-gallery img,.case-view .project-visual img{filter:none}
+}
+/* Keep dark-mode interactions legible on dark surfaces. */
+html[data-theme="dark"]{
+ --editorial-accent:#a6d9ff;
+}
+html[data-theme="dark"] .primary-link:is(:hover,:focus-visible),
+html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
+ background:#a6d9ff!important;color:#111!important;border-color:#a6d9ff!important
+}
+@media(prefers-reduced-motion:reduce){
+ .case-gallery img,.case-view .project-visual img{transition:none!important}
+}
