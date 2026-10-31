@@ -21,15 +21,13 @@ html[data-theme="dark"]{
 /* Desktop Contact is a filled action; phone navigation keeps it text-only. */
 .header-contact{display:inline-flex;align-items:center;gap:8px;justify-content:center;min-height:40px;padding:8px 4px;border:0;border-radius:0;text-decoration:none;font-size:.8125rem;font-weight:700;white-space:nowrap;background:var(--ink);color:var(--paper);transition:color .18s ease,background .18s ease}
 .header-contact:is(:hover,:focus-visible){background:var(--editorial-accent);color:var(--editorial-action-ink)}
-/* Dark navigation links outside .header-actions retain the same contrast.
-   Header-action links below have their own more specific color treatment. */
-html[data-theme="dark"] .site-header nav a{color:var(--night-link-ink)}
+/* All rendered header links live inside .header-actions; dark resting ink
+   uses the same token as other header controls. */
 html[data-theme="dark"] .site-header .header-actions nav a{color:var(--ink)}
 /* Navigation hover/focus ink belongs here, not in the editorial skin.
    Dark header-action resting ink has greater specificity, so explicitly
    include its interaction state without relying on !important. */
 .site-header nav a:is(:hover,:focus-visible),
-html[data-theme="dark"] .site-header nav a:is(:hover,:focus-visible),
 html[data-theme="dark"] .site-header .header-actions nav a:is(:hover,:focus-visible){color:var(--editorial-accent)}
 html[data-theme="dark"] .theme-toggle:focus-visible,
 html[data-theme="dark"] .header-contact:focus-visible{
