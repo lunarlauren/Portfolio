@@ -29,17 +29,8 @@ html[data-theme="dark"] .hero h1{color:var(--ink)!important}
 html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
 
 
-html[data-theme="dark"] .primary-link,
-html[data-theme="dark"] .hero-actions .primary-link{background:color-mix(in srgb,var(--palette-paper) 30%,var(--palette-pink))!important;color:#182333!important;border:1px solid color-mix(in srgb,var(--palette-paper) 30%,var(--palette-pink))!important}
-html[data-theme="dark"] .primary-link:hover{background:#ffc0dc!important;color:#182333!important}
 html[data-theme="dark"] .hero-foot{color:#b7c7d7}
 html[data-theme="dark"] .hero-foot span{color:inherit}
-
-@media(hover:hover) and (pointer:fine){.hero-actions .primary-link span{display:inline-block;transition:transform .2s ease} .hero-actions .primary-link:hover span{transform:translate(4px,-3px)}}
-.reveal-ready{animation:reveal-enter .55s ease both}
-@keyframes reveal-enter{from{opacity:.55;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:reduce){.hero-actions .primary-link span{transition:none!important}.reveal-ready{animation:none!important}}
-
 
 /* Dark-theme color variables remain above; link colors and focus states
    now live beside the components they affect. Do not outline static text. */
@@ -180,17 +171,3 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 .hero .notebook-hero-note::after{transform:none}
 
 /* Component styles extracted to ./components/stationery.css; load after this file. */
-
-/* Scroll reveals and subtle portrait depth. Motion is optional and never blocks content. */
-@media(prefers-reduced-motion:no-preference){
- .reveal-ready{animation:none;opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1);transition-delay:var(--reveal-delay,0ms)}
- .reveal-ready.in-view{opacity:1;transform:translateY(0)}
- .hero .hero-portrait-art{translate:0 var(--hero-parallax-y,0px);will-change:translate}
- .hero .hero-copy>.eyebrow{animation:hero-enter .55s ease-out both}
- .hero .hero-copy>h1{animation:hero-enter .7s .09s ease-out both}
- .hero .hero-description{animation:hero-enter .7s .2s ease-out both}
- .hero .hero-actions{animation:hero-enter .7s .28s ease-out both}
- .hero .hero-feature{animation:hero-enter .8s .14s ease-out both}
-}
-@keyframes hero-enter{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
-@media(prefers-reduced-motion:reduce){.reveal-ready{opacity:1!important;transform:none!important;transition:none!important}.hero .hero-portrait-art{translate:none!important}}
