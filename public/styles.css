@@ -2,14 +2,10 @@
    Rules are intentionally kept in cascade order while consolidation continues.
    Edit light/dark colors in components/foundations.css, not here.
    See docs/HANDOFF.md for the file map. */
-@media(max-width:950px) {.hero {grid-template-columns:1fr;min-height:0} .hero-feature {min-height:420px} .hero-foot {padding-top:48px} .hero h1 {font-size:clamp(3.625rem,10vw,5.9375rem)}}
-@media(max-width:760px) {.hero-feature {min-height:430px} .hero {padding-block:55px 80px} .hero h1 {font-size:clamp(3.125rem,12vw,4.875rem)} .hero-actions {gap:18px}}
-@media(prefers-reduced-motion:reduce) {.hero-feature:hover .feature-art,.primary-link:hover {transform:none}}
 .hero-feature {color:var(--brand-ink);overflow:visible;isolation:isolate;background:var(--brand-sky)}
 
 .hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
 
-@media(max-width:760px){.hero{min-width:0}.hero-feature{min-width:0}}
 
 
 
@@ -100,38 +96,7 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 }
 
 
-/* Desktop editorial hero: let the work section enter the first viewport.
-   Tablet and phone retain their existing composition. */
-@media(min-width:1024px){
- .hero.wrap{
-  min-height:0;
-  padding-top:clamp(42px,5vh,72px);
-  padding-bottom:clamp(42px,5vh,72px);
-  gap:clamp(36px,4vw,72px);
-  align-items:center;
- }
- .hero .hero-copy{justify-content:center}
- .hero .hero-copy h1{
-  font-size:clamp(3.625rem,5.1vw,5.375rem);
-  line-height:1.03;
-  letter-spacing:-.045em;
-  margin-block:22px 18px;
- }
- .hero .notebook-hero-note{margin-block:8px 16px}
- .hero .hero-description{font-size:clamp(1rem,1.2vw,1.1875rem);line-height:1.55}
- .hero .hero-actions{margin-top:24px}
- .hero .hero-feature{
-  min-height:0;
-  height:clamp(440px,62vh,620px);
-  box-sizing:border-box;
- }
- .hero .feature-art{height:100%;min-height:0}
-}
-
-
-/* Desktop hero handoff; Work spacing belongs to work-cards.css. */
-@media(min-width:1024px){.hero.wrap{padding-bottom:32px}}
-
+/* Desktop hero layout and its surviving art-height rule live in hero-polish.css. */
 
 /* Viewport-conscious desktop sections: fit the editorial sections within a
    typical laptop screen without clipping content at zoom or short heights. */
