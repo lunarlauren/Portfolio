@@ -18,6 +18,7 @@ const foundationsCss = read('../public/components/foundations.css');
 const navigationCss = read('../public/components/navigation.css');
 const heroPolishCss = read('../public/components/hero-polish.css');
 const workCss = read('../public/components/work-cards.css');
+const editorialCss = read('../public/components/monochrome-editorial.css');
 const homepageCss = read('../public/components/homepage-base.css');
 const playgroundCss = read('../public/components/playground.css');
 const visualPlaceholderCss = read('../public/components/visual-placeholders.css');
@@ -590,7 +591,7 @@ assert.ok(workCss.includes('#collection[hidden]{display:none!important}'), 'Inac
 assert.ok(workCss.includes('.collection-head h3{overflow-wrap:anywhere}'), 'Narrow collection headings must wrap');
 assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
-assert.match(html, /work-cards\.css\?v=20261030-motion-ownership/, 'Archive CSS version must be refreshed');
+assert.match(html, /work-cards\.css\?v=[0-9]{8}-[a-z0-9-]+/, 'Archive CSS must have a cache-versioned stylesheet reference');
 
 // Homepage interactions belong with the CTA and hero, not legacy overrides.
 // In reduced motion, reveal-ready must never hide the Work/About sections.
@@ -720,10 +721,12 @@ assert.match(caseStudy, /data-case-jump="case-evidence-notes"/, 'Chapter navigat
 assert.match(caseStudy, /processNotes=processNotesMarkup\(p,hasProcess\?3:2\)/, 'Evidence chapter must follow the optional process chapter');
 assert.match(caseStudy, /outcomeChapter=2\+Number\(hasProcess\)\+Number\(Boolean\(processNotes\)\)/, 'Outcome chapter number must follow the sections actually rendered');
 
-// Pass 3: archive geometry is shared; only surface/focus tokens change by theme.
-assert.match(workCss, /--archive-facts-edge:var\(--line\)/, 'Light archive dividers need a shared token');
-assert.match(workCss, /--archive-facts-edge:color-mix\(/, 'Dark archive dividers need an explicit token');
-assert.match(workCss, /--archive-focus-edge:color-mix\(/, 'Dark archive focus needs a visible token');
+// Archive structure is owned by Work; the final editorial skin owns
+// contrast and focus tokens in both themes. Do not duplicate assignments.
+assert.match(editorialCss, /--archive-facts-edge:var\(--line\)/, 'Archive dividers need the final editorial ink token');
+assert.match(editorialCss, /--archive-focus-edge:var\(--focus\)/, 'Archive focus needs the shared theme-aware focus token');
+assert.doesNotMatch(workCss, /--archive-(?:surface|edge|shadow|facts-edge|focus-edge)\s*:/,
+ 'Work layout must not redeclare editorial card surface/focus tokens');
 assert.match(workCss, /outline:2px solid var\(--archive-focus-edge\)/, 'Archive focus must consume the theme token');
 assert.match(workCss, /text-wrap:balance/, 'Archive headings must balance across card widths');
 
@@ -745,11 +748,13 @@ assert.ok(caseStudy.includes('const heading=caseJumpTargets.get(button.dataset.c
 assert.ok(caseStudy.includes('const caseJumpHeadings=[...caseJumpTargets.values()]'), 'Reading-progress tracking must reuse chapter targets');
 assert.ok(!caseStudy.includes('const heading=document.getElementById(button.dataset.caseJump)'), 'Avoid duplicate chapter DOM lookups');
 
-// Pass 10: one archive geometry with theme-specific color tokens.
-assert.match(workCss, /--archive-surface:var\(--palette-paper\)/, 'Archive paper surface must have a light token');
-assert.match(workCss, /--archive-surface:color-mix\(in srgb,var\(--palette-navy\)/, 'Archive paper surface must have a dark token');
-assert.match(workCss, /background-color:var\(--archive-surface\)/, 'Archive card background must use its theme token');
-assert.match(workCss, /border:1px solid var\(--archive-edge\)!important/, 'Archive card border must use its theme token');
+// Archive surface is applied last by the editorial skin, with opaque
+// light/dark colors; Work only owns the preview and card geometry.
+assert.match(editorialCss, /--editorial-card:#f7f6f3/, 'Light archive surface needs an opaque token');
+assert.match(editorialCss, /--editorial-card:#252525/, 'Dark archive surface needs an opaque token');
+assert.match(editorialCss, /background-color:var\(--editorial-card\)!important/, 'Archive card must paint an opaque base');
+assert.match(editorialCss, /border:1px solid var\(--editorial-card-edge\)!important/, 'Archive card edge belongs to editorial skin');
+assert.doesNotMatch(workCss, /border:1px solid var\(--archive-edge\)!important/, 'Retired archive border must not return');
 assert.match(workCss, /color:var\(--file-cta-ink,var\(--file-accent\)\)/, 'Archive CTA must use a shared theme color');
 
 // Pass 9: hero hierarchy and archive title token contracts.
