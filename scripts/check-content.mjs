@@ -983,7 +983,7 @@ assert.doesNotMatch(editorialCss, /\.work :is\(\.featured-project\.client-file,\
  'No blanket archive descendant ink override may erase client CTA/tab colors');
 assert.match(workCss, /\.work \.project-card :is\(h3,p,\.project-meta\)\{color:var\(--ink\)\}/,
  'Work component owns readable text without recoloring nested labels');
-assert.match(workCss, /--file-label-ink:#000;/, 'Tab label ink must contrast with dark monochrome blue');
+assert.match(workCss, /--file-label-ink:#000000;/, 'Tab label ink must contrast with dark monochrome blue');
 assert.match(workCss, /--file-cta-ink:color-mix\(in srgb,var\(--file-accent\) 35%,var\(--ink\)\)/,
  'Archive CTAs must not use pale raw accent ink on light paper');
 assert.doesNotMatch(editorialCss, /\.site-header,footer\.wrap\{background:/,
