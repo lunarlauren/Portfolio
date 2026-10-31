@@ -103,6 +103,8 @@ try{
     :{background:"rgb(35, 95, 136)",ink:"rgb(255, 255, 255)"};
    for(const selector of [".hero-actions .primary-link",".about .about-copy > .text-link"]){
     await page.hover(selector);
+    // Wait for the authored hover transition before asserting final colors.
+    await page.waitForTimeout(400);
     const colors=await page.$eval(selector,element=>{
      const style=getComputedStyle(element);
      return {background:style.backgroundColor,ink:style.color};
