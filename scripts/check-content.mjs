@@ -728,6 +728,15 @@ assert.match(editorialCss, /--archive-focus-edge:var\(--focus\)/, 'Archive focus
 assert.doesNotMatch(workCss, /--archive-(?:surface|edge|shadow|facts-edge|focus-edge)\s*:/,
  'Work layout must not redeclare editorial card surface/focus tokens');
 assert.match(workCss, /outline:2px solid var\(--archive-focus-edge\)/, 'Archive focus must consume the theme token');
+// Placeholder color ownership: do not revive superseded per-client palettes.
+assert.doesNotMatch(workCss, /--(?:archive-preview(?:-edge|-text)?|file-tint)\s*:/,
+ 'Work must not restore unused preview color tokens');
+assert.match(workCss, /border:1px dashed var\(--line\)/,
+ 'Work must retain a dashed frame for unsupplied project imagery');
+assert.match(editorialCss, /background:var\(--placeholder-surface\)!important/,
+ 'The editorial skin must own placeholder background color');
+assert.match(editorialCss, /color:var\(--placeholder-text\)!important/,
+ 'The editorial skin must own placeholder ink');
 assert.match(workCss, /text-wrap:balance/, 'Archive headings must balance across card widths');
 
 // Pass 4: reading hierarchy, chapter state and mobile gallery contracts.
