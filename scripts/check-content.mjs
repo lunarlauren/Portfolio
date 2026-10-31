@@ -42,6 +42,19 @@ const stationeryCss = read('../public/components/stationery.css');
  assert.doesNotMatch(css, /html\[data-theme="dark"\] \.hero-description\s*,/, 'Legacy dark text outline must not return');
 }
 
+// Navigation and viewport ownership regressions: source-level, not visual QA.
+{
+ assert.doesNotMatch(css, /scroll-padding-top:82px|scroll-margin-top:82px|site-header nav a,\.feature-project-link/, 'Legacy CSS must not regain mixed navigation rules');
+ assert.match(navigationCss, /html\{scroll-padding-top:82px\}/, 'Sticky header scroll offset belongs to navigation');
+ assert.match(navigationCss, /#work,#playground,#about,#top,#main\{scroll-margin-top:82px\}/, 'Section anchors must remain in sync');
+ assert.match(navigationCss, /\.site-header nav a\{white-space:nowrap;min-height:44px;display:inline-flex;align-items:center\}/, 'Desktop navigation links need 44px targets');
+ assert.match(stationeryCss, /env\(safe-area-inset-left\)/, 'Phone gutters must honor safe areas');
+ assert.match(workCss, /\.feature-project-link,\.collection-back\{min-height:44px/, 'Archive links retain 44px targets');
+ assert.match(caseCss, /\.case-next\{min-height:44px/, 'Case next links retain 44px targets');
+ assert.match(caseCss, /\.case-view:focus\{outline:none!important/, 'Programmatic case wrapper focus stays undecorated');
+ assert.match(aboutCss, /min-width:601px\) and \(max-width:760px/, 'Tablet About spacing stays scoped');
+}
+
 // Theme state is part of the accessible light/dark experience. Exercise the
 // actual inline controller: OS changes follow only without a manual choice,
 // and cross-tab updates refresh the toggle and browser theme color.
