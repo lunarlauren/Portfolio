@@ -547,10 +547,10 @@ assert.match(workCss, /\.work \.project-card-facts\s*\{/, 'Archive facts must ha
 assert.match(workCss, /\.work \.project-card-facts dd\s*\{/, 'Archive values must have readable styles');
 
 // Static responsive guards: these do not prove browser layout or screen-reader behavior.
-assert.match(navigationCss, /@media\(max-width:650px\)\{\s*\.site-header\{\s*display:flex/, 'Production mobile header must remain one row');
+assert.match(navigationCss, /@media\(max-width:650px\)\{[\s\S]*?\.site-header\{\s*display:grid/, 'Production phone header must use the accessible two-row grid');
 assert.match(navigationCss, /@media\(max-width:360px\)/, 'Narrow-phone header must have an explicit layout');
-assert.match(caseCss, /@media\(max-width:760px\)\{[\s\S]*?\.case-view \.case-section-links\{\s*top:64px/, 'Phone chapter index must clear the production one-row header');
-assert.match(caseCss, /\.case-view \.case-section-links\{\s*top:64px/, 'Mobile chapter index must clear the one-row header');
+assert.match(caseCss, /@media\(max-width:760px\)\{[\s\S]*?\.case-view \.case-section-links\{\s*top:64px/, 'Tablet chapter index must retain its compact sticky offset');
+assert.match(caseCss, /@media\(max-width:650px\)\{[\s\S]*?\.case-view \.case-section-links\{top:var\(--mobile-site-header-height,110px\)/, 'Phone chapter index must clear the two-row header');
 assert.match(caseStudy, /function revealCurrentCaseTab\(button\)/, 'Current chapter should remain visible in the phone tab strip');
 assert.match(caseStudy, /chapterNav\.scrollLeft\+=delta/, 'Reveal must scroll the strip without scrolling the document');
 assert.doesNotMatch(css, /\.case-view \.case-section-links\{mask-image:/, 'Do not restore the one-sided fade that obscured chapter controls');
