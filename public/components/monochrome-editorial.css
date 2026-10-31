@@ -216,3 +216,46 @@ html[data-theme="dark"] .work .featured-project.client-file{
 @media(prefers-reduced-motion:reduce){
  .work .featured-project.client-file,.work .notebook-project-index .featured-project{transition:none!important}
 }
+
+/* FINAL CHROME CONSISTENCY: keep brand colors inside work, not site furniture. */
+:root{
+ --site-chrome-bg:#f5f3ef;
+ --site-chrome-edge:#c8c5c0;
+ --notebook-paper:#f5f3ef;
+ --notebook-dot-color:rgba(40,40,40,.14);
+ --notebook-pink:#555;
+}
+html[data-theme="dark"]{
+ --site-chrome-bg:#151515;
+ --site-chrome-edge:#565656;
+ --notebook-paper:#151515;
+ --notebook-dot-color:rgba(245,245,245,.14);
+}
+html:not([data-theme="dark"]) body{
+ background-color:var(--paper);
+ background-image:radial-gradient(circle,var(--notebook-dot-color) 1px,transparent 1.4px);
+}
+html[data-theme="dark"] body{
+ background-color:var(--paper);
+ background-image:radial-gradient(circle,var(--notebook-dot-color) 1px,transparent 1.4px);
+}
+.site-header,footer.wrap{background:var(--site-chrome-bg)!important;border-color:var(--site-chrome-edge)!important}
+.about .about-copy>.text-link{
+ background:var(--ink)!important;
+ color:var(--paper)!important;
+ border-color:var(--ink)!important;
+ box-shadow:0 4px 0 var(--line)!important;
+}
+.about .about-copy>.text-link:is(:hover,:focus-visible){
+ background:var(--editorial-accent)!important;
+ color:#fff!important;
+ border-color:var(--editorial-accent)!important;
+ box-shadow:0 6px 0 var(--line)!important;
+}
+html[data-theme="dark"] .about .about-copy>.text-link:is(:hover,:focus-visible){
+ background:#a6d9ff!important;color:#111!important;border-color:#a6d9ff!important
+}
+.about .ai-process{border-left-color:var(--line)!important}
+@media(prefers-contrast:more){
+ .work .featured-project.client-file{box-shadow:none!important;border-width:2px!important}
+}
