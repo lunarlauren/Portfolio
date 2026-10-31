@@ -106,7 +106,7 @@ assert.doesNotMatch(css, /^\.project-visual:not\(:has\(img\)\)/m, 'Shared placeh
 assert.doesNotMatch(css, /\/\* Problem-solving hero: shared layout in both themes/, 'Extracted hero polish must not return to legacy CSS');
 assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must remain in its component');
 // The old responsive hero layout was consolidated into the finishing component.
-assert.doesNotMatch(css, /@media\(max-width:950px\)|@media\(min-width:1024px\)/,
+assert.doesNotMatch(css, /@media\(max-width:950px\)|@media\(max-width:650px\)|@media\(min-width:1024px\)/,
  'Legacy stylesheet must not own the hero tablet/desktop breakpoints');
 assert.doesNotMatch(css, /\.hero-feature:hover \.feature-art,\.primary-link:hover/,
  'Legacy stylesheet must not combine artwork and button motion guards');
@@ -114,6 +114,8 @@ assert.match(heroPolishCss, /@media\(max-width:950px\)\{[\s\S]*?\.hero-feature\{
  'Hero component must retain the 950px single-column breakpoint');
 assert.match(heroPolishCss, /@media\(max-width:760px\)\{[\s\S]*?\.hero-actions\{gap:18px\}/,
  'Hero component must retain tablet spacing and action gap');
+assert.match(heroPolishCss, /@media\(max-width:650px\)\{[\s\S]*?\.hero-feature\{min-height:320px\}/,
+ 'Hero component must preserve the 650px fold and illustration height');
 assert.match(heroPolishCss, /\.hero \.feature-art\{height:100%;min-height:0\}/,
  'Desktop hero art must retain its original fill height');
 assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
