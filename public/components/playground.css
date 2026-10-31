@@ -11,22 +11,18 @@
 .playground .project-card h3 {color:#f4f3ef}
 .playground .project-visual:not(:has(img)) {background:#292929!important;border-color:#777}
 .playground .project-visual:not(:has(img)) .visual-label {border-color:#777}
-.playground .section-head>p,.playground .project-card p {color:#e0e0e0}
+.playground .project-card p {color:#e0e0e0}
 .playground .project-visual:not(:has(img)) :is(.visual-label,.visual-brief,.brief-kicker){color:#f1f1f1!important}
 
-/* The heading has no generated star; its title and color are explicit. */
-.playground .section-head h2{display:block!important;visibility:visible!important;opacity:1!important;color:#fff!important;position:relative;z-index:1}
-.playground .section-head h2::after{content:none!important}
+/* The rendered heading is #playground-title; no generic h2 or pseudo-element
+   overrides are needed. Keep its night color explicit in both themes. */
 .playground .section-head .playground-title{display:block!important;position:relative;z-index:2;visibility:visible!important;opacity:1!important;color:#fff!important;font:600 clamp(35px,5vw,66px)/1.1 'Newsreader',Georgia,serif!important;margin:14px 0 0!important;max-width:100%;height:auto!important;overflow:visible!important}
-.playground .section-head .playground-title::before,.playground .section-head .playground-title::after{content:none!important;display:none!important}
 
 /* Keep project process evidence readable on the dark surface in either theme. */
 .playground .project-card .project-card-process{color:#e0e0e0;border-top-color:#777}
 .playground .project-card .project-card-process strong{color:#f0f0f0}
 .playground .project-card .project-card-cta{color:#f3f7ff}
 .playground .project-card .project-meta{color:#d5d5d5}
-.playground .project-card .project-card-process,
-.playground .project-card .project-card-process p{opacity:1}
 
 /* Light notebook paragraph rules must never paint over this night section.
    Both selectors are intentional: specificity beats the generic paper rule. */

@@ -142,9 +142,11 @@ try{
  // The After Hours section is deliberately a dark reading surface in both
  // page themes. Guard its visible heading and paper-free introduction after
  // extracting the component CSS from the legacy stylesheet.
- for(const theme of ["light","dark"]){
-  await page.evaluate(value=>{document.documentElement.dataset.theme=value},theme);
-  const night=await page.evaluate(()=>{
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   await page.evaluate(value=>{document.documentElement.dataset.theme=value},theme);
+   const night=await page.evaluate(()=>{
    const section=document.querySelector("#playground");
    const heading=section.querySelector("#playground-title");
    const intro=section.querySelector(".section-head>p");
@@ -153,7 +155,9 @@ try{
     surface:css.backgroundColor,
     headingVisible:title.display!=="none"&&title.visibility!=="hidden",
     introBackground:getComputedStyle(intro).backgroundColor,
-    introColor:getComputedStyle(intro).color
+    introColor:getComputedStyle(intro).color,
+    headingColor:title.color,
+    headingOpacity:title.opacity
    };
   });
   assert.equal(night.surface,"rgb(23, 23, 23)",
@@ -161,8 +165,12 @@ try{
   assert.equal(night.introColor,"rgb(224, 224, 224)",
    "Playground introduction must retain readable night ink in "+theme+" theme");
   assert.equal(night.headingVisible,true,"Playground heading must remain visible");
+  assert.equal(night.headingColor,"rgb(255, 255, 255)",
+   "Playground heading must retain white ink in "+theme+" theme");
+  assert.equal(night.headingOpacity,"1","Playground heading must remain fully opaque");
   assert.equal(night.introBackground,"rgba(0, 0, 0, 0)",
    "Playground intro must not inherit notebook paper in "+theme+" theme");
+  }
  }
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
  await page.setViewportSize({width:390,height:844});
@@ -185,12 +193,13 @@ try{
     const visual=card?.querySelector(".project-visual");
     const meta=card?.querySelector(".project-meta");
     const link=card?.querySelector(".project-card-link");
+     const title=card?.querySelector(".project-card h3.archive-project-title");
     return {
      visualPosition:visual?getComputedStyle(visual).position:null,
      visualOverflow:visual?getComputedStyle(visual).overflow:null,
      metaDisplay:meta?getComputedStyle(meta).display:null,
      linkDisplay:link?getComputedStyle(link).display:null,
-     found:!!grid&&!!card&&!!process,
+     found:!!grid&&!!card&&!!process&&!!title,
      columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(" ").filter(Boolean).length:0,
      surface:card?getComputedStyle(card).backgroundColor:null,
      approachVisible:!!process&&getComputedStyle(process).display!=="none",

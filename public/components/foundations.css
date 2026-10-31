@@ -256,7 +256,6 @@ body {
   .section-head h2:hover,
   .about h2:hover,
   .collection-head h3:hover,
-  .project-card-link:hover h4,
   .case-head h1:hover,
   .case-prose h2:hover {
     font-variation-settings: "SOFT" 75, "WONK" 1;
@@ -265,8 +264,7 @@ body {
 
 .hero h1:focus-within,
 .section-head h2:focus-within,
-.about h2:focus-within,
-.project-card-link:focus-visible h4 {
+.about h2:focus-within {
   font-variation-settings: "SOFT" 75, "WONK" 1;
 }
 
