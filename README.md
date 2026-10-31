@@ -6,7 +6,7 @@ A lightweight portfolio of product UX, visual design, and illustration. The prod
 
 ## CSS typography ownership
 
-Shared heading hover/focus behavior and reduced-motion support live in `public/components/foundations.css` under **DISPLAY HEADING INTERACTIONS**. To change a heading's size, use its section's component stylesheet instead of adding an override to `public/styles.css`. The default Newsreader variation is already `normal`; do not add a duplicate baseline declaration. The `docs/HANDOFF.md` file remains the detailed editing guide.
+Shared heading hover/focus behavior and reduced-motion support live in `public/components/foundations.css` under **DISPLAY HEADING INTERACTIONS**. Base section-heading spacing and default status-dot color also live there. Hero headline, paragraph and CTA colors belong in `public/components/homepage-base.css`; header wordmark and navigation hover styles belong in `public/components/navigation.css`; case-study headline defaults belong in `public/components/case-study-base.css`. To change a heading's size, use its section's component stylesheet instead of adding an override to `public/styles.css`. The default Newsreader variation is already `normal`; do not add a duplicate baseline declaration. The `docs/HANDOFF.md` file remains the detailed editing guide.
 
 ## Source of truth
 
