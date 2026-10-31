@@ -93,7 +93,7 @@ html[data-theme="dark"] {
 .hero .eyebrow,.work .eyebrow,.about .eyebrow{color:var(--muted)}
 /* High-contrast mode keeps secondary labels fully legible. */
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot{opacity:1;text-shadow:none}}
-.status-dot {display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
+.status-dot {display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:#377b91}
 .hero h1 {font-family:var(--font-display);font-size:var(--type-h1);font-weight:600;line-height:.99}
 .hero h1 em,.about h2 em {font-style:normal;color:var(--teal)}
 .hero-bottom {display:flex;justify-content:space-between;align-items:end;gap:30px}
@@ -102,7 +102,9 @@ html[data-theme="dark"] {
 .round-link:hover {transform:translateY(5px)}
 section.work,section.playground,section.about {padding-block:85px}
 .section-head {display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:36px}
-.section-head h2,.about h2 {font-family:var(--font-display);font-size:var(--type-h2);font-weight:600;line-height:1.05;letter-spacing:-.055em;margin:14px 0 0}
+/* Shared section headings: change their base rhythm here, not in styles.css.
+   About and Work components can override these values at specific widths. */
+.section-head h2,.about h2 {font-family:var(--font-display);font-size:var(--type-h2);font-weight:600;line-height:1.1;letter-spacing:-.025em;margin:14px 0 0}
 .section-head>p {max-width:330px;color:var(--muted);line-height:1.6;margin:0}
 
 /* TYPOGRAPHY SYSTEM
