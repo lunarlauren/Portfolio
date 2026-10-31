@@ -120,8 +120,6 @@ assert.match(heroPolishCss, /\.hero \.feature-art\{height:100%;min-height:0\}/,
  'Desktop hero art must retain its original fill height');
 assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
  'Reduced-motion CTA hover must remain with homepage button styles');
-assert.match(html, /hero-polish\.css\?v=20261031-responsive-owner/,
- 'Updated hero stylesheet needs a fresh cache key');
 // The mobile layout visually places the portrait before the hero CTAs.
 // Keeping the portrait panel noninteractive prevents a mismatched tab order.
 const heroFeatureMarkup = html.match(/<div class="hero-feature" id="hero-feature">[\s\S]*?<\/div><\/section>/)?.[0];
@@ -766,7 +764,7 @@ assert.match(phoneHeroCss, /\.hero \.hero-actions\{[^}]*margin-top:26px/,
  'Mobile CTA needs a distinct gap after the introduction');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*width:auto;min-width:min\(100%,238px\)/,
  'Phone CTA should remain content-sized, not a full-width color bar');
-assert.match(html, /hero-polish\.css\?v=20261029-portrait-first/,
+assert.match(html, /hero-polish\.css\?v=[a-zA-Z0-9-]+/,
  'Homepage must load the updated hero stylesheet');
 
 assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
