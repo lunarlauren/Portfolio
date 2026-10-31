@@ -111,12 +111,14 @@ html:not([data-theme="dark"]) .section-head>p{
    Retired ruled-paper layers once competed with this dot grid in styles.css.
    Keep section surfaces transparent so dots align across section gutters. */
 :root{
- --notebook-paper:#fffdf8;
+ --notebook-paper:var(--paper);
  --notebook-pink:#f05b9f;
- --notebook-dot-color:rgba(100,169,218,.32);
+ --notebook-dot-color:rgba(40,40,40,.14);
  --notebook-dot-step:30px;
  --notebook-dot-radius:1px;
 }
+/* Same dot geometry, theme-specific contrast. */
+html[data-theme="dark"]{--notebook-dot-color:rgba(245,245,245,.14)}
 html:not([data-theme="dark"]) body{
  background-color:var(--notebook-paper);
  background-image:radial-gradient(circle,var(--notebook-dot-color) var(--notebook-dot-radius),transparent 1.4px);
