@@ -226,6 +226,39 @@ try{
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
  await page.setViewportSize({width:1280,height:720});
 
+ // Phone Work intro: keep the UX story readable while revealing projects sooner.
+ // These are computed-layout checks, not pixel-level screenshot comparisons.
+ for(const width of [320,390,600]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const intro=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const work=document.querySelector("#work");
+    const head=work.querySelector(".section-head");
+    const title=head.querySelector("h2");
+    const copy=work.querySelector(".section-head>p");
+    return {
+     paddingTop:parseFloat(getComputedStyle(work).paddingTop),
+     headGap:parseFloat(getComputedStyle(head).marginBottom),
+     titleSize:parseFloat(getComputedStyle(title).fontSize),
+     titleHeight:title.getBoundingClientRect().height,
+     copyVisible:getComputedStyle(copy).display!=="none",
+     overflow:document.documentElement.scrollWidth>innerWidth+2
+    };
+   },theme);
+   assert.ok(intro.paddingTop>=34&&intro.paddingTop<=48,
+    `${width}px ${theme}: Work top spacing should be compact on phones`);
+   assert.ok(intro.headGap>=20&&intro.headGap<=28,
+    `${width}px ${theme}: First project should follow the Work introduction closely`);
+   assert.ok(intro.titleSize>=31.9&&intro.titleSize<=38.1&&intro.titleHeight<175,
+    `${width}px ${theme}: Work title should be legible without dominating the viewport`);
+   assert.ok(intro.copyVisible&&!intro.overflow,
+    `${width}px ${theme}: UX-process intro must remain readable without horizontal overflow`);
+  }
+ }
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+ await page.setViewportSize({width:1280,height:720});
+
  // Reduced-motion visitors must not receive Playground preview or case entrance motion.
  const reducedMotionPage=await browser.newPage({reducedMotion:"reduce"});
  reducedMotionPage.on("pageerror",error=>errors.push(error.message));
