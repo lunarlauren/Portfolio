@@ -37,15 +37,7 @@ html[data-theme="dark"]{
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
 .featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500}
-/* Primary action color belongs here; Contact and About own theirs. */
-.primary-link{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
-.primary-link:is(:hover,:focus-visible){
- background:var(--editorial-accent);color:var(--editorial-action-ink);border-color:var(--editorial-accent)
-}
-.site-header nav a:is(:hover,:focus-visible),.quiet-link:is(:hover,:focus-visible){
- color:var(--editorial-accent)!important
-}
-:where(.work,.playground,.about){border-top:1px solid var(--line)}
+/* Link interaction colors and section dividers live in their owning components. */
 @media(prefers-reduced-motion:reduce){
  .project-card img,.about-portrait img,.hero .feature-art .hero-portrait-art{transition:none!important}
 }

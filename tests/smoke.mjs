@@ -167,6 +167,18 @@ try{
     `${theme}: desktop Contact remains filled`);
   }
  }
+ // Nav and quiet-link hover should resolve to the editorial accent in
+ // both themes without a final-layer !important override.
+ await page.setViewportSize({width:1280,height:800});
+ for(const theme of ["light","dark"]){
+  await page.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+  const expected=theme==="dark"?"rgb(166, 217, 255)":"rgb(35, 95, 136)";
+  for(const selector of [".site-header nav a[href='/#work']", ".hero-actions .quiet-link"]){
+   await page.hover(selector);
+   const ink=await page.$eval(selector,node=>getComputedStyle(node).color);
+   assert.equal(ink,expected,theme+" "+selector+" hover ink");
+  }
+ }
  await page.setViewportSize({width:1280,height:720});
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 

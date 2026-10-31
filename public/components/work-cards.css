@@ -1,3 +1,6 @@
+/* Work section divider belongs here, not in the editorial presentation layer. */
+.work{border-top:1px solid var(--line)}
+
 /* Work intro and archive spacing. public/styles.css is a compatibility stub;
    this component owns Work typography at desktop, tablet and phone widths. */
 .work .section-head>p{line-height:var(--leading-body,1.6)}

@@ -643,8 +643,8 @@ assert.doesNotMatch(homepageCss, /@keyframes reveal-enter/,
 assert.ok(!css.includes('.project-card p,.case-back,footer'), 'Legacy typography bundle must not return');
 assert.ok(!css.includes('.hero-description,.case-intro,.section-head>p,.project-card p'), 'Legacy mixed text-color selector must not return');
 assert.match(homepageCss, /\.hero h1 \{[^}]*line-height:1\.04;letter-spacing:-\.045em/, 'Homepage owns the hero headline rhythm');
-assert.match(homepageCss, /\.primary-link \{[^}]*background:var\(--brand-navy\)/, 'Homepage owns the CTA background');
-assert.match(navigationCss, /\.site-header nav a:hover\{color:color-mix/, 'Navigation owns link hover color');
+assert.match(homepageCss, /\.primary-link \{[^}]*background:var\(--ink\);color:var\(--paper\);border:1px solid var\(--ink\)/, 'Homepage owns the final CTA surface');
+assert.match(navigationCss, /\.site-header nav a:is\(:hover,:focus-visible\)/, 'Navigation owns hover and keyboard focus ink');
 
 // The old collection chooser is not rendered or routed. Retire its styling
 // rather than carrying an untestable alternate gallery in the cascade.
@@ -964,12 +964,16 @@ assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var
 // both-theme contrast without a dark-only !important override.
 assert.match(editorialCss, /--editorial-action-ink:#fff;/, 'Light editorial actions need white hover ink');
 assert.match(editorialCss, /--editorial-accent:#a6d9ff;--editorial-action-ink:#111;/, 'Dark editorial actions need near-black hover ink');
-assert.match(editorialCss, /\.primary-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/,
+assert.match(homepageCss, /\.primary-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/,
  'Primary hover and keyboard focus use theme-aware ink');
 assert.doesNotMatch(homepageCss, /html\[data-theme="dark"\] \.primary-link/,
  'Homepage no longer owns a competing dark primary color');
 assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.primary-link:is/,
  'Editorial does not need a dark-only hover override');
+assert.doesNotMatch(editorialCss, /\.site-header nav a:is\(:hover,:focus-visible\)|\.quiet-link:is\(:hover,:focus-visible\)|\.primary-link:is\(:hover,:focus-visible\)/, 'Editorial layer must not override component link states');
+assert.doesNotMatch(foundationsCss, /\.site-header nav a:hover,\.text-link:hover/, 'Retired global link hover must not return');
+assert.doesNotMatch(homepageCss, /\.text-link(?:\s*\{|:hover)/, 'About contact link is not styled in homepage');
+assert.match(workCss, /\.work\{border-top:1px solid var\(--line\)\}/, 'Work divider belongs to Work');
 assert.match(navigationCss, /\.header-contact:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/,
  'Navigation owns Contact hover and keyboard focus colors');
 assert.doesNotMatch(navigationCss, /background:transparent!important;color:var\(--ink\)!important/,
