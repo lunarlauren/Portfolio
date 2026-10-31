@@ -1,48 +1,26 @@
-/* WORK SECTION SPACING
-   Keep the archive compact on desktops; shorter laptops use a fixed 36px
-   vertical gap. The later mobile rule controls phone padding separately. */
+/* Work intro and archive spacing. public/styles.css is a compatibility stub;
+   this component owns Work typography at desktop, tablet and phone widths. */
+.work .section-head>p{line-height:var(--leading-body,1.6)}
 @media(min-width:1024px){
  .work.wrap{padding-block:clamp(42px,5vw,68px)}
+ .work .section-head{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start;column-gap:clamp(20px,2.5vw,36px);
+  margin-bottom:clamp(28px,3vw,42px);
+ }
+ .work .section-head h2{margin-bottom:0;font-size:clamp(2.625rem,4vw,4rem);line-height:1.06}
+ .work .section-head>p{justify-self:start;align-self:center;max-width:38ch;margin:0}
+ .work .featured-projects-grid{gap:clamp(20px,2.5vw,36px)}
+ .work .notebook-project-index .featured-project{padding:clamp(18px,2vw,26px)}
 }
 @media(min-width:1024px) and (max-height:800px){
  .work.wrap{padding-block:36px}
-}
-
-/* WORK SECTION INTRO
-   The heading and summary use the same two tracks as the project archive.
-   Keep desktop typography here, not in legacy styles.css. The short-height
-   adjustment must follow the normal desktop rule to preserve laptop rhythm. */
-@media(min-width:1024px){
- .work .section-head{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  align-items:start;
-  column-gap:clamp(20px,2.5vw,36px);
-  margin-bottom:clamp(28px,3vw,42px);
- }
- .work .section-head h2{
-  margin-bottom:0;
-  font-size:clamp(2.625rem,4vw,4rem);
-  line-height:1.06;
- }
- .work .section-head>p{
-  justify-self:start;
-  align-self:center;
-  max-width:38ch;
-  margin:0;
-  line-height:var(--leading-body,1.6);
- }
-}
-@media(min-width:1024px) and (max-height:800px){
  .work .section-head{margin-bottom:26px}
 }
-
-/* At intermediate widths the global section-head flex layout can squeeze
-   the process statement beside a long editorial title. Stack these tracks
-   before the desktop archive grid takes over. */
 @media(min-width:601px) and (max-width:1023px){
+ /* Stack the intro before the desktop archive switches to two columns. */
  .work .section-head{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-3)}
- .work .section-head>p{max-width:54ch;margin:0;line-height:var(--leading-body,1.6)}
+ .work .section-head>p{max-width:54ch;margin:0}
  .work .section-head h2{max-width:19ch;text-wrap:balance}
 }
 
@@ -63,22 +41,13 @@
 .project-card-link:hover .project-visual{filter:saturate(1.12)}
 .project-card .project-meta{display:flex;justify-content:space-between;gap:8px}
 
-/* WORK ARCHIVE OWNERSHIP (extracted from the legacy cascade)
-   Base archive layout, documented UX approach teasers and keyboard states live
-   here before the more specific client-file styles below. */
-/* Featured case studies: direct entry to the work, before company browsing.
-   Use existing project-card components and tokens so light/dark themes stay aligned. */
+/* Work archive: linked case studies with documented process previews. */
 .featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,44px);margin-bottom:clamp(42px,6vw,76px)}
 .featured-project{min-width:0}
 .featured-project>.eyebrow{margin:0 0 12px;color:var(--muted);line-height:1.5}
 .featured-project .project-visual{aspect-ratio:16/10;min-height:0}
 .featured-project .project-card h3{font-size:clamp(1.625rem,2.5vw,2.375rem);line-height:1.12}
 .featured-project .project-card p{font-size:0.9375rem;line-height:1.65;max-width:58ch}
-@media(max-width:760px){
- .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
-}
-/* The linked card already includes its challenge, contribution and approach;
-   no standalone featured-case-link is rendered. */
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
 html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
 /* Notebook project index — one project per entry, with a clear editorial hierarchy.
@@ -87,12 +56,6 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
 .notebook-project-index .featured-project{position:relative;display:flex;flex-direction:column;gap:0}
 .notebook-project-index .featured-project .project-card{flex:1}
 .notebook-project-index .featured-project .eyebrow{font-size:0.6875rem;letter-spacing:.08em}
-@media(max-width:760px){
- .notebook-project-index{gap:22px}
- .notebook-project-index .featured-project{padding:16px 16px 20px;isolation:isolate}
- .notebook-project-index .featured-project .project-card h3{font-size:clamp(1.5625rem,7vw,2.125rem)}
- .notebook-project-index .project-card-link{min-height:44px}
-}
 /* Case-study editorial notes: clearly separate documented evidence from design
    rationale. No interactions or hover-only content are required to read them. */
 .project-card-cta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:0.875rem;font-weight:700;text-decoration:underline;text-underline-offset:4px}
@@ -108,10 +71,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 @media(max-width:420px){
  .notebook-project-index .project-card-link{overflow-wrap:break-word}
 }
-@media(min-width:1024px){
- .work .featured-projects-grid{gap:clamp(20px,2.5vw,36px)}
- .work .notebook-project-index .featured-project{padding:clamp(18px,2vw,26px)}
-}
 
 /* Stationery file-folder tabs: the client name is the actual projecting
    tab, not a tiny decorative dash. Keep the file number on the card itself. */
@@ -121,14 +80,11 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  position:relative;
  margin-top:32px;
  /* Card border and radius are painted by monochrome-editorial.css. */
- overflow:visible;
 }
 .client-file--hoylu{--file-accent:var(--palette-blue)}
 .client-file--alcon{--file-accent:var(--palette-pink)}
 .client-file--holland-america{--file-accent:var(--palette-green)}
-.client-file::before{content:none}
 .client-file>.eyebrow{
- position:static;
  margin-top:8px;
  margin-bottom:12px;
  font-size:0.6875rem;
@@ -157,10 +113,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 .client-file .client-file-number{
  font-variant-numeric:tabular-nums;
  letter-spacing:.11em;
-}
-@media(max-width:600px){
- .client-file{margin-top:29px}
- .client-file .client-file-label{min-width:102px;height:24px;font-size:0.625rem;top:-25px}
 }
 
 /* Archive metadata: distinguish the designer's actual contribution from
@@ -201,10 +153,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  letter-spacing:-.035em;
  text-wrap:balance;
 }
-.work .featured-project.client-file>.eyebrow{
- margin-bottom:4px;
- color:var(--muted);
-}
+.work .featured-project.client-file>.eyebrow{margin-bottom:4px}
 .work .featured-project.client-file .project-meta{
  margin-top:var(--space-2);
 }
@@ -216,8 +165,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  aspect-ratio:auto;
  min-height:132px;
  padding:clamp(14px,2vw,24px);
- display:flex;
- align-items:center;
  justify-content:flex-start;
  border:1px dashed var(--line);
 }
@@ -230,12 +177,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  font-size:0.625rem;
  line-height:1.3;
  letter-spacing:.09em;
-}
-@media(max-width:760px){
- .work .featured-project.client-file .project-visual:not(:has(img)){
-  min-height:110px;
-  padding:var(--space-2);
- }
 }
 
 /* Archive action: carry the folder's client color through to its CTA.
@@ -254,9 +195,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 html[data-theme="dark"] .work .client-file{
  --file-cta-ink:color-mix(in srgb,var(--file-accent) 72%,white);
 }
-/* Placeholder geometry stays in Work; the final editorial skin owns
-   placeholder backgrounds, borders and ink in both themes. */
-/* One readable metadata divider across both paper themes. */
+/* Facts dividers use the editorial theme token. */
 .work .featured-project.client-file .project-card-facts{
  border-block-color:var(--archive-facts-edge);
 }
@@ -287,20 +226,40 @@ html[data-theme="dark"] .work .client-file{
  .work .featured-project.client-file,.work .client-file .client-file-label{transition:none!important;animation:none!important}
 }
 
-/* Mobile archive: keep the section handoff compact without shrinking
-   cards, then show the challenge, contribution and approach at readable sizes. */
+/* One responsive archive owner. The shorter phone introduction reveals
+   the first case study sooner without hiding any UX-process evidence. */
+@media(max-width:760px){
+ .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
+ .notebook-project-index{gap:22px}
+ .notebook-project-index .featured-project{padding:16px 16px 20px;isolation:isolate}
+ .notebook-project-index .featured-project .project-card h3{font-size:clamp(1.5625rem,7vw,2.125rem)}
+ .notebook-project-index .project-card-link{min-height:44px}
+ .work .featured-project.client-file .project-visual:not(:has(img)){
+  min-height:110px;padding:var(--space-2);
+ }
+}
 @media(max-width:600px){
- .work.wrap{padding-bottom:clamp(28px,7vw,44px)}
+ /* Override the shared 85px section padding before the first file tab. */
+ .work.wrap{padding-top:clamp(34px,8vw,48px);padding-bottom:clamp(28px,7vw,44px)}
+ .work .section-head{margin-bottom:clamp(20px,5vw,28px)}
+ .work .section-head h2{
+  font-size:clamp(2rem,7.8vw,2.375rem);line-height:1.08;
+  margin-top:var(--space-2);text-wrap:balance;
+ }
+ .work .section-head>p{
+  max-width:44ch;margin-top:var(--space-3);
+  font-size:var(--type-body);line-height:1.55;text-wrap:pretty;
+ }
+ .client-file{margin-top:29px}
+ .client-file .client-file-label{min-width:102px;height:24px;font-size:0.625rem;top:-25px}
  .work .featured-projects-grid{margin-bottom:clamp(16px,4vw,28px)}
  .work .featured-project.client-file .archive-project-title{
   font-size:clamp(1.625rem,7vw,2.125rem);
-  line-height:1.12;
-  margin-bottom:var(--space-2);
+  line-height:1.12;margin-bottom:var(--space-2);
  }
  .work .project-card-facts{grid-template-columns:minmax(0,1fr);gap:var(--space-2)}
  .work .project-card-facts dt{font-size:var(--type-eyebrow,0.6875rem)}
  .work .project-card-facts dd{font-size:var(--type-sm,0.875rem);line-height:1.5}
- .work .client-file .project-card-facts + .project-card-process{padding-top:var(--space-2)}
 }
 
 /* Explicit challenge label anchors the problem → contribution → approach scan
