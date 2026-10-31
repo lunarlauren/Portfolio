@@ -185,8 +185,10 @@ try{
   await page.setViewportSize({width,height:844});
   const surfaces=[];
   for(const theme of ["light","dark"]){
-   const archive=await page.evaluate(theme=>{
+   const archive=await page.evaluate(async theme=>{
     document.documentElement.dataset.theme=theme;
+    // CTA colors transition when the theme changes; sample the settled state.
+    await new Promise(resolve=>setTimeout(resolve,260));
     const grid=document.querySelector(".work .featured-projects-grid");
     const card=grid?.querySelector(".featured-project.client-file");
     const process=card?.querySelector(".project-card-process");
@@ -221,12 +223,7 @@ try{
        cardColor:getComputedStyle(file).color,
        cardBackground:getComputedStyle(file).backgroundColor,
        labelColor:getComputedStyle(label).color,
-       labelBackground:getComputedStyle(label).backgroundColor,
-       fileClass:file.className,
-       fileCtaToken:getComputedStyle(file).getPropertyValue("--file-cta-ink").trim(),
-       ctaToken:getComputedStyle(cta).getPropertyValue("--file-cta-ink").trim(),
-       fileAccent:getComputedStyle(file).getPropertyValue("--file-accent").trim(),
-       fileInk:getComputedStyle(file).getPropertyValue("--ink").trim()
+       labelBackground:getComputedStyle(label).backgroundColor
       };
      });
     return {
@@ -261,7 +258,7 @@ try{
     assert.ok(client.labelContrast>=4.5,
      `${width}px ${theme}: client tab must meet 4.5:1 (got ${client.labelContrast.toFixed(2)})`);
     assert.ok(client.ctaContrast>=4.5,
-     `${width}px ${theme}: archive CTA must meet 4.5:1 (got ${client.ctaContrast.toFixed(2)}; CTA ${client.ctaColor} on ${client.cardBackground}; file ${client.fileClass}; token ${client.fileCtaToken}; inherited ${client.ctaToken}; accent ${client.fileAccent}; ink ${client.fileInk})`);
+     `${width}px ${theme}: archive CTA must meet 4.5:1 (got ${client.ctaContrast.toFixed(2)}; CTA ${client.ctaColor} on ${client.cardBackground})`);
     assert.notEqual(client.ctaColor,client.cardColor,
      `${width}px ${theme}: CTA must not be flattened to generic card ink`);
    }
