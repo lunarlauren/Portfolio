@@ -105,6 +105,15 @@ assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual:n
 assert.doesNotMatch(css, /^\.project-visual:not\(:has\(img\)\)/m, 'Shared placeholder rules must not return to legacy CSS');
 assert.doesNotMatch(css, /\/\* Problem-solving hero: shared layout in both themes/, 'Extracted hero polish must not return to legacy CSS');
 assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must remain in its component');
+// Hero ink, artwork stacking and 420px wrapping have one component owner.
+assert.doesNotMatch(css, /\.hero-feature|\.hero-foot|\.hero-description|\.hero-copy|\.hero h1|@media\(max-width:420px\)/,
+ 'Legacy paper rules must not regain hero declarations');
+assert.match(heroPolishCss, /html\[data-theme="dark"\] \.hero h1 em\{color:var\(--brand-pink\)!important\}/,
+ 'Hero component retains dark emphasis ink');
+assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero-description\{background:transparent;/,
+ 'Hero component keeps notebook paper visible through description');
+assert.match(heroPolishCss, /@media\(max-width:420px\)\{[\s\S]*?\.hero \.hero-description\{max-width:100%;overflow-wrap:break-word\}/,
+ 'Narrow phones retain description wrapping');
 // The old responsive hero layout was consolidated into the finishing component.
 assert.doesNotMatch(css, /@media\(max-width:950px\)|@media\(max-width:650px\)|@media\(min-width:1024px\)/,
  'Legacy stylesheet must not own the hero tablet/desktop breakpoints');
