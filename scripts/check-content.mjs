@@ -50,7 +50,7 @@ const stationeryCss = read('../public/components/stationery.css');
  assert.match(navigationCss, /#work,#playground,#about,#top,#main\{scroll-margin-top:82px\}/, 'Section anchors must remain in sync');
  assert.match(navigationCss, /\.site-header nav a\{white-space:nowrap;min-height:44px;display:inline-flex;align-items:center\}/, 'Desktop navigation links need 44px targets');
  assert.match(stationeryCss, /env\(safe-area-inset-left\)/, 'Phone gutters must honor safe areas');
- assert.match(workCss, /\.feature-project-link,\.collection-back\{min-height:44px/, 'Archive links retain 44px targets');
+ assert.match(workCss, /\.featured-case-link\{[^}]*min-height:44px/, 'Active featured case links retain 44px targets');
  assert.match(caseCss, /\.case-next\{min-height:44px/, 'Case next links retain 44px targets');
  assert.match(caseCss, /\.case-view:focus\{outline:none!important/, 'Programmatic case wrapper focus stays undecorated');
  assert.match(aboutCss, /min-width:601px\) and \(max-width:760px/, 'Tablet About spacing stays scoped');
@@ -586,9 +586,7 @@ assert.ok(!css.includes('.projects-grid,.play-grid'), 'Legacy CSS must not redef
 assert.ok(homepageCss.includes('grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))'), 'Homepage base owns responsive project columns');
 assert.ok(!css.includes('.work.wrap{padding-block:'), 'Legacy CSS must not redefine Work section spacing');
 assert.ok(workCss.includes('.work.wrap{padding-block:clamp(42px,5vw,68px)}'), 'Work component owns desktop section spacing');
-assert.ok(!css.includes('#collection[hidden]'), 'Legacy CSS must not own archive visibility');
-assert.ok(workCss.includes('#collection[hidden]{display:none!important}'), 'Inactive archive must remain hidden');
-assert.ok(workCss.includes('.collection-head h3{overflow-wrap:anywhere}'), 'Narrow collection headings must wrap');
+assert.doesNotMatch(css + workCss + homepageCss, /#collection\b|\.collection(?:\b|-nav\b|-back\b|-head\b)|\.close-collection\b/, 'Retired collection gallery must not retain CSS');
 assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
 assert.match(html, /work-cards\.css\?v=[0-9]{8}-[a-z0-9-]+/, 'Archive CSS must have a cache-versioned stylesheet reference');
@@ -613,20 +611,13 @@ assert.match(homepageCss, /\.hero h1 \{[^}]*line-height:1\.04;letter-spacing:-\.
 assert.match(homepageCss, /\.primary-link \{[^}]*background:var\(--brand-navy\)/, 'Homepage owns the CTA background');
 assert.match(navigationCss, /\.site-header nav a:hover\{color:color-mix/, 'Navigation owns link hover color');
 
-// Collection navigation and active-client header rules are owned by work-cards.
-// Motion is now owned by archive, case-study, Playground and shared foundations.
-assert.doesNotMatch(css, /^\.collection(?:-nav|-back|-head)(?:\s|\{|:|\[data-active)/m,
- 'Collection navigation and client-header rules must not return to legacy CSS');
-assert.match(workCss, /\.collection-nav\s*\{display:flex/,
- 'Work component must own collection navigation');
-assert.match(workCss, /\.collection\[data-active="alcon"\] \.collection-head/,
- 'Work component must retain client header theme states');
-assert.doesNotMatch(css + workCss, /@keyframes collection-enter/,
- 'Dead collection-enter keyframes must not return');
-const collectionHover = workCss.indexOf('.collection .project-card-link:hover .project-visual{transform:translateY(-5px)');
-const collectionReducedHover = workCss.indexOf('@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}');
-assert.ok(collectionHover >= 0 && collectionReducedHover > collectionHover,
- 'Collection hover motion must be disabled after its component override');
+// The old collection chooser is not rendered or routed. Retire its styling
+// rather than carrying an untestable alternate gallery in the cascade.
+assert.doesNotMatch(html + script + projectContent + caseStudy,
+ /(?:id=["']collection["']|class=["'][^"']*\bcollection(?:-nav|-back|-head)?\b|querySelector\(["']#collection["']\))/, 
+ 'Retired collection navigation must not return to active markup or routing');
+assert.match(workCss, /#work-title:focus\{outline:none!important;box-shadow:none!important\}/,
+ 'Programmatically focused Work heading stays undecorated; links retain visible focus');
 // Keep the cache-busting contract without pinning an unrelated historical
 // version string. This pass retires chrome already hidden by hero-polish.css.
 assert.match(html, /\/styles\.css\?v=[a-zA-Z0-9-]+/,
@@ -647,14 +638,10 @@ assert.ok(foundationsCss.includes('--motion-ease:cubic-bezier(.22,1,.36,1)'),
  'Foundations must own the shared motion token');
 assert.ok(foundationsCss.includes('::view-transition-old(selected-company)'),
  'Foundations must retain the shared route transition');
-assert.ok(workCss.includes('@keyframes gallery-reveal') && workCss.includes('.collection .project-card{animation:gallery-reveal'),
- 'Archive must own its card entrance animation');
 assert.ok(caseCss.includes('@keyframes detail-reveal') && caseCss.includes('.case-view:not([hidden]) .case-head{animation:detail-reveal'),
  'Case-study must own its entrance animation');
 assert.ok(playgroundCss.includes('.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)'),
  'Playground must own its preview hover');
-assert.ok(workCss.includes('.collection,.collection .collection-nav,.collection .collection-head,.collection .project-card{animation:none!important}'),
- 'Archive reduced-motion override must remain');
 assert.ok(caseCss.includes('.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}'),
  'Case-study reduced-motion override must remain');
 assert.ok(playgroundCss.includes('.play-grid .project-card-link .project-visual{transition:none!important}'),
