@@ -439,6 +439,11 @@ html[data-theme="dark"] .case-view{
 @media(max-width:420px){
  .case-view .case-section-links{padding-block:8px}
 }
+/* Phone chapters clear the taller two-row header and sticky chapter bar. */
+@media(max-width:650px){
+ .case-view .case-section-links{top:var(--mobile-site-header-height,110px)}
+ .case-view .case-prose h2[id]{scroll-margin-top:calc(var(--mobile-site-header-height,110px) + 80px)}
+}
 
 /* Case-study handoff: quick factual overview for skimming hiring managers.
    Keep values in script.js/projectEvidence aligned with confirmed project scope. */
