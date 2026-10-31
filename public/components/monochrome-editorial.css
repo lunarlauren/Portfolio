@@ -62,7 +62,8 @@ html[data-theme="dark"]{
 @media(hover:none){
  .hero .feature-art .hero-portrait-art{filter:none}
 }
-/* The higher-specificity dark CTA rule overrides earlier homepage button styles. */
+/* Dark homepage CTA base is still higher-specificity and !important;
+   this override preserves the tested hover contrast until that base is refactored. */
 html[data-theme="dark"] .primary-link:is(:hover,:focus-visible),
 html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  background:var(--editorial-accent)!important;color:var(--editorial-action-ink)!important;border-color:var(--editorial-accent)!important
@@ -89,7 +90,7 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  color:var(--ink)!important;
  position:relative;
  isolation:isolate;
- background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%),linear-gradient(155deg,var(--editorial-card),var(--editorial-card))!important;
+ background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%)!important;
  /* The gradient is a background image; give computed background-color an opaque base. */
  background-color:var(--editorial-card)!important;
  border:1px solid var(--editorial-card-edge)!important;
@@ -106,15 +107,8 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
 .work :is(.featured-project.client-file,.notebook-project-index .featured-project):is(:hover,:focus-within){
  box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 22px -8px color-mix(in srgb,var(--file-accent,var(--line)) 38%,transparent),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
 }
-.work :is(.featured-project.client-file,.notebook-project-index .featured-project) :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title){
- color:var(--ink)!important;
-}
-.work .featured-project.client-file .client-file-label{
- color:#151515!important;
-}
-.work :is(.featured-project.client-file,.notebook-project-index .featured-project) :is(.eyebrow,.project-card-facts dt,.project-card-summary-label){
- color:var(--muted)!important;
-}
+/* Semantic Work copy, client CTA ink and tab labels own their colors.
+   Avoid descendant-wide !important rules that flatten meaningful hierarchy. */
 /* Featured image frames are tactile but do not tint the actual projects. */
 .work .featured-project .project-visual{
  border:1px solid var(--editorial-card-edge);
@@ -131,13 +125,12 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  .work :is(.featured-project.client-file,.notebook-project-index .featured-project){transition:none!important}
 }
 
-/* FINAL CHROME CONSISTENCY: navigation owns chrome, stationery owns paper dots. */
+/* FINAL PAPER CONSISTENCY: navigation owns chrome, stationery owns dot tokens. */
 /* Theme tokens supply the dots' contrast; the geometry is shared. */
 body{
  background-color:var(--paper);
  background-image:radial-gradient(circle,var(--notebook-dot-color) 1px,transparent 1.4px);
 }
-.site-header,footer.wrap{background:var(--site-chrome-bg)!important;border-color:var(--site-chrome-edge)!important}
 .about .about-copy>.text-link{
  background:var(--ink)!important;
  color:var(--paper)!important;

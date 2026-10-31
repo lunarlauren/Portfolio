@@ -622,15 +622,16 @@ assert.ok(!css.includes('.work.wrap{padding-block:'), 'Legacy CSS must not redef
 assert.ok(workCss.includes('.work.wrap{padding-block:clamp(42px,5vw,68px)}'), 'Work component owns desktop section spacing');
 assert.doesNotMatch(css + workCss + homepageCss, /#collection\b|\.collection(?:\b|-nav\b|-back\b|-head\b)|\.close-collection\b/, 'Retired collection gallery must not retain CSS');
 assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
-assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
+assert.match(workCss, /:is\(\.work,\.playground\) \.project-card-link:focus-visible\{/, 'Shared Work/Playground keyboard focus ring must remain');
+assert.doesNotMatch(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Do not restore the overridden notebook-only focus rule');
 assert.match(html, /work-cards\.css\?v=[0-9]{8}-[a-z0-9-]+/, 'Archive CSS must have a cache-versioned stylesheet reference');
 
 // Homepage interactions belong with the CTA and hero, not legacy overrides.
 // In reduced motion, reveal-ready must never hide the Work/About sections.
 assert.doesNotMatch(css, /(?:reveal-ready|reveal-enter|hero-enter|hero-parallax-y|html\[data-theme="dark"\] \.primary-link)/,
  'Legacy CSS must not own homepage entrance or dark CTA states');
-assert.match(homepageCss, /html\[data-theme="dark"\] \.primary-link:hover\{background:#ffc0dc!important/,
- 'Homepage must retain dark CTA hover contrast');
+assert.doesNotMatch(homepageCss, /html\[data-theme="dark"\] \.primary-link:hover\{background:/,
+ 'Homepage must not compete with editorial dark CTA tokens');
 assert.match(homepageCss, /@media\(prefers-reduced-motion:no-preference\)\{[\s\S]*?\.reveal-ready\{animation:none;opacity:0/,
  'Homepage reveal must remain opt-in for motion');
 assert.match(homepageCss, /\.reveal-ready\{opacity:1!important;transform:none!important;transition:none!important\}/,
@@ -959,11 +960,14 @@ assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.work \.featured-p
 assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var\(--file-accent\)/,
  'Work card component must own the client tab background');
 
-// Editorial action hover contrast is tokenized for light/dark, while the
-// higher-specificity dark CTA remains to override homepage !important rules.
+// Editorial owns hover colors in both themes. The existing homepage dark
+// base remains !important, so its higher-specificity hover guard is needed.
 assert.match(editorialCss, /--editorial-action-ink:#fff;/, 'Light editorial actions need white hover ink');
 assert.match(editorialCss, /--editorial-accent:#a6d9ff;--editorial-action-ink:#111;/, 'Dark editorial actions need near-black hover ink');
-assert.ok(editorialCss.includes('html[data-theme="dark"] .primary-link:is(:hover,:focus-visible)'), 'Dark CTA must override homepage hover');
+assert.match(editorialCss, /\.primary-link:is\(:hover,:focus-visible\),\.header-contact:is\(:hover,:focus-visible\)\{/,
+ 'One editorial hover rule must serve both themes');
+assert.match(editorialCss, /html\[data-theme="dark"\] \.primary-link:is\(:hover,:focus-visible\)/,
+ 'Dark CTA hover must override the existing higher-specificity homepage base');
 assert.match(editorialCss, /\.about \.about-copy>\.text-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/, 'About CTA must use shared action ink');
 assert.doesNotMatch(editorialCss, /color:#fff!important;|background:#a6d9ff!important;color:#111!important/, 'No duplicate literal action colors');
 // Theme token ownership: later editorial declarations must not mask component edits.
@@ -976,5 +980,14 @@ assert.doesNotMatch(editorialCss, /\.visual-placeholder|--archive-(?:surface|ink
 assert.doesNotMatch(editorialCss, /\.notebook-project-index \.featured-project\{/, 'Archive surface must have only one authoritative editorial rule');
 assert.doesNotMatch(editorialCss, /\.project-visual img,\.project-card img,\.play-grid img,\.case-gallery img/, 'Do not restore redundant full-color image filter resets');
 assert.match(editorialCss, /\.project-card img\{transition:transform \.45s ease\}/, 'Shared project images retain their transition');
+assert.doesNotMatch(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\) :is\(/,
+ 'No blanket archive descendant ink override may erase client CTA/tab colors');
+assert.match(workCss, /\.work \.project-card :is\(h3,p,\.project-meta\)\{color:var\(--ink\)\}/,
+ 'Work component owns readable text without recoloring nested labels');
+assert.match(workCss, /--file-label-ink:#000000;/, 'Tab label ink must contrast with dark monochrome blue');
+assert.match(workCss, /--file-cta-ink:color-mix\(in srgb,var\(--file-accent\) 35%,var\(--ink\)\)/,
+ 'Archive CTAs must not use pale raw accent ink on light paper');
+assert.doesNotMatch(editorialCss, /\.site-header,footer\.wrap\{background:/,
+ 'Navigation owns opaque header and footer, including forced-colors behavior');
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);

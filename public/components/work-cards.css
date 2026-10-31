@@ -37,6 +37,9 @@
 .project-meta{font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;letter-spacing:.13em;font-weight:700;margin-top:20px}
 .project-card h3{font:600 25px 'Newsreader';letter-spacing:-.04em;margin:8px 0}
 .project-card p{color:var(--muted);line-height:1.6;font-size:var(--type-sm)}
+/* Work copy uses paper ink; After Hours keeps its own night contrast.
+   Do not override nested client labels or accent CTAs. */
+.work .project-card :is(h3,p,.project-meta){color:var(--ink)}
 .project-card-link{display:block;text-decoration:none;outline-offset:5px}
 .project-card-link:hover .project-visual{filter:saturate(1.12)}
 .project-card .project-meta{display:flex;justify-content:space-between;gap:8px}
@@ -64,10 +67,8 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
    sentence. This is a preview of documented copy, not generated evidence. */
 .project-card .project-card-process{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:0.875rem;line-height:1.55;color:var(--muted)}
 .project-card-process strong{display:block;color:var(--ink);font-size:0.6875rem;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
-html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
 /* Mobile interaction quality: keep tappable controls comfortable and avoid
    paper decoration interfering with focus or text. */
-.notebook-project-index .project-card-link:focus-visible{outline:3px solid var(--notebook-pink);outline-offset:4px}
 @media(max-width:420px){
  .notebook-project-index .project-card-link{overflow-wrap:break-word}
 }
@@ -76,7 +77,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
    tab, not a tiny decorative dash. Keep the file number on the card itself. */
 .client-file{
  --file-accent:#357caa;
- --file-label-ink:#142331; /* At least 4.5:1 against all three client tabs. */
+ --file-label-ink:#000000; /* AA contrast against monochrome tabs in both themes. */
  position:relative;
  margin-top:32px;
  /* Card border and radius are painted by monochrome-editorial.css. */
@@ -190,10 +191,11 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 .work .client-file .project-card-link:focus-visible .project-card-cta{
  text-decoration-thickness:3px;
 }
-/* The CTA uses one rule in both themes; only its ink token changes. */
-.work .client-file{--file-cta-ink:var(--file-accent)}
+/* Accent-tinted, contrast-safe CTA ink over neutral glass cards.
+   The raw tab accent is too pale for small linked text on light paper. */
+.work .client-file{--file-cta-ink:color-mix(in srgb,var(--file-accent) 35%,var(--ink))}
 html[data-theme="dark"] .work .client-file{
- --file-cta-ink:color-mix(in srgb,var(--file-accent) 72%,white);
+ --file-cta-ink:color-mix(in srgb,var(--file-accent) 55%,var(--ink));
 }
 /* Facts dividers use the editorial theme token. */
 .work .featured-project.client-file .project-card-facts{
@@ -267,7 +269,7 @@ html[data-theme="dark"] .work .client-file{
 .work .project-card-summary-label{
  display:block;
  margin-bottom:4px;
- color:var(--ink);
+ color:var(--muted);
  font-family:var(--font-body);
  font-size:var(--type-eyebrow,0.6875rem);
  font-weight:700;
@@ -307,8 +309,6 @@ html[data-theme="dark"] .work .client-file{
    More specific collection / client-file rules above retain precedence. */
 html[data-theme="dark"] .project-card-link{color:var(--ink)}
 html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
-html[data-theme="dark"] .project-meta{color:#c6d5e2}
-html[data-theme="dark"] .project-card p{color:#d7e3ed}
 
 /* Programmatic focus does not draw boxes around static archive headings.
    Actual links retain their visible :focus-visible rings. */
