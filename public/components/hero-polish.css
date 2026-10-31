@@ -17,6 +17,21 @@
  .hero h1{font-size:clamp(3.125rem,12vw,4.875rem)}
  .hero-actions{gap:18px}
 }
+/* Mobile first impression: show a slice of the illustrated featured-work card
+   above the fold rather than making visitors scroll past a full text introduction. */
+@media(max-width:650px){
+ .hero{gap:20px;padding-top:28px;padding-bottom:55px}
+ .hero-copy{justify-content:flex-start}
+ .hero-copy>.eyebrow{font-size:0.625rem;letter-spacing:.12em;line-height:1.55}
+ .hero h1{font-size:clamp(2.875rem,11.2vw,4.375rem);line-height:1.02;margin:18px 0 15px}
+ .hero-description{font-size:clamp(0.9375rem,4vw,1.0625rem);line-height:1.5;max-width:37ch}
+ .hero-actions{margin-top:20px;gap:14px}
+ .hero-actions .primary-link{min-height:48px;padding:12px 18px;font-size:0.875rem}
+ .hero-actions .quiet-link{font-size:0.8125rem}
+ .hero-foot{display:none}
+ .hero-feature{min-height:320px}
+}
+
 /* Motion preference applies to the artwork; the CTA guard is in homepage-base. */
 @media(prefers-reduced-motion:reduce){
  .hero-feature:hover .feature-art{transform:none}
