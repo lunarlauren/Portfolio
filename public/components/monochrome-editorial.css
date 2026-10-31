@@ -24,8 +24,6 @@ html[data-theme="dark"]{
  --editorial-card:#252525;--editorial-card-edge:#646464;
  --editorial-card-glow:rgba(255,255,255,.12);--editorial-card-shadow:rgba(0,0,0,.44);
 }
-body{color:var(--ink)}
-.site-header{border-bottom:1px solid var(--line)}
 .hero .hero-copy h1,.section-head h2,.about h2{letter-spacing:-.045em;text-wrap:balance}
 .hero .hero-copy h1 em,.section-head h2 em,.about h2 em{color:inherit!important;font-style:italic}
 .hero .notebook-hero-note{border-bottom-color:var(--line)}
@@ -33,12 +31,9 @@ body{color:var(--ink)}
 .hero .feature-art .hero-portrait-art{filter:grayscale(1) contrast(1.08);transition:filter .5s ease}
 .hero-feature:is(:hover,:focus-within) .hero-portrait-art{filter:grayscale(0)}
 .featured-projects-grid{gap:clamp(18px,2.5vw,34px)}
-.notebook-project-index .featured-project{
- background:var(--paper);border:1px solid var(--line);box-shadow:none;border-radius:3px;
-}
-.featured-project .project-visual{overflow:hidden;border-radius:2px;background:#d8d6d2}
+.featured-project .project-visual{border-radius:2px}
 /* Client work stays in color; About portrait retains its reveal and card lift remains animated. */
-.project-visual img,.project-card img,.play-grid img{transition:transform .45s ease}
+.project-card img{transition:transform .45s ease}
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
 .featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500}
@@ -51,8 +46,7 @@ body{color:var(--ink)}
 }
 :where(.work,.playground,.about){border-top:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){
- .project-visual img,.project-card img,.play-grid img,.about-portrait img,
- .hero .feature-art .hero-portrait-art{transition:none!important}
+ .project-card img,.about-portrait img,.hero .feature-art .hero-portrait-art{transition:none!important}
 }
 
 /* CASE STUDY READING EXPERIENCE
@@ -74,8 +68,7 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  background:var(--editorial-accent)!important;color:var(--editorial-action-ink)!important;border-color:var(--editorial-accent)!important
 }
 /* The illustrative placeholder is a separate readable surface. */
-.work .featured-project .project-visual:not(:has(img)),
-.work .featured-project .visual-placeholder{
+.work .featured-project .project-visual:not(:has(img)){
  --placeholder-surface:var(--surface-blush);
  --placeholder-text:var(--ink);
  --placeholder-edge:var(--line);
@@ -83,24 +76,17 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  color:var(--placeholder-text)!important;
  border-color:var(--placeholder-edge)!important;
 }
-.work .featured-project .project-visual:not(:has(img)) *,
-.work .featured-project .visual-placeholder *{
+.work .featured-project .project-visual:not(:has(img)) *{
  color:var(--placeholder-text)!important;
 }
 
-/* PROJECT IDENTITY: monochrome belongs to the site chrome, not the work.
-   Keep authentic project imagery and existing client accents in full color. */
-.project-visual img,.project-card img,.play-grid img,.case-gallery img{
- filter:none;
-}
+/* Project imagery has no grayscale rules; only the hero/About portraits reveal color.
+   Do not add image-filter resets that mask the owning component's styles. */
 /* Client accents remain in work-cards.css; the archive skin below owns the border. */
 /* EDITORIAL SYSTEM — neutral surfaces everywhere except branded project media.
    The restrained glass treatment adds depth without reducing text contrast. */
 .work :is(.featured-project.client-file,.notebook-project-index .featured-project){
  /* Single archive surface; preserve readable facts and keyboard focus tokens. */
- --archive-surface:var(--editorial-card);
- --archive-ink:var(--ink);
- --archive-muted:var(--muted);
  --archive-facts-edge:var(--line);
  --archive-focus-edge:var(--focus);
  color:var(--ink)!important;
@@ -139,7 +125,6 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
 }
 .work .featured-project .project-visual:has(img){background:transparent}
 /* Align neutral site sections and controls without erasing project colors. */
-.about,.work{color:var(--ink)}
 .about .ai-process{border-color:var(--line)}
 .playground .play-grid .project-card-link{border-color:#666}
 @media(hover:none){
@@ -168,7 +153,6 @@ body{
  border-color:var(--editorial-accent)!important;
  box-shadow:0 6px 0 var(--line)!important;
 }
-.about .ai-process{border-left-color:var(--line)!important}
 @media(prefers-contrast:more){
  .work .featured-project.client-file{box-shadow:none!important;border-width:2px!important}
 }
