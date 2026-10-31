@@ -547,6 +547,13 @@ assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
 assert.match(html, /work-cards\.css\?v=20261030-motion-ownership/, 'Archive CSS version must be refreshed');
 
+// Typography and link styling have named owners, not a late global override.
+assert.ok(!css.includes('.project-card p,.case-back,footer'), 'Legacy typography bundle must not return');
+assert.ok(!css.includes('.hero-description,.case-intro,.section-head>p,.project-card p'), 'Legacy mixed text-color selector must not return');
+assert.match(homepageCss, /\.hero h1 \{[^}]*line-height:1\.04;letter-spacing:-\.045em/, 'Homepage owns the hero headline rhythm');
+assert.match(homepageCss, /\.primary-link \{[^}]*background:var\(--brand-navy\)/, 'Homepage owns the CTA background');
+assert.match(navigationCss, /\.site-header nav a:hover\{color:color-mix/, 'Navigation owns link hover color');
+
 // Collection navigation and active-client header rules are owned by work-cards.
 // Motion is now owned by archive, case-study, Playground and shared foundations.
 assert.doesNotMatch(css, /^\.collection(?:-nav|-back|-head)(?:\s|\{|:|\[data-active)/m,
