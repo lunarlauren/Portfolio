@@ -1,8 +1,2 @@
-/* LEGACY SHARED PAPER RULES
-   Hero layout, artwork, and theme-specific text now live in
-   components/hero-polish.css; global theme tokens live in foundations.css.
-   Keep this file loaded before scoped component styles. */
-/* Light paper headings sit above the notebook texture; the Playground's
-   later dark section override preserves its own contrast. */
-html:not([data-theme="dark"]) .section-head{position:relative;z-index:1}
-html:not([data-theme="dark"]) .section-head>p{background:transparent;box-decoration-break:initial;-webkit-box-decoration-break:initial}
+/* Legacy stylesheet compatibility stub. Shared paper rules now live in
+   components/stationery.css; do not add new rules here. */
