@@ -2,6 +2,31 @@
    Loaded after the legacy stylesheet. Keep responsive hero ownership here
    rather than layering new overrides in styles.css. */
 
+/* RESPONSIVE HERO OWNERSHIP
+   The 950px/760px transitions belong with the final hero layout, not in
+   styles.css. Keep these before the more specific phone and desktop rules. */
+@media(max-width:950px){
+ .hero{grid-template-columns:1fr;min-height:0}
+ .hero-feature{min-height:420px}
+ .hero-foot{padding-top:48px}
+ .hero h1{font-size:clamp(3.625rem,10vw,5.9375rem)}
+}
+@media(max-width:760px){
+ .hero-feature{min-height:430px;min-width:0}
+ .hero{padding-block:55px 80px;min-width:0}
+ .hero h1{font-size:clamp(3.125rem,12vw,4.875rem)}
+ .hero-actions{gap:18px}
+}
+/* Motion preference applies to the artwork; the CTA guard is in homepage-base. */
+@media(prefers-reduced-motion:reduce){
+ .hero-feature:hover .feature-art{transform:none}
+}
+/* At desktop sizes the illustration still fills its feature-art container.
+   The retired legacy desktop sizing/spacing was overridden by later rules. */
+@media(min-width:1024px){
+ .hero .feature-art{height:100%;min-height:0}
+}
+
 /* Shared headline rhythm and illustration treatment in both themes. */
 .hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
 .hero .hero-copy h1 em{display:inline-block;max-width:100%}
