@@ -958,5 +958,9 @@ assert.match(stationeryCss, /--notebook-paper:var\(--paper\)/, 'Notebook surface
 assert.match(stationeryCss, /html\[data-theme="dark"\]\{--notebook-dot-color:rgba\(245,245,245,\.14\)\}/, 'Dark notebook dots retain intended contrast');
 assert.match(navigationCss, /--site-chrome-edge:var\(--line\)/, 'Opaque chrome separator belongs to navigation');
 assert.doesNotMatch(editorialCss, /:is\(\.featured-project,\.project-card,\.play-grid > \*\):is\(:hover,:focus-within\) img/, 'Full-color project imagery must not need duplicate hover overrides');
+assert.doesNotMatch(editorialCss, /\.visual-placeholder|--archive-(?:surface|ink|muted):/, 'Retired archive aliases and unused tokens must not return');
+assert.doesNotMatch(editorialCss, /\.notebook-project-index \.featured-project\{/, 'Archive surface must have only one authoritative editorial rule');
+assert.doesNotMatch(editorialCss, /\.project-visual img,\.project-card img,\.play-grid img,\.case-gallery img/, 'Do not restore redundant full-color image filter resets');
+assert.match(editorialCss, /\.project-card img\{transition:transform \.45s ease\}/, 'Shared project images retain their transition');
 
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);
