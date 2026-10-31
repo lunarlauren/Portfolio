@@ -104,9 +104,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 @media(min-width:1024px){
  .work .featured-projects-grid{gap:clamp(20px,2.5vw,36px)}
  .work .notebook-project-index .featured-project{padding:clamp(18px,2vw,26px)}
- .work .notebook-project-index .project-visual:not(:has(img)){
-  background:rgba(153,202,235,.1);
- }
 }
 
 /* Stationery file-folder tabs: the client name is the actual projecting
@@ -117,9 +114,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  --file-tint:#dceefa;
  position:relative;
  margin-top:32px;
- border:1px solid color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue))!important;
- border-top:1px solid var(--file-accent)!important;
- border-radius:0;
+ /* Card border and radius are painted by monochrome-editorial.css. */
  overflow:visible;
 }
 .client-file--hoylu{--file-accent:var(--palette-blue);--file-tint:color-mix(in srgb,var(--palette-blue) 15%,var(--palette-paper))}
@@ -157,7 +152,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  font-variant-numeric:tabular-nums;
  letter-spacing:.11em;
 }
-html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-color:var(--file-accent)!important}
 @media(max-width:600px){
  .client-file{margin-top:29px}
  .client-file .client-file-label{min-width:102px;height:24px;font-size:0.625rem;top:-25px}
@@ -197,11 +191,7 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
 
 
 
-/* Archive-first card hierarchy: title before image, one quiet paper edge.
-   Client color lives in the projecting tab, not a second outlined frame. */
-.work .featured-project.client-file{
- border-radius:0;
-}
+/* Archive-first hierarchy: title before image; the editorial skin owns the card radius. */
 .work .featured-project.client-file .archive-project-title{
  margin:var(--space-1) 0 var(--space-3);
  font-size:clamp(var(--type-h3),2.6vw,2.375rem);
@@ -278,29 +268,18 @@ html[data-theme="dark"] .client-file{border-color:#476078!important;border-top-c
 html[data-theme="dark"] .work .client-file{
  --file-cta-ink:color-mix(in srgb,var(--file-accent) 72%,white);
 }
-/* Shared archive surfaces: the theme swaps color tokens, not box geometry. */
+/* Preview-brief fallback tokens belong with archive layout.
+   Card surfaces, borders, facts/focus colors and shadows are owned by the
+   later monochrome-editorial.css skin; do not redeclare them here. */
 .work .featured-project.client-file{
- --archive-surface:var(--palette-paper);
- --archive-edge:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue));
- --archive-shadow:var(--paper-shadow);
  --archive-preview:color-mix(in srgb,var(--file-tint) 12%,#fffdf8);
  --archive-preview-edge:#bccbd4;
  --archive-preview-text:#526477;
- --archive-facts-edge:var(--line);
- --archive-focus-edge:var(--file-accent);
- background-color:var(--archive-surface);
- border:1px solid var(--archive-edge)!important;
- box-shadow:var(--archive-shadow);
 }
 html[data-theme="dark"] .work .featured-project.client-file{
- --archive-surface:color-mix(in srgb,var(--palette-navy) 83%,#243d52);
- --archive-edge:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));
- --archive-shadow:var(--paper-shadow-dark);
  --archive-preview:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  --archive-preview-edge:#52677c;
  --archive-preview-text:#d5e0eb;
- --archive-facts-edge:color-mix(in srgb,var(--palette-blue) 35%,var(--palette-navy));
- --archive-focus-edge:color-mix(in srgb,var(--file-accent) 75%,white);
 }
 /* One readable metadata divider across both paper themes. */
 .work .featured-project.client-file .project-card-facts{
@@ -320,10 +299,10 @@ html[data-theme="dark"] .work .featured-project.client-file{
 .work .featured-project.client-file{
  --file-lift:0px;
  transform:translateY(var(--file-lift));
- transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .24s ease,border-color .24s ease;
+ /* The editorial skin supplies transition timing; lift remains structural. */
 }
 @media(hover:hover) and (pointer:fine){
- .work .featured-project.client-file:hover{--file-lift:-5px;box-shadow:6px 11px 0 color-mix(in srgb,var(--file-accent) 18%,transparent)}
+ .work .featured-project.client-file:hover{--file-lift:-5px}
  .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
 }
 .work .featured-project.client-file:focus-within{--file-lift:-3px;outline:2px solid var(--archive-focus-edge);outline-offset:4px}
