@@ -33,13 +33,12 @@ html[data-theme="dark"]{
 .featured-projects-grid{gap:clamp(18px,2.5vw,34px)}
 .featured-project .project-visual{border-radius:2px}
 /* Client work stays in color; About portrait retains its reveal and card lift remains animated. */
-.project-card img{transition:transform .45s ease}
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
 .featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500}
 /* Link interaction colors and section dividers live in their owning components. */
 @media(prefers-reduced-motion:reduce){
- .project-card img,.about-portrait img,.hero .feature-art .hero-portrait-art{transition:none!important}
+ .about-portrait img,.hero .feature-art .hero-portrait-art{transition:none!important}
 }
 
 /* CASE STUDY READING EXPERIENCE
@@ -105,11 +104,9 @@ html[data-theme="dark"]{
 /* Align neutral site sections and controls without erasing project colors. */
 .about .ai-process{border-color:var(--line)}
 .playground .play-grid .project-card-link{border-color:#666}
-@media(hover:none){
+/* No archive lift animation on touch or when motion is reduced. */
+@media(hover:none),(prefers-reduced-motion:reduce){
  .work :is(.featured-project.client-file,.notebook-project-index .featured-project){transition:none}
-}
-@media(prefers-reduced-motion:reduce){
- .work :is(.featured-project.client-file,.notebook-project-index .featured-project){transition:none!important}
 }
 
 /* FINAL PAPER CONSISTENCY: navigation owns chrome, stationery owns dot tokens. */
