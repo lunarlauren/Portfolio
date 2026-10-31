@@ -216,6 +216,8 @@ try{
      headlineToCopy:body.top-headline.bottom,
      copyToAction:action.top-body.bottom,
      actionWidth:action.width,actionHeight:action.height,
+     actionPadding:getComputedStyle(document.querySelector('.hero-actions .primary-link')).padding,
+     actionDirection:getComputedStyle(document.querySelector('.hero-actions')).flexDirection,
      available:container.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight),
      illustrationBottom:illustration.bottom,
      overflow:document.documentElement.scrollWidth>innerWidth+2
@@ -231,6 +233,10 @@ try{
     `${width}px ${theme}: CTA should not fill the editorial column`);
    assert.ok(hero.actionHeight>=48,
     `${width}px ${theme}: CTA must remain a usable touch target`);
+   assert.equal(hero.actionPadding,'14px 20px',
+    `${width}px ${theme}: Phone CTA retains its intended inset after legacy cleanup`);
+   assert.equal(hero.actionDirection,'column',
+    `${width}px ${theme}: Phone action stack retains its intended direction`);
    assert.ok(hero.illustrationBottom<844,
     `${width}px ${theme}: Portrait should be visible within the first phone viewport`);
    assert.equal(hero.overflow,false,
