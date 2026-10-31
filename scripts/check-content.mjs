@@ -960,16 +960,26 @@ assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.work \.featured-p
 assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var\(--file-accent\)/,
  'Work card component must own the client tab background');
 
-// Editorial owns hover colors in both themes. The existing homepage dark
-// base remains !important, so its higher-specificity hover guard is needed.
+// Action colors have one component owner per surface. Shared tokens retain
+// both-theme contrast without a dark-only !important override.
 assert.match(editorialCss, /--editorial-action-ink:#fff;/, 'Light editorial actions need white hover ink');
 assert.match(editorialCss, /--editorial-accent:#a6d9ff;--editorial-action-ink:#111;/, 'Dark editorial actions need near-black hover ink');
-assert.match(editorialCss, /\.primary-link:is\(:hover,:focus-visible\),\.header-contact:is\(:hover,:focus-visible\)\{/,
- 'One editorial hover rule must serve both themes');
-assert.match(editorialCss, /html\[data-theme="dark"\] \.primary-link:is\(:hover,:focus-visible\)/,
- 'Dark CTA hover must override the existing higher-specificity homepage base');
-assert.match(editorialCss, /\.about \.about-copy>\.text-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/, 'About CTA must use shared action ink');
-assert.doesNotMatch(editorialCss, /color:#fff!important;|background:#a6d9ff!important;color:#111!important/, 'No duplicate literal action colors');
+assert.match(editorialCss, /\.primary-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/,
+ 'Primary hover and keyboard focus use theme-aware ink');
+assert.doesNotMatch(homepageCss, /html\[data-theme="dark"\] \.primary-link/,
+ 'Homepage no longer owns a competing dark primary color');
+assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.primary-link:is/,
+ 'Editorial does not need a dark-only hover override');
+assert.match(navigationCss, /\.header-contact:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/,
+ 'Navigation owns Contact hover and keyboard focus colors');
+assert.doesNotMatch(navigationCss, /background:transparent!important;color:var\(--ink\)!important/,
+ 'Phone Contact must not need important declarations');
+assert.match(aboutCss, /\.about \.about-copy > \.text-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/,
+ 'About owns its invitation hover and focus');
+assert.doesNotMatch(editorialCss, /\.about \.about-copy>\.text-link/,
+ 'Editorial must not override the About CTA');
+assert.doesNotMatch(editorialCss, /color:#fff!important;|background:#a6d9ff!important;color:#111!important/,
+ 'No duplicate literal action colors');
 // Theme token ownership: later editorial declarations must not mask component edits.
 assert.doesNotMatch(editorialCss, /--(?:site-chrome-bg|site-chrome-edge|notebook-paper|notebook-dot-color)\s*:/, 'Editorial skin must not duplicate navigation/stationery tokens');
 assert.match(stationeryCss, /--notebook-paper:var\(--paper\)/, 'Notebook surface follows the active paper theme');

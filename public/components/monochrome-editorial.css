@@ -37,11 +37,12 @@ html[data-theme="dark"]{
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
 .featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500}
-.primary-link,.header-contact{background:var(--ink)!important;color:var(--paper)!important;border-color:var(--ink)!important}
-.primary-link:is(:hover,:focus-visible),.header-contact:is(:hover,:focus-visible){
- background:var(--editorial-accent)!important;color:var(--editorial-action-ink)!important;border-color:var(--editorial-accent)!important
+/* Primary action color belongs here; Contact and About own theirs. */
+.primary-link{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+.primary-link:is(:hover,:focus-visible){
+ background:var(--editorial-accent);color:var(--editorial-action-ink);border-color:var(--editorial-accent)
 }
-.site-header nav a:is(:hover,:focus-visible),.text-link:is(:hover,:focus-visible),.quiet-link:is(:hover,:focus-visible){
+.site-header nav a:is(:hover,:focus-visible),.quiet-link:is(:hover,:focus-visible){
  color:var(--editorial-accent)!important
 }
 :where(.work,.playground,.about){border-top:1px solid var(--line)}
@@ -61,12 +62,6 @@ html[data-theme="dark"]{
 /* The decorative hero portrait must not require hover to reveal color. */
 @media(hover:none){
  .hero .feature-art .hero-portrait-art{filter:none}
-}
-/* Dark homepage CTA base is still higher-specificity and !important;
-   this override preserves the tested hover contrast until that base is refactored. */
-html[data-theme="dark"] .primary-link:is(:hover,:focus-visible),
-html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
- background:var(--editorial-accent)!important;color:var(--editorial-action-ink)!important;border-color:var(--editorial-accent)!important
 }
 /* The illustrative placeholder is a separate readable surface. */
 .work .featured-project .project-visual:not(:has(img)){
@@ -130,18 +125,6 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
 body{
  background-color:var(--paper);
  background-image:radial-gradient(circle,var(--notebook-dot-color) 1px,transparent 1.4px);
-}
-.about .about-copy>.text-link{
- background:var(--ink)!important;
- color:var(--paper)!important;
- border-color:var(--ink)!important;
- box-shadow:0 4px 0 var(--line)!important;
-}
-.about .about-copy>.text-link:is(:hover,:focus-visible){
- background:var(--editorial-accent)!important;
- color:var(--editorial-action-ink)!important;
- border-color:var(--editorial-accent)!important;
- box-shadow:0 6px 0 var(--line)!important;
 }
 @media(prefers-contrast:more){
  .work .featured-project.client-file{box-shadow:none!important;border-width:2px!important}
