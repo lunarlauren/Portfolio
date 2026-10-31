@@ -912,4 +912,17 @@ assert.match(caseCss, /html\[data-theme="dark"\] \.case-view \.case-hero-visual:
 assert.doesNotMatch(css, /\.case-hero-visual:not\(:has\(img\)\)/, 'Legacy CSS must not own case hero placeholders');
 assert.doesNotMatch(css, /\.case-process-note\s*\{/, 'Case-study process notes must be component-owned');
 
+
+// Archive skin selector ownership: the client folder and notebook index
+// share identical surfaces in both themes. Preserve the two branches inside
+// :is() without reintroducing redundant dark-only specificity.
+assert.match(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\)\{/,
+ 'Archive skin must use one shared selector for both card types');
+assert.match(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\)::after\{/,
+ 'Archive gloss must use the same shared card selector');
+assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.work \.featured-project\.client-file\{/,
+ 'Do not restore a redundant dark-only archive surface override');
+assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var\(--file-accent\)/,
+ 'Work card component must own the client tab background');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);
