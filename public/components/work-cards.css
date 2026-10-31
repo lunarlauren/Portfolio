@@ -111,15 +111,14 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 .client-file{
  --file-accent:#357caa;
  --file-label-ink:#142331; /* At least 4.5:1 against all three client tabs. */
- --file-tint:#dceefa;
  position:relative;
  margin-top:32px;
  /* Card border and radius are painted by monochrome-editorial.css. */
  overflow:visible;
 }
-.client-file--hoylu{--file-accent:var(--palette-blue);--file-tint:color-mix(in srgb,var(--palette-blue) 15%,var(--palette-paper))}
-.client-file--alcon{--file-accent:var(--palette-pink);--file-tint:color-mix(in srgb,var(--palette-pink) 15%,var(--palette-paper))}
-.client-file--holland-america{--file-accent:var(--palette-green);--file-tint:color-mix(in srgb,var(--palette-green) 15%,var(--palette-paper))}
+.client-file--hoylu{--file-accent:var(--palette-blue)}
+.client-file--alcon{--file-accent:var(--palette-pink)}
+.client-file--holland-america{--file-accent:var(--palette-green)}
 .client-file::before{content:none}
 .client-file>.eyebrow{
  position:static;
@@ -223,8 +222,7 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  display:flex;
  align-items:center;
  justify-content:flex-start;
- background:var(--archive-preview);
- border:1px dashed var(--archive-preview-edge);
+ border:1px dashed var(--line);
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
  max-width:54ch;
@@ -233,7 +231,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  font-size:0.75rem;
  line-height:1.5;
  letter-spacing:normal;
- color:var(--archive-preview-text);
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .brief-kicker{
  display:block;
@@ -268,19 +265,8 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 html[data-theme="dark"] .work .client-file{
  --file-cta-ink:color-mix(in srgb,var(--file-accent) 72%,white);
 }
-/* Preview-brief fallback tokens belong with archive layout.
-   Card surfaces, borders, facts/focus colors and shadows are owned by the
-   later monochrome-editorial.css skin; do not redeclare them here. */
-.work .featured-project.client-file{
- --archive-preview:color-mix(in srgb,var(--file-tint) 12%,#fffdf8);
- --archive-preview-edge:#bccbd4;
- --archive-preview-text:#526477;
-}
-html[data-theme="dark"] .work .featured-project.client-file{
- --archive-preview:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
- --archive-preview-edge:#52677c;
- --archive-preview-text:#d5e0eb;
-}
+/* Placeholder geometry stays in Work; the final editorial skin owns
+   placeholder backgrounds, borders and ink in both themes. */
 /* One readable metadata divider across both paper themes. */
 .work .featured-project.client-file .project-card-facts{
  border-block-color:var(--archive-facts-edge);
