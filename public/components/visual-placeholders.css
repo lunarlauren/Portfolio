@@ -37,19 +37,13 @@ html[data-theme="dark"] .project-visual:not(:has(img)){
  --placeholder-text:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
  background:var(--placeholder-surface);border-color:var(--placeholder-edge);
 }
-.project-visual .visual-label{font-size:var(--type-xs);line-height:1.5}
-.project-visual:not(:has(img)) .visual-label{
- position:static;background:none;color:var(--placeholder-text);
- border:1px solid var(--placeholder-edge);padding:13px 17px;
- letter-spacing:.15em;text-align:center;
-}
+/* The renderer's .visual-label.visual-brief is already inside the dashed frame. */
 .project-visual .visual-brief{
- position:static;display:flex;flex-direction:column;align-items:flex-start;
+ display:flex;flex-direction:column;align-items:flex-start;
  justify-content:center;gap:12px;width:100%;max-width:440px;
- padding:0;background:transparent;border:0;
  color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));
  font-size:clamp(0.75rem,1.15vw,0.9375rem);line-height:1.5;
- letter-spacing:0;font-weight:500;text-align:left;
+ font-weight:500;text-align:left;
 }
 html[data-theme="dark"] .project-visual .visual-brief{
  color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));
