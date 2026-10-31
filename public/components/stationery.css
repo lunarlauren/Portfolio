@@ -79,9 +79,6 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix
   animation:none;
  }
 }
-@media(min-width:1024px){
- .work .section-head{margin-bottom:clamp(14px,1.8vw,24px)}
-}
 @media(prefers-reduced-motion:no-preference){
  .work .featured-project.client-file,
  .playground .play-grid>.project-card{
