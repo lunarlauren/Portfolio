@@ -125,3 +125,26 @@ html[data-theme="dark"] .work .featured-project.client-file{
 .work .featured-project .visual-placeholder *{
  color:var(--ink)!important;
 }
+
+/* PROJECT IDENTITY: monochrome belongs to the site chrome, not the work.
+   Keep authentic project imagery and existing client accents in full color. */
+.project-visual img,.project-card img,.play-grid img,
+.case-gallery img,.case-view .project-visual img{
+ filter:none;
+}
+:is(.featured-project,.project-card,.play-grid > *):is(:hover,:focus-within) img{
+ filter:none;
+}
+/* Restore client-specific accents without reintroducing pale card text. */
+.work .featured-project.client-file{
+ border-top-color:var(--file-accent)!important;
+}
+.work .featured-project.client-file .client-file-label{
+ background:var(--file-accent);
+}
+/* Placeholder previews are documentation, not real screenshots.
+   Use a neutral, high-contrast paper surface; accents stay in the file tab. */
+.work .featured-project .project-visual:not(:has(img)),
+.work .featured-project .visual-placeholder{
+ background:var(--surface-blush)!important;
+}
