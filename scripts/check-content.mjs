@@ -108,6 +108,14 @@ assert.match(visualPlaceholderCss, /\.project-visual \.visual-brief\{[^}]*displa
 assert.doesNotMatch(workCss, /\.project-visual \.visual-brief\{\s*box-shadow:none/, 'No unused Work brief shadow reset');
 assert.doesNotMatch(editorialCss, /\.project-visual:not\(:has\(img\)\) \*\{/, 'No redundant editorial placeholder descendant override');
 assert.doesNotMatch(stationeryCss, /\.work \.section-head\{margin-bottom:/, 'Work heading rhythm belongs to work-cards.css');
+assert.equal((workCss.match(/@media\(max-width:760px\)/g)||[]).length,1,
+ 'Work tablet archive layout should have one responsive owner');
+assert.equal((workCss.match(/@media\(max-width:600px\)/g)||[]).length,1,
+ 'Work phone intro and archive should share one breakpoint');
+assert.match(workCss,/\.work \.section-head h2\{[^}]*font-size:clamp\(2rem,7\.8vw,2\.375rem\)/,
+ 'Work phone headline must not crowd out the first case study');
+assert.doesNotMatch(workCss,/\.client-file::before\{content:none\}/,
+ 'Unused client tab pseudo-element reset must stay retired');
 
 assert.doesNotMatch(css, /^\.project-visual:not\(:has\(img\)\)/m, 'Shared placeholder rules must not return to legacy CSS');
 assert.doesNotMatch(css, /\/\* Problem-solving hero: shared layout in both themes/, 'Extracted hero polish must not return to legacy CSS');
@@ -815,7 +823,7 @@ assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*width:aut
 assert.match(html, /hero-polish\.css\?v=[a-zA-Z0-9-]+/,
  'Homepage must load the updated hero stylesheet');
 
-assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
+assert.match(workCss,/\.work\.wrap\{[^}]*padding-bottom:clamp\(28px,7vw,44px\)/, 'Mobile work section needs a compact handoff');
 assert.ok(navigationCss.includes('gap:clamp(8px,2.4vw,18px)'), 'Phone navigation spacing should remain intentional');
 assert.match(navigationCss, /grid-template-rows:44px 44px/, 'Phone header must use two rows');
 assert.match(navigationCss, /grid-row:1\/3/, 'Logo must span the two rows');
