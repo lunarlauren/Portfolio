@@ -133,6 +133,38 @@ html[data-theme="dark"] .theme-toggle:hover{background:#3c5c73}
  .site-header .theme-toggle{flex-basis:40px;width:40px;min-width:40px}
 }
 
+/* Small-screen header: two deliberate rows instead of five compressed controls.
+   Preserve all navigation links and the email CTA; the theme switch stays visible.
+   Grid placement avoids changing DOM or keyboard reading order. */
+@media(max-width:650px){
+ .site-header{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  grid-template-rows:44px auto;column-gap:12px;row-gap:4px;
+  padding-block:8px 10px;
+ }
+ .site-header .wordmark{grid-column:1;grid-row:1;justify-self:start}
+ .site-header .header-actions{display:contents}
+ .site-header .theme-toggle{grid-column:2;grid-row:1;justify-self:end}
+ .site-header .header-actions nav{
+  grid-column:1;grid-row:2;display:flex;justify-content:space-between;
+  gap:clamp(10px,3vw,22px);min-width:0;
+ }
+ .site-header .header-actions nav a{
+  font-size:clamp(.75rem,3vw,.875rem);padding-inline:0;
+ }
+ .site-header .header-contact{
+  grid-column:2;grid-row:2;min-height:44px;
+  padding-inline:10px;font-size:.8125rem;
+ }
+ .site-header .header-contact span{display:none}
+}
+@media(max-width:360px){
+ .site-header{column-gap:6px;padding-inline:10px}
+ .site-header .header-actions nav{gap:8px}
+ .site-header .header-actions nav a{font-size:.6875rem}
+ .site-header .header-contact{padding-inline:4px;font-size:.6875rem}
+}
+
 /* Footer chrome lives alongside navigation chrome. */
 footer.wrap{
  display:flex;align-items:center;justify-content:space-between;
