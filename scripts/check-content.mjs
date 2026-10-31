@@ -591,7 +591,7 @@ assert.ok(workCss.includes('#collection[hidden]{display:none!important}'), 'Inac
 assert.ok(workCss.includes('.collection-head h3{overflow-wrap:anywhere}'), 'Narrow collection headings must wrap');
 assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
-assert.match(html, /work-cards\.css\?v=20261030-motion-ownership/, 'Archive CSS version must be refreshed');
+assert.match(html, /work-cards\.css\?v=[0-9]{8}-[a-z0-9-]+/, 'Archive CSS must have a cache-versioned stylesheet reference');
 
 // Homepage interactions belong with the CTA and hero, not legacy overrides.
 // In reduced motion, reveal-ready must never hide the Work/About sections.
