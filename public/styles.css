@@ -1,51 +1,8 @@
-/* LEGACY OVERRIDES
-   Rules are intentionally kept in cascade order while consolidation continues.
-   Edit light/dark colors in components/foundations.css, not here.
-   See docs/HANDOFF.md for the file map. */
-.hero-feature {color:var(--brand-ink);overflow:visible;isolation:isolate;background:var(--brand-sky)}
-
-.hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
-
-
-
-
-/* Type scale lives in components/foundations.css. */
-
-
-html[data-theme="dark"] .hero h1{color:var(--ink)!important}
-html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
-
-
-html[data-theme="dark"] .hero-foot{color:#b7c7d7}
-html[data-theme="dark"] .hero-foot span{color:inherit}
-
-/* Dark-theme color variables remain above; link colors and focus states
-   now live beside the components they affect. Do not outline static text. */
-
-
-html:not([data-theme="dark"]) .hero{border-radius:22px;position:relative}
-html:not([data-theme="dark"]) .hero-copy,
+/* LEGACY SHARED PAPER RULES
+   Hero layout, artwork, and theme-specific text now live in
+   components/hero-polish.css; global theme tokens live in foundations.css.
+   Keep this file loaded before scoped component styles. */
+/* Light paper headings sit above the notebook texture; the Playground's
+   later dark section override preserves its own contrast. */
 html:not([data-theme="dark"]) .section-head{position:relative;z-index:1}
-/* Keep paper lines visible behind editorial text; opaque text backgrounds
-   made the lines appear broken and disconnected from the writing. */
-html:not([data-theme="dark"]) .hero-description,
 html:not([data-theme="dark"]) .section-head>p{background:transparent;box-decoration-break:initial;-webkit-box-decoration-break:initial}
-/* Client folder shadows use the shared paper-depth token; no alternating overrides. */
-
-
-/* Phone hero and project index sizing. Header layout belongs to components/navigation.css. */
-@media(max-width:420px){
- .hero .hero-copy{min-width:0}
- .hero .hero-description{max-width:100%;overflow-wrap:break-word}
- .hero .hero-foot{flex-wrap:wrap;gap:8px 14px}
-}
-
-
-/* Desktop hero layout and its surviving art-height rule live in hero-polish.css. */
-
-/* Viewport-conscious desktop sections: fit the editorial sections within a
-   typical laptop screen without clipping content at zoom or short heights. */
-/* About viewport rhythm now lives in components/about.css. */
-
-
-/* Component styles extracted to ./components/stationery.css; load after this file. */

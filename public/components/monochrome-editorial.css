@@ -172,6 +172,8 @@ html[data-theme="dark"] .work .featured-project.client-file{
  position:relative;
  isolation:isolate;
  background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%),linear-gradient(155deg,var(--editorial-card),var(--editorial-card))!important;
+ /* The gradient is a background image; give computed background-color an opaque base. */
+ background-color:var(--editorial-card)!important;
  border:1px solid var(--editorial-card-edge)!important;
  border-top:2px solid var(--file-accent,var(--editorial-card-edge))!important;
  border-radius:12px;

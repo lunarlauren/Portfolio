@@ -2,6 +2,24 @@
    Loaded after the legacy stylesheet. Keep responsive hero ownership here
    rather than layering new overrides in styles.css. */
 
+/* LEGACY HERO CONSOLIDATION (2026-10-31)
+   Own hero ink, artwork stacking and narrow-screen wrapping here.
+   The portrait is unframed at every width: legacy background and overflow
+   were overridden by the existing phone and tablet/desktop rules. */
+.hero-feature{isolation:isolate}
+.hero-feature .feature-art{z-index:0}
+html[data-theme="dark"] .hero h1{color:var(--ink)!important}
+html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
+/* Preserve existing dark footer ink, not a new palette approximation. */
+html[data-theme="dark"] .hero-foot{color:#b7c7d7}
+html:not([data-theme="dark"]) .hero{border-radius:22px;position:relative}
+html:not([data-theme="dark"]) .hero-copy{position:relative;z-index:1}
+/* Keep notebook texture visible through hero copy. */
+html:not([data-theme="dark"]) .hero-description{background:transparent;box-decoration-break:initial;-webkit-box-decoration-break:initial}
+@media(max-width:420px){
+ .hero .hero-description{max-width:100%;overflow-wrap:break-word}
+}
+
 /* Notebook note: visible on tablet/desktop, hidden in the phone hero below.
    Keep typography and optical alignment here rather than in legacy CSS. */
 /* Notebook hero — expressive typography with legible mobile-first spacing.
