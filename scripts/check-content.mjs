@@ -547,10 +547,10 @@ assert.match(workCss, /\.work \.project-card-facts\s*\{/, 'Archive facts must ha
 assert.match(workCss, /\.work \.project-card-facts dd\s*\{/, 'Archive values must have readable styles');
 
 // Static responsive guards: these do not prove browser layout or screen-reader behavior.
-assert.match(navigationCss, /@media\(max-width:650px\)\{\s*\.site-header\{\s*display:flex/, 'Production mobile header must remain one row');
+assert.match(navigationCss, /@media\(max-width:650px\)\{[\s\S]*?\.site-header\{\s*display:grid/, 'Production phone header must use the accessible two-row grid');
 assert.match(navigationCss, /@media\(max-width:360px\)/, 'Narrow-phone header must have an explicit layout');
-assert.match(caseCss, /@media\(max-width:760px\)\{[\s\S]*?\.case-view \.case-section-links\{\s*top:64px/, 'Phone chapter index must clear the production one-row header');
-assert.match(caseCss, /\.case-view \.case-section-links\{\s*top:64px/, 'Mobile chapter index must clear the one-row header');
+assert.match(caseCss, /@media\(max-width:760px\)\{[\s\S]*?\.case-view \.case-section-links\{\s*top:64px/, 'Tablet chapter index must retain its compact sticky offset');
+assert.match(caseCss, /@media\(max-width:650px\)\{[\s\S]*?\.case-view \.case-section-links\{top:var\(--mobile-site-header-height,110px\)/, 'Phone chapter index must clear the two-row header');
 assert.match(caseStudy, /function revealCurrentCaseTab\(button\)/, 'Current chapter should remain visible in the phone tab strip');
 assert.match(caseStudy, /chapterNav\.scrollLeft\+=delta/, 'Reveal must scroll the strip without scrolling the document');
 assert.doesNotMatch(css, /\.case-view \.case-section-links\{mask-image:/, 'Do not restore the one-sided fade that obscured chapter controls');
@@ -810,7 +810,11 @@ assert.match(html, /hero-polish\.css\?v=[a-zA-Z0-9-]+/,
  'Homepage must load the updated hero stylesheet');
 
 assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
-assert.ok(navigationCss.includes('gap:clamp(7px,2.2vw,13px)'), 'Phone navigation spacing should remain intentional');
+assert.ok(navigationCss.includes('gap:clamp(8px,2.4vw,18px)'), 'Phone navigation spacing should remain intentional');
+assert.match(navigationCss, /grid-template-rows:44px 44px/, 'Phone header must use two rows');
+assert.match(navigationCss, /grid-row:1\/3/, 'Logo must span the two rows');
+assert.match(navigationCss, /--mobile-site-header-height:110px/, 'Phone header height must be shared');
+assert.match(caseCss, /top:var\(--mobile-site-header-height,110px\)/, 'Case chapter strip must clear the phone header');
 assert.ok(navigationCss.includes('min-height:44px;padding:0 1px'), 'Phone navigation links must retain 44px hit height');
 
 // Pass 7: routed metadata and mobile chapter navigation contracts.

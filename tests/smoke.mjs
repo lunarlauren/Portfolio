@@ -320,6 +320,32 @@ try{
   }
  }
 
+ // Phone header: DOM and visual order must agree, without crowded controls.
+ for(const width of [320,390,650]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const layout=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const q=selector=>document.querySelector(selector).getBoundingClientRect();
+    const nav=q(".site-header nav"),contact=q(".site-header .header-contact"),toggle=q(".site-header .theme-toggle");
+    return {
+     navBottom:nav.bottom,contactTop:contact.top,toggleTop:toggle.top,
+     contactHeight:contact.height,toggleHeight:toggle.height,
+     navRight:nav.right,headerBottom:q(".site-header").bottom,
+     linkHeights:[...document.querySelectorAll(".site-header nav a")].map(link=>link.getBoundingClientRect().height),
+     scrollPadding:parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop),
+     overflow:document.documentElement.scrollWidth>innerWidth+2
+    };
+   },theme);
+   assert.ok(layout.navBottom<=layout.contactTop+2,`${width}px ${theme}: nav must visually precede Contact`);
+   assert.ok(Math.abs(layout.contactTop-layout.toggleTop)<=2,`${width}px ${theme}: Contact and theme share row two`);
+   assert.ok(layout.linkHeights.every(h=>h>=44)&&layout.contactHeight>=44&&layout.toggleHeight>=44,
+    `${width}px ${theme}: navigation targets must be at least 44px high`);
+   assert.ok(layout.navRight<=width+1&&!layout.overflow,`${width}px ${theme}: header must not overflow`);
+   assert.ok(layout.scrollPadding>=layout.headerBottom+8,`${width}px ${theme}: anchors must clear sticky header`);
+  }
+ }
+
  // Guard the tablet breakpoints moved out of legacy styles.css. At 620px
  // the 650px spacing must win over 760px defaults; at 900px the hero
  // remains a single column with the original illustration minimum height.
