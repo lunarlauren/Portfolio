@@ -182,7 +182,14 @@ try{
     const grid=document.querySelector(".work .featured-projects-grid");
     const card=grid?.querySelector(".featured-project.client-file");
     const process=card?.querySelector(".project-card-process");
+    const visual=card?.querySelector(".project-visual");
+    const meta=card?.querySelector(".project-meta");
+    const link=card?.querySelector(".project-card-link");
     return {
+     visualPosition:visual?getComputedStyle(visual).position:null,
+     visualOverflow:visual?getComputedStyle(visual).overflow:null,
+     metaDisplay:meta?getComputedStyle(meta).display:null,
+     linkDisplay:link?getComputedStyle(link).display:null,
      found:!!grid&&!!card&&!!process,
      columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(" ").filter(Boolean).length:0,
      surface:card?getComputedStyle(card).backgroundColor:null,
@@ -197,6 +204,10 @@ try{
    assert.equal(archive.columns,width<=760?1:2,"Work archive columns must match viewport width");
    assert.notEqual(archive.surface,"rgba(0, 0, 0, 0)","Archive card must have a solid surface");
    assert.equal(archive.approachVisible,true,"Documented design approach teaser must remain visible");
+   assert.equal(archive.visualPosition,"relative","Project preview positioning in "+theme+" at "+width+"px");
+   assert.equal(archive.visualOverflow,"hidden","Project preview crop in "+theme+" at "+width+"px");
+   assert.equal(archive.metaDisplay,"flex","Project metadata layout in "+theme+" at "+width+"px");
+   assert.equal(archive.linkDisplay,"block","Work link geometry in "+theme+" at "+width+"px");
    assert.equal(archive.processInk,archive.cardInk,"Archive process copy must match readable card ink");
    assert.ok(archive.factsEdge&&archive.focusEdge,"Archive contrast and focus tokens must survive consolidation");
    surfaces.push(archive.surface);

@@ -576,6 +576,16 @@ assert.doesNotMatch(css + homepageCss, /\.company-(?:grid|card|name|description)
 assert.match(workCss, /\.project-card \.project-meta span:last-child\{display:inline-block/,
  'Active project metadata arrow belongs to work-cards.css');
 
+// Shared card geometry has one owner; the homepage base keeps only grids and hero.
+assert.doesNotMatch(homepageCss, /\.project-(?:card|visual|meta|card-link)\b/,
+ 'Shared card primitives must not return to homepage-base.css');
+assert.match(workCss, /\.project-visual\{display:grid;place-items:center;overflow:hidden;position:relative;/,
+ 'Work component owns the shared card frame geometry');
+assert.match(workCss, /\.project-visual img\{width:100%;height:100%;object-fit:cover;/,
+ 'Real project imagery must retain its cover crop');
+assert.doesNotMatch(workCss, /@media\(max-width:420px\)\{\s*\.work \.project-card-facts/,
+ 'The 600px facts stack already covers 420px; avoid duplicate overrides');
+
 // Archive presentation belongs to work-cards.css, not legacy overrides.
 // These structural checks do not replace browser geometry/contrast checks.
 assert.doesNotMatch(css, /\.featured-projects-grid\s*\{|\.notebook-project-index\s*\{|\.project-card-process\s*\{|\.project-card-cta\s*\{/,
