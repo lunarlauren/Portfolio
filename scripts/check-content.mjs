@@ -969,11 +969,11 @@ assert.match(homepageCss, /\.primary-link:is\(:hover,:focus-visible\)\{[^}]*colo
 assert.doesNotMatch(homepageCss, /html\[data-theme="dark"\] \.primary-link/,
  'Homepage no longer owns a competing dark primary color');
 assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.primary-link:is/,
+ 'Editorial does not need a dark-only hover override');
 assert.doesNotMatch(editorialCss, /\.site-header nav a:is\(:hover,:focus-visible\)|\.quiet-link:is\(:hover,:focus-visible\)|\.primary-link:is\(:hover,:focus-visible\)/, 'Editorial layer must not override component link states');
 assert.doesNotMatch(foundationsCss, /\.site-header nav a:hover,\.text-link:hover/, 'Retired global link hover must not return');
 assert.doesNotMatch(homepageCss, /\.text-link(?:\s*\{|:hover)/, 'About contact link is not styled in homepage');
 assert.match(workCss, /\.work\{border-top:1px solid var\(--line\)\}/, 'Work divider belongs to Work');
- 'Editorial does not need a dark-only hover override');
 assert.match(navigationCss, /\.header-contact:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/,
  'Navigation owns Contact hover and keyboard focus colors');
 assert.doesNotMatch(navigationCss, /background:transparent!important;color:var\(--ink\)!important/,
