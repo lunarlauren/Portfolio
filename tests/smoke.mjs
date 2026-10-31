@@ -105,11 +105,14 @@ try{
    return {
     surface:css.backgroundColor,
     headingVisible:title.display!=="none"&&title.visibility!=="hidden",
-    introBackground:getComputedStyle(intro).backgroundColor
+    introBackground:getComputedStyle(intro).backgroundColor,
+    introColor:getComputedStyle(intro).color
    };
   });
-  assert.notEqual(night.surface,"rgba(0, 0, 0, 0)",
-   "Playground must retain its opaque night surface in "+theme+" theme");
+  assert.equal(night.surface,"rgb(23, 23, 23)",
+   "Playground must retain its neutral charcoal surface in "+theme+" theme");
+  assert.equal(night.introColor,"rgb(224, 224, 224)",
+   "Playground introduction must retain readable night ink in "+theme+" theme");
   assert.equal(night.headingVisible,true,"Playground heading must remain visible");
   assert.equal(night.introBackground,"rgba(0, 0, 0, 0)",
    "Playground intro must not inherit notebook paper in "+theme+" theme");
