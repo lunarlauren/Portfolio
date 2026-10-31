@@ -3,7 +3,7 @@
    Keep contrast, keyboard access and reduced-motion behavior intact. */
 :root{
  --editorial-paper:#f5f3ef;--editorial-ink:#171717;--editorial-rule:#c8c5c0;
- --editorial-accent:#235f88;
+ --editorial-accent:#235f88;--editorial-action-ink:#fff;
  --palette-paper:#f5f3ef;--palette-navy:#171717;--palette-blue:#bdbdbd;--palette-pink:#858585;
  --notebook-pink:#555;--brand-pink:#555;--brand-sky:#e8e6e2;
  --paper:#f5f3ef;--ink:#171717;--brand-ink:#171717;--line:#c8c5c0;
@@ -17,8 +17,9 @@ html[data-theme="dark"]{
  --paper:#151515;--ink:#f1f0ec;--brand-ink:#f1f0ec;--line:#565656;
  --surface-blush:#242424;--surface-cream:#1d1d1d;--surface-navy:#292929;
  --focus:#a6d9ff;--muted:#c4c4c4;
+ --editorial-accent:#a6d9ff;--editorial-action-ink:#111;
 }
-body{background:var(--paper);color:var(--ink)}
+body{color:var(--ink)}
 .site-header{border-bottom:1px solid var(--line)}
 .hero .hero-copy h1,.section-head h2,.about h2{letter-spacing:-.045em;text-wrap:balance}
 .hero .hero-copy h1 em,.section-head h2 em,.about h2 em{color:inherit!important;font-style:italic}
@@ -38,18 +39,14 @@ body{background:var(--paper);color:var(--ink)}
 .featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500}
 .primary-link,.header-contact{background:var(--ink)!important;color:var(--paper)!important;border-color:var(--ink)!important}
 .primary-link:is(:hover,:focus-visible),.header-contact:is(:hover,:focus-visible){
- background:var(--editorial-accent)!important;color:#fff!important;border-color:var(--editorial-accent)!important
+ background:var(--editorial-accent)!important;color:var(--editorial-action-ink)!important;border-color:var(--editorial-accent)!important
 }
 .site-header nav a:is(:hover,:focus-visible),.text-link:is(:hover,:focus-visible),.quiet-link:is(:hover,:focus-visible){
  color:var(--editorial-accent)!important
 }
 html[data-theme="dark"] .site-header nav a:is(:hover,:focus-visible),
-html[data-theme="dark"] .text-link:is(:hover,:focus-visible){color:#a6d9ff!important}
+html[data-theme="dark"] .text-link:is(:hover,:focus-visible){color:var(--editorial-accent)!important}
 :where(.work,.playground,.about){border-top:1px solid var(--line)}
-@media(hover:none){
- /* Touch users should see actual product colors, not inaccessible hover-only content. */
- .project-visual img,.project-card img,.play-grid img{filter:none}
-}
 @media(prefers-reduced-motion:reduce){
  .project-visual img,.project-card img,.play-grid img,.about-portrait img,
  .hero .feature-art .hero-portrait-art{transition:none!important}
@@ -68,13 +65,10 @@ html[data-theme="dark"] .text-link:is(:hover,:focus-visible){color:#a6d9ff!impor
 @media(hover:none){
  .hero .feature-art .hero-portrait-art{filter:none}
 }
-/* Keep dark-mode interactions legible on dark surfaces. */
-html[data-theme="dark"]{
- --editorial-accent:#a6d9ff;
-}
+/* The higher-specificity dark CTA rule overrides earlier homepage button styles. */
 html[data-theme="dark"] .primary-link:is(:hover,:focus-visible),
 html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
- background:#a6d9ff!important;color:#111!important;border-color:#a6d9ff!important
+ background:var(--editorial-accent)!important;color:var(--editorial-action-ink)!important;border-color:var(--editorial-accent)!important
 }
 /* The illustrative placeholder is a separate readable surface. */
 .work .featured-project .project-visual:not(:has(img)),
@@ -196,12 +190,9 @@ body{
 }
 .about .about-copy>.text-link:is(:hover,:focus-visible){
  background:var(--editorial-accent)!important;
- color:#fff!important;
+ color:var(--editorial-action-ink)!important;
  border-color:var(--editorial-accent)!important;
  box-shadow:0 6px 0 var(--line)!important;
-}
-html[data-theme="dark"] .about .about-copy>.text-link:is(:hover,:focus-visible){
- background:#a6d9ff!important;color:#111!important;border-color:#a6d9ff!important
 }
 .about .ai-process{border-left-color:var(--line)!important}
 @media(prefers-contrast:more){
