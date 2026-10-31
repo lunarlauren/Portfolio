@@ -62,11 +62,6 @@ html[data-theme="dark"]{
 @media(hover:none){
  .hero .feature-art .hero-portrait-art{filter:none}
 }
-/* The higher-specificity dark CTA rule overrides earlier homepage button styles. */
-html[data-theme="dark"] .primary-link:is(:hover,:focus-visible),
-html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
- background:var(--editorial-accent)!important;color:var(--editorial-action-ink)!important;border-color:var(--editorial-accent)!important
-}
 /* The illustrative placeholder is a separate readable surface. */
 .work .featured-project .project-visual:not(:has(img)){
  --placeholder-surface:var(--surface-blush);
@@ -89,7 +84,7 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  color:var(--ink)!important;
  position:relative;
  isolation:isolate;
- background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%),linear-gradient(155deg,var(--editorial-card),var(--editorial-card))!important;
+ background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%)!important;
  /* The gradient is a background image; give computed background-color an opaque base. */
  background-color:var(--editorial-card)!important;
  border:1px solid var(--editorial-card-edge)!important;
@@ -124,13 +119,12 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  .work :is(.featured-project.client-file,.notebook-project-index .featured-project){transition:none!important}
 }
 
-/* FINAL CHROME CONSISTENCY: navigation owns chrome, stationery owns paper dots. */
+/* FINAL PAPER CONSISTENCY: navigation owns chrome, stationery owns dot tokens. */
 /* Theme tokens supply the dots' contrast; the geometry is shared. */
 body{
  background-color:var(--paper);
  background-image:radial-gradient(circle,var(--notebook-dot-color) 1px,transparent 1.4px);
 }
-.site-header,footer.wrap{background:var(--site-chrome-bg)!important;border-color:var(--site-chrome-edge)!important}
 .about .about-copy>.text-link{
  background:var(--ink)!important;
  color:var(--paper)!important;
