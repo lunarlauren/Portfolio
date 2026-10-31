@@ -76,9 +76,6 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  color:var(--placeholder-text)!important;
  border-color:var(--placeholder-edge)!important;
 }
-.work .featured-project .project-visual:not(:has(img)) *{
- color:var(--placeholder-text)!important;
-}
 
 /* Project imagery has no grayscale rules; only the hero/About portraits reveal color.
    Do not add image-filter resets that mask the owning component's styles. */
