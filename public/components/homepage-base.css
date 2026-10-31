@@ -1,6 +1,6 @@
 /* HOMEPAGE BASE
    These are the earliest homepage rules, in original cascade order.
-   Later overrides may still live in styles.css and named component files.
+   Component files own the final theme-specific presentation.
    Avoid adding a duplicate rule: search all CSS first.
    Hidden hero tile/orbit chrome is retired; keep the active portrait anchor. */
 /* SHARED PROJECT GRIDS
@@ -48,12 +48,9 @@ html[data-theme="dark"] :is(.quiet-link,.text-link):hover{color:var(--night-link
 .hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
 
 /* HOMEPAGE INTERACTION STATES
-   Keep dark CTA contrast and progressive entrance effects beside the base
-   homepage buttons. The script only adds reveal-ready when an observer exists;
+   Keep progressive entrance effects beside the homepage button geometry.
+   Final CTA colors live in monochrome-editorial.css. The script only adds reveal-ready when an observer exists;
    visitors requesting less motion see the content immediately. */
-html[data-theme="dark"] .primary-link,
-html[data-theme="dark"] .hero-actions .primary-link{background:color-mix(in srgb,var(--palette-paper) 30%,var(--palette-pink))!important;color:#182333!important;border:1px solid color-mix(in srgb,var(--palette-paper) 30%,var(--palette-pink))!important}
-
 @media(hover:hover) and (pointer:fine){.hero-actions .primary-link span{display:inline-block;transition:transform .2s ease} .hero-actions .primary-link:hover span{transform:translate(4px,-3px)}}
 
 @media(prefers-reduced-motion:no-preference){
