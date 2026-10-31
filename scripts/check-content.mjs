@@ -547,6 +547,19 @@ assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component
 assert.match(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Work component must retain keyboard focus outline');
 assert.match(html, /work-cards\.css\?v=20261030-motion-ownership/, 'Archive CSS version must be refreshed');
 
+// Homepage interactions belong with the CTA and hero, not legacy overrides.
+// In reduced motion, reveal-ready must never hide the Work/About sections.
+assert.doesNotMatch(css, /(?:reveal-ready|reveal-enter|hero-enter|hero-parallax-y|html\\[data-theme="dark"\\] \\.primary-link)/,
+ 'Legacy CSS must not own homepage entrance or dark CTA states');
+assert.match(homepageCss, /html\\[data-theme="dark"\\] \\.primary-link:hover\\{background:#ffc0dc!important/,
+ 'Homepage must retain dark CTA hover contrast');
+assert.match(homepageCss, /@media\\(prefers-reduced-motion:no-preference\\)\\{[\\s\\S]*?\\.reveal-ready\\{animation:none;opacity:0/,
+ 'Homepage reveal must remain opt-in for motion');
+assert.match(homepageCss, /\\.reveal-ready\\{opacity:1!important;transform:none!important;transition:none!important\\}/,
+ 'Reduced-motion visitors must see revealed sections');
+assert.doesNotMatch(homepageCss, /@keyframes reveal-enter/,
+ 'Superseded reveal-enter keyframes must not return');
+
 // Typography and link styling have named owners, not a late global override.
 assert.ok(!css.includes('.project-card p,.case-back,footer'), 'Legacy typography bundle must not return');
 assert.ok(!css.includes('.hero-description,.case-intro,.section-head>p,.project-card p'), 'Legacy mixed text-color selector must not return');
