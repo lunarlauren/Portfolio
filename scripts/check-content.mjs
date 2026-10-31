@@ -677,6 +677,10 @@ assert.ok(caseCss.includes('@keyframes detail-reveal') && caseCss.includes('.cas
  'Case-study must own its entrance animation');
 assert.ok(playgroundCss.includes('.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)'),
  'Playground must own its preview hover');
+assert.doesNotMatch(playgroundCss, /\.project-card-link:hover \.project-visual\{[^}]*box-shadow:/,
+ 'Night preview hover must not restore the conflicting shadow');
+assert.doesNotMatch(workCss, /\.project-card-link\{transition:none!important\}/,
+ 'Do not restore the unused link transition reset');
 assert.ok(caseCss.includes('.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}'),
  'Case-study reduced-motion override must remain');
 assert.ok(playgroundCss.includes('.play-grid .project-card-link .project-visual{transition:none!important}'),
@@ -993,7 +997,9 @@ assert.doesNotMatch(editorialCss, /:is\(\.featured-project,\.project-card,\.play
 assert.doesNotMatch(editorialCss, /\.visual-placeholder|--archive-(?:surface|ink|muted):/, 'Retired archive aliases and unused tokens must not return');
 assert.doesNotMatch(editorialCss, /\.notebook-project-index \.featured-project\{/, 'Archive surface must have only one authoritative editorial rule');
 assert.doesNotMatch(editorialCss, /\.project-visual img,\.project-card img,\.play-grid img,\.case-gallery img/, 'Do not restore redundant full-color image filter resets');
-assert.match(editorialCss, /\.project-card img\{transition:transform \.45s ease\}/, 'Shared project images retain their transition');
+assert.match(workCss, /\.project-visual img\{[^}]*transition:transform \.45s ease\}/, 'Work owns shared project image motion');
+assert.match(workCss, /\.project-visual img\{transition:none!important\}/, 'Shared image motion respects reduced motion');
+assert.doesNotMatch(editorialCss, /\.project-card img\{transition:/, 'Editorial surfaces must not own project image motion');
 assert.doesNotMatch(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\) :is\(/,
  'No blanket archive descendant ink override may erase client CTA/tab colors');
 assert.match(workCss, /\.work \.project-card :is\(h3,p,\.project-meta\)\{color:var\(--ink\)\}/,
