@@ -238,3 +238,8 @@
     box-shadow: 0 5px 0 #a83f73;
   }
 }
+
+/* Tablet About rhythm. The existing <=600px phone rule takes precedence. */
+@media(min-width:601px) and (max-width:760px){
+ .about.wrap{padding-block:clamp(52px,10vw,76px)}
+}
