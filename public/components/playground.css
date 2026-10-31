@@ -5,7 +5,7 @@
 
 /* Night-paper surface and editorial hierarchy. */
 .playground.wrap {max-width:none;padding:clamp(80px,9vw,120px) max(clamp(20px,5vw,72px),calc((100vw - 1176px)/2));color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));background:var(--night-bg);border:0;position:relative;overflow:hidden}
-.playground:before {content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 85% 0%,#e65da35c,transparent 42%),radial-gradient(circle at 12% 95%,#497eab55,transparent 48%)}
+.playground:before {content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 85% 0%,#ffffff12,transparent 42%),radial-gradient(circle at 12% 95%,#ffffff08,transparent 48%)}
 .playground>.section-head,.playground>.play-grid {position:relative;z-index:1}
 .playground .eyebrow {color:#a7b8d0}
 .playground .project-card h3 {color:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue))}
@@ -13,7 +13,7 @@
 .playground .project-visual:not(:has(img)) .visual-label {color:#c4d4e6;border-color:color-mix(in srgb,var(--palette-navy) 53%,var(--palette-paper))}
 .playground .section-head>p,.playground .project-card p {color:#d0d9e5}
 .playground .project-visual .visual-brief {color:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))!important}
-.playground .project-visual .brief-kicker {color:#ffc4e0}
+.playground .project-visual .brief-kicker {color:#e5e5e5}
 
 /* The heading has no generated star; its title and color are explicit. */
 .playground .section-head h2{display:block!important;visibility:visible!important;opacity:1!important;color:#fff!important;position:relative;z-index:1}
@@ -25,7 +25,7 @@
 .playground .project-card .project-card-process{color:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue));border-top-color:#8da5bd}
 .playground .project-card .project-card-process strong{color:color-mix(in srgb,var(--palette-paper) 65%,var(--palette-pink))}
 .playground .project-card .project-card-cta{color:#f3f7ff}
-.playground .project-card .project-meta{color:#f4bfd9}
+.playground .project-card .project-meta{color:#d5d5d5}
 .playground .project-card .project-card-process,
 .playground .project-card .project-card-process p{opacity:1}
 
@@ -92,3 +92,4 @@ html[data-theme="dark"] .playground .section-head>p{
  .play-grid .project-card-link .project-visual{transition:none!important}
  .play-grid .project-card-link:hover .project-visual{transform:none}
 }
+\n/* Beyond the Brief: neutral editorial shell; project artwork keeps its own colors. */\n.playground.wrap{background:#171717;color:#f4f3ef}\n.playground .eyebrow{color:#d0d0d0}\n.playground .section-head>p,.playground .project-card p{color:#e0e0e0}\n.playground .project-card .project-card-process strong{color:#f0f0f0}\n.playground .project-visual:not(:has(img)){background:#292929!important;border-color:#777}\n.playground .project-visual:not(:has(img)) :is(.visual-label,.visual-brief,.brief-kicker){color:#f1f1f1!important}\n
