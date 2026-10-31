@@ -6,49 +6,19 @@
 @media(max-width:760px) {.hero-feature {min-height:430px} .hero {padding-block:55px 80px} .hero h1 {font-size:clamp(3.125rem,12vw,4.875rem)} .hero-actions {gap:18px}}
 @media(prefers-reduced-motion:reduce) {.hero-feature:hover .feature-art,.primary-link:hover {transform:none}}
 body {background:var(--paper);color:var(--ink)}
-.status-dot {background:#377b91}
-.hero h1 em,.about h2 em,.section-head h2 em {color:color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue))}
-
 
 .hero-feature {color:var(--brand-ink);overflow:visible;isolation:isolate;background:var(--brand-sky)}
 
-.section-head h2 em,.about h2 em {color:color-mix(in srgb,var(--palette-navy) 25%,var(--palette-pink))}
-
-
 .hero-feature .feature-art {text-decoration:none;color:inherit;z-index:0}
 
-.hero h1 {line-height:1.04}
-.section-head h2,.about h2,.case-head h1 {line-height:1.1}
-.wordmark {display:inline-flex;align-items:center;line-height:1}
-.wordmark img {display:block;width:40px;height:auto}
-.hero-description,.case-intro,.section-head>p,.project-card p {color:var(--muted)}
-.hero .status-dot {background:var(--brand-pink)}
-.primary-link {background:var(--brand-navy);color:#fff}
-.primary-link:hover {background:color-mix(in srgb,var(--palette-navy) 80%,var(--palette-blue))}
-.quiet-link:hover,.text-link:hover,.site-header nav a:hover {color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
-.hero h1,.section-head h2,.about h2,.case-head h1 {letter-spacing:-.025em}
-.hero h1,.case-head h1 {letter-spacing:-.045em}
-
-.hero h1{color:var(--brand-ink)}
-.hero h1 em{color:var(--brand-pink);font-style:normal}
-
 @media(max-width:760px){.hero{min-width:0}.hero-feature{min-width:0}}
-
-
 
 .site-header nav a,.feature-project-link,.text-link,.collection-back,.case-back,.case-next{min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:760px){.case-head h1{overflow-wrap:anywhere}}
 
-
-.hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
-
-
 .collection:focus,.case-view:focus,#work-title:focus,.collection-head h3:focus{outline:none!important;box-shadow:none!important}
 
 /* Type scale lives in components/foundations.css. */
-.project-card p,.case-back,footer{font-size:var(--type-sm);line-height:1.6}
-.hero-description,.about-bottom p{line-height:var(--leading-reading,1.65)}
-@media(max-width:760px){.hero-description,.about-bottom p{font-size:1rem}.project-card p{font-size:0.875rem}}
 
 html{scroll-padding-top:82px}
 #work,#playground,#about,#top,#main{scroll-margin-top:82px}
