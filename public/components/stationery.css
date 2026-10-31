@@ -98,6 +98,15 @@ html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix
 
 
 
+/* Light paper heading treatment was the last live rule in styles.css.
+   Keep it beside the notebook surface; Playground owns its darker contrast. */
+html:not([data-theme="dark"]) .section-head{position:relative;z-index:1}
+html:not([data-theme="dark"]) .section-head>p{
+ background:transparent;
+ box-decoration-break:initial;
+ -webkit-box-decoration-break:initial;
+}
+
 /* Full-width notebook surface, shared by light and dark themes.
    Retired ruled-paper layers once competed with this dot grid in styles.css.
    Keep section surfaces transparent so dots align across section gutters. */
