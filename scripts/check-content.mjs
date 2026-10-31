@@ -50,7 +50,7 @@ const stationeryCss = read('../public/components/stationery.css');
  assert.match(navigationCss, /#work,#playground,#about,#top,#main\{scroll-margin-top:82px\}/, 'Section anchors must remain in sync');
  assert.match(navigationCss, /\.site-header nav a\{white-space:nowrap;min-height:44px;display:inline-flex;align-items:center\}/, 'Desktop navigation links need 44px targets');
  assert.match(stationeryCss, /env\(safe-area-inset-left\)/, 'Phone gutters must honor safe areas');
- assert.match(workCss, /\.featured-case-link\{[^}]*min-height:44px/, 'Active featured case links retain 44px targets');
+ assert.match(workCss, /\.notebook-project-index \.project-card-link\{min-height:44px\}/, 'Active mobile archive links retain 44px targets');
  assert.match(caseCss, /\.case-next\{min-height:44px/, 'Case next links retain 44px targets');
  assert.match(caseCss, /\.case-view:focus\{outline:none!important/, 'Programmatic case wrapper focus stays undecorated');
  assert.match(aboutCss, /min-width:601px\) and \(max-width:760px/, 'Tablet About spacing stays scoped');
@@ -576,6 +576,16 @@ assert.doesNotMatch(css + homepageCss, /\.company-(?:grid|card|name|description)
 assert.match(workCss, /\.project-card \.project-meta span:last-child\{display:inline-block/,
  'Active project metadata arrow belongs to work-cards.css');
 
+// Retire selectors for unrendered h4 titles, project-title classes and a
+// standalone featured-case-link. script.js renders h3 titles inside linked cards.
+assert.doesNotMatch(workCss, /\.featured-case-link\b|\.project-title\b|\.project-card-link:hover h4\b/,
+ 'Dead project-card heading and link selectors must not return');
+assert.doesNotMatch(foundationsCss, /\.project-card-link(?::hover|:focus-visible) h4\b/,
+ 'Shared heading motion must target rendered elements');
+assert.doesNotMatch(workCss, /\.featured-project \.project-card-link\{height:100%\}|\.notebook-project-index \.featured-project \.project-card-link\{height:auto\}/,
+ 'The notebook index must not restore its superseded link height override');
+assert.doesNotMatch(playgroundCss, /\.playground \.section-head h2\{display:block!important|\.playground \.section-head h2::after|\.playground \.section-head \.playground-title::(?:before|after)/,
+ 'Night heading must not accumulate obsolete generic and pseudo-element overrides');
 // Shared card geometry has one owner; the homepage base keeps only grids and hero.
 assert.doesNotMatch(homepageCss, /\.project-(?:card|visual|meta|card-link)\b/,
  'Shared card primitives must not return to homepage-base.css');
