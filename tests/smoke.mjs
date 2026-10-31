@@ -139,13 +139,19 @@ try{
      found:!!grid&&!!card&&!!process,
      columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(" ").filter(Boolean).length:0,
      surface:card?getComputedStyle(card).backgroundColor:null,
-     approachVisible:!!process&&getComputedStyle(process).display!=="none"
+     approachVisible:!!process&&getComputedStyle(process).display!=="none",
+     processInk:process?getComputedStyle(process).color:null,
+     cardInk:card?getComputedStyle(card).color:null,
+     factsEdge:card?getComputedStyle(card).getPropertyValue("--archive-facts-edge").trim():null,
+     focusEdge:card?getComputedStyle(card).getPropertyValue("--archive-focus-edge").trim():null
     };
    },theme);
    assert.equal(archive.found,true,"Work archive and documented process teaser must render");
    assert.equal(archive.columns,width<=760?1:2,"Work archive columns must match viewport width");
    assert.notEqual(archive.surface,"rgba(0, 0, 0, 0)","Archive card must have a solid surface");
    assert.equal(archive.approachVisible,true,"Documented design approach teaser must remain visible");
+   assert.equal(archive.processInk,archive.cardInk,"Archive process copy must match readable card ink");
+   assert.ok(archive.factsEdge&&archive.focusEdge,"Archive contrast and focus tokens must survive consolidation");
    surfaces.push(archive.surface);
   }
   assert.notEqual(surfaces[0],surfaces[1],"Archive card must adapt to light and dark themes");
