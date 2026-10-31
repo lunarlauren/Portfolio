@@ -925,4 +925,12 @@ assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.work \.featured-p
 assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var\(--file-accent\)/,
  'Work card component must own the client tab background');
 
+// Editorial action hover contrast is tokenized for light/dark, while the
+// higher-specificity dark CTA remains to override homepage !important rules.
+assert.match(editorialCss, /--editorial-action-ink:#fff;/, 'Light editorial actions need white hover ink');
+assert.match(editorialCss, /--editorial-accent:#a6d9ff;--editorial-action-ink:#111;/, 'Dark editorial actions need near-black hover ink');
+assert.ok(editorialCss.includes('html[data-theme="dark"] .primary-link:is(:hover,:focus-visible)'), 'Dark CTA must override homepage hover');
+assert.match(editorialCss, /\.about \.about-copy>\.text-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/, 'About CTA must use shared action ink');
+assert.doesNotMatch(editorialCss, /color:#fff!important;|background:#a6d9ff!important;color:#111!important/, 'No duplicate literal action colors');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);
