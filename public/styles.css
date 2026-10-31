@@ -33,18 +33,6 @@ html:not([data-theme="dark"]) .section-head>p{background:transparent;box-decorat
 /* Client folder shadows use the shared paper-depth token; no alternating overrides. */
 
 
-/* Notebook hero — expressive typography with legible mobile-first spacing.
-   Keep the existing portrait asset; owner-supplied doodles can replace accents. */
-html:not([data-theme="dark"]) .hero h1{color:var(--brand-ink)}
-html:not([data-theme="dark"]) .hero h1 em{color:var(--brand-pink);font-style:normal}
-.notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(1.0625rem,2vw,1.4375rem);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;border-bottom:2px solid var(--notebook-pink);margin:6px 0 14px}
-.notebook-hero-note span{font-size:1.5625rem;font-style:normal}
-html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
-@media(max-width:760px){
- .hero .notebook-hero-note{font-size:1rem;max-width:100%}
- .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
-}
-
 /* Phone hero and project index sizing. Header layout belongs to components/navigation.css. */
 @media(max-width:420px){
  .hero .hero-copy{min-width:0}
@@ -59,15 +47,5 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
    typical laptop screen without clipping content at zoom or short heights. */
 /* About viewport rhythm now lives in components/about.css. */
 
-
-/* Optical alignment: the hero note uses the shared no-rotation baseline.
-   Preserve its intentional border, padding, and margin adjustments. */
-.hero .notebook-hero-note{
- border-bottom:2px solid var(--notebook-pink);
- padding:5px 0 7px;
- margin-inline:0;
-}
-.hero .notebook-hero-note::before,
-.hero .notebook-hero-note::after{transform:none}
 
 /* Component styles extracted to ./components/stationery.css; load after this file. */
