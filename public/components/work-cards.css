@@ -77,7 +77,7 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
    tab, not a tiny decorative dash. Keep the file number on the card itself. */
 .client-file{
  --file-accent:#357caa;
- --file-label-ink:#000; /* AA contrast against monochrome tabs in both themes. */
+ --file-label-ink:#000000; /* AA contrast against monochrome tabs in both themes. */
  position:relative;
  margin-top:32px;
  /* Card border and radius are painted by monochrome-editorial.css. */
