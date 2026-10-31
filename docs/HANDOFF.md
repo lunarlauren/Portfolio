@@ -206,3 +206,7 @@ The blue rectangles around the hero label, descriptive paragraph, and Work intro
 - The source smoke check rejects accidental static-text outlines. It cannot prove rendered geometry or contrast. Check the hero and Work introduction in both themes, then use Tab to verify visible outlines on the CTA, navigation, and skip link before deploying.
 
 This change does not touch project narratives or claims. Hoylu Mobile Insights remains a **shipped contribution**; unverified UX research and results must not be invented.
+
+## Homepage motion and CTA ownership (2026-10-30)
+
+Dark-theme primary button colors, its small hover nudge, and the homepage's entrance effects now live together in `public/components/homepage-base.css`. The old `reveal-enter` animation was dead code: the motion-enabled reveal rule already sets `animation:none` and uses an observer-controlled opacity transition instead. The redundant animation and keyframes were removed. Reduced-motion visitors must see the Work/About sections immediately, and keyboard focus remains owned by `foundations.css`. Change hero geometry in `hero-polish.css` rather than appending overrides to `styles.css`; the open portrait-first and standalone-theme PRs were not modified. Run the content checks and Chromium smoke tests before release; neither proves pixel-level parity or deployment.

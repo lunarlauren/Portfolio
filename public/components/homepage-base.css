@@ -66,3 +66,30 @@ html[data-theme="dark"] :is(.quiet-link,.text-link):hover{color:var(--night-link
 .project-visual {position:relative;isolation:isolate;aspect-ratio:4/3;height:auto;min-height:190px}
 .project-visual img {position:relative;z-index:2}
 .project-card .project-meta {display:flex;justify-content:space-between;gap:8px}
+
+/* HOMEPAGE INTERACTION STATES
+   Keep dark CTA contrast and progressive entrance effects beside the base
+   homepage buttons. The script only adds reveal-ready when an observer exists;
+   visitors requesting less motion see the content immediately. */
+html[data-theme="dark"] .primary-link,
+html[data-theme="dark"] .hero-actions .primary-link{background:color-mix(in srgb,var(--palette-paper) 30%,var(--palette-pink))!important;color:#182333!important;border:1px solid color-mix(in srgb,var(--palette-paper) 30%,var(--palette-pink))!important}
+html[data-theme="dark"] .primary-link:hover{background:#ffc0dc!important;color:#182333!important}
+
+@media(hover:hover) and (pointer:fine){.hero-actions .primary-link span{display:inline-block;transition:transform .2s ease} .hero-actions .primary-link:hover span{transform:translate(4px,-3px)}}
+
+@media(prefers-reduced-motion:no-preference){
+ .reveal-ready{animation:none;opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1);transition-delay:var(--reveal-delay,0ms)}
+ .reveal-ready.in-view{opacity:1;transform:translateY(0)}
+ .hero .hero-portrait-art{translate:0 var(--hero-parallax-y,0px);will-change:translate}
+ .hero .hero-copy>.eyebrow{animation:hero-enter .55s ease-out both}
+ .hero .hero-copy>h1{animation:hero-enter .7s .09s ease-out both}
+ .hero .hero-description{animation:hero-enter .7s .2s ease-out both}
+ .hero .hero-actions{animation:hero-enter .7s .28s ease-out both}
+ .hero .hero-feature{animation:hero-enter .8s .14s ease-out both}
+}
+@keyframes hero-enter{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+@media(prefers-reduced-motion:reduce){
+ .hero-actions .primary-link span{transition:none!important}
+ .reveal-ready{opacity:1!important;transform:none!important;transition:none!important}
+ .hero .hero-portrait-art{translate:none!important}
+}
