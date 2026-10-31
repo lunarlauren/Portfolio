@@ -997,8 +997,8 @@ assert.doesNotMatch(editorialCss, /:is\(\.featured-project,\.project-card,\.play
 assert.doesNotMatch(editorialCss, /\.visual-placeholder|--archive-(?:surface|ink|muted):/, 'Retired archive aliases and unused tokens must not return');
 assert.doesNotMatch(editorialCss, /\.notebook-project-index \.featured-project\{/, 'Archive surface must have only one authoritative editorial rule');
 assert.doesNotMatch(editorialCss, /\.project-visual img,\.project-card img,\.play-grid img,\.case-gallery img/, 'Do not restore redundant full-color image filter resets');
-assert.match(workCss, /\.project-visual img\{[^}]*transition:transform \.45s ease\}/, 'Work owns shared project image motion');
-assert.match(workCss, /\.project-visual img\{transition:none!important\}/, 'Shared image motion respects reduced motion');
+assert.match(workCss, /\.project-card img\{transition:transform \.45s ease\}/, 'Work owns shared project image motion');
+assert.match(workCss, /\.project-card img\{transition:none!important\}/, 'Shared image motion respects reduced motion');
 assert.doesNotMatch(editorialCss, /\.project-card img\{transition:/, 'Editorial surfaces must not own project image motion');
 assert.doesNotMatch(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\) :is\(/,
  'No blanket archive descendant ink override may erase client CTA/tab colors');
