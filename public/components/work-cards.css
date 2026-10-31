@@ -328,78 +328,6 @@ html[data-theme="dark"] .work .client-file{
  text-transform:uppercase;
 }
 
-/* Collection navigation and client headers live with the archive gallery.
-   The original collection-enter animation was dead: gallery-reveal already
-   supersedes it, and the shared reduced-motion rule disables motion. */
-/* Hide the inactive collection entirely, including from keyboard layout.
-   The [hidden] attribute comes from the archive navigation script. */
-#collection[hidden]{display:none!important}
-.collection {margin-top:0;padding:0;background:transparent;scroll-margin-top:24px}
-.collection-nav {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
-.collection-back {display:inline-flex;align-items:center;gap:10px;color:var(--ink);font:700 14px 'DM Sans',system-ui,sans-serif;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:5px;transition:color .2s ease}
-.collection-back:hover {color:color-mix(in srgb,var(--palette-pink) 68%,var(--palette-navy))}
-/* Archive back link uses readable night-paper ink and a pink hover state. */
-html[data-theme="dark"] .collection-back{color:var(--night-link-ink)}
-html[data-theme="dark"] .collection-back:hover{color:var(--night-link-hover)}
-.collection-head {margin-bottom:32px;padding:clamp(22px,4vw,42px);background:var(--surface-blush);border-radius:6px}
-.collection-head h3 {font-size:clamp(3rem,6vw,5.25rem);line-height:1.05}
-.collection .projects-grid {margin-bottom:12px}
-@media(max-width:760px) {
- .collection-nav{align-items:flex-start;flex-direction:column}
- .collection-head{padding:24px}
- .collection-head h3{overflow-wrap:anywhere}
-}
-.collection .project-card-link .project-visual{transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),filter .35s ease}
-.collection .project-card-link:hover .project-visual{transform:translateY(-5px);box-shadow:0 15px 30px #20334419}
-/* This hover rule now loads after legacy reduced-motion rules: repeat the
-   transform reset here so moving ownership never re-enables motion. */
-@media(prefers-reduced-motion:reduce){.collection .project-card-link:hover .project-visual{transform:none}}
-.collection[data-active="alcon"] .collection-head {background:var(--surface-cream);color:var(--brand-navy)}
-.collection[data-active="holland-america"] .collection-head {background:var(--surface-navy);color:#fff}
-.collection[data-active="holland-america"] .collection-head p {color:inherit}
-.collection[data-active="alcon"] .collection-head p {color:inherit}
-/* Archive entry motion stays with the gallery; the view-transition rule
-   below suppresses the competing collection-header entrance when supported. */
-@keyframes gallery-reveal{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-@media(prefers-reduced-motion:no-preference){
- .collection{animation:gallery-reveal .5s var(--motion-ease) both}
- .collection .collection-nav{animation:gallery-reveal .42s var(--motion-ease) .04s both}
- .collection .collection-head{animation:gallery-reveal .55s var(--motion-ease) .09s both}
- .collection .project-card{animation:gallery-reveal .62s var(--motion-ease) both;animation-delay:calc(.16s + var(--i,0)*.075s)}
-}
-@media(prefers-reduced-motion:reduce){
- .collection,.collection .collection-nav,.collection .collection-head,.collection .project-card{animation:none!important}
- .collection .project-card-link .project-visual,.project-card .project-meta span:last-child{transition:none!important}
-}
-@supports (view-transition-name:selected-company) {.collection .collection-head {animation:none}}
-
-/* Archive collection gallery: card geometry, evidence briefs and theme contrast.
-   This is the sole owner of collection-specific presentation. */
-.collection .projects-grid{gap:clamp(22px,2.3vw,36px)}
-.collection .project-card{min-width:0}
-.collection .project-card-link{height:100%}
-.collection .project-visual{aspect-ratio:16/10;min-height:0}
-.collection .project-visual:not(:has(img)){padding:clamp(14px,1.7vw,24px)}
-.collection .project-visual .visual-brief{max-width:100%;font-size:clamp(0.75rem,1vw,0.875rem);line-height:1.45;letter-spacing:0;overflow-wrap:break-word}
-.collection .project-visual .brief-kicker{font-size:0.6875rem;letter-spacing:.08em;font-weight:700}
-.collection .project-meta{margin-top:16px;line-height:1.45}
-.collection .project-card h3,.collection .project-card h4{line-height:1.15;overflow-wrap:break-word}
-.collection .project-card p{font-size:0.9375rem;line-height:1.65;max-width:48ch}
-html[data-theme="dark"] .collection .project-card-link{color:color-mix(in srgb,var(--palette-paper) 95%,var(--palette-blue))}
-html[data-theme="dark"] .collection .project-card p{color:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
-html[data-theme="dark"] .collection .project-meta{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
-html[data-theme="dark"] .collection .project-visual:not(:has(img)){background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-lavender))!important;border-color:#7e9db5}
-html[data-theme="dark"] .collection .project-visual .visual-brief,
-html[data-theme="dark"] .collection .project-visual .visual-label{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))!important}
-html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mix(in srgb,var(--palette-paper) 70%,var(--palette-blue))}
-@media(min-width:900px) and (max-width:1250px){
- .collection .projects-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:760px){
- .collection .projects-grid{grid-template-columns:1fr;gap:30px}
- .collection .project-visual .visual-brief{font-size:0.8125rem}
-}
-
 /* Active archive/playground card metadata: keep the arrow discoverable for
    keyboard focus; the reduced-motion guard above disables its transition. */
 .project-card .project-meta span:last-child{display:inline-block;transition:transform .4s var(--motion-ease)}
@@ -437,13 +365,11 @@ html[data-theme="dark"] .collection .project-visual .brief-kicker{color:color-mi
 
 /* Baseline dark surfaces and typography for shared cards.
    More specific collection / client-file rules above retain precedence. */
-html[data-theme="dark"] .project-card-link,html[data-theme="dark"] .collection{color:var(--ink)}
+html[data-theme="dark"] .project-card-link{color:var(--ink)}
 html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
 html[data-theme="dark"] .project-meta{color:#c6d5e2}
 html[data-theme="dark"] .project-card p{color:#d7e3ed}
 
-/* Archive navigation keeps a 44px hit area without a global mixed selector. */
-.feature-project-link,.collection-back{min-height:44px;display:inline-flex;align-items:center}
 /* Programmatic focus does not draw boxes around static archive headings.
    Actual links retain their visible :focus-visible rings. */
-.collection:focus,#work-title:focus,.collection-head h3:focus{outline:none!important;box-shadow:none!important}
+#work-title:focus{outline:none!important;box-shadow:none!important}
