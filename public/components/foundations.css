@@ -230,3 +230,52 @@ body {
   filter:none;
  }
 }
+
+/* DISPLAY HEADING INTERACTIONS
+   All heading fonts are assigned by their component's base styles.
+   The old legacy file repeated those font families and set the default font
+   variation twice. The browser's default is already "normal".
+
+   On hover or keyboard focus, Newsreader's WONK axis gives headings a playful
+   editorial feel. Visitors who request less motion get no transition.
+   Edit the shared timing here; edit heading sizes in their own component. */
+.hero h1,
+.section-head h2,
+.about h2,
+.collection-head h3,
+.project-card h3,
+.case-head h1,
+.case-prose h2 {
+  transition: font-variation-settings .38s ease, letter-spacing .38s ease;
+}
+
+@media (hover: hover) {
+  .hero h1:hover,
+  .section-head h2:hover,
+  .about h2:hover,
+  .collection-head h3:hover,
+  .project-card-link:hover h4,
+  .case-head h1:hover,
+  .case-prose h2:hover {
+    font-variation-settings: "SOFT" 75, "WONK" 1;
+  }
+}
+
+.hero h1:focus-within,
+.section-head h2:focus-within,
+.about h2:focus-within,
+.project-card-link:focus-visible h4 {
+  font-variation-settings: "SOFT" 75, "WONK" 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1,
+  .section-head h2,
+  .about h2,
+  .collection-head h3,
+  .project-card h3,
+  .case-head h1,
+  .case-prose h2 {
+    transition: none;
+  }
+}

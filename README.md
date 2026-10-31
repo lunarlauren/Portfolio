@@ -4,6 +4,10 @@ A lightweight portfolio of product UX, visual design, and illustration. The prod
 
 > **Developer handoff:** See [docs/HANDOFF.md](docs/HANDOFF.md) for the current file map, UX evidence boundaries, and validation checklist.
 
+## CSS typography ownership
+
+Shared heading hover/focus behavior and reduced-motion support live in `public/components/foundations.css` under **DISPLAY HEADING INTERACTIONS**. To change a heading's size, use its section's component stylesheet instead of adding an override to `public/styles.css`. The default Newsreader variation is already `normal`; do not add a duplicate baseline declaration. The `docs/HANDOFF.md` file remains the detailed editing guide.
+
 ## Source of truth
 
 - **Live site:** `https://portfolio.bertinoln.workers.dev/`
