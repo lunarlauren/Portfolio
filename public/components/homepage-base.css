@@ -89,6 +89,7 @@ html[data-theme="dark"] .primary-link:hover{background:#ffc0dc!important;color:#
 }
 @keyframes hero-enter{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
 @media(prefers-reduced-motion:reduce){
+ .primary-link:hover{transform:none}
  .hero-actions .primary-link span{transition:none!important}
  .reveal-ready{opacity:1!important;transform:none!important;transition:none!important}
  .hero .hero-portrait-art{translate:none!important}
