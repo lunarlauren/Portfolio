@@ -238,6 +238,35 @@ try{
   }
  }
 
+ // Guard the tablet breakpoints moved out of legacy styles.css. At 620px
+ // the 650px spacing must win over 760px defaults; at 900px the hero
+ // remains a single column with the original illustration minimum height.
+ for(const width of [620,900]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const layout=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const hero=getComputedStyle(document.querySelector(".hero"));
+    const feature=getComputedStyle(document.querySelector(".hero-feature"));
+    const actions=getComputedStyle(document.querySelector(".hero-actions"));
+    return {
+     paddingTop:hero.paddingTop,paddingBottom:hero.paddingBottom,
+     featureMinHeight:feature.minHeight,actionGap:actions.columnGap,
+     columns:hero.gridTemplateColumns
+    };
+   },theme);
+   if(width===620){
+    assert.equal(layout.paddingTop,"28px",`620px ${theme}: 650px hero top padding must win`);
+    assert.equal(layout.paddingBottom,"55px",`620px ${theme}: 650px hero bottom padding must win`);
+    assert.equal(layout.featureMinHeight,"320px",`620px ${theme}: portrait panel height must be retained`);
+    assert.equal(layout.actionGap,"14px",`620px ${theme}: CTA spacing must not regress to 760px gap`);
+   }else{
+    assert.equal(layout.featureMinHeight,"420px",`900px ${theme}: tablet portrait minimum height must remain`);
+    assert.equal(layout.columns.trim().split(/\s+/).length,1,`900px ${theme}: hero must use one column`);
+   }
+  }
+ }
+
  // Regression for the compact About composition: a 12ch max-width on the
  // heading once created unnecessary extra lines on phones. Measure the actual
  // rendered width and confirm the photo still sits with the introduction.

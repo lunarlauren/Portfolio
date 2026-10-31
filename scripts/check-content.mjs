@@ -105,6 +105,21 @@ assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual:n
 assert.doesNotMatch(css, /^\.project-visual:not\(:has\(img\)\)/m, 'Shared placeholder rules must not return to legacy CSS');
 assert.doesNotMatch(css, /\/\* Problem-solving hero: shared layout in both themes/, 'Extracted hero polish must not return to legacy CSS');
 assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must remain in its component');
+// The old responsive hero layout was consolidated into the finishing component.
+assert.doesNotMatch(css, /@media\(max-width:950px\)|@media\(max-width:650px\)|@media\(min-width:1024px\)/,
+ 'Legacy stylesheet must not own the hero tablet/desktop breakpoints');
+assert.doesNotMatch(css, /\.hero-feature:hover \.feature-art,\.primary-link:hover/,
+ 'Legacy stylesheet must not combine artwork and button motion guards');
+assert.match(heroPolishCss, /@media\(max-width:950px\)\{[\s\S]*?\.hero-feature\{min-height:420px\}/,
+ 'Hero component must retain the 950px single-column breakpoint');
+assert.match(heroPolishCss, /@media\(max-width:760px\)\{[\s\S]*?\.hero-actions\{gap:18px\}/,
+ 'Hero component must retain tablet spacing and action gap');
+assert.match(heroPolishCss, /@media\(max-width:650px\)\{[\s\S]*?\.hero-feature\{min-height:320px\}/,
+ 'Hero component must preserve the 650px fold and illustration height');
+assert.match(heroPolishCss, /\.hero \.feature-art\{height:100%;min-height:0\}/,
+ 'Desktop hero art must retain its original fill height');
+assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
+ 'Reduced-motion CTA hover must remain with homepage button styles');
 // The mobile layout visually places the portrait before the hero CTAs.
 // Keeping the portrait panel noninteractive prevents a mismatched tab order.
 const heroFeatureMarkup = html.match(/<div class="hero-feature" id="hero-feature">[\s\S]*?<\/div><\/section>/)?.[0];
@@ -749,7 +764,7 @@ assert.match(phoneHeroCss, /\.hero \.hero-actions\{[^}]*margin-top:26px/,
  'Mobile CTA needs a distinct gap after the introduction');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*width:auto;min-width:min\(100%,238px\)/,
  'Phone CTA should remain content-sized, not a full-width color bar');
-assert.match(html, /hero-polish\.css\?v=20261029-portrait-first/,
+assert.match(html, /hero-polish\.css\?v=[a-zA-Z0-9-]+/,
  'Homepage must load the updated hero stylesheet');
 
 assert.ok(workCss.includes('.work.wrap{padding-bottom:clamp(28px,7vw,44px)}'), 'Mobile work section needs a compact handoff');
