@@ -103,6 +103,12 @@ for (const name of stylesheetOrder) {
  previousPosition = match;
 }
 assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual:not/, 'Placeholder dark tokens must stay in the shared component');
+assert.doesNotMatch(visualPlaceholderCss, /\.project-visual:not\(:has\(img\)\) \.visual-label\{/, 'No nested border around illustrative briefs');
+assert.match(visualPlaceholderCss, /\.project-visual \.visual-brief\{[^}]*display:flex;/, 'Shared brief remains readable');
+assert.doesNotMatch(workCss, /\.project-visual \.visual-brief\{\s*box-shadow:none/, 'No unused Work brief shadow reset');
+assert.doesNotMatch(editorialCss, /\.project-visual:not\(:has\(img\)\) \*\{/, 'No redundant editorial placeholder descendant override');
+assert.doesNotMatch(stationeryCss, /\.work \.section-head\{margin-bottom:/, 'Work heading rhythm belongs to work-cards.css');
+
 assert.doesNotMatch(css, /^\.project-visual:not\(:has\(img\)\)/m, 'Shared placeholder rules must not return to legacy CSS');
 assert.doesNotMatch(css, /\/\* Problem-solving hero: shared layout in both themes/, 'Extracted hero polish must not return to legacy CSS');
 assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must remain in its component');

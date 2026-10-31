@@ -193,7 +193,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 
 
-
 /* Archive-first hierarchy: title before image; the editorial skin owns the card radius. */
 .work .featured-project.client-file .archive-project-title{
  margin:var(--space-1) 0 var(--space-3);
@@ -206,13 +205,9 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
  margin-bottom:4px;
  color:var(--muted);
 }
-.work .featured-project.client-file .project-visual .visual-brief{
- box-shadow:none;
-}
 .work .featured-project.client-file .project-meta{
  margin-top:var(--space-2);
 }
-
 
 
 /* Portfolio-first placeholder treatment. Until approved images are available,
@@ -228,15 +223,10 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
  max-width:54ch;
- margin:0;
- text-align:left;
+ gap:8px;
  font-size:0.75rem;
- line-height:1.5;
- letter-spacing:normal;
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .brief-kicker{
- display:block;
- margin-bottom:7px;
  font-size:0.625rem;
  line-height:1.3;
  letter-spacing:.09em;
@@ -247,7 +237,6 @@ html[data-theme="dark"] .project-card-process strong{color:color-mix(in srgb,var
   padding:var(--space-2);
  }
 }
-
 
 /* Archive action: carry the folder's client color through to its CTA.
    An underline remains for recognition without relying on color alone. */
