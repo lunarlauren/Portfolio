@@ -129,15 +129,15 @@
 .about .about-copy > .text-link{
  display:inline-flex;align-items:center;justify-content:space-between;gap:20px;
  width:fit-content;max-width:100%;box-sizing:border-box;
- padding:15px 20px;border:1px solid #f08cba;border-radius:12px;
- background:#f08cba;color:#172637;
+ padding:15px 20px;border:1px solid var(--ink);border-radius:12px;
+ background:var(--ink);color:var(--paper);
  font-weight:750;line-height:1.4;text-decoration:none;
- box-shadow:0 5px 0 #a83f73;
+ box-shadow:0 5px 0 var(--line);
  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
 }
 .about .about-copy > .text-link:hover{
- background:#ffa5cb;color:#172637;transform:translateY(-2px);
- box-shadow:0 7px 0 #a83f73;
+ background:var(--editorial-accent,var(--ink));color:var(--paper);transform:translateY(-2px);
+ box-shadow:0 7px 0 var(--line);
 }
 .about .about-copy > .text-link:focus-visible{
  outline:3px solid var(--focus);outline-offset:5px;
@@ -161,7 +161,7 @@
  clear:both;
  margin:clamp(28px,4vw,46px) 0 clamp(26px,3vw,36px);
  padding:clamp(20px,3vw,28px) 0 4px clamp(18px,2.5vw,26px);
- border-left:3px solid var(--palette-pink,#ed88b7);
+ border-left:3px solid var(--line);
 }
 .about .ai-process .eyebrow{
  margin:0 0 10px;font-size:.72rem;letter-spacing:.13em;
@@ -231,11 +231,11 @@
     border-radius: 9px;
     font-size: .9375rem;
     line-height: 1.35;
-    box-shadow: 0 3px 0 #a83f73;
+    box-shadow: 0 3px 0 var(--line);
     text-wrap: balance;
   }
   .about .about-copy > .text-link:hover {
-    box-shadow: 0 5px 0 #a83f73;
+    box-shadow: 0 5px 0 var(--line);
   }
 }
 
