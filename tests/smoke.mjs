@@ -136,6 +136,37 @@ try{
    }
   }
  }
+ // Resting colors are as important as hover: the previous dark CTA cascade
+ // needed !important to overcome an earlier, more specific homepage rule.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:800});
+  for(const theme of ["light","dark"]){
+   await page.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+   await page.mouse.move(0,0);
+   await page.waitForTimeout(300);
+   const colors=await page.evaluate(()=>{
+    const get=selector=>{
+     const css=getComputedStyle(document.querySelector(selector));
+     return {background:css.backgroundColor,ink:css.color};
+    };
+    return {hero:get(".hero-actions .primary-link"),
+     about:get(".about .about-copy > .text-link"),
+     contact:get(".site-header .header-contact")};
+   });
+   const expected=theme==="dark"
+    ?{background:"rgb(241, 240, 236)",ink:"rgb(21, 21, 21)"}
+    :{background:"rgb(23, 23, 23)",ink:"rgb(245, 243, 239)"};
+   assert.deepEqual(colors.hero,expected,`${width}px ${theme}: resting hero CTA`);
+   assert.deepEqual(colors.about,expected,`${width}px ${theme}: resting About CTA`);
+   if(width===390){
+    assert.equal(colors.contact.background,"rgba(0, 0, 0, 0)",
+     `${theme}: phone Contact stays text-only`);
+    assert.equal(colors.contact.ink,theme==="dark"?"rgb(241, 240, 236)":"rgb(23, 23, 23)",
+     `${theme}: phone Contact ink is readable`);
+   }else assert.deepEqual(colors.contact,expected,
+    `${theme}: desktop Contact remains filled`);
+  }
+ }
  await page.setViewportSize({width:1280,height:720});
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
