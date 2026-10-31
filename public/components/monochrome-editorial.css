@@ -32,10 +32,9 @@ html:not([data-theme="dark"]) .notebook-project-index .featured-project{
  background:var(--paper);border:1px solid var(--line);box-shadow:none;border-radius:3px;
 }
 .featured-project .project-visual{overflow:hidden;border-radius:2px;background:#d8d6d2}
-.project-visual img,.project-card img,.play-grid img,.about-portrait img{
- filter:grayscale(1);transition:filter .45s ease,transform .45s ease;
-}
-:is(.featured-project,.project-card,.play-grid > *):is(:hover,:focus-within) img,
+/* Client work stays in color; About portrait retains its reveal and card lift remains animated. */
+.project-visual img,.project-card img,.play-grid img{transition:transform .45s ease}
+.about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
 .featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500}
 .primary-link,.header-contact{background:var(--ink)!important;color:var(--paper)!important;border-color:var(--ink)!important}
@@ -66,16 +65,9 @@ html[data-theme="dark"] .text-link:is(:hover,:focus-visible){color:#a6d9ff!impor
 .case-highlight{border-left-color:var(--line)}
 .case-process-note{background:var(--surface-blush);border-left-color:var(--line)}
 .case-gallery .project-visual{background:var(--surface-blush);border-radius:2px}
-.case-gallery img,.case-view .project-visual img{
- filter:grayscale(1);transition:filter .45s ease;
-}
-.case-gallery :is(a,figure,.project-visual):is(:hover,:focus-within) img,
-.case-view .project-visual:is(:hover,:focus-within) img{filter:none}
-
-/* Show the portrait in full color on touch devices too. */
+/* The decorative hero portrait must not require hover to reveal color. */
 @media(hover:none){
- .hero .feature-art .hero-portrait-art,
- .case-gallery img,.case-view .project-visual img{filter:none}
+ .hero .feature-art .hero-portrait-art{filter:none}
 }
 /* Keep dark-mode interactions legible on dark surfaces. */
 html[data-theme="dark"]{
@@ -84,32 +76,6 @@ html[data-theme="dark"]{
 html[data-theme="dark"] .primary-link:is(:hover,:focus-visible),
 html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
  background:#a6d9ff!important;color:#111!important;border-color:#a6d9ff!important
-}
-@media(prefers-reduced-motion:reduce){
- .case-gallery img,.case-view .project-visual img{transition:none!important}
-}
-
-/* CONTRAST SAFETY: archive cards can have their own light surface even when
-   the surrounding page is dark. Never inherit white text onto light cards. */
-.work .featured-project.client-file,
-.work .notebook-project-index .featured-project,
-html[data-theme="dark"] .work .featured-project.client-file{
- --archive-surface:var(--paper);
- --archive-ink:var(--ink);
- --archive-muted:var(--muted);
- --archive-facts-edge:var(--line);
- --archive-focus-edge:var(--focus);
- background:var(--paper)!important;
- color:var(--ink)!important;
- border-color:var(--line)!important;
-}
-.work .featured-project.client-file :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title),
-.work .notebook-project-index .featured-project :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title){
- color:var(--ink)!important;
-}
-.work .featured-project.client-file :is(.eyebrow,.project-card-facts dt,.project-card-summary-label),
-.work .notebook-project-index .featured-project :is(.eyebrow,.project-card-facts dt,.project-card-summary-label){
- color:var(--muted)!important;
 }
 /* The illustrative placeholder is a separate readable surface. */
 .work .featured-project .project-visual:not(:has(img)),
@@ -142,13 +108,6 @@ html[data-theme="dark"] .work .featured-project.client-file{
 .work .featured-project.client-file .client-file-label{
  background:var(--file-accent);
 }
-/* Placeholder previews are documentation, not real screenshots.
-   Use a neutral, high-contrast paper surface; accents stay in the file tab. */
-.work .featured-project .project-visual:not(:has(img)),
-.work .featured-project .visual-placeholder{
- background:var(--surface-blush)!important;
-}
-
 /* EDITORIAL SYSTEM — neutral surfaces everywhere except branded project media.
    The restrained glass treatment adds depth without reducing text contrast. */
 :root{
@@ -166,9 +125,13 @@ html[data-theme="dark"]{
 .work .featured-project.client-file,
 .work .notebook-project-index .featured-project,
 html[data-theme="dark"] .work .featured-project.client-file{
+ /* Single archive surface; preserve readable facts and keyboard focus tokens. */
  --archive-surface:var(--editorial-card);
  --archive-ink:var(--ink);
  --archive-muted:var(--muted);
+ --archive-facts-edge:var(--line);
+ --archive-focus-edge:var(--focus);
+ color:var(--ink)!important;
  position:relative;
  isolation:isolate;
  background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%),linear-gradient(155deg,var(--editorial-card),var(--editorial-card))!important;
@@ -225,7 +188,6 @@ html[data-theme="dark"] .work .featured-project.client-file{
  --site-chrome-edge:#c8c5c0;
  --notebook-paper:#f5f3ef;
  --notebook-dot-color:rgba(40,40,40,.14);
- --notebook-pink:#555;
 }
 html[data-theme="dark"]{
  --site-chrome-bg:#151515;
@@ -233,11 +195,8 @@ html[data-theme="dark"]{
  --notebook-paper:#151515;
  --notebook-dot-color:rgba(245,245,245,.14);
 }
-html:not([data-theme="dark"]) body{
- background-color:var(--paper);
- background-image:radial-gradient(circle,var(--notebook-dot-color) 1px,transparent 1.4px);
-}
-html[data-theme="dark"] body{
+/* Theme tokens supply the dots' contrast; the geometry is shared. */
+body{
  background-color:var(--paper);
  background-image:radial-gradient(circle,var(--notebook-dot-color) 1px,transparent 1.4px);
 }
