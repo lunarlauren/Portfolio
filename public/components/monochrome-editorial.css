@@ -106,15 +106,8 @@ html[data-theme="dark"] .header-contact:is(:hover,:focus-visible){
 .work :is(.featured-project.client-file,.notebook-project-index .featured-project):is(:hover,:focus-within){
  box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 22px -8px color-mix(in srgb,var(--file-accent,var(--line)) 38%,transparent),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
 }
-.work :is(.featured-project.client-file,.notebook-project-index .featured-project) :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title){
- color:var(--ink)!important;
-}
-.work .featured-project.client-file .client-file-label{
- color:#151515!important;
-}
-.work :is(.featured-project.client-file,.notebook-project-index .featured-project) :is(.eyebrow,.project-card-facts dt,.project-card-summary-label){
- color:var(--muted)!important;
-}
+/* Semantic Work copy, client CTA ink and tab labels own their colors.
+   Avoid descendant-wide !important rules that flatten meaningful hierarchy. */
 /* Featured image frames are tactile but do not tint the actual projects. */
 .work .featured-project .project-visual{
  border:1px solid var(--editorial-card-edge);
