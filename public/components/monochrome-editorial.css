@@ -171,7 +171,7 @@ html[data-theme="dark"] .work .featured-project.client-file{
  --archive-muted:var(--muted);
  position:relative;
  isolation:isolate;
- background:var(--editorial-card)!important;
+ background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%),linear-gradient(155deg,var(--editorial-card),var(--editorial-card))!important;
  border:1px solid var(--editorial-card-edge)!important;
  border-top:2px solid var(--file-accent,var(--editorial-card-edge))!important;
  border-radius:12px;
@@ -186,7 +186,7 @@ html[data-theme="dark"] .work .featured-project.client-file{
 }
 .work .featured-project.client-file:is(:hover,:focus-within),
 .work .notebook-project-index .featured-project:is(:hover,:focus-within){
- box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
+ box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 22px -8px color-mix(in srgb,var(--file-accent,var(--line)) 38%,transparent),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
 }
 .work .featured-project.client-file :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title),
 .work .notebook-project-index .featured-project :is(h2,h3,h4,p,dt,dd,span,.project-card-process,.project-card-facts,.project-card-summary-label,.project-card-cta,.client-file-label,.archive-project-title){
