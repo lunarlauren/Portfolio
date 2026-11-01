@@ -290,7 +290,23 @@ try{
        labelBackground:getComputedStyle(label).backgroundColor
       };
      });
+    // A synthetic missing-image Work card stays testable even after real art arrives.
+    const probe=document.createElement("div");
+    probe.className="featured-project client-file";
+    probe.innerHTML='<div class="project-visual"><div class="visual-brief"><span class="brief-kicker">ILLUSTRATIVE BRIEF</span><span>Image needed</span></div></div>';
+    grid.append(probe);
+    const frame=probe.querySelector(".project-visual");
+    const brief=probe.querySelector(".visual-brief");
+    const kicker=probe.querySelector(".brief-kicker");
+    const placeholder={
+     surface:getComputedStyle(frame).backgroundColor,
+     borderStyle:getComputedStyle(frame).borderTopStyle,
+     briefContrast:contrast(getComputedStyle(brief).color,getComputedStyle(frame).backgroundColor),
+     kickerContrast:contrast(getComputedStyle(kicker).color,getComputedStyle(frame).backgroundColor)
+    };
+    probe.remove();
     return {
+     placeholder,
      visualPosition:visual?getComputedStyle(visual).position:null,
      visualOverflow:visual?getComputedStyle(visual).overflow:null,
      metaDisplay:meta?getComputedStyle(meta).display:null,
@@ -307,6 +323,12 @@ try{
     };
    },theme);
    assert.equal(archive.found,true,"Work archive and documented process teaser must render");
+   assert.equal(archive.placeholder.surface,theme==="dark"?"rgb(36, 36, 36)":"rgb(238, 236, 232)",
+    width+"px "+theme+": Work placeholder must use neutral editorial paper");
+   assert.equal(archive.placeholder.borderStyle,"dashed",
+    width+"px "+theme+": missing Work imagery must retain its dashed frame");
+   assert.ok(archive.placeholder.briefContrast>=4.5&&archive.placeholder.kickerContrast>=4.5,
+    width+"px "+theme+": placeholder brief and disclosure must meet 4.5:1 contrast");
    assert.equal(archive.columns,width<=760?1:2,"Work archive columns must match viewport width");
    assert.notEqual(archive.surface,"rgba(0, 0, 0, 0)","Archive card must have a solid surface");
    assert.equal(archive.approachVisible,true,"Documented design approach teaser must remain visible");

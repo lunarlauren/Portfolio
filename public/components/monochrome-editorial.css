@@ -50,16 +50,6 @@ html[data-theme="dark"]{
 @media(hover:none){
  .hero .feature-art .hero-portrait-art{filter:none}
 }
-/* The illustrative placeholder is a separate readable surface. */
-.work .featured-project .project-visual:not(:has(img)){
- --placeholder-surface:var(--surface-blush);
- --placeholder-text:var(--ink);
- --placeholder-edge:var(--line);
- background:var(--placeholder-surface)!important;
- color:var(--placeholder-text)!important;
- border-color:var(--placeholder-edge)!important;
-}
-
 /* Project imagery has no grayscale rules; only the hero/About portraits reveal color.
    Do not add image-filter resets that mask the owning component's styles. */
 /* Client accents remain in work-cards.css; the archive skin below owns the border. */

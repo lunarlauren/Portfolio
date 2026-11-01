@@ -16,17 +16,14 @@
  line-height:1.5;
 }
 @media(max-width:760px){.brief-kicker{letter-spacing:.08em}}
-/* Dark-mode labels use a brighter ink; individual sections may refine it. */
-html[data-theme="dark"] :is(.visual-label,.visual-brief,.brief-kicker){
- color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));
-}
-
 /* Placeholder briefs are editorial notes, never simulated product screenshots.
-   Local client-file and Playground colors can override these without !important. */
+   Work supplies neutral tokens; Playground retains its scoped night contrast. */
+/* Shared dark media fallback, including real images while loading.
+   The no-image rules below override it with their scoped surface tokens. */
+html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
 .project-visual:not(:has(img)){
  --placeholder-surface:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
  --placeholder-edge:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
- --placeholder-text:#42647a;
  display:flex;align-items:center;justify-content:center;
  padding:clamp(18px,3vw,30px);
  background:var(--placeholder-surface);border:2px dashed var(--placeholder-edge);
@@ -34,8 +31,9 @@ html[data-theme="dark"] :is(.visual-label,.visual-brief,.brief-kicker){
 html[data-theme="dark"] .project-visual:not(:has(img)){
  --placeholder-surface:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  --placeholder-edge:#496074;
- --placeholder-text:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
- background:var(--placeholder-surface);border-color:var(--placeholder-edge);
+ /* Explicit paint wins over the equally specific dark media fallback above. */
+ background:var(--placeholder-surface);
+ border-color:var(--placeholder-edge);
 }
 /* The renderer's .visual-label.visual-brief is already inside the dashed frame. */
 .project-visual .visual-brief{
@@ -45,8 +43,15 @@ html[data-theme="dark"] .project-visual:not(:has(img)){
  font-size:clamp(0.75rem,1.15vw,0.9375rem);line-height:1.5;
  font-weight:500;text-align:left;
 }
-html[data-theme="dark"] .project-visual .visual-brief{
- color:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));
-}
+/* In dark mode --palette-paper is charcoal, not light text.
+   Use theme ink for both the brief and its illustrative disclosure. */
+html[data-theme="dark"] :is(.visual-label,.visual-brief,.brief-kicker){color:var(--ink)}
 @media(max-width:760px){.project-visual .visual-brief{font-size:0.8125rem}}
+/* Work's missing-image briefs use the editorial paper, not a tinted mockup.
+   The base background and border already consume these two scoped tokens. */
+.work .featured-project .project-visual:not(:has(img)){
+ --placeholder-surface:var(--surface-blush);
+ --placeholder-edge:var(--line);
+ color:var(--ink);
+}
 @media(prefers-contrast:more){.project-visual:not(:has(img)){border-style:solid}}
