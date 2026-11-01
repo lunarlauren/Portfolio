@@ -743,10 +743,14 @@ try{
     return {evidenceCols:evidence.gridTemplateColumns.trim().split(/\s+/).length,
      galleryCols:gallery.gridTemplateColumns.trim().split(/\s+/).length,
      evidenceGap:evidence.gap,galleryGap:gallery.gap,
-     surface:getComputedStyle(document.querySelector(".case-evidence-item")).backgroundColor};
+     surface:getComputedStyle(document.querySelector(".case-evidence-item")).backgroundColor,
+     heroBorder:getComputedStyle(document.querySelector(".case-hero-visual:not(:has(img))")).borderTopStyle,
+     heroBriefSize:parseFloat(getComputedStyle(document.querySelector(".case-hero-visual .hero-image-brief")).fontSize)};
    },theme);
    assert.equal(metrics.evidenceCols,width===390?1:3,theme+": evidence columns at "+width+"px");
    assert.equal(metrics.galleryCols,width===390?1:2,theme+": gallery columns at "+width+"px");
+   assert.equal(metrics.heroBorder,"dashed",theme+": missing hero must retain dashed border at "+width+"px");
+   assert.ok(metrics.heroBriefSize>=16&&metrics.heroBriefSize<=20,theme+": visual brief must stay caption-sized at "+width+"px");
    samples.push(metrics);
   }
   assert.equal(samples[0].evidenceGap,samples[1].evidenceGap,"Evidence spacing must not shift with theme");
