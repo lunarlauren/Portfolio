@@ -908,9 +908,9 @@ assert.equal(secondChapterButton.getAttribute('aria-current'), null, 'Only one c
 
 // Pass 6: production stylesheet ownership and duplicate-rule guardrails.
  // Effective evidence and gallery spacing belongs to the scoped component.
- const evidenceBase=caseCss.match(/(?:^|\n)\.case-evidence\{([^}]*)\}/)?.[1];
- assert.ok(evidenceBase,'Evidence grid retains structural desktop columns');
- assert.doesNotMatch(evidenceBase,/\bgap\s*:/,'Evidence gap must not have competing base rule');
+ assert.doesNotMatch(caseCss,/(?:^|\n)\.case-evidence\{/,'Unscoped evidence grid must not compete with its component owner');
+ assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/,'Evidence grid retains three desktop columns in its component owner');
+ assert.match(caseCss,/@media\(max-width:760px\)\{\.case-view \.case-evidence\{grid-template-columns:1fr\}\}/,'Evidence grid must stack on phones');
  assert.doesNotMatch(caseBaseCss,/\.case-intro\s*\{/,'Case intro belongs to scoped cover');
  assert.doesNotMatch(caseBaseCss,/\.case-gallery\s*\{[^}]*\bgap\s*:/,'Gallery gap belongs to scoped component');
  assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*gap:var\(--space-3,1rem\)/,'Evidence gap retains token');
@@ -993,8 +993,11 @@ assert.equal(provenanceFor('APPROVED / Actual shipped screen'), '');
 assert.ok(script.includes('illustrativeImageStatus(p.imageBrief)'), 'Archive/gallery images must retain illustrative status');
 assert.ok(caseStudy.includes('illustrativeImageStatus(p.imageBrief)'), 'Case-study hero images must retain illustrative status');
 assert.match(caseCss, /\.case-hero-visual > \.visual-image-status/, 'Illustrative hero label must have visible styling');
-assert.match(caseCss, /--case-hero-placeholder-bg:/, 'Case-study component owns no-image hero surface tokens');
-assert.match(caseCss, /html\[data-theme="dark"\] \.case-view \.case-hero-visual:not\(:has\(img\)\)/, 'Dark case hero needs its own placeholder surface');
+assert.match(caseCss, /\.case-view \.case-hero-visual:not\(:has\(img\)\)\{[^}]*background:color-mix\([^}]*border:2px dashed color-mix\(/, 'No-image case hero retains its light dashed frame');
+assert.match(caseCss, /html\[data-theme="dark"\] \.case-view \.case-hero-visual\{[^}]*background:color-mix\([^}]*border-color:#496074/, 'Shared dark hero paint must remain visible for no-image briefs');
+assert.doesNotMatch(caseCss, /--case-hero-placeholder-(?:bg|border):/, 'Unused hero placeholder token overrides must stay retired');
+assert.equal((caseCss.match(/\.case-view \.case-hero-visual:not\(:has\(img\)\) \.hero-image-brief\{/g)||[]).length,1,'Hero brief typography has one authoritative rule');
+assert.doesNotMatch(caseCss,/\.case-gallery \.project-visual\{min-height:220px\}/,'Superseded phone gallery height must stay retired');
 assert.doesNotMatch(css, /\.case-hero-visual:not\(:has\(img\)\)/, 'Legacy CSS must not own case hero placeholders');
 assert.doesNotMatch(css, /\.case-process-note\s*\{/, 'Case-study process notes must be component-owned');
 assert.match(caseCss, /\.case-fact\{[^}]*border-left:2px solid var\(--line\)/, 'Case-study facts own the neutral editorial rule');
