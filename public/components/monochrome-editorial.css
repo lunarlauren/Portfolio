@@ -52,31 +52,8 @@ html[data-theme="dark"]{
 }
 /* Project imagery has no grayscale rules; only the hero/About portraits reveal color.
    Do not add image-filter resets that mask the owning component's styles. */
-/* Client accents remain in work-cards.css; the archive skin below owns the border. */
-/* EDITORIAL SYSTEM — neutral surfaces everywhere except branded project media.
-   The restrained glass treatment adds depth without reducing text contrast. */
-.work .featured-project.client-file{
- /* Single archive surface; divider/focus colors inherit --line/--focus. */
- color:var(--ink)!important;
- position:relative;
- isolation:isolate;
- background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%)!important;
- /* The gradient is a background image; give computed background-color an opaque base. */
- background-color:var(--editorial-card)!important;
- border:1px solid var(--editorial-card-edge)!important;
- border-top:2px solid var(--file-accent,var(--editorial-card-edge))!important;
- border-radius:12px;
- box-shadow:0 12px 32px -22px var(--editorial-card-shadow),inset 0 1px 0 var(--editorial-card-glow);
- transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
-}
-/* A glossy highlight sits behind content, never above it. */
-.work .featured-project.client-file::after{
- content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
- background:linear-gradient(145deg,rgba(255,255,255,.11),transparent 43%);
-}
-.work .featured-project.client-file:is(:hover,:focus-within){
- box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 22px -8px color-mix(in srgb,var(--file-accent,var(--line)) 38%,transparent),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
-}
+/* Archive glass paint and motion now live in work-cards.css.
+   This layer retains theme tokens and shared image-frame treatment. */
 /* Semantic Work copy, client CTA ink and tab labels own their colors.
    Avoid descendant-wide !important rules that flatten meaningful hierarchy. */
 /* Featured image frames are tactile but do not tint the actual projects. */
@@ -87,11 +64,3 @@ html[data-theme="dark"]{
 .work .featured-project .project-visual:has(img){background:transparent}
 /* Align neutral site sections and controls without erasing project colors. */
 .playground .play-grid .project-card-link{border-color:#666}
-/* No archive lift animation on touch or when motion is reduced. */
-@media(hover:none),(prefers-reduced-motion:reduce){
- .work .featured-project.client-file{transition:none}
-}
-
-@media(prefers-contrast:more){
- .work .featured-project.client-file{box-shadow:none!important;border-width:2px!important}
-}

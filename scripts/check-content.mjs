@@ -103,6 +103,10 @@ for (const name of stylesheetOrder) {
  previousPosition = match;
 }
 assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual:not/, 'Placeholder dark tokens must stay in the shared component');
+assert.match(visualPlaceholderCss, /background:var\(--placeholder-surface,color-mix\(/,
+ 'Dark fallback must consume the same surface token as no-image briefs');
+assert.doesNotMatch(visualPlaceholderCss, /\/\* Explicit paint wins over the equally specific/,
+ 'No duplicate dark background or border override');
 assert.match(visualPlaceholderCss, /\.work \.featured-project \.project-visual:not\(:has\(img\)\)\{[^}]*--placeholder-surface:var\(--surface-blush\)/,
  'Archive placeholder tokens belong to the shared visual component');
 assert.doesNotMatch(editorialCss, /\.work \.featured-project \.project-visual:not\(:has\(img\)\)/,
@@ -804,12 +808,12 @@ assert.ok(caseStudy.includes('const heading=caseJumpTargets.get(button.dataset.c
 assert.ok(caseStudy.includes('const caseJumpHeadings=[...caseJumpTargets.values()]'), 'Reading-progress tracking must reuse chapter targets');
 assert.ok(!caseStudy.includes('const heading=document.getElementById(button.dataset.caseJump)'), 'Avoid duplicate chapter DOM lookups');
 
-// Archive surface is applied last by the editorial skin, with opaque
-// light/dark colors; Work only owns the preview and card geometry.
+// Editorial defines opaque theme tokens; Work consumes them to paint the
+// folder surface without a second competing late-stage override.
 assert.match(editorialCss, /--editorial-card:#f7f6f3/, 'Light archive surface needs an opaque token');
 assert.match(editorialCss, /--editorial-card:#252525/, 'Dark archive surface needs an opaque token');
-assert.match(editorialCss, /background-color:var\(--editorial-card\)!important/, 'Archive card must paint an opaque base');
-assert.match(editorialCss, /border:1px solid var\(--editorial-card-edge\)!important/, 'Archive card edge belongs to editorial skin');
+assert.match(workCss, /background-color:var\(--editorial-card\)/, 'Archive card must paint an opaque base');
+assert.match(workCss, /border:1px solid var\(--editorial-card-edge\)/, 'Archive card edge belongs to Work');
 assert.doesNotMatch(workCss, /border:1px solid var\(--archive-edge\)!important/, 'Retired archive border must not return');
 assert.match(workCss, /color:var\(--file-cta-ink,var\(--file-accent\)\)/, 'Archive CTA must use a shared theme color');
 
@@ -979,15 +983,18 @@ assert.doesNotMatch(css, /\.case-hero-visual:not\(:has\(img\)\)/, 'Legacy CSS mu
 assert.doesNotMatch(css, /\.case-process-note\s*\{/, 'Case-study process notes must be component-owned');
 
 
-// Archive skin selector ownership: the client folder and notebook index
-// share identical surfaces in both themes. Preserve the two branches inside
-// :is() without reintroducing redundant dark-only specificity.
-assert.match(editorialCss, /\.work \.featured-project\.client-file\{/,
- 'Archive skin must target the rendered client-file cards');
-assert.match(editorialCss, /\.work \.featured-project\.client-file::after\{/,
- 'Archive gloss must target the same rendered client-file cards');
-assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.work \.featured-project\.client-file\{/,
- 'Do not restore a redundant dark-only archive surface override');
+// Archive glass surface, gloss and motion have one component owner.
+// Editorial retains theme tokens and shared image-frame treatment.
+assert.match(workCss, /\.work \.featured-project\.client-file\{/,
+ 'Work owns the archive surface');
+assert.match(workCss, /\.work \.featured-project\.client-file::after\{/,
+ 'Work owns the archive gloss');
+assert.match(workCss, /background-color:var\(--editorial-card\)/,
+ 'Work surface consumes the editorial theme token');
+assert.doesNotMatch(editorialCss, /\.work \.featured-project\.client-file\{/,
+ 'Editorial must not reintroduce competing archive paint');
+assert.doesNotMatch(workCss, /background-color:var\(--editorial-card\)!important/,
+ 'Component-owned archive paint must not need important overrides');
 assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var\(--file-accent\)/,
  'Work card component must own the client tab background');
 
