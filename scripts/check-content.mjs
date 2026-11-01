@@ -562,7 +562,7 @@ assert.match(projectContent, /<dd class="case-fact-value"/, 'Fact values should 
 assert.match(caseCss, /\.case-view \.case-facts\s*\{/, 'Case facts must have scoped layout styles');
 assert.match(caseCss, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Case facts should have a narrow-screen two-column layout');
 assert.match(caseCss, /@media\(max-width:480px\)\{\s*\.case-view \.case-facts\{\s*grid-template-columns:minmax\(0,1fr\)/, 'Phone case facts must switch to one readable column');
-assert.match(caseCss, /\.case-view \.case-process-note\{\s*border-radius:0/, 'Evidence notes should have intentional square stationery edges');
+assert.match(caseCss, /\.case-process-note\{[^}]*border-radius:0/, 'Evidence notes should have intentional square stationery edges');
 
 for (const id of ['main', 'work', 'playground', 'about']) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `Missing #${id} navigation target`);
@@ -997,6 +997,11 @@ assert.match(caseCss, /--case-hero-placeholder-bg:/, 'Case-study component owns 
 assert.match(caseCss, /html\[data-theme="dark"\] \.case-view \.case-hero-visual:not\(:has\(img\)\)/, 'Dark case hero needs its own placeholder surface');
 assert.doesNotMatch(css, /\.case-hero-visual:not\(:has\(img\)\)/, 'Legacy CSS must not own case hero placeholders');
 assert.doesNotMatch(css, /\.case-process-note\s*\{/, 'Case-study process notes must be component-owned');
+assert.match(caseCss, /\.case-fact\{[^}]*border-left:2px solid var\(--line\)/, 'Case-study facts own the neutral editorial rule');
+assert.match(caseCss, /\.case-highlight\{[^}]*border-left:3px solid var\(--line\)/, 'Case-study highlights own the neutral editorial rule');
+assert.match(caseCss, /\.case-gallery \.project-visual\{[^}]*background:var\(--surface-blush\);border-radius:2px/, 'Gallery frame paint belongs to case-study.css');
+assert.doesNotMatch(caseBaseCss, /\.case-gallery \.project-visual\s*\{/, 'Gallery frame sizing has one component owner');
+assert.doesNotMatch(editorialCss, /\.(?:case-fact|case-fact-label|case-highlight|case-highlights|case-process-note|case-gallery)\b[^\n]*\{/, 'Editorial skin must not override case-study annotation paint');
 
 
 // Archive glass surface, gloss and motion have one component owner.

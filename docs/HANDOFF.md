@@ -334,3 +334,7 @@ The legacy `public/styles.css` remains an inactive compatibility stub. `case-stu
 ### 2026-11-01 — Case-study chapter controls and dark hover contrast
 
 `case-study.css` now groups chapter button geometry, focus, selected-state paint and motion instead of overriding them later. The `--case-chapter-hover` token preserves the light paper tint and uses dark paper in night mode to keep light text readable. The 44px target, horizontal phone strip, forced-colors focus ring, sticky offsets and evidence-first content remain unchanged. Source checks and Chromium hover-contrast assertions cover 390px/1280px in both themes. Screenshot parity and deployment are unverified. Mobile Insights remains shipped.
+
+### 2026-11-01 — Case-study annotation and gallery ownership
+
+The inactive `public/styles.css` stub has no rules to retire. `case-study.css` now owns neutral fact/highlight rules, square process-note surfaces, gallery frame sizing/paint, and case-view text ink; `monochrome-editorial.css` supplies theme tokens only. Removed redundant late editorial overrides and combined repeated facts typography and note-radius declarations. Evidence/rationale note kinds retain distinct border accents and visible provenance kickers; dark-specific note surfaces, approved imagery, responsive columns and shipped Mobile Insights copy are unchanged. Run source checks and Chromium in both themes before merging. Passing CI does not establish screenshot parity or production deployment.

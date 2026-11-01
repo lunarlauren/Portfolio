@@ -5,9 +5,9 @@
  .case-gallery .project-visual{min-height:220px}
  .case-view{padding-bottom:70px}
 }
-.case-facts{display:flex;flex-direction:column;gap:24px;line-height:1.4;letter-spacing:normal}
-.case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--brand-pink)}
-.case-fact-label{display:block;color:#7a6070;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase}
+.case-facts{display:flex;flex-direction:column;gap:24px;line-height:1.4;letter-spacing:normal;font-size:var(--type-xs)}
+.case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--line)}
+.case-fact-label{display:block;color:var(--muted);font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.15em;line-height:1.5;text-transform:uppercase}
 .case-fact-value{display:block;color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;letter-spacing:0}
 .case-next-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-block:32px 48px}
 .case-next-nav .case-next{text-decoration:none}
@@ -19,7 +19,7 @@
  .case-next-nav .case-next:last-child:not(:first-child){margin-left:0;text-align:left}
 }
 .case-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,3vw,32px);margin:clamp(24px,4vw,44px) 0;padding:clamp(18px,2.8vw,30px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.case-highlight{min-width:0;padding-left:clamp(12px,1.7vw,20px);border-left:3px solid var(--palette-pink)}
+.case-highlight{min-width:0;padding-left:clamp(12px,1.7vw,20px);border-left:3px solid var(--line)}
 .case-highlight-label{display:block;font-size:0.6875rem;letter-spacing:.12em;font-weight:700;color:var(--muted);margin-bottom:9px}
 .case-highlight p{font-family:Newsreader,Georgia,serif;font-size:clamp(1.3125rem,2.3vw,1.875rem);line-height:1.2;letter-spacing:-.025em;margin:0;max-width:28ch;color:var(--ink)}
 @media(max-width:600px){
@@ -28,7 +28,7 @@
 }
 /* Evidence/rationale notes retain visible, text-based provenance labels. */
 .case-process-notes{display:grid;gap:14px;margin:22px 0 28px}
-.case-process-note{padding:clamp(16px,2vw,24px);border-left:3px solid var(--brand-pink);background:var(--surface-blush)}
+.case-process-note{padding:clamp(16px,2vw,24px);border-left:3px solid var(--line);background:var(--surface-blush);border-radius:0}
 .case-process-note h3{margin:0 0 8px;color:var(--ink)}
 .case-process-note p{margin:0}
 html[data-theme="dark"] .case-process-note{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-lavender))}
@@ -89,7 +89,6 @@ html[data-theme="dark"] .case-view .case-hero-visual:not(:has(img)){
 
 /* Evidence and tradeoff notes should resemble editorial annotations,
    not rounded dashboard alerts. Retain theme-specific surface colors. */
-.case-view .case-process-note{border-radius:0}
 /* Two kinds of editorial annotation: a dark rule marks the evidence
    boundary; the cover accent marks design reasoning. The visible headings
    carry the distinction even without color (including forced-colors mode). */
@@ -161,6 +160,7 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
 }
 .case-view .case-prose h2[id]{scroll-margin-top:154px}
 
+.case-gallery .project-visual{min-height:260px;background:var(--surface-blush);border-radius:2px}
 .case-gallery .project-visual:not(:has(img)){min-height:270px}
 
 /* Editorial briefs are useful context, but a missing image must not consume
@@ -215,6 +215,7 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
 /* Case-study typography, cover, evidence and reading tokens.
    Themes change colors, never geometry. */
 .case-view{
+ color:var(--ink);
  --case-type-title:clamp(42px,5.2vw,76px);
  --case-type-section:clamp(27px,2.65vw,40px);
  --case-type-lead:clamp(18px,1.55vw,22px);
@@ -456,8 +457,6 @@ html[data-theme="dark"] .case-view{
 
 /* Case-study typography and keyboard states belong here, not in styles.css.
    Keep dark-mode colors explicit for readable evidence and return links. */
-.case-facts{font-size:var(--type-xs)}
-.case-fact-label{line-height:1.5}
 .case-next-nav a,.case-back{min-height:44px;display:inline-flex;align-items:center}
 .case-next-nav a:focus-visible,.case-back:focus-visible{
  outline:3px solid var(--notebook-pink);outline-offset:4px;
