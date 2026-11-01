@@ -913,7 +913,11 @@ assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*padding:var\(--spa
 // Pass 5: keyboard focus, touch targets, and reduced-motion contracts.
 assert.match(navigationCss, /:focus-visible/, 'Header navigation must expose keyboard focus');
 assert.match(navigationCss, /@media\(forced-colors:active\)/, 'Focus must remain visible in forced-colors mode');
-assert.match(caseCss, /\.case-view \.case-section-links button\{\s*min-height:44px;/, 'Case chapter controls must meet the 44px touch target');
+assert.match(caseCss, /\.case-section-links button\{[^}]*min-height:44px;/, 'Shared case chapter controls must meet the 44px touch target');
+assert.match(caseCss, /\.case-view \.case-section-links button\{font-size:0\.75rem;padding:10px 12px\}/, 'Phone chapter padding must stay consolidated');
+assert.doesNotMatch(caseCss, /\.case-view \.case-section-links button\{\s*min-height:44px;/, 'Do not duplicate the shared chapter touch target');
+assert.equal((caseCss.match(/^\.case-view\{/gm) || []).length, 1, 'Case-study default tokens should have one owner');
+assert.equal((caseCss.match(/^html\[data-theme="dark"\] \.case-view\{/gm) || []).length, 1, 'Dark case-study tokens should have one owner');
 assert.match(caseCss, /\.case-view \.case-section-links button:focus-visible/, 'Case chapter controls must show focus');
 assert.match(stationeryCss, /@media\(prefers-reduced-motion:reduce\)/, 'Stationery interactions must honor reduced motion');
 assert.match(stationeryCss, /transition:none;/, 'Reduced motion must disable highlight transitions');
