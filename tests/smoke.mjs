@@ -306,6 +306,17 @@ try{
       const [hi,lo]=[luminance(a),luminance(b)].sort((x,y)=>y-x);
       return (hi+.05)/(lo+.05);
      };
+     const facts=card?.querySelector(".project-card-facts");
+     const cardOrder=link?[...link.children].map(node=>{
+      if(node.classList.contains("archive-project-title"))return "title";
+      if(node.classList.contains("project-meta"))return "meta";
+      if(node.querySelector(".project-card-summary-label"))return "challenge";
+      if(node.classList.contains("project-card-facts"))return "facts";
+      if(node.classList.contains("project-card-process"))return "approach";
+      if(node.classList.contains("project-visual"))return "visual";
+      return null;
+     }).filter(Boolean):[];
+     const factsColumns=facts?getComputedStyle(facts).gridTemplateColumns.trim().split(/\s+/).length:0;
      const clientInk=[...grid.querySelectorAll(".featured-project.client-file")].map(file=>{
       const label=file.querySelector(".client-file-label");
       const cta=file.querySelector(".project-card-cta");
@@ -336,7 +347,7 @@ try{
     };
     probe.remove();
     return {
-     placeholder,
+     placeholder,cardOrder,factsColumns,
      visualPosition:visual?getComputedStyle(visual).position:null,
      visualOverflow:visual?getComputedStyle(visual).overflow:null,
      metaDisplay:meta?getComputedStyle(meta).display:null,
@@ -353,6 +364,10 @@ try{
     };
    },theme);
    assert.equal(archive.found,true,"Work archive and documented process teaser must render");
+   assert.deepEqual(archive.cardOrder,["title","meta","challenge","facts","approach","visual"],
+    width+"px "+theme+": role, delivery and approach must precede project imagery");
+   assert.equal(archive.factsColumns,2,
+    width+"px "+theme+": role and delivery should scan in two columns");
    assert.equal(archive.placeholder.surface,theme==="dark"?"rgb(36, 36, 36)":"rgb(238, 236, 232)",
     width+"px "+theme+": Work placeholder must use neutral editorial paper");
    assert.equal(archive.placeholder.borderStyle,"dashed",
