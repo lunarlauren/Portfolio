@@ -847,6 +847,10 @@ assert.match(html, /hero-polish\.css\?v=[a-zA-Z0-9-]+/,
  'Homepage must load the updated hero stylesheet');
 
 assert.match(workCss,/\.work\.wrap\{[^}]*padding-bottom:clamp\(28px,7vw,44px\)/, 'Mobile work section needs a compact handoff');
+assert.match(script, /const preview=professional\?title:visual\(p\)/, 'Professional archive starts with its project title');
+assert.match(script, /\+process\+\(professional\?visual\(p\):''\)\+cta/, 'Professional media follows the reviewed approach');
+assert.match(workCss, /@media\(max-width:359px\)\{\.work \.project-card-facts\{grid-template-columns:minmax\(0,1fr\)\}\}/,
+ 'Only very narrow phones stack the role and delivery facts');
 assert.ok(navigationCss.includes('gap:clamp(8px,2.4vw,18px)'), 'Phone navigation spacing should remain intentional');
 assert.match(navigationCss, /grid-template-rows:44px 44px/, 'Phone header must use two rows');
 assert.match(navigationCss, /grid-row:1\/3/, 'Logo must span the two rows');
@@ -1031,8 +1035,10 @@ assert.doesNotMatch(editorialCss, /\.featured-projects-grid\{gap:|\.featured-pro
  'Work grid gap and title font belong to work-cards.css');
 assert.match(workCss, /\.featured-projects-grid\{display:grid;[^}]*gap:clamp\(18px,2\.5vw,34px\)/,
  'Work owns the effective tablet archive gap');
-assert.match(workCss, /\.featured-project \.project-card h3\{font-family:var\(--font-display,Georgia,serif\);font-weight:500;/,
- 'Work owns the effective project title font');
+assert.doesNotMatch(workCss, /\.featured-project \.project-card h3\{font-family:/,
+ 'Overridden generic Work title rule must not return');
+assert.match(workCss, /\.work \.featured-project\.client-file \.archive-project-title\{[^}]*font-weight:500;/,
+ 'Work archive title keeps its authored 500 weight in its single owner');
 assert.match(workCss, /\.project-card-link:is\(:hover,:focus-visible\) \.project-meta span:last-child\{transform:translate\(4px,-4px\)\}/,
  'Metadata arrow remains discoverable on keyboard focus');
 assert.match(workCss, /@media\(prefers-reduced-motion:reduce\)\{\s*\.project-card \.project-meta span:last-child\{transition:none\}/,
