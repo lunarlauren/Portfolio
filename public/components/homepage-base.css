@@ -13,12 +13,6 @@
  gap:20px;
  align-items:start;
 }
-.playground {border-top:1px solid var(--line)}
-.about {border-top:1px solid var(--line)}
-.about h2 {font-size:clamp(2.875rem,7vw,5.9375rem);max-width:950px}
-.about-bottom {justify-content:space-between;gap:40px}
-.about-bottom p {max-width:650px;line-height:1.7;font-size:1.125rem}
-footer {border-top:1px solid var(--line);padding-block:30px;display:flex;justify-content:space-between;font-size:0.8125rem}
 @keyframes rise {from {opacity:0;transform:translateY(16px)} to {opacity:1;transform:translateY(0)}}
 @media(max-width:760px) {.section-head,.about-bottom {display:block} .section-head>p {margin-top:20px} .projects-grid,.play-grid {grid-template-columns:1fr} }
 @media(max-width:400px) {.hero h1 {font-size:3rem} .round-link {width:50px;height:50px}}
@@ -42,7 +36,6 @@ html[data-theme="dark"] .quiet-link:is(:hover,:focus-visible){color:var(--editor
 .eyebrow-divider {margin-inline:10px;color:#8da6b5}
 .hero-feature {position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;padding:25px;border-radius:3px}
 .feature-art {position:absolute;inset:14% 0 12%;display:grid;place-items:center}
-.section-head h2 em {font-style:normal;color:var(--teal)}
 /* Pink editorial emphasis wins over the earlier neutral heading color. */
 .hero h1 em,.section-head h2 em,.about h2 em{color:var(--brand-pink-text)}
 
