@@ -80,10 +80,6 @@
    does not add an extra gap inside its flow-root portrait wrapper. */
 .about .about-intro p{margin-bottom:0}
 
-/* Phone About layout: use the available width for the heading; a fixed 12ch
-   measure forces extra lines even on normal phones. The headshot introduces
-   the biography while longer text wraps beneath it. All rules stay scoped. */
-
 /* About contact invitation: a clear, tactile action distinct from body copy. */
 .about .about-copy > .text-link{
  display:inline-flex;align-items:center;justify-content:space-between;gap:20px;
@@ -127,8 +123,6 @@
 .about .about-copy .ai-process p:not(.eyebrow){max-width:58ch}
 .about .ai-process p:last-child{margin-bottom:0}
 
-/* Compact laptop rhythm belongs to About, not the legacy global sheet. */
-
 /* One desktop introduction: biography flows naturally in one column while
    the portrait occupies the other. No implicit grid rows or display:contents. */
 @media (min-width: 901px) {
@@ -169,7 +163,9 @@
  .about.wrap{padding-block:clamp(52px,10vw,76px)}
 }
 
-/* Phone portrait, biography, CTA and AI note share one breakpoint. */
+/* Phone About layout: use the available width for the heading; a fixed 12ch
+   measure forces extra lines even on normal phones. The headshot introduces
+   the biography while longer text wraps beneath it. All rules stay scoped. */
 @media (max-width: 600px) {
   .about.wrap { padding-block: clamp(32px, 7vw, 46px); }
   .about h2 {
