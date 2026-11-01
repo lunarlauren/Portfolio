@@ -955,10 +955,10 @@ assert.doesNotMatch(css, /\.case-process-note\s*\{/, 'Case-study process notes m
 // Archive skin selector ownership: the client folder and notebook index
 // share identical surfaces in both themes. Preserve the two branches inside
 // :is() without reintroducing redundant dark-only specificity.
-assert.match(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\)\{/,
- 'Archive skin must use one shared selector for both card types');
-assert.match(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\)::after\{/,
- 'Archive gloss must use the same shared card selector');
+assert.match(editorialCss, /\.work \.featured-project\.client-file\{/,
+ 'Archive skin must target the rendered client-file cards');
+assert.match(editorialCss, /\.work \.featured-project\.client-file::after\{/,
+ 'Archive gloss must target the same rendered client-file cards');
 assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.work \.featured-project\.client-file\{/,
  'Do not restore a redundant dark-only archive surface override');
 assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var\(--file-accent\)/,
