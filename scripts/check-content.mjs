@@ -689,16 +689,18 @@ assert.ok(foundationsCss.includes('::view-transition-old(selected-company)'),
  'Foundations must retain the shared route transition');
 assert.ok(caseCss.includes('@keyframes detail-reveal') && caseCss.includes('.case-view:not([hidden]) .case-head{animation:detail-reveal'),
  'Case-study must own its entrance animation');
-assert.ok(playgroundCss.includes('.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)'),
- 'Playground must own its preview hover');
-assert.doesNotMatch(playgroundCss, /\.project-card-link:hover \.project-visual\{[^}]*box-shadow:/,
- 'Night preview hover must not restore the conflicting shadow');
+assert.ok(workCss.includes('.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)'),
+ 'Shared card owner must retain the Playground preview hover');
+assert.ok(workCss.includes('.play-grid .project-card-link:focus-visible .project-visual{transform:translateY(-5px)'),
+ 'Keyboard focus must expose the same Playground preview affordance');
+assert.doesNotMatch(playgroundCss, /\.play-grid \.project-card-link(?::hover)? \.project-visual\{(?:transition|transform):/,
+ 'Playground must not duplicate shared preview motion');
 assert.doesNotMatch(workCss, /\.project-card-link\{transition:none!important\}/,
  'Do not restore the unused link transition reset');
 assert.ok(caseCss.includes('.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}'),
  'Case-study reduced-motion override must remain');
-assert.ok(playgroundCss.includes('.play-grid .project-card-link .project-visual{transition:none!important}'),
- 'Playground reduced-motion override must remain');
+assert.match(workCss, /@media\(prefers-reduced-motion:reduce\)\{[\s\S]*?\.play-grid \.project-card-link \.project-visual,[\s\S]*?transform:none!important/,
+ 'Shared preview motion must be disabled under reduced motion');
 
 // A light-theme notebook-paper rule must not cover the dark Playground intro.
 // This is a source-order guard only, not a measured color-contrast test.
@@ -1032,7 +1034,9 @@ assert.doesNotMatch(editorialCss, /\.visual-placeholder|--archive-(?:surface|ink
 assert.doesNotMatch(editorialCss, /\.notebook-project-index \.featured-project\{/, 'Archive surface must have only one authoritative editorial rule');
 assert.doesNotMatch(editorialCss, /\.project-visual img,\.project-card img,\.play-grid img,\.case-gallery img/, 'Do not restore redundant full-color image filter resets');
 assert.match(workCss, /\.project-card img\{transition:transform \.45s ease\}/, 'Work owns shared project image motion');
-assert.match(workCss, /\.project-card img\{transition:none!important\}/, 'Shared image motion respects reduced motion');
+assert.match(workCss, /@media\(prefers-reduced-motion:reduce\)\{[\s\S]*?\.project-card img,[\s\S]*?transition:none!important;transform:none!important/,
+ 'Shared image motion must not transition or zoom under reduced motion');
+assert.doesNotMatch(workCss, /\.project-card:hover img/, 'Media zoom must not trigger from unlinked card hover');
 assert.doesNotMatch(editorialCss, /\.project-card img\{transition:/, 'Editorial surfaces must not own project image motion');
 
 /* Archive motion + editorial token cleanup: the rendered professional files
@@ -1053,8 +1057,8 @@ assert.match(workCss, /\.work \.featured-project\.client-file \.archive-project-
  'Work archive title keeps its authored 500 weight in its single owner');
 assert.match(workCss, /\.project-card-link:is\(:hover,:focus-visible\) \.project-meta span:last-child\{transform:translate\(4px,-4px\)\}/,
  'Metadata arrow remains discoverable on keyboard focus');
-assert.match(workCss, /@media\(prefers-reduced-motion:reduce\)\{\s*\.project-card \.project-meta span:last-child\{transition:none\}/,
- 'Metadata arrows must stop animating for reduced-motion visitors');
+assert.match(workCss, /@media\(prefers-reduced-motion:reduce\)\{[\s\S]*?\.project-card \.project-meta span:last-child\{transition:none!important;transform:none!important\}/,
+ 'Metadata arrows must not move or animate for reduced-motion visitors');
 
 assert.doesNotMatch(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\) :is\(/,
  'No blanket archive descendant ink override may erase client CTA/tab colors');
