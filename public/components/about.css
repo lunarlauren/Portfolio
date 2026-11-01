@@ -1,3 +1,9 @@
+/* ABOUT SECTION OWNERSHIP
+   The section divider and tablet heading scale moved from homepage-base.css.
+   Navigation owns the footer; Playground owns its own borderless night surface. */
+.about{border-top:1px solid var(--line)}
+.about h2{font-size:clamp(2.875rem,7vw,5.9375rem);max-width:950px}
+
 /* ABOUT PORTRAIT
    Edit this small file to change how Lauren's headshot sits beside her bio.
    The image and caption live in public/index.html inside .about-copy.
@@ -14,14 +20,13 @@
   display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 12px 14px #28465d26);
 }
 
 .about-portrait figcaption {
   margin-top: 8px;
   color: var(--muted);
   font-size: 0.75rem;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 
@@ -35,12 +40,6 @@
 }
 .about .about-copy{min-width:0;width:100%;max-width:76ch}
 .about .about-copy>.text-link{margin-top:clamp(22px,2.5vw,32px);white-space:normal}
-@media(min-width:901px){
- .about .about-portrait{
-  width:clamp(118px,29%,172px);
-  margin:0 0 12px 20px;
- }
-}
 @media(min-width:601px) and (max-width:900px){
  .about .about-copy>.text-link{margin-top:24px}
 }
@@ -66,7 +65,6 @@
  line-height:var(--leading-reading,1.65);
  text-wrap:pretty;
 }
-.about .about-portrait figcaption{line-height:1.45}
 
 /* These desktop type rules used to live in styles.css. Keep the compact
    viewport override last so it can actually win the cascade at laptop heights. */
@@ -94,7 +92,7 @@
     margin: 10px 0 0;
   }
   .about .about-bottom { margin-top: 24px; }
-  .about .about-intro { display: flow-root; margin-bottom: 12px; }
+  .about .about-intro { margin-bottom: 12px; }
   .about .about-portrait {
     float: left;
     width: clamp(100px, 27vw, 124px);
@@ -107,20 +105,17 @@
     object-position: center 27%;
     border-radius: 12px;
     border: 1px solid var(--line);
-    filter: none;
   }
   /* The first sentence already introduces Lauren; avoid repeating that
      introduction under a tiny photo. Keep the desktop caption intact. */
   .about .about-portrait figcaption { display: none; }
   .about .about-copy p {
-    text-wrap:pretty;
     font-size: clamp(.9375rem, 3.9vw, 1.0625rem);
     line-height: 1.55;
     margin-bottom: .85em;
     max-width: 45ch;
   }
-  .about .about-intro p { margin-bottom: 0; text-wrap:pretty; }
-  .about .about-copy > .text-link { margin-top: 10px; }
+  .about .about-intro p { margin-bottom: 0; }
 }
 
 
@@ -145,7 +140,7 @@
 }
 @media(max-width:600px){
  .about .about-copy > .text-link{
-  display:flex;width:100%;margin-top:22px;padding:17px 20px;
+  display:flex;width:100%;padding:17px 20px;
   font-size:clamp(.9375rem,3.9vw,1.0625rem);
   text-wrap:balance;
  }
@@ -212,7 +207,7 @@
     margin-bottom: 28px;
   }
   .about .about-bio { grid-column: 1; grid-row: 1; }
-  .about .about-bio p { max-width: 59ch; margin: 0 0 1em; }
+  .about .about-bio p { margin: 0 0 1em; }
   .about .about-portrait {
     float: none; grid-column: 2; grid-row: 1 / span 2;
     width: 100%; max-width: 340px; margin: 0;
