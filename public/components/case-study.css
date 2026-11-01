@@ -1,10 +1,10 @@
 /* Case-study component: facts, responsive reading layout, process notes and hero briefs.
    Loaded after the base stylesheet to preserve the existing cascade. */
 
-.case-facts{display:flex;flex-direction:column;gap:24px;line-height:1.4;letter-spacing:normal;font-size:var(--type-xs)}
-.case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--line)}
-.case-fact-label{display:block;color:var(--muted);font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.15em;line-height:1.5;text-transform:uppercase}
-.case-fact-value{display:block;color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;letter-spacing:0}
+.case-facts{display:flex;flex-direction:column;gap:24px}
+.case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--line);font-family:'DM Sans',system-ui,sans-serif}
+.case-fact-label{display:block;color:var(--muted);line-height:1.5;text-transform:uppercase}
+.case-fact-value{display:block;color:var(--ink)}
 .case-next-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-block:32px 48px}
 .case-next-nav .case-next{text-decoration:none}
 .case-next-nav .case-next:last-child:not(:first-child){text-align:right;margin-left:auto}
@@ -13,7 +13,7 @@
 
 .case-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,3vw,32px);margin:clamp(24px,4vw,44px) 0;padding:clamp(18px,2.8vw,30px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .case-highlight{min-width:0;padding-left:clamp(12px,1.7vw,20px);border-left:3px solid var(--line)}
-.case-highlight-label{display:block;font-size:0.6875rem;letter-spacing:.12em;font-weight:700;color:var(--muted);margin-bottom:9px}
+.case-highlight-label{display:block;letter-spacing:.12em;font-weight:700;color:var(--muted);margin-bottom:9px}
 .case-highlight p{font-family:Newsreader,Georgia,serif;font-size:clamp(1.3125rem,2.3vw,1.875rem);line-height:1.2;letter-spacing:-.025em;margin:0;max-width:28ch;color:var(--ink)}
 
 /* Evidence/rationale notes retain visible, text-based provenance labels. */
@@ -26,11 +26,6 @@ html[data-theme="dark"] .case-process-note h3{color:color-mix(in srgb,var(--pale
 
 /* No-image briefs remain distinct from approved screenshots. The later dark
    hero surface rule supplies dark paint without duplicate placeholder tokens. */
-.case-view .case-hero-visual:not(:has(img)){
- background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
- border:2px dashed color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
-}
-.case-view .case-hero-visual:not(:has(img))::before{content:none;display:none}
 .case-view .case-hero-visual:not(:has(img)) .hero-image-brief{
  display:flex;flex-direction:column;gap:10px;max-width:72ch;
  font:500 clamp(16px,1.55vw,20px)/1.55 'DM Sans',system-ui,sans-serif;
@@ -52,9 +47,7 @@ html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var
  min-width:0;
 }
 .case-view .case-fact{min-width:0}
-.case-view .case-fact-label,
 .case-view .case-fact-value{margin:0}
-.case-view .case-fact-value{overflow-wrap:break-word}
 
 /* Evidence and tradeoff notes should resemble editorial annotations,
    not rounded dashboard alerts. Retain theme-specific surface colors. */
@@ -80,7 +73,7 @@ html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var
  margin-bottom:var(--space-1,0.5rem);
  color:var(--muted);
  font-family:var(--font-body);
- font-size:var(--case-type-meta,0.6875rem);
+ font-size:var(--case-type-meta);
  font-weight:700;
  letter-spacing:.075em;
  line-height:1.45;
@@ -118,7 +111,7 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
    The offset clears the sticky site header; scroll margins clear both bars. */
 .case-view .case-section-links{
  position:sticky;top:72px;z-index:15;
- padding:10px 0;margin-inline:0;
+ padding:10px 0;
  background:var(--paper);
  border-bottom:1px solid var(--line);
 }
@@ -132,6 +125,8 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
    bringing the UX challenge, process, and evidence closer to the first viewport.
    Real supplied imagery keeps the full-height cover treatment from the base. */
 .case-view .case-hero-visual:not(:has(img)){
+ background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ border:2px dashed color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
  height:auto;
  min-height:clamp(220px,28vw,320px);
  margin-block:clamp(24px,4vw,40px);
@@ -190,7 +185,7 @@ html[data-theme="dark"] .case-view{
 }
 .case-view .case-head h1{
  font-size:var(--case-type-title);line-height:1.08;letter-spacing:-.04em;
- max-width:18ch;margin-block:18px 20px;overflow-wrap:normal;text-wrap:balance;color:var(--case-cover-title);
+ max-width:18ch;margin-block:18px 20px;text-wrap:balance;color:var(--case-cover-title);
 }
 /* Delivery stamp: a factual, immediately visible distinction between
    shipped product contributions and prototypes/concept explorations.
@@ -213,12 +208,12 @@ html[data-theme="dark"] .case-view{
 .case-view .case-prose h2{font-size:var(--case-type-section);line-height:1.17;letter-spacing:-.035em}
 
 .case-view .case-head .eyebrow,.case-view .case-back,
-.case-view .case-evidence-label,.case-view .case-fact-label,
+.case-view .case-fact-label,
 .case-view .case-highlight-label{font-size:var(--case-type-meta)}
 .case-view .case-fact-value,.case-view .case-evidence-item strong{
  font-size:var(--case-type-small);line-height:1.6;
 }
-.case-view .case-fact-value{font-weight:400}
+.case-view .case-fact-value{font-weight:400;overflow-wrap:break-word}
 .case-view .case-fact-label{font-weight:650;letter-spacing:.09em}
 
 .case-view .case-head{
@@ -289,7 +284,7 @@ html[data-theme="dark"] .case-view{
 
 .case-view .case-prose p,
 .case-view .case-process-note p{
- font-size:var(--case-type-body);line-height:1.7;font-weight:400;
+ font-size:var(--case-type-body);line-height:1.7;
  max-width:68ch;overflow-wrap:break-word;
 }
 
@@ -342,7 +337,6 @@ html[data-theme="dark"] .case-view{
  .case-view .case-prose h2:not(:first-child){margin-top:2em}
  .case-view .case-section-links{
   align-items:center;
-  scroll-padding-inline:0;
   top:64px;
   max-width:100%;
   padding:9px 0;
@@ -399,8 +393,6 @@ html[data-theme="dark"] .case-view{
 
 /* Provenance travels with illustrative art, even after a file replaces its brief.
    The label is not a shipping-status badge and must never imply tested UI. */
-.project-visual:has(> .visual-image-status),
-.case-hero-visual:has(> .visual-image-status){position:relative}
 .project-visual > .visual-image-status,
 .case-hero-visual > .visual-image-status{
  position:absolute;inset-inline-start:12px;bottom:12px;z-index:2;

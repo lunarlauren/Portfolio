@@ -4,15 +4,13 @@
    Edit with both light and dark themes in mind. */
 .collection[hidden],.case-view[hidden] {display:none!important}
 .case-view {background:var(--paper);min-height:70vh;padding-block:40px 110px}
-.case-back {display:inline-flex;align-items:center;gap:10px;margin-bottom:54px;font-size:var(--type-sm);line-height:1.6;font-weight:700;text-decoration:none}
-.case-head {max-width:950px}
+.case-back {display:inline-flex;align-items:center;gap:10px;margin-bottom:54px;line-height:1.6;font-weight:700;text-decoration:none}
 /* Default case-study headline rhythm; case-study.css owns cover-specific sizes. */
 .case-head h1 {font-family:var(--font-display);font-weight:600}
 .case-hero-visual {height:clamp(300px,48vw,640px);margin-block:55px;background:#c8ddd6;display:grid;place-items:center;overflow:hidden;position:relative}
 .case-hero-visual img {width:100%;height:100%;object-fit:cover}
 .case-body {display:grid;grid-template-columns:220px minmax(0,700px);gap:clamp(30px,7vw,110px);margin-top:45px}
-.case-facts {font-weight:700;color:var(--muted)}
-.case-prose h2 {font:600 clamp(28px,3vw,43px) 'Newsreader';letter-spacing:-.05em}
+.case-prose h2 {font:600 clamp(28px,3vw,43px) 'Newsreader'}
 .case-prose p {color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-paper))}
 .case-gallery {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:70px}
 .case-next {margin-top:60px;font-weight:700;text-underline-offset:6px}

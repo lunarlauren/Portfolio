@@ -1171,4 +1171,18 @@ assert.match(aboutCss, /\.about h2\{font-size:clamp\(2\.875rem,7vw,5\.9375rem\)/
 assert.doesNotMatch(homepageCss, /\.about-bottom p\s*\{|footer\s*\{border-top|\.playground\s*\{border-top/, 'No dead homepage section/footer overrides');
 assert.doesNotMatch(aboutCss, /filter: drop-shadow\(0 12px 14px|filter: none;/, 'Editorial portrait treatment must not be reset by About');
 
+
+/* Case-study typography and hero cascade: structural defaults must not
+   compete with the scoped component's effective paint and type. */
+assert.doesNotMatch(caseBaseCss,/\.case-head\s*\{|\.case-facts\s*\{/,
+ 'Retired case head width and inherited facts ink must not return to base');
+assert.match(caseCss,/\.case-fact\{[^}]*font-family:'DM Sans'/,
+ 'Fact label and value share one inherited body-font owner');
+assert.doesNotMatch(caseCss,/\.case-fact-(?:label|value)\{[^}]*font-family:/,
+ 'Fact children must not duplicate their inherited family');
+assert.doesNotMatch(caseCss,/\.case-hero-visual:not\(:has\(img\)\)::before|\.project-visual:has\(> \.visual-image-status\)/,
+ 'No dead pseudo-element reset or redundant positioning for image-status labels');
+assert.match(caseCss,/\.case-view \.case-hero-visual:not\(:has\(img\)\)\{[^}]*background:[^}]*border:2px dashed[^}]*height:auto/,
+ 'Illustrative hero surface and compact geometry stay in one scoped rule');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);

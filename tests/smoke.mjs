@@ -779,11 +779,23 @@ try{
      evidenceGap:evidence.gap,galleryGap:gallery.gap,
      surface:getComputedStyle(document.querySelector(".case-evidence-item")).backgroundColor,
      heroBorder:getComputedStyle(document.querySelector(".case-hero-visual:not(:has(img))")).borderTopStyle,
-     heroBriefSize:parseFloat(getComputedStyle(document.querySelector(".case-hero-visual .hero-image-brief")).fontSize)};
+     heroBriefSize:parseFloat(getComputedStyle(document.querySelector(".case-hero-visual .hero-image-brief")).fontSize),
+     factLabelFont:getComputedStyle(document.querySelector(".case-fact-label")).fontFamily,
+     factValueFont:getComputedStyle(document.querySelector(".case-fact-value")).fontFamily,
+     factLabelWeight:getComputedStyle(document.querySelector(".case-fact-label")).fontWeight,
+     factValueWeight:getComputedStyle(document.querySelector(".case-fact-value")).fontWeight,
+     factLabelSize:getComputedStyle(document.querySelector(".case-fact-label")).fontSize,
+     factValueSize:getComputedStyle(document.querySelector(".case-fact-value")).fontSize};
    },theme);
    assert.equal(metrics.evidenceCols,width===390?1:3,theme+": evidence columns at "+width+"px");
    assert.equal(metrics.galleryCols,width===390?1:2,theme+": gallery columns at "+width+"px");
    assert.equal(metrics.heroBorder,"dashed",theme+": missing hero must retain dashed border at "+width+"px");
+    assert.equal(metrics.factLabelFont,metrics.factValueFont,theme+": fact label and value share body type");
+    assert.match(metrics.factLabelFont,/DM Sans/,theme+": facts retain the authored body font");
+    assert.equal(metrics.factLabelWeight,"650",theme+": fact labels retain their hierarchy");
+    assert.equal(metrics.factValueWeight,"400",theme+": fact values stay supporting copy");
+    assert.equal(metrics.factLabelSize,"12px",theme+": fact label meta size");
+    assert.equal(metrics.factValueSize,"14px",theme+": fact value size");
    assert.ok(metrics.heroBriefSize>=16&&metrics.heroBriefSize<=20,theme+": visual brief must stay caption-sized at "+width+"px");
    samples.push(metrics);
   }
