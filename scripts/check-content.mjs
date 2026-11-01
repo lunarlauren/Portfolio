@@ -931,8 +931,10 @@ assert.match(script, /caseOpener=null;\s*\}\);\s*\}\s*previousHash=nextHash;/, '
 assert.match(caseCss, /@media\(forced-colors:active\)\{[\s\S]*?\.case-view \.case-section-links button\[aria-current="location"\]\{border-color:Highlight\}/, 'Chapter selection must remain visible in forced colors');
 
 // Pass 12: chapter controls expose an equivalent focus state in both themes.
-assert.match(caseCss, /\.case-section-links button:focus-visible\{[^}]*background:var\(--surface-blush\);[^}]*text-decoration:underline;/, 'Keyboard focus must provide tactile feedback beyond the outline');
-assert.match(caseCss, /html\[data-theme="dark"\] \.case-section-links button:focus-visible\{[^}]*background:color-mix\(/, 'Dark-mode chapter focus must use a theme-aware surface');
+assert.match(caseCss, /\.case-section-links button:is\(:hover,:focus-visible\)\{background:var\(--surface-blush\)\}/, 'Chapter hover and keyboard focus share a light surface');
+assert.match(caseCss, /html\[data-theme="dark"\] \.case-section-links button:is\(:hover,:focus-visible\)\{background:color-mix\(/, 'Chapter hover and keyboard focus share a dark surface');
+assert.match(caseCss, /\.case-section-links button:focus-visible\{text-decoration:underline;text-underline-offset:4px\}/, 'Keyboard focus retains a non-color underline');
+assert.doesNotMatch(caseCss, /html:not\(\[data-theme="dark"\]\) \.case-prose\{/, 'Superseded light prose rule must not return');
 
 // The pastel folder tabs were previously white-on-color (< 3.2:1).
 // Measure their shared ink against each client accent; geometry and theme
