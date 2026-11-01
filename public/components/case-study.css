@@ -1,10 +1,6 @@
 /* Case-study component: facts, responsive reading layout, process notes and hero briefs.
    Loaded after the base stylesheet to preserve the existing cascade. */
-@media(max-width:760px){
- .case-body{grid-template-columns:1fr}
 
- .case-view{padding-bottom:70px}
-}
 .case-facts{display:flex;flex-direction:column;gap:24px;line-height:1.4;letter-spacing:normal;font-size:var(--type-xs)}
 .case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--line)}
 .case-fact-label{display:block;color:var(--muted);font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.15em;line-height:1.5;text-transform:uppercase}
@@ -14,18 +10,12 @@
 .case-next-nav .case-next:last-child:not(:first-child){text-align:right;margin-left:auto}
 .case-prose h2{margin-top:1.8em;margin-bottom:.45em}
 .case-prose h2:first-child{margin-top:0}
-@media(max-width:600px){
- .case-next-nav{align-items:stretch;flex-direction:column}
- .case-next-nav .case-next:last-child:not(:first-child){margin-left:0;text-align:left}
-}
+
 .case-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,3vw,32px);margin:clamp(24px,4vw,44px) 0;padding:clamp(18px,2.8vw,30px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .case-highlight{min-width:0;padding-left:clamp(12px,1.7vw,20px);border-left:3px solid var(--line)}
 .case-highlight-label{display:block;font-size:0.6875rem;letter-spacing:.12em;font-weight:700;color:var(--muted);margin-bottom:9px}
 .case-highlight p{font-family:Newsreader,Georgia,serif;font-size:clamp(1.3125rem,2.3vw,1.875rem);line-height:1.2;letter-spacing:-.025em;margin:0;max-width:28ch;color:var(--ink)}
-@media(max-width:600px){
- .case-highlights{grid-template-columns:1fr;gap:20px;margin:24px 0;padding:20px 0}
- .case-highlight p{font-size:1.4375rem}
-}
+
 /* Evidence/rationale notes retain visible, text-based provenance labels. */
 .case-process-notes{display:grid;gap:14px;margin:22px 0 28px}
 .case-process-note{padding:clamp(16px,2vw,24px);border-left:3px solid var(--line);background:var(--surface-blush);border-radius:0}
@@ -65,26 +55,6 @@ html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var
 .case-view .case-fact-label,
 .case-view .case-fact-value{margin:0}
 .case-view .case-fact-value{overflow-wrap:break-word}
-@media(max-width:760px){
- .case-view .case-facts{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(16px,3vw,24px);
- }
- .case-view .case-fact{padding-left:11px}
-}
-
-
-/* Case-study reading: long audience/constraint descriptions need a full
-   line on narrow phones. Keep two columns at tablet widths, but avoid
-   120px-wide text columns at 320–480px and 200% browser zoom. */
-@media(max-width:480px){
- .case-view .case-facts{
-  grid-template-columns:minmax(0,1fr);
-  gap:14px;
- }
- .case-view .case-fact{padding-left:12px}
-}
 
 /* Evidence and tradeoff notes should resemble editorial annotations,
    not rounded dashboard alerts. Retain theme-specific surface colors. */
@@ -118,7 +88,6 @@ html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var
  overflow-wrap:anywhere;
 }
 
-
 /* Chapter controls share one owner for touch, focus, and selected states.
    The dark hover uses paper rather than a light navy token for readable ink. */
 .case-view .case-section-links button{
@@ -144,10 +113,6 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
  background:color-mix(in srgb,var(--palette-blue) 18%,var(--palette-navy));
 }
 .case-section-links{display:flex;flex-wrap:wrap;gap:10px}
-@media(max-width:760px){
- .case-section-links{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;padding-bottom:6px}
- .case-view .case-section-links button{flex:0 0 auto;white-space:nowrap}
-}
 
 /* Case-study chapter index stays available during longer reads.
    The offset clears the sticky site header; scroll margins clear both bars. */
@@ -172,36 +137,11 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
  margin-block:clamp(24px,4vw,40px);
  padding:clamp(20px,3vw,36px);
 }
-@media(max-width:760px){
- .case-view .case-hero-visual:not(:has(img)){
-  min-height:clamp(200px,50vw,240px);
- }
-}
 
-/* Mobile reading: responsive typography, image sizing, and chapter context. */
-/* Mobile case-study reading: keep editorial copy legible without changing
-   project claims or the intentional image placeholders. */
-@media(max-width:600px){
- .case-view .case-head,.case-view .case-prose{min-width:0;overflow-wrap:break-word}
- .case-view .case-section-links{-webkit-overflow-scrolling:touch;scrollbar-width:none}
- .case-view .case-section-links::-webkit-scrollbar{display:none}
- .case-view .case-hero-visual img{max-width:100%;height:auto}
-}
 @media(prefers-reduced-motion:reduce){
  .case-view .case-section-links{scroll-behavior:auto}
  .case-view .case-section-links button{transition:none}
 }
-
-/* Mobile editorial rhythm and project identity. The sticky chapter bar repeats
-   the actual case-study title so readers retain context deep into a long page. */
-@media(max-width:760px){
- .case-view{padding-top:clamp(28px,6vw,48px)}
- .case-view .case-back{margin-bottom:clamp(22px,5vw,36px)}
- .case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{margin-block:clamp(24px,6vw,44px)}
- .case-view .case-prose h2:not(:first-child){margin-top:2em}
- .case-view .case-section-links{align-items:center;scroll-padding-inline:0}
-}
-
 
 /* Case-study typography, cover, evidence and reading tokens.
    Themes change colors, never geometry. */
@@ -280,11 +220,6 @@ html[data-theme="dark"] .case-view{
 }
 .case-view .case-fact-value{font-weight:400}
 .case-view .case-fact-label{font-weight:650;letter-spacing:.09em}
-@media(max-width:760px){
- .case-view{--case-type-title:clamp(38px,8vw,56px);--case-type-lead:clamp(17px,4vw,20px)}
- .case-view .case-head h1{line-height:1.1;overflow-wrap:break-word;hyphens:auto}
-}
-
 
 .case-view .case-head{
  max-width:100%;
@@ -296,9 +231,6 @@ html[data-theme="dark"] .case-view{
  box-shadow:var(--case-cover-shadow);
 }
 .case-view .case-head .eyebrow{color:var(--case-cover-kicker)}
-@media(max-width:760px){
- .case-view .case-head{padding:clamp(22px,5vw,34px)}
-}
 
 /* An authored approach line makes UX reasoning visible before any imagery.
    Reuse cover tokens in both themes; the label stacks above text on phones. */
@@ -323,9 +255,6 @@ html[data-theme="dark"] .case-view{
  white-space:nowrap;
 }
 .case-view .case-approach-text{min-width:0;overflow-wrap:break-word}
-@media(max-width:600px){
- .case-view .case-approach{grid-template-columns:minmax(0,1fr);gap:6px}
-}
 
 .case-view .case-evidence-item{
  min-width:0;
@@ -364,43 +293,6 @@ html[data-theme="dark"] .case-view{
  max-width:68ch;overflow-wrap:break-word;
 }
 
-/* Mobile reading sheet: rule the paragraphs, not the headings or chapter tabs. */
-@media(max-width:760px){
- .case-view .case-prose{
-  background-image:none;
-  padding:clamp(20px,5vw,30px);
- }
- .case-view .case-prose h2{
-  position:relative;
-  background:var(--case-reading-bg);
-  font-size:clamp(1.5625rem,6.3vw,2.125rem);
-  line-height:1.2;
-  overflow-wrap:break-word;
-  margin-bottom:18px;
- }
- .case-view .case-prose p{
-  margin-bottom:22px;
- }
- .case-view .case-section-links{
-  top:64px;
-  max-width:100%;
-  padding:9px 0;
-  gap:8px;
-  background:var(--case-reading-bg);
-  border-bottom:1px solid var(--case-fact-border);
- }
- .case-view .case-section-links button{font-size:0.75rem;padding:10px 12px}
- .case-view .case-prose h2[id]{scroll-margin-top:140px}
-}
-@media(max-width:420px){
- .case-view .case-section-links{padding-block:8px}
-}
-/* Phone chapters clear the taller two-row header and sticky chapter bar. */
-@media(max-width:650px){
- .case-view .case-section-links{top:var(--mobile-site-header-height,110px)}
- .case-view .case-prose h2[id]{scroll-margin-top:calc(var(--mobile-site-header-height,110px) + 80px)}
-}
-
 /* Case-study handoff: quick factual overview for skimming hiring managers.
    Keep values in script.js/projectEvidence aligned with confirmed project scope. */
 /* Case-study evidence and gallery: one owner for grid geometry and theme
@@ -412,7 +304,6 @@ html[data-theme="dark"] .case-view{
  align-items:stretch;
  gap:var(--space-3,1rem);
 }
-@media(max-width:760px){.case-view .case-evidence{grid-template-columns:1fr}}
 
 .case-view .case-gallery{
  align-items:start;
@@ -423,9 +314,80 @@ html[data-theme="dark"] .case-view{
  max-width:100%;
  height:auto;
 }
+
+/* Responsive case-study layout: one breakpoint owner per viewport range.
+   Keep 760 → 650 → 600 → 480 → 420 order: smaller screens override
+   tablet facts columns, sticky-header offsets, and chapter-strip scrollbars. */
 @media(max-width:760px){
+ .case-body{grid-template-columns:1fr}
+ .case-view{
+  padding-bottom:70px;
+  padding-top:clamp(28px,6vw,48px);
+  --case-type-title:clamp(38px,8vw,56px);
+  --case-type-lead:clamp(17px,4vw,20px);
+ }
+ .case-view .case-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,3vw,24px)}
+ .case-view .case-fact{padding-left:11px}
+ .case-section-links{
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overscroll-behavior-inline:contain;
+  scrollbar-width:thin;
+  padding-bottom:6px;
+ }
+ .case-view .case-section-links button{flex:0 0 auto;white-space:nowrap;font-size:0.75rem;padding:10px 12px}
+ .case-view .case-hero-visual:not(:has(img)){min-height:clamp(200px,50vw,240px)}
+ .case-view .case-back{margin-bottom:clamp(22px,5vw,36px)}
+ .case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{margin-block:clamp(24px,6vw,44px)}
+ .case-view .case-prose h2:not(:first-child){margin-top:2em}
+ .case-view .case-section-links{
+  align-items:center;
+  scroll-padding-inline:0;
+  top:64px;
+  max-width:100%;
+  padding:9px 0;
+  gap:8px;
+  background:var(--case-reading-bg);
+  border-bottom:1px solid var(--case-fact-border);
+ }
+ .case-view .case-head h1{line-height:1.1;overflow-wrap:break-word;hyphens:auto}
+ .case-view .case-head{padding:clamp(22px,5vw,34px)}
+ .case-view .case-prose{background-image:none;padding:clamp(20px,5vw,30px)}
+ .case-view .case-prose h2{
+  position:relative;
+  background:var(--case-reading-bg);
+  font-size:clamp(1.5625rem,6.3vw,2.125rem);
+  line-height:1.2;
+  overflow-wrap:break-word;
+  margin-bottom:18px;
+ }
+ .case-view .case-prose p{margin-bottom:22px}
+ .case-view .case-prose h2[id]{scroll-margin-top:140px}
+ .case-view .case-evidence{grid-template-columns:1fr}
  .case-view .case-evidence-item{padding:var(--space-3,1rem)}
  .case-view .case-gallery{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:650px){
+ .case-view .case-section-links{top:var(--mobile-site-header-height,110px)}
+ .case-view .case-prose h2[id]{scroll-margin-top:calc(var(--mobile-site-header-height,110px) + 80px)}
+}
+@media(max-width:600px){
+ .case-next-nav{align-items:stretch;flex-direction:column}
+ .case-next-nav .case-next:last-child:not(:first-child){margin-left:0;text-align:left}
+ .case-highlights{grid-template-columns:1fr;gap:20px;margin:24px 0;padding:20px 0}
+ .case-highlight p{font-size:1.4375rem}
+ .case-view .case-head,.case-view .case-prose{min-width:0;overflow-wrap:break-word}
+ .case-view .case-section-links{-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .case-view .case-section-links::-webkit-scrollbar{display:none}
+ .case-view .case-hero-visual img{max-width:100%;height:auto}
+ .case-view .case-approach{grid-template-columns:minmax(0,1fr);gap:6px}
+}
+@media(max-width:480px){
+ .case-view .case-facts{grid-template-columns:minmax(0,1fr);gap:14px}
+ .case-view .case-fact{padding-left:12px}
+}
+@media(max-width:420px){
+ .case-view .case-section-links{padding-block:8px}
 }
 
 /* System high-contrast themes can suppress custom surface colors.

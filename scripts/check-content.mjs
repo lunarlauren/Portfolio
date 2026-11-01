@@ -26,6 +26,22 @@ const visualPlaceholderCss = read('../public/components/visual-placeholders.css'
 const aboutCss = read('../public/components/about.css');
 const stationeryCss = read('../public/components/stationery.css');
 
+/* Read one complete case-study breakpoint, not a brittle one-rule snippet.
+   Responsive rules intentionally share a single owner per width. */
+const caseBreakpoint = width => {
+ const needle = `@media(max-width:${width}px){`;
+ assert.equal(caseCss.split(needle).length - 1, 1, `Expected one ${width}px case-study breakpoint`);
+ const start = caseCss.indexOf(needle) + needle.length;
+ let depth = 1;
+ for (let i = start; i < caseCss.length; i++) {
+  if (caseCss[i] === '{') depth++;
+  else if (caseCss[i] === '}' && --depth === 0) return caseCss.slice(start, i);
+ }
+ throw new Error(`Unclosed case-study breakpoint: ${width}px`);
+};
+for (const width of [760, 650, 600, 480, 420]) caseBreakpoint(width);
+
+
 // Regression: a former dark-theme selector accidentally outlined ordinary
 // labels and paragraphs along with the focused CTA, drawing blue rectangles.
 // Only actual focus targets should receive the global focus ring.
@@ -579,7 +595,7 @@ assert.match(projectContent, /<dt class="case-fact-label"/, 'Fact labels should 
 assert.match(projectContent, /<dd class="case-fact-value"/, 'Fact values should use dd elements');
 assert.match(caseCss, /\.case-view \.case-facts\s*\{/, 'Case facts must have scoped layout styles');
 assert.match(caseCss, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Case facts should have a narrow-screen two-column layout');
-assert.match(caseCss, /@media\(max-width:480px\)\{\s*\.case-view \.case-facts\{\s*grid-template-columns:minmax\(0,1fr\)/, 'Phone case facts must switch to one readable column');
+assert.match(caseBreakpoint(480), /\.case-view \.case-facts\{grid-template-columns:minmax\(0,1fr\)/, 'Phone case facts must switch to one readable column');
 assert.match(caseCss, /\.case-process-note\{[^}]*border-radius:0/, 'Evidence notes should have intentional square stationery edges');
 
 for (const id of ['main', 'work', 'playground', 'about']) {
@@ -596,8 +612,8 @@ assert.match(workCss, /\.work \.project-card-facts dd\s*\{/, 'Archive values mus
 // Static responsive guards: these do not prove browser layout or screen-reader behavior.
 assert.match(navigationCss, /@media\(max-width:650px\)\{[\s\S]*?\.site-header\{\s*display:grid/, 'Production phone header must use the accessible two-row grid');
 assert.match(navigationCss, /@media\(max-width:360px\)/, 'Narrow-phone header must have an explicit layout');
-assert.match(caseCss, /@media\(max-width:760px\)\{[\s\S]*?\.case-view \.case-section-links\{\s*top:64px/, 'Tablet chapter index must retain its compact sticky offset');
-assert.match(caseCss, /@media\(max-width:650px\)\{[\s\S]*?\.case-view \.case-section-links\{top:var\(--mobile-site-header-height,110px\)/, 'Phone chapter index must clear the two-row header');
+assert.match(caseBreakpoint(760), /\.case-view \.case-section-links\{[^}]*\btop:64px/, 'Tablet chapter index must retain its compact sticky offset');
+assert.match(caseBreakpoint(650), /\.case-view \.case-section-links\{[^}]*top:var\(--mobile-site-header-height,110px\)/, 'Phone chapter index must clear the two-row header');
 assert.match(caseStudy, /function revealCurrentCaseTab\(button\)/, 'Current chapter should remain visible in the phone tab strip');
 assert.match(caseStudy, /chapterNav\.scrollLeft\+=delta/, 'Reveal must scroll the strip without scrolling the document');
 assert.doesNotMatch(css, /\.case-view \.case-section-links\{mask-image:/, 'Do not restore the one-sided fade that obscured chapter controls');
@@ -928,7 +944,7 @@ assert.equal(secondChapterButton.getAttribute('aria-current'), null, 'Only one c
  // Effective evidence and gallery spacing belongs to the scoped component.
  assert.doesNotMatch(caseCss,/(?:^|\n)\.case-evidence\{/,'Unscoped evidence grid must not compete with its component owner');
  assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/,'Evidence grid retains three desktop columns in its component owner');
- assert.match(caseCss,/@media\(max-width:760px\)\{\.case-view \.case-evidence\{grid-template-columns:1fr\}\}/,'Evidence grid must stack on phones');
+assert.match(caseBreakpoint(760), /\.case-view \.case-evidence\{grid-template-columns:1fr\}/, 'Evidence grid must stack on phones');
  assert.doesNotMatch(caseBaseCss,/\.case-intro\s*\{/,'Case intro belongs to scoped cover');
  assert.doesNotMatch(caseBaseCss,/\.case-gallery\s*\{[^}]*\bgap\s*:/,'Gallery gap belongs to scoped component');
  assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*gap:var\(--space-3,1rem\)/,'Evidence gap retains token');
@@ -941,7 +957,7 @@ assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*padding:var\(--spa
 assert.match(navigationCss, /:focus-visible/, 'Header navigation must expose keyboard focus');
 assert.match(navigationCss, /@media\(forced-colors:active\)/, 'Focus must remain visible in forced-colors mode');
 assert.match(caseCss, /\.case-section-links button\{[^}]*min-height:44px;/, 'Shared case chapter controls must meet the 44px touch target');
-assert.match(caseCss, /\.case-view \.case-section-links button\{font-size:0\.75rem;padding:10px 12px\}/, 'Phone chapter padding must stay consolidated');
+assert.match(caseBreakpoint(760), /\.case-view \.case-section-links button\{[^}]*font-size:0\.75rem;padding:10px 12px\}/, 'Phone chapter padding must stay consolidated');
 assert.doesNotMatch(caseCss, /\.case-view \.case-section-links button\{\s*min-height:44px;/, 'Do not duplicate the shared chapter touch target');
 assert.equal((caseCss.match(/^\.case-view\{/gm) || []).length, 1, 'Case-study default tokens should have one owner');
 assert.equal((caseCss.match(/^html\[data-theme="dark"\] \.case-view\{/gm) || []).length, 1, 'Dark case-study tokens should have one owner');
