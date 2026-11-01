@@ -1,6 +1,6 @@
 /* CASE STUDY BASE
    Foundational case-study page layout, in original cascade order.
-   Additional case-study overrides remain in styles.css and case-study.css.
+   Component refinements live in case-study.css; styles.css is an inactive compatibility stub.
    Edit with both light and dark themes in mind. */
 .collection[hidden],.case-view[hidden] {display:none!important}
 .case-view {background:var(--paper);min-height:70vh;padding-block:40px 110px}
