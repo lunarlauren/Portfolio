@@ -193,7 +193,7 @@ Think of the site like a set of labeled drawers:
 | Fonts, starting colors, focus and basic layout | `public/components/foundations.css` |
 | Early homepage layout, hero and card rules | `public/components/homepage-base.css` |
 | Initial case-study layout and typography | `public/components/case-study-base.css` |
-| Older component styling and later overrides | `public/styles.css` (legacy; edit carefully) |
+| Retired compatibility stub (no active declarations) | `public/styles.css` (do not add new rules) |
 | About portrait size and mobile layout | `public/components/about.css` |
 | Header and navigation appearance | `public/components/navigation.css` |
 | Work cards and folders | `public/components/work-cards.css` |
@@ -353,3 +353,7 @@ The inactive `public/styles.css` stub has no rules to retire. `case-study.css` n
 ### 2026-11-01 — Global theme palette ownership
 
 `foundations.css` now owns the shared light/dark palette, ink, paper, focus and notebook-pink tokens. `stationery.css` owns dot-grid texture and elevation; `monochrome-editorial.css` owns editorial card/action paint and image treatments only. Former late editorial global overrides shadowed foundations and disabled the stronger dark high-contrast separator preference. Standard light/dark token values are preserved; high-contrast preferences can now take effect. Work client accents remain explicit in `work-cards.css`, not derived from neutral palette aliases. Change shared palette values in foundations, run source and Chromium CI in both themes, and verify deployment separately. No UX narratives, evidence, images or shipped Mobile Insights status changed.
+
+### 2026-11-01 — About responsive and typography consolidation
+
+`about.css` is the sole owner of About's 600px phone layout, invitation CTA and AI-process note spacing. The note's paragraphs inherit the biography font size, line height and wrapping from `.about .about-copy p`; only their narrower 58ch measure is specialized. Desktop and short-laptop spacing now share their existing 1024px media blocks. `homepage-base.css` no longer repeats About's block display or the dead emphasis colors superseded by the editorial skin; the global focus ring and border-box defaults still apply to the CTA. Source assertions and Chromium typography checks cover the two themes at 390px and 1280px; screenshot parity and deployment remain unverified. UX evidence, image placeholders and Hoylu Mobile Insights' shipped status were not changed.
