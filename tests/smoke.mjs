@@ -752,6 +752,35 @@ try{
   assert.equal(samples[0].evidenceGap,samples[1].evidenceGap,"Evidence spacing must not shift with theme");
   assert.equal(samples[0].galleryGap,samples[1].galleryGap,"Gallery spacing must not shift with theme");
   assert.notEqual(samples[0].surface,samples[1].surface,"Evidence card surface must adapt to theme");
+  // Hovered chapter tabs need readable text in both themes; reduced motion
+  // should disable the transition without removing the hover/focus cue.
+  await page.emulateMedia({reducedMotion:"reduce"});
+  for(const theme of ["light","dark"]){
+   await page.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+   await page.mouse.move(0,0);
+   const chapter=page.locator(".case-section-links button").last();
+   await chapter.hover();
+   const result=await chapter.evaluate(node=>{
+    const style=getComputedStyle(node);
+    const rgb=value=>{
+     const canvas=document.createElement("canvas");
+     canvas.width=canvas.height=1;
+     const ctx=canvas.getContext("2d");
+     ctx.fillStyle=value;ctx.fillRect(0,0,1,1);
+     return [...ctx.getImageData(0,0,1,1).data].slice(0,3);
+    };
+    const luminance=value=>{
+     const [r,g,b]=rgb(value).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);
+     return .2126*r+.7152*g+.0722*b;
+    };
+    const [hi,lo]=[luminance(style.color),luminance(style.backgroundColor)].sort((a,b)=>b-a);
+    return {contrast:(hi+.05)/(lo+.05),minHeight:parseFloat(style.minHeight),transition:style.transitionDuration};
+   });
+   assert.ok(result.contrast>=4.5,width+"px "+theme+": chapter hover needs 4.5:1 contrast (got "+result.contrast.toFixed(2)+")");
+   assert.ok(result.minHeight>=44,width+"px "+theme+": chapter touch target remains 44px");
+   assert.equal(result.transition,"0s",width+"px "+theme+": reduced motion disables chapter transitions");
+  }
+  await page.emulateMedia({reducedMotion:"no-preference"});
  }
  await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
  await page.setViewportSize({width:1280,height:720});
