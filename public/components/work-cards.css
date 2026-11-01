@@ -33,8 +33,8 @@
 /* SHARED PROJECT CARD PRIMITIVES — Work and After Hours use the same
    structure and image motion. The editorial layer owns glass surfaces;
    Playground owns its deliberately dark contrast. */
-.project-card{min-width:0}
-.project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;height:auto;min-height:190px}
+.project-card,.featured-project{min-width:0}
+.project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;min-height:190px}
 .project-visual img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
 .project-meta{font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;letter-spacing:.13em;font-weight:700;margin-top:20px}
 .project-card h3{font:600 25px 'Newsreader';letter-spacing:-.04em;margin:8px 0}
@@ -42,31 +42,29 @@
 /* Work copy uses paper ink; After Hours keeps its own night contrast.
    Do not override nested client labels or accent CTAs. */
 .work .project-card :is(h3,p,.project-meta){color:var(--ink)}
-.project-card-link{display:block;text-decoration:none;outline-offset:5px}
+.project-card-link{display:block;text-decoration:none}
 .project-card-link:hover .project-visual{filter:saturate(1.12)}
 .project-card .project-meta{display:flex;justify-content:space-between;gap:8px}
 
 /* Work archive: linked case studies with documented process previews. */
 .featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.5vw,34px);margin-bottom:clamp(42px,6vw,76px)}
-.featured-project{min-width:0}
-.featured-project>.eyebrow{margin:0 0 12px;color:var(--muted);line-height:1.5}
+.featured-project>.eyebrow{margin:8px 0 4px;color:var(--muted);line-height:1.5}
 .featured-project .project-visual{aspect-ratio:16/10;min-height:0}
 .featured-project .project-card p{font-size:0.9375rem;line-height:1.65;max-width:58ch}
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
 html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
 /* Notebook project index — one project per entry, with a clear editorial hierarchy.
    Cards use existing approved imagery or descriptive placeholders from content.js. */
-.notebook-project-index{counter-reset:project;align-items:stretch}
-.notebook-project-index .featured-project{position:relative;display:flex;flex-direction:column;gap:0}
+.notebook-project-index{align-items:stretch}
+.notebook-project-index .featured-project{display:flex;flex-direction:column}
 .notebook-project-index .featured-project .project-card{flex:1}
 .notebook-project-index .featured-project .eyebrow{font-size:0.6875rem;letter-spacing:.08em}
 /* Case-study editorial notes: clearly separate documented evidence from design
    rationale. No interactions or hover-only content are required to read them. */
 .project-card-cta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:0.875rem;font-weight:700;text-decoration:underline;text-underline-offset:4px}
-.project-card-link:hover .project-card-cta{text-decoration-thickness:2px}
 /* Recruiter scan path: challenge (summary) followed by one existing process
    sentence. This is a preview of documented copy, not generated evidence. */
-.project-card .project-card-process{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:0.875rem;line-height:1.55;color:var(--muted)}
+.project-card .project-card-process{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);line-height:1.55}
 .project-card-process strong{display:block;color:var(--ink);font-size:0.6875rem;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
 /* Mobile interaction quality: keep tappable controls comfortable and avoid
    paper decoration interfering with focus or text. */
@@ -91,8 +89,11 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
 .client-file--hoylu{--file-accent:#53a7de}
 .client-file--alcon{--file-accent:#f15c9d}
 .client-file--holland-america{--file-accent:#50ba9c}
-html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
-.client-file>.eyebrow{margin-top:8px}
+/* Dark file tokens stay together; the client CTA remains legible on night paper. */
+html[data-theme="dark"] .client-file{
+ --file-highlight-strength:48%;
+ --file-cta-ink:color-mix(in srgb,var(--file-accent) 55%,var(--ink));
+}
 .client-file .client-file-label{
  position:absolute;
  left:-1px;
@@ -102,10 +103,8 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
  min-width:116px;
  height:27px;
  padding:4px 22px 4px 13px;
- margin:0;
  background:var(--file-accent);
  color:var(--file-label-ink);
- border-radius:0;
  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,0 100%);
  font-size:0.6875rem;
  font-weight:800;
@@ -186,7 +185,6 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
  letter-spacing:-.035em;
  text-wrap:balance;
 }
-.work .featured-project.client-file>.eyebrow{margin-bottom:4px}
 .work .featured-project.client-file .project-meta{
  margin-top:var(--space-2);
 }
@@ -227,11 +225,6 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
 .work .client-file .project-card-link:hover .project-card-cta,
 .work .client-file .project-card-link:focus-visible .project-card-cta{
  text-decoration-thickness:3px;
-}
-/* Accent-tinted, contrast-safe CTA ink over neutral glass cards.
-   The raw tab accent is too pale for small linked text on light paper. */
-html[data-theme="dark"] .work .client-file{
- --file-cta-ink:color-mix(in srgb,var(--file-accent) 55%,var(--ink));
 }
 /* A facts block followed by the design approach is one section break,
    not two stacked horizontal rules. Keep the facts' lower rule. */
@@ -278,7 +271,7 @@ html[data-theme="dark"] .work .client-file{
 @media(max-width:760px){
  .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
  .notebook-project-index{gap:22px}
- .notebook-project-index .featured-project{padding:16px 16px 20px;isolation:isolate}
+ .notebook-project-index .featured-project{padding:16px 16px 20px}
  .notebook-project-index .project-card-link{min-height:44px}
  .work .featured-project.client-file .project-visual:not(:has(img)){
   min-height:110px;padding:var(--space-2);
@@ -318,7 +311,6 @@ html[data-theme="dark"] .work .client-file{
  display:block;
  margin-bottom:4px;
  color:var(--muted);
- font-family:var(--font-body);
  font-size:var(--type-eyebrow,0.6875rem);
  font-weight:700;
  letter-spacing:.08em;
@@ -336,9 +328,7 @@ html[data-theme="dark"] .work .client-file{
 }
 
 
-/* Shared Work / Playground card focus affordances.
-   Playground overrides only the focus color via --card-focus-color. */
-/* Consistent keyboard affordances across the light and night sections. */
+/* Shared Work / Playground keyboard focus; Playground supplies its own focus color. */
 :is(.work,.playground) .project-card-link:focus-visible{
  outline:3px solid var(--card-focus-color,#2585c0);
  outline-offset:5px;
@@ -376,9 +366,8 @@ html[data-theme="dark"] .project-card-link{color:var(--ink)}
  .play-grid .project-card-link .project-visual,
  .work .client-file .client-file-label,
  .project-card .project-meta span:last-child{transition:none!important;transform:none!important}
- .work .featured-project.client-file{transition:none;transform:none}
 }
-@media(hover:none){
+@media(prefers-reduced-motion:reduce), (hover:none){
  .work .featured-project.client-file{transition:none;transform:none}
 }
 @media(prefers-contrast:more){
