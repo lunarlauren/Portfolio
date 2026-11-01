@@ -330,3 +330,7 @@ The legacy `public/styles.css` remains an inactive compatibility stub. `case-stu
 ### 2026-11-01 — Case-study evidence and gallery cascade ownership
 
 `public/styles.css` remains an inactive compatibility stub. `case-study-base.css` retains structural fallbacks; `case-study.css` owns effective evidence-card paint and type, gallery spacing and responsive evidence gaps. This pass removed overridden cover/intro declarations, redundant paragraph sizes, and competing evidence-card colors and gaps. The evidence grid stays three columns on desktop and one on phones; the gallery stays two columns on desktop and one on phones. Chromium checks cover computed geometry, spacing and theme surfaces at 390px and 1280px. Hoylu Mobile Insights remains shipped; no narratives, metrics, evidence, images or placeholders changed. Screenshot parity and production deployment are not verified.
+
+### 2026-11-01 — Case-study chapter controls and dark hover contrast
+
+`case-study.css` now groups chapter button geometry, focus, selected-state paint and motion instead of overriding them later. The `--case-chapter-hover` token preserves the light paper tint and uses dark paper in night mode to keep light text readable. The 44px target, horizontal phone strip, forced-colors focus ring, sticky offsets and evidence-first content remain unchanged. Source checks and Chromium hover-contrast assertions cover 390px/1280px in both themes. Screenshot parity and deployment are unverified. Mobile Insights remains shipped.
