@@ -765,18 +765,21 @@ assert.match(caseStudy, /data-case-jump="case-evidence-notes"/, 'Chapter navigat
 assert.match(caseStudy, /processNotes=processNotesMarkup\(p,hasProcess\?3:2\)/, 'Evidence chapter must follow the optional process chapter');
 assert.match(caseStudy, /outcomeChapter=2\+Number\(hasProcess\)\+Number\(Boolean\(processNotes\)\)/, 'Outcome chapter number must follow the sections actually rendered');
 
-// Archive structure is owned by Work; the final editorial skin owns
-// contrast and focus tokens in both themes. Do not duplicate assignments.
-assert.match(editorialCss, /--archive-facts-edge:var\(--line\)/, 'Archive dividers need the final editorial ink token');
-assert.match(editorialCss, /--archive-focus-edge:var\(--focus\)/, 'Archive focus needs the shared theme-aware focus token');
+// Work facts and focus use the shared --line/--focus tokens directly;
+// the editorial skin owns only the card surface, border and shadow.
+assert.doesNotMatch(editorialCss, /--archive-(?:facts-edge|focus-edge)\s*:/,
+ 'Do not reintroduce aliases for existing theme divider/focus tokens');
 assert.doesNotMatch(workCss, /--archive-(?:surface|edge|shadow|facts-edge|focus-edge)\s*:/,
  'Work layout must not redeclare editorial card surface/focus tokens');
-assert.match(workCss, /outline:2px solid var\(--archive-focus-edge\)/, 'Archive focus must consume the theme token');
+assert.match(workCss, /border-block:1px solid var\(--line\)/, 'Archive facts must use shared theme dividers');
+assert.match(workCss, /outline:2px solid var\(--focus\)/, 'Archive focus must use shared theme-aware focus');
 // Placeholder color ownership: do not revive superseded per-client palettes.
 assert.doesNotMatch(workCss, /--(?:archive-preview(?:-edge|-text)?|file-tint)\s*:/,
  'Work must not restore unused preview color tokens');
-assert.match(workCss, /border:1px dashed var\(--line\)/,
- 'Work must retain a dashed frame for unsupplied project imagery');
+assert.match(workCss, /border-width:1px;/,
+ 'Work may adjust the width of the shared illustrative frame');
+assert.match(visualPlaceholderCss, /border:2px dashed var\(--placeholder-edge\)/,
+ 'Shared visual owner must retain dashed placeholder border style and color');
 assert.match(visualPlaceholderCss, /--placeholder-surface:var\(--surface-blush\)/,
  'Shared visual owner must give Work placeholders neutral paper');
 assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] :is\(\.visual-label,\.visual-brief,\.brief-kicker\)\{color:var\(--ink\)\}/,
