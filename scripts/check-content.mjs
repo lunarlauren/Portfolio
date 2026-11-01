@@ -132,6 +132,14 @@ assert.match(workCss, /\.work \.featured-project\.client-file \.project-visual:n
  'Work must own neutral illustrative background, readable ink and dashed frame');
 assert.doesNotMatch(editorialCss, /\.work \.featured-project \.project-visual:not\(:has\(img\)\)/,
  'Editorial skin must not reintroduce important placeholder overrides');
+assert.match(workCss, /\.work \.featured-project \.project-visual\{[^}]*border:1px solid var\(--editorial-card-edge\);[^}]*border-radius:2px;[^}]*box-shadow:/,
+ 'Work owns the solid preview frame and its editorial theme paint');
+assert.match(workCss, /\.work \.featured-project \.project-visual:has\(img\)\{background:transparent\}/,
+ 'Supplied Work imagery keeps its transparent image backing');
+assert.doesNotMatch(editorialCss, /\.featured-project \.project-visual(?:\{|:has\()/,
+ 'Late editorial skin must not redefine Work preview frames');
+assert.match(workCss, /\.work \.featured-project\.client-file \.project-visual:not\(:has\(img\)\)\{border-style:solid\}/,
+ 'Work missing-image frames must honor increased-contrast preferences');
 assert.doesNotMatch(workCss, /html\[data-theme="dark"\] \.project-visual\{/,
  'Shared dark visual fallback must not live in Work');
 assert.doesNotMatch(visualPlaceholderCss, /--placeholder-text:/,
