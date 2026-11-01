@@ -820,6 +820,32 @@ try{
   }
   await page.emulateMedia({reducedMotion:"no-preference"});
  }
+ // The consolidated breakpoints must preserve facts, gallery, evidence, and
+ // sticky chapter offsets across their exact boundaries in both themes.
+ for(const width of [320,480,481,600,650,651,760,761]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const metrics=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const columns=selector=>getComputedStyle(document.querySelector(selector)).gridTemplateColumns.trim().split(/\s+/).length;
+    const facts=getComputedStyle(document.querySelector(".case-facts"));
+    return {
+     factsDisplay:facts.display,factCols:columns(".case-facts"),
+     evidenceCols:columns(".case-evidence"),galleryCols:columns(".case-gallery"),
+     stickyTop:parseFloat(getComputedStyle(document.querySelector(".case-section-links")).top),
+     overflow:document.documentElement.scrollWidth-innerWidth
+    };
+   },theme);
+   if(width<=760){
+    assert.equal(metrics.factsDisplay,"grid",width+"px "+theme+": facts use the responsive grid");
+    assert.equal(metrics.factCols,width<=480?1:2,width+"px "+theme+": facts columns");
+   }else assert.equal(metrics.factsDisplay,"flex",width+"px "+theme+": desktop facts remain flex");
+   assert.equal(metrics.evidenceCols,width<=760?1:3,width+"px "+theme+": evidence columns");
+   assert.equal(metrics.galleryCols,width<=760?1:2,width+"px "+theme+": gallery columns");
+   assert.equal(metrics.stickyTop,width<=650?110:width<=760?64:72,width+"px "+theme+": sticky chapter offset");
+   assert.ok(metrics.overflow<=2,width+"px "+theme+": no horizontal page overflow");
+  }
+ }
  await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
  await page.setViewportSize({width:1280,height:720});
  assert.equal(await page.locator(".case-facts dt").allTextContents().then(labels=>labels.some(label=>label.trim()==="My role")),true,"Case facts should expose the designer's actual contribution");
