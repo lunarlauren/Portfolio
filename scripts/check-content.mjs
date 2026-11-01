@@ -224,6 +224,16 @@ assert.match(phoneAboutCss, /\.about \.about-portrait img\s*\{[^}]*object-fit:\s
  'Small portrait should use a consistent cropped frame');
 assert.match(phoneAboutCss, /\.about \.about-copy p\s*\{[^}]*line-height:\s*1\.55/,
  'Mobile biography should retain legible reading leading');
+// About owns the only phone breakpoint and the AI aside inherits the biography
+// type scale; do not restore a second, higher-specificity typography override.
+assert.equal((aboutCss.match(/@media\s*\(max-width:\s*600px\)/g)||[]).length,1,
+ 'About phone composition, CTA and AI aside should share one breakpoint');
+assert.match(aboutCss, /\.about \.about-copy \.ai-process p:not\(\.eyebrow\)\{max-width:58ch\}/,
+ 'AI process retains only its intentionally narrower reading measure');
+assert.doesNotMatch(homepageCss, /\.about-bottom\s*\{display:block\}/,
+ 'About display belongs to about.css, not homepage-base');
+assert.doesNotMatch(homepageCss, /\.hero h1 em,\.section-head h2 em,\.about h2 em/,
+ 'Dead pre-editorial emphasis paint should not return');
 assert.match(html, /03 \/ ABOUT ME/, 'About section label must describe its content');
 assert.match(aboutCss, /\.about \.about-bottom\s*\{[^}]*display:\s*block/,
  'About should have one readable column after removing the inventory');

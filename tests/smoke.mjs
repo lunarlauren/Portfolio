@@ -686,6 +686,23 @@ try{
     `${width}px ${theme}: AI process note must follow the portrait without overlapping it`);
   }
  }
+ // About's AI note should inherit the biography type rhythm rather than
+ // maintaining competing phone/desktop declarations. Check both themes.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const typography=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const bio=getComputedStyle(document.querySelector(".about .about-bio p"));
+    const note=getComputedStyle(document.querySelector(".about .ai-process p:not(.eyebrow)"));
+    return {bioSize:bio.fontSize,noteSize:note.fontSize,bioLeading:bio.lineHeight,noteLeading:note.lineHeight};
+   },theme);
+   assert.equal(typography.noteSize,typography.bioSize,
+    `${width}px ${theme}: AI aside and biography should share readable type size`);
+   assert.equal(typography.noteLeading,typography.bioLeading,
+    `${width}px ${theme}: AI aside should inherit the biography line height`);
+  }
+ }
  await page.setViewportSize({width:1280,height:720});
  await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
  assert.notEqual(await page.locator(".about-portrait figcaption").evaluate(node=>getComputedStyle(node).display),"none",
