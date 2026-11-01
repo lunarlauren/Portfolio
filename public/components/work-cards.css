@@ -45,15 +45,8 @@
 /* Work archive: linked case studies with documented process previews. */
 .featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.5vw,34px);margin-bottom:clamp(42px,6vw,76px)}
 .featured-project>.eyebrow{margin:8px 0 4px}
-/* One Work preview frame for supplied imagery and disclosed briefs.
-   Editorial supplies theme tokens; the more-specific missing-image rule
-   below retains its dashed edge and neutral paper in either theme. */
-.featured-project .project-visual{
- aspect-ratio:16/10;min-height:0;
- border:1px solid var(--editorial-card-edge);
- border-radius:2px;
- box-shadow:inset 0 1px 0 var(--editorial-card-glow);
-}
+/* Work owns the preview frame; missing-image briefs keep their dashed edge. */
+.featured-project .project-visual{aspect-ratio:16/10;min-height:0;border:1px solid var(--editorial-card-edge);border-radius:2px;box-shadow:inset 0 1px 0 var(--editorial-card-glow)}
 .work .featured-project .project-visual:has(img){background:transparent}
 .featured-project .project-card p{font-size:0.9375rem;line-height:1.65;max-width:58ch}
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
@@ -89,7 +82,7 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
  --file-cta-ink:color-mix(in srgb,var(--file-accent) 35%,var(--ink));
  position:relative;
  margin-top:32px;
- /* Archive surface and preview frames live here; editorial supplies theme tokens. */
+ /* Archive paint uses shared editorial theme tokens. */
 }
 .client-file--hoylu{--file-accent:#53a7de}
 .client-file--alcon{--file-accent:#f15c9d}
@@ -372,8 +365,8 @@ html[data-theme="dark"] .project-card-link{color:var(--ink)}
 @media(prefers-reduced-motion:reduce), (hover:none){
  .work .featured-project.client-file{transition:none;transform:none}
 }
+/* Preserve solid missing-image edges in increased-contrast mode. */
 @media(prefers-contrast:more){
  .work .featured-project.client-file{box-shadow:none!important;border-width:2px!important}
- /* A disclosed missing image must not lose the shared solid high-contrast edge. */
  .work .featured-project.client-file .project-visual:not(:has(img)){border-style:solid}
 }
