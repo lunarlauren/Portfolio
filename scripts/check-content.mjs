@@ -1067,7 +1067,7 @@ assert.doesNotMatch(renderFacts(['Hoylu','Product UX','Product design contributi
 assert.match(workCss,/\.work \.project-card-facts \.project-delivery-shipped\{/,
  'Delivery stamp should be styled within the owning Work component');
 
-assert.doesNotMatch(editorialCss, /\.site-header,footer\.wrap\{background:/
+assert.doesNotMatch(editorialCss, /\.site-header,footer\.wrap\{background:/,
  'Navigation owns opaque header and footer, including forced-colors behavior');
 
 // About/Playground/footer must not regain superseded homepage declarations.
