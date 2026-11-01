@@ -2,7 +2,7 @@
    Loaded after the base stylesheet to preserve the existing cascade. */
 @media(max-width:760px){
  .case-body{grid-template-columns:1fr}
- .case-gallery .project-visual{min-height:220px}
+
  .case-view{padding-bottom:70px}
 }
 .case-facts{display:flex;flex-direction:column;gap:24px;line-height:1.4;letter-spacing:normal;font-size:var(--type-xs)}
@@ -34,25 +34,24 @@
 html[data-theme="dark"] .case-process-note{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-lavender))}
 html[data-theme="dark"] .case-process-note h3{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
 
-/* A missing hero is a brief, not a shipped UI screenshot. Theme tokens replace !important. */
+/* No-image briefs remain distinct from approved screenshots. The later dark
+   hero surface rule supplies dark paint without duplicate placeholder tokens. */
 .case-view .case-hero-visual:not(:has(img)){
- --case-hero-placeholder-bg:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
- --case-hero-placeholder-border:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
- background:var(--case-hero-placeholder-bg);
- border:2px dashed var(--case-hero-placeholder-border);
+ background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ border:2px dashed color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
 }
 .case-view .case-hero-visual:not(:has(img))::before{content:none;display:none}
-.hero-image-brief{display:flex;flex-direction:column;gap:18px;max-width:720px;font:500 clamp(18px,2.4vw,31px)/1.45 'DM Sans',system-ui,sans-serif;color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));text-align:left}
+.case-view .case-hero-visual:not(:has(img)) .hero-image-brief{
+ display:flex;flex-direction:column;gap:10px;max-width:72ch;
+ font:500 clamp(16px,1.55vw,20px)/1.55 'DM Sans',system-ui,sans-serif;
+ color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));text-align:left;
+}
 html[data-theme="dark"] .case-view .case-hero-visual{
  background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
  border-color:#496074;
 }
 html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
-html[data-theme="dark"] .case-view .case-hero-visual:not(:has(img)){
- --case-hero-placeholder-bg:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
- --case-hero-placeholder-border:#496074;
-}
 
 /* Case-study facts: definition-list semantics with a compact phone layout.
    Audience/scenario and constraints are source-backed editorial summaries,
@@ -172,14 +171,6 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
  min-height:clamp(220px,28vw,320px);
  margin-block:clamp(24px,4vw,40px);
  padding:clamp(20px,3vw,36px);
-}
-/* Treat a visual request as a legible editorial caption, not oversized
-   product-screen artwork; the approved-image path remains untouched. */
-.case-view .case-hero-visual:not(:has(img)) .hero-image-brief{
- max-width:72ch;
- gap:10px;
- font-size:clamp(16px,1.55vw,20px);
- line-height:1.55;
 }
 @media(max-width:760px){
  .case-view .case-hero-visual:not(:has(img)){
@@ -337,16 +328,24 @@ html[data-theme="dark"] .case-view{
 }
 
 .case-view .case-evidence-item{
+ min-width:0;
  background:var(--case-fact-bg);
- border-color:var(--case-fact-border);
+ border:1px solid var(--case-fact-border);
  border-radius:0;
  border-left:3px solid var(--case-cover-accent);
  padding:var(--space-4,1.5rem);
 }
 /* A description list keeps the overview accessible without default <dd> indentation. */
 .case-view .case-evidence-value{margin:0}
-.case-view .case-evidence-label{color:var(--case-fact-label)}
-.case-view .case-evidence-item strong{color:var(--case-fact-ink);line-height:1.5}
+.case-view .case-evidence-label{
+ display:block;margin-bottom:8px;
+ font:700 11px/1.4 'DM Sans',system-ui,sans-serif;
+ letter-spacing:.1em;color:var(--case-fact-label);
+}
+.case-view .case-evidence-item strong{
+ display:block;font-weight:600;overflow-wrap:break-word;
+ color:var(--case-fact-ink);line-height:1.5;
+}
 .case-view .case-prose{
  background-color:var(--case-reading-bg);
  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--case-reading-rule) 31px,var(--case-reading-rule) 32px);
@@ -404,21 +403,16 @@ html[data-theme="dark"] .case-view{
 
 /* Case-study handoff: quick factual overview for skimming hiring managers.
    Keep values in script.js/projectEvidence aligned with confirmed project scope. */
-.case-evidence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:clamp(20px,3vw,36px) 0}
-.case-evidence-item{min-width:0;border:1px solid var(--line)}
-.case-evidence-label{display:block;margin-bottom:8px;font:700 11px/1.4 'DM Sans',system-ui,sans-serif;letter-spacing:.1em}
-.case-evidence-item strong{display:block;font-weight:600;overflow-wrap:break-word}
-@media(max-width:760px){.case-evidence{grid-template-columns:1fr}}
-/* Evidence colors inherit the shared --case-fact-* theme tokens above. */
-
-
-
-/* Case-study evidence and gallery: consistent editorial spacing, not dashboard tiles.
-   Keep image frames stable while their contents load. */
+/* Case-study evidence and gallery: one owner for grid geometry and theme
+   paint. Keep image frames stable while their contents load. */
 .case-view .case-evidence{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ margin:clamp(20px,3vw,36px) 0;
  align-items:stretch;
  gap:var(--space-3,1rem);
 }
+@media(max-width:760px){.case-view .case-evidence{grid-template-columns:1fr}}
 
 .case-view .case-gallery{
  align-items:start;
