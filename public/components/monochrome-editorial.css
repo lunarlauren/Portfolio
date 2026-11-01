@@ -21,22 +21,16 @@ html[data-theme="dark"]{
 /* Client work stays in color; About portrait retains its reveal and card lift remains animated. */
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
-/* Link interaction colors and section dividers live in their owning components. */
 @media(prefers-reduced-motion:reduce){
  .about-portrait img,.hero .feature-art .hero-portrait-art{transition:none!important}
 }
 
-/* Case-study evidence, annotations, and gallery surfaces are owned by
-   case-study.css; this skin supplies their shared theme tokens only. */
 /* The decorative hero portrait must not require hover to reveal color. */
 @media(hover:none){
  .hero .feature-art .hero-portrait-art{filter:none}
 }
 /* Project imagery has no grayscale rules; only the hero/About portraits reveal color.
    Do not add image-filter resets that mask the owning component's styles. */
-/* Archive glass paint, preview frames and motion live in work-cards.css.
-   This layer retains theme tokens and portrait treatments only. */
-/* Semantic Work copy, client CTA ink and tab labels own their colors.
-   Avoid descendant-wide !important rules that flatten meaningful hierarchy. */
+/* Work owns its card paint, frames, motion and copy; this skin supplies tokens. */
 /* Align neutral site sections and controls without erasing project colors. */
 .playground .play-grid .project-card-link{border-color:#666}
