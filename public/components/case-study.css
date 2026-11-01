@@ -129,28 +129,18 @@ html[data-theme="dark"] .case-view .case-hero-visual:not(:has(img)){
    notebook override formerly applied in the base stylesheet. */
 /* Case study chapter buttons: scroll within the routed page without changing its hash. */
 .case-section-links button{appearance:none;font:inherit;cursor:pointer;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:11px 16px;min-height:44px;touch-action:manipulation;text-align:left}
-.case-section-links button:hover{background:var(--surface-blush)}
-html[data-theme="dark"] .case-section-links button:hover{background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue))}
+.case-section-links button:is(:hover,:focus-visible){background:var(--surface-blush)}
+html[data-theme="dark"] .case-section-links button:is(:hover,:focus-visible){background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue))}
 
 
 /* Extracted case-study reading surfaces and sticky chapter index. */
 /* Notebook case-study chapters: paper styling is limited to the reading surface.
    Screenshots and diagrams stay on solid backgrounds for accurate inspection. */
-html:not([data-theme="dark"]) .case-view{--case-paper:#fffdf8}
-html:not([data-theme="dark"]) .case-prose{background:var(--case-paper);background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--notebook-rule) 31px,var(--notebook-rule) 32px);border-radius:12px;padding:clamp(16px,3vw,30px)}
 .case-section-links{display:flex;flex-wrap:wrap;gap:10px}
-.case-section-links button{transition:transform .16s ease,box-shadow .16s ease}
 .case-section-links button:active{transform:translateY(2px)}
 /* Hover is unavailable on touch screens: keyboard focus gets the same
    tactile surface feedback without relying on a color-only state. */
-.case-section-links button:focus-visible{
- background:var(--surface-blush);
- text-decoration:underline;
- text-underline-offset:4px;
-}
-html[data-theme="dark"] .case-section-links button:focus-visible{
- background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));
-}
+.case-section-links button:focus-visible{text-decoration:underline;text-underline-offset:4px}
 
 
 
@@ -208,7 +198,7 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 @media(max-width:600px){
  .case-view .case-head,.case-view .case-prose{min-width:0;overflow-wrap:break-word}
  .case-view .case-head h1{overflow-wrap:anywhere;hyphens:auto}
- .case-view .case-section-links{scroll-padding-inline:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .case-view .case-section-links{-webkit-overflow-scrolling:touch;scrollbar-width:none}
  .case-view .case-section-links::-webkit-scrollbar{display:none}
  .case-view .case-hero-visual img{max-width:100%;height:auto}
 }
@@ -220,6 +210,7 @@ html[data-theme="dark"] .case-section-links button[aria-current="location"]{
 /* Chapter index: clear active state and a paper-tab hover response.
    Use a non-color cue (underline) for the current chapter. */
 .case-view .case-section-links button{
+ font-size:var(--case-type-small);
  text-underline-offset:5px;
  transition:background-color .18s ease,border-color .18s ease,transform .18s ease;
 }
@@ -258,10 +249,9 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
  --case-type-small:var(--type-sm,14px);
  --case-type-meta:var(--type-xs,12px);
 }
-.case-view .case-head{max-width:100%}
 .case-view .case-head h1{
  font-size:var(--case-type-title);line-height:1.08;letter-spacing:-.04em;
- max-width:18ch;margin-block:18px 20px;overflow-wrap:normal;text-wrap:balance;
+ max-width:18ch;margin-block:18px 20px;overflow-wrap:normal;text-wrap:balance;color:var(--case-cover-title);
 }
 /* Delivery stamp: a factual, immediately visible distinction between
    shipped product contributions and prototypes/concept explorations.
@@ -280,7 +270,7 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
  letter-spacing:.07em;
  line-height:1.5;
 }
-.case-view .case-intro{font-size:var(--case-type-lead);line-height:1.55;max-width:68ch;text-wrap:pretty}
+.case-view .case-intro{font-size:var(--case-type-lead);line-height:1.55;max-width:68ch;text-wrap:pretty;color:var(--case-cover-lead)}
 .case-view .case-prose h2{font-size:var(--case-type-section);line-height:1.17;letter-spacing:-.035em}
 .case-view .case-prose p,.case-view .case-process-note p{
  font-size:var(--case-type-body);line-height:1.7;font-weight:400;
@@ -291,10 +281,9 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
 .case-view .case-fact-value,.case-view .case-evidence-item strong{
  font-size:var(--case-type-small);line-height:1.6;
 }
-.case-view .case-fact-value{font-weight:400;letter-spacing:0}
+.case-view .case-fact-value{font-weight:400}
 .case-view .case-fact-label{font-weight:650;letter-spacing:.09em}
-.case-view .case-evidence-item strong{font-weight:600;line-height:1.5}
-.case-view .case-section-links button{font-size:var(--case-type-small)}
+.case-view .case-evidence-item strong{line-height:1.5}
 @media(max-width:760px){
  .case-view{--case-type-title:clamp(38px,8vw,56px);--case-type-lead:clamp(17px,4vw,20px)}
  .case-view .case-head h1{line-height:1.1;overflow-wrap:break-word;hyphens:auto}
@@ -321,6 +310,7 @@ html[data-theme="dark"] .case-view{
  --case-cover-lead:#c7d6e3;
 }
 .case-view .case-head{
+ max-width:100%;
  position:relative;
  background:var(--case-cover-bg);
  border:1px solid var(--case-cover-border);
@@ -328,9 +318,7 @@ html[data-theme="dark"] .case-view{
  padding:clamp(24px,3.4vw,44px);
  box-shadow:var(--case-cover-shadow);
 }
-.case-view .case-head h1{color:var(--case-cover-title)}
 .case-view .case-head .eyebrow{color:var(--case-cover-kicker)}
-.case-view .case-intro{color:var(--case-cover-lead)}
 @media(max-width:760px){
  .case-view .case-head{padding:clamp(22px,5vw,34px)}
 }
@@ -382,6 +370,9 @@ html[data-theme="dark"] .case-view{
 .case-view .case-evidence-item{
  background:var(--case-fact-bg);
  border-color:var(--case-fact-border);
+ border-radius:0;
+ border-left:3px solid var(--case-cover-accent);
+ padding:var(--space-4,1.5rem);
 }
 /* A description list keeps the overview accessible without default <dd> indentation. */
 .case-view .case-evidence-value{margin:0}
@@ -392,14 +383,13 @@ html[data-theme="dark"] .case-view{
  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--case-reading-rule) 31px,var(--case-reading-rule) 32px);
  border-radius:0;
  padding:clamp(22px,3vw,34px);
+ min-width:0;
+ max-width:74ch;
 }
 
 /* Editorial reading width: keep long-form reasoning comfortable to scan,
    while the project facts retain their own narrow sidebar column. */
-.case-view .case-prose{
- min-width:0;
- max-width:74ch;
-}
+
 .case-view .case-prose p,
 .case-view .case-process-note p{
  max-width:68ch;
@@ -421,8 +411,6 @@ html[data-theme="dark"] .case-view{
   margin-bottom:18px;
  }
  .case-view .case-prose p{
-  background-image:none;
-  line-height:1.7;
   margin-bottom:22px;
  }
  .case-view .case-section-links{
@@ -462,11 +450,7 @@ html[data-theme="dark"] .case-view{
  align-items:stretch;
  gap:var(--space-3,1rem);
 }
-.case-view .case-evidence-item{
- border-radius:0;
- border-left:3px solid var(--case-cover-accent);
- padding:var(--space-4,1.5rem);
-}
+
 .case-view .case-gallery{
  align-items:start;
  gap:var(--space-4,1.5rem);
@@ -524,7 +508,6 @@ html[data-theme="dark"] .case-view{
 .case-next-nav a:focus-visible,.case-back:focus-visible{
  outline:3px solid var(--notebook-pink);outline-offset:4px;
 }
-html[data-theme="dark"] .case-view{color:var(--ink)}
 html[data-theme="dark"] .case-back{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
 html[data-theme="dark"] .case-back:hover{color:#ffc2df}
 html[data-theme="dark"] .case-fact-label{color:#c6d5e2}
