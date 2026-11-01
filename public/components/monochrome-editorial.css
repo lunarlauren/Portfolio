@@ -2,23 +2,21 @@
    Project imagery retains its original files; color is an interaction detail.
    Keep contrast, keyboard access and reduced-motion behavior intact. */
 :root{
- --editorial-paper:#f5f3ef;--editorial-ink:#171717;--editorial-rule:#c8c5c0;
  --editorial-accent:#235f88;--editorial-action-ink:#fff;
  --palette-paper:#f5f3ef;--palette-navy:#171717;--palette-blue:#bdbdbd;--palette-pink:#858585;
- --notebook-pink:#555;--brand-pink:#555;--brand-sky:#e8e6e2;
+ --notebook-pink:#555;--brand-pink:#555;
  --paper:#f5f3ef;--ink:#171717;--brand-ink:#171717;--line:#c8c5c0;
- --surface-blush:#eeece8;--surface-cream:#f5f3ef;--surface-navy:#292929;
+ --surface-blush:#eeece8;
  --focus:#235f88;
  /* Card surfaces belong with the editorial theme tokens. */
  --editorial-card:#f7f6f3;--editorial-card-edge:#b7b5b1;
  --editorial-card-glow:rgba(255,255,255,.88);--editorial-card-shadow:rgba(18,18,18,.10);
 }
 html[data-theme="dark"]{
- --editorial-paper:#151515;--editorial-ink:#f1f0ec;--editorial-rule:#565656;
  --palette-paper:#151515;--palette-navy:#efefef;--palette-blue:#777;--palette-pink:#aaa;
- --notebook-pink:#aaa;--brand-pink:#dedede;--brand-sky:#252525;
+ --notebook-pink:#aaa;--brand-pink:#dedede;
  --paper:#151515;--ink:#f1f0ec;--brand-ink:#f1f0ec;--line:#565656;
- --surface-blush:#242424;--surface-cream:#1d1d1d;--surface-navy:#292929;
+ --surface-blush:#242424;
  --focus:#a6d9ff;--muted:#c4c4c4;
  --editorial-accent:#a6d9ff;--editorial-action-ink:#111;
  --editorial-card:#252525;--editorial-card-edge:#646464;
@@ -30,12 +28,10 @@ html[data-theme="dark"]{
 .hero-feature,.hero .feature-art{background:transparent!important;box-shadow:none!important}
 .hero .feature-art .hero-portrait-art{filter:grayscale(1) contrast(1.08);transition:filter .5s ease}
 .hero-feature:is(:hover,:focus-within) .hero-portrait-art{filter:grayscale(0)}
-.featured-projects-grid{gap:clamp(18px,2.5vw,34px)}
 .featured-project .project-visual{border-radius:2px}
 /* Client work stays in color; About portrait retains its reveal and card lift remains animated. */
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
-.featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500}
 /* Link interaction colors and section dividers live in their owning components. */
 @media(prefers-reduced-motion:reduce){
  .about-portrait img,.hero .feature-art .hero-portrait-art{transition:none!important}
@@ -69,7 +65,7 @@ html[data-theme="dark"]{
 /* Client accents remain in work-cards.css; the archive skin below owns the border. */
 /* EDITORIAL SYSTEM — neutral surfaces everywhere except branded project media.
    The restrained glass treatment adds depth without reducing text contrast. */
-.work :is(.featured-project.client-file,.notebook-project-index .featured-project){
+.work .featured-project.client-file{
  /* Single archive surface; preserve readable facts and keyboard focus tokens. */
  --archive-facts-edge:var(--line);
  --archive-focus-edge:var(--focus);
@@ -86,11 +82,11 @@ html[data-theme="dark"]{
  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
 }
 /* A glossy highlight sits behind content, never above it. */
-.work :is(.featured-project.client-file,.notebook-project-index .featured-project)::after{
+.work .featured-project.client-file::after{
  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
  background:linear-gradient(145deg,rgba(255,255,255,.11),transparent 43%);
 }
-.work :is(.featured-project.client-file,.notebook-project-index .featured-project):is(:hover,:focus-within){
+.work .featured-project.client-file:is(:hover,:focus-within){
  box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 22px -8px color-mix(in srgb,var(--file-accent,var(--line)) 38%,transparent),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
 }
 /* Semantic Work copy, client CTA ink and tab labels own their colors.
@@ -102,19 +98,12 @@ html[data-theme="dark"]{
 }
 .work .featured-project .project-visual:has(img){background:transparent}
 /* Align neutral site sections and controls without erasing project colors. */
-.about .ai-process{border-color:var(--line)}
 .playground .play-grid .project-card-link{border-color:#666}
 /* No archive lift animation on touch or when motion is reduced. */
 @media(hover:none),(prefers-reduced-motion:reduce){
- .work :is(.featured-project.client-file,.notebook-project-index .featured-project){transition:none}
+ .work .featured-project.client-file{transition:none}
 }
 
-/* FINAL PAPER CONSISTENCY: navigation owns chrome, stationery owns dot tokens. */
-/* Theme tokens supply the dots' contrast; the geometry is shared. */
-body{
- background-color:var(--paper);
- background-image:radial-gradient(circle,var(--notebook-dot-color) 1px,transparent 1.4px);
-}
 @media(prefers-contrast:more){
  .work .featured-project.client-file{box-shadow:none!important;border-width:2px!important}
 }

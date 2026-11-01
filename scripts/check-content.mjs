@@ -955,10 +955,10 @@ assert.doesNotMatch(css, /\.case-process-note\s*\{/, 'Case-study process notes m
 // Archive skin selector ownership: the client folder and notebook index
 // share identical surfaces in both themes. Preserve the two branches inside
 // :is() without reintroducing redundant dark-only specificity.
-assert.match(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\)\{/,
- 'Archive skin must use one shared selector for both card types');
-assert.match(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\)::after\{/,
- 'Archive gloss must use the same shared card selector');
+assert.match(editorialCss, /\.work \.featured-project\.client-file\{/,
+ 'Archive skin must target the rendered client-file cards');
+assert.match(editorialCss, /\.work \.featured-project\.client-file::after\{/,
+ 'Archive gloss must target the same rendered client-file cards');
 assert.doesNotMatch(editorialCss, /html\[data-theme="dark"\] \.work \.featured-project\.client-file\{/,
  'Do not restore a redundant dark-only archive surface override');
 assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var\(--file-accent\)/,
@@ -1000,6 +1000,26 @@ assert.doesNotMatch(editorialCss, /\.project-visual img,\.project-card img,\.pla
 assert.match(workCss, /\.project-card img\{transition:transform \.45s ease\}/, 'Work owns shared project image motion');
 assert.match(workCss, /\.project-card img\{transition:none!important\}/, 'Shared image motion respects reduced motion');
 assert.doesNotMatch(editorialCss, /\.project-card img\{transition:/, 'Editorial surfaces must not own project image motion');
+
+/* Archive motion + editorial token cleanup: the rendered professional files
+   always carry .client-file; no duplicate notebook-index selector is needed. */
+assert.doesNotMatch(editorialCss, /--(?:editorial-paper|editorial-ink|editorial-rule|brand-sky|surface-cream|surface-navy)\s*:/,
+ 'Unused late theme aliases must not return');
+assert.doesNotMatch(editorialCss, /^body\s*\{/m,
+ 'Stationery owns the paper-dot background; editorial body reset was dead');
+assert.doesNotMatch(editorialCss, /\.notebook-project-index \.featured-project/,
+ 'Rendered archive files share the .client-file selector');
+assert.doesNotMatch(editorialCss, /\.featured-projects-grid\{gap:|\.featured-project \.project-card h3\{font-family:/,
+ 'Work grid gap and title font belong to work-cards.css');
+assert.match(workCss, /\.featured-projects-grid\{display:grid;[^}]*gap:clamp\(18px,2\.5vw,34px\)/,
+ 'Work owns the effective tablet archive gap');
+assert.match(workCss, /\.featured-project \.project-card h3\{font-family:var\(--font-display,Georgia,serif\);font-weight:500;/,
+ 'Work owns the effective project title font');
+assert.match(workCss, /\.project-card-link:is\(:hover,:focus-visible\) \.project-meta span:last-child\{transform:translate\(4px,-4px\)\}/,
+ 'Metadata arrow remains discoverable on keyboard focus');
+assert.match(workCss, /@media\(prefers-reduced-motion:reduce\)\{\s*\.project-card \.project-meta span:last-child\{transition:none\}/,
+ 'Metadata arrows must stop animating for reduced-motion visitors');
+
 assert.doesNotMatch(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\) :is\(/,
  'No blanket archive descendant ink override may erase client CTA/tab colors');
 assert.match(workCss, /\.work \.project-card :is\(h3,p,\.project-meta\)\{color:var\(--ink\)\}/,
