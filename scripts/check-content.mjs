@@ -103,6 +103,16 @@ for (const name of stylesheetOrder) {
  previousPosition = match;
 }
 assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual:not/, 'Placeholder dark tokens must stay in the shared component');
+assert.match(visualPlaceholderCss, /\.work \.featured-project \.project-visual:not\(:has\(img\)\)\{[^}]*--placeholder-surface:var\(--surface-blush\)/,
+ 'Archive placeholder tokens belong to the shared visual component');
+assert.doesNotMatch(editorialCss, /\.work \.featured-project \.project-visual:not\(:has\(img\)\)/,
+ 'Editorial skin must not reintroduce important placeholder overrides');
+assert.doesNotMatch(workCss, /html\[data-theme="dark"\] \.project-visual\{/,
+ 'Shared dark visual fallback must not live in Work');
+assert.doesNotMatch(visualPlaceholderCss, /--placeholder-text:/,
+ 'Unused placeholder text token must stay retired');
+assert.equal((visualPlaceholderCss.match(/html\[data-theme="dark"\] :is\(\.visual-label,\.visual-brief,\.brief-kicker\)/g)||[]).length,1,
+ 'Dark illustrative labels must have one readable ink rule');
 assert.doesNotMatch(visualPlaceholderCss, /\.project-visual:not\(:has\(img\)\) \.visual-label\{/, 'No nested border around illustrative briefs');
 assert.match(visualPlaceholderCss, /\.project-visual \.visual-brief\{[^}]*display:flex;/, 'Shared brief remains readable');
 assert.doesNotMatch(workCss, /\.project-visual \.visual-brief\{\s*box-shadow:none/, 'No unused Work brief shadow reset');
