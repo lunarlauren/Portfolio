@@ -37,15 +37,8 @@ html[data-theme="dark"]{
  .about-portrait img,.hero .feature-art .hero-portrait-art{transition:none!important}
 }
 
-/* CASE STUDY READING EXPERIENCE
-   Keep research and outcomes readable; avoid ornamental colored callouts. */
-.case-view{color:var(--ink)}
-.case-fact{border-left-color:var(--line)}
-.case-fact-label,.case-highlight-label{color:var(--muted)}
-.case-highlights{border-color:var(--line)}
-.case-highlight{border-left-color:var(--line)}
-.case-process-note{background:var(--surface-blush);border-left-color:var(--line)}
-.case-gallery .project-visual{background:var(--surface-blush);border-radius:2px}
+/* Case-study evidence, annotations, and gallery surfaces are owned by
+   case-study.css; this skin supplies their shared theme tokens only. */
 /* The decorative hero portrait must not require hover to reveal color. */
 @media(hover:none){
  .hero .feature-art .hero-portrait-art{filter:none}
