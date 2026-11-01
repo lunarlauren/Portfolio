@@ -14,6 +14,7 @@ const css = read('../public/styles.css');
 const caseStudy = read('../public/components/case-study.js');
 const projectContent = read('../public/components/project-content.js');
 const caseCss = read('../public/components/case-study.css');
+const caseBaseCss = read('../public/components/case-study-base.css');
 const foundationsCss = read('../public/components/foundations.css');
 const navigationCss = read('../public/components/navigation.css');
 const heroPolishCss = read('../public/components/hero-polish.css');
@@ -906,6 +907,14 @@ assert.equal(secondChapterButton.getAttribute('aria-current'), null, 'Only one c
 
 
 // Pass 6: production stylesheet ownership and duplicate-rule guardrails.
+ // Effective evidence and gallery spacing belongs to the scoped component.
+ const evidenceBase=caseCss.match(/(?:^|\n)\.case-evidence\{([^}]*)\}/)?.[1];
+ assert.ok(evidenceBase,'Evidence grid retains structural desktop columns');
+ assert.doesNotMatch(evidenceBase,/\bgap\s*:/,'Evidence gap must not have competing base rule');
+ assert.doesNotMatch(caseBaseCss,/\.case-intro\s*\{/,'Case intro belongs to scoped cover');
+ assert.doesNotMatch(caseBaseCss,/\.case-gallery\s*\{[^}]*\bgap\s*:/,'Gallery gap belongs to scoped component');
+ assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*gap:var\(--space-3,1rem\)/,'Evidence gap retains token');
+ assert.match(caseCss,/\.case-view \.case-gallery\{[^}]*gap:var\(--space-4,1\.5rem\)/,'Gallery gap retains token');
 assert.doesNotMatch(caseCss, /html\[data-theme="dark"\] \.case-evidence-item\{/, 'Evidence theme colors should use shared tokens, not duplicate dark rules');
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*border-radius:0/, 'Evidence geometry must remain in the scoped component');
 assert.match(caseCss, /\.case-view \.case-evidence-item\{[^}]*padding:var\(--space-4/, 'Evidence spacing must use the shared scale');
