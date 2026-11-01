@@ -731,6 +731,30 @@ try{
  assert.ok(phoneBriefHeight>=190&&phoneBriefHeight<=320,"Phone brief should not bury the UX narrative");
  assert.equal(await brief.evaluate(node=>node.scrollHeight<=node.clientHeight+2),true,"Brief text should not be vertically clipped");
  await page.setViewportSize({width:1280,height:720});
+ // Check computed evidence/gallery geometry and theme paint after removing dead overrides.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  const samples=[];
+  for(const theme of ["light","dark"]){
+   const metrics=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const evidence=getComputedStyle(document.querySelector(".case-evidence"));
+    const gallery=getComputedStyle(document.querySelector(".case-gallery"));
+    return {evidenceCols:evidence.gridTemplateColumns.trim().split(/\s+/).length,
+     galleryCols:gallery.gridTemplateColumns.trim().split(/\s+/).length,
+     evidenceGap:evidence.gap,galleryGap:gallery.gap,
+     surface:getComputedStyle(document.querySelector(".case-evidence-item")).backgroundColor};
+   },theme);
+   assert.equal(metrics.evidenceCols,width===390?1:3,theme+": evidence columns at "+width+"px");
+   assert.equal(metrics.galleryCols,width===390?1:2,theme+": gallery columns at "+width+"px");
+   samples.push(metrics);
+  }
+  assert.equal(samples[0].evidenceGap,samples[1].evidenceGap,"Evidence spacing must not shift with theme");
+  assert.equal(samples[0].galleryGap,samples[1].galleryGap,"Gallery spacing must not shift with theme");
+  assert.notEqual(samples[0].surface,samples[1].surface,"Evidence card surface must adapt to theme");
+ }
+ await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
+ await page.setViewportSize({width:1280,height:720});
  assert.equal(await page.locator(".case-facts dt").allTextContents().then(labels=>labels.some(label=>label.trim()==="My role")),true,"Case facts should expose the designer's actual contribution");
  assert.match(await page.locator(".case-facts").innerText(),/Product UX and visual design/,"Role must use reviewed project metadata");
  assert.equal(await page.locator(".case-delivery-stamp").count(),0,"Design contributions without verified shipping must not get a shipped stamp");
