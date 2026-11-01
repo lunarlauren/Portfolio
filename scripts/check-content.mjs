@@ -145,7 +145,7 @@ assert.equal((workCss.match(/@media\(max-width:600px\)/g)||[]).length,1,
  'Work phone intro and archive should share one breakpoint');
 // Archive folders render with both .featured-project and .client-file.
 // Keep metadata spacing and night CTA tokens under one cascade owner.
-assert.match(workCss, /\.featured-project>\.eyebrow\{margin:8px 0 4px;/,
+assert.match(workCss, /\.featured-project>\.eyebrow\{margin:8px 0 4px\}/,
  'Archive folder metadata should have one spacing owner');
 assert.doesNotMatch(workCss, /counter-reset:project|\.client-file>\.eyebrow\{|\.work \.featured-project\.client-file>\.eyebrow\{/,
  'Retired counter and duplicate archive eyebrow rules must stay removed');
