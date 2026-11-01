@@ -358,8 +358,9 @@ try{
      approachVisible:!!process&&getComputedStyle(process).display!=="none",
      processInk:process?getComputedStyle(process).color:null,
      cardInk:card?getComputedStyle(card).color:null,
-     factsEdge:card?getComputedStyle(card).getPropertyValue("--archive-facts-edge").trim():null,
-     focusEdge:card?getComputedStyle(card).getPropertyValue("--archive-focus-edge").trim():null,
+     factsEdge:facts?getComputedStyle(facts).borderTopColor:null,
+     factsBorderStyle:facts?getComputedStyle(facts).borderTopStyle:null,
+     focusEdge:card?getComputedStyle(card).getPropertyValue("--focus").trim():null,
      clientInk
     };
    },theme);
@@ -382,7 +383,8 @@ try{
    assert.equal(archive.metaDisplay,"flex","Project metadata layout in "+theme+" at "+width+"px");
    assert.equal(archive.linkDisplay,"block","Work link geometry in "+theme+" at "+width+"px");
    assert.equal(archive.processInk,archive.cardInk,"Archive process copy must match readable card ink");
-   assert.ok(archive.factsEdge&&archive.focusEdge,"Archive contrast and focus tokens must survive consolidation");
+   assert.ok(archive.factsEdge&&archive.focusEdge,"Archive facts and focus must retain shared theme colors");
+   assert.equal(archive.factsBorderStyle,"solid","Archive evidence divider must remain visible");
    assert.ok(archive.clientInk.length>0&&archive.clientInk.every(Boolean),
     "Every archive file needs a client tab and visible case-study CTA");
    for(const client of archive.clientInk){

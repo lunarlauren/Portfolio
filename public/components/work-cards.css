@@ -85,6 +85,7 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
  --file-label-ink:#000000;
  --file-highlight-strength:35%;
  --file-highlight:color-mix(in srgb,var(--file-accent) var(--file-highlight-strength),transparent);
+ --file-cta-ink:color-mix(in srgb,var(--file-accent) 35%,var(--ink));
  position:relative;
  margin-top:32px;
  /* Card border and radius are painted by monochrome-editorial.css. */
@@ -93,12 +94,7 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
 .client-file--alcon{--file-accent:#f15c9d}
 .client-file--holland-america{--file-accent:#50ba9c}
 html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
-.client-file>.eyebrow{
- margin-top:8px;
- margin-bottom:12px;
- font-size:0.6875rem;
- letter-spacing:.055em;
-}
+.client-file>.eyebrow{margin-top:8px}
 .client-file .client-file-label{
  position:absolute;
  left:-1px;
@@ -118,6 +114,7 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
  letter-spacing:.075em;
  text-transform:uppercase;
  white-space:nowrap;
+ transition:transform .24s cubic-bezier(.2,.75,.25,1);
 }
 .client-file .client-file-number{
  font-variant-numeric:tabular-nums;
@@ -208,6 +205,7 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
  min-height:132px;
  padding:clamp(14px,2vw,24px);
  justify-content:flex-start;
+ /* The later editorial frame resets border-style; preserve dashed disclosure. */
  border:1px dashed var(--line);
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
@@ -234,21 +232,14 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
 }
 /* Accent-tinted, contrast-safe CTA ink over neutral glass cards.
    The raw tab accent is too pale for small linked text on light paper. */
-.work .client-file{--file-cta-ink:color-mix(in srgb,var(--file-accent) 35%,var(--ink))}
 html[data-theme="dark"] .work .client-file{
  --file-cta-ink:color-mix(in srgb,var(--file-accent) 55%,var(--ink));
 }
-/* Facts dividers use the editorial theme token. */
-.work .featured-project.client-file .project-card-facts{
- border-block-color:var(--archive-facts-edge);
-}
-
 /* A facts block followed by the design approach is one section break,
    not two stacked horizontal rules. Keep the facts' lower rule. */
 .work .client-file .project-card-facts + .project-card-process{
  border-top:0;
  margin-top:0;
- padding-top:12px;
 }
 
 /* Tactile archive: folders respond like paper, not floating UI tiles.
@@ -262,12 +253,10 @@ html[data-theme="dark"] .work .client-file{
  .work .featured-project.client-file:hover{--file-lift:-5px}
  .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
 }
-.work .featured-project.client-file:focus-within{--file-lift:-3px;outline:2px solid var(--archive-focus-edge);outline-offset:4px}
+.work .featured-project.client-file:focus-within{--file-lift:-3px;outline:2px solid var(--focus);outline-offset:4px}
 .work .featured-project.client-file:active{--file-lift:1px;box-shadow:2px 3px 0 color-mix(in srgb,var(--file-accent) 22%,transparent)}
-.work .client-file .client-file-label{transition:transform .24s cubic-bezier(.2,.75,.25,1)}
 @media(prefers-reduced-motion:reduce){
- .work .featured-project.client-file,.work .client-file .client-file-label{transition:none!important;animation:none!important}
- .project-card img{transition:none!important}
+ .work .client-file .client-file-label,.project-card img{transition:none!important}
 }
 
 /* One responsive archive owner. The shorter phone introduction reveals
@@ -276,7 +265,6 @@ html[data-theme="dark"] .work .client-file{
  .featured-projects-grid{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:48px}
  .notebook-project-index{gap:22px}
  .notebook-project-index .featured-project{padding:16px 16px 20px;isolation:isolate}
- .notebook-project-index .featured-project .project-card h3{font-size:clamp(1.5625rem,7vw,2.125rem)}
  .notebook-project-index .project-card-link{min-height:44px}
  .work .featured-project.client-file .project-visual:not(:has(img)){
   min-height:110px;padding:var(--space-2);
