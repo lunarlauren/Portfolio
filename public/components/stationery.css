@@ -19,15 +19,9 @@
  --palette-green:#50ba9c;
  --palette-lavender:#b397e6;
 }
-/* Stationery interaction system
-   Client-colored highlighters, violet Playground ink, and rose personal notes.
-   No ornamental clips; reduced-motion visitors receive immediate states. */
-.client-file--hoylu{--file-highlight:color-mix(in srgb,var(--palette-blue) 35%,transparent)}
-.client-file--alcon{--file-highlight:color-mix(in srgb,var(--palette-pink) 35%,transparent)}
-.client-file--holland-america{--file-highlight:color-mix(in srgb,var(--palette-green) 35%,transparent)}
-html[data-theme="dark"] .client-file--hoylu{--file-highlight:color-mix(in srgb,var(--palette-blue) 48%,transparent)}
-html[data-theme="dark"] .client-file--alcon{--file-highlight:color-mix(in srgb,var(--palette-pink) 48%,transparent)}
-html[data-theme="dark"] .client-file--holland-america{--file-highlight:color-mix(in srgb,var(--palette-green) 48%,transparent)}
+/* Stationery interaction system: shared highlight geometry and motion.
+   Client colors/strength are owned once in work-cards.css; the editorial
+   palette remains neutral, while actual client work retains its identity. */
 
 :is(.work .featured-project.client-file .archive-project-title,
     .playground .play-grid .project-card-link h3){
