@@ -776,10 +776,10 @@ assert.match(workCss, /outline:2px solid var\(--focus\)/, 'Archive focus must us
 // Placeholder color ownership: do not revive superseded per-client palettes.
 assert.doesNotMatch(workCss, /--(?:archive-preview(?:-edge|-text)?|file-tint)\s*:/,
  'Work must not restore unused preview color tokens');
-assert.match(workCss, /border-width:1px;/,
- 'Work may adjust the width of the shared illustrative frame');
+assert.match(workCss, /border:1px dashed var\(--line\)/,
+ 'Work must keep a dashed illustrative frame over the later editorial border');
 assert.match(visualPlaceholderCss, /border:2px dashed var\(--placeholder-edge\)/,
- 'Shared visual owner must retain dashed placeholder border style and color');
+ 'Shared visual owner must retain the base dashed placeholder frame');
 assert.match(visualPlaceholderCss, /--placeholder-surface:var\(--surface-blush\)/,
  'Shared visual owner must give Work placeholders neutral paper');
 assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] :is\(\.visual-label,\.visual-brief,\.brief-kicker\)\{color:var\(--ink\)\}/,
