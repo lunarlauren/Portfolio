@@ -808,12 +808,12 @@ assert.ok(caseStudy.includes('const heading=caseJumpTargets.get(button.dataset.c
 assert.ok(caseStudy.includes('const caseJumpHeadings=[...caseJumpTargets.values()]'), 'Reading-progress tracking must reuse chapter targets');
 assert.ok(!caseStudy.includes('const heading=document.getElementById(button.dataset.caseJump)'), 'Avoid duplicate chapter DOM lookups');
 
-// Archive surface is applied last by the editorial skin, with opaque
-// light/dark colors; Work only owns the preview and card geometry.
+// Editorial defines opaque theme tokens; Work consumes them to paint the
+// folder surface without a second competing late-stage override.
 assert.match(editorialCss, /--editorial-card:#f7f6f3/, 'Light archive surface needs an opaque token');
 assert.match(editorialCss, /--editorial-card:#252525/, 'Dark archive surface needs an opaque token');
-assert.match(editorialCss, /background-color:var\(--editorial-card\)!important/, 'Archive card must paint an opaque base');
-assert.match(editorialCss, /border:1px solid var\(--editorial-card-edge\)!important/, 'Archive card edge belongs to editorial skin');
+assert.match(workCss, /background-color:var\(--editorial-card\)/, 'Archive card must paint an opaque base');
+assert.match(workCss, /border:1px solid var\(--editorial-card-edge\)/, 'Archive card edge belongs to Work');
 assert.doesNotMatch(workCss, /border:1px solid var\(--archive-edge\)!important/, 'Retired archive border must not return');
 assert.match(workCss, /color:var\(--file-cta-ink,var\(--file-accent\)\)/, 'Archive CTA must use a shared theme color');
 
