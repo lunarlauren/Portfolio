@@ -56,9 +56,7 @@ html[data-theme="dark"]{
 /* EDITORIAL SYSTEM — neutral surfaces everywhere except branded project media.
    The restrained glass treatment adds depth without reducing text contrast. */
 .work .featured-project.client-file{
- /* Single archive surface; preserve readable facts and keyboard focus tokens. */
- --archive-facts-edge:var(--line);
- --archive-focus-edge:var(--focus);
+ /* Single archive surface; divider/focus colors inherit --line/--focus. */
  color:var(--ink)!important;
  position:relative;
  isolation:isolate;
