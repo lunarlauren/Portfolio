@@ -290,6 +290,43 @@ try{
  assert.equal(playGridColumns,1,"Playground cards must stack on narrow phones");
  await page.setViewportSize({width:1280,height:720});
 
+ // The shared image fallback and no-image frame must resolve the same
+ // night paint. Work and Playground override this shared base independently.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const fallback=await page.evaluate(value=>{
+    document.documentElement.dataset.theme=value;
+    const brief=document.createElement("div");
+    brief.className="project-visual";
+    brief.innerHTML='<span class="visual-brief">Illustrative brief</span>';
+    const loading=document.createElement("div");
+    loading.className="project-visual";
+    loading.innerHTML='<img alt="">';
+    document.body.append(brief,loading);
+    const noImage=getComputedStyle(brief),withImage=getComputedStyle(loading);
+    const sample={
+     briefSurface:noImage.backgroundColor,
+     loadingSurface:withImage.backgroundColor,
+     borderStyle:noImage.borderTopStyle,
+     borderColor:noImage.borderTopColor
+    };
+    brief.remove();loading.remove();
+    return sample;
+   },theme);
+   assert.equal(fallback.borderStyle,"dashed",
+    width+"px "+theme+": shared illustrative frame must remain dashed");
+   if(theme==="dark"){
+    assert.equal(fallback.briefSurface,fallback.loadingSurface,
+     width+"px dark: loading images and illustrative briefs share one fallback surface");
+    assert.equal(fallback.borderColor,"rgb(73, 96, 116)",
+     width+"px dark: shared illustrative frame retains its night edge");
+   }
+  }
+ }
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+ await page.setViewportSize({width:1280,height:720});
+
  // Archive CSS now belongs to work-cards.css. Check computed layout and
  // card surfaces in both themes and at desktop/phone widths after extraction.
  for(const width of [390,1280]){
@@ -362,6 +399,7 @@ try{
     const placeholder={
      surface:getComputedStyle(frame).backgroundColor,
      borderStyle:getComputedStyle(frame).borderTopStyle,
+     borderWidth:getComputedStyle(frame).borderTopWidth,
      briefContrast:contrast(getComputedStyle(brief).color,getComputedStyle(frame).backgroundColor),
      kickerContrast:contrast(getComputedStyle(kicker).color,getComputedStyle(frame).backgroundColor)
     };
@@ -398,6 +436,8 @@ try{
     width+"px "+theme+": Work placeholder must use neutral editorial paper");
    assert.equal(archive.placeholder.borderStyle,"dashed",
     width+"px "+theme+": missing Work imagery must retain its dashed frame");
+   assert.equal(archive.placeholder.borderWidth,"1px",
+    width+"px "+theme+": Work briefs retain their compact 1px frame");
    assert.ok(archive.placeholder.briefContrast>=4.5&&archive.placeholder.kickerContrast>=4.5,
     width+"px "+theme+": placeholder brief and disclosure must meet 4.5:1 contrast");
    assert.equal(archive.columns,width<=760?1:2,"Work archive columns must match viewport width");

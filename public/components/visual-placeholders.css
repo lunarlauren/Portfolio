@@ -16,26 +16,20 @@
  line-height:1.5;
 }
 @media(max-width:760px){.brief-kicker{letter-spacing:.08em}}
-/* Placeholder briefs are editorial notes, never simulated product screenshots.
-   Work supplies neutral tokens; Playground retains its scoped night contrast. */
-/* Shared dark media fallback, including real images while loading.
-   The no-image rules below override it with their scoped surface tokens. */
-html[data-theme="dark"] .project-visual{
- background:var(--placeholder-surface,color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green)));
- color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
- border-color:var(--placeholder-edge,#496074);
-}
+/* Placeholder briefs are editorial notes, never simulated screenshots.
+   Work owns its neutral paper; Playground owns its scoped night contrast. */
 .project-visual:not(:has(img)){
- --placeholder-surface:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
- --placeholder-edge:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
  display:flex;align-items:center;justify-content:center;
  padding:clamp(18px,3vw,30px);
- background:var(--placeholder-surface);border:2px dashed var(--placeholder-edge);
+ background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ border:2px dashed color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
 }
-html[data-theme="dark"] .project-visual:not(:has(img)){
- --placeholder-surface:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
- --placeholder-edge:#496074;
- /* The fallback reads these tokens; Work may override them. */
+/* Dark fallback covers both loading images and illustrative briefs.
+   Place it after the light no-image rule so the two states share one paint. */
+html[data-theme="dark"] .project-visual{
+ background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
+ color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ border-color:#496074;
 }
 /* The renderer's .visual-label.visual-brief is already inside the dashed frame. */
 .project-visual .visual-brief{
@@ -49,11 +43,4 @@ html[data-theme="dark"] .project-visual:not(:has(img)){
    Use theme ink for both the brief and its illustrative disclosure. */
 html[data-theme="dark"] :is(.visual-label,.visual-brief,.brief-kicker){color:var(--ink)}
 @media(max-width:760px){.project-visual .visual-brief{font-size:0.8125rem}}
-/* Work's missing-image briefs use the editorial paper, not a tinted mockup.
-   The base background and border already consume these two scoped tokens. */
-.work .featured-project .project-visual:not(:has(img)){
- --placeholder-surface:var(--surface-blush);
- --placeholder-edge:var(--line);
- color:var(--ink);
-}
 @media(prefers-contrast:more){.project-visual:not(:has(img)){border-style:solid}}

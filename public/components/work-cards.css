@@ -188,14 +188,15 @@ html[data-theme="dark"] .client-file{
    Keep a deliberate gap before either approved artwork or an image brief. */
 .work .client-file .project-card-link > .project-visual{margin-top:var(--space-3)}
 
-/* Portfolio-first placeholder treatment. Until approved images are available,
-   briefs are quiet production notes, not the dominant artwork on the page. */
+/* Work's illustrative briefs use neutral editorial paper, not a tinted
+   mockup. Keep disclosure visible even under the later image-frame skin. */
 .work .featured-project.client-file .project-visual:not(:has(img)){
  aspect-ratio:auto;
  min-height:132px;
  padding:clamp(14px,2vw,24px);
  justify-content:flex-start;
- /* The later editorial frame resets border-style; preserve dashed disclosure. */
+ background:var(--surface-blush);
+ color:var(--ink);
  border:1px dashed var(--line);
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
