@@ -8,6 +8,20 @@ Edit the production-facing site in `public/`; obsolete root-level prototype file
 Styles begin in `public/components/foundations.css`, then `public/components/homepage-base.css`, then `public/components/case-study-base.css`, then the legacy `public/styles.css`, with scoped additions in `public/components/...`. Client folder tabs use a shared dark-ink token (`--file-label-ink`) against blue, pink, and green accents; maintain at least **4.5:1 contrast** for the small tab labels in both themes. Prefer existing color and type tokens, preserve the stationery visual language, and check both light/dark modes. Avoid appending competing overrides to the base stylesheet. The responsive hero's typography, portrait sizing, and phone reading order are owned by `public/components/hero-polish.css`. The single `@media(max-width:600px)` block intentionally hides the redundant editorial note and decorative card chrome on phones; the note remains on larger screens. Avoid adding competing `styles.css` overrides. The About section's heading scale, biography measure/leading, and short-laptop typography now live in `public/components/about.css` (loaded after `styles.css`); avoid reintroducing About-specific type overrides into the legacy sheet. The short-viewport heading rule (`min-width:1024px`, `max-height:780px`) intentionally comes last so it wins the cascade. The Work section's two-column desktop heading, editorial title scale, supporting paragraph alignment, and short-laptop spacing now live together in `public/components/work-cards.css` (after the legacy sheet). Keep Work heading and section padding changes there. On phones (600px and below), the Work intro uses a 34–48px top gutter, a 2–2.375rem heading and a 20–28px handoff to the first archive card; the full UX-process summary stays visible. The 760px/600px archive rules are grouped once each in work-cards.css. Test 320/390/600px in both themes before release. The shared `.projects-grid` / `.play-grid` layout now lives in `public/components/homepage-base.css`; Work card geometry and focus styles live in `work-cards.css`; the old collection view is retired.
 
 
+## Work evidence-first card hierarchy (2026-11-01)
+The professional archive in `public/script.js` renders title → project type →
+challenge → reviewed contribution/delivery facts → documented design approach →
+approved image or clearly labeled illustrative brief → case-study link. This
+is one semantic DOM order for mobile, desktop and screen readers; do not
+reorder only with CSS. After Hours keeps its visual-first layout. The Work
+component owns the gap above media and uses two columns for role/delivery
+facts at 360px and wider, stacking only at 359px and below. The redundant
+generic Work h3 declaration was removed; the single archive title rule
+retains its 500 font weight. Browser smoke checks assert the rendered order
+and computed facts columns in both themes at 390px and 1280px. No case-study
+research, metrics, outcome claims or image assets were changed; Mobile Insights
+remains a shipped contribution. These tests do not establish screenshot parity.
+
 ## Client color and verified-delivery ownership (2026-11-01)
 The global monochrome editorial palette remains neutral. The Work archive now
 defines Hoylu blue, Alcon pink, and Holland America green directly in
