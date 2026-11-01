@@ -362,6 +362,15 @@ try{
   card.remove();return value;
  });
  assert.equal(reducedImageTransition,"none","Project image zoom must honor reduced motion");
+
+ // Decorative metadata arrows must not move or transition when reduced motion
+ // is requested, even on a hovered professional project card.
+ await reducedMotionPage.locator(".work .project-card-link").first().hover();
+ const reducedArrow=await reducedMotionPage.locator(".work .project-meta span:last-child").first()
+  .evaluate(node=>({transition:getComputedStyle(node).transitionProperty,transform:getComputedStyle(node).transform}));
+ assert.equal(reducedArrow.transition,"none","Project metadata arrows must not transition under reduced motion");
+ assert.equal(reducedArrow.transform,"none","Project metadata arrows must not shift under reduced motion");
+
  await reducedMotionPage.goto(origin+"/case-studies/hoylu/connected-planning/");
  await reducedMotionPage.locator(".case-view .case-head").waitFor();
  const caseAnimation=await reducedMotionPage.locator(".case-view .case-head")
