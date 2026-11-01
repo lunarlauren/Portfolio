@@ -352,6 +352,16 @@ try{
  const previewTransition=await reducedMotionPage.locator("#play-grid .project-card-link .project-visual").first()
   .evaluate(node=>getComputedStyle(node).transitionProperty);
  assert.equal(previewTransition,"none","Playground preview must not animate under reduced motion");
+ // A synthetic project preview verifies the shared image rule even when all
+ // authored project art is intentionally represented by placeholders.
+ const reducedImageTransition=await reducedMotionPage.evaluate(()=>{
+  const card=document.createElement("div");card.className="project-card";
+  card.innerHTML='<div class="project-visual"><img alt=""></div>';
+  document.body.append(card);
+  const value=getComputedStyle(card.querySelector("img")).transitionProperty;
+  card.remove();return value;
+ });
+ assert.equal(reducedImageTransition,"none","Project image zoom must honor reduced motion");
  await reducedMotionPage.goto(origin+"/case-studies/hoylu/connected-planning/");
  await reducedMotionPage.locator(".case-view .case-head").waitFor();
  const caseAnimation=await reducedMotionPage.locator(".case-view .case-head")

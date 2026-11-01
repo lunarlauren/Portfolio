@@ -18,7 +18,9 @@ jobs:
       - name: Install Playwright
         run: |
           npm install --no-save playwright
-          npx playwright install --with-deps chromium
+          # GitHub-hosted Ubuntu has Chromium runtime libraries; avoid the
+          # unreliable apt mirror refresh triggered by --with-deps.
+          npx playwright install chromium
       - name: Check JavaScript syntax
         run: |
           node --check public/script.js
