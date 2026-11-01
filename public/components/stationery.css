@@ -9,16 +9,8 @@
 }
 
 
-/* Six-color art direction: neutral tints and shadows derive from these
-   anchors rather than introducing new unrelated accent hues. */
-:root{
- --palette-navy:#203344;
- --palette-paper:#fffdf8;
- --palette-pink:#f15c9d;
- --palette-blue:#53a7de;
- --palette-green:#50ba9c;
- --palette-lavender:#b397e6;
-}
+/* Global palette lives in foundations.css. Work owns client tab colors;
+   stationery owns paper texture, elevation and interaction geometry. */
 /* Stationery interaction system: shared highlight geometry and motion.
    Client colors/strength are owned once in work-cards.css; the editorial
    palette remains neutral, while actual client work retains its identity. */
@@ -103,7 +95,6 @@ html:not([data-theme="dark"]) .section-head>p{
    Keep section surfaces transparent so dots align across section gutters. */
 :root{
  --notebook-paper:var(--paper);
- --notebook-pink:#f05b9f;
  --notebook-dot-color:rgba(40,40,40,.14);
  --notebook-dot-step:30px;
  --notebook-dot-radius:1px;
