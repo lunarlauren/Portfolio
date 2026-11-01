@@ -777,10 +777,10 @@ assert.doesNotMatch(workCss, /--(?:archive-preview(?:-edge|-text)?|file-tint)\s*
  'Work must not restore unused preview color tokens');
 assert.match(workCss, /border:1px dashed var\(--line\)/,
  'Work must retain a dashed frame for unsupplied project imagery');
-assert.match(editorialCss, /background:var\(--placeholder-surface\)!important/,
- 'The editorial skin must own placeholder background color');
-assert.match(editorialCss, /color:var\(--placeholder-text\)!important/,
- 'The editorial skin must own placeholder ink');
+assert.match(visualPlaceholderCss, /--placeholder-surface:var\(--surface-blush\)/,
+ 'Shared visual owner must give Work placeholders neutral paper');
+assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] :is\(\.visual-label,\.visual-brief,\.brief-kicker\)\{color:var\(--ink\)\}/,
+ 'Dark placeholder briefs must use legible theme ink');
 assert.match(workCss, /text-wrap:balance/, 'Archive headings must balance across card widths');
 
 // Pass 4: reading hierarchy, chapter state and mobile gallery contracts.
