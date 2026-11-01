@@ -403,9 +403,24 @@ try{
      briefContrast:contrast(getComputedStyle(brief).color,getComputedStyle(frame).backgroundColor),
      kickerContrast:contrast(getComputedStyle(kicker).color,getComputedStyle(frame).backgroundColor)
     };
+    // A supplied-image probe must retain the same frame after its paint
+    // moves from the late editorial stylesheet into the Work component.
+    const supplied=document.createElement("div");
+    supplied.className="featured-project client-file";
+    supplied.innerHTML='<div class="project-visual"><img alt=""></div>';
+    grid.append(supplied);
+    const imageStyle=getComputedStyle(supplied.querySelector(".project-visual"));
+    const imageFrame={
+     borderStyle:imageStyle.borderTopStyle,
+     borderColor:imageStyle.borderTopColor,
+     radius:imageStyle.borderTopLeftRadius,
+     shadow:imageStyle.boxShadow,
+     background:imageStyle.backgroundColor
+    };
+    supplied.remove();
     probe.remove();
     return {
-     placeholder,cardOrder,factsColumns,
+     placeholder,imageFrame,cardOrder,factsColumns,
      // Inherited ink must not erase distinct muted labels or client CTA accents.
      bodyInk:[title,meta,summary,process,process?.querySelector("strong"),factValue]
       .map(node=>node?getComputedStyle(node).color:null),
@@ -438,6 +453,19 @@ try{
     width+"px "+theme+": missing Work imagery must retain its dashed frame");
    assert.equal(archive.placeholder.borderWidth,"1px",
     width+"px "+theme+": Work briefs retain their compact 1px frame");
+   assert.deepEqual({
+    borderStyle:archive.imageFrame.borderStyle,
+    borderColor:archive.imageFrame.borderColor,
+    radius:archive.imageFrame.radius,
+    background:archive.imageFrame.background
+   },{
+    borderStyle:"solid",
+    borderColor:theme==="dark"?"rgb(100, 100, 100)":"rgb(183, 181, 177)",
+    radius:"2px",
+    background:"rgba(0, 0, 0, 0)"
+   },width+"px "+theme+": supplied Work imagery retains its neutral editorial frame");
+   assert.notEqual(archive.imageFrame.shadow,"none",
+    width+"px "+theme+": image frame keeps its inset highlight");
    assert.ok(archive.placeholder.briefContrast>=4.5&&archive.placeholder.kickerContrast>=4.5,
     width+"px "+theme+": placeholder brief and disclosure must meet 4.5:1 contrast");
    assert.equal(archive.columns,width<=760?1:2,"Work archive columns must match viewport width");
@@ -464,6 +492,22 @@ try{
     assert.notEqual(client.ctaColor,client.cardColor,
      `${width}px ${theme}: CTA must not be flattened to generic card ink`);
    }
+   // The more-specific Work dashed brief used to override the shared
+   // solid high-contrast edge; verify the accessible state in both themes.
+   await page.emulateMedia({contrast:"more"});
+   const highContrastBrief=await page.evaluate(()=>{
+    const grid=document.querySelector(".work .featured-projects-grid");
+    const probe=document.createElement("div");
+    probe.className="featured-project client-file";
+    probe.innerHTML='<div class="project-visual"><span class="visual-brief">Illustrative brief</span></div>';
+    grid.append(probe);
+    const style=getComputedStyle(probe.querySelector(".project-visual")).borderTopStyle;
+    probe.remove();
+    return style;
+   });
+   assert.equal(highContrastBrief,"solid",
+    width+"px "+theme+": Work missing-image edge must be solid at increased contrast");
+   await page.emulateMedia({contrast:"no-preference"});
    surfaces.push(archive.surface);
   }
   assert.notEqual(surfaces[0],surfaces[1],"Archive card must adapt to light and dark themes");
