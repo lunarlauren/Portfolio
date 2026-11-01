@@ -1042,10 +1042,32 @@ assert.doesNotMatch(editorialCss, /\.work :is\(\.featured-project\.client-file,\
  'No blanket archive descendant ink override may erase client CTA/tab colors');
 assert.match(workCss, /\.work \.project-card :is\(h3,p,\.project-meta\)\{color:var\(--ink\)\}/,
  'Work component owns readable text without recoloring nested labels');
-assert.match(workCss, /--file-label-ink:#000000;/, 'Tab label ink must contrast with dark monochrome blue');
+assert.match(workCss, /--file-label-ink:#000000;/, 'Tab label ink must contrast with every client color');
 assert.match(workCss, /--file-cta-ink:color-mix\(in srgb,var\(--file-accent\) 35%,var\(--ink\)\)/,
  'Archive CTAs must not use pale raw accent ink on light paper');
-assert.doesNotMatch(editorialCss, /\.site-header,footer\.wrap\{background:/,
+
+/* Client color belongs to the archive, not the monochrome global palette.
+   Six per-client light/dark highlighter declarations collapse to one formula. */
+for (const [client,hex] of [['hoylu','53a7de'],['alcon','f15c9d'],['holland-america','50ba9c']]) {
+ assert.ok(workCss.includes('.client-file--'+client+'{--file-accent:#'+hex+'}'),
+  client+' should retain its identifiable project color in both themes');
+}
+assert.match(workCss,/--file-highlight:color-mix\(in srgb,var\(--file-accent\) var\(--file-highlight-strength\),transparent\)/,
+ 'Client highlighters must derive from the same brand accent as the folder tab');
+assert.doesNotMatch(stationeryCss,/\.client-file--(?:hoylu|alcon|holland-america)\{--file-highlight:/,
+ 'Stationery must not duplicate six client-specific highlight declarations');
+const factsStart=script.indexOf('const archiveFactsMarkup=');
+const factsEnd=script.indexOf('// Keep card content',factsStart);
+assert.ok(factsStart>=0&&factsEnd>factsStart,'Archive fact renderer must remain discoverable');
+const renderFacts=vm.runInNewContext(script.slice(factsStart,factsEnd)+'\narchiveFactsMarkup',{esc:value=>String(value)});
+assert.match(renderFacts(['Hoylu','Mobile UX','Shipped product contribution'],'verified'),
+ /class="project-delivery-shipped"/,'Verified shipped work should have a visible delivery stamp');
+assert.doesNotMatch(renderFacts(['Hoylu','Product UX','Product design contribution'],'unverified'),
+ /project-delivery-shipped/,'Design-only contributions must never inherit a shipped stamp');
+assert.match(workCss,/\.work \.project-card-facts \.project-delivery-shipped\{/,
+ 'Delivery stamp should be styled within the owning Work component');
+
+assert.doesNotMatch(editorialCss, /\.site-header,footer\.wrap\{background:/
  'Navigation owns opaque header and footer, including forced-colors behavior');
 
 // About/Playground/footer must not regain superseded homepage declarations.
