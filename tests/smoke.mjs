@@ -194,7 +194,24 @@ try{
    const heading=section.querySelector("#playground-title");
    const intro=section.querySelector(".section-head>p");
    const css=getComputedStyle(section),title=getComputedStyle(heading);
+   // Synthetic brief protects the intentionally unsupplied image state even
+   // if every current After Hours card eventually gains approved artwork.
+   const probe=document.createElement("article");
+   probe.className="project-card";
+   probe.innerHTML='<div class="project-visual"><div class="visual-brief"><span class="brief-kicker">ILLUSTRATIVE</span></div></div>';
+   section.append(probe);
+   const frame=probe.querySelector(".project-visual");
+   const brief=probe.querySelector(".visual-brief");
+   const kicker=probe.querySelector(".brief-kicker");
+   const placeholder={
+    surface:getComputedStyle(frame).backgroundColor,
+    edge:getComputedStyle(frame).borderTopColor,
+    briefInk:getComputedStyle(brief).color,
+    kickerInk:getComputedStyle(kicker).color
+   };
+   probe.remove();
    return {
+    placeholder,
     surface:css.backgroundColor,
     headingVisible:title.display!=="none"&&title.visibility!=="hidden",
     introBackground:getComputedStyle(intro).backgroundColor,
@@ -213,6 +230,10 @@ try{
   assert.equal(night.headingOpacity,"1","Playground heading must remain fully opaque");
   assert.equal(night.introBackground,"rgba(0, 0, 0, 0)",
    "Playground intro must not inherit notebook paper in "+theme+" theme");
+  assert.deepEqual(night.placeholder,{
+   surface:"rgb(41, 41, 41)",edge:"rgb(119, 119, 119)",
+   briefInk:"rgb(241, 241, 241)",kickerInk:"rgb(241, 241, 241)"
+  }, "Playground illustrative brief must retain its night contrast in "+theme+" theme at "+width+"px");
   }
  }
  await page.evaluate(()=>document.documentElement.dataset.theme="light");

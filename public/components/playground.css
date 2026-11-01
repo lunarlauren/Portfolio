@@ -9,13 +9,18 @@
 .playground>.section-head,.playground>.play-grid {position:relative;z-index:1}
 .playground .eyebrow {color:#d0d0d0}
 .playground .project-card h3 {color:#f4f3ef}
-.playground .project-visual:not(:has(img)) {background:#292929!important;border-color:#777}
+/* A card ancestor wins over the later generic dark placeholder rule without !important. */
+.playground .project-card .project-visual:not(:has(img)){background:#292929;border-color:#777}
 .playground .project-card p {color:#e0e0e0}
-.playground .project-visual:not(:has(img)) :is(.visual-brief,.brief-kicker){color:#f1f1f1!important}
+.playground .project-visual:not(:has(img)) :is(.visual-brief,.brief-kicker){color:#f1f1f1}
 
-/* The rendered heading is #playground-title; no generic h2 or pseudo-element
-   overrides are needed. Keep its night color explicit in both themes. */
-.playground .section-head .playground-title{display:block!important;position:relative;z-index:2;visibility:visible!important;opacity:1!important;color:#fff!important;font:600 clamp(35px,5vw,66px)/1.1 'Newsreader',Georgia,serif!important;margin:14px 0 0!important;max-width:100%;height:auto!important;overflow:visible!important}
+/* The rendered #playground-title is a normal block heading. Generic section
+   typography has no competing !important rules; keep only effective styles. */
+.playground .section-head .playground-title{
+ position:relative;z-index:2;color:#fff;
+ font:600 clamp(35px,5vw,66px)/1.1 'Newsreader',Georgia,serif;
+ margin:14px 0 0;
+}
 
 /* Keep project process evidence readable on the dark surface in either theme. */
 .playground .project-card .project-card-process{color:#e0e0e0;border-top-color:#777}
@@ -23,15 +28,9 @@
 .playground .project-card .project-card-cta{color:#f3f7ff}
 .playground .project-card .project-meta{color:#d5d5d5}
 
-/* Light notebook paragraph rules must never paint over this night section.
-   Both selectors are intentional: specificity beats the generic paper rule. */
-html:not([data-theme="dark"]) .playground .section-head>p,
-html[data-theme="dark"] .playground .section-head>p{
- background:transparent;
- color:#e0e0e0;
- -webkit-box-decoration-break:initial;
- box-decoration-break:initial;
-}
+/* Night intro uses one rule in both themes. The stationery paper rule
+   already sets a transparent background; these explicit colors stay local. */
+.playground .section-head>p{background:transparent;color:#e0e0e0}
 
 /* Keyboard focus uses the shared ring, with higher contrast at night. */
 .playground {--card-focus-color:#a7d9ff}
