@@ -145,7 +145,7 @@ assert.equal((workCss.match(/@media\(max-width:600px\)/g)||[]).length,1,
  'Work phone intro and archive should share one breakpoint');
 // Archive folders render with both .featured-project and .client-file.
 // Keep metadata spacing and night CTA tokens under one cascade owner.
-assert.match(workCss, /\.featured-project>\.eyebrow\{margin:8px 0 4px;/,
+assert.match(workCss, /\.featured-project>\.eyebrow\{margin:8px 0 4px\}/,
  'Archive folder metadata should have one spacing owner');
 assert.doesNotMatch(workCss, /counter-reset:project|\.client-file>\.eyebrow\{|\.work \.featured-project\.client-file>\.eyebrow\{/,
  'Retired counter and duplicate archive eyebrow rules must stay removed');
@@ -852,7 +852,7 @@ assert.match(editorialCss, /--editorial-card:#252525/, 'Dark archive surface nee
 assert.match(workCss, /background-color:var\(--editorial-card\)/, 'Archive card must paint an opaque base');
 assert.match(workCss, /border:1px solid var\(--editorial-card-edge\)/, 'Archive card edge belongs to Work');
 assert.doesNotMatch(workCss, /border:1px solid var\(--archive-edge\)!important/, 'Retired archive border must not return');
-assert.match(workCss, /color:var\(--file-cta-ink,var\(--file-accent\)\)/, 'Archive CTA must use a shared theme color');
+assert.match(workCss, /color:var\(--file-cta-ink\)/, 'Archive CTA must use its defined theme color token');
 
 // Pass 9: hero hierarchy and archive title token contracts.
 assert.ok(heroPolishCss.includes('max-width:54ch;text-wrap:pretty;line-height:1.6'), 'Desktop hero copy must retain a readable measure');
@@ -1135,8 +1135,14 @@ assert.match(workCss, /@media\(prefers-reduced-motion:reduce\)\{[\s\S]*?\.projec
 
 assert.doesNotMatch(editorialCss, /\.work :is\(\.featured-project\.client-file,\.notebook-project-index \.featured-project\) :is\(/,
  'No blanket archive descendant ink override may erase client CTA/tab colors');
-assert.match(workCss, /\.work \.project-card :is\(h3,p,\.project-meta\)\{color:var\(--ink\)\}/,
- 'Work component owns readable text without recoloring nested labels');
+assert.doesNotMatch(workCss, /\.work \.project-card :is\(h3,p,\.project-meta\)\{color:/,
+ 'Work copy should inherit theme ink without a competing descendant-wide override');
+assert.doesNotMatch(workCss, /\.project-card p\{color:/,
+ 'Shared card paragraphs should inherit Work ink or explicit Playground night ink');
+assert.doesNotMatch(workCss, /\.featured-project>\.eyebrow\{[^}]*color:/,
+ 'Work file eyebrows inherit the shared muted label color');
+assert.doesNotMatch(workCss, /--file-accent,var\(/,
+ 'Client files define their accent; fallback branches duplicate existing tokens');
 assert.match(workCss, /--file-label-ink:#000000;/, 'Tab label ink must contrast with every client color');
 assert.match(workCss, /--file-cta-ink:color-mix\(in srgb,var\(--file-accent\) 35%,var\(--ink\)\)/,
  'Archive CTAs must not use pale raw accent ink on light paper');

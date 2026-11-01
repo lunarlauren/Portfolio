@@ -306,6 +306,9 @@ try{
     const visual=card?.querySelector(".project-visual");
     const meta=card?.querySelector(".project-meta");
     const link=card?.querySelector(".project-card-link");
+    const summary=link?.querySelector(":scope > p:not(.project-card-process)");
+    const factValue=card?.querySelector(".project-card-facts dd");
+    const eyebrow=card?.querySelector(":scope > .eyebrow");
      const title=card?.querySelector(".project-card h3.archive-project-title");
      // Test actual painted client tabs and CTA ink, not just CSS token presence.
      const rgb=value=>{
@@ -365,6 +368,11 @@ try{
     probe.remove();
     return {
      placeholder,cardOrder,factsColumns,
+     // Inherited ink must not erase distinct muted labels or client CTA accents.
+     bodyInk:[title,meta,summary,process,process?.querySelector("strong"),factValue]
+      .map(node=>node?getComputedStyle(node).color:null),
+     eyebrowInk:eyebrow?getComputedStyle(eyebrow).color:null,
+     introEyebrowInk:getComputedStyle(document.querySelector(".work .section-head .eyebrow")).color,
      visualPosition:visual?getComputedStyle(visual).position:null,
      visualOverflow:visual?getComputedStyle(visual).overflow:null,
      metaDisplay:meta?getComputedStyle(meta).display:null,
@@ -400,6 +408,10 @@ try{
    assert.equal(archive.metaDisplay,"flex","Project metadata layout in "+theme+" at "+width+"px");
    assert.equal(archive.linkDisplay,"block","Work link geometry in "+theme+" at "+width+"px");
    assert.equal(archive.processInk,archive.cardInk,"Archive process copy must match readable card ink");
+   assert.ok(archive.bodyInk.every(color=>color===archive.cardInk),
+    width+"px "+theme+": archive title, metadata, challenge, approach and fact values inherit readable theme ink");
+   assert.equal(archive.eyebrowInk,archive.introEyebrowInk,
+    width+"px "+theme+": file eyebrow retains muted label ink");
    assert.ok(archive.factsEdge&&archive.focusEdge,"Archive facts and focus must retain shared theme colors");
    assert.equal(archive.factsBorderStyle,"solid","Archive evidence divider must remain visible");
    assert.ok(archive.clientInk.length>0&&archive.clientInk.every(Boolean),

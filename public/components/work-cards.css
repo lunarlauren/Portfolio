@@ -1,9 +1,7 @@
 /* Work section divider belongs here, not in the editorial presentation layer. */
 .work{border-top:1px solid var(--line)}
 
-/* Work intro and archive spacing. public/styles.css is a compatibility stub;
-   this component owns Work typography at desktop, tablet and phone widths. */
-.work .section-head>p{line-height:var(--leading-body,1.6)}
+/* Work intro and archive spacing; global type and ink inherit from foundations. */
 @media(min-width:1024px){
  .work.wrap{padding-block:clamp(42px,5vw,68px)}
  .work .section-head{
@@ -11,8 +9,8 @@
   align-items:start;column-gap:clamp(20px,2.5vw,36px);
   margin-bottom:clamp(28px,3vw,42px);
  }
- .work .section-head h2{margin-bottom:0;font-size:clamp(2.625rem,4vw,4rem);line-height:1.06}
- .work .section-head>p{justify-self:start;align-self:center;max-width:38ch;margin:0}
+ .work .section-head h2{font-size:clamp(2.625rem,4vw,4rem);line-height:1.06}
+ .work .section-head>p{justify-self:start;align-self:center;max-width:38ch}
  .work .featured-projects-grid{gap:clamp(20px,2.5vw,36px)}
  .work .notebook-project-index .featured-project{padding:clamp(18px,2vw,26px)}
 }
@@ -23,8 +21,8 @@
 @media(min-width:601px) and (max-width:1023px){
  /* Stack the intro before the desktop archive switches to two columns. */
  .work .section-head{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-3)}
- .work .section-head>p{max-width:54ch;margin:0}
- .work .section-head h2{max-width:19ch;text-wrap:balance}
+ .work .section-head>p{max-width:54ch}
+ .work .section-head h2{max-width:19ch}
 }
 
 /* Work archive cards: client folder tabs, verified contribution metadata,
@@ -36,19 +34,17 @@
 .project-card,.featured-project{min-width:0}
 .project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;min-height:190px}
 .project-visual img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
-.project-meta{font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;letter-spacing:.13em;font-weight:700;margin-top:20px}
+.project-meta{font-size:var(--type-xs);line-height:1.5;letter-spacing:.13em;font-weight:700;margin-top:20px}
 .project-card h3{font:600 25px 'Newsreader';letter-spacing:-.04em;margin:8px 0}
-.project-card p{color:var(--muted);line-height:1.6;font-size:var(--type-sm)}
-/* Work copy uses paper ink; After Hours keeps its own night contrast.
-   Do not override nested client labels or accent CTAs. */
-.work .project-card :is(h3,p,.project-meta){color:var(--ink)}
+.project-card p{line-height:1.6;font-size:var(--type-sm)}
+/* Work body copy inherits theme ink; After Hours owns its night contrast. */
 .project-card-link{display:block;text-decoration:none}
 .project-card-link:hover .project-visual{filter:saturate(1.12)}
 .project-card .project-meta{display:flex;justify-content:space-between;gap:8px}
 
 /* Work archive: linked case studies with documented process previews. */
 .featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.5vw,34px);margin-bottom:clamp(42px,6vw,76px)}
-.featured-project>.eyebrow{margin:8px 0 4px;color:var(--muted);line-height:1.5}
+.featured-project>.eyebrow{margin:8px 0 4px}
 .featured-project .project-visual{aspect-ratio:16/10;min-height:0}
 .featured-project .project-card p{font-size:0.9375rem;line-height:1.65;max-width:58ch}
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
@@ -65,7 +61,7 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
 /* Recruiter scan path: challenge (summary) followed by one existing process
    sentence. This is a preview of documented copy, not generated evidence. */
 .project-card .project-card-process{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);line-height:1.55}
-.project-card-process strong{display:block;color:var(--ink);font-size:0.6875rem;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
+.project-card-process strong{display:block;font-size:0.6875rem;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
 /* Mobile interaction quality: keep tappable controls comfortable and avoid
    paper decoration interfering with focus or text. */
 @media(max-width:420px){
@@ -141,7 +137,6 @@ html[data-theme="dark"] .client-file{
 }
 .work .project-card-facts dd{
  margin:0;
- color:var(--ink);
  font-size:0.75rem;
  font-weight:600;
  line-height:1.45;
@@ -153,7 +148,6 @@ html[data-theme="dark"] .client-file{
  display:inline-flex;
  align-items:center;
  gap:7px;
- width:fit-content;
  min-height:28px;
  padding:4px 9px;
  border:1px solid color-mix(in srgb,var(--file-accent) 45%,var(--line));
@@ -218,7 +212,7 @@ html[data-theme="dark"] .client-file{
 /* Archive action: carry the folder's client color through to its CTA.
    An underline remains for recognition without relying on color alone. */
 .work .client-file .project-card-cta{
- color:var(--file-cta-ink,var(--file-accent));
+ color:var(--file-cta-ink);
  text-decoration-thickness:2px;
  transition:color .18s ease,text-decoration-thickness .18s ease;
 }
@@ -237,15 +231,13 @@ html[data-theme="dark"] .client-file{
    Editorial theme tokens resolve here when the browser computes styles. */
 .work .featured-project.client-file{
  --file-lift:0px;
- /* Single archive surface; divider/focus colors inherit --line/--focus. */
- color:var(--ink);
- position:relative;
+ /* Shared editorial paint; divider/focus colors inherit --line/--focus. */
  isolation:isolate;
- background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent,var(--editorial-card-edge)) 12%,transparent),transparent 52%);
+ background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--file-accent) 12%,transparent),transparent 52%);
  /* The gradient is a background image; give computed background-color an opaque base. */
  background-color:var(--editorial-card);
  border:1px solid var(--editorial-card-edge);
- border-top:2px solid var(--file-accent,var(--editorial-card-edge));
+ border-top:2px solid var(--file-accent);
  border-radius:12px;
  box-shadow:0 12px 32px -22px var(--editorial-card-shadow),inset 0 1px 0 var(--editorial-card-glow);
  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
@@ -263,7 +255,7 @@ html[data-theme="dark"] .client-file{
 .work .featured-project.client-file:focus-within{--file-lift:-3px;outline:2px solid var(--focus);outline-offset:4px}
 .work .featured-project.client-file:active{--file-lift:1px;box-shadow:2px 3px 0 color-mix(in srgb,var(--file-accent) 22%,transparent)}
 .work .featured-project.client-file:is(:hover,:focus-within){
- box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 22px -8px color-mix(in srgb,var(--file-accent,var(--line)) 38%,transparent),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
+ box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 22px -8px color-mix(in srgb,var(--file-accent) 38%,transparent),0 0 0 1px var(--file-accent),inset 0 1px 0 var(--editorial-card-glow);
 }
 
 /* One responsive archive owner. The shorter phone introduction reveals
@@ -283,7 +275,7 @@ html[data-theme="dark"] .client-file{
  .work .section-head{margin-bottom:clamp(20px,5vw,28px)}
  .work .section-head h2{
   font-size:clamp(2rem,7.8vw,2.375rem);line-height:1.08;
-  margin-top:var(--space-2);text-wrap:balance;
+  margin-top:var(--space-2);
  }
  .work .section-head>p{
   max-width:44ch;margin-top:var(--space-3);
@@ -297,8 +289,8 @@ html[data-theme="dark"] .client-file{
   line-height:1.12;margin-bottom:var(--space-2);
  }
  .work .project-card-facts{gap:var(--space-2)}
- .work .project-card-facts dt{font-size:var(--type-eyebrow,0.6875rem)}
- .work .project-card-facts dd{font-size:var(--type-sm,0.875rem);line-height:1.5}
+ .work .project-card-facts dt{font-size:var(--type-eyebrow)}
+ .work .project-card-facts dd{font-size:var(--type-sm);line-height:1.5}
 }
 
 /* Only narrow phones stack role and delivery facts; at 390px two columns
@@ -311,7 +303,7 @@ html[data-theme="dark"] .client-file{
  display:block;
  margin-bottom:4px;
  color:var(--muted);
- font-size:var(--type-eyebrow,0.6875rem);
+ font-size:var(--type-eyebrow);
  font-weight:700;
  letter-spacing:.08em;
  line-height:1.4;
