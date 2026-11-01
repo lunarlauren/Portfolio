@@ -127,6 +127,14 @@ assert.equal((workCss.match(/@media\(max-width:760px\)/g)||[]).length,1,
  'Work tablet archive layout should have one responsive owner');
 assert.equal((workCss.match(/@media\(max-width:600px\)/g)||[]).length,1,
  'Work phone intro and archive should share one breakpoint');
+// Archive folders render with both .featured-project and .client-file.
+// Keep metadata spacing and night CTA tokens under one cascade owner.
+assert.match(workCss, /\.featured-project>\.eyebrow\{margin:8px 0 4px;/,
+ 'Archive folder metadata should have one spacing owner');
+assert.doesNotMatch(workCss, /counter-reset:project|\.client-file>\.eyebrow\{|\.work \.featured-project\.client-file>\.eyebrow\{/,
+ 'Retired counter and duplicate archive eyebrow rules must stay removed');
+assert.match(workCss, /html\[data-theme="dark"\] \.client-file\{[^}]*--file-highlight-strength:48%;[^}]*--file-cta-ink:/,
+ 'Night client tokens should be co-located in one rule');
 assert.match(workCss,/\.work \.section-head h2\{[^}]*font-size:clamp\(2rem,7\.8vw,2\.375rem\)/,
  'Work phone headline must not crowd out the first case study');
 assert.doesNotMatch(workCss,/\.client-file::before\{content:none\}/,
