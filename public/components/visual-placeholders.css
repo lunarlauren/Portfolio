@@ -31,6 +31,9 @@ html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palet
 html[data-theme="dark"] .project-visual:not(:has(img)){
  --placeholder-surface:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  --placeholder-edge:#496074;
+ /* Explicit paint wins over the equally specific dark media fallback above. */
+ background:var(--placeholder-surface);
+ border-color:var(--placeholder-edge);
 }
 /* The renderer's .visual-label.visual-brief is already inside the dashed frame. */
 .project-visual .visual-brief{
