@@ -53,7 +53,6 @@
 .featured-project{min-width:0}
 .featured-project>.eyebrow{margin:0 0 12px;color:var(--muted);line-height:1.5}
 .featured-project .project-visual{aspect-ratio:16/10;min-height:0}
-.featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500;font-size:clamp(1.625rem,2.5vw,2.375rem);line-height:1.12}
 .featured-project .project-card p{font-size:0.9375rem;line-height:1.65;max-width:58ch}
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
 html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
@@ -186,6 +185,7 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
 /* Archive-first hierarchy: title before image; the editorial skin owns the card radius. */
 .work .featured-project.client-file .archive-project-title{
  margin:var(--space-1) 0 var(--space-3);
+ font-weight:500;
  font-size:clamp(var(--type-h3),2.6vw,2.375rem);
  line-height:1.1;
  letter-spacing:-.035em;
@@ -196,6 +196,10 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
  margin-top:var(--space-2);
 }
 
+
+/* Recruiter scan order: challenge, role, delivery and approach precede media.
+   Keep a deliberate gap before either approved artwork or an image brief. */
+.work .client-file .project-card-link > .project-visual{margin-top:var(--space-3)}
 
 /* Portfolio-first placeholder treatment. Until approved images are available,
    briefs are quiet production notes, not the dominant artwork on the page. */
@@ -297,10 +301,14 @@ html[data-theme="dark"] .work .client-file{
   font-size:clamp(1.625rem,7vw,2.125rem);
   line-height:1.12;margin-bottom:var(--space-2);
  }
- .work .project-card-facts{grid-template-columns:minmax(0,1fr);gap:var(--space-2)}
+ .work .project-card-facts{gap:var(--space-2)}
  .work .project-card-facts dt{font-size:var(--type-eyebrow,0.6875rem)}
  .work .project-card-facts dd{font-size:var(--type-sm,0.875rem);line-height:1.5}
 }
+
+/* Only narrow phones stack role and delivery facts; at 390px two columns
+   shorten the card while retaining the complete reviewed wording. */
+@media(max-width:359px){.work .project-card-facts{grid-template-columns:minmax(0,1fr)}}
 
 /* Explicit challenge label anchors the problem → contribution → approach scan
    without adding invented impact claims or changing project copy. */
