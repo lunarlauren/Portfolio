@@ -1010,4 +1010,10 @@ assert.match(workCss, /--file-cta-ink:color-mix\(in srgb,var\(--file-accent\) 35
 assert.doesNotMatch(editorialCss, /\.site-header,footer\.wrap\{background:/,
  'Navigation owns opaque header and footer, including forced-colors behavior');
 
+// About/Playground/footer must not regain superseded homepage declarations.
+assert.match(aboutCss, /\.about\{border-top:1px solid var\(--line\)\}/, 'About owns its section divider');
+assert.match(aboutCss, /\.about h2\{font-size:clamp\(2\.875rem,7vw,5\.9375rem\)/, 'About owns the tablet heading scale');
+assert.doesNotMatch(homepageCss, /\.about-bottom p\s*\{|footer\s*\{border-top|\.playground\s*\{border-top/, 'No dead homepage section/footer overrides');
+assert.doesNotMatch(aboutCss, /filter: drop-shadow\(0 12px 14px|filter: none;/, 'Editorial portrait treatment must not be reset by About');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);
