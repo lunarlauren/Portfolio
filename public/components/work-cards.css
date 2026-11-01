@@ -49,11 +49,11 @@
 .project-card .project-meta{display:flex;justify-content:space-between;gap:8px}
 
 /* Work archive: linked case studies with documented process previews. */
-.featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,44px);margin-bottom:clamp(42px,6vw,76px)}
+.featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.5vw,34px);margin-bottom:clamp(42px,6vw,76px)}
 .featured-project{min-width:0}
 .featured-project>.eyebrow{margin:0 0 12px;color:var(--muted);line-height:1.5}
 .featured-project .project-visual{aspect-ratio:16/10;min-height:0}
-.featured-project .project-card h3{font-size:clamp(1.625rem,2.5vw,2.375rem);line-height:1.12}
+.featured-project .project-card h3{font-family:var(--font-display,Georgia,serif);font-weight:500;font-size:clamp(1.625rem,2.5vw,2.375rem);line-height:1.12}
 .featured-project .project-card p{font-size:0.9375rem;line-height:1.65;max-width:58ch}
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
 html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
@@ -283,14 +283,17 @@ html[data-theme="dark"] .work .client-file{
  text-transform:uppercase;
 }
 
-/* Active archive/playground card metadata: keep the arrow discoverable for
-   keyboard focus; the reduced-motion guard above disables its transition. */
+/* The arrow is visible without motion. Keep desktop hover (-3px) and
+   keyboard focus (-4px) distinct; reduced-motion removes both transforms. */
 .project-card .project-meta span:last-child{display:inline-block;transition:transform .4s var(--motion-ease)}
-.project-card-link:hover .project-meta span:last-child,
-.project-card-link:focus-visible .project-meta span:last-child{transform:translate(4px,-4px)}
+.project-card-link:is(:hover,:focus-visible) .project-meta span:last-child{transform:translate(4px,-4px)}
 @media(hover:hover) and (pointer:fine){
- .project-card .project-meta span:last-child{transition:transform .25s ease}
+ .project-card .project-meta span:last-child{transition-duration:.25s;transition-timing-function:ease}
  .project-card-link:hover .project-meta span:last-child{transform:translate(4px,-3px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .project-card .project-meta span:last-child{transition:none}
+ .project-card-link:is(:hover,:focus-visible) .project-meta span:last-child{transform:none}
 }
 
 /* Shared project-card hover interaction is owned with card presentation. */
