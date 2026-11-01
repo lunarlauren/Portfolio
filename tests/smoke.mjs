@@ -91,6 +91,23 @@ try{
  }
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // A late editorial skin previously shadowed the stronger dark
+ // high-contrast separator preference. Test computed tokens, not just source.
+ const contrastSession=await page.context().newCDPSession(page);
+ await contrastSession.send("Emulation.setEmulatedMedia",{
+  features:[{name:"prefers-contrast",value:"more"}]
+ });
+ await page.evaluate(()=>document.documentElement.dataset.theme="dark");
+ const highContrast=await page.evaluate(()=>{
+  const root=getComputedStyle(document.documentElement);
+  return {line:root.getPropertyValue("--line").trim(),muted:root.getPropertyValue("--muted").trim()};
+ });
+ assert.equal(highContrast.line,"#91adc3","Dark high-contrast separators must override standard theme");
+ assert.notEqual(highContrast.muted,"#c4c4c4","High-contrast secondary ink must override standard theme");
+ await contrastSession.send("Emulation.setEmulatedMedia",{features:[]});
+ await contrastSession.detach();
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // Brand accents are a visible distinction between professional projects.
  // Check computed colors in Chromium: the editorial global palette deliberately
  // neutralizes blue/pink, but Work's client tabs must not become gray.

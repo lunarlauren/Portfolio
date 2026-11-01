@@ -978,9 +978,26 @@ const contrastRatio = (a,b) => {
 };
 assert.match(workCss, /\.client-file \.client-file-label\{[^}]*color:var\(--file-label-ink\)/, 'Client tabs must use their accessible ink token');
 const tabInk = tokenHex(workCss, 'file-label-ink');
-for (const accent of ['blue','pink','green']) {
- const tabColor = tokenHex(stationeryCss, 'palette-' + accent);
- assert.ok(contrastRatio(tabInk,tabColor) >= 4.5, accent + ' client tab must meet WCAG AA normal-text contrast');
+// Keep shared palette ownership in foundations. Later global overrides used to
+// defeat the dark high-contrast separator preference despite valid source CSS.
+for (const token of ['--palette-navy:#171717','--palette-paper:#f5f3ef',
+ '--palette-blue:#bdbdbd','--palette-pink:#858585','--notebook-pink:#555',
+ '--focus:#235f88','--line:#c8c5c0','--surface-blush:#eeece8']) {
+ assert.ok(foundationsCss.includes(token), 'Global light token belongs in foundations.css: ' + token);
+}
+assert.doesNotMatch(stationeryCss,/--palette-(?:navy|paper|pink|blue|green|lavender)\s*:/,
+ 'Stationery must not redefine shared palette tokens');
+assert.doesNotMatch(editorialCss,/--(?:palette-[a-z-]+|notebook-pink|brand-pink|paper|ink|brand-ink|line|surface-blush|focus|muted)\s*:/,
+ 'Editorial must not override global theme tokens');
+assert.match(foundationsCss,/@media \(prefers-contrast:more\)[\s\S]*?--line:#91adc3/,
+ 'Dark high-contrast separators must remain stronger than the standard theme');
+
+// Client colors are deliberate exceptions to the neutral editorial palette.
+// Measure actual Work card tokens, not retired stationery palette aliases.
+for (const client of ['hoylu','alcon','holland-america']) {
+ const rule = workCss.split('.client-file--' + client + '{--file-accent:')[1]?.match(/^(#[0-9a-fA-F]{6})/);
+ assert.ok(rule, client + ' must have an explicit client tab accent');
+ assert.ok(contrastRatio(tabInk,rule[1]) >= 4.5, client + ' tab must meet WCAG AA normal-text contrast');
 }
 
 

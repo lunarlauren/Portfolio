@@ -1,23 +1,13 @@
-/* MONOCHROME EDITORIAL — isolated presentation layer.
-   Project imagery retains its original files; color is an interaction detail.
-   Keep contrast, keyboard access and reduced-motion behavior intact. */
+/* MONOCHROME EDITORIAL — component-specific presentation only.
+   Shared light/dark palette, ink, paper and focus live in foundations.css;
+   client colors stay in work-cards.css. */
 :root{
  --editorial-accent:#235f88;--editorial-action-ink:#fff;
- --palette-paper:#f5f3ef;--palette-navy:#171717;--palette-blue:#bdbdbd;--palette-pink:#858585;
- --notebook-pink:#555;--brand-pink:#555;
- --paper:#f5f3ef;--ink:#171717;--brand-ink:#171717;--line:#c8c5c0;
- --surface-blush:#eeece8;
- --focus:#235f88;
  /* Card surfaces belong with the editorial theme tokens. */
  --editorial-card:#f7f6f3;--editorial-card-edge:#b7b5b1;
  --editorial-card-glow:rgba(255,255,255,.88);--editorial-card-shadow:rgba(18,18,18,.10);
 }
 html[data-theme="dark"]{
- --palette-paper:#151515;--palette-navy:#efefef;--palette-blue:#777;--palette-pink:#aaa;
- --notebook-pink:#aaa;--brand-pink:#dedede;
- --paper:#151515;--ink:#f1f0ec;--brand-ink:#f1f0ec;--line:#565656;
- --surface-blush:#242424;
- --focus:#a6d9ff;--muted:#c4c4c4;
  --editorial-accent:#a6d9ff;--editorial-action-ink:#111;
  --editorial-card:#252525;--editorial-card-edge:#646464;
  --editorial-card-glow:rgba(255,255,255,.12);--editorial-card-shadow:rgba(0,0,0,.44);
