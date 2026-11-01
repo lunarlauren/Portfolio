@@ -20,7 +20,11 @@
    Work supplies neutral tokens; Playground retains its scoped night contrast. */
 /* Shared dark media fallback, including real images while loading.
    The no-image rules below override it with their scoped surface tokens. */
-html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));border-color:#496074}
+html[data-theme="dark"] .project-visual{
+ background:var(--placeholder-surface,color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green)));
+ color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+ border-color:var(--placeholder-edge,#496074);
+}
 .project-visual:not(:has(img)){
  --placeholder-surface:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
  --placeholder-edge:color-mix(in srgb,var(--palette-blue) 42%,var(--palette-navy));
@@ -31,9 +35,7 @@ html[data-theme="dark"] .project-visual{background:color-mix(in srgb,var(--palet
 html[data-theme="dark"] .project-visual:not(:has(img)){
  --placeholder-surface:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  --placeholder-edge:#496074;
- /* Explicit paint wins over the equally specific dark media fallback above. */
- background:var(--placeholder-surface);
- border-color:var(--placeholder-edge);
+ /* The fallback reads these tokens; Work may override them. */
 }
 /* The renderer's .visual-label.visual-brief is already inside the dashed frame. */
 .project-visual .visual-brief{
