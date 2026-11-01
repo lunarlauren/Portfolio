@@ -442,16 +442,32 @@ try{
  const previewTransition=await reducedMotionPage.locator("#play-grid .project-card-link .project-visual").first()
   .evaluate(node=>getComputedStyle(node).transitionProperty);
  assert.equal(previewTransition,"none","Playground preview must not animate under reduced motion");
+ // Reduced-motion hover must not jump the preview or lift the archive file.
+ for(const theme of ["light","dark"]){
+  await reducedMotionPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+  await reducedMotionPage.locator("#play-grid .project-card-link").first().hover();
+  const previewTransform=await reducedMotionPage.locator("#play-grid .project-card-link .project-visual").first()
+   .evaluate(node=>getComputedStyle(node).transform);
+  assert.equal(previewTransform,"none",theme+": reduced-motion Playground hover must not shift the preview");
+  await reducedMotionPage.locator(".work .project-card-link").first().hover();
+  const fileTransform=await reducedMotionPage.locator(".work .featured-project.client-file").first()
+   .evaluate(node=>getComputedStyle(node).transform);
+  assert.equal(fileTransform,"none",theme+": reduced-motion archive must not lift on hover");
+ }
+
  // A synthetic project preview verifies the shared image rule even when all
  // authored project art is intentionally represented by placeholders.
  const reducedImageTransition=await reducedMotionPage.evaluate(()=>{
   const card=document.createElement("div");card.className="project-card";
-  card.innerHTML='<div class="project-visual"><img alt=""></div>';
+  card.innerHTML='<a class="project-card-link" href="#work"><div class="project-visual"><img alt=""></div></a>';
   document.body.append(card);
-  const value=getComputedStyle(card.querySelector("img")).transitionProperty;
+  card.querySelector("a").focus();
+  const image=card.querySelector("img");
+  const value={transition:getComputedStyle(image).transitionProperty,transform:getComputedStyle(image).transform};
   card.remove();return value;
  });
- assert.equal(reducedImageTransition,"none","Project image zoom must honor reduced motion");
+ assert.equal(reducedImageTransition.transition,"none","Project image zoom must honor reduced motion");
+ assert.equal(reducedImageTransition.transform,"none","Project image must not zoom on reduced-motion focus");
 
  // Decorative metadata arrows must not move or transition when reduced motion
  // is requested, even on a hovered professional project card.
