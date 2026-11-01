@@ -28,9 +28,8 @@
 /* Work archive cards: client folder tabs, verified contribution metadata,
    project previews, and dark-mode card surfaces. Loaded after base styles. */
 
-/* SHARED PROJECT CARD PRIMITIVES — Work and After Hours use the same
-   structure and image motion. The editorial layer owns glass surfaces;
-   Playground owns its deliberately dark contrast. */
+/* SHARED PROJECT CARD PRIMITIVES — Work and After Hours share geometry
+   and image motion. Work owns glass paint; Playground owns night contrast. */
 .project-card,.featured-project{min-width:0}
 .project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;min-height:190px}
 .project-visual img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
@@ -46,7 +45,7 @@
 .featured-projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.5vw,34px);margin-bottom:clamp(42px,6vw,76px)}
 .featured-project>.eyebrow{margin:8px 0 4px}
 /* Work owns the preview frame; missing-image briefs keep their dashed edge. */
-.featured-project .project-visual{aspect-ratio:16/10;min-height:0;border:1px solid var(--editorial-card-edge);border-radius:2px;box-shadow:inset 0 1px 0 var(--editorial-card-glow)}
+.work .featured-project .project-visual{aspect-ratio:16/10;min-height:0;border:1px solid var(--editorial-card-edge);border-radius:2px;box-shadow:inset 0 1px 0 var(--editorial-card-glow)}
 .work .featured-project .project-visual:has(img){background:transparent}
 .featured-project .project-card p{font-size:0.9375rem;line-height:1.65;max-width:58ch}
 html:not([data-theme="dark"]) .featured-projects-grid{position:relative;z-index:1}
