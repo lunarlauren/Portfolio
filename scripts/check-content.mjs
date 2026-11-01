@@ -119,13 +119,17 @@ for (const name of stylesheetOrder) {
  assert.ok(match > previousPosition, name + ' must load after the preceding stylesheet');
  previousPosition = match;
 }
-assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual:not/, 'Placeholder dark tokens must stay in the shared component');
-assert.match(visualPlaceholderCss, /background:var\(--placeholder-surface,color-mix\(/,
- 'Dark fallback must consume the same surface token as no-image briefs');
-assert.doesNotMatch(visualPlaceholderCss, /\/\* Explicit paint wins over the equally specific/,
- 'No duplicate dark background or border override');
-assert.match(visualPlaceholderCss, /\.work \.featured-project \.project-visual:not\(:has\(img\)\)\{[^}]*--placeholder-surface:var\(--surface-blush\)/,
- 'Archive placeholder tokens belong to the shared visual component');
+// One shared fallback follows the light illustrative frame; Work owns its
+// neutral preview paint rather than redefining custom properties upstream.
+assert.ok(visualPlaceholderCss.indexOf('html[data-theme="dark"] .project-visual{') >
+ visualPlaceholderCss.indexOf('.project-visual:not(:has(img)){'),
+ 'Dark shared image fallback must follow the light no-image frame');
+assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual\{[^}]*background:color-mix\([^}]*border-color:#496074;/,
+ 'Dark image and brief fallback paint must share one rule');
+assert.doesNotMatch(visualPlaceholderCss, /--placeholder-(?:surface|edge|text):|\.work \.featured-project \.project-visual:not/,
+ 'Retired placeholder tokens and Work overrides must not return to shared CSS');
+assert.match(workCss, /\.work \.featured-project\.client-file \.project-visual:not\(:has\(img\)\)\{[^}]*background:var\(--surface-blush\);[^}]*color:var\(--ink\);[^}]*border:1px dashed var\(--line\)/,
+ 'Work must own neutral illustrative background, readable ink and dashed frame');
 assert.doesNotMatch(editorialCss, /\.work \.featured-project \.project-visual:not\(:has\(img\)\)/,
  'Editorial skin must not reintroduce important placeholder overrides');
 assert.doesNotMatch(workCss, /html\[data-theme="dark"\] \.project-visual\{/,
@@ -819,10 +823,10 @@ assert.doesNotMatch(workCss, /--(?:archive-preview(?:-edge|-text)?|file-tint)\s*
  'Work must not restore unused preview color tokens');
 assert.match(workCss, /border:1px dashed var\(--line\)/,
  'Work must keep a dashed illustrative frame over the later editorial border');
-assert.match(visualPlaceholderCss, /border:2px dashed var\(--placeholder-edge\)/,
+assert.match(visualPlaceholderCss, /border:2px dashed color-mix\(/,
  'Shared visual owner must retain the base dashed placeholder frame');
-assert.match(visualPlaceholderCss, /--placeholder-surface:var\(--surface-blush\)/,
- 'Shared visual owner must give Work placeholders neutral paper');
+assert.match(workCss, /background:var\(--surface-blush\)/,
+ 'Work must give illustrative previews neutral paper');
 assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] :is\(\.visual-label,\.visual-brief,\.brief-kicker\)\{color:var\(--ink\)\}/,
  'Dark placeholder briefs must use legible theme ink');
 assert.match(workCss, /text-wrap:balance/, 'Archive headings must balance across card widths');
