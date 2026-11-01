@@ -8,6 +8,23 @@ Edit the production-facing site in `public/`; obsolete root-level prototype file
 Styles begin in `public/components/foundations.css`, then `public/components/homepage-base.css`, then `public/components/case-study-base.css`, then the legacy `public/styles.css`, with scoped additions in `public/components/...`. Client folder tabs use a shared dark-ink token (`--file-label-ink`) against blue, pink, and green accents; maintain at least **4.5:1 contrast** for the small tab labels in both themes. Prefer existing color and type tokens, preserve the stationery visual language, and check both light/dark modes. Avoid appending competing overrides to the base stylesheet. The responsive hero's typography, portrait sizing, and phone reading order are owned by `public/components/hero-polish.css`. The single `@media(max-width:600px)` block intentionally hides the redundant editorial note and decorative card chrome on phones; the note remains on larger screens. Avoid adding competing `styles.css` overrides. The About section's heading scale, biography measure/leading, and short-laptop typography now live in `public/components/about.css` (loaded after `styles.css`); avoid reintroducing About-specific type overrides into the legacy sheet. The short-viewport heading rule (`min-width:1024px`, `max-height:780px`) intentionally comes last so it wins the cascade. The Work section's two-column desktop heading, editorial title scale, supporting paragraph alignment, and short-laptop spacing now live together in `public/components/work-cards.css` (after the legacy sheet). Keep Work heading and section padding changes there. On phones (600px and below), the Work intro uses a 34–48px top gutter, a 2–2.375rem heading and a 20–28px handoff to the first archive card; the full UX-process summary stays visible. The 760px/600px archive rules are grouped once each in work-cards.css. Test 320/390/600px in both themes before release. The shared `.projects-grid` / `.play-grid` layout now lives in `public/components/homepage-base.css`; Work card geometry and focus styles live in `work-cards.css`; the old collection view is retired.
 
 
+## Client color and verified-delivery ownership (2026-11-01)
+The global monochrome editorial palette remains neutral. The Work archive now
+defines Hoylu blue, Alcon pink, and Holland America green directly in
+`work-cards.css`; do not derive these from the theme-neutralized
+`--palette-blue` or `--palette-pink`. The same `--file-accent` drives tabs,
+hover highlighters, and contrast-mixed CTAs. Six redundant client/theme
+highlighter declarations were removed from `stationery.css`.
+
+Only projects whose reviewed `projectEvidence[title][2]` is exactly
+`Shipped product contribution` receive the small text-labeled delivery
+stamp. This includes **Hoylu Mobile Insights** and the two shipped Holland
+America apps. No other project should receive that stamp without confirmed
+delivery evidence. `scripts/check-content.mjs` guards the evidence condition;
+Chromium smoke tests check the rendered labels, accents, and stamp at phone
+and desktop widths in both themes. This does not establish screenshot parity
+or a production deployment.
+
 ## Shared illustrative-placeholder ownership (2026-10-31)
 The legacy `public/styles.css` has zero active rules. `visual-placeholders.css` now owns Work's neutral no-image tokens and the shared dark media fallback; `monochrome-editorial.css` no longer forces three `!important` placeholder colors. The base background and border consume scoped tokens automatically, so the unused `--placeholder-text` token and repeated dark declarations are retired. Night brief/disclosure ink uses `--ink`, not the dark `--palette-paper` mix that made labels difficult to read. Playground retains its higher-specificity charcoal and white labels. Browser checks use a synthetic Work placeholder at 390px and 1280px in both themes to check 4.5:1 contrast and a dashed frame. These are computed-style checks, not screenshot equivalence. Case-study evidence and shipped-status copy are unchanged.
 
