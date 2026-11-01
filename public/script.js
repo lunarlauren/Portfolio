@@ -36,7 +36,7 @@ const processTeaser=p=>{
 // link navigation communicates contribution and delivery, not only the challenge.
 // Only render reviewed labels, never inferred metrics.
 const archiveFactsMarkup=(evidence,id)=>evidence?
- '<dl id="'+id+'" class="project-card-facts"><div><dt>My contribution</dt><dd>'+esc(evidence[1])+'</dd></div><div><dt>Delivery</dt><dd>'+esc(evidence[2])+'</dd></div></dl>':"";
+ '<dl id="'+id+'" class="project-card-facts"><div><dt>My contribution</dt><dd>'+esc(evidence[1])+'</dd></div><div><dt>Delivery</dt><dd'+(evidence[2]==="Shipped product contribution"?' class="project-delivery-shipped"':'')+'>'+esc(evidence[2])+'</dd></div></dl>':"";
 // Keep card content in one semantic order across desktop and mobile.
 // Professional cards lead with the challenge; playground cards stay visual-first.
 const projectCard=(p,i,group,evidence)=>{

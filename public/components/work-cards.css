@@ -77,18 +77,23 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
  .notebook-project-index .project-card-link{overflow-wrap:break-word}
 }
 
-/* Stationery file-folder tabs: the client name is the actual projecting
-   tab, not a tiny decorative dash. Keep the file number on the card itself. */
+/* Stationery file-folder tabs: keep client identities colorful even when
+   the surrounding editorial palette is monochrome. Do not derive brand
+   accents from --palette-blue/pink: the late editorial theme neutralizes them.
+   Dark ink on these three colors exceeds 4.5:1 contrast. */
 .client-file{
  --file-accent:#357caa;
- --file-label-ink:#000000; /* AA contrast against monochrome tabs in both themes. */
+ --file-label-ink:#000000;
+ --file-highlight-strength:35%;
+ --file-highlight:color-mix(in srgb,var(--file-accent) var(--file-highlight-strength),transparent);
  position:relative;
  margin-top:32px;
  /* Card border and radius are painted by monochrome-editorial.css. */
 }
-.client-file--hoylu{--file-accent:var(--palette-blue)}
-.client-file--alcon{--file-accent:var(--palette-pink)}
-.client-file--holland-america{--file-accent:var(--palette-green)}
+.client-file--hoylu{--file-accent:#53a7de}
+.client-file--alcon{--file-accent:#f15c9d}
+.client-file--holland-america{--file-accent:#50ba9c}
+html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
 .client-file>.eyebrow{
  margin-top:8px;
  margin-bottom:12px;
@@ -121,7 +126,8 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
 }
 
 /* Archive metadata: distinguish the designer's actual contribution from
-   delivery status at scan speed. No invented outcomes or research badges. */
+   delivery status at scan speed. No invented outcomes or research badges.
+   Only the explicitly verified "Shipped product contribution" receives a stamp. */
 .work .project-card-facts{
  display:grid;
  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
@@ -147,6 +153,33 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
  font-weight:600;
  line-height:1.45;
  overflow-wrap:break-word;
+}
+/* Visible proof of delivery without suggesting metrics or undocumented research.
+   Text carries the meaning; the accent dot is purely decorative. */
+.work .project-card-facts .project-delivery-shipped{
+ display:inline-flex;
+ align-items:center;
+ gap:7px;
+ width:fit-content;
+ min-height:28px;
+ padding:4px 9px;
+ border:1px solid color-mix(in srgb,var(--file-accent) 45%,var(--line));
+ border-radius:4px;
+ background:color-mix(in srgb,var(--file-accent) 13%,var(--editorial-card));
+ box-shadow:2px 2px 0 color-mix(in srgb,var(--file-accent) 18%,transparent);
+ font-weight:700;
+}
+.work .project-delivery-shipped::before{
+ content:"";
+ flex:none;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:var(--file-accent);
+}
+@media(forced-colors:active){
+ .work .project-card-facts .project-delivery-shipped{border-color:CanvasText;box-shadow:none}
+ .work .project-delivery-shipped::before{background:CanvasText}
 }
 
 
