@@ -15,5 +15,4 @@
 .case-prose h2 {font:600 clamp(28px,3vw,43px) 'Newsreader';letter-spacing:-.05em}
 .case-prose p {color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-paper))}
 .case-gallery {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:70px}
-.case-gallery .project-visual {min-height:260px}
 .case-next {margin-top:60px;font-weight:700;text-underline-offset:6px}
