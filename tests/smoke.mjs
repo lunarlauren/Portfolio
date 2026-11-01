@@ -91,6 +91,36 @@ try{
  }
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // Brand accents are a visible distinction between professional projects.
+ // Check computed colors in Chromium: the editorial global palette deliberately
+ // neutralizes blue/pink, but Work's client tabs must not become gray.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   await page.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+   const cards=await page.evaluate(()=>[...document.querySelectorAll(".work .client-file")].map(card=>({
+    client:[...card.classList].find(name=>name.startsWith("client-file--"))?.replace("client-file--",""),
+    title:card.querySelector(".archive-project-title")?.textContent.trim(),
+    tab:getComputedStyle(card.querySelector(".client-file-label")).backgroundColor,
+    tabInk:getComputedStyle(card.querySelector(".client-file-label")).color,
+    shipped:card.querySelector(".project-delivery-shipped")?.textContent.trim()||null,
+    stampBorder:card.querySelector(".project-delivery-shipped")?getComputedStyle(card.querySelector(".project-delivery-shipped")).borderTopStyle:null
+   })));
+   const accents={hoylu:"rgb(83, 167, 222)",alcon:"rgb(241, 92, 157)","holland-america":"rgb(80, 186, 156)"};
+   assert.ok(cards.length>=8,"Professional archive should include documented case studies");
+   for(const card of cards){
+    assert.equal(card.tab,accents[card.client],width+"px "+theme+": "+card.client+" tab keeps its brand accent");
+    assert.equal(card.tabInk,"rgb(0, 0, 0)",width+"px "+theme+": tab ink retains readable contrast");
+    if(["Mobile Insights","Navigator App","Stateroom TV App"].includes(card.title)){
+     assert.equal(card.shipped,"Shipped product contribution",card.title+" shows verified delivery");
+     assert.equal(card.stampBorder,"solid",card.title+" shipped stamp has a visible edge");
+    }else assert.equal(card.shipped,null,card.title+" must not be marked shipped without verification");
+   }
+  }
+ }
+ await page.setViewportSize({width:1280,height:800});
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // Regression: blue boxes around ordinary hero/Work text were caused by
  // a dark-mode outline rule accidentally sharing the CTA's selector list.
  // Check computed styles in Chromium, not only source text, in both themes.
