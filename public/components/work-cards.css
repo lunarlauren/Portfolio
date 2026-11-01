@@ -205,7 +205,8 @@ html[data-theme="dark"] .client-file{--file-highlight-strength:48%}
  min-height:132px;
  padding:clamp(14px,2vw,24px);
  justify-content:flex-start;
- border-width:1px;
+ /* The later editorial frame resets border-style; preserve dashed disclosure. */
+ border:1px dashed var(--line);
 }
 .work .featured-project.client-file .project-visual:not(:has(img)) .visual-brief{
  max-width:54ch;
