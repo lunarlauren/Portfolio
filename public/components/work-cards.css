@@ -36,8 +36,6 @@
 .project-card{min-width:0}
 .project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;height:auto;min-height:190px}
 .project-visual img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
-.project-card img{transition:transform .45s ease}
-.project-card:hover img{transform:scale(1.035)}
 .project-meta{font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;letter-spacing:.13em;font-weight:700;margin-top:20px}
 .project-card h3{font:600 25px 'Newsreader';letter-spacing:-.04em;margin:8px 0}
 .project-card p{color:var(--muted);line-height:1.6;font-size:var(--type-sm)}
@@ -265,7 +263,7 @@ html[data-theme="dark"] .work .client-file{
  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
  background:linear-gradient(145deg,rgba(255,255,255,.11),transparent 43%);
 }
-@media(hover:hover) and (pointer:fine){
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
  .work .featured-project.client-file:hover{--file-lift:-5px}
  .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
 }
@@ -273,9 +271,6 @@ html[data-theme="dark"] .work .client-file{
 .work .featured-project.client-file:active{--file-lift:1px;box-shadow:2px 3px 0 color-mix(in srgb,var(--file-accent) 22%,transparent)}
 .work .featured-project.client-file:is(:hover,:focus-within){
  box-shadow:0 20px 44px -22px var(--editorial-card-shadow),0 0 22px -8px color-mix(in srgb,var(--file-accent,var(--line)) 38%,transparent),0 0 0 1px var(--file-accent,var(--line)),inset 0 1px 0 var(--editorial-card-glow);
-}
-@media(prefers-reduced-motion:reduce){
- .work .client-file .client-file-label,.project-card img{transition:none!important}
 }
 
 /* One responsive archive owner. The shorter phone introduction reveals
@@ -339,13 +334,7 @@ html[data-theme="dark"] .work .client-file{
  .project-card .project-meta span:last-child{transition-duration:.25s;transition-timing-function:ease}
  .project-card-link:hover .project-meta span:last-child{transform:translate(4px,-3px)}
 }
-@media(prefers-reduced-motion:reduce){
- .project-card .project-meta span:last-child{transition:none}
- .project-card-link:is(:hover,:focus-visible) .project-meta span:last-child{transform:none}
-}
 
-/* Shared project-card hover interaction is owned with card presentation. */
-@media(hover:hover) and (pointer:fine){.project-card-link:hover{transform:translateY(-3px)}}
 
 /* Shared Work / Playground card focus affordances.
    Playground overrides only the focus color via --card-focus-color. */
@@ -367,9 +356,30 @@ html[data-theme="dark"] .project-card-link{color:var(--ink)}
 /* Programmatic focus does not draw boxes around static archive headings.
    Actual links retain their visible :focus-visible rings. */
 #work-title:focus{outline:none!important;box-shadow:none!important}
-/* No animated paper lift on touch or when motion is reduced. */
-@media(hover:none),(prefers-reduced-motion:reduce){
- .work .featured-project.client-file{transition:none}
+/* One owner for Work / After Hours preview motion. Keep keyboard focus
+   feedback alongside pointer hover; never animate media for reduced motion. */
+@media(prefers-reduced-motion:no-preference){
+ .project-card img{transition:transform .45s ease}
+ .project-card-link:focus-visible img{transform:scale(1.035)}
+ .play-grid .project-card-link .project-visual{transition:transform .55s var(--motion-ease),filter .35s ease}
+ .play-grid .project-card-link:focus-visible .project-visual{transform:translateY(-5px)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .project-card-link:hover img{transform:scale(1.035)}
+ .play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)}
+ .project-card-link:hover{transform:translateY(-3px)}
+}
+/* Hover and focus remain visible via color, underline and outline,
+   without moving the archive, preview, label or image. */
+@media(prefers-reduced-motion:reduce){
+ .project-card img,
+ .play-grid .project-card-link .project-visual,
+ .work .client-file .client-file-label,
+ .project-card .project-meta span:last-child{transition:none!important;transform:none!important}
+ .work .featured-project.client-file{transition:none;transform:none}
+}
+@media(hover:none){
+ .work .featured-project.client-file{transition:none;transform:none}
 }
 @media(prefers-contrast:more){
  .work .featured-project.client-file{box-shadow:none!important;border-width:2px!important}

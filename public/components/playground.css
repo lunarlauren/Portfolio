@@ -73,11 +73,5 @@
  .playground .play-grid .project-card-cta{margin-top:auto;padding-top:20px}
  .playground .play-grid .project-card-process{margin-bottom:0}
 }
-/* Playground preview motion: transform-only lift. The former shadow was
-   overridden on hover-capable devices and inconsistent on touch. */
-.play-grid .project-card-link .project-visual{transition:transform .55s var(--motion-ease),filter .35s ease}
-.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)}
-@media(prefers-reduced-motion:reduce){
- .play-grid .project-card-link .project-visual{transition:none!important}
- .play-grid .project-card-link:hover .project-visual{transform:none}
-}
+/* Shared project-card preview motion (including keyboard and reduced-motion
+   behavior) lives in work-cards.css; keep only night contrast here. */
