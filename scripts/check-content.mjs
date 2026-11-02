@@ -1063,8 +1063,8 @@ assert.ok(!caseStudy.includes('const heading=document.getElementById(button.data
 
 // Editorial defines opaque theme tokens; Work consumes them to paint the
 // folder surface without a second competing late-stage override.
-assert.match(editorialCss, /--editorial-card:#f7f6f3/, 'Light archive surface needs an opaque token');
-assert.match(editorialCss, /--editorial-card:#252525/, 'Dark archive surface needs an opaque token');
+assert.match(editorialCss.replace(/\\s+/g, ''), /--editorial-card:#f7f6f3/, 'Light archive surface needs an opaque token');
+assert.match(editorialCss.replace(/\\s+/g, ''), /--editorial-card:#252525/, 'Dark archive surface needs an opaque token');
 assert.match(workCss, /background-color:var\(--editorial-card\)/, 'Archive card must paint an opaque base');
 assert.match(workCss, /border:1px solid var\(--editorial-card-edge\)/, 'Archive card edge belongs to Work');
 assert.doesNotMatch(workCss, /border:1px solid var\(--archive-edge\)!important/, 'Retired archive border must not return');
