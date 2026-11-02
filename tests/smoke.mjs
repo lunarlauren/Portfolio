@@ -1657,8 +1657,18 @@ try{
  for(const width of [320,480,481,600,650,651,760,761]){
   await page.setViewportSize({width,height:844});
   for(const theme of ["light","dark"]){
-   const metrics=await page.evaluate(theme=>{
-    document.documentElement.dataset.theme=theme;
+   await page.evaluate(theme=>{document.documentElement.dataset.theme=theme},theme);
+   // ResizeObserver updates the shared offset on the next layout frame.
+   // Await the observed size rather than racing the callback on CI runners.
+   if(width<=650){
+    await page.waitForFunction(()=>{
+     const height=Math.ceil(document.querySelector(".site-header").getBoundingClientRect().height);
+     const measured=parseFloat(getComputedStyle(document.documentElement)
+      .getPropertyValue("--mobile-site-header-height"));
+     return Number.isFinite(measured)&&Math.abs(measured-height)<=1;
+    });
+   }
+   const metrics=await page.evaluate(()=>{
     const columns=selector=>getComputedStyle(document.querySelector(selector)).gridTemplateColumns.trim().split(/\s+/).length;
     const facts=getComputedStyle(document.querySelector(".case-facts"));
     return {
