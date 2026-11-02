@@ -214,6 +214,22 @@ assert.doesNotMatch(heroPolishCss, /max-width:37ch|width:min\(88%,360px\)|transf
  'Dead intermediate hero description and portrait geometry must stay retired');
 assert.match(heroPolishCss, /\.hero \.feature-art\{height:100%;min-height:0\}/,
  'Desktop hero art must retain its original fill height');
+// Pass 8: the 760px and 1024px rules share one authoritative media block
+// apiece. This prevents competing declarations across unrelated file regions.
+assert.equal((heroPolishCss.match(/@media\(max-width:760px\)/g)||[]).length,1,
+ 'Hero tablet styles must have one 760px media owner');
+assert.equal((heroPolishCss.match(/@media\(min-width:1024px\)/g)||[]).length,1,
+ 'Hero desktop styles must have one 1024px media owner');
+assert.doesNotMatch(heroPolishCss, /@media\s+\(min-width:\s*1024px\)/,
+ 'Do not reintroduce a duplicate spaced desktop breakpoint');
+const desktopHeroBlock=heroPolishCss.slice(heroPolishCss.indexOf('@media(min-width:1024px){'),
+ heroPolishCss.indexOf('/* Phone editorial layout:'));
+for(const selector of ['.hero .feature-art{height:100%;min-height:0}',
+ '.hero .hero-copy{justify-content:center}', '.hero .hero-foot{margin-top:0;']){
+ assert.ok(desktopHeroBlock.includes(selector),
+  'Desktop hero media block must own '+selector);
+}
+
 assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
  'Reduced-motion CTA hover must remain with homepage button styles');
 // The hero notebook note and phone action sizing have one component owner.
