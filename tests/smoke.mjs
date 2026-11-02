@@ -1058,8 +1058,76 @@ try{
  assert.notEqual(await page.locator(".about-portrait figcaption").evaluate(node=>getComputedStyle(node).display),"none",
   "Desktop About must retain the headshot caption");
 
+ // Pass 10: archive title and metadata selectors no longer repeat
+ // .featured-project. Verify computed type and spacing at each breakpoint.
+ for(const width of [320,390,600,601,760,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const cards=await page.evaluate(value=>{
+    document.documentElement.dataset.theme=value;
+    return [...document.querySelectorAll(".work .client-file")].map(file=>{
+     const heading=file.querySelector(".archive-project-title");
+     const meta=file.querySelector(".project-meta");
+     return {
+      featured:file.classList.contains("featured-project"),
+      weight:getComputedStyle(heading).fontWeight,
+      margin:getComputedStyle(meta).marginTop,
+      size:parseFloat(getComputedStyle(heading).fontSize),
+      leading:parseFloat(getComputedStyle(heading).lineHeight)
+     };
+    });
+   },theme);
+   assert.ok(cards.length>=3,width+"px "+theme+": professional client files exist");
+   for(const card of cards){
+    assert.equal(card.featured,true,width+"px "+theme+": client files retain featured structure");
+    assert.equal(card.weight,"500",width+"px "+theme+": heading weight remains 500");
+    assert.equal(card.margin,"12px",width+"px "+theme+": metadata retains 12px spacing");
+    assert.ok(Math.abs(card.leading/card.size-(width<=600?1.12:1.1))<0.02,
+     width+"px "+theme+": archive title line-height remains unchanged");
+   }
+  }
+ }
+ await page.setViewportSize({width:1280,height:720});
+ await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
+
  await page.goto(origin+"/case-studies/hoylu/connected-planning/");
  await page.locator("#case-title").waitFor();
+ // Pass 10: the shared case-navigation owner keeps every next/back link
+ // touch-friendly. Fact values and evidence text retain distinct line heights.
+ for(const width of [390,760,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const data=await page.evaluate(value=>{
+    document.documentElement.dataset.theme=value;
+    const links=[...document.querySelectorAll(".case-next-nav a,.case-back")];
+    const ratio=selector=>{
+     const style=getComputedStyle(document.querySelector(selector));
+     return parseFloat(style.lineHeight)/parseFloat(style.fontSize);
+    };
+    return {
+     links:links.map(link=>{
+      const style=getComputedStyle(link);
+      return {isNext:link.matches(".case-next-nav a")?link.classList.contains("case-next"):true,
+       height:parseFloat(style.minHeight),display:style.display,align:style.alignItems};
+     }),
+     facts:ratio(".case-fact-value"),evidence:ratio(".case-evidence-item strong")
+    };
+   },theme);
+   assert.ok(data.links.length>=2,width+"px "+theme+": case navigation exists");
+   for(const link of data.links){
+    assert.equal(link.isNext,true,width+"px "+theme+": next links retain class and nav parent");
+    assert.ok(link.height>=44,width+"px "+theme+": case links retain 44px minimum height");
+    assert.ok(["flex","inline-flex"].includes(link.display),width+"px "+theme+": links remain flex-aligned");
+    assert.equal(link.align,"center",width+"px "+theme+": links stay vertically aligned");
+   }
+   assert.ok(Math.abs(data.facts-1.6)<0.02,width+"px "+theme+": fact values retain 1.6 leading");
+   assert.ok(Math.abs(data.evidence-1.5)<0.02,width+"px "+theme+": evidence values retain 1.5 leading");
+  }
+ }
+ await page.setViewportSize({width:1280,height:720});
+ await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
+
+
  // Canonical homepage anchors must work when opened in another tab from a
  // deep-linked case study. The original case-study page must remain in place.
  for(const selector of [".site-header nav a[href='/#work']", ".case-back"]){
