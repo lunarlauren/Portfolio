@@ -1,67 +1,330 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f9fa"><script>
-/* Apply persisted/system appearance before the first stylesheet paints. */
-(function(){
- var theme="light";
- try{var saved=localStorage.getItem("portfolio-theme");if(saved==="light"||saved==="dark")theme=saved;
- else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)theme="dark";}
- catch(e){if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)theme="dark";}
- document.documentElement.setAttribute("data-theme",theme);
- document.documentElement.style.colorScheme=theme;
- document.documentElement.style.backgroundColor=theme==="dark"?"#111d2a":"#f7f9fa";
- document.querySelector('meta[name="theme-color"]').setAttribute("content",theme==="dark"?"#111d2a":"#f7f9fa");
-})();
-</script><meta name="description" content="Orlando-area UX/UI, product and visual designer Lauren Leven. Explore web and app design case studies across software, healthcare and travel."><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://portfolio.bertinoln.workers.dev/"><meta property="og:type" content="website"><meta property="og:site_name" content="Lauren Leven Portfolio"><meta property="og:title" content="Lauren Leven | Orlando Area UX/UI & Product Designer"><meta property="og:description" content="Orlando-area UX/UI, product and visual designer Lauren Leven. Explore web and app design case studies across software, healthcare and travel."><meta property="og:url" content="https://portfolio.bertinoln.workers.dev/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Lauren Leven | Orlando Area UX/UI & Product Designer"><meta name="twitter:description" content="Orlando-area UX/UI, product and visual designer Lauren Leven. Explore web and app design case studies across software, healthcare and travel."><title>Lauren Leven | Orlando Area UX/UI & Product Designer</title><link rel="icon" type="image/svg+xml" href="/LL%20logo.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><link rel="preload" as="image" href="/laurenlevenportfolioheroportrait.png" fetchpriority="high"><link rel="stylesheet" href="/components/foundations.css?v=20261102-accessible-ink"><link rel="stylesheet" href="/components/homepage-base.css?v=20261102-action-shape"><link rel="stylesheet" href="/components/visual-placeholders.css?v=20261101-shared-media-owner"><link rel="stylesheet" href="/components/playground.css?v=20261101-night-rule-prune"><link rel="stylesheet" href="/components/hero-polish.css?v=20261102-dark-note-contrast"><link rel="stylesheet" href="/components/stationery.css?v=20261101-palette-owner"><link rel="stylesheet" href="/components/navigation.css?v=20261102-desktop-nav-align"><link rel="stylesheet" href="/components/work-cards.css?v=20261102-square-card-corner"><link rel="stylesheet" href="/components/case-study.css?v=20261102-motion-gate">
-<link rel="stylesheet" href="/components/about.css?v=20261102-action-shape"><link rel="stylesheet" href="/components/monochrome-editorial.css?v=20261102-action-shape"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Lauren Leven","url":"https://portfolio.bertinoln.workers.dev/","jobTitle":"Visual & Product Designer","description":"Visual and product designer specializing in UX/UI, digital products, branding, and creative direction.","homeLocation":{"@type":"Place","name":"Greater Orlando, Florida, United States"},"areaServed":[{"@type":"Place","name":"Orlando, Florida"},{"@type":"Place","name":"Winter Park, Florida"},{"@type":"Place","name":"Altamonte Springs, Florida"},{"@type":"Place","name":"Longwood, Florida"},{"@type":"Place","name":"Lake Mary, Florida"},{"@type":"Place","name":"Sanford, Florida"},{"@type":"Place","name":"Maitland, Florida"},{"@type":"Place","name":"Casselberry, Florida"},{"@type":"Place","name":"Oviedo, Florida"},{"@type":"Place","name":"Winter Springs, Florida"},{"@type":"Place","name":"Apopka, Florida"},{"@type":"Place","name":"Kissimmee, Florida"},{"@type":"Place","name":"Celebration, Florida"},{"@type":"Place","name":"Ocoee, Florida"},{"@type":"Place","name":"Winter Garden, Florida"}],"knowsAbout":["User experience (UX) design","User interface (UI) design","UX/UI design","Product design","Web design","Website design","Mobile app design","Interaction design","Visual design","Graphic design","Brand identity design","Design systems","Prototyping","Illustration"]}</script></head>
-<body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="wordmark" href="/#top" aria-label="Lauren Leven, home"><img src="/LL%20logo.svg" alt="" width="40" height="42"></a><div class="header-actions"><nav aria-label="Main navigation"><a href="/#work">Work</a><a href="/#playground">Playground</a><a href="/#about">About</a></nav><a class="header-contact" id="contact-link" href="mailto:bertinoln@gmail.com">Contact <span aria-hidden="true">↗</span></a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" title="Switch to dark theme"><span class="theme-toggle-icon" aria-hidden="true">☾</span></button></div></header>
-<main id="main"><section class="hero wrap" id="top"><div class="hero-copy"><p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> LAUREN LEVEN <span class="eyebrow-divider">/</span> PRODUCT DESIGN · UX/UI · VISUAL CRAFT</p><h1>I illustrate possibilities.<br><em>I design solutions.</em></h1><p class="notebook-hero-note"><span aria-hidden="true">✎</span> I sketch to figure things out. Then I make them work.</p><p class="hero-description">I like the messy part of design. The questions, the sketches, the ideas that don't quite work yet. I turn all of that into thoughtful, useful experiences that feel a little more human.</p><div class="hero-actions"><a class="primary-link" href="#work">Explore my work <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#about">A little about me <span aria-hidden="true">↓</span></a></div><div class="hero-foot"><span>ILLUSTRATION</span><span>UX/UI DESIGN</span><span>VISUAL STORYTELLING</span></div></div><div class="hero-feature" id="hero-feature"><div class="feature-top"><span>ILLUSTRATED / 01</span><span class="feature-mark" aria-hidden="true">✳</span></div><div class="feature-art"><span class="art-orbit art-orbit-one"></span><span class="art-orbit art-orbit-two"></span><span class="art-tile art-tile-one"></span><span class="art-tile art-tile-two"></span><span class="art-tile art-tile-three"></span><img class="hero-portrait-art" src="/laurenlevenportfolioheroportrait.png" alt="Illustration of Lauren waving from her desk" decoding="async" fetchpriority="high"></div><div class="feature-bottom"><span>FROM SKETCH TO SCREEN</span></div></div></section>
-<section class="work wrap" id="work" aria-labelledby="work-title"><div class="section-head"><div><p class="eyebrow">01 / THE WORK</p><h2 id="work-title">The work behind<br><em>the work.</em></h2></div><p>The finished screens are one part of the story. Here's what I was trying to untangle, the choices I made, and what I learned along the way.</p></div><!-- Project index is rendered from content.js by script.js. --></section>
-<section class="playground wrap" id="playground" aria-labelledby="playground-title"><div class="section-head"><div><p class="eyebrow night-eyebrow">02 / AFTER HOURS · BY NIGHT</p><h2 class="playground-title" id="playground-title">I don't really stop making things.</h2></div><p>Sometimes it's a character sketch. Sometimes it's a game build. Sometimes a tiny idea becomes an app before I realize what happened.</p></div><div id="play-grid" class="play-grid"></div></section>
-<section class="about wrap" id="about" aria-labelledby="about-title"><p class="eyebrow">03 / ABOUT ME</p><h2 id="about-title">I ask a lot of questions.<br><em>Then I make things.</em></h2><div class="about-bottom"><div class="about-copy"><div class="about-intro"><figure class="about-portrait"><picture><source srcset="/headshot-lauren-leven-1024.webp" type="image/webp"><img src="/Headshot%20Lauren%20Leven.png" alt="Portrait photograph of Lauren Leven" loading="lazy" decoding="async" width="2000" height="2000"></picture><figcaption>Hi, I’m Lauren. The person behind the pixels.</figcaption></figure><div class="about-bio"><p>Hi, I’m Lauren, a product and visual designer in the Orlando area. I’ve designed for construction, healthcare, and travel, which means I’ve spent a lot of time making complicated things feel less intimidating.</p><p>I’m the person who asks one more question, sketches three more options, and keeps fiddling with the details until something finally clicks.</p><p>When I’m not designing for work, I’m drawing characters, building something ridiculous in a game, or following a side-project idea much further than I meant to.</p></div><section class="ai-process" aria-labelledby="ai-process-title"><p class="eyebrow">A NOTE ON AI</p><h3 id="ai-process-title">Curiosity first. Tools second.</h3><p>I use AI the way I use a sketchbook: to get unstuck, test an idea, or see a problem from another angle. It's useful for brainstorming, exploring code, and getting a rough thought into something I can react to.</p><p>But the interesting part is still the thinking. I decide what matters, question what comes back, and shape the final experience myself. I don't want AI to replace my taste, my drawings, or the messy work of figuring something out. I want it to give me more room to do that work.</p></section></div><a class="text-link" id="email-link" href="mailto:bertinoln@gmail.com">Have something complicated? Let's figure it out ↗</a></div></div></section></main>
-<footer class="wrap"><span>© <span id="year"></span> Lauren Leven</span><a href="/#top">Back to top <span aria-hidden="true">↑</span></a></footer><script>
-(function(){
- const root=document.documentElement;
- const button=document.getElementById("theme-toggle");
- const meta=document.querySelector('meta[name="theme-color"]');
- if(!button)return;
- let stored;
- try{stored=localStorage.getItem("portfolio-theme")}catch(e){}
- const systemScheme=typeof window.matchMedia==="function"?window.matchMedia("(prefers-color-scheme: dark)"):null;
- const systemTheme=()=>systemScheme?.matches?"dark":"light";
- const chosenTheme=()=>stored==="dark"||stored==="light"?stored:systemTheme();
- function setTheme(theme){
-  const dark=theme==="dark";
-  root.setAttribute("data-theme",dark?"dark":"light");
-  root.style.colorScheme=dark?"dark":"light";
-  root.style.backgroundColor=dark?"#111d2a":"#f7f9fa";
-  button.setAttribute("aria-pressed",String(dark));
-  // The toggle has one stable accessible name; aria-pressed communicates state.
-  // Only the hover title describes the next action.
-  button.title=dark?"Switch to light theme":"Switch to dark theme";
-  button.querySelector(".theme-toggle-icon").textContent=dark?"☀":"☾";
-  if(meta)meta.setAttribute("content",dark?"#111d2a":"#f7f9fa");
- }
- setTheme(chosenTheme());
- // Follow OS appearance changes only until a visitor makes an explicit choice.
- if(systemScheme){
-  const followSystem=()=>{if(stored!=="dark"&&stored!=="light")setTheme(systemTheme())};
-  if(typeof systemScheme.addEventListener==="function")systemScheme.addEventListener("change",followSystem);
-  else if(typeof systemScheme.addListener==="function")systemScheme.addListener(followSystem);
- }
- // Keep open portfolio tabs in sync; clearing the preference restores OS mode.
- window.addEventListener("storage",event=>{
-  if(event.key!=="portfolio-theme")return;
-  stored=event.newValue;
-  setTheme(chosenTheme());
- });
- button.addEventListener("click",function(){
-  const next=root.getAttribute("data-theme")==="dark"?"light":"dark";
-  stored=next;
-  setTheme(next);
-  try{localStorage.setItem("portfolio-theme",next)}catch(e){}
- });
-})();
-</script><script src="/components/standalone-refresh.js?v=20261029-ios-refresh"></script><script src="/content.js?v=20261028-navigator-execution"></script>
-<script src="/components/project-content.js?v=20261029-cover-approach"></script>
-<script src="/components/case-study.js?v=20261029-cover-approach"></script>
-<script src="/script.js?v=20261101-evidence-first"></script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f7f9fa" />
+    <script>
+      /* Apply persisted/system appearance before the first stylesheet paints. */
+      (function () {
+        var theme = "light";
+        try {
+          var saved = localStorage.getItem("portfolio-theme");
+          if (saved === "light" || saved === "dark") theme = saved;
+          else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        } catch (e) {
+          if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+        document.documentElement.style.backgroundColor = theme === "dark" ? "#111d2a" : "#f7f9fa";
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute("content", theme === "dark" ? "#111d2a" : "#f7f9fa");
+      })();
+    </script>
+    <!-- Page description and previews shown in search and social sharing. -->
+    <meta
+      name="description"
+      content="Orlando-area UX/UI, product and visual designer Lauren Leven. Explore web and app design case studies across software, healthcare and travel."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://portfolio.bertinoln.workers.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lauren Leven Portfolio" />
+    <meta property="og:title" content="Lauren Leven | Orlando Area UX/UI & Product Designer" />
+    <meta
+      property="og:description"
+      content="Orlando-area UX/UI, product and visual designer Lauren Leven. Explore web and app design case studies across software, healthcare and travel."
+    />
+    <meta property="og:url" content="https://portfolio.bertinoln.workers.dev/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Lauren Leven | Orlando Area UX/UI & Product Designer" />
+    <meta
+      name="twitter:description"
+      content="Orlando-area UX/UI, product and visual designer Lauren Leven. Explore web and app design case studies across software, healthcare and travel."
+    />
+    <title>Lauren Leven | Orlando Area UX/UI & Product Designer</title>
+    <link rel="icon" type="image/svg+xml" href="/LL%20logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"
+    />
+    <link rel="preload" as="image" href="/laurenlevenportfolioheroportrait.png" fetchpriority="high" />
+    <!-- Load shared colors and type first, then the page-specific styles. -->
+    <link rel="stylesheet" href="/components/foundations.css?v=20261102-accessible-ink" />
+    <link rel="stylesheet" href="/components/homepage-base.css?v=20261102-action-shape" />
+    <link rel="stylesheet" href="/components/visual-placeholders.css?v=20261101-shared-media-owner" />
+    <link rel="stylesheet" href="/components/playground.css?v=20261101-night-rule-prune" />
+    <link rel="stylesheet" href="/components/hero-polish.css?v=20261102-dark-note-contrast" />
+    <link rel="stylesheet" href="/components/stationery.css?v=20261101-palette-owner" />
+    <link rel="stylesheet" href="/components/navigation.css?v=20261102-desktop-nav-align" />
+    <link rel="stylesheet" href="/components/work-cards.css?v=20261102-square-card-corner" />
+    <link rel="stylesheet" href="/components/case-study.css?v=20261102-motion-gate" />
+    <link rel="stylesheet" href="/components/about.css?v=20261102-action-shape" />
+    <link rel="stylesheet" href="/components/monochrome-editorial.css?v=20261102-action-shape" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Lauren Leven",
+        "url": "https://portfolio.bertinoln.workers.dev/",
+        "jobTitle": "Visual & Product Designer",
+        "description": "Visual and product designer specializing in UX/UI, digital products, branding, and creative direction.",
+        "homeLocation": {
+          "@type": "Place",
+          "name": "Greater Orlando, Florida, United States"
+        },
+        "areaServed": [
+          { "@type": "Place", "name": "Orlando, Florida" },
+          { "@type": "Place", "name": "Winter Park, Florida" },
+          { "@type": "Place", "name": "Altamonte Springs, Florida" },
+          { "@type": "Place", "name": "Longwood, Florida" },
+          { "@type": "Place", "name": "Lake Mary, Florida" },
+          { "@type": "Place", "name": "Sanford, Florida" },
+          { "@type": "Place", "name": "Maitland, Florida" },
+          { "@type": "Place", "name": "Casselberry, Florida" },
+          { "@type": "Place", "name": "Oviedo, Florida" },
+          { "@type": "Place", "name": "Winter Springs, Florida" },
+          { "@type": "Place", "name": "Apopka, Florida" },
+          { "@type": "Place", "name": "Kissimmee, Florida" },
+          { "@type": "Place", "name": "Celebration, Florida" },
+          { "@type": "Place", "name": "Ocoee, Florida" },
+          { "@type": "Place", "name": "Winter Garden, Florida" }
+        ],
+        "knowsAbout": [
+          "User experience (UX) design",
+          "User interface (UI) design",
+          "UX/UI design",
+          "Product design",
+          "Web design",
+          "Website design",
+          "Mobile app design",
+          "Interaction design",
+          "Visual design",
+          "Graphic design",
+          "Brand identity design",
+          "Design systems",
+          "Prototyping",
+          "Illustration"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <!-- Navigation labels live here; its layout and colors live in navigation.css. -->
+    <header class="site-header">
+      <a class="wordmark" href="/#top" aria-label="Lauren Leven, home"
+        ><img src="/LL%20logo.svg" alt="" width="40" height="42"
+      /></a>
+      <div class="header-actions">
+        <nav aria-label="Main navigation">
+          <a href="/#work">Work</a><a href="/#playground">Playground</a><a href="/#about">About</a>
+        </nav>
+        <a class="header-contact" id="contact-link" href="mailto:bertinoln@gmail.com"
+          >Contact <span aria-hidden="true">↗</span></a
+        ><button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Dark theme"
+          aria-pressed="false"
+          title="Switch to dark theme"
+        >
+          <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+        </button>
+      </div>
+    </header>
+    <!-- Main homepage copy and image: edit in the section below. -->
+    <main id="main">
+      <section class="hero wrap" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="status-dot" aria-hidden="true"></span> LAUREN LEVEN
+            <span class="eyebrow-divider">/</span> PRODUCT DESIGN · UX/UI · VISUAL CRAFT
+          </p>
+          <h1>I illustrate possibilities.<br /><em>I design solutions.</em></h1>
+          <p class="notebook-hero-note">
+            <span aria-hidden="true">✎</span> I sketch to figure things out. Then I make them work.
+          </p>
+          <p class="hero-description">
+            I like the messy part of design. The questions, the sketches, the ideas that don't quite work yet. I turn
+            all of that into thoughtful, useful experiences that feel a little more human.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#work">Explore my work <span aria-hidden="true">↗</span></a
+            ><a class="quiet-link" href="#about">A little about me <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-foot">
+            <span>ILLUSTRATION</span><span>UX/UI DESIGN</span><span>VISUAL STORYTELLING</span>
+          </div>
+        </div>
+        <div class="hero-feature" id="hero-feature">
+          <div class="feature-top">
+            <span>ILLUSTRATED / 01</span><span class="feature-mark" aria-hidden="true">✳</span>
+          </div>
+          <div class="feature-art">
+            <span class="art-orbit art-orbit-one"></span><span class="art-orbit art-orbit-two"></span
+            ><span class="art-tile art-tile-one"></span><span class="art-tile art-tile-two"></span
+            ><span class="art-tile art-tile-three"></span
+            ><img
+              class="hero-portrait-art"
+              src="/laurenlevenportfolioheroportrait.png"
+              alt="Illustration of Lauren waving from her desk"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </div>
+          <div class="feature-bottom"><span>FROM SKETCH TO SCREEN</span></div>
+        </div>
+      </section>
+      <section class="work wrap" id="work" aria-labelledby="work-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">01 / THE WORK</p>
+            <h2 id="work-title">The work behind<br /><em>the work.</em></h2>
+          </div>
+          <p>
+            The finished screens are one part of the story. Here's what I was trying to untangle, the choices I made,
+            and what I learned along the way.
+          </p>
+        </div>
+        <!-- Project cards are rendered from content.js by script.js. Edit project details there. -->
+      </section>
+      <section class="playground wrap" id="playground" aria-labelledby="playground-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow night-eyebrow">02 / AFTER HOURS · BY NIGHT</p>
+            <h2 class="playground-title" id="playground-title">I don't really stop making things.</h2>
+          </div>
+          <p>
+            Sometimes it's a character sketch. Sometimes it's a game build. Sometimes a tiny idea becomes an app before
+            I realize what happened.
+          </p>
+        </div>
+        <div id="play-grid" class="play-grid"></div>
+      </section>
+      <!-- About copy and portrait are editable here; section styles live in about.css. -->
+      <section class="about wrap" id="about" aria-labelledby="about-title">
+        <p class="eyebrow">03 / ABOUT ME</p>
+        <h2 id="about-title">I ask a lot of questions.<br /><em>Then I make things.</em></h2>
+        <div class="about-bottom">
+          <div class="about-copy">
+            <div class="about-intro">
+              <figure class="about-portrait">
+                <picture
+                  ><source srcset="/headshot-lauren-leven-1024.webp" type="image/webp" />
+                  <img
+                    src="/Headshot%20Lauren%20Leven.png"
+                    alt="Portrait photograph of Lauren Leven"
+                    loading="lazy"
+                    decoding="async"
+                    width="2000"
+                    height="2000"
+                /></picture>
+                <figcaption>Hi, I’m Lauren. The person behind the pixels.</figcaption>
+              </figure>
+              <div class="about-bio">
+                <p>
+                  Hi, I’m Lauren, a product and visual designer in the Orlando area. I’ve designed for construction,
+                  healthcare, and travel, which means I’ve spent a lot of time making complicated things feel less
+                  intimidating.
+                </p>
+                <p>
+                  I’m the person who asks one more question, sketches three more options, and keeps fiddling with the
+                  details until something finally clicks.
+                </p>
+                <p>
+                  When I’m not designing for work, I’m drawing characters, building something ridiculous in a game, or
+                  following a side-project idea much further than I meant to.
+                </p>
+              </div>
+              <section class="ai-process" aria-labelledby="ai-process-title">
+                <p class="eyebrow">A NOTE ON AI</p>
+                <h3 id="ai-process-title">Curiosity first. Tools second.</h3>
+                <p>
+                  I use AI the way I use a sketchbook: to get unstuck, test an idea, or see a problem from another
+                  angle. It's useful for brainstorming, exploring code, and getting a rough thought into something I can
+                  react to.
+                </p>
+                <p>
+                  But the interesting part is still the thinking. I decide what matters, question what comes back, and
+                  shape the final experience myself. I don't want AI to replace my taste, my drawings, or the messy work
+                  of figuring something out. I want it to give me more room to do that work.
+                </p>
+              </section>
+            </div>
+            <a class="text-link" id="email-link" href="mailto:bertinoln@gmail.com"
+              >Have something complicated? Let's figure it out ↗</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="wrap">
+      <span>© <span id="year"></span> Lauren Leven</span
+      ><a href="/#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+    <!-- Theme button behavior: keep this paired with the header button above. -->
+    <script>
+      (function () {
+        const root = document.documentElement;
+        const button = document.getElementById("theme-toggle");
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (!button) return;
+        let stored;
+        try {
+          stored = localStorage.getItem("portfolio-theme");
+        } catch (e) {}
+        const systemScheme =
+          typeof window.matchMedia === "function" ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+        const systemTheme = () => (systemScheme?.matches ? "dark" : "light");
+        const chosenTheme = () => (stored === "dark" || stored === "light" ? stored : systemTheme());
+        function setTheme(theme) {
+          const dark = theme === "dark";
+          root.setAttribute("data-theme", dark ? "dark" : "light");
+          root.style.colorScheme = dark ? "dark" : "light";
+          root.style.backgroundColor = dark ? "#111d2a" : "#f7f9fa";
+          button.setAttribute("aria-pressed", String(dark));
+          // The toggle has one stable accessible name; aria-pressed communicates state.
+          // Only the hover title describes the next action.
+          button.title = dark ? "Switch to light theme" : "Switch to dark theme";
+          button.querySelector(".theme-toggle-icon").textContent = dark ? "☀" : "☾";
+          if (meta) meta.setAttribute("content", dark ? "#111d2a" : "#f7f9fa");
+        }
+        setTheme(chosenTheme());
+        // Follow OS appearance changes only until a visitor makes an explicit choice.
+        if (systemScheme) {
+          const followSystem = () => {
+            if (stored !== "dark" && stored !== "light") setTheme(systemTheme());
+          };
+          if (typeof systemScheme.addEventListener === "function")
+            systemScheme.addEventListener("change", followSystem);
+          else if (typeof systemScheme.addListener === "function") systemScheme.addListener(followSystem);
+        }
+        // Keep open portfolio tabs in sync; clearing the preference restores OS mode.
+        window.addEventListener("storage", (event) => {
+          if (event.key !== "portfolio-theme") return;
+          stored = event.newValue;
+          setTheme(chosenTheme());
+        });
+        button.addEventListener("click", function () {
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          stored = next;
+          setTheme(next);
+          try {
+            localStorage.setItem("portfolio-theme", next);
+          } catch (e) {}
+        });
+      })();
+    </script>
+    <script src="/components/standalone-refresh.js?v=20261029-ios-refresh"></script>
+    <script src="/content.js?v=20261028-navigator-execution"></script>
+    <script src="/components/project-content.js?v=20261029-cover-approach"></script>
+    <script src="/components/case-study.js?v=20261029-cover-approach"></script>
+    <script src="/script.js?v=20261101-evidence-first"></script>
+  </body>
+</html>
