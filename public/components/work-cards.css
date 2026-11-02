@@ -357,6 +357,8 @@ html[data-theme="dark"] .client-file{
 }
 /* Preserve solid missing-image edges in increased-contrast mode. */
 @media(prefers-contrast:more){
- .work .featured-project.client-file{box-shadow:none!important;border-width:2px!important}
+ /* Match the higher-specificity hover/focus shadow without forcing paint. */
+ .work .featured-project.client-file,
+ .work .featured-project.client-file:is(:hover,:focus-within){box-shadow:none;border-width:2px}
  .work .featured-project.client-file .project-visual:not(:has(img)){border-style:solid}
 }
