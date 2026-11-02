@@ -1665,6 +1665,7 @@ try{
      factsDisplay:facts.display,factCols:columns(".case-facts"),
      evidenceCols:columns(".case-evidence"),galleryCols:columns(".case-gallery"),
      stickyTop:parseFloat(getComputedStyle(document.querySelector(".case-section-links")).top),
+     headerHeight:document.querySelector(".site-header").getBoundingClientRect().height,
      overflow:document.documentElement.scrollWidth-innerWidth
     };
    },theme);
@@ -1674,7 +1675,13 @@ try{
    }else assert.equal(metrics.factsDisplay,"flex",width+"px "+theme+": desktop facts remain flex");
    assert.equal(metrics.evidenceCols,width<=760?1:3,width+"px "+theme+": evidence columns");
    assert.equal(metrics.galleryCols,width<=760?1:2,width+"px "+theme+": gallery columns");
-   assert.equal(metrics.stickyTop,width<=650?110:width<=760?64:72,width+"px "+theme+": sticky chapter offset");
+   if(width<=650){
+    assert.ok(Math.abs(metrics.stickyTop-Math.ceil(metrics.headerHeight))<=1,
+     width+"px "+theme+": phone chapter offset follows actual sticky header height");
+   }else{
+    assert.equal(metrics.stickyTop,width<=760?64:72,
+     width+"px "+theme+": tablet/desktop chapter offset remains unchanged");
+   }
    assert.ok(metrics.overflow<=2,width+"px "+theme+": no horizontal page overflow");
   }
  }
