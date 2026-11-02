@@ -1,6 +1,7 @@
 /* FOUNDATIONS: Fonts, global colors, focus styles, layout helpers and headings.
    Change one value at a time. Other component styles load after this file. */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400..800&display=swap');
+/* Font stylesheet loads directly from index.html after preconnect hints.
+   Avoid an @import waterfall inside this first render-blocking stylesheet. */
 /* GLOBAL PALETTE — one owner for light/dark ink, paper, focus and colors.
    Component skins may define --editorial-* paint, not override these tokens. */
 :root {
