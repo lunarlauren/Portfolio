@@ -248,10 +248,6 @@ html[data-theme="dark"] .client-file{
  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
  background:linear-gradient(145deg,rgba(255,255,255,.11),transparent 43%);
 }
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
- .work .featured-project.client-file:hover{--file-lift:-5px}
- .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
-}
 .work .featured-project.client-file:focus-within{--file-lift:-3px;outline:2px solid var(--focus);outline-offset:4px}
 .work .featured-project.client-file:active{--file-lift:1px;box-shadow:2px 3px 0 color-mix(in srgb,var(--file-accent) 22%,transparent)}
 .work .featured-project.client-file:is(:hover,:focus-within){
@@ -341,6 +337,9 @@ html[data-theme="dark"] .client-file{
  .play-grid .project-card-link:focus-visible .project-visual{transform:translateY(-5px)}
 }
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ /* Archive folder, label, and preview motion use one fine-pointer guard. */
+ .work .featured-project.client-file:hover{--file-lift:-5px}
+ .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
  .project-card-link:hover img{transform:scale(1.035)}
  .play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)}
  .project-card-link:hover{transform:translateY(-3px)}

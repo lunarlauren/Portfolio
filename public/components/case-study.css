@@ -133,10 +133,6 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
  padding:clamp(20px,3vw,36px);
 }
 
-@media(prefers-reduced-motion:reduce){
- .case-view .case-section-links{scroll-behavior:auto}
- .case-view .case-section-links button{transition:none}
-}
 
 /* Case-study typography, cover, evidence and reading tokens.
    Themes change colors, never geometry. */
@@ -423,6 +419,9 @@ html[data-theme="dark"] .case-prose p{color:#d7e3ed}
  .case-view:not([hidden]) .case-gallery{animation:detail-reveal .7s var(--motion-ease) .25s both}
 }
 @media(prefers-reduced-motion:reduce){
+ /* Keep chapter navigation stationary alongside the routed cover and body. */
+ .case-view .case-section-links{scroll-behavior:auto}
+ .case-view .case-section-links button{transition:none}
  .case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}
 }
 

@@ -773,6 +773,27 @@ assert.ok(foundationsCss.includes('--motion-ease:cubic-bezier(.22,1,.36,1)'),
  'Foundations must own the shared motion token');
 assert.ok(foundationsCss.includes('::view-transition-old(selected-company)'),
  'Foundations must retain the shared route transition');
+// Pass 9: keep fine-pointer hover and reduced-motion fallbacks together.
+assert.equal((workCss.match(/@media\(hover:hover\) and \(pointer:fine\) and \(prefers-reduced-motion:no-preference\)/g)||[]).length,1,
+ 'Work and After Hours hover motion must share one fine-pointer guard');
+assert.equal((caseCss.match(/@media\(prefers-reduced-motion:reduce\)/g)||[]).length,1,
+ 'Case-study chapter and routed entrance fallbacks must share one reduced-motion guard');
+const workMotionBlock=workCss.split('@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){')[1]?.split('\n}')[0];
+assert.ok(workMotionBlock && [
+ '.work .featured-project.client-file:hover{--file-lift:-5px}',
+ '.work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}',
+ '.project-card-link:hover img{transform:scale(1.035)}',
+ '.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)}'
+].every(rule=>workMotionBlock.includes(rule)),
+ 'Fine-pointer media block must retain archive and preview affordances');
+const caseReduceBlock=caseCss.split('@media(prefers-reduced-motion:reduce){')[1]?.split('\n}')[0];
+assert.ok(caseReduceBlock && [
+ '.case-view .case-section-links{scroll-behavior:auto}',
+ '.case-view .case-section-links button{transition:none}',
+ '.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}'
+].every(rule=>caseReduceBlock.includes(rule)),
+ 'One case-study reduced-motion block must protect chapter controls and entrance art');
+
 assert.ok(caseCss.includes('@keyframes detail-reveal') && caseCss.includes('.case-view:not([hidden]) .case-head{animation:detail-reveal'),
  'Case-study must own its entrance animation');
 assert.ok(workCss.includes('.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)'),
