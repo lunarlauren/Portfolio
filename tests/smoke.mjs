@@ -1155,6 +1155,26 @@ try{
  const aboutHeadshot=page.locator(".about-portrait img");
  await aboutHeadshot.scrollIntoViewIfNeeded();
  await page.waitForFunction(()=>document.querySelector(".about-portrait img")?.naturalWidth>0);
+ // Temporary Pass 19 asset extraction: produce an exact-source WebP derivative
+ // inside Chromium's local image pipeline; remove logging after committing.
+ const diagnosticHeadshot=await aboutHeadshot.evaluate(img=>{
+  const ratio=Math.min(1,1024/img.naturalWidth,1440/img.naturalHeight);
+  const width=Math.max(1,Math.round(img.naturalWidth*ratio));
+  const height=Math.max(1,Math.round(img.naturalHeight*ratio));
+  const canvas=document.createElement("canvas");
+  canvas.width=width;
+  canvas.height=height;
+  const ctx=canvas.getContext("2d");
+  ctx.imageSmoothingEnabled=true;
+  ctx.imageSmoothingQuality="high";
+  ctx.drawImage(img,0,0,width,height);
+  const url=canvas.toDataURL("image/webp",0.86);
+  if(!url.startsWith("data:image/webp;base64,"))throw Error("Chromium WebP encoding unavailable");
+  return {originalWidth:img.naturalWidth,originalHeight:img.naturalHeight,
+   width,height,mime:"image/webp",base64:url.slice("data:image/webp;base64,".length)};
+ });
+ console.log("__PORTFOLIO_PASS19_IMAGE_START__"+JSON.stringify(diagnosticHeadshot)+
+  "__PORTFOLIO_PASS19_IMAGE_END__");
  assert.match(await aboutHeadshot.getAttribute("src"),/Headshot%20Lauren%20Leven\.png$/);
  assert.notEqual(await heroPortrait.getAttribute("src"),await aboutHeadshot.getAttribute("src"),
   "The About photograph must remain distinct from the illustrated hero");
