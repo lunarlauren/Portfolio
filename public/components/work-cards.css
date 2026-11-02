@@ -163,10 +163,6 @@ html[data-theme="dark"] .client-file{
  border-radius:50%;
  background:var(--file-accent);
 }
-@media(forced-colors:active){
- .work .project-card-facts .project-delivery-shipped{border-color:CanvasText;box-shadow:none}
- .work .project-delivery-shipped::before{background:CanvasText}
-}
 
 
 /* Archive-first hierarchy: title before image; the editorial skin owns the card radius. */
@@ -361,4 +357,16 @@ html[data-theme="dark"] .client-file{
  .work .featured-project.client-file,
  .work .featured-project.client-file:is(:hover,:focus-within){box-shadow:none;border-width:2px}
  .work .featured-project.client-file .project-visual:not(:has(img)){border-style:solid}
+}
+
+/* Windows forced-colors: use system colors for real keyboard focus and
+   disclosure borders. Kept after ordinary card/hover rules so Highlight
+   cannot be overridden by a later component-owned outline declaration. */
+@media(forced-colors:active){
+ .work .project-card-facts .project-delivery-shipped{border-color:CanvasText;box-shadow:none}
+ .work .project-delivery-shipped::before{background:CanvasText}
+ .work .featured-project.client-file:focus-within,
+ :is(.work,.playground) .project-card-link:focus-visible{outline-color:Highlight}
+ .work .featured-project.client-file .project-visual:not(:has(img)),
+ .playground .project-visual:not(:has(img)){border-style:solid}
 }

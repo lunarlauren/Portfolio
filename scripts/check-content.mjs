@@ -1104,6 +1104,30 @@ assert.match(script, /if\(leavingProject&&nextHash!=="work"&&nextHash!=="playgro
 assert.match(script, /destination\.focus\(\{preventScroll:true\}\)/, 'Focus must move to a visible destination');
 assert.match(script, /caseOpener=null;\s*\}\);\s*\}\s*previousHash=nextHash;/, 'Non-gallery exits must discard stale project openers');
 assert.match(caseCss, /@media\(forced-colors:active\)\{[\s\S]*?\.case-view \.case-section-links button\[aria-current="location"\]\{border-color:Highlight\}/, 'Chapter selection must remain visible in forced colors');
+// Pass 13: actual Windows forced-colors uses system palette focus ink.
+assert.equal((workCss.match(/@media\(forced-colors:active\)/g)||[]).length,1,
+ 'Work facts, focused cards, and visual briefs share one forced-colors owner');
+const workForced=workCss.split('@media(forced-colors:active){')[1]?.split('\n}')[0];
+assert.ok(workForced && [
+ '.work .project-card-facts .project-delivery-shipped{border-color:CanvasText;box-shadow:none}',
+ '.work .featured-project.client-file:focus-within,',
+ ':is(.work,.playground) .project-card-link:focus-visible{outline-color:Highlight}',
+ '.playground .project-visual:not(:has(img)){border-style:solid}'
+].every(rule=>workForced.includes(rule)),
+ 'Work forced colors must distinguish status, focus, and illustrative frames');
+assert.equal((caseCss.match(/@media\(forced-colors:active\)/g)||[]).length,1,
+ 'Case-study chapters and navigation share one forced-colors owner');
+const caseForced=caseCss.split('@media(forced-colors:active){')[1]?.split('\n}')[0];
+assert.ok(caseForced && caseForced.includes(
+ '.case-next-nav a:focus-visible,.case-back:focus-visible{outline-color:Highlight}'),
+ 'Case Back and Next focus must use system Highlight rather than palette pink');
+assert.ok(caseCss.indexOf('@media(forced-colors:active){') >
+ caseCss.indexOf('.case-next-nav a:focus-visible,.case-back:focus-visible{'),
+ 'System-color case focus rule must win after ordinary case navigation paint');
+assert.ok(workCss.indexOf('@media(forced-colors:active){') >
+ workCss.indexOf(':is(.work,.playground) .project-card-link:focus-visible{'),
+ 'System-color card focus rule must win after ordinary card focus paint');
+
 
 // Pass 12: chapter controls expose an equivalent focus state in both themes.
 assert.match(caseCss, /\.case-view \.case-section-links button:is\(:hover,:focus-visible\)\{background:var\(--case-chapter-hover\)\}/, 'Chapter hover and keyboard focus share a themed surface');

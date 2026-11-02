@@ -686,6 +686,93 @@ try{
  }
  await contrastCardsPage.close();
 
+ // Pass 13: forced-colors is a system palette mode, not merely a
+ // prefers-contrast setting. Real keyboard targets need system Highlight,
+ // and editorial missing-image frames need distinguishable solid edges.
+ const forcedPage=await browser.newPage();
+ forcedPage.on("pageerror",error=>errors.push(error.message));
+ await forcedPage.emulateMedia({forcedColors:"active"});
+ await forcedPage.goto(origin+"/");
+ const systemHighlight=await forcedPage.evaluate(()=>{
+  const probe=document.createElement("span");
+  probe.style.color="Highlight";
+  document.body.append(probe);
+  const color=getComputedStyle(probe).color;
+  probe.remove();
+  return color;
+ });
+ assert.ok(await forcedPage.evaluate(()=>matchMedia("(forced-colors: active)").matches),
+  "Chromium must actually emulate forced colors before asserting system ink");
+ const checkRing=async(locator,label)=>{
+  await locator.focus();
+  await forcedPage.keyboard.press("Tab");
+  await forcedPage.keyboard.press("Shift+Tab");
+  const result=await locator.evaluate(node=>{
+   const style=getComputedStyle(node);
+   return {
+    focused:document.activeElement===node,
+    keyboard:node.matches(":focus-visible"),
+    style:style.outlineStyle,
+    color:style.outlineColor,
+    width:parseFloat(style.outlineWidth)
+   };
+  });
+  assert.equal(result.focused,true,label+": keyboard returns to target");
+  assert.equal(result.keyboard,true,label+": focus-visible is active");
+  assert.equal(result.style,"solid",label+": visible outline is solid");
+  assert.ok(result.width>=3,label+": focus ring stays at least 3px");
+  assert.equal(result.color,systemHighlight,label+": outline uses system Highlight");
+ };
+ for(const width of [390,1280]){
+  await forcedPage.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   await forcedPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+   await checkRing(forcedPage.locator(".work .client-file .project-card-link").first(),
+    width+"px "+theme+" Work link");
+   const focusFile=await forcedPage.locator(".work .featured-project.client-file").first()
+    .evaluate(node=>{
+     const style=getComputedStyle(node);
+     return {focused:node.matches(":focus-within"),outline:style.outlineColor,
+      width:parseFloat(style.outlineWidth)};
+    });
+   assert.equal(focusFile.focused,true,width+"px "+theme+": focused file keeps focus-within");
+   assert.equal(focusFile.outline,systemHighlight,width+"px "+theme+": archive file uses Highlight");
+   assert.ok(focusFile.width>=2,width+"px "+theme+": file focus outline remains visible");
+   await checkRing(forcedPage.locator("#play-grid .project-card-link").first(),
+    width+"px "+theme+" After Hours link");
+   const edges=await forcedPage.evaluate(()=>{
+    const work=document.querySelector(".work .featured-project.client-file");
+    const play=document.querySelector(".playground");
+    const a=document.createElement("div"),b=document.createElement("div");
+    a.className=b.className="project-visual";
+    work.append(a);play.append(b);
+    const result={work:getComputedStyle(a).borderTopStyle,
+     playground:getComputedStyle(b).borderTopStyle};
+    a.remove();b.remove();
+    return result;
+   });
+   assert.equal(edges.work,"solid",width+"px "+theme+": Work illustrative frame is solid");
+   assert.equal(edges.playground,"solid",width+"px "+theme+": After Hours illustrative frame is solid");
+  }
+ }
+ await forcedPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await forcedPage.locator(".case-view .case-head").waitFor();
+ for(const width of [390,1280]){
+  await forcedPage.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   await forcedPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+   await checkRing(forcedPage.locator(".case-back"),width+"px "+theme+" Back link");
+   await checkRing(forcedPage.locator(".case-next-nav .case-next").first(),
+    width+"px "+theme+" Next navigation link");
+   await checkRing(forcedPage.locator(".case-section-links button").first(),
+    width+"px "+theme+" chapter control");
+   const selection=await forcedPage.locator(".case-section-links button[aria-current='location']")
+    .first().evaluate(node=>getComputedStyle(node).borderTopColor);
+   assert.equal(selection,systemHighlight,width+"px "+theme+": current chapter uses system Highlight");
+  }
+ }
+ await forcedPage.close();
+
  // Reduced-motion visitors must not receive Playground preview or case entrance motion.
  const reducedMotionPage=await browser.newPage({reducedMotion:"reduce"});
  reducedMotionPage.on("pageerror",error=>errors.push(error.message));

@@ -62,6 +62,26 @@ duration reset in `foundations.css` remains intentional. Chromium smoke
 tests cover Work cards at rest/hover/focus in both themes and widths, and
 the reduced-motion portrait/case-study states.
 
+## Windows forced-colors focus and illustrated briefs — Pass 13
+
+Windows forced-colors mode uses system colors, not the site's custom
+high-contrast palette. The `@media(forced-colors:active)` block at the end
+of `work-cards.css` owns `Highlight` outlines for Work/After Hours links,
+focused archive files, and solid borders for illustrative missing-image frames.
+It also retains `CanvasText` borders/dots on shipped-status labels.
+
+The corresponding `case-study.css` block sits **after** ordinary case
+navigation focus rules. It provides `Highlight` outlines for Back/Next links,
+chapter buttons, and the active chapter border. This order is deliberate:
+later standard component paint must not overwrite system color.
+
+The Chromium smoke suite explicitly emulates `forced-colors:active` at
+390px and 1280px in both page themes, verifies genuine keyboard
+`:focus-visible`, and checks system highlight and border style values.
+These system settings are independent of `prefers-contrast:more`. Do not
+add `forced-color-adjust:none` to preserve decorative accents; it would
+bypass the user's chosen color palette.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
