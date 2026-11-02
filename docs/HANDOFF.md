@@ -43,6 +43,25 @@ have explicit 3px `:focus-visible` outlines in their component owners. The
 Chromium focus smoke test covers keyboard modality, light/dark themes and
 phone/desktop widths. Keep those focus behaviors independently verifiable.
 
+## Contrast and reduced-motion ownership — Pass 12
+
+High-contrast Work cards need stronger borders and **no decorative shadow**,
+even while hovered or focused. The `prefers-contrast:more` rule in
+`work-cards.css` explicitly covers both the resting
+`.featured-project.client-file` state and the higher-specificity
+`:is(:hover,:focus-within)` state. Never replace those selectors with a
+weaker rule that loses to the regular hover shadow, and avoid `!important`
+when the actual state can be represented by a properly scoped selector.
+
+Case-study entrance animations are opt-in under
+`prefers-reduced-motion:no-preference`; the reduced-motion fallback can set
+`animation:none` without an important override. The hero portrait can set
+`transition:none` under reduced motion, retaining its editorial grayscale
+appearance while removing the animated color reveal. The global reduced-motion
+duration reset in `foundations.css` remains intentional. Chromium smoke
+tests cover Work cards at rest/hover/focus in both themes and widths, and
+the reduced-motion portrait/case-study states.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
