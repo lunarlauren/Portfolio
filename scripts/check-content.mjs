@@ -130,7 +130,10 @@ assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;min-width:
  assert.ok(inlineTheme,'Homepage theme controller must remain discoverable');
  new vm.Script(inlineTheme,{filename:'homepage-theme.js'});
  // Toggle buttons keep a stable name; the pressed state announces whether dark mode is on.
- assert.match(html, /<button class="theme-toggle"[^>]*aria-label="Dark theme"[^>]*aria-pressed="false"/,
+ const themeToggleTag=html.match(/<button\b(?=[^>]*\bclass="theme-toggle")[^>]*>/)?.[0]??'';
+ assert.match(themeToggleTag, /\baria-label="Dark theme"/,
+  'Theme toggle needs a stable accessible name');
+ assert.match(themeToggleTag, /\baria-pressed="false"/,
   'Theme toggle needs a stable accessible name and an initial pressed state');
  const state={dark:false,stored:null,theme:null,color:null,pressed:null,label:'Dark theme'};
  const root={style:{},setAttribute:(key,value)=>{if(key==='data-theme')state.theme=value},getAttribute:()=>state.theme};
@@ -165,24 +168,29 @@ assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;min-width:
 // before the many blocking component stylesheets. Preserve one image request.
 assert.doesNotMatch(foundationsCss,/(?:^|\n)\s*@import\s+/m,
  'Foundation CSS must not create a serial Google Fonts request waterfall');
-assert.match(html, /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">/,
+const linkTags=Array.from(html.matchAll(/<link\b[^>]*>/g),match=>match[0]);
+assert.ok(linkTags.some(tag=>/\brel="preconnect"/.test(tag)&&/\bhref="https:\/\/fonts\.googleapis\.com"/.test(tag)),
  'Preconnect to the Google Fonts CSS host');
-assert.match(html, /<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>/,
+assert.ok(linkTags.some(tag=>/\brel="preconnect"/.test(tag)&&/\bhref="https:\/\/fonts\.gstatic\.com"/.test(tag)&&/\bcrossorigin(?:\s|=|>)/.test(tag)),
  'Font-file origin must preconnect with the matching anonymous CORS mode');
-assert.match(html, /<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com\/css2\?family=DM\+Sans:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6\.\.72,400\.\.800&amp;display=swap">/,
+const fontStylesheet=linkTags.find(tag=>/\brel="stylesheet"/.test(tag)&&/fonts\.googleapis\.com\/css2\?/.test(tag));
+assert.ok(fontStylesheet,'Request the shared Google Fonts stylesheet in the document head');
+assert.match(fontStylesheet, /family=DM\+Sans:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6\.\.72,400\.\.800&amp;display=swap/,
  'The original font weights, variable Newsreader range and swap strategy remain unchanged');
 assert.equal((html.match(/fonts\.googleapis\.com\/css2\?/g)||[]).length,1,
  'Only one Google Fonts stylesheet should be requested');
 const criticalImage='/laurenlevenportfolioheroportrait.png';
-assert.match(html, /<link rel="preload" as="image" href="\/laurenlevenportfolioheroportrait\.png" fetchpriority="high">/,
+assert.ok(linkTags.some(tag=>/\brel="preload"/.test(tag)&&/\bas="image"/.test(tag)&&/\bhref="\/laurenlevenportfolioheroportrait\.png"/.test(tag)&&/\bfetchpriority="high"/.test(tag)),
  'Above-the-fold illustration should be discovered in the head with high priority');
 assert.equal((html.match(/<link rel="preload" as="image"/g)||[]).length,1,
  'Only the hero image is critical enough to preload');
 assert.ok(html.indexOf('rel="preload" as="image"') < html.indexOf('/components/foundations.css'),
  'Critical image preload must precede render-blocking component CSS');
-assert.match(html, /class="hero-portrait-art" src="\/laurenlevenportfolioheroportrait\.png"[^>]*decoding="async" fetchpriority="high"/,
+const heroImageTag=html.match(/<img\b(?=[^>]*\bclass="hero-portrait-art")[^>]*>/)?.[0]??'';
+assert.match(heroImageTag, /\bsrc="\/laurenlevenportfolioheroportrait\.png"[^>]*decoding="async"[^>]*fetchpriority="high"/,
  'Preload and illustration must use the exact same URL and priority');
-assert.match(html, /class="about-portrait"[\s\S]*?<img src="\/Headshot%20Lauren%20Leven\.png"[^>]*loading="lazy" decoding="async"/,
+const aboutPortrait=html.match(/<figure\b(?=[^>]*\bclass="about-portrait")[^>]*>[\s\S]*?<img\b[^>]*>/)?.[0]??'';
+assert.match(aboutPortrait, /\bsrc="\/Headshot%20Lauren%20Leven\.png"[^>]*loading="lazy"[^>]*decoding="async"/,
  'Large About headshot stays lazy and asynchronously decoded');
 assert.doesNotMatch(html, /rel="preload"[^>]+Headshot/,
  'Do not preload the offscreen 4.57 MB About headshot');
@@ -202,8 +210,8 @@ for (const name of stylesheetOrder) {
 assert.ok(visualPlaceholderCss.indexOf('html[data-theme="dark"] .project-visual,') >
  visualPlaceholderCss.indexOf('.project-visual:not(:has(img)){'),
  'Dark shared image fallback must follow the light no-image frame');
-assert.ok(visualPlaceholderCss.includes('html[data-theme="dark"] .project-visual,\nhtml[data-theme="dark"] .case-view .case-hero-visual{') && visualPlaceholderCss.includes('border-color:#496074;'),
- 'Dark image and brief fallback paint must share one rule');
+assert.ok(visualPlaceholderCss.includes('html[data-theme="dark"] .project-visual,\nhtml[data-theme="dark"] .case-view .case-hero-visual{') && visualPlaceholderCss.includes('background:color-mix(in srgb,var(--paper) 90%,var(--palette-blue) 10%);') && visualPlaceholderCss.includes('color:var(--brand-ink);') && visualPlaceholderCss.includes('border-color:var(--line);'),
+ 'Dark image and brief fallback must share the readable paper-and-ink rule');
 assert.doesNotMatch(visualPlaceholderCss, /--placeholder-(?:surface|edge|text):|\.work \.featured-project \.project-visual:not/,
  'Retired placeholder tokens and Work overrides must not return to shared CSS');
 assert.match(workCss, /\.work \.featured-project\.client-file \.project-visual:not\(:has\(img\)\)\{[^}]*background:var\(--surface-blush\);[^}]*color:var\(--ink\);[^}]*border:1px dashed var\(--line\)/,
@@ -318,9 +326,10 @@ assert.match(heroPolishCss, /\.hero \.hero-actions \.primary-link\{[^}]*padding:
 
 // The mobile layout visually places the portrait before the hero CTAs.
 // Keeping the portrait panel noninteractive prevents a mismatched tab order.
-const heroFeatureMarkup = html.match(/<div class="hero-feature" id="hero-feature">[\s\S]*?<\/div><\/section>/)?.[0];
+const heroFeatureMarkup = html.match(/<div\b(?=[^>]*\bclass="hero-feature")[^>]*>[\s\S]*?<\/div>\s*<\/section>/)?.[0];
 assert.ok(heroFeatureMarkup, 'Homepage must retain the illustrated hero panel');
-assert.match(heroFeatureMarkup, /<img class="hero-portrait-art"[^>]+alt="[^"]+"/, 'Hero portrait must have useful alternative text');
+const heroPortraitTag=heroFeatureMarkup.match(/<img\b(?=[^>]*\bclass="hero-portrait-art")[^>]*>/)?.[0]??'';
+assert.match(heroPortraitTag, /\balt="[^"]+"/, 'Hero portrait must have useful alternative text');
 assert.doesNotMatch(heroFeatureMarkup, /<(?:a|button)\b/, 'Visually reordered portrait panel must not contain keyboard-focusable controls');
 // The hero should direct attention to UX work, not add an unrelated keyboard
 // stop for a decorative animation. Keep the useful work CTA and portrait.
@@ -333,9 +342,9 @@ assert.doesNotMatch(css + heroPolishCss, /notebook-sticker|sticker-pop/, 'Remove
 
 // The homepage's progressive reveal must not hide editorial content if a browser
 // exposes an IntersectionObserver property that is not a callable constructor.
-assert.match(script, /typeof window\.IntersectionObserver!=="function"/,
+assert.match(script, /typeof\s+window\.IntersectionObserver\s*!==\s*"function"/,
  'Reveals must check that the observer constructor is callable');
-const revealStart=script.indexOf('function initReveals(){');
+const revealStart=script.search(/function\s+initReveals\s*\(\)\s*\{/);
 const revealEnd=script.indexOf('\ninitReveals();',revealStart);
 assert.ok(revealStart>=0&&revealEnd>revealStart,'Reveal controller must remain discoverable');
 const revealController=script.slice(revealStart,revealEnd+'\ninitReveals();'.length);
@@ -370,9 +379,15 @@ assert.equal(headshotWebp.toString('ascii',8,12),'WEBP','Optimized photo must be
 assert.ok(headshotWebp.byteLength<120000,'Optimized headshot should remain under 120 KB');
 assert.ok(headshotWebp.byteLength<headshotOriginal.byteLength*0.1,
  'Optimized delivery should save at least 90% of photo transfer');
-assert.match(aboutPortraitMarkup,
- /<picture><source srcset="\/headshot-lauren-leven-1024\.webp" type="image\/webp"><img src="\/Headshot%20Lauren%20Leven\.png"[^>]*loading="lazy" decoding="async" width="2000" height="2000"><\/picture>/,
- 'About photo needs matching original fallback, lazy loading and square intrinsic dimensions');
+const aboutPicture=aboutPortraitMarkup.match(/<picture\b[\s\S]*?<\/picture>/)?.[0]??'';
+const aboutSourceTag=aboutPicture.match(/<source\b[^>]*>/)?.[0]??'';
+const aboutImageTag=aboutPicture.match(/<img\b[^>]*>/)?.[0]??'';
+assert.match(aboutSourceTag, /\bsrcset="\/headshot-lauren-leven-1024\.webp"[^>]*\btype="image\/webp"/,
+ 'About photo should offer the optimized WebP source');
+assert.match(aboutImageTag, /\bsrc="\/Headshot%20Lauren%20Leven\.png"[^>]*\bloading="lazy"[^>]*\bdecoding="async"[^>]*\bwidth="2000"[^>]*\bheight="2000"/,
+ 'About photo needs a lazy original fallback and square intrinsic dimensions');
+assert.ok(aboutPicture.indexOf(aboutSourceTag)<aboutPicture.indexOf(aboutImageTag),
+ 'Optimized WebP source must precede the original photo fallback');
 assert.match(aboutCss,/\.about-portrait picture\{display:block;width:100%\}/,
  'The picture wrapper must not create an inline line box around the image');
 assert.doesNotMatch(html, /<link rel="preload"[^>]*(?:Headshot|headshot-lauren)/,
@@ -431,7 +446,7 @@ assert.match(visualBriefKicker('Show the prototype, clearly labeled PROTOTYPE'),
 assert.match(script, /visualBriefKicker\(p\.imageBrief\)/, 'Archive and gallery placeholders must disclose their status');
 // The entire project card is a link. Do not mask its title and challenge with
 // a generic aria-label: give link navigation a concise name and description.
-const cardStart = script.indexOf('const projectCard=');
+const cardStart = script.indexOf('const projectCard =');
 const cardEnd = script.indexOf('// Single source of truth', cardStart);
 assert.ok(cardStart >= 0 && cardEnd > cardStart, 'Project card renderer must remain discoverable');
 const renderProjectCard = vm.runInNewContext(
@@ -519,7 +534,8 @@ new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not
 // Exercise the real delegated handler so target="_blank", named browsing
 // contexts, and download links retain native browser behavior.
 {
- const start=script.indexOf('document.addEventListener("click",event=>{',script.indexOf('previousHash=nextHash;'));
+ const hashUpdate=script.search(/previousHash\s*=\s*nextHash;/);
+ const start=script.indexOf('document.addEventListener("click", (event) => {',hashUpdate);
  const end=script.indexOf('\n});',start);
  assert.ok(start>=0&&end>start,'Case-study link handler must remain discoverable');
  const handlers=[],navigations=[];
@@ -548,7 +564,7 @@ new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not
 // retaining a broken /case-studies/... address. Exercise the real route()
 // branch with a small DOM/history stub; this is not browser navigation QA.
 {
- const start=script.indexOf('function route(){');
+ const start=script.search(/function\s+route\s*\(\)\s*\{/);
  const end=script.indexOf('// Remember where a visitor opened a case study',start);
  assert.ok(start>=0&&end>start,'Router branch must remain discoverable');
  const routeSource=script.slice(start,end);
@@ -579,10 +595,10 @@ assert.ok(data && Array.isArray(data.companies) && Array.isArray(data.playground
 // Exercise the actual slug resolver too: a valid shipped case must resolve,
 // while an outdated title or unknown client must take the archive fallback.
 {
- const slugStart=script.indexOf('const projectSlug=');
- const slugEnd=script.indexOf('\nconst casePath=',slugStart);
- const routeStart=script.indexOf('const caseRoute=()=>{');
- const routeEnd=script.indexOf('\nconst navigateCase=',routeStart);
+ const slugStart=script.search(/const\s+projectSlug\s*=/);
+ const slugEnd=script.indexOf('\nconst casePath',slugStart);
+ const routeStart=script.search(/const\s+caseRoute\s*=/);
+ const routeEnd=script.indexOf('\nconst navigateCase',routeStart);
  assert.ok(slugStart>=0&&slugEnd>slugStart&&routeStart>=0&&routeEnd>routeStart);
  const resolver=script.slice(slugStart,slugEnd)+'\n'+script.slice(routeStart,routeEnd)+'\ncaseRoute()';
  const resolve=pathname=>vm.runInNewContext(resolver,{
@@ -715,7 +731,9 @@ assert.doesNotMatch(iolHighlights, /tested|validated|shipped|clinically proven|i
 
 // Archive excerpts may override a rhetorical opening, but must remain authored
 // in content.js rather than being fabricated from a project's delivery label.
-const archiveTeaserSource = script.match(/const processTeaser=p=>\{[\s\S]*?\n\};/)?.[0];
+const teaserStart=script.search(/const\s+processTeaser\s*=/);
+const teaserEnd=script.indexOf('// Optional archive facts',teaserStart);
+const archiveTeaserSource=teaserStart>=0&&teaserEnd>teaserStart?script.slice(teaserStart,teaserEnd):'';
 assert.ok(archiveTeaserSource, 'Archive teaser helper should be present');
 const archiveTeaser = vm.runInNewContext(archiveTeaserSource + '\nprocessTeaser');
 assert.equal(archiveTeaser({ archiveApproach: 'Focused on hierarchy.', process: 'Why? More context.' }), 'Focused on hierarchy.');
@@ -749,9 +767,9 @@ for (const id of ['main', 'work', 'playground', 'about']) {
 }
 // Archive labels reuse the same reviewed role/delivery source as case-study
 // overviews. An unlabeled project would make its status harder to assess.
-assert.match(script, /archiveFactsMarkup\(evidence,factsId\)/, 'Project cards must render role/delivery facts with a unique description target');
-assert.match(script, /projectCard\(project,index,company\.id,projectEvidence\[project\.title\]\)/, 'Professional cards must use reviewed evidence');
-assert.match(script, /<dl id="'\+id\+'" class="project-card-facts">/, 'Role and delivery facts should use description-list semantics');
+assert.match(script, /archiveFactsMarkup\(\s*evidence\s*,\s*factsId\s*\)/, 'Project cards must render role/delivery facts with a unique description target');
+assert.match(script, /projectCard\(\s*project\s*,\s*index\s*,\s*company\.id\s*,\s*projectEvidence\[project\.title\]\s*\)/, 'Professional cards must use reviewed evidence');
+assert.match(script, /<dl id="'\s*\+\s*id\s*\+\s*'" class="project-card-facts">/, 'Role and delivery facts should use description-list semantics');
 assert.match(workCss, /\.work \.project-card-facts\s*\{/, 'Archive facts must have an intentional layout');
 assert.match(workCss, /\.work \.project-card-facts dd\s*\{/, 'Archive values must have readable styles');
 
@@ -769,7 +787,7 @@ assert.match(html, /components\/foundations\.css\?v=[a-zA-Z0-9-]+/, 'HTML must l
 
 // Case-study accessibility: the visible title names the active main landmark,
 // and evidence is a labeled group rather than an unnamed generic container.
-assert.match(script, /caseView\.setAttribute\("aria-labelledby","case-title"\)/, 'Case-study main landmark must have a name');
+assert.match(script, /caseView\.setAttribute\("aria-labelledby",\s*"case-title"\)/, 'Case-study main landmark must have a name');
 assert.match(caseStudy, /<h1 id="case-title">/, 'Case-study title must label its main landmark');
 assert.match(projectContent, /<dl class="case-evidence" aria-label="Project overview"/, 'Project overview must use a semantic description list');
 assert.match(projectContent, /<dt class="case-evidence-label"/, 'Project overview labels must use dt elements');
@@ -849,8 +867,8 @@ assert.doesNotMatch(html + script + projectContent + caseStudy,
  'Retired collection navigation must not return to active markup or routing');
 // Pass 11: programmatic focus on static containers should not suppress focus
 // feedback for real links or buttons. No important override is required.
-assert.match(script, /caseView\.tabIndex=-1/, 'Case-view wrapper is programmatically focusable');
-assert.match(script, /heading\.tabIndex=-1;heading\.focus/, 'Work heading focus is only set during route restoration');
+assert.match(script, /caseView\.tabIndex\s*=\s*-1/, 'Case-view wrapper is programmatically focusable');
+assert.match(script, /heading\.tabIndex\s*=\s*-1;\s*heading\.focus/, 'Work heading focus is only set during route restoration');
 assert.doesNotMatch(workCss, /#work-title[^{]*:focus\{[^}]*!important/,
  'Work heading focus suppression must not use important');
 assert.doesNotMatch(caseCss, /\.case-view[^{]*:focus\{[^}]*!important/,
@@ -1034,7 +1052,7 @@ assert.match(caseCss, /\.case-view \.case-gallery\{grid-template-columns:minmax\
 
 // A case-study observer must not follow hidden headings after a route exit.
 // The next case render still creates a fresh observer for its own chapters.
-assert.match(script, /if\(window\.caseSectionObserver\)\{window\.caseSectionObserver\.disconnect\(\);window\.caseSectionObserver=null;\}/, 'Leaving a case study must release its chapter observer');
+assert.match(script, /if\s*\(\s*window\.caseSectionObserver\s*\)\s*\{\s*window\.caseSectionObserver\.disconnect\(\);\s*window\.caseSectionObserver\s*=\s*null;\s*\}/, 'Leaving a case study must release its chapter observer');
 assert.match(caseStudy, /window\.caseSectionObserver=new IntersectionObserver\(/, 'Opening a case study must reattach chapter tracking');
 
 // Pass 11: keep chapter navigation target lookup centralized.
@@ -1095,8 +1113,8 @@ assert.match(html, /hero-polish\.css\?v=[a-zA-Z0-9-]+/,
  'Homepage must load the updated hero stylesheet');
 
 assert.match(workCss,/\.work\.wrap\{[^}]*padding-bottom:clamp\(28px,7vw,44px\)/, 'Mobile work section needs a compact handoff');
-assert.match(script, /const preview=professional\?title:visual\(p\)/, 'Professional archive starts with its project title');
-assert.match(script, /\+process\+\(professional\?visual\(p\):''\)\+cta/, 'Professional media follows the reviewed approach');
+assert.match(script, /const\s+preview\s*=\s*professional\s*\?\s*title\s*:\s*visual\(p\)/, 'Professional archive starts with its project title');
+assert.match(script, /process\s*\+\s*\(professional\s*\?\s*visual\(p\)\s*:\s*""\)\s*\+\s*cta/, 'Professional media follows the reviewed approach');
 assert.match(workCss, /@media\(max-width:359px\)\{\.work \.project-card-facts\{grid-template-columns:minmax\(0,1fr\)\}\}/,
  'Only very narrow phones stack the role and delivery facts');
 assert.ok(navigationCss.includes('column-gap:clamp(8px,2.4vw,18px);row-gap:0;min-width:0'), 'Phone navigation spacing should remain intentional while wrapping');
@@ -1118,11 +1136,11 @@ assert.match(navigationCss, /#work,#playground,#about,#top,#main\{scroll-margin-
  'Section scroll margins must track the dynamic anchor offset');
 assert.doesNotMatch(navigationCss, /min-height:var\(--mobile-site-header-height\)/,
  'The measured token must not create a feedback loop in header sizing');
-assert.match(script, /function initResponsiveHeaderHeight\(\)/,
+assert.match(script, /function\s+initResponsiveHeaderHeight\s*\(\)/,
  'One observer owns responsive header size measurement');
 assert.match(script, /new ResizeObserver\(update\)\.observe\(header\)/,
  'Header measurement must respond to font resize and wrapping');
-assert.match(script, /root\.style\.setProperty\("--mobile-site-header-height",height\+"px"\)/,
+assert.match(script, /root\.style\.setProperty\("--mobile-site-header-height",\s*height\s*\+\s*"px"\)/,
  'Measured header height must feed shared chapter/anchor offset');
 
 
@@ -1219,9 +1237,9 @@ assert.match(navigationCss, /html\[data-theme="dark"\]\s*\{[^}]*--site-chrome-bg
 assert.doesNotMatch(css, /--site-chrome-bg\s*:/, 'Chrome surface tokens must not be duplicated in legacy CSS');
 
 // Pass 13: leaving a case study must never strand focus in hidden content.
-assert.match(script, /if\(leavingProject&&nextHash!=="work"&&nextHash!=="playground"\)/, 'Non-gallery case-study exits must restore focus');
-assert.match(script, /destination\.focus\(\{preventScroll:true\}\)/, 'Focus must move to a visible destination');
-assert.match(script, /caseOpener=null;\s*\}\);\s*\}\s*previousHash=nextHash;/, 'Non-gallery exits must discard stale project openers');
+assert.match(script, /if\s*\(\s*leavingProject\s*&&\s*nextHash\s*!==\s*"work"\s*&&\s*nextHash\s*!==\s*"playground"\s*\)/, 'Non-gallery case-study exits must restore focus');
+assert.match(script, /destination\.focus\(\{\s*preventScroll:\s*true\s*\}\)/, 'Focus must move to a visible destination');
+assert.match(script, /caseOpener\s*=\s*null;\s*\}\);\s*\}\s*previousHash\s*=\s*nextHash;/, 'Non-gallery exits must discard stale project openers');
 assert.match(caseCss, /@media\(forced-colors:active\)\{[\s\S]*?\.case-view \.case-section-links button\[aria-current="location"\]\{border-color:Highlight\}/, 'Chapter selection must remain visible in forced colors');
 // Pass 13: actual Windows forced-colors uses system palette focus ink.
 assert.equal((workCss.match(/@media\(forced-colors:active\)/g)||[]).length,1,
@@ -1444,7 +1462,7 @@ assert.match(workCss,/--file-highlight:color-mix\(in srgb,var\(--file-accent\) v
  'Client highlighters must derive from the same brand accent as the folder tab');
 assert.doesNotMatch(stationeryCss,/\.client-file--(?:hoylu|alcon|holland-america)\{--file-highlight:/,
  'Stationery must not duplicate six client-specific highlight declarations');
-const factsStart=script.indexOf('const archiveFactsMarkup=');
+const factsStart=script.indexOf('const archiveFactsMarkup =');
 const factsEnd=script.indexOf('// Keep card content',factsStart);
 assert.ok(factsStart>=0&&factsEnd>factsStart,'Archive fact renderer must remain discoverable');
 const renderFacts=vm.runInNewContext(script.slice(factsStart,factsEnd)+'\narchiveFactsMarkup',{esc:value=>String(value)});

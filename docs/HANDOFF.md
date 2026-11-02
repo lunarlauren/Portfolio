@@ -1,5 +1,14 @@
 # Portfolio developer handoff
 
+## Accessibility and workflow audit — Pass 36
+
+The homepage logo and secondary hero link now meet the 44px touch-target goal.
+The decorative hero slash is hidden from assistive technology and uses the
+theme-aware muted text color. The theme-toggle source check now reads the
+button's opening tag, and related HTML/JS checks tolerate normal whitespace
+while continuing to assert their actual accessibility and routing behavior.
+Both changed stylesheet URLs use fresh cache keys.
+
 ## Dark case-study contrast — Pass 35
 
 Case-study covers, fact cards, reading panels, process notes, chapter controls,
