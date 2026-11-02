@@ -170,7 +170,7 @@ html[data-theme="dark"] .client-file{
 
 
 /* Archive-first hierarchy: title before image; the editorial skin owns the card radius. */
-.work .featured-project.client-file .archive-project-title{
+.work .client-file .archive-project-title{
  margin:var(--space-1) 0 var(--space-3);
  font-weight:500;
  font-size:clamp(var(--type-h3),2.6vw,2.375rem);
@@ -178,7 +178,7 @@ html[data-theme="dark"] .client-file{
  letter-spacing:-.035em;
  text-wrap:balance;
 }
-.work .featured-project.client-file .project-meta{
+.work .client-file .project-meta{
  margin-top:var(--space-2);
 }
 
@@ -280,7 +280,7 @@ html[data-theme="dark"] .client-file{
  .client-file{margin-top:29px}
  .client-file .client-file-label{min-width:102px;height:24px;font-size:0.625rem;top:-25px}
  .work .featured-projects-grid{margin-bottom:clamp(16px,4vw,28px)}
- .work .featured-project.client-file .archive-project-title{
+ .work .client-file .archive-project-title{
   font-size:clamp(1.625rem,7vw,2.125rem);
   line-height:1.12;margin-bottom:var(--space-2);
  }
