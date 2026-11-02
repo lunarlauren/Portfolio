@@ -91,6 +91,37 @@ try{
  }
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // Hero emphasis must resolve to the actual heading ink, not a late
+ // !important theme override. Portrait reveal remains grayscale on hover
+ // devices, while the note keeps the active light/dark paper separator.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const heroInk=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const heading=document.querySelector(".hero .hero-copy h1");
+    const emphasis=heading.querySelector("em");
+    const note=document.querySelector(".hero .notebook-hero-note");
+    const portrait=document.querySelector(".hero .feature-art .hero-portrait-art");
+    return {
+     heading:getComputedStyle(heading).color,
+     emphasis:getComputedStyle(emphasis).color,
+     emphasisStyle:getComputedStyle(emphasis).fontStyle,
+     noteBorder:getComputedStyle(note).borderBottomColor,
+     expectedNote:getComputedStyle(document.documentElement).getPropertyValue(theme==="dark"?"--brand-pink":"--line").trim(),
+     portraitFilter:getComputedStyle(portrait).filter
+    };
+   },theme);
+   assert.equal(heroInk.emphasis,heroInk.heading,width+"px "+theme+": hero emphasis must inherit heading contrast");
+   assert.equal(heroInk.emphasisStyle,"italic",width+"px "+theme+": editorial emphasis stays italic");
+   assert.match(heroInk.portraitFilter,/grayscale\\(1\\)/,width+"px "+theme+": hero grayscale reveal remains active");
+   const expected=theme==="dark"?"rgb(222, 222, 222)":"rgb(200, 197, 192)";
+   assert.equal(heroInk.noteBorder,expected,width+"px "+theme+": note border must retain theme color");
+  }
+ }
+ await page.setViewportSize({width:1280,height:800});
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // A late editorial skin previously shadowed the stronger dark
  // high-contrast separator preference. Test computed tokens, not just source.
  const contrastSession=await page.context().newCDPSession(page);
