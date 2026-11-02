@@ -642,6 +642,50 @@ try{
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
  await page.setViewportSize({width:1280,height:720});
 
+ // Pass 12: high contrast must suppress folder shadows even under the
+ // stronger :hover/:focus-within selectors. Verify both themes and layouts,
+ // then ensure ordinary themes still retain their tactile card shadow.
+ const contrastCardsPage=await browser.newPage();
+ contrastCardsPage.on("pageerror",error=>errors.push(error.message));
+ await contrastCardsPage.goto(origin+"/");
+ const contrastCard=contrastCardsPage.locator(".work .featured-project.client-file").first();
+ for(const width of [390,1280]){
+  await contrastCardsPage.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   await contrastCardsPage.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+   await contrastCardsPage.mouse.move(0,0);
+   await contrastCardsPage.emulateMedia({contrast:"no-preference"});
+   const normal=await contrastCard.evaluate(node=>getComputedStyle(node).boxShadow);
+   assert.notEqual(normal,"none",width+"px "+theme+": normal tactile file shadow remains");
+   await contrastCardsPage.emulateMedia({contrast:"more"});
+   const assertCardEdge=async(state)=>{
+    // Media switches can transition the previous shadow for 250ms. Finish
+    // CSS transitions before measuring the settled high-contrast surface.
+    const value=await contrastCard.evaluate(node=>{
+     void getComputedStyle(node).boxShadow;
+     for(const animation of node.getAnimations()){
+      if(animation.playState==="running")animation.finish();
+     }
+     const css=getComputedStyle(node);
+     return {shadow:css.boxShadow,left:css.borderLeftWidth,right:css.borderRightWidth};
+    });
+    assert.equal(value.shadow,"none",width+"px "+theme+" "+state+": contrast mode has no decorative shadow");
+    assert.equal(value.left,"2px",width+"px "+theme+" "+state+": strong left edge");
+    assert.equal(value.right,"2px",width+"px "+theme+" "+state+": strong right edge");
+   };
+   await assertCardEdge("rest");
+   await contrastCard.hover();
+   await assertCardEdge("hover");
+   await contrastCardsPage.mouse.move(0,0);
+   await contrastCard.locator(".project-card-link").first().focus();
+   assert.equal(await contrastCard.evaluate(node=>node.matches(":focus-within")),true,
+    width+"px "+theme+": archive card should receive child focus");
+   await assertCardEdge("keyboard focus");
+   await contrastCardsPage.evaluate(()=>document.activeElement?.blur());
+  }
+ }
+ await contrastCardsPage.close();
+
  // Reduced-motion visitors must not receive Playground preview or case entrance motion.
  const reducedMotionPage=await browser.newPage({reducedMotion:"reduce"});
  reducedMotionPage.on("pageerror",error=>errors.push(error.message));
@@ -649,6 +693,18 @@ try{
  const previewTransition=await reducedMotionPage.locator("#play-grid .project-card-link .project-visual").first()
   .evaluate(node=>getComputedStyle(node).transitionProperty);
  assert.equal(previewTransition,"none","Playground preview must not animate under reduced motion");
+ // A color reveal can remain useful without a half-second transition.
+ // Preserve grayscale treatment but remove motion on the hero portrait.
+ for(const theme of ["light","dark"]){
+  const portraitMotion=await reducedMotionPage.evaluate(value=>{
+   document.documentElement.dataset.theme=value;
+   const portrait=document.querySelector(".hero .hero-portrait-art");
+   const style=getComputedStyle(portrait);
+   return {transition:style.transitionProperty,filter:style.filter};
+  },theme);
+  assert.equal(portraitMotion.transition,"none",theme+": reduced-motion portrait reveal is instantaneous");
+  assert.match(portraitMotion.filter,/grayscale/,theme+": editorial portrait treatment remains");
+ }
  // Reduced-motion hover must not jump the preview or lift the archive file.
  for(const theme of ["light","dark"]){
   await reducedMotionPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);

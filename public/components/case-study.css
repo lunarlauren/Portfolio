@@ -404,7 +404,7 @@ html[data-theme="dark"] .case-prose p{color:#d7e3ed}
  /* Keep chapter navigation stationary alongside the routed cover and body. */
  .case-view .case-section-links{scroll-behavior:auto}
  .case-view .case-section-links button{transition:none}
- .case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}
+ .case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none}
 }
 
 /* Case-study navigation retains touch targets and visible link focus.

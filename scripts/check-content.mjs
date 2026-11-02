@@ -192,7 +192,7 @@ assert.match(heroPolishCss, /\.hero \.feature-art \.hero-portrait-art\{filter:gr
  'Hero component owns grayscale reveal and timing');
 assert.match(heroPolishCss, /@media\(hover:none\)\{\.hero \.feature-art \.hero-portrait-art\{filter:none\}\}/,
  'Touch visitors must see the full-color hero portrait');
-assert.match(heroPolishCss, /@media\(prefers-reduced-motion:reduce\)\{\.hero \.feature-art \.hero-portrait-art\{transition:none!important\}\}/,
+assert.match(heroPolishCss, /@media\(prefers-reduced-motion:reduce\)\{\.hero \.feature-art \.hero-portrait-art\{transition:none\}\}/,
  'Reduced-motion hero reveal must not animate');
 assert.doesNotMatch(heroPolishCss, /color:var\(--brand-pink\)!important|background:transparent!important/,
  'Hero ink and surfaces must not need forced paint');
@@ -811,7 +811,7 @@ const caseReduceBlock=caseCss.split('@media(prefers-reduced-motion:reduce){')[1]
 assert.ok(caseReduceBlock && [
  '.case-view .case-section-links{scroll-behavior:auto}',
  '.case-view .case-section-links button{transition:none}',
- '.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}'
+ '.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none}'
 ].every(rule=>caseReduceBlock.includes(rule)),
  'One case-study reduced-motion block must protect chapter controls and entrance art');
 
@@ -825,8 +825,21 @@ assert.doesNotMatch(playgroundCss, /\.play-grid \.project-card-link(?::hover)? \
  'Playground must not duplicate shared preview motion');
 assert.doesNotMatch(workCss, /\.project-card-link\{transition:none!important\}/,
  'Do not restore the unused link transition reset');
-assert.ok(caseCss.includes('.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none!important}'),
+assert.ok(caseCss.includes('.case-view .case-head,.case-view .case-hero-visual,.case-view .case-body,.case-view .case-gallery{animation:none}'),
  'Case-study reduced-motion override must remain');
+// Pass 12: high-contrast card paint must beat the more-specific hover/focus
+// shadow without important flags, including when a card is focused.
+const workHighContrast=workCss.split('@media(prefers-contrast:more){')[1]?.split('\n}')[0];
+assert.ok(workHighContrast && workHighContrast.includes(
+ '.work .featured-project.client-file:is(:hover,:focus-within){box-shadow:none;border-width:2px}'),
+ 'High-contrast card shadow reset must explicitly cover hover and focus');
+assert.doesNotMatch(workHighContrast,/box-shadow:none!important|border-width:2px!important/,
+ 'High-contrast card paint must not depend on important');
+assert.doesNotMatch(caseReduceBlock,/animation:none!important/,
+ 'Reduced-motion case entrance must not depend on important');
+assert.doesNotMatch(heroPolishCss,/\.hero \.feature-art \.hero-portrait-art\{transition:none!important/,
+ 'Reduced-motion portrait reveal must not depend on important');
+
 assert.match(workCss, /@media\(prefers-reduced-motion:reduce\)\{[\s\S]*?\.play-grid \.project-card-link \.project-visual,[\s\S]*?transform:none!important/,
  'Shared preview motion must be disabled under reduced motion');
 

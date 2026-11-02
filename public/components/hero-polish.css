@@ -192,4 +192,4 @@ html[data-theme="dark"] .hero h1 em{color:var(--brand-pink);font-style:italic}
 .hero .feature-art .hero-portrait-art{filter:grayscale(1) contrast(1.08);transition:filter .5s ease}
 .hero-feature:is(:hover,:focus-within) .hero-portrait-art{filter:grayscale(0)}
 @media(hover:none){.hero .feature-art .hero-portrait-art{filter:none}}
-@media(prefers-reduced-motion:reduce){.hero .feature-art .hero-portrait-art{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.hero .feature-art .hero-portrait-art{transition:none}}
