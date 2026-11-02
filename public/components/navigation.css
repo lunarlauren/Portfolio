@@ -4,6 +4,7 @@
 /* --site-chrome-edge already follows the theme-aware --line alias. */
 html[data-theme="dark"]{--site-chrome-bg:var(--paper)}
 .site-header{
+ display:flex;align-items:center;justify-content:space-between;
  position:sticky;top:0;z-index:100;max-width:none;width:100%;
  box-sizing:border-box;padding:8px clamp(18px,4vw,56px);
  min-height:66px;gap:24px;
@@ -17,8 +18,8 @@ html[data-theme="dark"]{--site-chrome-bg:var(--paper)}
 .header-actions{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2vw,28px);min-width:0}
 .site-header .header-actions nav a{font-weight:600;letter-spacing:0}
 /* Desktop Contact is a filled action; phone navigation keeps it text-only. */
-.header-contact{display:inline-flex;align-items:center;gap:8px;justify-content:center;min-height:40px;padding:8px 4px;border:0;border-radius:0;text-decoration:none;font-size:.8125rem;font-weight:700;white-space:nowrap;background:var(--ink);color:var(--paper);transition:color .18s ease,background .18s ease}
-.header-contact:is(:hover,:focus-visible){background:var(--editorial-accent);color:var(--editorial-action-ink)}
+.header-contact{display:inline-flex;align-items:center;gap:8px;justify-content:center;min-height:44px;padding:8px 12px;border:1px solid var(--ink);border-radius:var(--editorial-action-radius);text-decoration:none;font-size:.9375rem;font-weight:700;white-space:nowrap;background:var(--ink);color:var(--paper);transition:color .18s ease,background .18s ease,border-color .18s ease}
+.header-contact:is(:hover,:focus-visible){background:var(--editorial-accent);color:var(--editorial-action-ink);border-color:var(--editorial-accent)}
 /* All rendered header links live inside .header-actions; dark resting ink
    uses the same token as other header controls. */
 html[data-theme="dark"] .site-header .header-actions nav a{color:var(--ink)}
@@ -29,7 +30,7 @@ html[data-theme="dark"] .site-header .header-actions nav a{color:var(--ink)}
 html[data-theme="dark"] .site-header .header-actions nav a:is(:hover,:focus-visible){color:var(--editorial-accent)}
 html[data-theme="dark"] .theme-toggle:focus-visible,
 html[data-theme="dark"] .header-contact:focus-visible{
- outline:3px solid color-mix(in srgb,var(--palette-blue) 65%,var(--palette-paper));
+ outline:3px solid var(--focus);
  outline-offset:3px;
 }
 .site-header nav a[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
