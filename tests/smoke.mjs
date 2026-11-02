@@ -1205,7 +1205,7 @@ try{
    return {
     width:rect.width,height:rect.height,naturalWidth:img.naturalWidth,
     ratio:rect.height/rect.width,
-    actual:new URL(img.currentSrc).pathname,
+    actual:img.currentSrc?new URL(img.currentSrc).pathname:null,
     picture:getComputedStyle(img.parentElement).display
    };
   });
