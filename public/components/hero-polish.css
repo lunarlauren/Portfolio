@@ -71,6 +71,13 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 }
 
 
+/* Keep the portrait fill on large screens: the later desktop inset alone
+   does not set an explicit height for this absolutely positioned element. */
+@media(min-width:1024px){.hero .feature-art{height:100%;min-height:0}}
+
+/* Reduced-motion hover is also relevant at tablet widths without desktop art rules. */
+@media(prefers-reduced-motion:reduce){.hero-feature:hover .feature-art{transform:none}}
+
 /* Shared headline rhythm and illustration treatment in both themes. */
 .hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
 .hero .hero-copy h1 em{display:inline-block;max-width:100%}
