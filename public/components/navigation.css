@@ -1,5 +1,5 @@
-/* Navigation owns header geometry, opaque theme chrome and Aero glass.
-   Opaque fallback keeps text legible where backdrop filters are unsupported. */
+/* Navigation owns header geometry and opaque editorial chrome.
+   A solid surface provides reliable contrast without a costly backdrop blur. */
 :root{--site-chrome-bg:var(--notebook-paper,#fffdf8);--site-chrome-edge:var(--line)}
 /* --site-chrome-edge already follows the theme-aware --line alias. */
 html[data-theme="dark"]{--site-chrome-bg:var(--paper)}
@@ -63,25 +63,21 @@ html[data-theme="dark"] .theme-toggle:hover{background:#3c5c73}
  html[data-theme="dark"] .theme-toggle{border-width:2px}
 }
 
-@supports ((-webkit-backdrop-filter:blur(18px)) or (backdrop-filter:blur(18px))){
+/* The header is already fully opaque. Blurring pixels behind that solid
+   sheet cannot affect its paint, but may incur an extra backdrop pass.
+   Preserve the soft toggle highlight and separator without backdrop filters. */
+@supports (color:color-mix(in srgb,black 50%,white 50%)){
  .site-header{
-  /* Opaque chrome prevents scrolled content showing through the header. */
-   background:var(--site-chrome-bg);
-  -webkit-backdrop-filter:blur(20px) saturate(150%);
-  backdrop-filter:blur(20px) saturate(150%);
   border-bottom-color:color-mix(in srgb,var(--site-chrome-edge) 65%,white 35%);
  }
  .site-header .theme-toggle{
   background:color-mix(in srgb,var(--site-chrome-bg) 68%,transparent);
-  -webkit-backdrop-filter:blur(12px) saturate(130%);
-  backdrop-filter:blur(12px) saturate(130%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 4px 16px rgba(16,39,61,.12);
  }
 }
 @media(forced-colors:active){
  .site-header,.site-header .theme-toggle{
-  background:Canvas;border-color:CanvasText;
-  -webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none
+  background:Canvas;border-color:CanvasText;box-shadow:none
  }
 }
 

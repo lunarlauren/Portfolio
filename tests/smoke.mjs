@@ -69,6 +69,59 @@ try{
   "Dark footer must match the dark page surface");
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // Pass 17: opaque chrome is the legibility layer. Backdrop blur behind
+ // an opaque sheet has no visible contribution but requests extra compositing;
+ // preserve the tactile separator, theme toggle gloss, and parallax behavior.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const paint=await page.evaluate(value=>{
+    document.documentElement.dataset.theme=value;
+    const css=node=>getComputedStyle(node);
+    const header=css(document.querySelector(".site-header"));
+    const toggle=css(document.querySelector(".site-header .theme-toggle"));
+    const portrait=document.querySelector(".hero .hero-portrait-art");
+    const portraitStyle=css(portrait);
+    const prev=portrait.style.getPropertyValue("--hero-parallax-y");
+    portrait.style.setProperty("--hero-parallax-y","8px");
+    const plus=css(portrait).translate;
+    portrait.style.setProperty("--hero-parallax-y","-8px");
+    const minus=css(portrait).translate;
+    if(prev)portrait.style.setProperty("--hero-parallax-y",prev);
+    else portrait.style.removeProperty("--hero-parallax-y");
+    return {
+     paper:css(document.body).backgroundColor,
+     headerBackground:header.backgroundColor,
+     headerShadow:header.boxShadow,
+     headerEdge:header.borderBottomColor,
+     headerBlur:header.backdropFilter,
+     toggleBlur:toggle.backdropFilter,
+     toggleBackground:toggle.backgroundColor,
+     toggleShadow:toggle.boxShadow,
+     portraitWillChange:portraitStyle.willChange,
+     plus,minus
+    };
+   },theme);
+   const id=width+"px "+theme;
+   assert.equal(paint.headerBackground,paint.paper,id+": opaque chrome keeps page paper");
+   assert.equal(paint.headerBlur,"none",id+": scrolling header must not blur backdrop");
+   assert.equal(paint.toggleBlur,"none",id+": theme toggle no longer blurs backdrop");
+   assert.notEqual(paint.headerShadow,"none",id+": header retains soft separation");
+   assert.notEqual(paint.headerEdge,"rgba(0, 0, 0, 0)",id+": hairline stays visible");
+   assert.notEqual(paint.toggleBackground,"rgba(0, 0, 0, 0)",
+    id+": tactile toggle still has paper tint");
+   assert.match(paint.toggleShadow,/inset/,id+": toggle retains its inset highlight");
+   assert.equal(paint.portraitWillChange,"auto",
+    id+": hero must not reserve a permanent compositor layer");
+   assert.notEqual(paint.plus,paint.minus,
+    id+": portrait keeps responsive translate parallax without will-change");
+   assert.match(paint.plus,/8px/,id+": portrait can translate downward");
+   assert.match(paint.minus,/-8px/,id+": portrait can translate upward");
+  }
+ }
+ await page.setViewportSize({width:1280,height:800});
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // Pass 7: root aliases --paper and --ink must resolve dynamically from
  // the light/dark source palette without a second theme-specific declaration.
  // Chrome edge likewise follows --line, including increased contrast below.
