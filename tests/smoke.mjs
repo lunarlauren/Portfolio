@@ -1684,7 +1684,7 @@ try{
      pageBackground:style(".case-view").backgroundColor,
      paperBackground:style("body").backgroundColor,
      minHeight:parseFloat(style(".case-view").minHeight),
-     bodyColumns:style(".case-body").gridTemplateColumns.trim().split(/\\s+/).length,
+     bodyColumns:style(".case-body").gridTemplateColumns.trim().split(/\s+/).length,
      backDisplay:style(".case-back").display,
      nextMarginTop:parseFloat(style(".case-next-nav .case-next").marginTop),
      headingFamily:style(".case-prose h2").fontFamily,
