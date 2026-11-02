@@ -204,6 +204,12 @@ assert.match(heroPolishCss, /@media\(max-width:760px\)\{[\s\S]*?\.hero-actions\{
  'Hero component must retain tablet spacing and action gap');
 assert.match(heroPolishCss, /@media\(max-width:650px\)\{[\s\S]*?\.hero-feature\{min-height:320px\}/,
  'Hero component must preserve the 650px fold and illustration height');
+// 601–760px tablet and <=600px phone selectors already own the final type.
+// The retired 650/760px base sizes never reached computed style at any width.
+assert.doesNotMatch(heroPolishCss, /font-size:clamp\\(3\\.125rem,12vw,4\\.875rem\\)|font-size:clamp\\(2\\.875rem,11\\.2vw,4\\.375rem\\)/,
+ 'Shadowed intermediate hero heading sizes must stay retired');
+assert.doesNotMatch(heroPolishCss, /max-width:37ch|width:min\\(88%,360px\\)|transform:rotate\\(8deg\\)/,
+ 'Dead intermediate hero description and portrait geometry must stay retired');
 assert.match(heroPolishCss, /\.hero \.feature-art\{height:100%;min-height:0\}/,
  'Desktop hero art must retain its original fill height');
 assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
