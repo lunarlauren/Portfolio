@@ -1,10 +1,17 @@
 # Portfolio developer handoff
 
+## Portfolio-making case study — Pass 38
+
+The About section contains a keyboard-friendly disclosure with the portfolio's
+design rationale, editorial type and notebook details, and light/dark brand
+colors. Keep it in About; it is not a Work project or a header destination.
+
 ## Dark hero divider contrast — Pass 37
 
 The homepage note border now uses the light dark-theme accent instead of the
 low-contrast neutral rule. This keeps the transparent note readable against
-the dark paper; the hero stylesheet URL has a fresh cache key.
+the dark paper; the hero stylesheet URL has a fresh cache key. Commit is on
+GitHub main; wait for the browser check before considering the pass verified.
 
 ## Accessibility and workflow audit — Pass 36
 

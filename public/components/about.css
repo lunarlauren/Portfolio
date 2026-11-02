@@ -128,6 +128,45 @@
 .about .about-copy .ai-process p:not(.eyebrow){max-width:58ch}
 .about .ai-process p:last-child{margin-bottom:0}
 
+/* A self-contained portfolio case study. The native disclosure keeps this
+   extra story inside About without adding another destination to the nav. */
+.about .site-case-study{
+ margin-top:clamp(28px,4vw,48px);
+ border-top:1px solid var(--line);
+ border-bottom:1px solid var(--line);
+}
+.about .site-case-study summary{
+ display:flex;align-items:center;justify-content:space-between;gap:20px;
+ min-height:56px;padding:12px 0;
+ color:var(--ink);font-size:1rem;font-weight:700;
+ cursor:pointer;list-style:none;
+}
+.about .site-case-study summary::-webkit-details-marker{display:none}
+.about .site-case-study summary::after{content:"+";font-size:1.3rem;font-weight:500;color:var(--editorial-accent)}
+.about .site-case-study[open] summary::after{content:"−"}
+.about .site-case-study summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.site-case-study-content{max-width:76ch;padding:14px 0 24px}
+.site-case-study-content>.eyebrow{margin:0 0 10px}
+.site-case-study-content h3{
+ max-width:20ch;margin:0 0 14px;color:var(--ink);
+ font-size:clamp(1.75rem,3.8vw,2.65rem);line-height:1.08;letter-spacing:-.035em;
+}
+.about .about-copy .site-case-study-content p{max-width:68ch}
+.site-case-study-content .site-case-study-lead{font-family:var(--font-display);font-size:clamp(1.125rem,1.7vw,1.35rem);line-height:1.45}
+.site-case-study-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 30px;margin:26px 0}
+.site-case-study-sections section{min-width:0;border-top:2px solid var(--line);padding-top:12px}
+.site-case-study-sections h4{margin:0 0 8px;font-size:.95rem;line-height:1.4;color:var(--ink)}
+.about .about-copy .site-case-study-sections p{margin:0;font-size:.9375rem;line-height:1.65}
+.site-case-study-palette{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;margin:16px 0 0;padding:0;list-style:none}
+.site-case-study-palette li{display:flex;align-items:center;gap:8px;min-width:0;font-size:.8125rem;line-height:1.4;font-weight:600;overflow-wrap:anywhere}
+.site-case-study-swatch{flex:0 0 18px;width:18px;height:18px;border:1px solid var(--line);border-radius:50%}
+.swatch-paper{background:#f5f3ef}
+.swatch-ink{background:#171717}
+.swatch-logo-navy{background:#213544}
+.swatch-logo-pink{background:linear-gradient(120deg,#fe81ae,#f15c9d)}
+.swatch-action{background:#235f88}
+.about .about-copy .site-case-study-close{margin:0;padding-top:18px;border-top:1px solid var(--line);font-weight:600}
+
 /* One desktop introduction: biography flows naturally in one column while
    the portrait occupies the other. No implicit grid rows or display:contents. */
 @media (min-width: 901px) {
@@ -211,4 +250,7 @@
     text-wrap:balance;
   }
   .about .ai-process{margin-top:34px;margin-bottom:30px;padding-left:17px}
+  .site-case-study-sections{grid-template-columns:1fr;gap:18px}
+  .site-case-study-palette{grid-template-columns:1fr}
+  .site-case-study-content{padding-bottom:20px}
 }

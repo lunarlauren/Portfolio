@@ -1496,4 +1496,25 @@ assert.doesNotMatch(caseCss,/\.case-hero-visual:not\(:has\(img\)\)::before|\.pro
 assert.match(caseCss,/\.case-view \.case-hero-visual:not\(:has\(img\)\)\{[^}]*background:[^}]*border:2px dashed[^}]*height:auto/,
  'Illustrative hero surface and compact geometry stay in one scoped rule');
 
+// The portfolio-making case study is intentionally discoverable only through
+// an accessible disclosure inside About; it does not become another nav item.
+const aboutStart=html.indexOf('<section class="about wrap"');
+const aboutEnd=html.indexOf('\n      </section>',aboutStart);
+assert.ok(aboutStart>=0&&aboutEnd>aboutStart,'About section must remain identifiable');
+const aboutMarkup=html.slice(aboutStart,aboutEnd);
+assert.match(aboutMarkup,/<details class="site-case-study">\s*<summary>How I made this portfolio<\/summary>/,
+ 'Portfolio case study must open from a native disclosure in About');
+assert.match(aboutMarkup,/<article class="site-case-study-content" aria-labelledby="site-case-study-title">[\s\S]*?<h3 id="site-case-study-title">/,
+ 'The disclosure must contain a labeled case-study article');
+assert.doesNotMatch(html.slice(0,aboutStart),/site-case-study/,
+ 'The portfolio-making case study must not be linked from the header or earlier sections');
+for(const hex of ['#F5F3EF','#171717','#151515','#EFEFEF'])
+ assert.ok(aboutMarkup.includes(hex),'Case study should describe palette color '+hex);
+assert.match(aboutCss,/\.about \.site-case-study summary\{[^}]*min-height:56px/,
+ 'The keyboard disclosure summary keeps a comfortable touch target');
+assert.match(aboutCss,/\.about \.site-case-study summary:focus-visible\{outline:3px solid var\(--focus\);outline-offset:3px\}/,
+ 'The disclosure summary keeps a visible keyboard focus treatment');
+assert.match(phoneAboutCss,/\.site-case-study-sections\{grid-template-columns:1fr/,
+ 'Case-study sections reflow into one column on phones');
+
 console.log(`PASS: ${data.companies.length} companies, ${projects.length} projects, navigation targets, JS syntax and component contracts`);
