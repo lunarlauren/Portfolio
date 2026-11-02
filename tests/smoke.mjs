@@ -1205,6 +1205,113 @@ try{
   }
  }
 
+ // Pass 15: phone nav must reflow at 200% text size without overlap, clip
+ // or an out-of-date sticky-header offset. Compare its actual rectangles.
+ const headerReflowPage=await browser.newPage();
+ headerReflowPage.on("pageerror",error=>errors.push(error.message));
+ await headerReflowPage.goto(origin+"/");
+ const syncHeader=async()=>headerReflowPage.waitForFunction(()=>{
+  const header=document.querySelector(".site-header");
+  const token=parseFloat(getComputedStyle(document.documentElement)
+   .getPropertyValue("--mobile-site-header-height"));
+  return Number.isFinite(token)&&Math.abs(token-Math.ceil(header.getBoundingClientRect().height))<=1;
+ });
+ for(const width of [320,390,650]){
+  await headerReflowPage.setViewportSize({width,height:844});
+  for(const scale of [100,200,100]){
+   for(const theme of ["light","dark"]){
+    await headerReflowPage.evaluate(({scale,theme})=>{
+     document.documentElement.dataset.theme=theme;
+     document.documentElement.style.fontSize=scale+"%";
+    },{scale,theme});
+    await syncHeader();
+    const m=await headerReflowPage.evaluate(()=>{
+     const box=sel=>document.querySelector(sel).getBoundingClientRect();
+     const nav=box(".site-header nav"),header=box(".site-header");
+     const contact=box(".header-contact"),toggle=box(".theme-toggle");
+     const links=[...document.querySelectorAll(".site-header nav a")].map(x=>{
+      const r=x.getBoundingClientRect();
+      return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,
+       width:r.width,height:r.height,client:x.clientWidth,scroll:x.scrollWidth};
+     });
+     return {headerHeight:header.height,navRight:nav.right,navBottom:nav.bottom,
+      contactTop:contact.top,toggleTop:toggle.top,
+      contactHeight:contact.height,toggleHeight:toggle.height,links,
+      navScroll:document.querySelector(".site-header nav").scrollWidth,
+      navClient:document.querySelector(".site-header nav").clientWidth,
+      scrollPadding:parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop),
+      pageOverflow:document.documentElement.scrollWidth-innerWidth};
+    });
+    const at=width+"px "+scale+"% text "+theme;
+    assert.ok(m.pageOverflow<=2&&m.navScroll<=m.navClient+2&&m.navRight<=width+2,
+     at+": header and nav have no horizontal overflow");
+    assert.ok(m.navBottom<=m.contactTop+2&&Math.abs(m.contactTop-m.toggleTop)<=2,
+     at+": links precede Contact and theme row");
+    assert.ok(m.contactHeight>=44&&m.toggleHeight>=44,at+": controls retain 44px targets");
+    assert.ok(m.scrollPadding>=m.headerHeight+8,at+": scroll offset clears full sticky header");
+    for(const [i,link] of m.links.entries()){
+     assert.ok(link.height>=44&&link.width>=24&&link.left>=-2&&link.right<=width+2,
+      at+": nav link "+i+" stays onscreen and touch-friendly");
+     assert.ok(link.scroll<=link.client+2,at+": nav label "+i+" isn't clipped");
+     for(let j=0;j<i;j++){
+      const other=m.links[j],dx=Math.min(link.right,other.right)-Math.max(link.left,other.left);
+      const dy=Math.min(link.bottom,other.bottom)-Math.max(link.top,other.top);
+      assert.ok(dx<=1||dy<=1,at+": nav links "+j+" and "+i+" cannot overlap");
+     }
+    }
+   }
+  }
+ }
+ await headerReflowPage.setViewportSize({width:320,height:844});
+ await headerReflowPage.evaluate(()=>{
+  document.documentElement.dataset.theme="light";
+  document.documentElement.style.fontSize="200%";
+ });
+ await syncHeader();
+ for(const selector of ['.site-header nav a[href="/#work"]',
+  '.site-header nav a[href="/#playground"]','.site-header nav a[href="/#about"]',
+  '.site-header .header-contact','.site-header .theme-toggle']){
+  const control=headerReflowPage.locator(selector);
+  await control.focus();
+  await headerReflowPage.keyboard.press("Tab");
+  await headerReflowPage.keyboard.press("Shift+Tab");
+  const state=await control.evaluate(node=>{
+   const css=getComputedStyle(node);
+   return {focused:document.activeElement===node,visible:node.matches(":focus-visible"),
+    outline:css.outlineStyle,width:parseFloat(css.outlineWidth)};
+  });
+  assert.equal(state.focused,true,selector+": keyboard returns to control at 200%");
+  assert.equal(state.visible,true,selector+": focus-visible stays active at 200%");
+  assert.equal(state.outline,"solid",selector+": focus ring stays solid at 200%");
+  assert.ok(state.width>=3,selector+": focus outline remains at least 3px");
+ }
+ await headerReflowPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await headerReflowPage.locator(".case-section-links").waitFor();
+ for(const width of [320,390,650]){
+  await headerReflowPage.setViewportSize({width,height:844});
+  for(const scale of [100,200]){
+   for(const theme of ["light","dark"]){
+    await headerReflowPage.evaluate(({scale,theme})=>{
+     document.documentElement.dataset.theme=theme;
+     document.documentElement.style.fontSize=scale+"%";
+    },{scale,theme});
+    await syncHeader();
+    const m=await headerReflowPage.evaluate(()=>{
+     const header=document.querySelector(".site-header").getBoundingClientRect();
+     return {height:header.height,
+      stickyTop:parseFloat(getComputedStyle(document.querySelector(".case-section-links")).top),
+      margin:parseFloat(getComputedStyle(document.querySelector(".case-prose h2[id]")).scrollMarginTop),
+      padding:parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)};
+    });
+    const at=width+"px "+scale+"% "+theme+" case header";
+    assert.ok(Math.abs(m.stickyTop-m.height)<=2,at+": chapter strip clears dynamic header");
+    assert.ok(m.margin>=m.height+75,at+": chapter heading clears both sticky bars");
+    assert.ok(m.padding>=m.height+8,at+": anchor padding clears sticky header");
+   }
+  }
+ }
+ await headerReflowPage.close();
+
  // Guard the tablet breakpoints moved out of legacy styles.css. At 620px
  // the 650px spacing must win over 760px defaults; at 900px the hero
  // remains a single column with the original illustration minimum height.
