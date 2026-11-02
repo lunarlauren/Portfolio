@@ -1,5 +1,11 @@
 # Portfolio developer handoff
 
+## Dark media-frame edge contrast — Pass 39
+
+Illustrative Work frames and case-study covers use a stronger dark-theme edge
+(`#6F8498`, 4.72:1 against `#151515`). The shared frame owner is
+`public/components/visual-placeholders.css`; CI checks the computed edge.
+
 ## Portfolio-making case study — Pass 38
 
 The About section contains a keyboard-friendly disclosure with the portfolio's

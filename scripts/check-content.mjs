@@ -210,7 +210,7 @@ for (const name of stylesheetOrder) {
 assert.ok(visualPlaceholderCss.indexOf('html[data-theme="dark"] .project-visual,') >
  visualPlaceholderCss.indexOf('.project-visual:not(:has(img)){'),
  'Dark shared image fallback must follow the light no-image frame');
-assert.ok(visualPlaceholderCss.includes('html[data-theme="dark"] .project-visual,\nhtml[data-theme="dark"] .case-view .case-hero-visual{') && visualPlaceholderCss.includes('background:color-mix(in srgb,var(--paper) 90%,var(--palette-blue) 10%);') && visualPlaceholderCss.includes('color:var(--brand-ink);') && visualPlaceholderCss.includes('border-color:var(--line);'),
+assert.ok(visualPlaceholderCss.includes('html[data-theme="dark"] .project-visual,\nhtml[data-theme="dark"] .case-view .case-hero-visual{') && visualPlaceholderCss.includes('background:color-mix(in srgb,var(--paper) 90%,var(--palette-blue) 10%);') && visualPlaceholderCss.includes('color:var(--brand-ink);') && visualPlaceholderCss.includes('border-color:#6f8498;'),
  'Dark image and brief fallback must share the readable paper-and-ink rule');
 assert.doesNotMatch(visualPlaceholderCss, /--placeholder-(?:surface|edge|text):|\.work \.featured-project \.project-visual:not/,
  'Retired placeholder tokens and Work overrides must not return to shared CSS');

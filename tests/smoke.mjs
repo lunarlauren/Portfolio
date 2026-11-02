@@ -575,7 +575,7 @@ try{
      width+"px dark: case-study hero and project frames share the same dark loading paint");
     assert.equal(fallback.briefSurface,fallback.loadingSurface,
      width+"px dark: loading images and illustrative briefs share one fallback surface");
-    assert.equal(fallback.borderColor,"rgb(73, 96, 116)",
+    assert.equal(fallback.borderColor,"rgb(111, 132, 152)",
      width+"px dark: shared illustrative frame retains its night edge");
    }
   }
