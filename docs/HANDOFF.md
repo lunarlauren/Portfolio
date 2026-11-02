@@ -92,6 +92,9 @@ The kicker allows `overflow-wrap:anywhere` and the explanation column
 retains `minmax(0,1fr)`. At widths up to 600px, the existing single-column
 layout still takes precedence.
 
+Case-study cover headings also allow emergency word wrapping at desktop
+widths, not only under the 760px mobile breakpoint.
+
 Next-case and Back anchors use `min-width:0`, `max-width:100%`, and
 `overflow-wrap:anywhere` so project-title links can reflow rather than be
 clipped. The Work archive title also allows emergency wrapping for long
