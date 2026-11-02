@@ -376,10 +376,6 @@ html[data-theme="dark"] .case-view{
 
 /* System high-contrast themes can suppress custom surface colors.
    Keep the chapter focus ring and selected-state border legible. */
-@media(forced-colors:active){
- .case-view .case-section-links button:focus-visible{outline-color:Highlight}
- .case-view .case-section-links button[aria-current="location"]{border-color:Highlight}
-}
 
 /* Case-study typography and keyboard states belong here, not in styles.css.
    Keep dark-mode colors explicit for readable evidence and return links. */
@@ -411,3 +407,11 @@ html[data-theme="dark"] .case-prose p{color:#d7e3ed}
    The wrapper itself receives programmatic focus only. */
 .case-view[tabindex="-1"]:focus{outline:none;box-shadow:none}
 
+/* Keep the system-color focus and selected states after standard link paint.
+   The Back/Next ring otherwise inherits a pastel accent with poor visibility
+   in user-supplied high-contrast palettes. */
+@media(forced-colors:active){
+ .case-view .case-section-links button:focus-visible{outline-color:Highlight}
+ .case-view .case-section-links button[aria-current="location"]{border-color:Highlight}
+ .case-next-nav a:focus-visible,.case-back:focus-visible{outline-color:Highlight}
+}
