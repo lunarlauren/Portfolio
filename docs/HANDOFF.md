@@ -13,9 +13,9 @@ The inactive `public/styles.css` is already a compatibility stub; it has no
 remaining hero declarations to migrate. `hero-polish.css` now owns the
 monochrome portrait reveal, italic emphasis, and note border as well as the
 responsive geometry. The final `monochrome-editorial.css` no longer applies
-late hero paint or `!important` headline overrides. The hero headline and
-emphasis inherit the same theme ink; the note uses the light `--line` edge
-and existing dark `--brand-pink` edge. Touch devices see the full-color
+late hero paint or `!important` headline overrides. The hero headline inherits the theme ink. Emphasis inherits that ink in
+light mode (normal type) and uses `--brand-pink` italic in dark mode; the note
+uses the light `--line` edge and existing dark `--brand-pink` edge. Touch devices see the full-color
 portrait, and reduced-motion users get an immediate reveal. Preserve the
 601px desktop-art / 600px phone boundary and the 1024px art fill; they are
 intentional. Source and Chromium computed-style checks cover 390/1280px in
