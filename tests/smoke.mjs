@@ -716,6 +716,82 @@ try{
 
  await reducedMotionPage.close();
 
+ // Pass 11: skip decorative rings when route management focuses static
+ // headings/containers, but retain visible keyboard rings on actual actions.
+ // Use a separate page so test focus state cannot affect router assertions.
+ const focusPage=await browser.newPage();
+ focusPage.on("pageerror",error=>errors.push(error.message));
+ await focusPage.goto(origin+"/");
+ await focusPage.locator(".work .project-card-link").first().waitFor();
+ const inspectFocus=async(selector)=>{
+  return await focusPage.locator(selector).first().evaluate(node=>{
+   const style=getComputedStyle(node);
+   return {
+    focused:document.activeElement===node,
+    keyboardVisible:node.matches(":focus-visible"),
+    outlineStyle:style.outlineStyle,
+    outlineWidth:parseFloat(style.outlineWidth),
+    shadow:style.boxShadow
+   };
+  });
+ };
+ for(const width of [320,390,1280]){
+  await focusPage.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const heading=await focusPage.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const target=document.getElementById("work-title");
+    target.tabIndex=-1;
+    target.focus({preventScroll:true});
+    const style=getComputedStyle(target);
+    return {focused:document.activeElement===target,tabIndex:target.tabIndex,
+     outline:style.outlineStyle,shadow:style.boxShadow};
+   },theme);
+   assert.equal(heading.focused,true,width+"px "+theme+": Work heading receives route focus");
+   assert.equal(heading.tabIndex,-1,width+"px "+theme+": Work heading remains out of normal tab order");
+   assert.equal(heading.outline,"none",width+"px "+theme+": static heading has no decorative ring");
+   assert.equal(heading.shadow,"none",width+"px "+theme+": static heading has no focus shadow");
+   await focusPage.locator(".work .project-card-link").first().focus();
+   await focusPage.keyboard.press("Tab");
+   await focusPage.keyboard.press("Shift+Tab");
+   const link=await inspectFocus(".work .project-card-link");
+   assert.equal(link.focused,true,width+"px "+theme+": keyboard returns to first Work link");
+   assert.equal(link.keyboardVisible,true,width+"px "+theme+": Work link is focus-visible");
+   assert.equal(link.outlineStyle,"solid",width+"px "+theme+": Work link has a solid focus ring");
+   assert.ok(link.outlineWidth>=3,width+"px "+theme+": Work link focus ring remains at least 3px");
+  }
+ }
+ await focusPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await focusPage.locator(".case-view .case-head").waitFor();
+ for(const width of [390,1280]){
+  await focusPage.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const wrapper=await focusPage.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const target=document.querySelector(".case-view");
+    target.focus({preventScroll:true});
+    const style=getComputedStyle(target);
+    return {focused:document.activeElement===target,tabIndex:target.tabIndex,
+     outline:style.outlineStyle,shadow:style.boxShadow};
+   },theme);
+   assert.equal(wrapper.focused,true,width+"px "+theme+": case wrapper receives route focus");
+   assert.equal(wrapper.tabIndex,-1,width+"px "+theme+": case wrapper stays outside tab order");
+   assert.equal(wrapper.outline,"none",width+"px "+theme+": case wrapper has no decorative ring");
+   assert.equal(wrapper.shadow,"none",width+"px "+theme+": case wrapper has no focus shadow");
+   for(const selector of [".case-back",".case-section-links button"]){
+    await focusPage.locator(selector).first().focus();
+    await focusPage.keyboard.press("Tab");
+    await focusPage.keyboard.press("Shift+Tab");
+    const action=await inspectFocus(selector);
+    assert.equal(action.focused,true,width+"px "+theme+": keyboard returns to "+selector);
+    assert.equal(action.keyboardVisible,true,width+"px "+theme+": "+selector+" is focus-visible");
+    assert.equal(action.outlineStyle,"solid",width+"px "+theme+": "+selector+" retains a visible ring");
+    assert.ok(action.outlineWidth>=3,width+"px "+theme+": "+selector+" retains a 3px ring");
+   }
+  }
+ }
+ await focusPage.close();
+
  // Accessible link navigation should expose challenge, reviewed contribution,
  // and the visible design approach—not just a generic case-study action.
  const cardDescriptions=await page.locator('.work .project-card-link').first().evaluate(link=>
