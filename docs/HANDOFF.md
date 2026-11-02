@@ -1,5 +1,18 @@
 # Portfolio developer handoff
 
+## Motion media ownership — Pass 9
+
+`work-cards.css` has a single fine-pointer, hover-capable,
+`prefers-reduced-motion:no-preference` block for archive folder/tab lift and
+linked project/Playground preview motion. Keep keyboard focus and default
+transitions in their separate accessibility-aware rules.
+
+`case-study.css` has one `prefers-reduced-motion:reduce` block governing
+the chapter strip's scrolling, button transition, and routed case-study
+entrance animations. When editing animation timing or chapter navigation,
+test both themes and the reduced-motion setting. Do not merge media
+conditions with different accessibility semantics merely to reduce file size.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
