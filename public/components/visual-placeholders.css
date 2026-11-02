@@ -15,7 +15,6 @@
  letter-spacing:.14em;
  line-height:1.5;
 }
-@media(max-width:760px){.brief-kicker{letter-spacing:.08em}}
 /* Placeholder briefs are editorial notes, never simulated screenshots.
    Work owns its neutral paper; Playground owns its scoped night contrast. */
 .project-visual:not(:has(img)){
@@ -42,5 +41,5 @@ html[data-theme="dark"] .project-visual{
 /* In dark mode --palette-paper is charcoal, not light text.
    Use theme ink for both the brief and its illustrative disclosure. */
 html[data-theme="dark"] :is(.visual-label,.visual-brief,.brief-kicker){color:var(--ink)}
-@media(max-width:760px){.project-visual .visual-brief{font-size:0.8125rem}}
+@media(max-width:760px){.brief-kicker{letter-spacing:.08em}.project-visual .visual-brief{font-size:0.8125rem}}
 @media(prefers-contrast:more){.project-visual:not(:has(img)){border-style:solid}}
