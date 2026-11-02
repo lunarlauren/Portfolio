@@ -25,10 +25,7 @@ html:not([data-theme="dark"]) .hero-description{background:transparent;box-decor
 .notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(1.0625rem,2vw,1.4375rem);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;margin:6px 0 14px}
 .notebook-hero-note span{font-size:1.5625rem;font-style:normal}
 html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
-@media(max-width:760px){
- .hero .notebook-hero-note{font-size:1rem;max-width:100%}
- .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
-}
+
 
 /* Optical alignment: the hero note uses the shared no-rotation baseline.
    Preserve its intentional border, padding, and margin adjustments. */
@@ -41,18 +38,22 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 .hero .notebook-hero-note::after{transform:none}
 
 /* RESPONSIVE HERO OWNERSHIP
-   The 950px/760px transitions belong with the final hero layout, not in
-   styles.css. Keep these before the more specific phone and desktop rules. */
+   One 760px breakpoint owns tablet typography and layout. Its rules precede
+   the narrower 650px and 600px layouts so phone spacing still wins. */
 @media(max-width:950px){
  .hero{grid-template-columns:1fr;min-height:0}
  .hero-feature{min-height:420px}
  .hero-foot{padding-top:48px}
  .hero h1{font-size:clamp(3.625rem,10vw,5.9375rem)}
 }
+.hero .hero-copy h1 em{display:inline-block;max-width:100%}
 @media(max-width:760px){
+.hero .notebook-hero-note{font-size:1rem;max-width:100%}
+ .hero .hero-copy h1{overflow-wrap:normal;hyphens:none}
  .hero-feature{min-height:430px;min-width:0}
  .hero{padding-block:55px 80px;min-width:0}
  .hero-actions{gap:18px}
+ .hero .hero-copy h1 em{display:inline;overflow-wrap:normal}
 }
 /* Mobile first impression: show a slice of the illustrated featured-work card
    above the fold rather than making visitors scroll past a full text introduction. */
@@ -69,26 +70,20 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 }
 
 
-/* Keep the portrait fill on large screens: the later desktop inset alone
-   does not set an explicit height for this absolutely positioned element. */
-@media(min-width:1024px){.hero .feature-art{height:100%;min-height:0}}
 
 /* Reduced-motion hover is also relevant at tablet widths without desktop art rules. */
 @media(prefers-reduced-motion:reduce){.hero-feature:hover .feature-art{transform:none}}
 
 /* Shared headline rhythm and illustration treatment in both themes. */
 .hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
-.hero .hero-copy h1 em{display:inline-block;max-width:100%}
-.hero .hero-description{max-width:54ch;text-wrap:pretty;line-height:1.6}
+ .hero .hero-description{max-width:54ch;text-wrap:pretty;line-height:1.6}
 .hero .feature-art .hero-portrait-art{
  position:relative;z-index:2;display:block;
  height:100%;max-height:100%;object-fit:contain
 }
 
 /* Allow the second headline line to wrap normally on smaller viewports. */
-@media(max-width:760px){
- .hero .hero-copy h1 em{display:inline;overflow-wrap:normal}
-}
+
 
 /* Tablet retains the desktop composition, with a smaller editorial scale. */
 @media(min-width:601px) and (max-width:760px){
@@ -97,14 +92,25 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
  .hero .hero-description{font-size:clamp(1rem,3.8vw,1.125rem);line-height:1.6;max-width:43ch}
 }
 
-/* Desktop fold: preserve the side-by-side introduction and featured art. */
+/* One desktop breakpoint owns art fill, hero rhythm and visual alignment. */
 @media(min-width:1024px){
+ .hero .feature-art{height:100%;min-height:0}
  .hero.wrap{gap:clamp(28px,3vw,52px)}
  .hero .hero-copy h1{font-size:clamp(3.25rem,4.45vw,4.75rem);line-height:1.01;margin-block:14px 12px}
  .hero .notebook-hero-note{margin-block:4px 10px}
  .hero .hero-description{font-size:clamp(1rem,1.05vw,1.125rem);line-height:1.5}
  .hero .hero-actions{margin-top:16px}
  .hero .hero-feature{height:clamp(370px,49vh,510px)}
+ .hero.wrap {
+    min-height: 0;
+    align-items: center;
+    padding-top: clamp(32px, 5vh, 64px);
+    padding-bottom: clamp(42px, 6vh, 76px);
+  }
+  .hero .hero-copy { justify-content: center; }
+  .hero .hero-feature { min-height: 0; align-self: center; }
+  .hero .hero-foot { margin-top: 0; padding-top: clamp(28px, 4vh, 52px); }
+  .hero .hero-copy h1 { max-width: 16ch; }
 }
 
 /* Phone editorial layout: existing 3D portrait → headline → one concise
@@ -157,18 +163,7 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 
 /* Desktop composition: anchor the copy and artwork on the same visual axis.
    Do not change portrait-first ordering or sizing on phones. */
-@media (min-width: 1024px) {
-  .hero.wrap {
-    min-height: 0;
-    align-items: center;
-    padding-top: clamp(32px, 5vh, 64px);
-    padding-bottom: clamp(42px, 6vh, 76px);
-  }
-  .hero .hero-copy { justify-content: center; }
-  .hero .hero-feature { min-height: 0; align-self: center; }
-  .hero .hero-foot { margin-top: 0; padding-top: clamp(28px, 4vh, 52px); }
-  .hero .hero-copy h1 { max-width: 16ch; }
-}
+
 
 /* Desktop art uses the same clean, unframed presentation as the phone.
    Preserve the illustration itself; hide only its decorative container. */
