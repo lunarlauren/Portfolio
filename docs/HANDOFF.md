@@ -1,5 +1,12 @@
 # Portfolio developer handoff
 
+## Shared action shape and dark toggle contrast — Pass 33
+
+The About contact action now uses the same `--editorial-action-radius` token as
+the header and hero actions at desktop widths. The dark theme switch now uses
+the dark paper surface with theme-aware ink for its idle state; its hover state
+stays visible without turning into a pale control with a white icon.
+
 ## Interaction-script readability — Pass 32
 
 `public/script.js` now uses consistent formatting and short section markers for

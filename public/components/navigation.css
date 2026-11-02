@@ -56,10 +56,14 @@ html[data-theme="dark"] .header-contact:focus-visible{
  padding:0;border-radius:50%;border:1px solid var(--line);
 }
 html[data-theme="dark"] .theme-toggle{
- border-color:#9bb5c8;color:#fff;
- background:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));
+ border-color:var(--line);color:var(--ink);
+ /* --palette-navy flips to light ink in dark mode. Build this control from
+    the dark paper surface so its foreground stays readable at rest. */
+ background:color-mix(in srgb,var(--paper) 82%,var(--palette-blue) 18%);
 }
-html[data-theme="dark"] .theme-toggle:hover{background:#3c5c73}
+html[data-theme="dark"] .theme-toggle:hover{
+ background:color-mix(in srgb,var(--paper) 68%,var(--palette-blue) 32%);
+}
 @media(prefers-contrast:more){
  html[data-theme="dark"] .theme-toggle{border-width:2px}
 }

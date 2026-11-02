@@ -156,7 +156,8 @@
     max-width: min(100%, 460px);
     gap: 12px;
     padding: 13px 18px;
-    border-radius: 9px;
+    /* Keep the desktop CTA on the shared shape used by header and hero actions. */
+    border-radius: var(--editorial-action-radius);
     font-size: .9375rem;
     line-height: 1.35;
     text-wrap: balance;
