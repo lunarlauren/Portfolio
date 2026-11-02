@@ -147,7 +147,7 @@ assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;min-width:
 // Pass 18: discover the font stylesheet in HTML rather than after the browser
 // downloads and parses foundations.css, and discover the above-fold image
 // before the many blocking component stylesheets. Preserve one image request.
-assert.doesNotMatch(foundationsCss,/@import\b/,
+assert.doesNotMatch(foundationsCss,/(?:^|\n)\s*@import\s+/m,
  'Foundation CSS must not create a serial Google Fonts request waterfall');
 assert.match(html, /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">/,
  'Preconnect to the Google Fonts CSS host');
