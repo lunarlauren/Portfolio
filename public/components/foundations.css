@@ -15,18 +15,10 @@
   --ink: var(--brand-ink);
   --muted: color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper));
   --line:#c8c5c0;
-  --teal: color-mix(in srgb,var(--palette-navy) 55%,var(--palette-blue));
-  --clay: var(--brand-pink);
-  --lilac: color-mix(in srgb,var(--palette-paper) 80%,var(--palette-pink));
   --focus:#235f88;
   --brand-pink:#555;
-  --brand-pink-text: var(--palette-pink);
   --brand-ink:#171717;
-  --brand-navy: var(--brand-ink);
-  --brand-sky: color-mix(in srgb,var(--palette-paper) 40%,var(--palette-blue));
   --surface-blush:#eeece8;
-  --surface-cream: color-mix(in srgb,var(--palette-pink) 7%,var(--palette-paper));
-  --surface-navy: color-mix(in srgb,var(--palette-blue) 22%,var(--palette-navy));
   --night-bg: color-mix(in srgb,var(--palette-navy) 85%,black);
   font-family: var(--font-body);
   color: var(--ink);
@@ -47,14 +39,8 @@ html[data-theme="dark"] {
   --paper:var(--palette-paper);
   --brand-ink:#f1f0ec;
   --ink:var(--brand-ink);
-  --teal:color-mix(in srgb,var(--palette-blue) 72%,var(--palette-paper));
-  --clay:color-mix(in srgb,var(--palette-pink) 65%,var(--palette-paper));
-  --lilac:color-mix(in srgb,var(--palette-pink) 18%,var(--palette-navy));
   --brand-pink:#dedede;
-  --brand-pink-text:color-mix(in srgb,var(--palette-pink) 72%,var(--palette-paper));
   --surface-blush:#242424;
-  --surface-cream:color-mix(in srgb,var(--palette-pink) 9%,var(--palette-navy));
-  --surface-navy:color-mix(in srgb,var(--palette-blue) 14%,var(--palette-navy));
   color-scheme:dark;
   background:var(--paper);
 }
@@ -78,13 +64,10 @@ html[data-theme="dark"] .primary-link:focus-visible {outline-offset:5px}
 /* Reuse these colors for readable dark-theme links across components. */
 html[data-theme="dark"] {
  --night-link-ink:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
- --night-link-hover:#ffc2df;
 }
 .skip-link {padding:12px}
-.skip-link:focus {top:12px}
 .wrap {max-width:1320px;margin:auto;padding-inline:clamp(20px,5vw,72px)}
-.site-header {margin:auto;display:flex;justify-content:space-between;align-items:center}
-.wordmark {text-decoration:none;font-family:var(--font-display);font-size:2rem;font-weight:700;letter-spacing:-.1em}
+.site-header {margin:auto}
 .site-header nav {font-weight:600}
 .site-header nav a {text-decoration:none}
 /* Eyebrows are the small uppercase labels above sections and cards.
@@ -101,12 +84,7 @@ html[data-theme="dark"] {
 /* High-contrast mode keeps secondary labels fully legible. */
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot{opacity:1;text-shadow:none}}
 .status-dot {display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:#377b91}
-.hero h1 {font-family:var(--font-display);font-size:var(--type-h1);font-weight:600;line-height:.99}
-.hero h1 em,.about h2 em {font-style:normal;color:var(--teal)}
-.hero-bottom {display:flex;justify-content:space-between;align-items:end;gap:30px}
-.hero-bottom p {font-size:clamp(1.0625rem,2vw,1.375rem);line-height:1.5;max-width:590px}
-.round-link {display:grid;place-items:center;border:1px solid var(--ink);border-radius:50%;width:64px;height:64px;flex-shrink:0;text-decoration:none;font-size:1.75rem;transition:transform .25s,background .25s}
-.round-link:hover {transform:translateY(5px)}
+.hero h1 {font-family:var(--font-display);font-weight:600}
 section.work,section.playground,section.about {padding-block:85px}
 .section-head {display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:36px}
 /* Shared section headings: change their base rhythm here, not in styles.css.
@@ -124,7 +102,6 @@ section.work,section.playground,section.about {padding-block:85px}
  --type-xs:0.75rem;
  --type-sm:0.875rem;
  --type-body:1rem;
- --type-lead:1.125rem;
  --type-eyebrow:0.6875rem;
  --type-h1:clamp(3.375rem,9.2vw,8.25rem);
  --type-h2:clamp(2.1875rem,5vw,4.125rem);
@@ -138,8 +115,6 @@ section.work,section.playground,section.about {padding-block:85px}
  --space-2:0.75rem;
  --space-3:1rem;
  --space-4:1.5rem;
- --space-5:2rem;
- --space-6:3rem;
 }
 :where(body,button,input,textarea,select){font-family:var(--font-body)}
 :where(p){font-size:var(--type-paragraph);line-height:var(--leading-body)}
@@ -214,10 +189,10 @@ body {
 /* On touchscreens, a brief pressed state confirms a tap.
    Links and buttons already have touch-action:manipulation above. */
 @media (pointer:coarse) {
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button) {
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.theme-toggle,.case-section-links button) {
   -webkit-tap-highlight-color:transparent;
  }
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active {
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.theme-toggle,.case-section-links button):active {
   filter:brightness(.96);
  }
 }
@@ -235,7 +210,7 @@ body {
   animation-iteration-count:1!important;
   transition-duration:.01ms!important;
  }
- :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.feature-project-link,.portrait-mobile-link,.theme-toggle,.case-section-links button):active {
+ :where(.primary-link,.quiet-link,.project-card-link,.case-back,.case-next,.theme-toggle,.case-section-links button):active {
   filter:none;
  }
 }
@@ -251,7 +226,6 @@ body {
 .hero h1,
 .section-head h2,
 .about h2,
-.collection-head h3,
 .project-card h3,
 .case-head h1,
 .case-prose h2 {
@@ -262,7 +236,6 @@ body {
   .hero h1:hover,
   .section-head h2:hover,
   .about h2:hover,
-  .collection-head h3:hover,
   .case-head h1:hover,
   .case-prose h2:hover {
     font-variation-settings: "SOFT" 75, "WONK" 1;
@@ -279,7 +252,6 @@ body {
   .hero h1,
   .section-head h2,
   .about h2,
-  .collection-head h3,
   .project-card h3,
   .case-head h1,
   .case-prose h2 {
