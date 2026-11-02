@@ -99,7 +99,7 @@ try{
    assert.equal(tokens.notebook,tokens.paper,width+"px "+theme+": notebook paper follows the active paper token");
    assert.equal(tokens.edge,tokens.line,width+"px "+theme+": chrome edge follows the active separator");
    assert.equal(tokens.headerEdge,tokens.line,width+"px "+theme+": header inherits the same separator");
-   assert.equal(tokens.dots.replace(/\\s/g,""),theme==="dark"?"rgba(245,245,245,.14)":"rgba(40,40,40,.14)",
+   assert.equal(tokens.dots.replace(/\s/g,""),theme==="dark"?"rgba(245,245,245,.14)":"rgba(40,40,40,.14)",
     width+"px "+theme+": notebook dots retain contrast");
    assert.match(tokens.texture,/radial-gradient/,width+"px "+theme+": notebook texture remains visible");
   }
