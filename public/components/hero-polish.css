@@ -138,23 +138,23 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
   line-height:1.12;letter-spacing:-.035em
  }
  .hero .hero-feature{
-  order:2;width:100%;min-height:0!important;height:clamp(225px,61vw,300px)!important;
-  margin:0 0 18px;padding:0!important;overflow:hidden;
-  background:transparent!important;border:0!important;box-shadow:none!important
+  order:2;width:100%;min-height:0;height:clamp(225px,61vw,300px);
+  margin:0 0 18px;padding:0;overflow:hidden;
+  background:transparent;border:0;box-shadow:none
  }
- .hero .hero-feature::before,.hero .hero-feature::after{display:none!important}
+ .hero .hero-feature::before,.hero .hero-feature::after{display:none}
  .hero .feature-top,.hero .feature-bottom,
- .hero .art-orbit,.hero .art-tile{display:none!important}
+ .hero .art-orbit,.hero .art-tile{display:none}
  .hero .feature-art{
-  inset:0!important;height:auto;min-height:0;display:grid;place-items:center;
-  transform:none!important;filter:none!important
+  inset:0;height:auto;min-height:0;display:grid;place-items:center;
+  transform:none;filter:none
  }
  .hero .feature-art .hero-portrait-art{
   width:min(89%,305px);height:100%;transform:none;
   filter:drop-shadow(0 12px 16px rgba(25,45,65,.12))
  }
  /* The note repeats the introduction on phones; retain it on larger screens. */
- .hero .notebook-hero-note{display:none!important}
+ .hero .notebook-hero-note{display:none}
  .hero .hero-description{
   order:5;margin:0;max-width:38ch;font-size:1rem;text-align:center;
   line-height:1.62;text-wrap:pretty
@@ -165,7 +165,7 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
   width:auto;min-width:min(100%,238px);min-height:48px;
   justify-content:space-between;gap:24px;box-sizing:border-box
  }
- .hero .hero-actions .quiet-link,.hero .hero-foot{display:none!important}
+ .hero .hero-actions .quiet-link,.hero .hero-foot{display:none}
 }
 
 /* Desktop composition: anchor the copy and artwork on the same visual axis.

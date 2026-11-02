@@ -692,6 +692,50 @@ try{
   }
  }
 
+ // Pass 5: phone hero layout must not depend on !important to win the
+ // cascade. Test computed geometry/visibility in both themes, including
+ // the 600px boundary where the phone composition still applies.
+ for(const width of [320,390,600]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const phone=await page.evaluate(selected=>{
+    document.documentElement.dataset.theme=selected;
+    const feature=document.querySelector(".hero .hero-feature");
+    const art=document.querySelector(".hero .feature-art");
+    const featureStyle=getComputedStyle(feature),artStyle=getComputedStyle(art);
+    const visible=selector=>getComputedStyle(document.querySelector(selector)).display;
+    return {
+     featureMinHeight:featureStyle.minHeight,
+     featureHeight:feature.getBoundingClientRect().height,
+     featurePadding:featureStyle.padding,
+     featureBorder:featureStyle.borderTopWidth,
+     featureShadow:featureStyle.boxShadow,
+     featureBackground:featureStyle.backgroundColor,
+     artInset:[artStyle.top,artStyle.right,artStyle.bottom,artStyle.left],
+     artTransform:artStyle.transform,artFilter:artStyle.filter,
+     featureTop:visible(".hero .feature-top"),
+     artOrbit:visible(".hero .art-orbit"),
+     note:visible(".hero .notebook-hero-note"),
+     foot:visible(".hero .hero-foot"),
+     quietLink:visible(".hero .hero-actions .quiet-link")
+    };
+   },theme);
+   assert.equal(phone.featureMinHeight,"0px",width+"px "+theme+": hero panel must not impose old minimum height");
+   assert.ok(Math.abs(phone.featureHeight-Math.min(300,Math.max(225,width*.61)))<2,
+    width+"px "+theme+": portrait panel must use the authored responsive height");
+   assert.equal(phone.featurePadding,"0px",width+"px "+theme+": phone portrait panel has no card padding");
+   assert.equal(phone.featureBorder,"0px",width+"px "+theme+": phone portrait panel has no frame");
+   assert.equal(phone.featureShadow,"none",width+"px "+theme+": phone portrait panel has no shadow");
+   assert.equal(phone.featureBackground,"rgba(0, 0, 0, 0)",width+"px "+theme+": portrait background remains transparent");
+   assert.deepEqual(phone.artInset,["0px","0px","0px","0px"],width+"px "+theme+": art fills portrait panel");
+   assert.equal(phone.artTransform,"none",width+"px "+theme+": art wrapper has no rotation");
+   assert.equal(phone.artFilter,"none",width+"px "+theme+": art wrapper has no filter");
+   for(const key of ["featureTop","artOrbit","note","foot","quietLink"]){
+    assert.equal(phone[key],"none",width+"px "+theme+": decorative or secondary element "+key+" must stay hidden");
+   }
+  }
+ }
+
  // Phone header: DOM and visual order must agree, without crowded controls.
  for(const width of [320,390,650]){
   await page.setViewportSize({width,height:844});
