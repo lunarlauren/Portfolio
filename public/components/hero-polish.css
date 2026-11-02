@@ -24,7 +24,10 @@ html:not([data-theme="dark"]) .hero-description{background:transparent;box-decor
    Keep the existing portrait asset; owner-supplied doodles can replace accents. */
 .notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(1.0625rem,2vw,1.4375rem);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;margin:6px 0 14px}
 .notebook-hero-note span{font-size:1.5625rem;font-style:normal}
-html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
+/* Keep this editorial note transparent in both themes. --night-bg is derived
+   from a token that inverts in dark mode, which made this fill light gray
+   behind light text and failed contrast. */
+html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:var(--line);color:var(--brand-ink)}
 
 /* Optical alignment: the hero note uses the shared no-rotation baseline.
    Preserve its intentional border, padding, and margin adjustments. */
@@ -67,9 +70,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
  .hero-foot{display:none}
  .hero-feature{min-height:320px}
 }
-
-/* Reduced-motion hover is also relevant at tablet widths without desktop art rules. */
-@media(prefers-reduced-motion:reduce){.hero-feature:hover .feature-art{transform:none}}
 
 /* Shared headline rhythm and illustration treatment in both themes. */
 .hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
@@ -136,10 +136,9 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
  .hero .feature-top,.hero .feature-bottom,
  .hero .art-orbit,.hero .art-tile{display:none}
  .hero .feature-art{
-  inset:0;height:auto;min-height:0;display:grid;place-items:center;
-  transform:none;filter:none
+  height:auto;min-height:0;display:grid;place-items:center;
  }
- .hero .feature-art .hero-portrait-art{width:min(89%,305px);height:100%;transform:none}
+ .hero .feature-art .hero-portrait-art{width:min(89%,305px);height:100%}
  /* The note repeats the introduction on phones; retain it on larger screens. */
  .hero .notebook-hero-note{display:none}
  .hero .hero-description{
@@ -171,15 +170,8 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
   .hero .feature-bottom,
   .hero .art-orbit,
   .hero .art-tile { display: none; }
-  .hero .feature-art {
-    inset: 0;
-    transform: none;
-    filter: none;
-  }
-  .hero .hero-feature:hover .feature-art { transform: none; }
   .hero .feature-art .hero-portrait-art {
     width: min(100%, 460px);
-    transform: none;
   }
 }
 
