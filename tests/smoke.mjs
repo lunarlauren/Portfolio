@@ -673,6 +673,31 @@ try{
  const caseAnimation=await reducedMotionPage.locator(".case-view .case-head")
   .evaluate(node=>getComputedStyle(node).animationName);
  assert.equal(caseAnimation,"none","Case-study entrance must not animate under reduced motion");
+ // Pass 9: the consolidated case-study reduced-motion block must also
+ // disable chapter strip scrolling and tab transitions in both themes.
+ for(const theme of ["light","dark"]){
+  await reducedMotionPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+  const navMotion=await reducedMotionPage.evaluate(()=>{
+   const strip=document.querySelector(".case-view .case-section-links");
+   const button=strip.querySelector("button");
+   const cover=document.querySelector(".case-view .case-hero-visual");
+   const body=document.querySelector(".case-view .case-body");
+   const gallery=document.querySelector(".case-view .case-gallery");
+   return {
+    scroll:getComputedStyle(strip).scrollBehavior,
+    buttonTransition:getComputedStyle(button).transitionProperty,
+    coverAnimation:getComputedStyle(cover).animationName,
+    bodyAnimation:getComputedStyle(body).animationName,
+    galleryAnimation:getComputedStyle(gallery).animationName
+   };
+  });
+  assert.equal(navMotion.scroll,"auto",theme+": reduced-motion chapter strip must not smooth-scroll");
+  assert.equal(navMotion.buttonTransition,"none",theme+": reduced-motion chapter buttons have no transition");
+  for(const key of ["coverAnimation","bodyAnimation","galleryAnimation"]){
+   assert.equal(navMotion[key],"none",theme+": routed case "+key+" must remain stationary");
+  }
+ }
+
  await reducedMotionPage.close();
 
  // Accessible link navigation should expose challenge, reviewed contribution,
