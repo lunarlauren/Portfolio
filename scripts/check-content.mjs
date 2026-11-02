@@ -1011,7 +1011,7 @@ assert.equal(secondChapterButton.getAttribute('aria-current'), null, 'Only one c
  assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/,'Evidence grid retains three desktop columns in its component owner');
 assert.match(caseBreakpoint(760), /\.case-view \.case-evidence\{grid-template-columns:1fr\}/, 'Evidence grid must stack on phones');
  assert.doesNotMatch(caseBaseCss,/\.case-intro\s*\{/,'Case intro belongs to scoped cover');
- assert.doesNotMatch(caseBaseCss,/\.case-gallery\s*\{[^}]*\bgap\s*:/,'Gallery gap belongs to scoped component');
+ assert.doesNotMatch(caseBaseCss,/\.case-gallery\s*\{/,'Gallery layout belongs entirely to scoped case-study component');
  assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*gap:var\(--space-3,1rem\)/,'Evidence gap retains token');
  assert.match(caseCss,/\.case-view \.case-gallery\{[^}]*gap:var\(--space-4,1\.5rem\)/,'Gallery gap retains token');
 assert.doesNotMatch(caseCss, /html\[data-theme="dark"\] \.case-evidence-item\{/, 'Evidence theme colors should use shared tokens, not duplicate dark rules');
