@@ -2,7 +2,8 @@
 
 A lightweight portfolio of product UX, visual design, and illustration. The production-facing static site is in **`public/`** and is configured as a Cloudflare Worker with static assets. The obsolete root-level prototype files were removed on October 27, 2026 to prevent accidental edits to a non-deployed version. **All website changes belong in `public/`**.
 
-> **Developer handoff:** See [docs/HANDOFF.md](docs/HANDOFF.md) for the current file map, UX evidence boundaries, and validation checklist.
+> **Designer quick guide:** See [docs/DESIGNER_GUIDE.md](docs/DESIGNER_GUIDE.md) for a short edit map, theme guidance, and accessibility checks.
+> **Developer handoff:** See [docs/HANDOFF.md](docs/HANDOFF.md) for detailed file ownership, UX evidence boundaries, and validation notes.
 
 ## CSS typography ownership
 
