@@ -177,6 +177,7 @@ html[data-theme="dark"] .case-view{
 .case-view .case-head h1{
  font-size:var(--case-type-title);line-height:1.08;letter-spacing:-.04em;
  max-width:18ch;margin-block:18px 20px;text-wrap:balance;color:var(--case-cover-title);
+ overflow-wrap:anywhere;
 }
 /* Delivery stamp: a factual, immediately visible distinction between
    shipped product contributions and prototypes/concept explorations.
@@ -222,7 +223,8 @@ html[data-theme="dark"] .case-view{
    Reuse cover tokens in both themes; the label stacks above text on phones. */
 .case-view .case-approach{
  display:grid;
- grid-template-columns:max-content minmax(0,1fr);
+ grid-template-columns:fit-content(18ch) minmax(0,1fr);
+ min-width:0;
  gap:clamp(12px,2vw,22px);
  max-width:70ch;
  margin:clamp(18px,2.4vw,28px) 0 0;
@@ -238,7 +240,9 @@ html[data-theme="dark"] .case-view{
  font-weight:700;
  letter-spacing:.08em;
  text-transform:uppercase;
- white-space:nowrap;
+ min-width:0;
+ white-space:normal;
+ overflow-wrap:anywhere;
 }
 .case-view .case-approach-text{min-width:0;overflow-wrap:break-word}
 
@@ -379,7 +383,7 @@ html[data-theme="dark"] .case-view{
 
 /* Case-study typography and keyboard states belong here, not in styles.css.
    Keep dark-mode colors explicit for readable evidence and return links. */
-.case-next-nav a,.case-back{min-height:44px;display:inline-flex;align-items:center}
+.case-next-nav a,.case-back{min-height:44px;min-width:0;max-width:100%;display:inline-flex;align-items:center;overflow-wrap:anywhere}
 .case-next-nav a:focus-visible,.case-back:focus-visible{
  outline:3px solid var(--notebook-pink);outline-offset:4px;
 }

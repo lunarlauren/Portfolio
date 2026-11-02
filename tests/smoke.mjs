@@ -773,6 +773,82 @@ try{
  }
  await forcedPage.close();
 
+ // Pass 14: stress real components with long, unbroken editor-supplied
+ // labels and 200% root text size. A clipped page can conceal the problem,
+ // so inspect each element's scroll box and actual rendered bounds.
+ const reflowPage=await browser.newPage();
+ reflowPage.on("pageerror",error=>errors.push(error.message));
+ await reflowPage.goto(origin+"/");
+ const longToken="ProductStrategyAndEnterpriseWorkflowArchitecture".repeat(5);
+ await reflowPage.evaluate(token=>{
+  document.querySelector(".work .client-file .archive-project-title").textContent=token;
+ },longToken);
+ const measureNode=selector=>reflowPage.locator(selector).first().evaluate(node=>{
+  const box=node.getBoundingClientRect();
+  return {client:node.clientWidth,scroll:node.scrollWidth,
+   left:box.left,right:box.right,height:box.height,viewport:innerWidth};
+ });
+ const checkBox=(data,label)=>{
+  assert.ok(data.client>0,label+": element has a usable reading width");
+  assert.ok(data.scroll<=data.client+2,
+   label+": no text should overflow its own scroll box ("+data.scroll+"/"+data.client+")");
+  assert.ok(data.left>=-2&&data.right<=data.viewport+2,
+   label+": element must remain within the viewport");
+  assert.ok(data.height>0,label+": text remains rendered");
+ };
+ for(const width of [320,390,760,1280]){
+  await reflowPage.setViewportSize({width,height:844});
+  for(const scale of [100,200]){
+   for(const theme of ["light","dark"]){
+    await reflowPage.evaluate(({scale,theme})=>{
+     document.documentElement.dataset.theme=theme;
+     document.documentElement.style.fontSize=scale+"%";
+    },{scale,theme});
+    checkBox(await measureNode(".work .client-file .archive-project-title"),
+     width+"px "+scale+"% text "+theme+" Work title");
+   }
+  }
+ }
+ await reflowPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await reflowPage.locator(".case-view .case-approach").waitFor();
+ await reflowPage.evaluate(token=>{
+  document.querySelector(".case-head h1").textContent=token;
+  document.querySelector(".case-approach-label").textContent=token;
+  document.querySelector(".case-approach-text").textContent=token;
+  document.querySelector(".case-next-nav .case-next:last-child").textContent="Next: "+token;
+ },longToken);
+ for(const width of [320,390,760,1280]){
+  await reflowPage.setViewportSize({width,height:844});
+  for(const scale of [100,200]){
+   for(const theme of ["light","dark"]){
+    await reflowPage.evaluate(({scale,theme})=>{
+     document.documentElement.dataset.theme=theme;
+     document.documentElement.style.fontSize=scale+"%";
+    },{scale,theme});
+    for(const [selector,name] of [
+     [".case-head h1","case-study heading"],
+     [".case-approach-label","approach kicker"],
+     [".case-approach-text","approach reasoning"],
+     [".case-next-nav .case-next:last-child","next case-study link"]]){
+     checkBox(await measureNode(selector),width+"px "+scale+"% text "+theme+" "+name);
+    }
+    const cols=await reflowPage.evaluate(()=>{
+     const label=document.querySelector(".case-approach-label");
+     const copy=document.querySelector(".case-approach-text");
+     const section=document.querySelector(".case-approach");
+     const a=label.getBoundingClientRect(),b=copy.getBoundingClientRect(),c=section.getBoundingClientRect();
+     return {labelRight:a.right,textLeft:b.left,sectionRight:c.right,textWidth:b.width};
+    });
+    assert.ok(cols.textWidth>40,width+"px "+scale+"% "+theme+": explanation keeps a reading column");
+    if(width>600)assert.ok(cols.textLeft>=cols.labelRight-2,
+     width+"px "+scale+"% "+theme+": long kicker cannot collide with explanation");
+    assert.ok(cols.sectionRight<=width+2,
+     width+"px "+scale+"% "+theme+": approach panel does not escape the viewport");
+   }
+  }
+ }
+ await reflowPage.close();
+
  // Reduced-motion visitors must not receive Playground preview or case entrance motion.
  const reducedMotionPage=await browser.newPage({reducedMotion:"reduce"});
  reducedMotionPage.on("pageerror",error=>errors.push(error.message));

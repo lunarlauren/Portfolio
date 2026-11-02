@@ -82,6 +82,31 @@ These system settings are independent of `prefers-contrast:more`. Do not
 add `forced-color-adjust:none` to preserve decorative accents; it would
 bypass the user's chosen color palette.
 
+## Text reflow and long-content resilience — Pass 14
+
+`case-study.css` caps the *Design approach* kicker track with
+`fit-content(18ch)` rather than an unconstrained `max-content` track.
+Normal short labels preserve their natural width, while unexpectedly long
+copy can wrap without pushing the adjacent UX rationale outside the cover.
+The kicker allows `overflow-wrap:anywhere` and the explanation column
+retains `minmax(0,1fr)`. At widths up to 600px, the existing single-column
+layout still takes precedence.
+
+Case-study cover headings also allow emergency word wrapping at desktop
+widths, not only under the 760px mobile breakpoint.
+
+Next-case and Back anchors use `min-width:0`, `max-width:100%`, and
+`overflow-wrap:anywhere` so project-title links can reflow rather than be
+clipped. The Work archive title also allows emergency wrapping for long
+unbroken names; regular natural-language titles retain editorial balancing.
+
+Chromium reflow smoke tests inject temporary long content into the rendered
+Work and case-study components and verify *element* scroll bounds at 320px,
+390px, 760px, and 1280px, including 200% root-font resizing and both themes.
+The temporary test mutations never alter authored project content. These
+tests supplement, but do not replace, manual full-page browser zoom and
+screen-reader review.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 

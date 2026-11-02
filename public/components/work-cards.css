@@ -173,6 +173,7 @@ html[data-theme="dark"] .client-file{
  line-height:1.1;
  letter-spacing:-.035em;
  text-wrap:balance;
+ overflow-wrap:anywhere;
 }
 .work .client-file .project-meta{
  margin-top:var(--space-2);

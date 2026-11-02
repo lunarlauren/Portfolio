@@ -74,7 +74,17 @@ assert.match(caseStudy, /<nav class="case-next-nav"[^>]*><a class="case-next"/,
  'Routed case next links stay inside the accessible next navigation');
 assert.doesNotMatch(caseCss, /\.case-next\{min-height:44px;display:inline-flex/,
  'Duplicate case next touch-target rule must stay retired');
-assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;display:inline-flex;align-items:center\}/, 'Routed case navigation and Back links retain 44px targets');
+// Pass 14: reflow at narrow viewport, 200% text size and unexpectedly long
+// project metadata must not rely on overflow-x clipping to hide content.
+assert.match(caseCss, /\.case-view \.case-approach\{[^}]*grid-template-columns:fit-content\(18ch\) minmax\(0,1fr\)/,
+ 'Cover label column must be capped so long labels cannot starve the reasoning');
+assert.match(caseCss, /\.case-view \.case-approach-label\{[^}]*white-space:normal;[^}]*overflow-wrap:anywhere/,
+ 'Cover label must be allowed to wrap on a narrow screen or with long text');
+assert.match(workCss, /\.work \.client-file \.archive-project-title\{[^}]*overflow-wrap:anywhere/,
+ 'Unbroken archive project titles must wrap inside their cards');
+assert.match(caseCss, /\.case-view \.case-head h1\{[^}]*overflow-wrap:anywhere/,
+ 'Unbroken case-study titles must wrap at desktop and not just phone widths');
+assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;min-width:0;max-width:100%;display:inline-flex;align-items:center;overflow-wrap:anywhere\}/, 'Routed case navigation and Back links retain 44px targets');
  assert.match(caseCss, /\.case-view\[tabindex="-1"\]:focus\{outline:none;box-shadow:none\}/,
   'Only the programmatically focused case wrapper suppresses its decorative ring');
  assert.match(aboutCss, /min-width:601px\) and \(max-width:760px/, 'Tablet About spacing stays scoped');
