@@ -365,11 +365,16 @@ try{
     const hero=document.createElement("div");
     hero.className="case-hero-visual";
     hero.innerHTML='<div class="hero-image-brief"><span class="brief-kicker">ILLUSTRATIVE</span></div>';
+    const heroImage=document.createElement("section");
+    heroImage.className="case-view";
+    heroImage.innerHTML='<div class="case-hero-visual"><img alt=""><span class="visual-image-status">ILLUSTRATIVE VISUAL</span></div>';
     const unrelated=document.createElement("span");
     unrelated.className="brief-kicker";
     unrelated.textContent="Outside illustration";
-    document.body.append(brief,loading,hero,unrelated);
+    document.body.append(brief,loading,hero,heroImage,unrelated);
     const noImage=getComputedStyle(brief),withImage=getComputedStyle(loading);
+    const heroFrame=heroImage.querySelector(".case-hero-visual");
+    const heroStatus=heroImage.querySelector(".visual-image-status");
     const sample={
      briefSurface:noImage.backgroundColor,
      loadingSurface:withImage.backgroundColor,
@@ -379,10 +384,15 @@ try{
      borderStyle:noImage.borderTopStyle,
      borderColor:noImage.borderTopColor,
      heroKickerInk:getComputedStyle(hero.querySelector(".brief-kicker")).color,
+     heroImageFit:getComputedStyle(heroFrame.querySelector("img")).objectFit,
+     heroImageSurface:getComputedStyle(heroFrame).backgroundColor,
+     heroStatusPosition:getComputedStyle(heroStatus).position,
+     heroStatusBottom:getComputedStyle(heroStatus).bottom,
+     heroStatusPointerEvents:getComputedStyle(heroStatus).pointerEvents,
      unrelatedKickerInk:getComputedStyle(unrelated).color,
      bodyInk:getComputedStyle(document.body).color
     };
-    brief.remove();loading.remove();hero.remove();unrelated.remove();
+    brief.remove();loading.remove();hero.remove();heroImage.remove();unrelated.remove();
     return sample;
    },theme);
    assert.equal(fallback.borderStyle,"dashed",
@@ -390,11 +400,17 @@ try{
    assert.equal(fallback.imageFrameDisplay,"grid",width+"px "+theme+": real-image frame retains grid layout");
    assert.equal(fallback.imageFrameRatio,"4 / 3",width+"px "+theme+": real-image frame retains aspect ratio");
    assert.equal(fallback.imageFit,"cover",width+"px "+theme+": real images retain their cover crop");
+   assert.equal(fallback.heroImageFit,"cover",width+"px "+theme+": case-study images retain their cover crop");
+   assert.equal(fallback.heroStatusPosition,"absolute",width+"px "+theme+": illustrative image status stays anchored");
+   assert.equal(fallback.heroStatusBottom,"12px",width+"px "+theme+": illustrative status keeps its original inset");
+   assert.equal(fallback.heroStatusPointerEvents,"none",width+"px "+theme+": illustrative status cannot block image interactions");
    assert.equal(fallback.unrelatedKickerInk,"rgb(154, 50, 99)",
     width+"px "+theme+": unrelated labels must not inherit dark illustrative ink");
    if(theme==="dark"){
     assert.equal(fallback.heroKickerInk,fallback.bodyInk,
      width+"px dark: case-study hero illustrative disclosure retains readable ink");
+    assert.equal(fallback.heroImageSurface,fallback.loadingSurface,
+     width+"px dark: case-study hero and project frames share the same dark loading paint");
     assert.equal(fallback.briefSurface,fallback.loadingSurface,
      width+"px dark: loading images and illustrative briefs share one fallback surface");
     assert.equal(fallback.borderColor,"rgb(73, 96, 116)",
