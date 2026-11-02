@@ -4,7 +4,8 @@
 
 Illustrative Work frames and case-study covers use a stronger dark-theme edge
 (`#6F8498`, 4.72:1 against `#151515`). The shared frame owner is
-`public/components/visual-placeholders.css`; CI checks the computed edge.
+`public/components/visual-placeholders.css`; CI checks the computed edge. The
+reveal smoke check now respects whether About starts within the test viewport.
 
 ## Portfolio-making case study — Pass 38
 

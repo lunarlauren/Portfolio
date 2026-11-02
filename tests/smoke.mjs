@@ -1028,9 +1028,20 @@ try{
    await homepageMotionPage.goto(origin+"/");
    await homepageMotionPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
    const label=width+"px "+theme;
-   assert.equal(await homepageMotionPage.locator(".about-copy").evaluate(node=>
-    node.matches(".reveal-ready:not(.in-view)")&&getComputedStyle(node).opacity==="0"),true,
-    label+": offscreen biography starts with its normal entrance pending");
+   await homepageMotionPage.waitForFunction(()=>{
+    const bio=document.querySelector(".about-copy");
+    if(!bio)return false;
+    const box=bio.getBoundingClientRect();
+    return bio.classList.contains("in-view")||box.top>innerHeight||box.bottom<0;
+   });
+   const revealStart=await homepageMotionPage.locator(".about-copy").evaluate(node=>{
+    const box=node.getBoundingClientRect();
+    const visible=box.bottom>=0&&box.top<=innerHeight;
+    return {visible,pending:node.matches(".reveal-ready:not(.in-view)")&&getComputedStyle(node).opacity==="0",
+     revealed:node.classList.contains("in-view")&&getComputedStyle(node).opacity!=="0"};
+   });
+   assert.equal(revealStart.visible?revealStart.revealed:revealStart.pending,true,
+    label+": biography should reveal when visible and stay hidden only while below the viewport");
    const action=homepageMotionPage.locator(".hero-actions .primary-link");
    await action.hover();
    await waitForHeroHover();
