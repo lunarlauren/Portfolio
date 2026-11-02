@@ -174,6 +174,39 @@ This verifies retained rendering behavior, **not** a quantified FPS,
 battery-life, or Core Web Vitals improvement. Measure performance on
 representative devices before making a numerical claim.
 
+## Resource discovery and image priority — Pass 18
+
+The original DM Sans (400/500/600/700) and variable Newsreader font
+stylesheet now loads directly from the HTML `<head>` rather than through
+`@import` inside `foundations.css`. Preconnect hints for
+`fonts.googleapis.com` and `fonts.gstatic.com` (with anonymous CORS mode
+for font files) let the browser begin connection setup before parsing CSS.
+`display=swap` and the authored font-family fallbacks remain unchanged.
+Keep a single font stylesheet request rather than restoring a blocking import.
+
+The illustrated hero is above the fold on phones and desktop. A high-priority
+`<link rel="preload" as="image">` in the head references the **exact same
+URL** as the hero image's existing `fetchpriority="high"` and async decode.
+Do not change only one URL or add a cross-origin mode to only one of the
+references; that could produce a duplicate image download. The About photo
+continues to use `loading="lazy" decoding="async"`; it must not be preloaded
+as critical content. The inactive 132-byte `styles.css` compatibility stub
+remains for existing source audits but is **not** linked as a stylesheet, so
+it no longer generates an unnecessary render-blocking network request.
+
+The source headshot PNG is 4,572,180 bytes in Git. This pass deliberately
+does not alter or replace the original photograph. A future measured asset
+pass should produce and visually review a responsibly compressed derivative
+with the same subject and crop, then retain the original as a safe fallback.
+Avoid claiming image transfer or LCP savings until deployment resource
+timings are observed.
+
+Chromium tests verify head link order, preconnects, priority attributes,
+unchanged font stacks, asynchronous About photo loading, absence of the
+compatibility request, and exactly **one** hero image request after preload
+discovery. Google Fonts network performance and Core Web Vitals need
+real-world measurement; offline CI cannot prove those outcomes.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
