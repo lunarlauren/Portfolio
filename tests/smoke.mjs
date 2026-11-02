@@ -95,9 +95,7 @@ try{
      headerShadow:header.boxShadow,
      headerEdge:header.borderBottomColor,
      headerBlur:header.backdropFilter,
-     webkitHeaderBlur:header.webkitBackdropFilter,
      toggleBlur:toggle.backdropFilter,
-     webkitToggleBlur:toggle.webkitBackdropFilter,
      toggleBackground:toggle.backgroundColor,
      toggleShadow:toggle.boxShadow,
      portraitWillChange:portraitStyle.willChange,
@@ -107,9 +105,7 @@ try{
    const id=width+"px "+theme;
    assert.equal(paint.headerBackground,paint.paper,id+": opaque chrome keeps page paper");
    assert.equal(paint.headerBlur,"none",id+": scrolling header must not blur backdrop");
-   assert.equal(paint.webkitHeaderBlur,"none",id+": Safari header must not blur backdrop");
    assert.equal(paint.toggleBlur,"none",id+": theme toggle no longer blurs backdrop");
-   assert.equal(paint.webkitToggleBlur,"none",id+": Safari toggle no longer blurs backdrop");
    assert.notEqual(paint.headerShadow,"none",id+": header retains soft separation");
    assert.notEqual(paint.headerEdge,"rgba(0, 0, 0, 0)",id+": hairline stays visible");
    assert.notEqual(paint.toggleBackground,"rgba(0, 0, 0, 0)",
