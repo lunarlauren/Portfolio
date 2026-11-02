@@ -57,6 +57,22 @@ for (const width of [760, 650, 600, 480, 420]) caseBreakpoint(width);
  }
  assert.match(foundationsCss, /:where\(a,button,\[tabindex="-1"\]\):focus-visible/, 'Shared keyboard focus belongs in foundations.css');
  assert.match(foundationsCss, /html\[data-theme="dark"\] \.primary-link:focus-visible/, 'Dark CTA focus must stay visible');
+
+// Pass 21: one root token source, one normal dark palette and no dead type alias.
+// A single global reduced-motion guard covers heading transitions.
+assert.equal((foundationsCss.match(/^:root\s*\{/gm)||[]).length,1,
+ 'Foundation palette, typography and spacing must share one :root');
+assert.equal((foundationsCss.match(/^html\[data-theme="dark"\]\s*\{/gm)||[]).length,1,
+ 'Normal dark tokens must not be split across late overrides');
+assert.doesNotMatch(foundationsCss,/--type-paragraph\s*:/,
+ 'The paragraph scale must use --type-body directly');
+assert.doesNotMatch(foundationsCss,/\.hero h1\s*\{font-family:|\.section-head h2,\.about h2\s*\{font-family:/,
+ 'Heading family and weight inherit shared semantic typography');
+assert.doesNotMatch(foundationsCss,/\.project-card h3,\s*\.case-head h1,/,
+ 'Archive card title has no heading-axis motion to transition');
+assert.match(foundationsCss,/--night-link-ink:color-mix\(in srgb,var\(--palette-paper\) 85%,var\(--palette-blue\)\)/,
+ 'Dark quiet-link ink must remain part of the normal dark palette');
+
  assert.doesNotMatch(css, /html\[data-theme="dark"\] \.hero-description\s*,/, 'Legacy dark text outline must not return');
 }
 
