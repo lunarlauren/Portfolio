@@ -121,10 +121,10 @@ for (const name of stylesheetOrder) {
 }
 // One shared fallback follows the light illustrative frame; Work owns its
 // neutral preview paint rather than redefining custom properties upstream.
-assert.ok(visualPlaceholderCss.indexOf('html[data-theme="dark"] .project-visual{') >
+assert.ok(visualPlaceholderCss.indexOf('html[data-theme="dark"] .project-visual,') >
  visualPlaceholderCss.indexOf('.project-visual:not(:has(img)){'),
  'Dark shared image fallback must follow the light no-image frame');
-assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] \.project-visual\{[^}]*background:color-mix\([^}]*border-color:#496074;/,
+assert.ok(visualPlaceholderCss.includes('html[data-theme="dark"] .project-visual,\nhtml[data-theme="dark"] .case-view .case-hero-visual{') && visualPlaceholderCss.includes('border-color:#496074;'),
  'Dark image and brief fallback paint must share one rule');
 assert.doesNotMatch(visualPlaceholderCss, /--placeholder-(?:surface|edge|text):|\.work \.featured-project \.project-visual:not/,
  'Retired placeholder tokens and Work overrides must not return to shared CSS');
@@ -703,8 +703,9 @@ assert.doesNotMatch(homepageCss, /\.project-(?:card|visual|meta|card-link)\b/,
  'Shared card primitives must not return to homepage-base.css');
 assert.match(visualPlaceholderCss, /\.project-visual\{display:grid;place-items:center;overflow:hidden;position:relative;/,
  'Shared visual component owns project frame geometry');
-assert.match(visualPlaceholderCss, /\.project-visual img\{width:100%;height:100%;object-fit:cover;/,
- 'Shared visual component must preserve real image cover crop');
+assert.ok(visualPlaceholderCss.includes('.project-visual img,.case-hero-visual img{width:100%;height:100%;object-fit:cover}') && visualPlaceholderCss.includes('.project-visual img{position:relative;z-index:2}'),
+ 'Shared media owner preserves both image crops and the preview stacking layer');
+assert.doesNotMatch(caseBaseCss, /\.case-hero-visual img\s*\{/, 'Case-study base must not duplicate the shared image crop');
 assert.doesNotMatch(workCss, /(?:^|\n)\.project-visual(?:\{| img\{)/,
  'Do not split shared media geometry back into Work CSS');
 assert.doesNotMatch(workCss, /@media\(max-width:420px\)\{\s*\.work \.project-card-facts/,
@@ -1123,9 +1124,11 @@ assert.match(provenanceFor('ILLUSTRATIVE / Proposed flow'), /ILLUSTRATIVE VISUAL
 assert.equal(provenanceFor('APPROVED / Actual shipped screen'), '');
 assert.ok(script.includes('illustrativeImageStatus(p.imageBrief)'), 'Archive/gallery images must retain illustrative status');
 assert.ok(caseStudy.includes('illustrativeImageStatus(p.imageBrief)'), 'Case-study hero images must retain illustrative status');
-assert.match(caseCss, /\.case-hero-visual > \.visual-image-status/, 'Illustrative hero label must have visible styling');
+assert.ok(visualPlaceholderCss.includes(':is(.project-visual,.case-hero-visual) > .visual-image-status{'), 'Shared media owner must style illustrative status on both frames');
+assert.doesNotMatch(caseCss, /\.visual-image-status\{/, 'Case-study CSS must not duplicate shared status styling');
 assert.match(caseCss, /\.case-view \.case-hero-visual:not\(:has\(img\)\)\{[^}]*background:color-mix\([^}]*border:2px dashed color-mix\(/, 'No-image case hero retains its light dashed frame');
-assert.match(caseCss, /html\[data-theme="dark"\] \.case-view \.case-hero-visual\{[^}]*background:color-mix\([^}]*border-color:#496074/, 'Shared dark hero paint must remain visible for no-image briefs');
+assert.ok(visualPlaceholderCss.includes('html[data-theme="dark"] .case-view .case-hero-visual{'), 'Shared dark hero paint must remain visible for no-image briefs');
+assert.doesNotMatch(caseCss, /html\[data-theme="dark"\] \.case-view \.case-hero-visual\{/, 'Case-study CSS must not duplicate shared dark media paint');
 assert.doesNotMatch(caseCss, /--case-hero-placeholder-(?:bg|border):/, 'Unused hero placeholder token overrides must stay retired');
 assert.equal((caseCss.match(/\.case-view \.case-hero-visual:not\(:has\(img\)\) \.hero-image-brief\{/g)||[]).length,1,'Hero brief typography has one authoritative rule');
 assert.doesNotMatch(caseCss,/\.case-gallery \.project-visual\{min-height:220px\}/,'Superseded phone gallery height must stay retired');
