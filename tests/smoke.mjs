@@ -1052,7 +1052,7 @@ try{
       return {
        transforms:[node,arrow,preview,file,label].filter(Boolean)
         .map(el=>getComputedStyle(el).transform),
-       transitions:[arrow,node.closest(".play-grid")?preview:null,label].filter(Boolean)
+       transitions:[node,arrow,node.closest(".play-grid")?preview:null,label].filter(Boolean)
         .map(el=>getComputedStyle(el).transitionProperty)
       };
      });

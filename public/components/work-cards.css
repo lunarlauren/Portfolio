@@ -340,6 +340,7 @@ html[data-theme="dark"] .client-file{
 /* Transforms above are opt-in. Disable transition properties directly so
    the global duration safeguard needs no component !important override. */
 @media(prefers-reduced-motion:reduce){
+ .project-card-link,
  .project-card img,
  .play-grid .project-card-link .project-visual,
  .work .client-file .client-file-label,

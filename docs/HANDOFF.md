@@ -8,9 +8,10 @@
 image, preview and folder-label transforms now default to stationary under
 reduced motion, without an important transform reset.
 
-The reduced-motion rule sets `transition-property:none`. This disables
-transitions without competing with foundations' intentional important
-duration safeguard. Keep the global safeguard and the separate archive
+The reduced-motion rule sets `transition-property:none`, including on the
+project link itself. This also prevents an implicit `all` transition when a
+visitor changes the preference while hovering. It avoids competing with
+foundations' intentional important duration safeguard. Keep the global safeguard and the separate archive
 surface reset, which also handles touch devices. Color, underlines and
 keyboard rings continue to provide feedback when motion is disabled.
 
