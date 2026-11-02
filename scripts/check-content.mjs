@@ -75,7 +75,8 @@ assert.match(caseStudy, /<nav class="case-next-nav"[^>]*><a class="case-next"/,
 assert.doesNotMatch(caseCss, /\.case-next\{min-height:44px;display:inline-flex/,
  'Duplicate case next touch-target rule must stay retired');
 assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;display:inline-flex;align-items:center\}/, 'Routed case navigation and Back links retain 44px targets');
- assert.match(caseCss, /\.case-view:focus\{outline:none!important/, 'Programmatic case wrapper focus stays undecorated');
+ assert.match(caseCss, /\.case-view\[tabindex="-1"\]:focus\{outline:none;box-shadow:none\}/,
+  'Only the programmatically focused case wrapper suppresses its decorative ring');
  assert.match(aboutCss, /min-width:601px\) and \(max-width:760px/, 'Tablet About spacing stays scoped');
 }
 
@@ -758,8 +759,21 @@ assert.match(navigationCss, /\.site-header nav a:is\(:hover,:focus-visible\)/, '
 assert.doesNotMatch(html + script + projectContent + caseStudy,
  /(?:id=["']collection["']|class=["'][^"']*\bcollection(?:-nav|-back|-head)?\b|querySelector\(["']#collection["']\))/, 
  'Retired collection navigation must not return to active markup or routing');
-assert.match(workCss, /#work-title:focus\{outline:none!important;box-shadow:none!important\}/,
- 'Programmatically focused Work heading stays undecorated; links retain visible focus');
+// Pass 11: programmatic focus on static containers should not suppress focus
+// feedback for real links or buttons. No important override is required.
+assert.match(script, /caseView\.tabIndex=-1/, 'Case-view wrapper is programmatically focusable');
+assert.match(script, /heading\.tabIndex=-1;heading\.focus/, 'Work heading focus is only set during route restoration');
+assert.doesNotMatch(workCss, /#work-title[^{]*:focus\{[^}]*!important/,
+ 'Work heading focus suppression must not use important');
+assert.doesNotMatch(caseCss, /\.case-view[^{]*:focus\{[^}]*!important/,
+ 'Case-view wrapper focus suppression must not use important');
+assert.match(workCss, /:is\(\.work,\.playground\) \.project-card-link:focus-visible\{[^}]*outline:3px solid/,
+ 'Real project links must retain a 3px keyboard ring');
+assert.match(caseCss, /\.case-next-nav a:focus-visible,\.case-back:focus-visible\{[^}]*outline:3px solid/,
+ 'Case return and next links must retain a visible keyboard ring');
+
+assert.match(workCss, /#work-title\[tabindex="-1"\]:focus\{outline:none;box-shadow:none\}/,
+ 'Only a programmatically focused Work heading suppresses its decorative ring');
 // Keep the cache-busting contract without pinning an unrelated historical
 // version string. This pass retires chrome already hidden by hero-polish.css.
 assert.match(html, /\/styles\.css\?v=[a-zA-Z0-9-]+/,

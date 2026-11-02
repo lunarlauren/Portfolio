@@ -409,5 +409,5 @@ html[data-theme="dark"] .case-prose p{color:#d7e3ed}
 
 /* Case-study navigation retains touch targets and visible link focus.
    The wrapper itself receives programmatic focus only. */
-.case-view:focus{outline:none!important;box-shadow:none!important}
+.case-view[tabindex="-1"]:focus{outline:none;box-shadow:none}
 
