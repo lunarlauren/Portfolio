@@ -150,6 +150,30 @@ navigation targets, keyboard focus, and real header/anchor/chapter offsets.
 This complements manual testing with actual browser zoom and display-scale
 settings.
 
+## Opaque chrome and compositing efficiency — Pass 17
+
+The sticky header's `--site-chrome-bg` is opaque to keep scrolled content
+from showing through navigation. A `backdrop-filter` cannot visibly affect
+the opaque header and causes unnecessary backdrop rendering work, so
+`navigation.css` no longer applies backdrop blur to the header or its theme
+toggle. The hairline separator, toggle's semi-transparent paper tint, soft
+shadow, and inset gloss are preserved with a feature guard on
+`color-mix()` itself rather than on support for backdrop blur. Windows
+forced-colors still uses system `Canvas`/`CanvasText` and removes shadows.
+
+The homepage portrait still responds to the existing
+`--hero-parallax-y` variable, but it does **not** permanently request
+a compositor layer with `will-change:translate`. A browser can choose its
+own layer strategy when the portrait actually moves. Do not add permanent
+`will-change` to offscreen or long-lived elements unless profiling shows
+a measurable benefit.
+
+The Chromium smoke suite checks computed blur, opacity, shadow, toggle
+surface, and live parallax translation at 390px and 1280px in both themes.
+This verifies retained rendering behavior, **not** a quantified FPS,
+battery-life, or Core Web Vitals improvement. Measure performance on
+representative devices before making a numerical claim.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
