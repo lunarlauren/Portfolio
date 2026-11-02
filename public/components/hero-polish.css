@@ -8,8 +8,9 @@
    were overridden by the existing phone and tablet/desktop rules. */
 .hero-feature{isolation:isolate}
 .hero-feature .feature-art{z-index:0}
-html[data-theme="dark"] .hero h1{color:var(--ink)!important}
-html[data-theme="dark"] .hero h1 em{color:var(--brand-pink)!important}
+/* The base headline already resolves theme ink through --brand-ink.
+   Only the dark emphasis needs a distinct neutral tone; no cascade override. */
+html[data-theme="dark"] .hero h1 em{color:var(--brand-pink);font-style:italic}
 /* Preserve existing dark footer ink, not a new palette approximation. */
 html[data-theme="dark"] .hero-foot{color:#b7c7d7}
 html:not([data-theme="dark"]) .hero{border-radius:22px;position:relative}
@@ -25,7 +26,7 @@ html:not([data-theme="dark"]) .hero-description{background:transparent;box-decor
 /* Notebook hero — expressive typography with legible mobile-first spacing.
    Keep the existing portrait asset; owner-supplied doodles can replace accents. */
 html:not([data-theme="dark"]) .hero h1{color:var(--brand-ink)}
-html:not([data-theme="dark"]) .hero h1 em{color:var(--brand-pink);font-style:normal}
+html:not([data-theme="dark"]) .hero h1 em{color:inherit;font-style:normal}
 .notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(1.0625rem,2vw,1.4375rem);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;border-bottom:2px solid var(--notebook-pink);margin:6px 0 14px}
 .notebook-hero-note span{font-size:1.5625rem;font-style:normal}
 html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}

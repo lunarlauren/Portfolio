@@ -646,6 +646,50 @@ try{
  assert.notEqual(await heroPortrait.getAttribute("src"),await aboutHeadshot.getAttribute("src"),
   "The About photograph must remain distinct from the illustrated hero");
 
+ // Pass 6: the editorial skin must not force heading colors or hero panel
+ // paint with !important. Measure the resulting values at both sides of the
+ // phone/tablet/desktop breakpoints, in each page theme.
+ for(const width of [320,390,600,601,950,1024,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const paint=await page.evaluate(value=>{
+    document.documentElement.dataset.theme=value;
+    const read=selector=>getComputedStyle(document.querySelector(selector));
+    const h1=read(".hero h1"),em=read(".hero h1 em");
+    const workH2=read(".work .section-head h2"),workEm=read(".work .section-head h2 em");
+    const aboutH2=read(".about h2"),aboutEm=read(".about h2 em");
+    const feature=read(".hero .hero-feature"),art=read(".hero .feature-art");
+    return {
+     titleInk:h1.color,emphasisInk:em.color,emphasisStyle:em.fontStyle,
+     workInk:workH2.color,workEmInk:workEm.color,workEmStyle:workEm.fontStyle,
+     aboutInk:aboutH2.color,aboutEmInk:aboutEm.color,aboutEmStyle:aboutEm.fontStyle,
+     featurePaint:feature.backgroundColor,featureShadow:feature.boxShadow,
+     artPaint:art.backgroundColor,artShadow:art.boxShadow
+    };
+   },theme);
+   assert.equal(paint.titleInk,theme==="dark"?"rgb(241, 240, 236)":"rgb(23, 23, 23)",
+    width+"px "+theme+": hero headline follows theme ink");
+   assert.equal(paint.emphasisInk,theme==="dark"?"rgb(222, 222, 222)":paint.titleInk,
+    width+"px "+theme+": hero emphasis keeps its pre-refactor neutral contrast");
+   assert.equal(paint.emphasisStyle,theme==="dark"?"italic":"normal",
+    width+"px "+theme+": hero emphasis preserves editorial type treatment");
+   assert.equal(paint.workEmInk,paint.workInk,
+    width+"px "+theme+": Work section emphasis inherits its parent color");
+   assert.equal(paint.aboutEmInk,paint.aboutInk,
+    width+"px "+theme+": About section emphasis inherits its parent color");
+   assert.equal(paint.workEmStyle,"italic",width+"px "+theme+": Work section emphasis remains italic");
+   assert.equal(paint.aboutEmStyle,"italic",width+"px "+theme+": About section emphasis remains italic");
+   for(const key of ["featurePaint","artPaint"]){
+    assert.equal(paint[key],"rgba(0, 0, 0, 0)",
+     width+"px "+theme+": unframed hero surface "+key+" stays transparent");
+   }
+   for(const key of ["featureShadow","artShadow"]){
+    assert.equal(paint[key],"none",
+     width+"px "+theme+": hero surface "+key+" stays unframed");
+   }
+  }
+ }
+
  // The mobile introduction should give the illustration its own space and
  // keep the action easy to find without turning it into a full-width slab.
  // Measure both themes; the two use the same responsive geometry.
