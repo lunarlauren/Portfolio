@@ -217,7 +217,6 @@ body {
 .hero h1,
 .section-head h2,
 .about h2,
-.project-card h3,
 .case-head h1,
 .case-prose h2 {
   transition: font-variation-settings .38s ease, letter-spacing .38s ease;
