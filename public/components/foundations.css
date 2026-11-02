@@ -21,6 +21,25 @@
   --brand-ink:#171717;
   --surface-blush:#eeece8;
   --night-bg: color-mix(in srgb,var(--palette-navy) 85%,black);
+  /* Shared type scale and spacing tokens: one :root, no late redefinitions. */
+ 
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --font-display:'Newsreader',Georgia,serif;
+  --type-xs:0.75rem;
+  --type-sm:0.875rem;
+  --type-body:1rem;
+  --type-eyebrow:0.6875rem;
+  --type-h1:clamp(3.375rem,9.2vw,8.25rem);
+  --type-h2:clamp(2.1875rem,5vw,4.125rem);
+  --type-h3:clamp(1.5rem,2.5vw,2rem);
+  --leading-body:1.6;
+  --leading-reading:1.65;
+  --motion-ease:cubic-bezier(.22,1,.36,1);
+  /* Shared rhythm: reuse these values rather than inventing one-off gaps. */
+  --space-1:0.5rem;
+  --space-2:0.75rem;
+  --space-3:1rem;
+  --space-4:1.5rem;
   font-family: var(--font-body);
   color: var(--ink);
   background: var(--paper);
@@ -40,6 +59,7 @@ html[data-theme="dark"] {
   --brand-ink:#f1f0ec;
   --brand-pink:#dedede;
   --surface-blush:#242424;
+  --night-link-ink:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
   color-scheme:dark;
   background:var(--paper);
 }
@@ -60,11 +80,6 @@ button {font:inherit}
    The primary CTA intentionally retains its wider ring. */
 html[data-theme="dark"] :where(a,button):focus-visible {outline-offset:4px}
 html[data-theme="dark"] .primary-link:focus-visible {outline-offset:5px}
-/* Reuse these colors for readable dark-theme links across components. */
-html[data-theme="dark"] {
- --night-link-ink:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
-}
-.skip-link {padding:12px}
 .wrap {max-width:1320px;margin:auto;padding-inline:clamp(20px,5vw,72px)}
 .site-header {margin:auto}
 .site-header nav {font-weight:600}
@@ -83,40 +98,16 @@ html[data-theme="dark"] {
 /* High-contrast mode keeps secondary labels fully legible. */
 @media(prefers-contrast:more){.eyebrow,.project-meta,.hero-foot{opacity:1;text-shadow:none}}
 .status-dot {display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:#377b91}
-.hero h1 {font-family:var(--font-display);font-weight:600}
 section.work,section.playground,section.about {padding-block:85px}
 .section-head {display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:36px}
 /* Shared section headings: change their base rhythm here, not in styles.css.
    About and Work components can override these values at specific widths. */
-.section-head h2,.about h2 {font-family:var(--font-display);font-size:var(--type-h2);font-weight:600;line-height:1.1;letter-spacing:-.025em;margin:14px 0 0}
+.section-head h2,.about h2 {font-size:var(--type-h2);line-height:1.1;letter-spacing:-.025em;margin:14px 0 0}
 .section-head>p {max-width:330px;color:var(--muted);line-height:1.6;margin:0}
 
-/* TYPOGRAPHY SYSTEM
-   Shared type tokens. Component headings reference these rather than defining
-   separate pixel-based scales. rem values respect the visitor's font settings.
-   Semantic defaults use :where() so deliberate component variants still win. */
-:root {
- --font-body:'DM Sans',system-ui,sans-serif;
- --font-display:'Newsreader',Georgia,serif;
- --type-xs:0.75rem;
- --type-sm:0.875rem;
- --type-body:1rem;
- --type-eyebrow:0.6875rem;
- --type-h1:clamp(3.375rem,9.2vw,8.25rem);
- --type-h2:clamp(2.1875rem,5vw,4.125rem);
- --type-h3:clamp(1.5rem,2.5vw,2rem);
- --type-paragraph:var(--type-body);
- --leading-body:1.6;
- --leading-reading:1.65;
- --motion-ease:cubic-bezier(.22,1,.36,1);
- /* Shared rhythm: reuse these values rather than inventing one-off gaps. */
- --space-1:0.5rem;
- --space-2:0.75rem;
- --space-3:1rem;
- --space-4:1.5rem;
-}
+/* Semantic type defaults inherit the shared root token system. */
 :where(body,button,input,textarea,select){font-family:var(--font-body)}
-:where(p){font-size:var(--type-paragraph);line-height:var(--leading-body)}
+:where(p){font-size:var(--type-body);line-height:var(--leading-body)}
 :where(h1,h2,h3){font-family:var(--font-display);font-weight:600}
 :where(h1){font-size:var(--type-h1);line-height:1.05}
 :where(h2){font-size:var(--type-h2);line-height:1.1}
@@ -139,6 +130,7 @@ section.work,section.playground,section.about {padding-block:85px}
    Keep it offscreen until focused, then show it above the header.
    --paper, --ink, and --focus automatically follow the light/dark theme. */
 .skip-link {
+ padding:12px;
  position:fixed;
  top:0;
  left:16px;
@@ -247,13 +239,4 @@ body {
   font-variation-settings: "SOFT" 75, "WONK" 1;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero h1,
-  .section-head h2,
-  .about h2,
-  .project-card h3,
-  .case-head h1,
-  .case-prose h2 {
-    transition: none;
-  }
-}
+/* The global reduced-motion guard above already suppresses heading motion. */
