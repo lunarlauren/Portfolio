@@ -177,8 +177,10 @@ assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must rem
 assert.doesNotMatch(css, /\.hero-feature|\.hero-foot|\.hero-description|\.hero-copy|\.hero h1|@media\(max-width:420px\)/,
  'Legacy paper rules must not regain hero declarations');
 // Hero typography and portrait filters must have one component owner.
-assert.match(heroPolishCss, /\.hero \.hero-copy h1 em\{color:inherit;font-style:italic\}/,
- 'Hero emphasis must inherit readable light/dark ink and retain editorial italic');
+assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero h1 em\{color:inherit;font-style:normal\}/,
+ 'Light hero emphasis inherits headline ink without italics');
+assert.match(heroPolishCss, /html\[data-theme="dark"\] \.hero h1 em\{color:var\(--brand-pink\);font-style:italic\}/,
+ 'Dark hero emphasis keeps the neutral italic treatment');
 assert.match(heroPolishCss, /\.hero \.feature-art \.hero-portrait-art\{filter:grayscale\(1\) contrast\(1\.08\);transition:filter \.5s ease\}/,
  'Hero component owns grayscale reveal and timing');
 assert.match(heroPolishCss, /@media\(hover:none\)\{\.hero \.feature-art \.hero-portrait-art\{filter:none\}\}/,
