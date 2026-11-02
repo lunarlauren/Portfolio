@@ -232,6 +232,47 @@ fetched once and decoded, and hold the image response to compare image bounds
 before/after load on phone and desktop. This is a local rendering test and
 does not prove a deployed CDN cache outcome, LCP, or a field-measured CLS score.
 
+## Visual regression screenshots — Pass 20
+
+`tests/visual-regression.mjs` compares **12 reviewed component snapshots**
+from real homepage and case-study routes at **390px** and **1280px**, in
+**light and dark** modes. Each comparison targets the existing header, hero
+illustration panel, or case-study chapter strip, rather than a full page of
+regularly edited prose. Chapter button labels are normalized to short fixed
+terms for screenshot purposes; content semantics are checked separately by
+the regular smoke suite. Reduced motion is enabled and animations, parallax,
+and the caret are frozen during screenshot capture. This keeps CSS geometry,
+surface colors, borders, artwork, and theme treatments in view while avoiding
+incidental animation timing changes.
+
+The committed JPEG baselines live in `tests/visual-baselines/`. The visual
+test runs in the same GitHub Actions Chromium job after the existing content,
+syntax, and browser smoke tests. It compares decoded pixels in Chromium:
+major differences exceeding **5% of pixels** (per-channel difference over
+35/255) or **7.5 mean RGB units** fail CI. Any dimension change fails.
+These thresholds accommodate small font-antialiasing differences, **not**
+arbitrary changes in component appearance. On failure, the workflow uploads
+`artifacts/visual/*-actual.jpg` and `*-diff.png` as a reviewable artifact
+for 14 days.
+
+To regenerate *only after reviewing an intentional design change*:
+
+```sh
+npm install --no-save playwright
+npx playwright install chromium
+VISUAL_BASELINE_CAPTURE=1 node tests/visual-regression.mjs
+node tests/visual-regression.mjs
+```
+
+Review **every** resulting JPEG against the intended design and commit the
+changed files explicitly. Never make the normal CI job automatically update
+snapshots, and do not increase diff thresholds just to make a real regression
+pass. Run the screenshot test with the same Chromium revision as CI whenever
+possible. The source-level and computed-style tests continue to cover
+keyboard focus, overflow, system colors, and reduced motion; these snapshots
+are only one part of visual QA. They do **not** replace cross-browser checks,
+real-device testing, or full-page copy review.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
