@@ -32,6 +32,9 @@
    already sets a transparent background; these explicit colors stay local. */
 .playground .section-head>p{background:transparent;color:#e0e0e0}
 
+/* Night card edge belongs to Playground, not the late editorial skin. */
+.playground .play-grid .project-card-link{border-color:#666}
+
 /* Keyboard focus uses the shared ring, with higher contrast at night. */
 .playground {--card-focus-color:#a7d9ff}
 
