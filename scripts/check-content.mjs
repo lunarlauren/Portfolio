@@ -68,7 +68,13 @@ for (const width of [760, 650, 600, 480, 420]) caseBreakpoint(width);
  assert.match(navigationCss, /\.site-header nav a\{white-space:nowrap;min-height:44px;display:inline-flex;align-items:center\}/, 'Desktop navigation links need 44px targets');
  assert.match(stationeryCss, /env\(safe-area-inset-left\)/, 'Phone gutters must honor safe areas');
  assert.match(workCss, /\.notebook-project-index \.project-card-link\{min-height:44px\}/, 'Active mobile archive links retain 44px targets');
- assert.match(caseCss, /\.case-next\{min-height:44px/, 'Case next links retain 44px targets');
+ // All rendered .case-next links are <a> elements inside .case-next-nav;
+// the navigation owner already gives them identical sizing and alignment.
+assert.match(caseStudy, /<nav class="case-next-nav"[^>]*><a class="case-next"/,
+ 'Routed case next links stay inside the accessible next navigation');
+assert.doesNotMatch(caseCss, /\\.case-next\\{min-height:44px;display:inline-flex/,
+ 'Duplicate case next touch-target rule must stay retired');
+assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;display:inline-flex;align-items:center\}/, 'Routed case navigation and Back links retain 44px targets');
  assert.match(caseCss, /\.case-view:focus\{outline:none!important/, 'Programmatic case wrapper focus stays undecorated');
  assert.match(aboutCss, /min-width:601px\) and \(max-width:760px/, 'Tablet About spacing stays scoped');
 }
@@ -1230,7 +1236,19 @@ assert.match(workCss, /\.featured-projects-grid\{display:grid;[^}]*gap:clamp\(18
  'Work owns the effective tablet archive gap');
 assert.doesNotMatch(workCss, /\.featured-project \.project-card h3\{font-family:/,
  'Overridden generic Work title rule must not return');
-assert.match(workCss, /\.work \.featured-project\.client-file \.archive-project-title\{[^}]*font-weight:500;/,
+// Pass 10: professional files already carry both .featured-project and
+// .client-file in the renderer. Avoid redundant compound selectors that make
+// later client-owned typography harder to override.
+assert.match(script, /class="featured-project client-file client-file--/,
+ 'Rendered professional archive files retain both their structural classes');
+assert.equal((workCss.match(/\\.work \\.client-file \\.archive-project-title\\{/g)||[]).length,2,
+ 'One archive-title selector should serve desktop and phone widths');
+assert.match(workCss, /\\.work \\.client-file \\.project-meta\\{margin-top:var\\(--space-2\\)/,
+ 'Client metadata keeps its compact authored spacing');
+assert.doesNotMatch(workCss, /\\.work \\.featured-project\\.client-file \\.(?:archive-project-title|project-meta)\\{/,
+ 'Do not restore unnecessary archive class specificity');
+
+assert.match(workCss, /\.work \.client-file \.archive-project-title\{[^}]*font-weight:500;/,
  'Work archive title keeps its authored 500 weight in its single owner');
 assert.match(workCss, /\.project-card-link:is\(:hover,:focus-visible\) \.project-meta span:last-child\{transform:translate\(4px,-4px\)\}/,
  'Metadata arrow remains discoverable on keyboard focus');
