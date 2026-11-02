@@ -689,6 +689,7 @@ try{
      found:!!grid&&!!card&&!!process&&!!title,
      columns:grid?getComputedStyle(grid).gridTemplateColumns.trim().split(" ").filter(Boolean).length:0,
      surface:card?getComputedStyle(card).backgroundColor:null,
+     cardTopLeftRadius:card?getComputedStyle(card).borderTopLeftRadius:null,
      approachVisible:!!process&&getComputedStyle(process).display!=="none",
      processInk:process?getComputedStyle(process).color:null,
      cardInk:card?getComputedStyle(card).color:null,
@@ -699,6 +700,7 @@ try{
     };
    },theme);
    assert.equal(archive.found,true,"Work archive and documented process teaser must render");
+   assert.equal(archive.cardTopLeftRadius,"0px",width+"px "+theme+": project cards keep their square top-left corner");
    assert.deepEqual(archive.cardOrder,["title","meta","challenge","facts","approach","visual"],
     width+"px "+theme+": role, delivery and approach must precede project imagery");
    assert.equal(archive.factsColumns,2,
