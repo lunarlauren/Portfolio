@@ -303,15 +303,8 @@ html[data-theme="dark"] .client-file{
  text-transform:uppercase;
 }
 
-/* The arrow is visible without motion. Keep desktop hover (-3px) and
-   keyboard focus (-4px) distinct; reduced-motion removes both transforms. */
+/* Arrow geometry stays constant; motion is opt-in with the other previews. */
 .project-card .project-meta span:last-child{display:inline-block;transition:transform .4s var(--motion-ease)}
-.project-card-link:is(:hover,:focus-visible) .project-meta span:last-child{transform:translate(4px,-4px)}
-@media(hover:hover) and (pointer:fine){
- .project-card .project-meta span:last-child{transition-duration:.25s;transition-timing-function:ease}
- .project-card-link:hover .project-meta span:last-child{transform:translate(4px,-3px)}
-}
-
 
 /* Shared Work / Playground keyboard focus; Playground supplies its own focus color. */
 :is(.work,.playground) .project-card-link:focus-visible{
@@ -328,6 +321,7 @@ html[data-theme="dark"] .client-file{
 /* One owner for Work / After Hours preview motion. Keep keyboard focus
    feedback alongside pointer hover; never animate media for reduced motion. */
 @media(prefers-reduced-motion:no-preference){
+ .project-card-link:is(:hover,:focus-visible) .project-meta span:last-child{transform:translate(4px,-4px)}
  .project-card img{transition:transform .45s ease}
  .project-card-link:focus-visible img{transform:scale(1.035)}
  .play-grid .project-card-link .project-visual{transition:transform .55s var(--motion-ease),filter .35s ease}
@@ -335,19 +329,22 @@ html[data-theme="dark"] .client-file{
 }
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
  /* Archive folder, label, and preview motion use one fine-pointer guard. */
+ .project-card .project-meta span:last-child{transition-duration:.25s;transition-timing-function:ease}
+ .project-card-link:hover .project-meta span:last-child{transform:translate(4px,-3px)}
  .work .featured-project.client-file:hover{--file-lift:-5px}
  .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
  .project-card-link:hover img{transform:scale(1.035)}
  .play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)}
  .project-card-link:hover{transform:translateY(-3px)}
 }
-/* Hover and focus remain visible via color, underline and outline,
-   without moving the archive, preview, label or image. */
+/* Transforms above are opt-in. Disable transition properties directly so
+   the global duration safeguard needs no component !important override. */
 @media(prefers-reduced-motion:reduce){
+ .project-card-link,
  .project-card img,
  .play-grid .project-card-link .project-visual,
  .work .client-file .client-file-label,
- .project-card .project-meta span:last-child{transition:none!important;transform:none!important}
+ .project-card .project-meta span:last-child{transition-property:none}
 }
 @media(prefers-reduced-motion:reduce), (hover:none){
  .work .featured-project.client-file{transition:none;transform:none}

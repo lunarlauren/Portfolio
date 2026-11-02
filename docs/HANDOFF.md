@@ -1,5 +1,27 @@
 # Portfolio developer handoff
 
+## Preference-aware project arrows — Pass 22
+
+`work-cards.css` places metadata-arrow transforms inside the existing
+`prefers-reduced-motion:no-preference` guards. Keyboard focus retains the
+4px/-4px arrow movement; fine-pointer hover retains 4px/-3px. The arrow,
+image, preview and folder-label transforms now default to stationary under
+reduced motion, without an important transform reset.
+
+The reduced-motion rule sets `transition-property:none`, including on the
+project link itself. This also prevents an implicit `all` transition when a
+visitor changes the preference while hovering. It avoids competing with
+foundations' intentional important duration safeguard. Keep the global safeguard and the separate archive
+surface reset, which also handles touch devices. Color, underlines and
+keyboard rings continue to provide feedback when motion is disabled.
+
+Chromium smoke tests toggle the preference on an already hovered or
+keyboard-focused Work/After Hours link at 390px and 1280px in both themes.
+They verify stationary preview layers and retained focus rings, then restore
+the original arrow motion without reloading. The existing 12 component
+snapshots remain the visual baseline; production deployment is a separate check.
+
+
 
 ## Foundation typography and motion ownership — Pass 21
 
