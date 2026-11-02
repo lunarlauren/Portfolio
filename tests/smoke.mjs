@@ -982,17 +982,59 @@ try{
   assert.equal(portraitMotion.transition,"none",theme+": reduced-motion portrait reveal is instantaneous");
   assert.match(portraitMotion.filter,/grayscale/,theme+": editorial portrait treatment remains");
  }
- // Reduced-motion hover must not jump the preview or lift the archive file.
- for(const theme of ["light","dark"]){
-  await reducedMotionPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
-  await reducedMotionPage.locator("#play-grid .project-card-link").first().hover();
-  const previewTransform=await reducedMotionPage.locator("#play-grid .project-card-link .project-visual").first()
-   .evaluate(node=>getComputedStyle(node).transform);
-  assert.equal(previewTransform,"none",theme+": reduced-motion Playground hover must not shift the preview");
-  await reducedMotionPage.locator(".work .project-card-link").first().hover();
-  const fileTransform=await reducedMotionPage.locator(".work .featured-project.client-file").first()
-   .evaluate(node=>getComputedStyle(node).transform);
-  assert.equal(fileTransform,"none",theme+": reduced-motion archive must not lift on hover");
+ // Pass 21: switch the OS preference while a real Work/After Hours link
+ // is hovered or keyboard-focused. Motion must stop without a page reload;
+ // opting back in restores the authored arrow movement and focus ring.
+ for(const width of [390,1280]){
+  await reducedMotionPage.setViewportSize({width,height:900});
+  for(const theme of ["light","dark"]){
+   await reducedMotionPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+   for(const selector of [".work .project-card-link","#play-grid .project-card-link"]){
+    const link=reducedMotionPage.locator(selector).first();
+    const checkStationary=async(state)=>{
+     const values=await link.evaluate(node=>{
+      const arrow=node.querySelector(".project-meta span:last-child");
+      const preview=node.querySelector(".project-visual");
+      const file=node.closest(".client-file");
+      const label=file?.querySelector(".client-file-label");
+      return {
+       transforms:[node,arrow,preview,file,label].filter(Boolean)
+        .map(el=>getComputedStyle(el).transform),
+       transitions:[arrow,node.closest(".play-grid")?preview:null,label].filter(Boolean)
+        .map(el=>getComputedStyle(el).transitionProperty)
+      };
+     });
+     const context=width+"px "+theme+" "+selector+" "+state;
+     assert.ok(values.transforms.every(value=>value==="none"),context+": reduced motion keeps every preview layer still");
+     assert.ok(values.transitions.every(value=>value==="none"),context+": reduced motion disables preview transitions");
+    };
+    const waitForArrow=async(y)=>{
+     await reducedMotionPage.waitForFunction(({selector,y})=>{
+      const arrow=document.querySelector(selector+" .project-meta span:last-child");
+      const transform=new DOMMatrixReadOnly(getComputedStyle(arrow).transform);
+      return Math.abs(transform.m41-4)<0.01&&Math.abs(transform.m42-y)<0.01;
+     },{selector,y});
+    };
+    await reducedMotionPage.emulateMedia({reducedMotion:"no-preference"});
+    await link.hover();
+    await waitForArrow(-3);
+    await reducedMotionPage.emulateMedia({reducedMotion:"reduce"});
+    await checkStationary("hover");
+
+    await reducedMotionPage.mouse.move(0,0);
+    await link.focus();
+    await reducedMotionPage.keyboard.press("Tab");
+    await reducedMotionPage.keyboard.press("Shift+Tab");
+    await reducedMotionPage.emulateMedia({reducedMotion:"no-preference"});
+    await waitForArrow(-4);
+    await reducedMotionPage.emulateMedia({reducedMotion:"reduce"});
+    await checkStationary("keyboard focus");
+    const focus=await link.evaluate(node=>({visible:node.matches(":focus-visible"),
+     outline:getComputedStyle(node).outlineStyle,width:parseFloat(getComputedStyle(node).outlineWidth)}));
+    assert.ok(focus.visible&&focus.outline==="solid"&&focus.width>=3,
+     width+"px "+theme+" "+selector+": static feedback keeps its keyboard focus ring");
+   }
+  }
  }
 
  // A synthetic project preview verifies the shared image rule even when all
@@ -1008,14 +1050,6 @@ try{
  });
  assert.equal(reducedImageTransition.transition,"none","Project image zoom must honor reduced motion");
  assert.equal(reducedImageTransition.transform,"none","Project image must not zoom on reduced-motion focus");
-
- // Decorative metadata arrows must not move or transition when reduced motion
- // is requested, even on a hovered professional project card.
- await reducedMotionPage.locator(".work .project-card-link").first().hover();
- const reducedArrow=await reducedMotionPage.locator(".work .project-meta span:last-child").first()
-  .evaluate(node=>({transition:getComputedStyle(node).transitionProperty,transform:getComputedStyle(node).transform}));
- assert.equal(reducedArrow.transition,"none","Project metadata arrows must not transition under reduced motion");
- assert.equal(reducedArrow.transform,"none","Project metadata arrows must not shift under reduced motion");
 
  await reducedMotionPage.goto(origin+"/case-studies/hoylu/connected-planning/");
  await reducedMotionPage.locator(".case-view .case-head").waitFor();
