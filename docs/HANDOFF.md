@@ -5,7 +5,8 @@
 The About contact action now uses the same `--editorial-action-radius` token as
 the header and hero actions at desktop widths. The dark theme switch now uses
 the dark paper surface with theme-aware ink for its idle state; its hover state
-stays visible without turning into a pale control with a white icon.
+stays visible without turning into a pale control with a white icon. The two
+changed stylesheet URLs use fresh cache keys so browsers receive the update.
 
 ## Interaction-script readability — Pass 32
 
