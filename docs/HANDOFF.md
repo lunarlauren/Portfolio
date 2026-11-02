@@ -1,5 +1,13 @@
 # Portfolio developer handoff
 
+## Interaction-script readability â€” Pass 32
+
+`public/script.js` now uses consistent formatting and short section markers for
+project-card rendering, case-study routing, header state, and optional motion.
+The opening note points copy edits back to `content.js` and presentation edits
+to component CSS. This is a source-only cleanup; interaction behavior is
+unchanged. The script cache key was advanced.
+
 ## Project-content editing guide â€” Pass 31
 
 The opening comment in `public/content.js` now gives designers a short map for
@@ -461,10 +469,124 @@ checks do not establish screenshot parity or production deployment.
 The professional archive in `public/script.js` renders title â†’ project type â†’
 challenge â†’ reviewed contribution/delivery facts â†’ documented design approach â†’
 approved image or clearly labeled illustrative brief â†’ case-study link. This
-is one semantic DOM order for mobile, desktop and screen readers; do not
-reorder only with CSS. After Hours keeps its visual-first layout. The Work
-component owns the gap above media and uses two columns for role/delivery
-facts at 360px and wider, stacking only at 359px and below. The redundant
-generic Work h3 declaration was removed; the single archive title rule
-retains its 500 font weight. Browser smoke checks assert the rendered order
-and computed facts columns in bowß®=¶‰žËkºwµçF†÷r—BÖ÷fW2&WGvVVâ6†ö–6W2ÂæB†÷rwVW7B6âFVÆÂv†–6‚6öçG&öÂ—26VÆV7FVBâf÷"f÷–vRG&6¶W"Â’&–÷&—F—¦VBF†RÖ–âf÷–vR–æf÷&ÖF–öâæB6öç6–FW&VB†÷r6V6öæF'’FWF–Ç26÷VÆB&VÖ–â66W76–&ÆRv—F†÷WB6ö×WF–ærf÷"GFVçF–öââF†—2FW67&–&W2×’–çFW&f6RÖFW6–vâ&ö6ƒ²—B—2æ÷B6Æ–ÒF†B'F–7VÆ"æf–vF–öâGFW&âv2fÆ–FFVBF‡&÷Vv‚FW7F–ærâ"À¢Wf–FVæ6S¢$6öæf—&ÖVB66÷S¢’6öçG&–'WFVB–çFW&f6RFW6–vâFòF†R6†—VB–â×7FFW&ööÒEbÂ–æ6ÇVF–ærf÷–vRG&6¶W"âW6W"–çFW'f–Ww2ÂW6&–Æ—G’7GVF–W2Â&VÖ÷FRÖ6öçG&öÂFW7Bf–æF–æw2ÂæBVævvVÖVçBÖWG&–72†fRæ÷B&VVâ7WÆ–VBf÷"F†—266R7GVG’âF†RFW6–vâ&F–öæÆR&VÆ÷r6†÷VÆBæ÷B&R&VB2ÖV7W&VBwVW7B&V†f–÷"â"À¢G&FVöfg3¢$Eb—6âwB§W7Bv–çB†öæRâ–÷RæVVBFò&VB—Bg&öÒ7&÷72F†R&ööÒæBæf–vFRv—F‚†æFgVÂöb'WGFöç2â’ff÷&VB6ÆV"fö7W2f—6–&–Æ—G’ÂF—&V7F–öæÂ&VF–7F&–Æ—G’ÂæB7G&öær&–Ö'’Ö–æf÷&ÖF–öâ†–W&&6‡’2FW6–vâ&–÷&—F–W3²æòFW7FVB6ö×&—6öâ&WGvVVâÇFW&æF—fW2—26Æ–ÖVBâ"À¢÷WF6öÖS¢%F†—2v÷&²6†—VB–â†öÆÆæBÖW&–6Æ–æRw27FFW&ööÒEbW‡W&–Væ6RÂ–æ6ÇVF–ær&VÖ÷FRÖg&–VæFÇ’æf–vF–öâæBf÷–vRG&6¶W"âFW6–væ–ærf÷"EbÖFRÖR&WF†–æ²F†–æw2’vBF¶Rf÷"w&çFVBöâ†öæS¢fö7W27FFW2Â'WGFöâF&vWG2ÂæBv†WF†W"6öÖVöæR6â&VBF†R67&VVâg&öÒ7&÷72F†R&ööÒâ"À¢–ÖvT'&–Vc¢$&÷fVB7FFW&ööÒEb–çFW&f6Rv—F‚F†Rf÷–vRG&6¶W"v–FvWBf—6–&ÆRâ"À¢vÆÆW'”'&–Vg3¥°¢%7FFW&ööÒEb†öÖR67&VVâ6†÷v–ær—G2Æ–÷WBæBæf–vF–öââ"À¢%f÷–vRG&6¶W"v–FvWBæB6†—×÷6—F–öâ÷"—F–æW&'’–æf÷&ÖF–öâÂ2f–Æ&ÆR–â&÷fVB'Gv÷&²â"À¢$FF—F–öæÂ–â×&ööÒEbv–FvWG2÷"–çFW&7F–öâ7FFW2F†BFVÖöç7G&FR&VF&ÆRÂ&VÖ÷FRÖg&–VæFÇ’T’â ¢Ð¢Ð¢Ð¢Ð¢ÒÀ¢Æ–w&÷VæC¥°¢°¢F—FÆS¢$f÷&·F7F–72"ÇG—S¢$–æFWVæFVçB&öGV7B+rU‚õT’FW6–vâ"À¢7VÖÖ'“¢$’v÷BF—&VBöbF†RvVV¶Ç’wv†Bw2f÷"F–ææW#òr7—&ÂÂ6ò’7F'FVBFW6–væ–ærÖVÂÆææW"F†BÖ¶W26†ö÷6–ærfööBfVVÂÖ÷&RÆ–¶R'V–ÆF–ærFV6²F†âFö–ær†öÖWv÷&²â"À¢FWF–Ç3¢$F–ææW"6†÷VÆFâwB&WV—&Rg&W6‚&÷VæBöbFV6—6–öâÖÖ¶–ærWfW'’6–ævÆRæ–v‡Bâf÷&·F7F–72&Vvâ2×’GFV×BFòÖ¶RvVV¶Ç’ÖVÂÆææ–ærfVVÂÆW72Æ–¶R†öÖWv÷&²â’6öæ6V—fVBæB—FW&FVBöâ&öGV7BF†B†VÇ2V÷ÆR6†ö÷6RÖVÇ2Â&Wf–WrvVV²öbF–ææW'2ÂæB6†÷v—F‚ÆW72v7FRâF†RW‡W&–Væ6R6öÖ&–æW2&VfW&Væ6RÖ&6VBF—66÷fW'’ÂvVV¶Ç’ÖVçRÂ'VFvWBv&VæW72ÂæBw&ö6W'’Æ—7BF†B6öç6öÆ–FFW2–æw&VF–VçG2W6VB'’×VÇF—ÆR&V6—W2â—Bw2W'6öæÂ&ö¦V7B’vÒ7F–ÆÂ'V–ÆF–æræB&Vf–æ–ærâ"À¢&ö6W73¢$’vçFVBF†RvVV¶Ç’ÖVçRFòfVVÂÆ–¶RF†R†V'BöbF†RW‡W&–Væ6RÂæ÷BÖ¦Röb6WGF–æw2â’—FW&FVBöâÖVÂF—66÷fW'’Â7v—R–çFW&7F–öç2ÂÖVçR&Wf–Ww2&Vf÷&R6öÖÖ—GF–ærÂ&V6—R7v2Â–æw&VF–VçB6öç6öÆ–FF–öâÂæB6ÆV"6öö¶VBöæ÷BÖ6öö¶VB7FFRâ’W‡Æ÷&VBfWrf—7VÂF—&V7F–öç2Â–æ6ÇVF–ærG&F–ærÖ6&BÖ–ç7—&VBF†VÖRâÆöærF†Rv’Â’¶WB&WGW&æ–ærFò&7F–6Â—77VW27V6‚26ÖÆÂ×67&VVâ÷fW&fÆ÷rÂ7v—RvW7GW&W26ö×WF–ærv—F‚67&öÆÆ–ærÂæBöæ&ö&F–ærF†B6¶VBFöò×V6‚öbæWrW6W'2â'V–ÆF–ærâ’Ö76—7FVB&÷F÷G—R†VÇVBÖRFW7B–FV2V–6¶Ç’Â'WBF†R–×÷'FçBFW6–vâv÷&²v2FV6–F–ærv†–6‚–çFW&7F–öç2vVçV–æVÇ’ÖFRÆææ–ærV6–W"â"À¢òò6VÆbÖF—&V7FVB&÷F÷G—RWf–FVæ6R—2æ÷BWV—fÆVçBFò'F–6—çB&W6V&6‚à¢Wf–FVæ6S¢$Fö7VÖVçFVC¢f÷&·F7F–72—2×’–æFWVæFVçBÂ’Ö76—7FVBv÷&¶–ær&÷F÷G—Râ—FW&F–öâ†27W&f6VB–çFW&7F–öâæBFF×VÆ—G’—77VW2Â–æ6ÇVF–ær7v—RvW7GW&W26ö×WF–ærv—F‚67&öÆÆ–æræBw&ö6W'’VçF—F–W2÷"&–6RW7F–ÖFW2æVVF–ær&Vf–æVÖVçBâæò&V7'V—FVBW6W"–çFW'f–Ww2Âf÷&ÖÂW6&–Æ—G’7GVG’ÂfW&–f–VBw&ö6W'’6f–æw2Â÷"&öGV7F–öâÆVæ6‚†2&VVâFö7VÖVçFVBâ"À¢G&FVöfg3¢%F†RFW6–vâFVç6–öâ—2WFöÖF–öâfW'7W26öçG&öÃ¢&÷÷6RW6VgVÂvVV¶Ç’ÖVçRv†–ÆRÆVf–ær&ööÒFò&Wf–WræB7vÖVÇ2â–æw&VF–VçB÷fW&Æ6â7W÷'B'VFvWBv&VæW72'WB6†÷VÆBæ÷BVÆ–Ö–æFRf&–WG“²G&F–ærÖ6&BÖ–ç7—&VBf—7VÂ–FVçF—G’6†÷VÆBÖ¶RF—66÷fW'’–çf—F–ærv—F†÷WB†–F–ærWfW'–F’Æææ–ær7F–öç2âF†W6R&RFW6–vâ&–÷&—F–W2Âæ÷BÖV7W&VB÷WF6öÖW2â"À¢÷WF6öÖS¢$f÷&·F7F–72—2v÷&¶–ær&÷F÷G—RÂæ÷BöÆ—6†VB7V66W727F÷'’v—F‚&÷röâ—Bâ’wfR'V–ÇBæB&Wv÷&¶VBF†RvVV¶Ç’ÆææW"Â&V6—RF—66÷fW'’ÂæBw&ö6W'’Æ—7B2’f–æBg&–7F–öâ–âF†RfÆ÷râ’vÒ7F–ÆÂFW7F–ærv†WF†W"F†R–FV27GVÆÇ’6fRF–ÖRÂÖöæW’Â÷"fööBv7FRâ"À¢–ÖvT'&–Vc¢%6†÷rF†RW†—7F–ærf÷&·F7F–72&÷F÷G—R2âW‡Æ÷&F–öâÂ6ÆV&Ç’Æ&VÆVB$õDõE•Râ&WÆ6Rv—F‚÷&–v–æÂf–vÖÖFW6–væVB†W&òf—7VÇ2öæ6RF†R&VFW6–vâW†—7G2â"À¢vÆÆW'”'&–Vg3¥°¢#òD„R4õ$R”DT²F–w&ÒF†RfÆ÷s¢FVÆÂf÷&·F7F–72–÷W"F7FW2(i"vWB&÷÷6VBvVV¶Ç’ÖVçR(i"&Wf–WræB7vÖVÇ2(i"6†÷v—F†–â–÷W"'VFvWBâ"À¢#"ò$õDõE•RU…Äõ$D”ôâ²&VÂ67&VVç6†÷G2öbF†R’Ö76—7FVBv÷&¶–ær&÷F÷G—RÂÆ&VÆVB2W‡Æ÷&F÷'’&F†W"F†âf–æÂFW6–vââ"À¢#2ò4Ô%DU"4„õ”ärÄôt”2²–ÆÇW7G&FR†÷rGvò÷"Ö÷&RF–ææW'26†&R–æw&VF–VçG2Â†÷rVçF—F–W2&öÆÂ–çFòöæRw&ö6W'’Æ—7BÂæB†÷rW7F–ÖFVB6÷7G2–æf÷&ÒÖVçR6†ö–6W2v–ç7B'VFvWBâÆ&VÂ6Æ7VÆF–öç22&÷F÷G—RW7F–ÖFW2â"À¢#BòD„RDU4”tâD•$T5D”ôâ²V&Ç’÷&–v–æÂf–vÖW‡Æ÷&F–öç2öbD4rÖ–ç7—&VB–çFW&f6RF†BÖ¶W26†ö÷6–ærÖVÇ2Æ–gVÂv—F†÷WB6ö×Æ–6F–ærÆææ–ærâv÷&²–â&öw&W72â"À¢#RòDU4”tä”ärD„R5•5DTÒ²gWGW&Rf–vÖ6ö×öæVçG3¢ÖVÂ6&G2Â7FFW2Âæf–vF–öâÂG—öw&‡’Â76–ærÂæB66W76–&–Æ—G’FV6—6–öç2âFBv†Vâ7&VFVBâ"À¢#bòe$ôÒ$õDõE•RDò$ôET5B²gWGW&R6–FRÖ'’×6–FR6ö×&—6öâöbW‡Æ÷&F÷'’&÷F÷G—RæBFW6–væW"ÖÆVB&VFW6–vââFòæ÷B&W6VçB26ö×ÆWFVBVçF–Â'V–ÇBâ ¢Ð¢ÒÀ¢°¢F—FÆS¢$fÆÆ÷WBsb²v†B’vBFW6–vâ"ÇG—S¢%Væöff–6–ÂvÖR6öæ6WBFW6–vâ+rfâv÷&²"À¢7VÖÖ'“¢$†÷rf"6â–÷RW6‚â–FV&Vf÷&R—B7F÷2fVVÆ–ærÆ–¶RfÆÆ÷WCò’W‡Æ÷&VBæWr6×ö&¦V7G2ÂF†VÖVB6V6öâÂæB'&†Ö–â×÷vW&VBG&fVÂâ"À¢FWF–Ç3¢%F†W6R&RF‡&VRVæöff–6–ÂfÆÆ÷WBsbFW6–vâ&÷÷6Ç2f÷"Æ–W'2v†òVæ¦÷’4Õö&¦V7G2Â6V6öæÂ&Wv&G2ÂæBÆ6†–w2v÷&ÆF'V–ÆF–æs¢ÖVBvVV²6†&7WFW&–RF—7Æ’ÂÖ—7G&W72öb×—7FW'’Ö–ç7—&VB6V6öâÂæB'&†Ö–â×÷vW&VBG&ç7÷'FF–öââ×’&öÆR—2–æFWVæFVçB6öæ6WBF—&V7F–öâæBf—7VÂÆææ–ærÂæ÷Bv÷&²6öÖÖ—76–öæVB'’&WF†W6FâF†R6†ÆÆVævR—2Fò&W7V7BF†RvÖRw2&V6övæ—¦&ÆR&WG&òÖgWGW&—7BÆæwVvRv†–ÆR–çG&öGV6–ær6öÖWF†–ærÆ–gVÂæBF—7F–æ7BâF†R'Gv÷&²æBT’Öö6·W2FW67&–&VB&VÆ÷r&RÆææVB÷'FföÆ–òf—7VÇ2Âæ÷BWf–FVæ6Röb–×ÆVÖVçFVBvÖR6öçFVçBâ"À¢&ö6W73¢$’÷&væ—¦VBF†R&÷÷6Ç2&÷VæBF‡&VRF–ffW&VçBÆ–W"F÷V6‡ö–çG3¢Æ6V&ÆR4Õö&¦V7BÂ6V6öâæB—G2&Wv&G2ÂæB7V7VÆF—fRG&fVÂ–çFW&7F–öââF†B6W&F–öâ†VÇ2ÖR6²F–ffW&VçBFW6–vâVW7F–öç2&÷WB6–Æ†÷VWGFRÂf—7VÂ†–W&&6‡’ÂæB–â×v÷&ÆBÆW6–&–Æ—G’âF†RF—&V7F–öç2&VÆ÷r&R6öæ6WB'&–Vg2Âæ÷BFö7VÖVçFVB&÷F÷G—W2ÂÆ–W"×FW7FVB—FW&F–öç2Â÷"f–æ—6†VB–ÆÇW7G&F–öç2åÆåÆäÔTBtTT²òD„R4„$5UDU$”R$ô$B²6×F—7Æ’–ç7—&VB'’ÖVBvVV³¢â÷fW'6—¦VBÂFVÆ–v‡FgVÆÇ’'7W&B7&VBöbv7FVÆæBÖVG2æB6æ6·2âF†RFW6–vâ6†ÆÆVævR—2FòÖ¶RÆ–gVÂ6öÆÆV7F–&ÆRF—7Æ’fVVÂ&VF&ÆRÂWF—¦–ær–âfÆÆ÷WB6÷'Böbv’ÂæBVæÖ—7F¶&Ç’'Böbw&†Òw26VÆV'&F–öâåÆåÆäÔ•5E$U52ôbÕ•5DU%’òD„R4T4ôâ²6V6öâ6öæ6WB–ç7—&VB'’F†R÷&FW"öb×—7FW&–W2Âv—F‚F†VÖVB6V6öâ66÷&V&ö&BæB7W&FVBÆ–æWWöb&Wv&G2’vBvçBFòV&ââF†Rf—7VÂF—&V7F–öâG&w2g&öÒ6V7&WB–FVçF—F–W2ÂVÇÖ6öÖ–2G&ÖÂæBF†Rf7F–öâw2F†VG&–6ÂVÆVvæ6Râ&Wv&B–ÆÇW7G&F–öç2æB66÷&V&ö&BÖö6·Wv–ÆÂÖ¶RF†R6öæ6WBFæv–&ÆRåÆåÆä%$„Ô”âE$å5õ%DD”ôâ²6öæ6WBf÷"Ö÷f–ærF‡&÷Vv‚Æ6†–v—F‚'&†Ö–ââ’vBW‡Æ÷&R†÷rF†RfV†–6ÆR÷"6&fâÆöö·2Âv†B—BfVVÇ2Æ–¶RFòW6RÂæB†÷r—Bf—G2fÆÆ÷WBw267&’v÷&ÆBv—F†÷WB&WFVæF–ær—Bw2âW†—7F–ærÖV6†æ–2â"À¢òòæòf–æ—6†VB'Gv÷&²ÂÆ—FW7BÂ÷"6†—VB6öçFVçB—2W7F&Æ—6†VB'’F†W6R'&–Vg2à¢Wf–FVæ6S¢$Fö7VÖVçFVB–âF†—2÷'FföÆ–ò'&–Vc¢F‡&VR–æFWVæFVçBfâ&÷÷6Ç2æBÆææVBf—7VÂF—&V7F–öç2âF†RÖFW&–Ç2†W&RFòæ÷BW7F&Æ—6‚6ö×ÆWFVB6öæ6WB–ÆÇW7G&F–öç2Â–çFW&7F—fR&÷F÷G—W2ÂÆ–W"–çFW'f–Ww2ÂW6&–Æ—G’FW7G2ÂFWfVÆ÷W"6öÆÆ&÷&F–öâÂ÷"–âÖvÖR–×ÆVÖVçFF–öââ–ÖvR'&–Vg2FW67&–&Rv÷&²Fò7&VFRÂæ÷BWf–FVæ6Röbf–æ—6†VB76WG2â"À¢G&FVöfg3¢$V6‚&÷÷6Â†2F–ffW&VçBFW6–vâFVç6–öã¢Ö¶RÖVBvVV²4ÕF—7Æ’–ÖÖVF–FVÇ’&V6övæ—¦&ÆRv—F†÷WBÆ÷6–ær—G2&–F–7VÆ÷W26†&Ó²Ö¶RÖ—7G&W72öb×—7FW'’6V6öâfVVÂf—F†gVÂFòF†Rf7F–öâv—F†÷WB6–×Ç’6÷––ærW†—7F–ær&Wv&G3²æBÖ¶R'&†Ö–âG&ç7÷'FF–öâf—BF†Rv÷&ÆBw267&’Æöv–2v—F†÷WB–×Ç––ær—B—27W÷'FVBÖV6†æ–2âF†W6R&RVW7F–öç2f÷"gWGW&RW‡Æ÷&F–öâÂæ÷BfÆ–FFVBFW6–vâFV6—6–öç2â"À¢÷WF6öÖS¢%F‡&VR7V7VÆF—fRfâÖFW6–vâF—&V7F–öç2v—F‚'&–Vg2f÷"gWGW&R6öæ6WB–ÆÇW7G&F–öç2æBT’Öö6·W2âF†W’&RVæöff–6–Â&÷÷6Ç2Âæ÷B6†—VBvÖRfVGW&W3²f–æ—6†VB76WG2ÂÆ–W"&W7öç6RÂæB–×ÆVÖVçFF–öâ÷WF6öÖW2&Ræ÷BW7F&Æ—6†VB'’F†R7W'&VçBÖFW&–Ç2â"À¢–ÖvT'&–Vc¢$6öæ6WB÷'FföÆ–ò6÷fW#¢F‡&VRF—7F–æ7BfâÖFW6–vâ&÷÷6Ç3²ÖVBvVV²6†&7WFW&–RF—7Æ’ÂÖ—7G&W72öb×—7FW'’6V6öâ66÷&V&ö&BÂæB'&†Ö–âG&ç7÷'FF–öââW6R÷&–v–æÂ6öæ6WB'Gv÷&²öæ6RFW6–væVC²Fòæ÷B–×Ç’F†W6R&R–âÖvÖR67&VVç6†÷G2â"À¢vÆÆW'”'&–Vg3¥°¢#òÔTBtTT²4„$5UDU$”R²6öæ6WB–ÆÇW7G&F–öâöbÆ6V&ÆR6×ÖVBF—7Æ’&ö&BÂv—F‚–æw&VF–VçG2Â&W6VçFF–öâÂ66ÆRÂæBÆ–gVÂfÆÆ÷WB×7G–ÆR—FVÒæÖRâ"À¢#"òÔTBtTT²•DTÒ$U4TåDD”ôâ²Öö6²WF†R6×Ö'V–ÆF–ær6FÆörF–ÆRæBF†RF—7Æ’–âÆ–W"6×Â6ÆV&Ç’Æ&VÆVBdâ4ôä4UBâ"À¢#2òÔ•5E$U52ôbÕ•5DU%’4T4ôâ²FW6–vâ6ö×ÆWFR6V6öâ66÷&V&ö&B6ö×÷6—F–öâ–ç7—&VB'’F†R÷&FW"öb×—7FW&–W2ÂW6–ærâ÷&–v–æÂÆ–÷WBæB6ÆV&Ç’Ö&¶VB2âVæöff–6–Â6öæ6WBâ"À¢#BòD„R$Ut$E2’tBtåB²–ÆÇW7G&FR&÷÷6VB&Wv&BÆ–æWWf÷"F†R6V6öã¢÷WFf—G2Â6×FV6÷"Â&÷2ÂæB÷F†W"F†VÖVB6öÆÆV7F–&ÆW2âf–æÂ—FVÒ6†ö–6W2æB'BFò&RFW6–væVBâ"À¢#Rò%$„Ô”âE$å5õ%DD”ôâ²6öæ6WB6†VWB6†÷v–ær'&†Ö–â×÷vW&VB6&fâ÷"G&ç7÷'B7—7FVÒÂ–æ6ÇVF–ær6–Æ†÷VWGFRÂÖFW&–Ç2ÂæB†÷rÆ–W"Ö–v‡B–çFW&7Bv—F‚—Bâ"À¢#bò”âÕtõ$ÄBU…U$”Tä4R²T’æBVçf—&öæÖVçFÂÖö6·W26†÷v–ær†÷rF†RG&ç7÷'FF–öâ6öæ6WB6÷VÆBf—B–çFòÆ6†–²7V7VÆF—fRvÖWÆ’Âæ÷BâW†—7F–ærfVGW&Râ ¢Ð¢ÒÀ¢°¢F—FÆS¢$–ÆÇW7G&F–öâbW‡W&–ÖVçG2"ÇG—S¢%W'6öæÂ7&VF—fR&7F–6R"À¢7VÖÖ'“¢%6öÖWF–ÖW2F†R&W7B&V6öâFòÖ¶R6öÖWF†–ær—2F†B’6âwB7F÷F†–æ¶–ær&÷WB—BâF†—2—2v†W&RF†÷6R–FV2vòâ"À¢FWF–Ç3¢$÷WG6–FR6Æ–VçB'&–Vg2Â’W6RW'6öæÂ–ÆÇW7G&F–öâ2Æ6RFòW‡Æ÷&R6†&7FW"ÂW‡&W76–öâÂæBf—7VÂ7G–ÆRâ×’&öÆR—2–æFWVæFVçB7&VF—fRF—&V7F–öâæB–ÆÇW7G&F–öâÂ&F†W"F†â&öGV7BU‚f÷"FVf–æVBW6W"w&÷WâF†Rf—7VÂ6†ÆÆVævR—2FòÖ¶R6†&7FW"÷"6ö×÷6—F–öâ&VF&ÆRæBF—7F–æ7F—fRv—F†÷WB&VÇ––æröâW‡G&FWF–ÂâF†—26öÆÆV7F–öâFöW2æ÷B†fRFö7VÖVçFVB6Æ–VçB'&–VbÂVF–Væ6R7GVG’Â÷"&öGV7F–öâFVFÆ–æRâ"À¢&ö6W73¢%F†RVW7F–öç2wV–F–ærF†—2v÷&²&Rf—7VÂöæW3¢v†B6â6–Æ†÷VWGFR6öÖ×Væ–6FR&Vf÷&R6öÆ÷"—2FFVBÂ†÷rFöW2ÆWGFR6†ævRF†RÖööBÂæBv†–6‚FWF–Ç27W÷'BF†RW‡&W76–öãò7G&öævW"&ö6W72&W6VçFF–öâv÷VÆB—"÷&–v–æÂ6¶WF6†W2v—F‚ÇFW&æF—fW2ÂW‡Æ–âv‡’öæRF—&V7F–öâv2&Vf–æVBÂæB6†÷rF†Rf–æÂ'Gv÷&²âF†÷6R7FvW2&R&W6VçFF–öâÆâ†W&RÂæ÷B6Æ–ÒF†B'F–7VÆ"6¶WF6‚&÷VæG2÷"FW7G2†fR&VVâFö7VÖVçFVBâ"À¢òòW'6öæÂ&7F–6R—2Fö7VÖVçFVC²F†W6Rf—7VÂ'&–Vg2&Ræ÷B6ö×ÆWFVB'Gv÷&²à¢Wf–FVæ6S¢$6öæf—&ÖVB66÷S¢öævö–ær–æFWVæFVçB–ÆÇW7G&F–öâæB7&VF—fRW‡Æ÷&F–öââ7V6–f–2FFVB6¶WF6†W2Â6ö×&F—fR—FW&F–öç2ÂVF–Væ6RfVVF&6²ÂæB&÷fVBf–æ—6†VB–V6W2†fRæ÷B&VVâ7WÆ–VBf÷"F†—266R7GVG’âF†R†W&òæBvÆÆW'’FW67&—F–öç2&RgWGW&R–ÖvR'&–Vg2Âæ÷B6ö×ÆWFVBFVÆ—fW&&ÆW2÷"FW7BWf–FVæ6Râ"À¢G&FVöfg3¢$’Æ÷fRÖVÖ÷&&ÆR6–Æ†÷VWGFRÂ'WB’Ç6ò¶æ÷rv†VâFW6–vâ—2G'––ærFò6’f—fRF†–æw2Böæ6Râ’Æöö²f÷"F†RFWF–Ç2F†BÖ¶R6†&7FW"&V6övæ—¦&ÆRæB7WBF†RöæW2F†B§W7BFBæö—6RâF†W6R&RF†RVW7F–öç2&V†–æBF†Rv÷&²Âæ÷B6Æ–×2&÷WBf÷&ÖÂFW7Bâ"À¢÷WF6öÖS¢$âöævö–ærW'6öæÂ–ÆÇW7G&F–öâ&7F–6RâF†—2vR7W'&VçFÇ’6öÖ×Væ–6FW2F†R7&VF—fRF—&V7F–öâæBÆææVB&ö6W72&W6VçFF–öã²—BFöW2æ÷B6Æ–Ò6ö×ÆWFVB–ÆÇW7G&FVB6W&–W2Âf÷&ÖÂWfÇVF–öâÂ÷"ÖV7W&VBVF–Væ6R&W7öç6Râ"À¢–ÖvT'&–Vc¢%ÆææVB†W&ó¢VF—F÷&–Â6öÆÆvRöb÷&–v–æÂ6†&7FW"–ÆÇW7G&F–öç2Â6öÆ÷"7GVF–W2ÂæB6VÆV7FVBöÆ—6†VB'Gv÷&²öâ&W7G&–æVB&6¶w&÷VæBâFBöæÇ’v†VâF†R'Gv÷&²—2&VG’â"À¢vÆÆW'”'&–Vg3¥°¢%ÄääTBò6†&7FW"FWfVÆ÷ÖVçB6†VWBv—F‚÷&–v–æÂ6–Æ†÷VWGFW2ÂW‡&W76–öç2ÂÆWGFW2ÂæBf–æÂ÷6W2âæ÷B–WB7WÆ–VBâ"À¢%ÄääTBò6–FRÖ'’×6–FR÷&–v–æÂ&÷Vv‚6¶WF6‚Â&Vf–æVBÆ–æWv÷&²ÂæBf–æÂ6öÆ÷"v—F‚æ÷FW2öâ7GVÂFV6—6–öç2âæ÷B–WB7WÆ–VBâ"À¢%ÄääTBò7W&FVBÖ–æ’ÖvÆÆW'’öbF‡&VRW'6öæÂ–V6W2v—F‚6F–öç2–FVçF–g––ærV6‚–V6RæB—G2&ö6W72âæ÷B–WB7WÆ–VBâ ¢Ð¢Ð¢Ð§Ó°
+is one semantic DOM order for mobile, desktop and screen readers; do noÛÎ|æÚ$z{-®éÜj×are editable here; section styles live in about.css. -->
+      <section class="about wrap" id="about" aria-labelledby="about-title">
+        <p class="eyebrow">03 / ABOUT ME</p>
+        <h2 id="about-title">I ask a lot of questions.<br /><em>Then I make things.</em></h2>
+        <div class="about-bottom">
+          <div class="about-copy">
+            <div class="about-intro">
+              <figure class="about-portrait">
+                <picture
+                  ><source srcset="/headshot-lauren-leven-1024.webp" type="image/webp" />
+                  <img
+                    src="/Headshot%20Lauren%20Leven.png"
+                    alt="Portrait photograph of Lauren Leven"
+                    loading="lazy"
+                    decoding="async"
+                    width="2000"
+                    height="2000"
+                /></picture>
+                <figcaption>Hi, Iâ€™m Lauren. The person behind the pixels.</figcaption>
+              </figure>
+              <div class="about-bio">
+                <p>
+                  Hi, Iâ€™m Lauren, a product and visual designer in the Orlando area. Iâ€™ve designed for construction,
+                  healthcare, and travel, which means Iâ€™ve spent a lot of time making complicated things feel less
+                  intimidating.
+                </p>
+                <p>
+                  Iâ€™m the person who asks one more question, sketches three more options, and keeps fiddling with the
+                  details until something finally clicks.
+                </p>
+                <p>
+                  When Iâ€™m not designing for work, Iâ€™m drawing characters, building something ridiculous in a game, or
+                  following a side-project idea much further than I meant to.
+                </p>
+              </div>
+              <section class="ai-process" aria-labelledby="ai-process-title">
+                <p class="eyebrow">A NOTE ON AI</p>
+                <h3 id="ai-process-title">Curiosity first. Tools second.</h3>
+                <p>
+                  I use AI the way I use a sketchbook: to get unstuck, test an idea, or see a problem from another
+                  angle. It's useful for brainstorming, exploring code, and getting a rough thought into something I can
+                  react to.
+                </p>
+                <p>
+                  But the interesting part is still the thinking. I decide what matters, question what comes back, and
+                  shape the final experience myself. I don't want AI to replace my taste, my drawings, or the messy work
+                  of figuring something out. I want it to give me more room to do that work.
+                </p>
+              </section>
+            </div>
+            <a class="text-link" id="email-link" href="mailto:bertinoln@gmail.com"
+              >Have something complicated? Let's figure it out â†—</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="wrap">
+      <span>Â© <span id="year"></span> Lauren Leven</span
+      ><a href="/#top">Back to top <span aria-hidden="true">â†‘</span></a>
+    </footer>
+    <!-- Theme button behavior: keep this paired with the header button above. -->
+    <script>
+      (function () {
+        const root = document.documentElement;
+        const button = document.getElementById("theme-toggle");
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (!button) return;
+        let stored;
+        try {
+          stored = localStorage.getItem("portfolio-theme");
+        } catch (e) {}
+        const systemScheme =
+          typeof window.matchMedia === "function" ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+        const systemTheme = () => (systemScheme?.matches ? "dark" : "light");
+        const chosenTheme = () => (stored === "dark" || stored === "light" ? stored : systemTheme());
+        function setTheme(theme) {
+          const dark = theme === "dark";
+          root.setAttribute("data-theme", dark ? "dark" : "light");
+          root.style.colorScheme = dark ? "dark" : "light";
+          root.style.backgroundColor = dark ? "#111d2a" : "#f7f9fa";
+          button.setAttribute("aria-pressed", String(dark));
+          // The toggle has one stable accessible name; aria-pressed communicates state.
+          // Only the hover title describes the next action.
+          button.title = dark ? "Switch to light theme" : "Switch to dark theme";
+          button.querySelector(".theme-toggle-icon").textContent = dark ? "â˜€" : "â˜¾";
+          if (meta) meta.setAttribute("content", dark ? "#111d2a" : "#f7f9fa");
+        }
+        setTheme(chosenTheme());
+        // Follow OS appearance changes only until a visitor makes an explicit choice.
+        if (systemScheme) {
+          const followSystem = () => {
+            if (stored !== "dark" && stored !== "light") setTheme(systemTheme());
+          };
+          if (typeof systemScheme.addEventListener === "function")
+            systemScheme.addEventListener("change", followSystem);
+          else if (typeof systemScheme.addListener === "function") systemScheme.addListener(followSystem);
+        }
+        // Keep open portfolio tabs in sync; clearing the preference restores OS mode.
+        window.addEventListener("storage", (event) => {
+          if (event.key !== "portfolio-theme") return;
+          stored = event.newValue;
+          setTheme(chosenTheme());
+        });
+        button.addEventListener("click", function () {
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          stored = next;
+          setTheme(next);
+          try {
+            localStorage.setItem("portfolio-theme", next);
+          } catch (e) {}
+        });
+      })();
+    </script>
+    <script src="/components/standalone-refresh.js?v=20261029-ios-refresh"></script>
+    <script src="/content.js?v=20261102-project-edit-guide"></script>
+    <script src="/components/project-content.js?v=20261029-cover-approach"></script>
+    <script src="/components/case-study.js?v=20261029-cover-approach"></script>
+    <script src="/script.js?v=20261102-readable-script"></script>
+  </body>
+</html>
