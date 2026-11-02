@@ -112,8 +112,10 @@ try{
      portraitFilter:getComputedStyle(portrait).filter
     };
    },theme);
-   assert.equal(heroInk.emphasis,heroInk.heading,width+"px "+theme+": hero emphasis must inherit heading contrast");
-   assert.equal(heroInk.emphasisStyle,"italic",width+"px "+theme+": editorial emphasis stays italic");
+   assert.equal(heroInk.emphasis,theme==="dark"?"rgb(222, 222, 222)":heroInk.heading,
+    width+"px "+theme+": hero emphasis retains its theme-specific neutral ink");
+   assert.equal(heroInk.emphasisStyle,theme==="dark"?"italic":"normal",
+    width+"px "+theme+": hero emphasis retains its theme-specific type");
    assert.match(heroInk.portraitFilter,/grayscale\(1\)/,width+"px "+theme+": hero grayscale reveal remains active");
    const expected=theme==="dark"?"rgb(222, 222, 222)":"rgb(200, 197, 192)";
    assert.equal(heroInk.noteBorder,expected,width+"px "+theme+": note border must retain theme color");
