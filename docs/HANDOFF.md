@@ -1,5 +1,11 @@
 # Portfolio developer handoff
 
+## Mobile dark-mode visual baselines — Pass 42
+
+Refresh only the 390px dark header and case-study chapter snapshots to the
+current reviewed states: the 44px theme control and selected chapter focus.
+The remaining ten component snapshots already match.
+
 ## Reveal test observer threshold — Pass 41
 
 The Chromium check now accepts the brief partially visible state before the
