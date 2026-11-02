@@ -327,7 +327,7 @@ html[data-theme="dark"] .client-file{
    underline metrics or a dark-theme ink override. */
 /* Programmatic focus does not draw boxes around static archive headings.
    Actual links retain their visible :focus-visible rings. */
-#work-title:focus{outline:none!important;box-shadow:none!important}
+#work-title[tabindex="-1"]:focus{outline:none;box-shadow:none}
 /* One owner for Work / After Hours preview motion. Keep keyboard focus
    feedback alongside pointer hover; never animate media for reduced motion. */
 @media(prefers-reduced-motion:no-preference){
