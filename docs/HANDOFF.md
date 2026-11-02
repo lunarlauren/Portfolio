@@ -28,6 +28,21 @@ Case-study next links are generated as `a.case-next` inside
 size rule. Case fact values retain 1.6 line-height, while evidence
 `strong` text retains 1.5. Computed-style tests cover both themes.
 
+## Programmatic focus versus keyboard focus — Pass 11
+
+The router focuses the Work heading and case-study wrapper to orient screen
+readers after route changes. Both receive `tabindex="-1"` and intentionally
+suppress a decorative outline **only while focused in that state**:
+`#work-title[tabindex="-1"]:focus` and
+`.case-view[tabindex="-1"]:focus`. Neither rule needs `!important`.
+Avoid making these selectors broad `:focus` resets that could hide future
+interactive focus states.
+
+Actual project links, case-study Back/Next links, and chapter buttons still
+have explicit 3px `:focus-visible` outlines in their component owners. The
+Chromium focus smoke test covers keyboard modality, light/dark themes and
+phone/desktop widths. Keep those focus behaviors independently verifiable.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
