@@ -1,7 +1,7 @@
 // Dependency-free structural smoke checks for the portfolio's static assets.
 // These checks cannot replace browser, keyboard, screen-reader or visual QA.
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import vm from 'node:vm';
 
 const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
@@ -14,7 +14,7 @@ const css = read('../public/styles.css');
 const caseStudy = read('../public/components/case-study.js');
 const projectContent = read('../public/components/project-content.js');
 const caseCss = read('../public/components/case-study.css');
-const caseBaseCss = read('../public/components/case-study-base.css');
+
 const foundationsCss = read('../public/components/foundations.css');
 const navigationCss = read('../public/components/navigation.css');
 const heroPolishCss = read('../public/components/hero-polish.css');
@@ -722,7 +722,7 @@ assert.match(visualPlaceholderCss, /\.project-visual\{display:grid;place-items:c
  'Shared visual component owns project frame geometry');
 assert.ok(visualPlaceholderCss.includes('.project-visual img,.case-hero-visual img{width:100%;height:100%;object-fit:cover}') && visualPlaceholderCss.includes('.project-visual img{position:relative;z-index:2}'),
  'Shared media owner preserves both image crops and the preview stacking layer');
-assert.doesNotMatch(caseBaseCss, /\.case-hero-visual img\s*\{/, 'Case-study base must not duplicate the shared image crop');
+assert.doesNotMatch(caseCss, /(?:^|\n)\.case-hero-visual img\s*\{/, 'Case-study component must not duplicate the shared image crop');
 assert.doesNotMatch(workCss, /(?:^|\n)\.project-visual(?:\{| img\{)/,
  'Do not split shared media geometry back into Work CSS');
 assert.doesNotMatch(workCss, /@media\(max-width:420px\)\{\s*\.work \.project-card-facts/,
@@ -1089,13 +1089,27 @@ assert.equal(chapterReveals, 2, 'Explicit selection must reveal a newly active c
 assert.equal(secondChapterButton.getAttribute('aria-current'), null, 'Only one chapter may be current');
 
 
+// Pass 16: case-study structural defaults are no longer split across a
+// legacy base stylesheet and a late scoped component. One request, one owner.
+assert.equal(existsSync(new URL('../public/components/case-study-base.css',import.meta.url)),false,
+ 'Retired case-study base stylesheet must not return');
+assert.doesNotMatch(html, /case-study-base\.css/, 'Homepage must load only the case-study component');
+assert.match(caseCss, /\.case-body\{display:grid;grid-template-columns:220px minmax\(0,700px\)/,
+ 'Case-study component owns the desktop facts/reading columns');
+assert.match(caseCss, /\.case-hero-visual\{height:clamp\(300px,48vw,640px\)/,
+ 'Case-study component owns the approved-image cover frame');
+assert.match(caseCss, /\.case-view\{\s*background:var\(--paper\);min-height:70vh;padding-block:40px 110px;/,
+ 'Case-study component owns its page surface and vertical rhythm');
+assert.doesNotMatch(caseCss, /\.case-prose h2\s*\{font:600 clamp|\.case-head h1\s*\{font-family:/,
+ 'Do not restore redundant base heading fonts over shared type tokens');
+
 // Pass 6: production stylesheet ownership and duplicate-rule guardrails.
  // Effective evidence and gallery spacing belongs to the scoped component.
  assert.doesNotMatch(caseCss,/(?:^|\n)\.case-evidence\{/,'Unscoped evidence grid must not compete with its component owner');
  assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/,'Evidence grid retains three desktop columns in its component owner');
 assert.match(caseBreakpoint(760), /\.case-view \.case-evidence\{grid-template-columns:1fr\}/, 'Evidence grid must stack on phones');
- assert.doesNotMatch(caseBaseCss,/\.case-intro\s*\{/,'Case intro belongs to scoped cover');
- assert.doesNotMatch(caseBaseCss,/\.case-gallery\s*\{/,'Gallery layout belongs entirely to scoped case-study component');
+ assert.doesNotMatch(caseCss, /(?:^|\n)\.case-intro\s*\{/, 'Case intro remains scoped to its cover');
+ assert.doesNotMatch(caseCss, /(?:^|\n)\.case-gallery\s*\{/, 'Gallery layout remains scoped to case-study component');
  assert.match(caseCss,/\.case-view \.case-evidence\{[^}]*gap:var\(--space-3,1rem\)/,'Evidence gap retains token');
  assert.match(caseCss,/\.case-view \.case-gallery\{[^}]*gap:var\(--space-4,1\.5rem\)/,'Gallery gap retains token');
 assert.doesNotMatch(caseCss, /html\[data-theme="dark"\] \.case-evidence-item\{/, 'Evidence theme colors should use shared tokens, not duplicate dark rules');
@@ -1245,7 +1259,7 @@ assert.doesNotMatch(css, /\.case-process-note\s*\{/, 'Case-study process notes m
 assert.match(caseCss, /\.case-fact\{[^}]*border-left:2px solid var\(--line\)/, 'Case-study facts own the neutral editorial rule');
 assert.match(caseCss, /\.case-highlight\{[^}]*border-left:3px solid var\(--line\)/, 'Case-study highlights own the neutral editorial rule');
 assert.match(caseCss, /\.case-gallery \.project-visual\{[^}]*background:var\(--surface-blush\);border-radius:2px/, 'Gallery frame paint belongs to case-study.css');
-assert.doesNotMatch(caseBaseCss, /\.case-gallery \.project-visual\s*\{/, 'Gallery frame sizing has one component owner');
+assert.equal((caseCss.match(/\.case-gallery \.project-visual\{/g)||[]).length,1, 'Gallery frame sizing has one component owner');
 assert.doesNotMatch(editorialCss, /\.(?:case-fact|case-fact-label|case-highlight|case-highlights|case-process-note|case-gallery)\b[^\n]*\{/, 'Editorial skin must not override case-study annotation paint');
 
 
@@ -1383,8 +1397,8 @@ assert.doesNotMatch(aboutCss, /filter: drop-shadow\(0 12px 14px|filter: none;/, 
 
 /* Case-study typography and hero cascade: structural defaults must not
    compete with the scoped component's effective paint and type. */
-assert.doesNotMatch(caseBaseCss,/\.case-head\s*\{|\.case-facts\s*\{/,
- 'Retired case head width and inherited facts ink must not return to base');
+assert.doesNotMatch(caseCss, /(?:^|\n)\.case-head\s*\{|(?:^|\n)\.case-prose h2\s*\{font:/,
+ 'Retired base typography must not compete with scoped case-study headings');
 assert.match(caseCss,/\.case-fact\{[^}]*font-family:'DM Sans'/,
  'Fact label and value share one inherited body-font owner');
 assert.doesNotMatch(caseCss,/\.case-fact-(?:label|value)\{[^}]*font-family:/,

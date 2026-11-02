@@ -1777,6 +1777,55 @@ try{
   assert.equal(chrome.footerImage,"none",theme+" footer must not show the page texture");
   assert.equal(chrome.footerColor,chrome.headerColor,theme+" header and footer should share the paper surface");
  }
+ // Pass 16: one case-study stylesheet must preserve the structural defaults
+ // previously loaded before the component, in both themes and at phone/desktop.
+ const caseOwnerPage=await browser.newPage();
+ caseOwnerPage.on("pageerror",error=>errors.push(error.message));
+ await caseOwnerPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await caseOwnerPage.locator(".case-view .case-head").waitFor();
+ for(const width of [390,1280]){
+  await caseOwnerPage.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const values=await caseOwnerPage.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const style=selector=>getComputedStyle(document.querySelector(selector));
+    const cover=document.createElement("div");
+    cover.className="case-hero-visual";
+    cover.innerHTML='<img alt="" />';
+    document.querySelector(".case-view").append(cover);
+    const coverStyle=getComputedStyle(cover);
+    const result={
+     pageBackground:style(".case-view").backgroundColor,
+     paperBackground:style("body").backgroundColor,
+     minHeight:parseFloat(style(".case-view").minHeight),
+     bodyColumns:style(".case-body").gridTemplateColumns.trim().split(/\s+/).length,
+     backDisplay:style(".case-back").display,
+     nextMarginTop:parseFloat(style(".case-next-nav .case-next").marginTop),
+     headingFamily:style(".case-prose h2").fontFamily,
+     headingWeight:style(".case-prose h2").fontWeight,
+     coverHeight:parseFloat(coverStyle.height),
+     coverObjectFit:getComputedStyle(cover.querySelector("img")).objectFit,
+     overflow:document.documentElement.scrollWidth-innerWidth
+    };
+    cover.remove();
+    return result;
+   },theme);
+   const at=width+"px "+theme+" consolidated case-study";
+   assert.equal(values.pageBackground,values.paperBackground,at+": page retains theme paper");
+   assert.ok(values.minHeight>0,at+": case page retains minimum reading height");
+   assert.equal(values.bodyColumns,width<=760?1:2,at+": case body retains responsive columns");
+   assert.equal(values.backDisplay,"inline-flex",at+": Back link retains layout");
+   assert.equal(values.nextMarginTop,60,at+": next-project spacing remains authored");
+   assert.match(values.headingFamily,/Newsreader/i,at+": case headings inherit display family");
+   assert.equal(values.headingWeight,"600",at+": case headings retain display weight");
+   assert.ok(Math.abs(values.coverHeight-Math.min(640,Math.max(300,width*.48)))<=2,
+    at+": approved-image cover retains base frame height");
+   assert.equal(values.coverObjectFit,"cover",at+": approved images retain shared crop");
+   assert.ok(values.overflow<=2,at+": no horizontal overflow");
+  }
+ }
+ await caseOwnerPage.close();
+
  // Editorial chapters are optional. Keep numbering contiguous when a future
  // case study has evidence notes but no process section, or neither section.
  const optional=await browser.newPage();
