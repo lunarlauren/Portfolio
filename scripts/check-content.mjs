@@ -72,7 +72,7 @@ for (const width of [760, 650, 600, 480, 420]) caseBreakpoint(width);
 // the navigation owner already gives them identical sizing and alignment.
 assert.match(caseStudy, /<nav class="case-next-nav"[^>]*><a class="case-next"/,
  'Routed case next links stay inside the accessible next navigation');
-assert.doesNotMatch(caseCss, /\\.case-next\\{min-height:44px;display:inline-flex/,
+assert.doesNotMatch(caseCss, /\.case-next\{min-height:44px;display:inline-flex/,
  'Duplicate case next touch-target rule must stay retired');
 assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;display:inline-flex;align-items:center\}/, 'Routed case navigation and Back links retain 44px targets');
  assert.match(caseCss, /\.case-view:focus\{outline:none!important/, 'Programmatic case wrapper focus stays undecorated');
@@ -1241,11 +1241,11 @@ assert.doesNotMatch(workCss, /\.featured-project \.project-card h3\{font-family:
 // later client-owned typography harder to override.
 assert.match(script, /class="featured-project client-file client-file--/,
  'Rendered professional archive files retain both their structural classes');
-assert.equal((workCss.match(/\\.work \\.client-file \\.archive-project-title\\{/g)||[]).length,2,
+assert.equal((workCss.match(/\.work \.client-file \.archive-project-title\{/g)||[]).length,2,
  'One archive-title selector should serve desktop and phone widths');
-assert.match(workCss, /\\.work \\.client-file \\.project-meta\\{margin-top:var\\(--space-2\\)/,
+assert.match(workCss, /\.work \.client-file \.project-meta\{margin-top:var\(--space-2\)/,
  'Client metadata keeps its compact authored spacing');
-assert.doesNotMatch(workCss, /\\.work \\.featured-project\\.client-file \\.(?:archive-project-title|project-meta)\\{/,
+assert.doesNotMatch(workCss, /\.work \.featured-project\.client-file \.(?:archive-project-title|project-meta)\{/,
  'Do not restore unnecessary archive class specificity');
 
 assert.match(workCss, /\.work \.client-file \.archive-project-title\{[^}]*font-weight:500;/,
