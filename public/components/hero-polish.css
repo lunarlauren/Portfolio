@@ -199,10 +199,11 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 }
 
 /* MONOCHROME HERO PRESENTATION
-   Headline ink inherits the active theme; the emphasis remains editorial italic.
+   The headline inherits theme ink; emphasis keeps distinct light/dark styling.
    The image filter is intentional only for the hero portrait, not client work.
    Keep these rules after responsive geometry to preserve the existing cascade. */
-.hero .hero-copy h1 em{color:inherit;font-style:italic}
+html:not([data-theme="dark"]) .hero h1 em{color:inherit;font-style:normal}
+html[data-theme="dark"] .hero h1 em{color:var(--brand-pink);font-style:italic}
 .hero .feature-art .hero-portrait-art{filter:grayscale(1) contrast(1.08);transition:filter .5s ease}
 .hero-feature:is(:hover,:focus-within) .hero-portrait-art{filter:grayscale(0)}
 @media(hover:none){.hero .feature-art .hero-portrait-art{filter:none}}
