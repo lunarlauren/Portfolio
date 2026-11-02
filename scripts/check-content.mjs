@@ -343,6 +343,27 @@ assert.match(aboutPortraitMarkup, /src="\/Headshot%20Lauren%20Leven\.png"/,
  'About should use Lauren\'s actual headshot, not repeat the hero illustration');
 assert.match(aboutPortraitMarkup, /alt="Portrait photograph of Lauren Leven"/,
  'About headshot must have a factual accessible description');
+// Pass 19: keep a compressed source-first photo while retaining an exact
+// PNG fallback and intrinsic dimensions, even before lazy loading completes.
+const headshotOriginal=readFileSync(new URL('../public/Headshot Lauren Leven.png',import.meta.url));
+const headshotWebp=readFileSync(new URL('../public/headshot-lauren-leven-1024.webp',import.meta.url));
+assert.equal(headshotOriginal.subarray(0,8).toString('hex'),'89504e470d0a1a0a',
+ 'The original headshot must remain a valid PNG fallback');
+assert.equal(headshotOriginal.readUInt32BE(16),2000,'Original portrait pixel width');
+assert.equal(headshotOriginal.readUInt32BE(20),2000,'Original portrait pixel height');
+assert.equal(headshotWebp.toString('ascii',0,4),'RIFF','Optimized photo must be a real RIFF image');
+assert.equal(headshotWebp.toString('ascii',8,12),'WEBP','Optimized photo must be WebP');
+assert.ok(headshotWebp.byteLength<120000,'Optimized headshot should remain under 120 KB');
+assert.ok(headshotWebp.byteLength<headshotOriginal.byteLength*0.1,
+ 'Optimized delivery should save at least 90% of photo transfer');
+assert.match(aboutPortraitMarkup,
+ /<picture><source srcset="\/headshot-lauren-leven-1024\.webp" type="image\/webp"><img src="\/Headshot%20Lauren%20Leven\.png"[^>]*loading="lazy" decoding="async" width="2000" height="2000"><\/picture>/,
+ 'About photo needs matching original fallback, lazy loading and square intrinsic dimensions');
+assert.match(aboutCss,/\.about-portrait picture\{display:block;width:100%\}/,
+ 'The picture wrapper must not create an inline line box around the image');
+assert.doesNotMatch(html, /<link rel="preload"[^>]*(?:Headshot|headshot-lauren)/,
+ 'Offscreen headshot should not compete with the critical hero preload');
+
 
 // Phone About has one clear visual introduction rather than a full-screen
 // heading followed by a detached centered headshot and oversized body copy.

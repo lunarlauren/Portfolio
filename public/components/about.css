@@ -16,6 +16,10 @@
   text-align: center;
 }
 
+/* The picture wrapper remains block-level, so it cannot introduce a stray
+   inline line box around the dimension-reserved img. */
+.about-portrait picture{display:block;width:100%}
+
 .about-portrait img {
   display: block;
   width: 100%;

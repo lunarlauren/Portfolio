@@ -194,18 +194,43 @@ as critical content. The inactive 132-byte `styles.css` compatibility stub
 remains for existing source audits but is **not** linked as a stylesheet, so
 it no longer generates an unnecessary render-blocking network request.
 
-The source headshot PNG is 4,572,180 bytes in Git. This pass deliberately
-does not alter or replace the original photograph. A future measured asset
-pass should produce and visually review a responsibly compressed derivative
-with the same subject and crop, then retain the original as a safe fallback.
-Avoid claiming image transfer or LCP savings until deployment resource
-timings are observed.
+The source headshot PNG is 4,572,180 bytes in Git. Pass 18 left that
+asset unchanged; Pass 19 subsequently added a reviewed, compressed WebP
+derivative while keeping this original photograph as fallback. Do not infer
+real-world LCP or CDN improvements without deployed resource measurements.
 
 Chromium tests verify head link order, preconnects, priority attributes,
 unchanged font stacks, asynchronous About photo loading, absence of the
 compatibility request, and exactly **one** hero image request after preload
 discovery. Google Fonts network performance and Core Web Vitals need
 real-world measurement; offline CI cannot prove those outcomes.
+
+## Optimized About headshot and image-layout stability — Pass 19
+
+The original `public/Headshot Lauren Leven.png` is a **2000 × 2000**
+photograph and remains in Git unchanged as a browser fallback. The same
+photograph was resized to 1024 × 1024 and exported as
+`public/headshot-lauren-leven-1024.webp` using Chromium's image encoder
+at 0.86 quality. The reviewed derivative is approximately **68 KB** rather
+than the original **4.57 MB** (about **98.5% fewer image bytes** in browsers
+that support WebP). No synthetic portrait, retouching, new crop, or replacement
+subject was introduced.
+
+`public/index.html` uses `<picture>` with the optimized WebP `<source>`
+and the original PNG as the `<img>` fallback. The image retains factual
+alt text, `loading="lazy"`, `decoding="async"`, and `width="2000"
+height="2000"` attributes for a preallocated **1:1 intrinsic ratio**.
+The source PNG and WebP are both square, so the desktop portrait occupies
+the same dimensions. `about.css` owns the block-level `picture`
+wrapper; its existing phone-only `aspect-ratio:4/5`,
+`object-fit:cover` and `object-position:center 27%` preserve the
+mobile crop. Do not remove these without checking the phone layout.
+
+The source contract verifies both real file formats, size savings, fallback,
+and intrinsic dimensions. Chromium tests check that the WebP—not the PNG—is
+fetched once and decoded, and hold the image response to compare image bounds
+before/after load on phone and desktop. This is a local rendering test and
+does not prove a deployed CDN cache outcome, LCP, or a field-measured CLS score.
 
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
@@ -356,7 +381,7 @@ The always-dark **After Hours / Playground** section now lives in `public/compon
 The removed inventory left unused rules in `public/styles.css`, `public/components/about.css`, and `public/components/stationery.css`. Those rules and the unused `public/components/inventory.js` are retired. Keep About column width, portrait, biography, AI note, CTA, and compact-laptop spacing in `public/components/about.css`; `public/styles.css` should not regain inventory selectors or About grid overrides. The homepage reveal selector in `public/script.js` no longer includes the removed component. `scripts/check-content.mjs` and `tests/smoke.mjs` guard the mobile reading order and absence of the removed inventory; the desktop biography/AI and portrait now form a two-column introduction. Light/dark color tokens remain shared. Verify browser geometry in both themes and at phone widths before asserting visual parity.
 
 ## Portrait assets
-The homepage hero deliberately uses `public/laurenlevenportfolioheroportrait.png` (the illustrated 3D portrait) to communicate visual craft. The About biography uses the separate `public/Headshot Lauren Leven.png` photograph, referenced as `/Headshot%20Lauren%20Leven.png` in `public/index.html`. Keep both images distinct when editing: About introduces the actual designer, while the hero expresses the illustrative identity. The About figure, caption, responsive sizing, and lazy-loading behavior are owned by `public/components/about.css` and `public/index.html`. The headshot is a large source asset; consider an optimized web derivative in a later measured performance pass, without replacing the original. Neither portrait is product evidence or a case-study image placeholder.
+The homepage hero deliberately uses `public/laurenlevenportfolioheroportrait.png` (the illustrated 3D portrait) to communicate visual craft. The About biography uses the separate `public/Headshot Lauren Leven.png` photograph, referenced as `/Headshot%20Lauren%20Leven.png` in `public/index.html`. Keep both images distinct when editing: About introduces the actual designer, while the hero expresses the illustrative identity. The About figure, caption, responsive sizing, and lazy-loading behavior are owned by `public/components/about.css` and `public/index.html`. The large original headshot remains a fallback; the responsive About image now delivers the optimized WebP derivative in supporting browsers. Neither portrait is product evidence or a case-study image placeholder.
 
 ## Mobile About editorial layout
 On phones (≤600px), `public/components/about.css` keeps the About heading deliberately smaller than the hero statement. It uses the available text width rather than a fixed `12ch` maximum, which previously caused extra lines even on standard phones. The real headshot floats to the **left** of the first biography paragraph, which wraps naturally beneath it, rather than appearing as a detached centered square. The portrait uses a modest rounded crop; its redundant caption is hidden **only on phones**, where the adjacent sentence already introduces Lauren. Desktop still shows the caption. **The About introduction now uses two desktop columns**: biography and AI note on the left, real headshot on the right. On phones it returns to one reading column. Do not restore the retired interactive inventory or its script/styles. The biography, AI process note, and contact CTA flow in document order. Preserve the full-size photo source and its factual alt text. The biography is concise and describes Lauren's approach; do not expand it into unverified research or impact claims. `scripts/check-content.mjs` guards the one-column layout and absence of obsolete inventory code. Check narrow phones, long text, and both themes visually before claiming visual validation.
