@@ -829,10 +829,10 @@ assert.match(caseCss, /\.case-next-nav a:focus-visible,\.case-back:focus-visible
 
 assert.match(workCss, /#work-title\[tabindex="-1"\]:focus\{outline:none;box-shadow:none\}/,
  'Only a programmatically focused Work heading suppresses its decorative ring');
-// Keep the cache-busting contract without pinning an unrelated historical
-// version string. This pass retires chrome already hidden by hero-polish.css.
-assert.match(html, /\/styles\.css\?v=[a-zA-Z0-9-]+/,
- 'Legacy CSS must remain cache-versioned');
+// Keep active CSS cache-versioned without requesting the inert legacy stub.
+// This contract follows the first production stylesheet, not styles.css.
+assert.match(html, /\/components\/foundations\.css\?v=[a-zA-Z0-9-]+/,
+ 'Active foundations CSS must remain cache-versioned');
 assert.doesNotMatch(css + homepageCss,
  /\.(?:art-orbit|art-tile|art-center)(?:-[a-z]+)?(?:\s|\{|:)/,
  'Hidden hero ornament CSS must not return to active stylesheets');
