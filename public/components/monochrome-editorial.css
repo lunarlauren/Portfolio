@@ -32,5 +32,3 @@ html[data-theme="dark"]{
 /* Project imagery has no grayscale rules; only the hero/About portraits reveal color.
    Do not add image-filter resets that mask the owning component's styles. */
 /* Work owns its card paint, frames, motion and copy; this skin supplies tokens. */
-/* Align neutral site sections and controls without erasing project colors. */
-.playground .play-grid .project-card-link{border-color:#666}
