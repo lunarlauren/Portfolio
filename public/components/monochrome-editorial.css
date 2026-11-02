@@ -12,24 +12,16 @@ html[data-theme="dark"]{
  --editorial-card:#252525;--editorial-card-edge:#646464;
  --editorial-card-glow:rgba(255,255,255,.12);--editorial-card-shadow:rgba(0,0,0,.44);
 }
-.hero .hero-copy h1,.section-head h2,.about h2{letter-spacing:-.045em;text-wrap:balance}
-/* Hero heading emphasis is owned by hero-polish.css, not this late skin. */
+.section-head h2,.about h2{letter-spacing:-.045em;text-wrap:balance}
+/* Section heading emphasis remains editorial; hero ink is owned by hero-polish.css. */
 .section-head h2 em,.about h2 em{color:inherit!important;font-style:italic}
-.hero .notebook-hero-note{border-bottom-color:var(--line)}
-/* The hero component already owns unframed art at every viewport width. */
-.hero .feature-art .hero-portrait-art{filter:grayscale(1) contrast(1.08);transition:filter .5s ease}
-.hero-feature:is(:hover,:focus-within) .hero-portrait-art{filter:grayscale(0)}
 /* Client work stays in color; About portrait retains its reveal and card lift remains animated. */
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
 @media(prefers-reduced-motion:reduce){
- .about-portrait img,.hero .feature-art .hero-portrait-art{transition:none!important}
+ .about-portrait img{transition:none!important}
 }
 
-/* The decorative hero portrait must not require hover to reveal color. */
-@media(hover:none){
- .hero .feature-art .hero-portrait-art{filter:none}
-}
-/* Project imagery has no grayscale rules; only the hero/About portraits reveal color.
-   Do not add image-filter resets that mask the owning component's styles. */
+/* Project imagery remains full color. The hero portrait has its own scoped
+   grayscale treatment; About retains its independent hover reveal here. */
 /* Work owns its card paint, frames, motion and copy; this skin supplies tokens. */
