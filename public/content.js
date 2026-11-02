@@ -1,14 +1,11 @@
-/* Portfolio editorial content.
-   Fictional impact-writing samples live in docs/ILLUSTRATIVE_IMPACT_EXAMPLES.md,
-   not in these published outcomes. Do not add unverified metrics here.
-   Drafts are based on known work themes, not verified client results.
-   Replace review notes and add approved imagery before publishing externally.
-   Images: set image to a file in public/images; gallery can contain image paths.
-   imageBrief and galleryBriefs appear as descriptive placeholders until then.
-   audience and constraints are editorial summaries of documented context;
-   explicitly label design scenarios that are not validated research personas.
-   ILLUSTRATIVE briefs request new explanatory artwork, not documented output;
-   approved-screen requests for shipped products must use real approved assets. */
+/*
+  EDITING GUIDE
+  - Add professional projects under companies[].projects; personal work under playground[].
+  - summary appears on the project card and case page; details/process/outcome fill the case page.
+  - Put approved image paths in image and gallery. imageBrief/galleryBriefs are proposed art, not delivered work.
+  - Keep audience, constraints, evidence and outcomes tied to documented facts; never add unverified metrics.
+  - Project titles are lookup keys in script.js and components/project-content.js. Update those maps when renaming.
+*/
 window.PORTFOLIO = {
   email: "bertinoln@gmail.com",
   companies: [

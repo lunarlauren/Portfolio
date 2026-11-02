@@ -70,7 +70,7 @@ assert.doesNotMatch(foundationsCss,/\.hero h1\s*\{font-family:|\.section-head h2
  'Heading family and weight inherit shared semantic typography');
 assert.doesNotMatch(foundationsCss,/\.project-card h3,\s*\.case-head h1,/,
  'Archive card title has no heading-axis motion to transition');
-assert.match(foundationsCss,/--night-link-ink:color-mix\(in srgb,var\(--palette-paper\) 85%,var\(--palette-blue\)\)/,
+assert.match(foundationsCss,/--night-link-ink:var\(--brand-ink\)/,
  'Dark quiet-link ink must remain part of the normal dark palette');
 
  assert.doesNotMatch(css, /html\[data-theme="dark"\] \.hero-description\s*,/, 'Legacy dark text outline must not return');
@@ -308,8 +308,6 @@ for(const selector of ['.hero .feature-art{height:100%;min-height:0}',
   'Desktop hero media block must own '+selector);
 }
 
-assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
- 'Reduced-motion CTA hover must remain with homepage button styles');
 // The hero notebook note and phone action sizing have one component owner.
 assert.doesNotMatch(css, /\.notebook-hero-note\s*\{|\.hero \.notebook-hero-note::before/,
  'Legacy CSS must not regain notebook note styles');
@@ -834,8 +832,6 @@ assert.doesNotMatch(homepageCss, /html\[data-theme="dark"\] \.primary-link:hover
  'Homepage must not compete with editorial dark CTA tokens');
 assert.match(homepageCss, /@media\(prefers-reduced-motion:no-preference\)\{[\s\S]*?\.reveal-ready\{animation:none;opacity:0/,
  'Homepage reveal must remain opt-in for motion');
-assert.match(homepageCss, /\.reveal-ready\{opacity:1!important;transform:none!important;transition:none!important\}/,
- 'Reduced-motion visitors must see revealed sections');
 assert.doesNotMatch(homepageCss, /@keyframes reveal-enter/,
  'Superseded reveal-enter keyframes must not return');
 

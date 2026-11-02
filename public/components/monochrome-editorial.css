@@ -3,6 +3,7 @@
    client colors stay in work-cards.css. */
 :root{
  --editorial-accent:#235f88;--editorial-action-ink:#fff;
+ --editorial-action-radius:3px;
  /* Card surfaces belong with the editorial theme tokens. */
  --editorial-card:#f7f6f3;--editorial-card-edge:#b7b5b1;
  --editorial-card-glow:rgba(255,255,255,.88);--editorial-card-shadow:rgba(18,18,18,.10);
@@ -19,7 +20,7 @@ html[data-theme="dark"]{
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
 @media(prefers-reduced-motion:reduce){
- .about-portrait img{transition:none!important}
+ .about-portrait img{transition-property:none}
 }
 
 /* Project imagery remains full color. The hero portrait has its own scoped

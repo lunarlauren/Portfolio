@@ -95,7 +95,6 @@ html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var
  transition:background-color .18s ease,border-color .18s ease,transform .18s ease;
 }
 .case-view .case-section-links button:is(:hover,:focus-visible){background:var(--case-chapter-hover)}
-.case-view .case-section-links button:active{transform:translateY(2px)}
 .case-view .case-section-links button:focus-visible{
  text-decoration:underline;outline:3px solid var(--focus);outline-offset:3px;
  position:relative;z-index:1;
@@ -405,6 +404,7 @@ html[data-theme="dark"] .case-prose p{color:#d7e3ed}
 /* Routed case-study entrance and its local reduced-motion fallback. */
 @keyframes detail-reveal{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @media(prefers-reduced-motion:no-preference){
+ .case-view .case-section-links button:active{transform:translateY(2px)}
  .case-view:not([hidden]) .case-head{animation:detail-reveal .6s var(--motion-ease) .06s both}
  .case-view:not([hidden]) .case-hero-visual{animation:detail-reveal .7s var(--motion-ease) .13s both}
  .case-view:not([hidden]) .case-body{animation:detail-reveal .7s var(--motion-ease) .2s both}

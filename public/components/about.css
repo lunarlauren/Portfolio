@@ -88,24 +88,25 @@
 .about .about-copy > .text-link{
  display:inline-flex;align-items:center;justify-content:space-between;gap:20px;
  width:fit-content;max-width:100%;
- padding:15px 20px;border:1px solid var(--ink);border-radius:12px;
+ padding:15px 20px;border:1px solid var(--ink);border-radius:var(--editorial-action-radius);
  background:var(--ink);color:var(--paper);
- font-weight:750;line-height:1.4;text-decoration:none;
- box-shadow:0 4px 0 var(--line);
- transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+ font-size:.9375rem;font-weight:700;line-height:1.4;text-decoration:none;
+ transition:transform .18s ease,background .18s ease,border-color .18s ease;
 }
 .about .about-copy > .text-link:is(:hover,:focus-visible){
  background:var(--editorial-accent);color:var(--editorial-action-ink);
- border-color:var(--editorial-accent);box-shadow:0 6px 0 var(--line);
+ border-color:var(--editorial-accent);
 }
-.about .about-copy > .text-link:hover{transform:translateY(-2px)}
 .about .about-copy > .text-link:focus-visible{
  outline-offset:5px;
 }
 
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .about .about-copy > .text-link:hover{transform:translateY(-2px)}
+}
+
 @media(prefers-reduced-motion:reduce){
- .about .about-copy > .text-link{transition:none}
- .about .about-copy > .text-link:hover{transform:none}
+ .about .about-copy > .text-link{transition-property:none}
 }
 
 /* AI process: an editorial aside, not another competing CTA or card. */

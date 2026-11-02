@@ -59,7 +59,7 @@ html[data-theme="dark"] {
   --brand-ink:#f1f0ec;
   --brand-pink:#dedede;
   --surface-blush:#242424;
-  --night-link-ink:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
+  --night-link-ink:var(--brand-ink);
   color-scheme:dark;
   background:var(--paper);
 }

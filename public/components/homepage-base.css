@@ -18,8 +18,7 @@
 .hero h1 {font-size:clamp(3.75rem,7.2vw,6.75rem);margin:28px 0 30px;max-width:850px;line-height:1.04;letter-spacing:-.045em;color:var(--brand-ink)}
 .hero-description {font-size:clamp(1.125rem,1.65vw,1.4375rem);line-height:1.48;max-width:590px;color:var(--muted);margin:0}
 .hero-actions {display:flex;align-items:center;flex-wrap:wrap;gap:24px;margin-top:38px}
-.primary-link {display:inline-flex;align-items:center;gap:30px;padding:17px 23px;text-decoration:none;font-weight:700;border-radius:3px;transition:transform .25s,background .25s;background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
-.primary-link:hover {transform:translateY(-3px)}
+.primary-link {display:inline-flex;align-items:center;gap:30px;padding:17px 23px;text-decoration:none;font-size:.9375rem;font-weight:700;border-radius:var(--editorial-action-radius);transition:transform .25s,background .25s,border-color .25s;background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
 .primary-link:is(:hover,:focus-visible){background:var(--editorial-accent);color:var(--editorial-action-ink);border-color:var(--editorial-accent)}
 .quiet-link {font-size:0.875rem;font-weight:700;text-underline-offset:5px}
 /* Homepage quiet-link hover/focus uses the editorial accent token. */
@@ -31,14 +30,15 @@ html[data-theme="dark"] .quiet-link:is(:hover,:focus-visible){color:var(--editor
 .hero .status-dot {background:var(--brand-pink)}
 .eyebrow-divider {margin-inline:10px;color:#8da6b5}
 .hero-feature {position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;padding:25px;border-radius:3px}
-.feature-art {position:absolute;inset:14% 0 12%;display:grid;place-items:center}
+.feature-art {position:absolute;inset:0;display:grid;place-items:center}
 /* HOMEPAGE INTERACTION STATES
    Keep progressive entrance effects beside the homepage button geometry.
    CTA colors resolve through shared editorial tokens. The script only adds reveal-ready when an observer exists;
    visitors requesting less motion see the content immediately. */
-@media(hover:hover) and (pointer:fine){.hero-actions .primary-link span{display:inline-block;transition:transform .2s ease} .hero-actions .primary-link:hover span{transform:translate(4px,-3px)}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.hero-actions .primary-link span{display:inline-block;transition:transform .2s ease} .hero-actions .primary-link:hover span{transform:translate(4px,-3px)}}
 
 @media(prefers-reduced-motion:no-preference){
+ .primary-link:hover{transform:translateY(-3px)}
  .reveal-ready{animation:none;opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1);transition-delay:var(--reveal-delay,0ms)}
  .reveal-ready.in-view{opacity:1;transform:translateY(0)}
  /* Parallax uses the individual translate property; do not reserve a
@@ -51,10 +51,8 @@ html[data-theme="dark"] .quiet-link:is(:hover,:focus-visible){color:var(--editor
  .hero .hero-feature{animation:hero-enter .8s .14s ease-out both}
 }
 @keyframes hero-enter{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+/* Motion is opt-in above; match About's heading specificity to stop its type transition. */
 @media(prefers-reduced-motion:reduce){
- .primary-link:hover{transform:none}
- .hero-actions .primary-link span{transition:none!important}
- .reveal-ready{opacity:1!important;transform:none!important;transition:none!important}
- .hero .hero-portrait-art{translate:none!important}
+ .primary-link,.hero-actions .primary-link span,.reveal-ready,.about h2.reveal-ready{transition-property:none}
 }
 
