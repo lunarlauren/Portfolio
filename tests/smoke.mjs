@@ -1657,6 +1657,18 @@ try{
  for(const width of [320,480,481,600,650,651,760,761]){
   await page.setViewportSize({width,height:844});
   for(const theme of ["light","dark"]){
+   await page.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+   if(width<=650){
+    // ResizeObserver publishes the measured height asynchronously. Wait
+    // for it before comparing the chapter offset to the visible header.
+    await page.waitForFunction(()=>{
+     const header=document.querySelector(".site-header");
+     const measured=parseFloat(getComputedStyle(document.documentElement)
+      .getPropertyValue("--mobile-site-header-height"));
+     return Number.isFinite(measured)&&
+      Math.abs(measured-Math.ceil(header.getBoundingClientRect().height))<=1;
+    });
+   }
    const metrics=await page.evaluate(theme=>{
     document.documentElement.dataset.theme=theme;
     const columns=selector=>getComputedStyle(document.querySelector(selector)).gridTemplateColumns.trim().split(/\s+/).length;
@@ -1677,7 +1689,7 @@ try{
    assert.equal(metrics.galleryCols,width<=760?1:2,width+"px "+theme+": gallery columns");
    if(width<=650){
     assert.ok(Math.abs(metrics.stickyTop-Math.ceil(metrics.headerHeight))<=1,
-     width+"px "+theme+": phone chapter offset follows actual sticky header height");
+     width+"px "+theme+": phone chapter offset follows actual sticky header height (offset="+metrics.stickyTop+", height="+metrics.headerHeight+")");
    }else{
     assert.equal(metrics.stickyTop,width<=760?64:72,
      width+"px "+theme+": tablet/desktop chapter offset remains unchanged");
