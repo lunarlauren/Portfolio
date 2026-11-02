@@ -202,9 +202,9 @@ html[data-theme="dark"] .case-view{
 .case-view .case-fact-label,
 .case-view .case-highlight-label{font-size:var(--case-type-meta)}
 .case-view .case-fact-value,.case-view .case-evidence-item strong{
- font-size:var(--case-type-small);line-height:1.6;
+ font-size:var(--case-type-small);
 }
-.case-view .case-fact-value{font-weight:400;overflow-wrap:break-word}
+.case-view .case-fact-value{font-weight:400;line-height:1.6;overflow-wrap:break-word}
 .case-view .case-fact-label{font-weight:650;letter-spacing:.09em}
 
 .case-view .case-head{
@@ -409,6 +409,5 @@ html[data-theme="dark"] .case-prose p{color:#d7e3ed}
 
 /* Case-study navigation retains touch targets and visible link focus.
    The wrapper itself receives programmatic focus only. */
-.case-next{min-height:44px;display:inline-flex;align-items:center}
 .case-view:focus{outline:none!important;box-shadow:none!important}
 
