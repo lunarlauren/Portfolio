@@ -1,10 +1,8 @@
 /* Navigation owns header geometry, opaque theme chrome and Aero glass.
    Opaque fallback keeps text legible where backdrop filters are unsupported. */
 :root{--site-chrome-bg:var(--notebook-paper,#fffdf8);--site-chrome-edge:var(--line)}
-html[data-theme="dark"]{
- --site-chrome-bg:var(--paper);
- --site-chrome-edge:var(--line);
-}
+/* --site-chrome-edge already follows the theme-aware --line alias. */
+html[data-theme="dark"]{--site-chrome-bg:var(--paper)}
 .site-header{
  position:sticky;top:0;z-index:100;max-width:none;width:100%;
  box-sizing:border-box;padding:8px clamp(18px,4vw,56px);
