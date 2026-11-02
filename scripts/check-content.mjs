@@ -931,9 +931,11 @@ assert.match(phoneHeroCss, /\.hero \.hero-copy>\.eyebrow\{[^}]*text-wrap:balance
 assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*background:transparent;[^}]*border:0;box-shadow:none/, 'Portrait should not inherit the busy featured-card surface');
 assert.match(phoneHeroCss, /\.hero \.notebook-hero-note\{display:none\}/, 'Phone intro should not repeat its message');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link,\.hero \.hero-foot\{display:none\}/, 'Phone hero should have one primary action');
+// Bound the phone-specific source check at the next media owner so unrelated
+// reduced-motion accessibility rules are not mistaken for phone overrides.
 // The phone layout already has sufficient component specificity. Keep the
 // two purposeful dark-heading !important declarations outside this block.
-assert.doesNotMatch(phoneHeroCss.slice(0,phoneHeroCss.indexOf('/* Desktop composition:')), /!important/,
+assert.doesNotMatch(phoneHeroCss.slice(0,phoneHeroCss.indexOf('/* Desktop art uses')), /!important/,
  'Phone hero geometry and visibility must not require important overrides');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.primary-link\{[^}]*min-height:48px/, 'Primary action needs a touch-friendly height');
 const phoneHeroMeasure = phoneHeroCss.match(/\.hero \.hero-description\{[^}]*max-width:(\d+)ch/);
