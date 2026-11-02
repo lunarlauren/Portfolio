@@ -30,8 +30,8 @@
 .case-process-note{padding:clamp(16px,2vw,24px);border-left:3px solid var(--line);background:var(--surface-blush);border-radius:0}
 .case-process-note h3{margin:0 0 8px;color:var(--ink)}
 .case-process-note p{margin:0}
-html[data-theme="dark"] .case-process-note{background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-lavender))}
-html[data-theme="dark"] .case-process-note h3{color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue))}
+html[data-theme="dark"] .case-process-note{background:color-mix(in srgb,var(--paper) 88%,var(--palette-lavender) 12%)}
+html[data-theme="dark"] .case-process-note h3{color:var(--brand-ink)}
 
 /* No-image briefs remain distinct from approved screenshots. The later dark
    hero surface rule supplies dark paint without duplicate placeholder tokens. */
@@ -40,7 +40,7 @@ html[data-theme="dark"] .case-process-note h3{color:color-mix(in srgb,var(--pale
  font:500 clamp(16px,1.55vw,20px)/1.55 'DM Sans',system-ui,sans-serif;
  color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-blue));text-align:left;
 }
-html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
+html[data-theme="dark"] .case-view .hero-image-brief{color:var(--brand-ink)}
 
 /* Case-study facts: definition-list semantics with a compact phone layout.
    Audience/scenario and constraints are source-backed editorial summaries,
@@ -104,9 +104,9 @@ html[data-theme="dark"] .case-view .hero-image-brief{color:color-mix(in srgb,var
  background:var(--surface-blush);font-weight:700;
 }
 html[data-theme="dark"] .case-view .case-section-links button[aria-current="location"]{
- border-color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));
- color:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));
- background:color-mix(in srgb,var(--palette-blue) 18%,var(--palette-navy));
+ border-color:var(--focus);
+ color:var(--brand-ink);
+ background:color-mix(in srgb,var(--paper) 78%,var(--palette-blue) 22%);
 }
 .case-section-links{display:flex;flex-wrap:wrap;gap:10px}
 
@@ -167,19 +167,21 @@ html[data-theme="dark"] .case-view .case-section-links button[aria-current="loca
  --case-chapter-hover:var(--surface-blush);
 }
 html[data-theme="dark"] .case-view{
- --case-cover-bg:color-mix(in srgb,var(--palette-navy) 72%,#0f1b26);
+ /* The global palette's navy becomes light ink in dark mode. Dark surfaces
+    must start from --paper so cover and reading text keep their contrast. */
+ --case-cover-bg:color-mix(in srgb,var(--paper) 90%,#243746 10%);
  --case-cover-border:color-mix(in srgb,var(--palette-blue) 32%,#243746);
  --case-cover-accent:var(--palette-pink);
  --case-cover-shadow:var(--paper-shadow-dark);
- --case-cover-title:var(--palette-paper);
- --case-cover-kicker:#cbdce9;
- --case-cover-lead:#c7d6e3;
+ --case-cover-title:var(--brand-ink);
+ --case-cover-kicker:var(--muted);
+ --case-cover-lead:var(--muted);
 
- --case-fact-bg:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-blue));
+ --case-fact-bg:color-mix(in srgb,var(--paper) 88%,var(--palette-blue) 12%);
  --case-fact-border:#718ba2;
- --case-fact-label:color-mix(in srgb,var(--palette-paper) 75%,var(--palette-blue));
- --case-fact-ink:color-mix(in srgb,var(--palette-paper) 90%,var(--palette-blue));
- --case-reading-bg:color-mix(in srgb,var(--palette-navy) 88%,#0f1b26);
+ --case-fact-label:var(--muted);
+ --case-fact-ink:var(--brand-ink);
+ --case-reading-bg:color-mix(in srgb,var(--paper) 96%,var(--palette-blue) 4%);
  --case-reading-rule:color-mix(in srgb,var(--palette-blue) 20%,transparent);
  --case-chapter-hover:color-mix(in srgb,var(--paper) 85%,var(--palette-blue));
 }
@@ -396,9 +398,9 @@ html[data-theme="dark"] .case-view{
 .case-next-nav a:focus-visible,.case-back:focus-visible{
  outline:3px solid var(--notebook-pink);outline-offset:4px;
 }
-html[data-theme="dark"] .case-back{color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue))}
-html[data-theme="dark"] .case-back:hover{color:#ffc2df}
-html[data-theme="dark"] .case-fact-label{color:#c6d5e2}
+html[data-theme="dark"] .case-back{color:var(--muted)}
+html[data-theme="dark"] .case-back:hover{color:var(--editorial-accent)}
+html[data-theme="dark"] .case-fact-label{color:var(--muted)}
 html[data-theme="dark"] .case-prose p{color:#d7e3ed}
 
 /* Routed case-study entrance and its local reduced-motion fallback. */

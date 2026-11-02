@@ -1,5 +1,13 @@
 # Portfolio developer handoff
 
+## Dark case-study contrast — Pass 35
+
+Case-study covers, fact cards, reading panels, process notes, chapter controls,
+and illustrative image briefs now use the dark paper token for their surfaces
+and light ink for their text. The global palette flips its navy token to light
+ink in dark mode, so dark component surfaces should start from `--paper`.
+Both affected stylesheet URLs use fresh cache keys.
+
 ## Header control target sizing — Pass 34
 
 The desktop theme switch now has a 44×44px hit area, matching Contact and the

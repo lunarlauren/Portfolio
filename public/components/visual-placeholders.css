@@ -32,9 +32,9 @@
    Place it after the light no-image rule so the two states share one paint. */
 html[data-theme="dark"] .project-visual,
 html[data-theme="dark"] .case-view .case-hero-visual{
- background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
- color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
- border-color:#496074;
+ background:color-mix(in srgb,var(--paper) 90%,var(--palette-blue) 10%);
+ color:var(--brand-ink);
+ border-color:var(--line);
 }
 /* Provenance travels with illustrative art, even after a file replaces its brief.
    The label is not a shipping-status badge and must never imply tested UI. */
