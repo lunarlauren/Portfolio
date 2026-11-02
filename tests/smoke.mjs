@@ -1155,29 +1155,80 @@ try{
  const aboutHeadshot=page.locator(".about-portrait img");
  await aboutHeadshot.scrollIntoViewIfNeeded();
  await page.waitForFunction(()=>document.querySelector(".about-portrait img")?.naturalWidth>0);
- // Temporary Pass 19 asset extraction: produce an exact-source WebP derivative
- // inside Chromium's local image pipeline; remove logging after committing.
- const diagnosticHeadshot=await aboutHeadshot.evaluate(img=>{
-  const ratio=Math.min(1,1024/img.naturalWidth,1440/img.naturalHeight);
-  const width=Math.max(1,Math.round(img.naturalWidth*ratio));
-  const height=Math.max(1,Math.round(img.naturalHeight*ratio));
-  const canvas=document.createElement("canvas");
-  canvas.width=width;
-  canvas.height=height;
-  const ctx=canvas.getContext("2d");
-  ctx.imageSmoothingEnabled=true;
-  ctx.imageSmoothingQuality="high";
-  ctx.drawImage(img,0,0,width,height);
-  const url=canvas.toDataURL("image/webp",0.86);
-  if(!url.startsWith("data:image/webp;base64,"))throw Error("Chromium WebP encoding unavailable");
-  return {originalWidth:img.naturalWidth,originalHeight:img.naturalHeight,
-   width,height,mime:"image/webp",base64:url.slice("data:image/webp;base64,".length)};
- });
- console.log("__PORTFOLIO_PASS19_IMAGE_START__"+JSON.stringify(diagnosticHeadshot)+
-  "__PORTFOLIO_PASS19_IMAGE_END__");
  assert.match(await aboutHeadshot.getAttribute("src"),/Headshot%20Lauren%20Leven\.png$/);
  assert.notEqual(await heroPortrait.getAttribute("src"),await aboutHeadshot.getAttribute("src"),
   "The About photograph must remain distinct from the illustrated hero");
+ // Pass 19: the original PNG remains the same-photo fallback; supporting
+ // browsers select the 1024px WebP without an unnecessary 4.57 MB PNG fetch.
+ const delivered=await aboutHeadshot.evaluate(img=>({
+  src:new URL(img.currentSrc).pathname,
+  original:img.getAttribute("src"),
+  naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,
+  width:img.getAttribute("width"),height:img.getAttribute("height"),
+  lazy:img.loading,decoding:img.decoding
+ }));
+ assert.equal(delivered.src,"/headshot-lauren-leven-1024.webp",
+  "Chromium should decode the actual smaller WebP source in About");
+ assert.equal(delivered.original,"/Headshot%20Lauren%20Leven.png",
+  "Original photo remains as the fallback source");
+ assert.equal(delivered.naturalWidth,1024,"Optimized image has 1024 source pixels");
+ assert.equal(delivered.naturalHeight,1024,"Optimized image keeps square source crop");
+ assert.equal(delivered.width,"2000","Fallback photo intrinsic width remains reserved");
+ assert.equal(delivered.height,"2000","Fallback photo intrinsic height remains reserved");
+ assert.equal(delivered.lazy,"lazy","About headshot remains lazy");
+ assert.equal(delivered.decoding,"async","About headshot keeps async decoding");
+
+ // Hold the WebP response to check whether the picture/image has a stable
+ // reserved box BEFORE any bytes arrive; then compare the same element after
+ // the response. This checks actual layout-shift resistance on phone/desktop.
+ for(const width of [390,1280]){
+  const imagePage=await browser.newPage({viewport:{width,height:844}});
+  imagePage.on("pageerror",error=>errors.push(error.message));
+  let releaseImage;
+  let resolvePending;
+  const paused=new Promise(resolve=>{resolvePending=resolve});
+  let pngRequests=0,webpRequests=0;
+  imagePage.on("request",request=>{
+   const path=new URL(request.url()).pathname;
+   if(path==="/Headshot%20Lauren%20Leven.png")pngRequests++;
+   if(path==="/headshot-lauren-leven-1024.webp")webpRequests++;
+  });
+  await imagePage.route("**/headshot-lauren-leven-1024.webp",route=>{
+   releaseImage=()=>route.continue();
+   resolvePending();
+  });
+  await imagePage.goto(origin+"/");
+  await imagePage.locator(".about-portrait").scrollIntoViewIfNeeded();
+  await paused;
+  const measure=()=>imagePage.locator(".about-portrait img").evaluate(img=>{
+   const rect=img.getBoundingClientRect();
+   return {
+    width:rect.width,height:rect.height,naturalWidth:img.naturalWidth,
+    ratio:rect.height/rect.width,
+    actual:new URL(img.currentSrc).pathname,
+    picture:getComputedStyle(img.parentElement).display
+   };
+  });
+  const before=await measure();
+  const expectedRatio=width<=600?1.25:1;
+  assert.ok(before.width>=100,width+"px: image reserves a visible width before loading");
+  assert.ok(Math.abs(before.ratio-expectedRatio)<0.03,
+   width+"px: image reserves the authored phone crop or desktop square before loading");
+  assert.equal(before.naturalWidth,0,width+"px: image bytes are still held back");
+  assert.equal(before.picture,"block",width+"px: picture wrapper does not add inline line-box");
+  await releaseImage();
+  await imagePage.waitForFunction(()=>document.querySelector(".about-portrait img")?.naturalWidth>0);
+  const after=await measure();
+  assert.equal(after.actual,"/headshot-lauren-leven-1024.webp",
+   width+"px: WebP source replaces full-size PNG request");
+  assert.ok(Math.abs(after.width-before.width)<1&&Math.abs(after.height-before.height)<1,
+   width+"px: image geometry stays stable when the lazy image finishes loading");
+  assert.equal(webpRequests,1,width+"px: exactly one optimized image request");
+  assert.equal(pngRequests,0,width+"px: browser does not download PNG in parallel");
+  await imagePage.close();
+ }
+
+
 
  // Pass 6: the editorial skin must not force heading colors or hero panel
  // paint with !important. Measure the resulting values at both sides of the
