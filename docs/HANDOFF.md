@@ -1,5 +1,12 @@
 # Portfolio developer handoff
 
+## Desktop header and chapter baselines — Pass 44
+
+Refresh the 1280px light/dark header snapshots for the aligned 66px header
+and the chapter-strip snapshots for their current 68px height. Combined with
+Pass 42's two 390px dark captures, these cover the six stale snapshots found
+when Chromium first reached the visual comparison step; the other six match.
+
 ## Media stylesheet cache — Pass 43
 
 The shared media stylesheet URL advances after its theme rules change, so
