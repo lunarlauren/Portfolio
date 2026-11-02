@@ -1,6 +1,8 @@
-/* Shared no-image project visuals. Load after styles.css, before scoped card styles.
-   Real supplied images retain the cover treatment from homepage-base.css. */
-.project-visual{background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
+/* Shared project-media owner: frame geometry, real-image cover crop, and
+   explicitly illustrative no-image briefs. Scoped Work and Playground paint
+   follows in their own components; never duplicate this frame in Work CSS. */
+.project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;min-height:190px;background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
+.project-visual img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
 .project-card:nth-child(3n+1) .project-visual:has(img){background:#ffd7eb}
 .project-card:nth-child(3n+3) .project-visual:has(img){background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-pink))}
 

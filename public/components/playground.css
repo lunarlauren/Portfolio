@@ -23,7 +23,7 @@
 }
 
 /* Keep project process evidence readable on the dark surface in either theme. */
-.playground .project-card .project-card-process{color:#e0e0e0;border-top-color:#777}
+.playground .project-card .project-card-process{border-top-color:#777}
 .playground .project-card .project-card-process strong{color:#f0f0f0}
 .playground .project-card .project-card-cta{color:#f3f7ff}
 .playground .project-card .project-meta{color:#d5d5d5}
@@ -31,9 +31,6 @@
 /* Night intro uses one rule in both themes. The stationery paper rule
    already sets a transparent background; these explicit colors stay local. */
 .playground .section-head>p{background:transparent;color:#e0e0e0}
-
-/* Night card edge belongs to Playground, not the late editorial skin. */
-.playground .play-grid .project-card-link{border-color:#666}
 
 /* Keyboard focus uses the shared ring, with higher contrast at night. */
 .playground {--card-focus-color:#a7d9ff}
@@ -66,7 +63,7 @@
 /* Stretch cards consistently on wider screens without hiding real imagery. */
 @media(min-width:761px){
  .playground .play-grid{align-items:stretch}
- .playground .play-grid>.project-card{display:flex;min-width:0}
+ .playground .play-grid>.project-card{display:flex}
  .playground .play-grid .project-card-link{
   display:flex;
   flex-direction:column;
