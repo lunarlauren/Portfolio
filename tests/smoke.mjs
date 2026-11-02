@@ -40,8 +40,69 @@ const readMetadata=page=>page.evaluate(()=>{
 try{
  const page=await browser.newPage();
  page.on("pageerror",error=>errors.push(error.message));
+ // Count real image requests, not markup occurrences: a mistaken preload URL
+ // or CORS mode can cause the browser to download the same image twice.
+ let heroImageRequests=0;
+ let retiredCssRequests=0;
+ page.on("request",request=>{
+  const path=new URL(request.url()).pathname;
+  if(path==="/laurenlevenportfolioheroportrait.png")heroImageRequests++;
+  if(path==="/styles.css")retiredCssRequests++;
+ });
  await page.goto(origin+"/");
  const homepageMetadata=await readMetadata(page);
+ // Pass 18: prove render-critical fonts and hero art are discovered in
+ // the HTML head, not by an @import waterfall after foundations.css.
+ await page.waitForFunction(()=>document.querySelector(".hero-portrait-art")?.naturalWidth>0);
+ const discovery=await page.evaluate(()=>{
+  const head=[...document.head.querySelectorAll("link")];
+  const fontSheet=head.find(link=>link.rel==="stylesheet"&&link.href.includes("fonts.googleapis.com/css2"));
+  const rootSheet=head.find(link=>link.rel==="stylesheet"&&link.href.includes("/components/foundations.css"));
+  const artPreload=head.find(link=>link.rel==="preload"&&link.as==="image");
+  const art=document.querySelector(".hero-portrait-art");
+  const headshot=document.querySelector(".about-portrait img");
+  const preconnects=head.filter(link=>link.rel==="preconnect");
+  return {
+   fontUrl:fontSheet?.href,
+   fontBeforeFoundation:fontSheet&&rootSheet?
+    head.indexOf(fontSheet)<head.indexOf(rootSheet):false,
+   googleCssConnect:preconnects.some(link=>link.href==="https://fonts.googleapis.com/"),
+   googleFileConnect:preconnects.some(link=>link.href==="https://fonts.gstatic.com/"&&
+    link.crossOrigin==="anonymous"),
+   artPreloadUrl:artPreload?.getAttribute("href"),
+   artPreloadPriority:artPreload?.fetchPriority,
+   preloadBeforeCSS:artPreload&&rootSheet?head.indexOf(artPreload)<head.indexOf(rootSheet):false,
+   artSrc:art.getAttribute("src"),
+   artPriority:art.fetchPriority,
+   artLoaded:art.naturalWidth>0,
+   bodyFont:getComputedStyle(document.body).fontFamily,
+   displayFont:getComputedStyle(document.querySelector(".hero h1")).fontFamily,
+   headshotLoading:headshot.loading,
+   headshotDecoding:headshot.decoding,
+   legacyCss:head.some(link=>link.rel==="stylesheet"&&new URL(link.href).pathname==="/styles.css")
+  };
+ });
+ assert.equal(discovery.googleCssConnect,true,"Font CSS origin should preconnect");
+ assert.equal(discovery.googleFileConnect,true,"Cross-origin font file host should preconnect anonymously");
+ assert.match(discovery.fontUrl||"",/family=DM\+Sans.*family=Newsreader.*display=swap/,
+  "Original DM Sans and Newsreader Google Fonts request is still used");
+ assert.equal(discovery.fontBeforeFoundation,true,
+  "Font CSS is discovered before first component stylesheet");
+ assert.equal(discovery.artPreloadUrl,"/laurenlevenportfolioheroportrait.png",
+  "Critical image preload uses the actual hero illustration URL");
+ assert.equal(discovery.artPreloadPriority,"high","Hero preload has high fetch priority");
+ assert.equal(discovery.preloadBeforeCSS,true,"Hero preload precedes render-blocking component CSS");
+ assert.equal(discovery.artSrc,discovery.artPreloadUrl,"Preload and img should reuse exact same URL");
+ assert.equal(discovery.artPriority,"high","Above-the-fold hero image retains high fetch priority");
+ assert.equal(discovery.artLoaded,true,"Hero image loads from the preloaded resource");
+ assert.equal(heroImageRequests,1,"Hero preload and img must result in one network request");
+ assert.equal(retiredCssRequests,0,"Inactive styles.css compatibility stub is no longer fetched");
+ assert.equal(discovery.legacyCss,false,"Inactive styles.css must not be linked in head");
+ assert.match(discovery.bodyFont,/DM Sans/,"Body text keeps its authored font-family stack");
+ assert.match(discovery.displayFont,/Newsreader/,"Headings keep the display font-family stack");
+ assert.equal(discovery.headshotLoading,"lazy","Large About portrait is not eagerly requested");
+ assert.equal(discovery.headshotDecoding,"async","About portrait remains asynchronously decoded");
+
  // Persisted appearance must be applied before the stylesheet paints, not
  // only by the late footer toggle controller (iOS Home Screen flash).
  const initialTheme=await page.evaluate(()=>({
