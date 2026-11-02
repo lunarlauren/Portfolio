@@ -13,9 +13,10 @@ html[data-theme="dark"]{
  --editorial-card-glow:rgba(255,255,255,.12);--editorial-card-shadow:rgba(0,0,0,.44);
 }
 .hero .hero-copy h1,.section-head h2,.about h2{letter-spacing:-.045em;text-wrap:balance}
-.hero .hero-copy h1 em,.section-head h2 em,.about h2 em{color:inherit!important;font-style:italic}
+/* Hero heading emphasis is owned by hero-polish.css, not this late skin. */
+.section-head h2 em,.about h2 em{color:inherit!important;font-style:italic}
 .hero .notebook-hero-note{border-bottom-color:var(--line)}
-.hero-feature,.hero .feature-art{background:transparent!important;box-shadow:none!important}
+/* The hero component already owns unframed art at every viewport width. */
 .hero .feature-art .hero-portrait-art{filter:grayscale(1) contrast(1.08);transition:filter .5s ease}
 .hero-feature:is(:hover,:focus-within) .hero-portrait-art{filter:grayscale(0)}
 /* Client work stays in color; About portrait retains its reveal and card lift remains animated. */
