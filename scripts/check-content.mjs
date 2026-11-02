@@ -144,11 +144,40 @@ assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;min-width:
  assert.equal(state.label,'Dark theme','System-driven changes must not rename the toggle');
 }
 
+// Pass 18: discover the font stylesheet in HTML rather than after the browser
+// downloads and parses foundations.css, and discover the above-fold image
+// before the many blocking component stylesheets. Preserve one image request.
+assert.doesNotMatch(foundationsCss,/@import\b/,
+ 'Foundation CSS must not create a serial Google Fonts request waterfall');
+assert.match(html, /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">/,
+ 'Preconnect to the Google Fonts CSS host');
+assert.match(html, /<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>/,
+ 'Font-file origin must preconnect with the matching anonymous CORS mode');
+assert.match(html, /<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com\/css2\?family=DM\+Sans:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6\.\.72,400\.\.800&amp;display=swap">/,
+ 'The original font weights, variable Newsreader range and swap strategy remain unchanged');
+assert.equal((html.match(/fonts\.googleapis\.com\/css2\?/g)||[]).length,1,
+ 'Only one Google Fonts stylesheet should be requested');
+const criticalImage='/laurenlevenportfolioheroportrait.png';
+assert.match(html, /<link rel="preload" as="image" href="\/laurenlevenportfolioheroportrait\.png" fetchpriority="high">/,
+ 'Above-the-fold illustration should be discovered in the head with high priority');
+assert.equal((html.match(/<link rel="preload" as="image"/g)||[]).length,1,
+ 'Only the hero image is critical enough to preload');
+assert.ok(html.indexOf('rel="preload" as="image"') < html.indexOf('/components/foundations.css'),
+ 'Critical image preload must precede render-blocking component CSS');
+assert.match(html, /class="hero-portrait-art" src="\/laurenlevenportfolioheroportrait\.png"[^>]*decoding="async" fetchpriority="high"/,
+ 'Preload and illustration must use the exact same URL and priority');
+assert.match(html, /class="about-portrait"[\s\S]*?<img src="\/Headshot%20Lauren%20Leven\.png"[^>]*loading="lazy" decoding="async"/,
+ 'Large About headshot stays lazy and asynchronously decoded');
+assert.doesNotMatch(html, /rel="preload"[^>]+Headshot/,
+ 'Do not preload the offscreen 4.57 MB About headshot');
+assert.doesNotMatch(html, /<link rel="stylesheet" href="\/styles\.css/,
+ 'Inactive compatibility stub should not create a render-blocking request');
+
 // Component ownership and stylesheet order are part of the visual contract.
-const stylesheetOrder = ['styles.css', 'visual-placeholders.css', 'playground.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'work-cards.css', 'case-study.css'];
+const stylesheetOrder = ['foundations.css', 'homepage-base.css', 'visual-placeholders.css', 'playground.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'work-cards.css', 'case-study.css', 'about.css', 'monochrome-editorial.css'];
 let previousPosition = -1;
 for (const name of stylesheetOrder) {
- const match = html.indexOf('/' + (name === 'styles.css' ? name : 'components/' + name));
+ const match = html.indexOf('/components/' + name);
  assert.ok(match > previousPosition, name + ' must load after the preceding stylesheet');
  previousPosition = match;
 }
@@ -701,7 +730,7 @@ assert.match(caseStudy, /chapterNav\.scrollLeft\+=delta/, 'Reveal must scroll th
 assert.doesNotMatch(css, /\.case-view \.case-section-links\{mask-image:/, 'Do not restore the one-sided fade that obscured chapter controls');
 // The version is intentionally updated with each CSS deployment. Do not pin a
 // smoke test to one historic cache-busting token: that made routine releases fail.
-assert.match(html, /styles\.css\?v=[a-zA-Z0-9-]+/, 'HTML must reference a versioned stylesheet');
+assert.match(html, /components\/foundations\.css\?v=[a-zA-Z0-9-]+/, 'HTML must load a versioned base stylesheet');
 
 // Case-study accessibility: the visible title names the active main landmark,
 // and evidence is a labeled group rather than an unnamed generic container.
