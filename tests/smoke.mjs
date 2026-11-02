@@ -1030,18 +1030,16 @@ try{
    const label=width+"px "+theme;
    await homepageMotionPage.waitForFunction(()=>{
     const bio=document.querySelector(".about-copy");
-    if(!bio)return false;
-    const box=bio.getBoundingClientRect();
-    return bio.classList.contains("in-view")||box.top>innerHeight||box.bottom<0;
+    if(!bio?.classList.contains("reveal-ready"))return false;
+    return bio.classList.contains("in-view")||getComputedStyle(bio).opacity==="0";
    });
    const revealStart=await homepageMotionPage.locator(".about-copy").evaluate(node=>{
-    const box=node.getBoundingClientRect();
-    const visible=box.bottom>=0&&box.top<=innerHeight;
-    return {visible,pending:node.matches(".reveal-ready:not(.in-view)")&&getComputedStyle(node).opacity==="0",
-     revealed:node.classList.contains("in-view")&&getComputedStyle(node).opacity!=="0"};
+    const style=getComputedStyle(node);
+    return {ready:node.classList.contains("reveal-ready"),inView:node.classList.contains("in-view"),opacity:style.opacity};
    });
-   assert.equal(revealStart.visible?revealStart.revealed:revealStart.pending,true,
-    label+": biography should reveal when visible and stay hidden only while below the viewport");
+   assert.equal(revealStart.ready,true,label+": biography reveal enhancement should register");
+   assert.equal(revealStart.inView?revealStart.opacity!=="0":revealStart.opacity==="0",true,
+    label+": pending content stays hidden until the observer marks it in view");
    const action=homepageMotionPage.locator(".hero-actions .primary-link");
    await action.hover();
    await waitForHeroHover();

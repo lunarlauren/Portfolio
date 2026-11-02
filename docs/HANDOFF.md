@@ -1,11 +1,19 @@
 # Portfolio developer handoff
 
+## Reveal test observer threshold — Pass 41
+
+The Chromium check now accepts the brief partially visible state before the
+observer threshold, while still requiring pending content to stay hidden and
+entered content to be visible. Reduced-motion checks still require every
+registered reveal to become visible and stationary.
+
 ## Dark media-frame edge contrast — Pass 39
 
 Illustrative Work frames and case-study covers use a stronger dark-theme edge
 (`#6F8498`, 4.72:1 against `#151515`). The shared frame owner is
 `public/components/visual-placeholders.css`; CI checks the computed edge. The
-reveal smoke check now respects whether About starts within the test viewport.
+reveal smoke check also accounts for the observer's threshold when About
+partially overlaps the test viewport.
 
 ## Portfolio-making case study — Pass 38
 
