@@ -8,9 +8,6 @@
    were overridden by the existing phone and tablet/desktop rules. */
 .hero-feature{isolation:isolate}
 .hero-feature .feature-art{z-index:0}
-/* The base headline already resolves theme ink through --brand-ink.
-   Only the dark emphasis needs a distinct neutral tone; no cascade override. */
-html[data-theme="dark"] .hero h1 em{color:var(--brand-pink);font-style:italic}
 /* Preserve existing dark footer ink, not a new palette approximation. */
 html[data-theme="dark"] .hero-foot{color:#b7c7d7}
 html:not([data-theme="dark"]) .hero{border-radius:22px;position:relative}
@@ -25,9 +22,7 @@ html:not([data-theme="dark"]) .hero-description{background:transparent;box-decor
    Keep typography and optical alignment here rather than in legacy CSS. */
 /* Notebook hero — expressive typography with legible mobile-first spacing.
    Keep the existing portrait asset; owner-supplied doodles can replace accents. */
-html:not([data-theme="dark"]) .hero h1{color:var(--brand-ink)}
-html:not([data-theme="dark"]) .hero h1 em{color:inherit;font-style:normal}
-.notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(1.0625rem,2vw,1.4375rem);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;border-bottom:2px solid var(--notebook-pink);margin:6px 0 14px}
+.notebook-hero-note{display:inline-flex;align-items:center;gap:9px;font-family:'Newsreader',Georgia,serif;font-size:clamp(1.0625rem,2vw,1.4375rem);font-style:italic;line-height:1.25;transform:none;background:transparent;padding:5px 0;margin:6px 0 14px}
 .notebook-hero-note span{font-size:1.5625rem;font-style:normal}
 html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-color:var(--brand-pink)}
 @media(max-width:760px){
@@ -38,7 +33,7 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 /* Optical alignment: the hero note uses the shared no-rotation baseline.
    Preserve its intentional border, padding, and margin adjustments. */
 .hero .notebook-hero-note{
- border-bottom:2px solid var(--notebook-pink);
+ border-bottom:2px solid var(--line);
  padding:5px 0 7px;
  margin-inline:0;
 }
@@ -75,15 +70,6 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
  .hero-feature{min-height:320px}
 }
 
-/* Motion preference applies to the artwork; the CTA guard is in homepage-base. */
-@media(prefers-reduced-motion:reduce){
- .hero-feature:hover .feature-art{transform:none}
-}
-/* At desktop sizes the illustration still fills its feature-art container.
-   The retired legacy desktop sizing/spacing was overridden by later rules. */
-@media(min-width:1024px){
- .hero .feature-art{height:100%;min-height:0}
-}
 
 /* Shared headline rhythm and illustration treatment in both themes. */
 .hero .hero-copy h1{max-width:15ch;text-wrap:balance;overflow-wrap:normal}
@@ -92,7 +78,7 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 .hero .feature-art .hero-portrait-art{
  position:relative;z-index:2;display:block;
  width:min(90%,430px);height:100%;max-height:100%;object-fit:contain;
- filter:drop-shadow(0 18px 22px rgba(25,45,65,.16));transform:rotate(8deg)
+ transform:rotate(8deg)
 }
 
 /* Allow the second headline line to wrap normally on smaller viewports. */
@@ -110,7 +96,7 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
 
 /* Desktop fold: preserve the side-by-side introduction and featured art. */
 @media(min-width:1024px){
- .hero.wrap{padding-block:clamp(26px,3.5vh,46px);gap:clamp(28px,3vw,52px)}
+ .hero.wrap{gap:clamp(28px,3vw,52px)}
  .hero .hero-copy h1{font-size:clamp(3.25rem,4.45vw,4.75rem);line-height:1.01;margin-block:14px 12px}
  .hero .notebook-hero-note{margin-block:4px 10px}
  .hero .hero-description{font-size:clamp(1rem,1.05vw,1.125rem);line-height:1.5}
@@ -150,10 +136,7 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
   inset:0;height:auto;min-height:0;display:grid;place-items:center;
   transform:none;filter:none
  }
- .hero .feature-art .hero-portrait-art{
-  width:min(89%,305px);height:100%;transform:none;
-  filter:drop-shadow(0 12px 16px rgba(25,45,65,.12))
- }
+ .hero .feature-art .hero-portrait-art{width:min(89%,305px);height:100%;transform:none}
  /* The note repeats the introduction on phones; retain it on larger screens. */
  .hero .notebook-hero-note{display:none}
  .hero .hero-description{
@@ -211,3 +194,13 @@ html[data-theme="dark"] .notebook-hero-note{background:var(--night-bg);border-co
     transform: none;
   }
 }
+
+/* MONOCHROME HERO PRESENTATION
+   Headline ink inherits the active theme; the emphasis remains editorial italic.
+   The image filter is intentional only for the hero portrait, not client work.
+   Keep these rules after responsive geometry to preserve the existing cascade. */
+.hero .hero-copy h1 em{color:inherit;font-style:italic}
+.hero .feature-art .hero-portrait-art{filter:grayscale(1) contrast(1.08);transition:filter .5s ease}
+.hero-feature:is(:hover,:focus-within) .hero-portrait-art{filter:grayscale(0)}
+@media(hover:none){.hero .feature-art .hero-portrait-art{filter:none}}
+@media(prefers-reduced-motion:reduce){.hero .feature-art .hero-portrait-art{transition:none!important}}
