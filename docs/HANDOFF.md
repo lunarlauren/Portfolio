@@ -1,5 +1,24 @@
 # Portfolio developer handoff
 
+## Homepage motion defaults — Pass 23
+
+`homepage-base.css` applies the primary button lift and arrow movement only
+when reduced motion is not requested. The arrow also retains its fine-pointer
+hover guard. The previous reduced-motion rule disabled the arrow's transition
+but still allowed its hover transform to jump to the shifted position.
+
+Reveal opacity/transforms and hero parallax are already opt-in, so their
+important resets are removed. The reduced-motion group disables transition
+properties directly and includes `.about h2.reveal-ready` to outrank the shared
+heading transition. Existing observed content becomes visible immediately when
+the visitor enables reduced motion. The editorial About portrait also disables
+transition properties without an important shorthand.
+
+Chromium checks exercise the actual homepage button, keyboard ring, portrait
+parallax and offscreen reveal targets at 390px/1280px in both themes, including
+live preference changes and restoring normal hover motion. Keep the global
+duration safeguard and existing visual baselines.
+
 ## Preference-aware project arrows — Pass 22
 
 `work-cards.css` places metadata-arrow transforms inside the existing

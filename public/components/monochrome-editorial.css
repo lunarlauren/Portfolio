@@ -19,7 +19,7 @@ html[data-theme="dark"]{
 .about-portrait img{filter:grayscale(1);transition:filter .45s ease,transform .45s ease}
 .about-portrait:is(:hover,:focus-within) img{filter:grayscale(0)}
 @media(prefers-reduced-motion:reduce){
- .about-portrait img{transition:none!important}
+ .about-portrait img{transition-property:none}
 }
 
 /* Project imagery remains full color. The hero portrait has its own scoped

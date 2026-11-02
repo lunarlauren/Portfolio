@@ -308,8 +308,6 @@ for(const selector of ['.hero .feature-art{height:100%;min-height:0}',
   'Desktop hero media block must own '+selector);
 }
 
-assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
- 'Reduced-motion CTA hover must remain with homepage button styles');
 // The hero notebook note and phone action sizing have one component owner.
 assert.doesNotMatch(css, /\.notebook-hero-note\s*\{|\.hero \.notebook-hero-note::before/,
  'Legacy CSS must not regain notebook note styles');
@@ -834,8 +832,6 @@ assert.doesNotMatch(homepageCss, /html\[data-theme="dark"\] \.primary-link:hover
  'Homepage must not compete with editorial dark CTA tokens');
 assert.match(homepageCss, /@media\(prefers-reduced-motion:no-preference\)\{[\s\S]*?\.reveal-ready\{animation:none;opacity:0/,
  'Homepage reveal must remain opt-in for motion');
-assert.match(homepageCss, /\.reveal-ready\{opacity:1!important;transform:none!important;transition:none!important\}/,
- 'Reduced-motion visitors must see revealed sections');
 assert.doesNotMatch(homepageCss, /@keyframes reveal-enter/,
  'Superseded reveal-enter keyframes must not return');
 
