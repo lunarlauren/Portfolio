@@ -278,6 +278,28 @@ function initSectionNavigation(){
  updateCurrent();
 }
 initSectionNavigation();
+/* The two-row phone header can grow when navigation text is enlarged.
+   Measure its rendered height for anchor and sticky chapter offsets instead
+   of assuming every visitor has a 110px header. The measured token must not
+   size the header itself, or shrink-back would be prevented by a feedback loop. */
+function initResponsiveHeaderHeight(){
+ const header=$(".site-header");
+ if(!header)return;
+ const root=document.documentElement;
+ let previous=0;
+ const update=()=>{
+  const height=Math.ceil(header.getBoundingClientRect().height);
+  if(height!==previous){
+   previous=height;
+   root.style.setProperty("--mobile-site-header-height",height+"px");
+  }
+ };
+ update();
+ if(typeof ResizeObserver==="function")new ResizeObserver(update).observe(header);
+ else window.addEventListener("resize",update,{passive:true});
+}
+initResponsiveHeaderHeight();
+
 $("#year").textContent=new Date().getFullYear();if(data.email&&data.email!=="hello@example.com"){const mail="mailto:"+data.email;$("#contact-link").href=mail;$("#email-link").href=mail}else{$("#contact-link").href="#about";$("#email-link").href="#about";$("#email-link").textContent="Contact details coming soon ↗"}
 
 /* Reveal elements when they enter the viewport, without hiding content when JS fails. */

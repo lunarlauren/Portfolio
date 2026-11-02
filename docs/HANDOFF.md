@@ -107,6 +107,31 @@ The temporary test mutations never alter authored project content. These
 tests supplement, but do not replace, manual full-page browser zoom and
 screen-reader review.
 
+## Enlarged-text phone header and measured sticky offsets — Pass 15
+
+At up to 650px, the navigation component keeps the same DOM order, two-row
+visual hierarchy, and minimum 44px touch targets. The first row is
+`minmax(44px,auto)`, and the links can wrap when root text is enlarged.
+The second row retains Contact and the theme toggle; no controls are removed,
+shrunken to illegible sizes, or sent into an inaccessible horizontal scroller.
+
+The header retains a *static* `min-height:110px` baseline. The small
+`initResponsiveHeaderHeight()` hook in `public/script.js` observes the
+actual rendered header height and updates
+`--mobile-site-header-height`. The variable is consumed by the mobile
+`scroll-padding-top` and section scroll margins in `navigation.css`, and by
+the phone case-study chapter strip and heading margins in `case-study.css`.
+**Do not use the measured variable to size the header itself**: that
+creates a feedback loop that can stop it shrinking when fonts return to
+normal. The code updates only on changes and falls back to a window resize
+listener where `ResizeObserver` is unavailable.
+
+Chromium tests verify 320/390/650px at normal, 200%, and restored text
+size, in both themes, checking bounding rectangles, nonoverlapping 44px
+navigation targets, keyboard focus, and real header/anchor/chapter offsets.
+This complements manual testing with actual browser zoom and display-scale
+settings.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
