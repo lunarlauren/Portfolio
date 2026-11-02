@@ -112,7 +112,7 @@ for (const width of [760, 650, 600, 480, 420]) caseBreakpoint(width);
 }
 
 // Component ownership and stylesheet order are part of the visual contract.
-const stylesheetOrder = ['styles.css', 'visual-placeholders.css', 'playground.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'case-study.css'];
+const stylesheetOrder = ['styles.css', 'visual-placeholders.css', 'playground.css', 'hero-polish.css', 'stationery.css', 'navigation.css', 'work-cards.css', 'case-study.css'];
 let previousPosition = -1;
 for (const name of stylesheetOrder) {
  const match = html.indexOf('/' + (name === 'styles.css' ? name : 'components/' + name));
@@ -685,10 +685,12 @@ assert.doesNotMatch(playgroundCss, /\.playground \.section-head h2\{display:bloc
 // Shared card geometry has one owner; the homepage base keeps only grids and hero.
 assert.doesNotMatch(homepageCss, /\.project-(?:card|visual|meta|card-link)\b/,
  'Shared card primitives must not return to homepage-base.css');
-assert.match(workCss, /\.project-visual\{display:grid;place-items:center;overflow:hidden;position:relative;/,
- 'Work component owns the shared card frame geometry');
-assert.match(workCss, /\.project-visual img\{width:100%;height:100%;object-fit:cover;/,
- 'Real project imagery must retain its cover crop');
+assert.match(visualPlaceholderCss, /\.project-visual\{display:grid;place-items:center;overflow:hidden;position:relative;/,
+ 'Shared visual component owns project frame geometry');
+assert.match(visualPlaceholderCss, /\.project-visual img\{width:100%;height:100%;object-fit:cover;/,
+ 'Shared visual component must preserve real image cover crop');
+assert.doesNotMatch(workCss, /(?:^|\n)\.project-visual(?:\{| img\{)/,
+ 'Do not split shared media geometry back into Work CSS');
 assert.doesNotMatch(workCss, /@media\(max-width:420px\)\{\s*\.work \.project-card-facts/,
  'The 600px facts stack already covers 420px; avoid duplicate overrides');
 
@@ -779,17 +781,20 @@ assert.ok(genericPaperRule >= 0 && playgroundContrastRule >= 0,
 assert.doesNotMatch(css, /\.section-head\s*\{|\.section-head>p\s*\{/, 'Retired legacy stylesheet must not contain heading rules');
 assert.doesNotMatch(playgroundCss, /\\n\/\* Beyond the Brief/, 'Escaped newline text must not invalidate Playground selectors');
 assert.match(playgroundCss, /\.playground\.wrap \{[^}]*background:#171717;/, 'After Hours must have a stable neutral night surface');
-assert.match(playgroundCss, /\.playground \.project-card \.project-card-process\{color:#e0e0e0;/, 'After Hours process text must be legible in both themes');
+assert.match(playgroundCss, /\.playground \.project-card p \{color:#e0e0e0\}/, 'After Hours paragraphs and process inherit readable night ink');
+assert.match(playgroundCss, /\.playground \.project-card \.project-card-process\{border-top-color:#777\}/, 'After Hours process divider retains its night contrast');
 assert.match(playgroundCss.slice(playgroundContrastRule, playgroundContrastRule + 120),
  /background:transparent/, 'Playground intro must not inherit paper background');
 assert.doesNotMatch(playgroundCss, /html(?:\:not\(\[data-theme="dark"\]\)|\[data-theme="dark"\]) \.playground \.section-head>p/,
  'Playground intro must use one theme-independent night rule');
 assert.doesNotMatch(playgroundCss, /\.playground \.section-head \.playground-title\{[^}]*!important/,
  'Night heading must not rely on redundant important overrides');
-assert.match(playgroundCss, /\.playground \.play-grid \.project-card-link\{border-color:#666\}/,
- 'Playground owns its night card edge');
-assert.doesNotMatch(editorialCss, /\.playground \.play-grid \.project-card-link\{border-color:/,
- 'Late editorial skin must not override Playground card borders');
+assert.doesNotMatch(playgroundCss + editorialCss, /\.playground \.play-grid \.project-card-link\{border-color:/,
+ 'Borderless Playground links must not accumulate ineffective border colors');
+assert.doesNotMatch(playgroundCss, /\.playground \.play-grid>\.project-card\{[^}]*min-width:/,
+ 'Shared project-card min-width must not be redeclared in Playground');
+assert.doesNotMatch(workCss, /html\[data-theme="dark"\] \.project-card-link\{color:|:is\(\.work,\.playground\) \.project-card-link\{\s*text-decoration-thickness:/,
+ 'Cards must inherit section ink and keep underline styling on the actual CTA');
 assert.match(playgroundCss, /\.playground \.project-card \.project-visual:not\(:has\(img\)\)\{background:#292929;border-color:#777\}/,
  'Night placeholder must outrank generic dark placeholder without important');
 assert.doesNotMatch(playgroundCss, /\.playground \.project-visual:not\(:has\(img\)\) :is\([^}]*!important/,

@@ -28,11 +28,9 @@
 /* Work archive cards: client folder tabs, verified contribution metadata,
    project previews, and dark-mode card surfaces. Loaded after base styles. */
 
-/* SHARED PROJECT CARD PRIMITIVES — Work and After Hours share geometry
-   and image motion. Work owns glass paint; Playground owns night contrast. */
+/* Shared card copy and interaction; visual-placeholders.css owns the frame
+   and cover crop. Work owns glass paint; Playground owns night contrast. */
 .project-card,.featured-project{min-width:0}
-.project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;min-height:190px}
-.project-visual img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
 .project-meta{font-size:var(--type-xs);line-height:1.5;letter-spacing:.13em;font-weight:700;margin-top:20px}
 .project-card h3{font:600 25px 'Newsreader';letter-spacing:-.04em;margin:8px 0}
 .project-card p{line-height:1.6;font-size:var(--type-sm)}
@@ -328,15 +326,9 @@ html[data-theme="dark"] .client-file{
  outline-offset:5px;
  border-radius:8px;
 }
-:is(.work,.playground) .project-card-link{
- text-decoration-thickness:1px;
- text-underline-offset:4px;
-}
-
-/* Baseline dark surfaces and typography for shared cards.
-   More specific collection / client-file rules above retain precedence. */
-html[data-theme="dark"] .project-card-link{color:var(--ink)}
-
+/* Links inherit their section ink. Work's CTA owns its underline, while
+   Playground's CTA uses the stationery highlighter; neither needs link-wide
+   underline metrics or a dark-theme ink override. */
 /* Programmatic focus does not draw boxes around static archive headings.
    Actual links retain their visible :focus-visible rings. */
 #work-title:focus{outline:none!important;box-shadow:none!important}

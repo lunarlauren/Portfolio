@@ -273,6 +273,7 @@ try{
    const section=document.querySelector("#playground");
    const heading=section.querySelector("#playground-title");
    const intro=section.querySelector(".section-head>p");
+   const process=section.querySelector(".project-card-process");
    const css=getComputedStyle(section),title=getComputedStyle(heading);
    // Synthetic brief protects the intentionally unsupplied image state even
    // if every current After Hours card eventually gains approved artwork.
@@ -296,6 +297,8 @@ try{
     headingVisible:title.display!=="none"&&title.visibility!=="hidden",
     introBackground:getComputedStyle(intro).backgroundColor,
     introColor:getComputedStyle(intro).color,
+    processColor:getComputedStyle(process).color,
+    processEdge:getComputedStyle(process).borderTopColor,
     headingColor:title.color,
     headingOpacity:title.opacity
    };
@@ -304,6 +307,10 @@ try{
    "Playground must retain its neutral charcoal surface in "+theme+" theme");
   assert.equal(night.introColor,"rgb(224, 224, 224)",
    "Playground introduction must retain readable night ink in "+theme+" theme");
+  assert.equal(night.processColor,"rgb(224, 224, 224)",
+   "Playground process text must inherit readable paragraph ink in "+theme+" theme");
+  assert.equal(night.processEdge,"rgb(119, 119, 119)",
+   "Playground process divider must retain its night edge in "+theme+" theme");
   assert.equal(night.headingVisible,true,"Playground heading must remain visible");
   assert.equal(night.headingColor,"rgb(255, 255, 255)",
    "Playground heading must retain white ink in "+theme+" theme");
@@ -349,6 +356,9 @@ try{
     const sample={
      briefSurface:noImage.backgroundColor,
      loadingSurface:withImage.backgroundColor,
+     imageFrameDisplay:withImage.display,
+     imageFrameRatio:withImage.aspectRatio,
+     imageFit:getComputedStyle(loading.querySelector("img")).objectFit,
      borderStyle:noImage.borderTopStyle,
      borderColor:noImage.borderTopColor,
      heroKickerInk:getComputedStyle(hero.querySelector(".brief-kicker")).color,
@@ -360,6 +370,9 @@ try{
    },theme);
    assert.equal(fallback.borderStyle,"dashed",
     width+"px "+theme+": shared illustrative frame must remain dashed");
+   assert.equal(fallback.imageFrameDisplay,"grid",width+"px "+theme+": real-image frame retains grid layout");
+   assert.equal(fallback.imageFrameRatio,"4 / 3",width+"px "+theme+": real-image frame retains aspect ratio");
+   assert.equal(fallback.imageFit,"cover",width+"px "+theme+": real images retain their cover crop");
    assert.equal(fallback.unrelatedKickerInk,"rgb(154, 50, 99)",
     width+"px "+theme+": unrelated labels must not inherit dark illustrative ink");
    if(theme==="dark"){
