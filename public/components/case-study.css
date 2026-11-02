@@ -296,6 +296,9 @@ html[data-theme="dark"] .case-view{
 }
 
 .case-view .case-gallery{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ margin-top:70px;
  align-items:start;
  gap:var(--space-4,1.5rem);
 }
