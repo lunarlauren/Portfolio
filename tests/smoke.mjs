@@ -69,26 +69,42 @@ try{
   "Dark footer must match the dark page surface");
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
- // Component token ownership must preserve actual chrome and notebook colors
- // in both themes; source checks alone cannot catch a late override.
- for(const theme of ["light","dark"]){
-  const tokens=await page.evaluate(theme=>{
-   document.documentElement.dataset.theme=theme;
-   const root=getComputedStyle(document.documentElement);
-   const value=name=>root.getPropertyValue(name).trim();
-   return {
-    paper:value("--paper"),notebook:value("--notebook-paper"),
-    edge:value("--site-chrome-edge"),line:value("--line"),
-    dots:value("--notebook-dot-color"),
-    texture:getComputedStyle(document.body).backgroundImage
-   };
-  },theme);
-  assert.equal(tokens.notebook,tokens.paper,theme+" notebook paper must follow the active paper token");
-  assert.equal(tokens.edge,tokens.line,theme+" chrome separator must use the opaque theme rule");
-  assert.equal(tokens.dots.replace(/\s/g,""),theme==="dark"?"rgba(245,245,245,.14)":"rgba(40,40,40,.14)",
-   theme+" notebook dots must retain the intended contrast");
-  assert.match(tokens.texture,/radial-gradient/,theme+" notebook texture must remain visible");
+ // Pass 7: root aliases --paper and --ink must resolve dynamically from
+ // the light/dark source palette without a second theme-specific declaration.
+ // Chrome edge likewise follows --line, including increased contrast below.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const tokens=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const root=getComputedStyle(document.documentElement);
+    const value=name=>root.getPropertyValue(name).trim();
+    return {
+     paper:value("--paper"),palettePaper:value("--palette-paper"),
+     ink:value("--ink"),brandInk:value("--brand-ink"),
+     notebook:value("--notebook-paper"),
+     edge:value("--site-chrome-edge"),line:value("--line"),
+     headerEdge:getComputedStyle(document.querySelector(".site-header")).getPropertyValue("--site-chrome-edge").trim(),
+     dots:value("--notebook-dot-color"),
+     texture:getComputedStyle(document.body).backgroundImage,
+     renderedInk:getComputedStyle(document.body).color
+    };
+   },theme);
+   assert.equal(tokens.paper,tokens.palettePaper,width+"px "+theme+": paper alias follows theme palette");
+   assert.equal(tokens.ink,tokens.brandInk,width+"px "+theme+": ink alias follows theme brand ink");
+   assert.equal(tokens.paper,theme==="dark"?"#151515":"#f5f3ef",width+"px "+theme+": paper palette stays unchanged");
+   assert.equal(tokens.ink,theme==="dark"?"#f1f0ec":"#171717",width+"px "+theme+": ink palette stays unchanged");
+   assert.equal(tokens.renderedInk,theme==="dark"?"rgb(241, 240, 236)":"rgb(23, 23, 23)",
+    width+"px "+theme+": body ink stays readable");
+   assert.equal(tokens.notebook,tokens.paper,width+"px "+theme+": notebook paper follows the active paper token");
+   assert.equal(tokens.edge,tokens.line,width+"px "+theme+": chrome edge follows the active separator");
+   assert.equal(tokens.headerEdge,tokens.line,width+"px "+theme+": header inherits the same separator");
+   assert.equal(tokens.dots.replace(/\s/g,""),theme==="dark"?"rgba(245,245,245,.14)":"rgba(40,40,40,.14)",
+    width+"px "+theme+": notebook dots retain contrast");
+   assert.match(tokens.texture,/radial-gradient/,width+"px "+theme+": notebook texture remains visible");
+  }
  }
+ await page.setViewportSize({width:1280,height:800});
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
  // Hero emphasis must resolve to the actual heading ink, not a late
@@ -133,9 +149,10 @@ try{
  await page.evaluate(()=>document.documentElement.dataset.theme="dark");
  const highContrast=await page.evaluate(()=>{
   const root=getComputedStyle(document.documentElement);
-  return {line:root.getPropertyValue("--line").trim(),muted:root.getPropertyValue("--muted").trim()};
+  return {line:root.getPropertyValue("--line").trim(),edge:root.getPropertyValue("--site-chrome-edge").trim(),muted:root.getPropertyValue("--muted").trim()};
  });
  assert.equal(highContrast.line,"#91adc3","Dark high-contrast separators must override standard theme");
+  assert.equal(highContrast.edge,highContrast.line,"Chrome edge must follow the stronger high-contrast separator");
  assert.notEqual(highContrast.muted,"#c4c4c4","High-contrast secondary ink must override standard theme");
  await contrastSession.send("Emulation.setEmulatedMedia",{features:[]});
  await contrastSession.detach();
