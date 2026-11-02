@@ -898,6 +898,53 @@ try{
   }
  }
 
+ // Pass 8: prove consolidated 760px/1024px media blocks preserve the
+ // original cascade at their boundaries, not just source selector counts.
+ // Phone, tablet, narrow desktop, and large desktop are checked in both themes.
+ for(const width of [600,601,650,651,760,761,950,951,1023,1024,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const layout=await page.evaluate(value=>{
+    document.documentElement.dataset.theme=value;
+    const get=selector=>getComputedStyle(document.querySelector(selector));
+    const feature=document.querySelector(".hero .hero-feature");
+    const art=document.querySelector(".hero .feature-art");
+    return {
+     minHeight:get(".hero .hero-feature").minHeight,
+     actionGap:get(".hero .hero-actions").columnGap,
+     emDisplay:get(".hero .hero-copy h1 em").display,
+     noteDisplay:get(".hero .notebook-hero-note").display,
+     heroDisplay:get(".hero").display,
+     columns:get(".hero").gridTemplateColumns,
+     featureHeight:feature.getBoundingClientRect().height,
+     artHeight:art.getBoundingClientRect().height,
+     heroPaddingTop:get(".hero").paddingTop
+    };
+   },theme);
+   const minHeight=width<=600?"0px":width<=650?"320px":
+    width<=760?"430px":width<=950?"420px":width<1024?"520px":"0px";
+   assert.equal(layout.minHeight,minHeight,width+"px "+theme+": portrait panel minimum height");
+   const gap=width<=600?"12px":width<=650?"14px":width<=760?"18px":"24px";
+   assert.equal(layout.actionGap,gap,width+"px "+theme+": responsive hero action gap");
+   assert.equal(layout.emDisplay,width<=760?"inline":"inline-block",
+    width+"px "+theme+": emphasis display across tablet cutoff");
+   assert.equal(layout.noteDisplay,width<=600?"none":"flex",
+    width+"px "+theme+": notebook note follows phone cutoff (flex items are blockified)");
+   assert.equal(layout.heroDisplay,width<=600?"flex":"grid",
+    width+"px "+theme+": hero maintains intentional layout mode");
+   if(width>=1024){
+    assert.ok(Math.abs(layout.artHeight-layout.featureHeight)<2,
+     width+"px "+theme+": desktop art fills the feature frame");
+    assert.equal(layout.minHeight,"0px",width+"px "+theme+": desktop frame has no minimum");
+    assert.ok(parseFloat(layout.heroPaddingTop)>=32,
+     width+"px "+theme+": desktop hero keeps reading gutter");
+   }else if(width>=601){
+    assert.equal(layout.columns.trim().split(/\s+/).length,width<=950?1:2,
+     width+"px "+theme+": column count remains stable at 950px boundary");
+   }
+  }
+ }
+ 
  // Regression for the compact About composition: a 12ch max-width on the
  // heading once created unnecessary extra lines on phones. Measure the actual
  // rendered width and confirm the photo still sits with the introduction.
