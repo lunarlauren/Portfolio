@@ -82,6 +82,8 @@ assert.match(caseCss, /\.case-view \.case-approach-label\{[^}]*white-space:norma
  'Cover label must be allowed to wrap on a narrow screen or with long text');
 assert.match(workCss, /\.work \.client-file \.archive-project-title\{[^}]*overflow-wrap:anywhere/,
  'Unbroken archive project titles must wrap inside their cards');
+assert.match(caseCss, /\.case-view \.case-head h1\{[^}]*overflow-wrap:anywhere/,
+ 'Unbroken case-study titles must wrap at desktop and not just phone widths');
 assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;min-width:0;max-width:100%;display:inline-flex;align-items:center;overflow-wrap:anywhere\}/, 'Routed case navigation and Back links retain 44px targets');
  assert.match(caseCss, /\.case-view\[tabindex="-1"\]:focus\{outline:none;box-shadow:none\}/,
   'Only the programmatically focused case wrapper suppresses its decorative ring');
