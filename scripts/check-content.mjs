@@ -1065,6 +1065,22 @@ for (const token of ['--palette-navy:#171717','--palette-paper:#f5f3ef',
  '--focus:#235f88','--line:#c8c5c0','--surface-blush:#eeece8']) {
  assert.ok(foundationsCss.includes(token), 'Global light token belongs in foundations.css: ' + token);
 }
+// Pass 7: derived theme aliases should be declared once on :root, then
+// resolve from the active palette. A dark redeclaration can drift from them.
+for(const alias of ["paper","ink"]){
+ const declaration=new RegExp("--"+alias+"\\s*:","g");
+ assert.equal((foundationsCss.match(declaration)||[]).length,1,
+  "Derived --"+alias+" must have one declaration in foundations.css");
+}
+assert.match(foundationsCss,/--paper:var\(--palette-paper\)/,
+ "Paper alias must follow --palette-paper");
+assert.match(foundationsCss,/--ink:\s*var\(--brand-ink\)/,
+ "Ink alias must follow --brand-ink");
+assert.equal((navigationCss.match(/--site-chrome-edge\s*:/g)||[]).length,1,
+ "Navigation chrome edge must be declared once and derive from --line");
+assert.match(navigationCss,/--site-chrome-edge:var\(--line\)/,
+ "Navigation chrome edge must track the active theme line color");
+
 assert.doesNotMatch(stationeryCss,/--palette-(?:navy|paper|pink|blue|green|lavender)\s*:/,
  'Stationery must not redefine shared palette tokens');
 assert.doesNotMatch(editorialCss,/--(?:palette-[a-z-]+|notebook-pink|brand-pink|paper|ink|brand-ink|line|surface-blush|focus|muted)\s*:/,
