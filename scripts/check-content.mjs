@@ -176,16 +176,19 @@ assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must rem
 // Hero ink, artwork stacking and 420px wrapping have one component owner.
 assert.doesNotMatch(css, /\.hero-feature|\.hero-foot|\.hero-description|\.hero-copy|\.hero h1|@media\(max-width:420px\)/,
  'Legacy paper rules must not regain hero declarations');
-// Editorial hero ink comes from the component, not a late !important skin.
-assert.match(heroPolishCss, /html\[data-theme="dark"\] \.hero h1 em\{color:var\(--brand-pink\);font-style:italic\}/,
- 'Dark hero emphasis retains its neutral editorial tint');
-assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero h1 em\{color:inherit;font-style:normal\}/,
- 'Light hero emphasis inherits its heading ink');
-assert.doesNotMatch(heroPolishCss, /!important/, 'Hero layout and ink must have no important declarations');
-assert.doesNotMatch(editorialCss, /\.hero \.hero-copy h1 em[^}]*color:inherit!important/,
- 'Late editorial skin must not override hero emphasis color');
-assert.doesNotMatch(editorialCss, /\.hero-feature,\.hero \.feature-art\{background:transparent!important/,
- 'Unframed hero surface paint must not be forced by editorial skin');
+// Hero typography and portrait filters must have one component owner.
+assert.match(heroPolishCss, /\\.hero \\.hero-copy h1 em\\{color:inherit;font-style:italic\\}/,
+ 'Hero emphasis must inherit readable light/dark ink and retain editorial italic');
+assert.match(heroPolishCss, /\\.hero \\.feature-art \\.hero-portrait-art\\{filter:grayscale\\(1\\) contrast\\(1\\.08\\);transition:filter \\.5s ease\\}/,
+ 'Hero component owns grayscale reveal and timing');
+assert.match(heroPolishCss, /@media\\(hover:none\\)\\{\\.hero \\.feature-art \\.hero-portrait-art\\{filter:none\\}\\}/,
+ 'Touch visitors must see the full-color hero portrait');
+assert.match(heroPolishCss, /@media\\(prefers-reduced-motion:reduce\\)\\{\\.hero \\.feature-art \\.hero-portrait-art\\{transition:none!important\\}\\}/,
+ 'Reduced-motion hero reveal must not animate');
+assert.doesNotMatch(heroPolishCss, /color:var\\(--brand-pink\\)!important|background:transparent!important/,
+ 'Hero ink and surfaces must not need forced paint');
+assert.doesNotMatch(editorialCss, /\\.hero(?:-feature| \\.hero-copy| \\.feature-art| \\.notebook-hero-note)/,
+ 'Editorial skin must not own hero geometry, ink, note or portrait treatment');
 assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero-description\{background:transparent;/,
  'Hero component keeps notebook paper visible through description');
 assert.match(heroPolishCss, /@media\(max-width:420px\)\{[\s\S]*?\.hero \.hero-description\{max-width:100%;overflow-wrap:break-word\}/,
