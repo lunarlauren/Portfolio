@@ -13,6 +13,21 @@ entrance animations. When editing animation timing or chapter navigation,
 test both themes and the reduced-motion setting. Do not merge media
 conditions with different accessibility semantics merely to reduce file size.
 
+## Selector ownership — Pass 10
+
+Professional Work entries are rendered as `.featured-project.client-file`.
+For archive titles and metadata, `work-cards.css` deliberately uses
+`.work .client-file .archive-project-title` and
+`.work .client-file .project-meta` rather than repeating both structural
+classes. Their shared specificity is sufficient to beat generic card type;
+the 600px title override retains the same selector and follows later.
+
+Case-study next links are generated as `a.case-next` inside
+`.case-next-nav`. The existing `.case-next-nav a,.case-back` rule owns
+44px touch targets and alignment; do not add a redundant `.case-next`
+size rule. Case fact values retain 1.6 line-height, while evidence
+`strong` text retains 1.5. Computed-style tests cover both themes.
+
 ## Source of truth
 Edit the production-facing site in `public/`; obsolete root-level prototype files were removed and must not be recreated. `public/content.js` holds project narratives, constraints, evidence boundaries, outcomes, and planned imagery. `public/script.js` owns routing and archive cards. `public/components/project-content.js` owns case-study evidence, highlights, and facts; `public/components/case-study.js` renders case studies and chapter navigation. Their order in `public/index.html` matters: **content → project-content → case-study → script**.
 
