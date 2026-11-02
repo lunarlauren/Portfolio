@@ -183,6 +183,54 @@ try{
  await page.setViewportSize({width:1280,height:800});
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // Pass 21: one foundation token owner must preserve rendered heading type
+ // and paragraph rhythm at phone/desktop widths in both themes. The archive
+ // title's background highlight retains its stationery-specific transition.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const typography=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const style=selector=>getComputedStyle(document.querySelector(selector));
+    const sample=document.createElement("p");
+    sample.textContent="Type scale check";
+    document.body.append(sample);
+    const paragraph=getComputedStyle(sample);
+    const values={
+     headingFamily:style(".hero h1").fontFamily,
+     headingWeight:style(".hero h1").fontWeight,
+     headingTransition:style(".hero h1").transitionProperty,
+     workFamily:style(".work .section-head h2").fontFamily,
+     workWeight:style(".work .section-head h2").fontWeight,
+     aboutFamily:style(".about h2").fontFamily,
+     aboutWeight:style(".about h2").fontWeight,
+     paragraphSize:paragraph.fontSize,
+     paragraphLineHeight:paragraph.lineHeight,
+     skipPadding:style(".skip-link").paddingTop,
+     archiveTitleTransition:style(".work .archive-project-title").transitionProperty
+    };
+    sample.remove();
+    return values;
+   },theme);
+   const label=width+"px "+theme;
+   for(const key of ["headingFamily","workFamily","aboutFamily"]){
+    assert.match(typography[key],/Newsreader/,label+": "+key+" uses shared display type");
+   }
+   for(const key of ["headingWeight","workWeight","aboutWeight"]){
+    assert.equal(typography[key],"600",label+": "+key+" preserves heading weight");
+   }
+   assert.equal(typography.paragraphSize,"16px",label+": paragraph body token");
+   assert.equal(typography.paragraphLineHeight,"25.6px",label+": paragraph leading");
+   assert.equal(typography.skipPadding,"12px",label+": skip-link retains its hit area");
+   assert.match(typography.headingTransition,/font-variation-settings/,
+    label+": heading retains editorial axis transition");
+   assert.equal(typography.archiveTitleTransition,"background-size",
+    label+": archive title keeps its stationery highlighter transition");
+  }
+ }
+ await page.setViewportSize({width:1280,height:800});
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // Pass 7: root aliases --paper and --ink must resolve dynamically from
  // the light/dark source palette without a second theme-specific declaration.
  // Chrome edge likewise follows --line, including increased contrast below.
