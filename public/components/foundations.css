@@ -36,9 +36,7 @@ html[data-theme="dark"] {
   --focus:#a6d9ff;
   --muted:#c4c4c4;
   --line:#565656;
-  --paper:var(--palette-paper);
   --brand-ink:#f1f0ec;
-  --ink:var(--brand-ink);
   --brand-pink:#dedede;
   --surface-blush:#242424;
   color-scheme:dark;
