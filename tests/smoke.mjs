@@ -1011,6 +1011,66 @@ try{
  }
  await reflowPage.close();
 
+ // Pass 23: a live motion-preference change must stop the hero action and
+ // reveal already-registered offscreen content, without removing focus cues.
+ const homepageMotionPage=await browser.newPage({reducedMotion:"no-preference"});
+ homepageMotionPage.on("pageerror",error=>errors.push(error.message));
+ const waitForHeroHover=()=>homepageMotionPage.waitForFunction(()=>{
+  const button=document.querySelector(".hero-actions .primary-link");
+  const arrow=new DOMMatrixReadOnly(getComputedStyle(button.querySelector("span")).transform);
+  const action=new DOMMatrixReadOnly(getComputedStyle(button).transform);
+  return Math.abs(arrow.m41-4)<0.01&&Math.abs(arrow.m42+3)<0.01&&Math.abs(action.m42+3)<0.01;
+ });
+ for(const width of [390,1280]){
+  await homepageMotionPage.setViewportSize({width,height:900});
+  for(const theme of ["light","dark"]){
+   await homepageMotionPage.emulateMedia({reducedMotion:"no-preference"});
+   await homepageMotionPage.goto(origin+"/");
+   await homepageMotionPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
+   const label=width+"px "+theme;
+   assert.equal(await homepageMotionPage.locator(".about-copy").evaluate(node=>
+    node.matches(".reveal-ready:not(.in-view)")&&getComputedStyle(node).opacity==="0"),true,
+    label+": offscreen biography starts with its normal entrance pending");
+   const action=homepageMotionPage.locator(".hero-actions .primary-link");
+   await action.hover();
+   await waitForHeroHover();
+   await homepageMotionPage.emulateMedia({reducedMotion:"reduce"});
+   await homepageMotionPage.evaluate(()=>new Promise(done=>
+    requestAnimationFrame(()=>requestAnimationFrame(done))));
+   const still=await homepageMotionPage.evaluate(()=>{
+    const action=document.querySelector(".hero-actions .primary-link");
+    const arrow=action.querySelector("span");
+    const portrait=document.querySelector(".hero .hero-portrait-art");
+    return {
+     transforms:[action,arrow].map(node=>getComputedStyle(node).transform),
+     transitions:[action,arrow,document.querySelector(".about-portrait img")]
+      .map(node=>getComputedStyle(node).transitionProperty),
+     portraitTranslate:getComputedStyle(portrait).translate,
+     reveals:[...document.querySelectorAll(".reveal-ready")].map(node=>{
+      const style=getComputedStyle(node);
+      return {opacity:style.opacity,transform:style.transform,transition:style.transitionProperty};
+     })
+    };
+   });
+   assert.ok(still.transforms.every(value=>value==="none"),label+": reduced-motion button and arrow stay stationary");
+   assert.ok(still.transitions.every(value=>value==="none"),label+": actions and About photo disable transitions");
+   assert.equal(still.portraitTranslate,"none",label+": portrait parallax stops");
+   assert.ok(still.reveals.length>0&&still.reveals.every(value=>
+    value.opacity==="1"&&value.transform==="none"&&value.transition==="none"),
+    label+": all previously registered reveal content is visible and stationary");
+   await action.focus();
+   await homepageMotionPage.keyboard.press("Tab");
+   await homepageMotionPage.keyboard.press("Shift+Tab");
+   assert.equal(await action.evaluate(node=>node.matches(":focus-visible")&&
+    getComputedStyle(node).outlineStyle==="solid"&&parseFloat(getComputedStyle(node).outlineWidth)>=3),true,
+    label+": reduced-motion primary action retains its keyboard ring");
+   await homepageMotionPage.emulateMedia({reducedMotion:"no-preference"});
+   await action.hover();
+   await waitForHeroHover();
+  }
+ }
+ await homepageMotionPage.close();
+
  // Reduced-motion visitors must not receive Playground preview or case entrance motion.
  const reducedMotionPage=await browser.newPage({reducedMotion:"reduce"});
  reducedMotionPage.on("pageerror",error=>errors.push(error.message));
