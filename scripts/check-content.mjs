@@ -60,6 +60,22 @@ for (const width of [760, 650, 600, 480, 420]) caseBreakpoint(width);
  assert.doesNotMatch(css, /html\[data-theme="dark"\] \.hero-description\s*,/, 'Legacy dark text outline must not return');
 }
 
+// Pass 17: an opaque header does not benefit from backdrop-filter;
+// backdrop compositing costs should not be imposed on a scrolling header.
+// The translucent toggle's paper mix and inset gloss must remain intact.
+assert.doesNotMatch(navigationCss,/(?:-webkit-)?backdrop-filter\s*:/,
+ 'Opaque header and toggle must not request unnecessary backdrop compositing');
+assert.match(navigationCss, /@supports \(color:color-mix\(in srgb,black 50%,white 50%\)\)/,
+ 'Optional color-mix surface treatment should be guarded by its actual feature');
+assert.match(navigationCss,/\.site-header \.theme-toggle\{[^}]*background:color-mix\(in srgb,var\(--site-chrome-bg\) 68%,transparent\);[^}]*box-shadow:inset 0 1px 0/,
+ 'Theme toggle keeps its semi-transparent paper gloss and inset highlight');
+assert.match(navigationCss,/\.site-header\{[^}]*background:var\(--site-chrome-bg\)/,
+ 'Sticky header stays fully opaque for reliable contrast');
+assert.doesNotMatch(homepageCss,/will-change\s*:/,
+ 'Do not reserve permanent compositor layers for the hero portrait');
+assert.match(homepageCss,/\.hero \.hero-portrait-art\{translate:0 var\(--hero-parallax-y,0px\)\}/,
+ 'Parallax translate remains animated only as its runtime offset changes');
+
 // Navigation and viewport ownership regressions: source-level, not visual QA.
 {
  assert.doesNotMatch(css, /scroll-padding-top:82px|scroll-margin-top:82px|site-header nav a,\.feature-project-link/, 'Legacy CSS must not regain mixed navigation rules');
