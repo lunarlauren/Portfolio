@@ -2,7 +2,10 @@
    explicitly illustrative no-image briefs. Scoped Work and Playground paint
    follows in their own components; never duplicate this frame in Work CSS. */
 .project-visual{display:grid;place-items:center;overflow:hidden;position:relative;isolation:isolate;aspect-ratio:4/3;min-height:190px;background:color-mix(in srgb,var(--palette-paper) 80%,var(--palette-blue))}
-.project-visual img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
+/* Gallery previews and case-study heroes share image cropping. Only previews
+   need a stacking layer above their frame. */
+.project-visual img,.case-hero-visual img{width:100%;height:100%;object-fit:cover}
+.project-visual img{position:relative;z-index:2}
 .project-card:nth-child(3n+1) .project-visual:has(img){background:#ffd7eb}
 .project-card:nth-child(3n+3) .project-visual:has(img){background:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-pink))}
 
@@ -27,11 +30,23 @@
 }
 /* Dark fallback covers both loading images and illustrative briefs.
    Place it after the light no-image rule so the two states share one paint. */
-html[data-theme="dark"] .project-visual{
+html[data-theme="dark"] .project-visual,
+html[data-theme="dark"] .case-view .case-hero-visual{
  background:color-mix(in srgb,var(--palette-navy) 95%,var(--palette-green));
  color:color-mix(in srgb,var(--palette-paper) 85%,var(--palette-blue));
  border-color:#496074;
 }
+/* Provenance travels with illustrative art, even after a file replaces its brief.
+   The label is not a shipping-status badge and must never imply tested UI. */
+:is(.project-visual,.case-hero-visual) > .visual-image-status{
+ position:absolute;inset-inline-start:12px;bottom:12px;z-index:2;
+ max-width:calc(100% - 24px);box-sizing:border-box;
+ padding:7px 10px;border:1px solid var(--line);border-radius:4px;
+ background:var(--paper);color:var(--ink);
+ font:700 0.6875rem/1.4 'DM Sans',system-ui,sans-serif;
+ letter-spacing:.06em;pointer-events:none;
+}
+
 /* The renderer's .visual-label.visual-brief is already inside the dashed frame. */
 .project-visual .visual-brief{
  display:flex;flex-direction:column;align-items:flex-start;
