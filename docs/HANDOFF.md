@@ -1,5 +1,11 @@
 # Portfolio developer handoff
 
+## Media stylesheet cache — Pass 43
+
+The shared media stylesheet URL advances after its theme rules change, so
+production browsers request the reviewed frame-edge update instead of a
+cached copy.
+
 ## Mobile dark-mode visual baselines — Pass 42
 
 Refresh only the 390px dark header and case-study chapter snapshots to the
@@ -17,9 +23,7 @@ registered reveal to become visible and stationary.
 
 Illustrative Work frames and case-study covers use a stronger dark-theme edge
 (`#6F8498`, 4.72:1 against `#151515`). The shared frame owner is
-`public/components/visual-placeholders.css`; CI checks the computed edge. The
-reveal smoke check also accounts for the observer's threshold when About
-partially overlaps the test viewport.
+`public/components/visual-placeholders.css`; CI checks the computed edge.
 
 ## Portfolio-making case study — Pass 38
 
