@@ -1373,8 +1373,8 @@ assert.match(workCss, /\.client-file \.client-file-label\{[\s\S]*?background:var
 
 // Action colors have one component owner per surface. Shared tokens retain
 // both-theme contrast without a dark-only !important override.
-assert.match(editorialCss, /--editorial-action-ink:#fff;/, 'Light editorial actions need white hover ink');
-assert.match(editorialCss, /--editorial-accent:#a6d9ff;--editorial-action-ink:#111;/, 'Dark editorial actions need near-black hover ink');
+assert.match(editorialCss.replace(/\s+/g, ''), /--editorial-action-ink:#fff;/, 'Light editorial actions need white hover ink');
+assert.match(editorialCss.replace(/\s+/g, ''), /--editorial-accent:#a6d9ff;--editorial-action-ink:#111;/, 'Dark editorial actions need near-black hover ink');
 assert.match(homepageCss, /\.primary-link:is\(:hover,:focus-visible\)\{[^}]*color:var\(--editorial-action-ink\)/,
  'Primary hover and keyboard focus use theme-aware ink');
 assert.doesNotMatch(homepageCss, /html\[data-theme="dark"\] \.primary-link/,
