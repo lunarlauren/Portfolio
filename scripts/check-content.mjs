@@ -176,16 +176,21 @@ assert.match(heroPolishCss, /\.hero \.hero-copy h1\{/, 'Hero typography must rem
 // Hero ink, artwork stacking and 420px wrapping have one component owner.
 assert.doesNotMatch(css, /\.hero-feature|\.hero-foot|\.hero-description|\.hero-copy|\.hero h1|@media\(max-width:420px\)/,
  'Legacy paper rules must not regain hero declarations');
-// Editorial hero ink comes from the component, not a late !important skin.
-assert.match(heroPolishCss, /html\[data-theme="dark"\] \.hero h1 em\{color:var\(--brand-pink\);font-style:italic\}/,
- 'Dark hero emphasis retains its neutral editorial tint');
+// Hero typography and portrait filters must have one component owner.
 assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero h1 em\{color:inherit;font-style:normal\}/,
- 'Light hero emphasis inherits its heading ink');
-assert.doesNotMatch(heroPolishCss, /!important/, 'Hero layout and ink must have no important declarations');
-assert.doesNotMatch(editorialCss, /\.hero \.hero-copy h1 em[^}]*color:inherit!important/,
- 'Late editorial skin must not override hero emphasis color');
-assert.doesNotMatch(editorialCss, /\.hero-feature,\.hero \.feature-art\{background:transparent!important/,
- 'Unframed hero surface paint must not be forced by editorial skin');
+ 'Light hero emphasis inherits headline ink without italics');
+assert.match(heroPolishCss, /html\[data-theme="dark"\] \.hero h1 em\{color:var\(--brand-pink\);font-style:italic\}/,
+ 'Dark hero emphasis keeps the neutral italic treatment');
+assert.match(heroPolishCss, /\.hero \.feature-art \.hero-portrait-art\{filter:grayscale\(1\) contrast\(1\.08\);transition:filter \.5s ease\}/,
+ 'Hero component owns grayscale reveal and timing');
+assert.match(heroPolishCss, /@media\(hover:none\)\{\.hero \.feature-art \.hero-portrait-art\{filter:none\}\}/,
+ 'Touch visitors must see the full-color hero portrait');
+assert.match(heroPolishCss, /@media\(prefers-reduced-motion:reduce\)\{\.hero \.feature-art \.hero-portrait-art\{transition:none!important\}\}/,
+ 'Reduced-motion hero reveal must not animate');
+assert.doesNotMatch(heroPolishCss, /color:var\(--brand-pink\)!important|background:transparent!important/,
+ 'Hero ink and surfaces must not need forced paint');
+assert.doesNotMatch(editorialCss, /\.hero(?:-feature| \.hero-copy| \.feature-art| \.notebook-hero-note)/,
+ 'Editorial skin must not own hero geometry, ink, note or portrait treatment');
 assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero-description\{background:transparent;/,
  'Hero component keeps notebook paper visible through description');
 assert.match(heroPolishCss, /@media\(max-width:420px\)\{[\s\S]*?\.hero \.hero-description\{max-width:100%;overflow-wrap:break-word\}/,
@@ -201,6 +206,12 @@ assert.match(heroPolishCss, /@media\(max-width:760px\)\{[\s\S]*?\.hero-actions\{
  'Hero component must retain tablet spacing and action gap');
 assert.match(heroPolishCss, /@media\(max-width:650px\)\{[\s\S]*?\.hero-feature\{min-height:320px\}/,
  'Hero component must preserve the 650px fold and illustration height');
+// 601–760px tablet and <=600px phone selectors already own the final type.
+// The retired 650/760px base sizes never reached computed style at any width.
+assert.doesNotMatch(heroPolishCss, /font-size:clamp\(3\.125rem,12vw,4\.875rem\)|font-size:clamp\(2\.875rem,11\.2vw,4\.375rem\)/,
+ 'Shadowed intermediate hero heading sizes must stay retired');
+assert.doesNotMatch(heroPolishCss, /max-width:37ch|width:min\(88%,360px\)|transform:rotate\(8deg\)/,
+ 'Dead intermediate hero description and portrait geometry must stay retired');
 assert.match(heroPolishCss, /\.hero \.feature-art\{height:100%;min-height:0\}/,
  'Desktop hero art must retain its original fill height');
 assert.match(homepageCss, /\.primary-link:hover\{transform:none\}/,
