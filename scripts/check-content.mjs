@@ -1024,12 +1024,32 @@ assert.match(script, /const preview=professional\?title:visual\(p\)/, 'Professio
 assert.match(script, /\+process\+\(professional\?visual\(p\):''\)\+cta/, 'Professional media follows the reviewed approach');
 assert.match(workCss, /@media\(max-width:359px\)\{\.work \.project-card-facts\{grid-template-columns:minmax\(0,1fr\)\}\}/,
  'Only very narrow phones stack the role and delivery facts');
-assert.ok(navigationCss.includes('gap:clamp(8px,2.4vw,18px)'), 'Phone navigation spacing should remain intentional');
-assert.match(navigationCss, /grid-template-rows:44px 44px/, 'Phone header must use two rows');
+assert.ok(navigationCss.includes('column-gap:clamp(8px,2.4vw,18px);row-gap:0;min-width:0'), 'Phone navigation spacing should remain intentional while wrapping');
+assert.match(navigationCss, /grid-template-rows:minmax\(44px,auto\) minmax\(44px,auto\)/, 'Phone header rows must expand with enlarged text');
 assert.match(navigationCss, /grid-row:1\/3/, 'Logo must span the two rows');
 assert.match(navigationCss, /--mobile-site-header-height:110px/, 'Phone header height must be shared');
 assert.match(caseCss, /top:var\(--mobile-site-header-height,110px\)/, 'Case chapter strip must clear the phone header');
 assert.ok(navigationCss.includes('min-height:44px;padding:0 1px'), 'Phone navigation links must retain 44px hit height');
+// Pass 15: do not let the header's measured token size the header itself.
+// ResizeObserver may update the token when 200% text causes the nav to wrap,
+// but the header must also shrink when text is restored to normal.
+assert.match(navigationCss, /\.site-header \.header-actions nav\{[^}]*flex-wrap:wrap/,
+ 'Phone header navigation must reflow rather than clip enlarged text');
+assert.match(navigationCss, /\.site-header \.header-actions nav a\{[^}]*white-space:normal;overflow-wrap:anywhere/,
+ 'Phone navigation labels must support enlarged and localized content');
+assert.match(navigationCss, /html\{scroll-padding-top:calc\(var\(--mobile-site-header-height,110px\) \+ 12px\)\}/,
+ 'Anchor scroll offsets must follow the actual sticky header height');
+assert.match(navigationCss, /#work,#playground,#about,#top,#main\{scroll-margin-top:calc\(var\(--mobile-site-header-height,110px\) \+ 12px\)\}/,
+ 'Section scroll margins must track the dynamic anchor offset');
+assert.doesNotMatch(navigationCss, /min-height:var\(--mobile-site-header-height\)/,
+ 'The measured token must not create a feedback loop in header sizing');
+assert.match(script, /function initResponsiveHeaderHeight\(\)/,
+ 'One observer owns responsive header size measurement');
+assert.match(script, /new ResizeObserver\(update\)\.observe\(header\)/,
+ 'Header measurement must respond to font resize and wrapping');
+assert.match(script, /root\.style\.setProperty\("--mobile-site-header-height",height\+"px"\)/,
+ 'Measured header height must feed shared chapter/anchor offset');
+
 
 // Pass 7: routed metadata and mobile chapter navigation contracts.
 for (const key of ['og:title','og:description','og:url','twitter:title','twitter:description']) {
