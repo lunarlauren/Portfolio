@@ -765,6 +765,10 @@ assert.doesNotMatch(playgroundCss, /html(?:\:not\(\[data-theme="dark"\]\)|\[data
  'Playground intro must use one theme-independent night rule');
 assert.doesNotMatch(playgroundCss, /\.playground \.section-head \.playground-title\{[^}]*!important/,
  'Night heading must not rely on redundant important overrides');
+assert.match(playgroundCss, /\.playground \.play-grid \.project-card-link\{border-color:#666\}/,
+ 'Playground owns its night card edge');
+assert.doesNotMatch(editorialCss, /\.playground \.play-grid \.project-card-link\{border-color:/,
+ 'Late editorial skin must not override Playground card borders');
 assert.match(playgroundCss, /\.playground \.project-card \.project-visual:not\(:has\(img\)\)\{background:#292929;border-color:#777\}/,
  'Night placeholder must outrank generic dark placeholder without important');
 assert.doesNotMatch(playgroundCss, /\.playground \.project-visual:not\(:has\(img\)\) :is\([^}]*!important/,
