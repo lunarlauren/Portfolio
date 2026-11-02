@@ -1,5 +1,11 @@
 # Portfolio developer handoff
 
+## Header control target sizing — Pass 34
+
+The desktop theme switch now has a 44×44px hit area, matching Contact and the
+phone layout. This gives the icon control the same practical target size without
+changing its circular shape. The navigation stylesheet cache key was advanced.
+
 ## Shared action shape and dark toggle contrast — Pass 33
 
 The About contact action now uses the same `--editorial-action-radius` token as

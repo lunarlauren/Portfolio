@@ -52,7 +52,8 @@ html[data-theme="dark"] .header-contact:focus-visible{
 .theme-toggle:hover{background:var(--surface-blush)}
 .theme-toggle-icon{font-size:1.0625rem;line-height:1}
 .site-header .theme-toggle{
- flex:0 0 38px;width:38px;min-width:38px;height:38px;min-height:38px;
+ /* Keep the icon button as easy to target as the 44px Contact action. */
+ flex:0 0 44px;width:44px;min-width:44px;height:44px;min-height:44px;
  padding:0;border-radius:50%;border:1px solid var(--line);
 }
 html[data-theme="dark"] .theme-toggle{
