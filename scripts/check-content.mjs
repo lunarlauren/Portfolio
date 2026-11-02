@@ -1243,7 +1243,7 @@ assert.match(script, /class="featured-project client-file client-file--/,
  'Rendered professional archive files retain both their structural classes');
 assert.equal((workCss.match(/\.work \.client-file \.archive-project-title\{/g)||[]).length,2,
  'One archive-title selector should serve desktop and phone widths');
-assert.match(workCss, /\.work \.client-file \.project-meta\{margin-top:var\(--space-2\)/,
+assert.match(workCss, /\.work \.client-file \.project-meta\{[^}]*margin-top:var\(--space-2\)/,
  'Client metadata keeps its compact authored spacing');
 assert.doesNotMatch(workCss, /\.work \.featured-project\.client-file \.(?:archive-project-title|project-meta)\{/,
  'Do not restore unnecessary archive class specificity');
