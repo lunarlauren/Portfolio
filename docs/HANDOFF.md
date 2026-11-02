@@ -1,6 +1,6 @@
 # Portfolio developer handoff
 
-## Preference-aware project arrows — Pass 21
+## Preference-aware project arrows — Pass 22
 
 `work-cards.css` places metadata-arrow transforms inside the existing
 `prefers-reduced-motion:no-preference` guards. Keyboard focus retains the
@@ -19,6 +19,20 @@ keyboard-focused Work/After Hours link at 390px and 1280px in both themes.
 They verify stationary preview layers and retained focus rings, then restore
 the original arrow motion without reloading. The existing 12 component
 snapshots remain the visual baseline; production deployment is a separate check.
+
+
+
+## Foundation typography and motion ownership — Pass 21
+
+`foundations.css` now has one `:root` for palette, typography, and spacing,
+plus one ordinary dark-theme token block. Headings inherit the shared
+Newsreader/600 defaults; component files own only sizes and special treatment.
+The `--type-paragraph` alias and duplicate hero/section font declarations
+were retired. The archive title has no variable-font motion to transition;
+the global reduced-motion rule already suppresses heading transitions.
+Do not add another late root or dark palette block. Preserve UX narratives,
+illustrative image disclosures, and shipped Hoylu Mobile Insights wording.
+Source and Chromium checks are necessary; deployment is separately verified.
 
 ## Current case-study CSS ownership — Pass 16
 

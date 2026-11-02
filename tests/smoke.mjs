@@ -183,6 +183,54 @@ try{
  await page.setViewportSize({width:1280,height:800});
  await page.evaluate(()=>document.documentElement.dataset.theme="light");
 
+ // Pass 21: one foundation token owner must preserve rendered heading type
+ // and paragraph rhythm at phone/desktop widths in both themes. The archive
+ // title's background highlight retains its stationery-specific transition.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});
+  for(const theme of ["light","dark"]){
+   const typography=await page.evaluate(theme=>{
+    document.documentElement.dataset.theme=theme;
+    const style=selector=>getComputedStyle(document.querySelector(selector));
+    const sample=document.createElement("p");
+    sample.textContent="Type scale check";
+    document.body.append(sample);
+    const paragraph=getComputedStyle(sample);
+    const values={
+     headingFamily:style(".hero h1").fontFamily,
+     headingWeight:style(".hero h1").fontWeight,
+     headingTransition:style(".hero h1").transitionProperty,
+     workFamily:style(".work .section-head h2").fontFamily,
+     workWeight:style(".work .section-head h2").fontWeight,
+     aboutFamily:style(".about h2").fontFamily,
+     aboutWeight:style(".about h2").fontWeight,
+     paragraphSize:paragraph.fontSize,
+     paragraphLineHeight:paragraph.lineHeight,
+     skipPadding:style(".skip-link").paddingTop,
+     archiveTitleTransition:style(".work .archive-project-title").transitionProperty
+    };
+    sample.remove();
+    return values;
+   },theme);
+   const label=width+"px "+theme;
+   for(const key of ["headingFamily","workFamily","aboutFamily"]){
+    assert.match(typography[key],/Newsreader/,label+": "+key+" uses shared display type");
+   }
+   for(const key of ["headingWeight","workWeight","aboutWeight"]){
+    assert.equal(typography[key],"600",label+": "+key+" preserves heading weight");
+   }
+   assert.equal(typography.paragraphSize,"16px",label+": paragraph body token");
+   assert.equal(typography.paragraphLineHeight,"25.6px",label+": paragraph leading");
+   assert.equal(typography.skipPadding,"12px",label+": skip-link retains its hit area");
+   assert.match(typography.headingTransition,/font-variation-settings/,
+    label+": heading retains editorial axis transition");
+   assert.equal(typography.archiveTitleTransition,"background-size",
+    label+": archive title keeps its stationery highlighter transition");
+  }
+ }
+ await page.setViewportSize({width:1280,height:800});
+ await page.evaluate(()=>document.documentElement.dataset.theme="light");
+
  // Pass 7: root aliases --paper and --ink must resolve dynamically from
  // the light/dark source palette without a second theme-specific declaration.
  // Chrome edge likewise follows --line, including increased contrast below.
@@ -982,7 +1030,7 @@ try{
   assert.equal(portraitMotion.transition,"none",theme+": reduced-motion portrait reveal is instantaneous");
   assert.match(portraitMotion.filter,/grayscale/,theme+": editorial portrait treatment remains");
  }
- // Pass 21: switch the OS preference while a real Work/After Hours link
+ // Pass 22: switch the OS preference while a real Work/After Hours link
  // is hovered or keyboard-focused. Motion must stop without a page reload;
  // opting back in restores the authored arrow movement and focus ring.
  for(const width of [390,1280]){
@@ -992,6 +1040,10 @@ try{
    for(const selector of [".work .project-card-link","#play-grid .project-card-link"]){
     const link=reducedMotionPage.locator(selector).first();
     const checkStationary=async(state)=>{
+     // Media emulation updates styles before the next paint. Allow two frames
+     // for the global 0.01ms transition safeguard to finish before sampling.
+     await reducedMotionPage.evaluate(()=>new Promise(done=>
+      requestAnimationFrame(()=>requestAnimationFrame(done))));
      const values=await link.evaluate(node=>{
       const arrow=node.querySelector(".project-meta span:last-child");
       const preview=node.querySelector(".project-visual");
@@ -1005,8 +1057,8 @@ try{
       };
      });
      const context=width+"px "+theme+" "+selector+" "+state;
-     assert.ok(values.transforms.every(value=>value==="none"),context+": reduced motion keeps every preview layer still");
-     assert.ok(values.transitions.every(value=>value==="none"),context+": reduced motion disables preview transitions");
+     assert.ok(values.transforms.every(value=>value==="none"),context+": reduced motion keeps every preview layer still "+JSON.stringify(values));
+     assert.ok(values.transitions.every(value=>value==="none"),context+": reduced motion disables preview transitions "+JSON.stringify(values));
     };
     const waitForArrow=async(y)=>{
      await reducedMotionPage.waitForFunction(({selector,y})=>{
