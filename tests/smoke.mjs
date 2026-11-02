@@ -928,8 +928,8 @@ try{
    assert.equal(layout.actionGap,gap,width+"px "+theme+": responsive hero action gap");
    assert.equal(layout.emDisplay,width<=760?"inline":"inline-block",
     width+"px "+theme+": emphasis display across tablet cutoff");
-   assert.equal(layout.noteDisplay,width<=600?"none":"inline-flex",
-    width+"px "+theme+": notebook note follows phone cutoff");
+   assert.equal(layout.noteDisplay,width<=600?"none":"flex",
+    width+"px "+theme+": notebook note follows phone cutoff (flex items are blockified)");
    assert.equal(layout.heroDisplay,width<=600?"flex":"grid",
     width+"px "+theme+": hero maintains intentional layout mode");
    if(width>=1024){
