@@ -659,7 +659,13 @@ try{
    assert.notEqual(normal,"none",width+"px "+theme+": normal tactile file shadow remains");
    await contrastCardsPage.emulateMedia({contrast:"more"});
    const assertCardEdge=async(state)=>{
+    // Media switches can transition the previous shadow for 250ms. Finish
+    // CSS transitions before measuring the settled high-contrast surface.
     const value=await contrastCard.evaluate(node=>{
+     void getComputedStyle(node).boxShadow;
+     for(const animation of node.getAnimations()){
+      if(animation.playState==="running")animation.finish();
+     }
      const css=getComputedStyle(node);
      return {shadow:css.boxShadow,left:css.borderLeftWidth,right:css.borderRightWidth};
     });
