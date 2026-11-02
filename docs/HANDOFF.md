@@ -1,5 +1,18 @@
 # Portfolio developer handoff
 
+
+## Foundation typography and motion ownership — Pass 21
+
+`foundations.css` now has one `:root` for palette, typography, and spacing,
+plus one ordinary dark-theme token block. Headings inherit the shared
+Newsreader/600 defaults; component files own only sizes and special treatment.
+The `--type-paragraph` alias and duplicate hero/section font declarations
+were retired. The archive title has no variable-font motion to transition;
+the global reduced-motion rule already suppresses heading transitions.
+Do not add another late root or dark palette block. Preserve UX narratives,
+illustrative image disclosures, and shipped Hoylu Mobile Insights wording.
+Source and Chromium checks are necessary; deployment is separately verified.
+
 ## Current case-study CSS ownership — Pass 16
 
 `public/styles.css` is an inactive 132-byte compatibility stub. The retired
