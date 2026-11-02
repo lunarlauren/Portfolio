@@ -144,8 +144,10 @@ assert.doesNotMatch(workCss, /html\[data-theme="dark"\] \.project-visual\{/,
  'Shared dark visual fallback must not live in Work');
 assert.doesNotMatch(visualPlaceholderCss, /--placeholder-text:/,
  'Unused placeholder text token must stay retired');
-assert.equal((visualPlaceholderCss.match(/html\[data-theme="dark"\] :is\(\.visual-label,\.visual-brief,\.brief-kicker\)/g)||[]).length,1,
+assert.equal((visualPlaceholderCss.match(/html\[data-theme="dark"\] :where\(\.project-visual,\.case-hero-visual\) :is\(\.visual-label,\.visual-brief,\.brief-kicker\)/g)||[]).length,1,
  'Dark illustrative labels must have one readable ink rule');
+assert.doesNotMatch(visualPlaceholderCss, /html\[data-theme="dark"\] :is\(\.visual-label,\.visual-brief,\.brief-kicker\)/,
+ 'Illustrative ink must not be overridden outside image-brief contexts');
 assert.doesNotMatch(visualPlaceholderCss, /\.project-visual:not\(:has\(img\)\) \.visual-label\{/, 'No nested border around illustrative briefs');
 assert.match(visualPlaceholderCss, /\.project-visual \.visual-brief\{[^}]*display:flex;/, 'Shared brief remains readable');
 assert.doesNotMatch(workCss, /\.project-visual \.visual-brief\{\s*box-shadow:none/, 'No unused Work brief shadow reset');
@@ -839,7 +841,7 @@ assert.match(visualPlaceholderCss, /border:2px dashed color-mix\(/,
  'Shared visual owner must retain the base dashed placeholder frame');
 assert.match(workCss, /background:var\(--surface-blush\)/,
  'Work must give illustrative previews neutral paper');
-assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] :is\(\.visual-label,\.visual-brief,\.brief-kicker\)\{color:var\(--ink\)\}/,
+assert.match(visualPlaceholderCss, /html\[data-theme="dark"\] :where\(\.project-visual,\.case-hero-visual\) :is\(\.visual-label,\.visual-brief,\.brief-kicker\)\{color:var\(--ink\)\}/,
  'Dark placeholder briefs must use legible theme ink');
 assert.match(workCss, /text-wrap:balance/, 'Archive headings must balance across card widths');
 

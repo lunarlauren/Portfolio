@@ -303,20 +303,35 @@ try{
     const loading=document.createElement("div");
     loading.className="project-visual";
     loading.innerHTML='<img alt="">';
-    document.body.append(brief,loading);
+    // Case-study hero briefs share the dark ink; unrelated labels must not
+    // inherit a site-wide placeholder override.
+    const hero=document.createElement("div");
+    hero.className="case-hero-visual";
+    hero.innerHTML='<div class="hero-image-brief"><span class="brief-kicker">ILLUSTRATIVE</span></div>';
+    const unrelated=document.createElement("span");
+    unrelated.className="brief-kicker";
+    unrelated.textContent="Outside illustration";
+    document.body.append(brief,loading,hero,unrelated);
     const noImage=getComputedStyle(brief),withImage=getComputedStyle(loading);
     const sample={
      briefSurface:noImage.backgroundColor,
      loadingSurface:withImage.backgroundColor,
      borderStyle:noImage.borderTopStyle,
-     borderColor:noImage.borderTopColor
+     borderColor:noImage.borderTopColor,
+     heroKickerInk:getComputedStyle(hero.querySelector(".brief-kicker")).color,
+     unrelatedKickerInk:getComputedStyle(unrelated).color,
+     bodyInk:getComputedStyle(document.body).color
     };
-    brief.remove();loading.remove();
+    brief.remove();loading.remove();hero.remove();unrelated.remove();
     return sample;
    },theme);
    assert.equal(fallback.borderStyle,"dashed",
     width+"px "+theme+": shared illustrative frame must remain dashed");
+   assert.equal(fallback.unrelatedKickerInk,"rgb(154, 50, 99)",
+    width+"px "+theme+": unrelated labels must not inherit dark illustrative ink");
    if(theme==="dark"){
+    assert.equal(fallback.heroKickerInk,fallback.bodyInk,
+     width+"px dark: case-study hero illustrative disclosure retains readable ink");
     assert.equal(fallback.briefSurface,fallback.loadingSurface,
      width+"px dark: loading images and illustrative briefs share one fallback surface");
     assert.equal(fallback.borderColor,"rgb(73, 96, 116)",
