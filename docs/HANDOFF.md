@@ -1,5 +1,11 @@
 # Portfolio developer handoff
 
+## Dark hero divider contrast — Pass 37
+
+The homepage note border now uses the light dark-theme accent instead of the
+low-contrast neutral rule. This keeps the transparent note readable against
+the dark paper; the hero stylesheet URL has a fresh cache key.
+
 ## Accessibility and workflow audit — Pass 36
 
 The homepage logo and secondary hero link now meet the 44px touch-target goal.

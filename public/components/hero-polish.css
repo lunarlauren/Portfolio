@@ -27,7 +27,7 @@ html:not([data-theme="dark"]) .hero-description{background:transparent;box-decor
 /* Keep this editorial note transparent in both themes. --night-bg is derived
    from a token that inverts in dark mode, which made this fill light gray
    behind light text and failed contrast. */
-html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:var(--line);color:var(--brand-ink)}
+html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:var(--brand-pink);color:var(--brand-ink)}
 
 /* Optical alignment: the hero note uses the shared no-rotation baseline.
    Preserve its intentional border, padding, and margin adjustments. */
