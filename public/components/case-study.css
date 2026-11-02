@@ -177,6 +177,7 @@ html[data-theme="dark"] .case-view{
 .case-view .case-head h1{
  font-size:var(--case-type-title);line-height:1.08;letter-spacing:-.04em;
  max-width:18ch;margin-block:18px 20px;text-wrap:balance;color:var(--case-cover-title);
+ overflow-wrap:anywhere;
 }
 /* Delivery stamp: a factual, immediately visible distinction between
    shipped product contributions and prototypes/concept explorations.
