@@ -29,3 +29,8 @@ jobs:
           node --check public/content.js
       - name: Test navigation in Chromium
         run: node tests/smoke.mjs
+      - name: Capture Pass 20 snapshot baselines (temporary)
+        env:
+          VISUAL_BASELINE_CAPTURE: '1'
+          VISUAL_BASELINE_EMIT: '1'
+        run: node tests/visual-regression.mjs
