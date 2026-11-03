@@ -12,12 +12,13 @@
 
 .case-facts{display:flex;flex-direction:column;gap:24px}
 .case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--line);font-family:'DM Sans',system-ui,sans-serif}
-.case-fact-label{display:block;color:var(--muted);line-height:1.5;text-transform:uppercase}
-.case-fact-value{display:block;color:var(--ink)}
+.case-fact-label,.case-fact-value{display:block}
+.case-fact-label{color:var(--muted);line-height:1.5;text-transform:uppercase}
+.case-fact-value{color:var(--ink)}
 .case-next-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-block:32px 48px}
 .case-next-nav .case-next{margin-top:60px;font-weight:700;text-underline-offset:6px;text-decoration:none}
 .case-next-nav .case-next:last-child:not(:first-child){text-align:right;margin-left:auto}
-.case-prose h2{margin-top:1.8em;margin-bottom:.45em}
+.case-prose h2{margin:1.8em 0 .45em}
 .case-prose h2:first-child{margin-top:0}
 
 .case-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,3vw,32px);margin:clamp(24px,4vw,44px) 0;padding:clamp(18px,2.8vw,30px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
