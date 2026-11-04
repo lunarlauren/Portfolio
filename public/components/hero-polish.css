@@ -151,7 +151,14 @@ html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:
   width:auto;min-width:min(100%,238px);min-height:48px;
   justify-content:space-between;gap:24px;box-sizing:border-box
  }
- .hero .hero-actions .quiet-link,.hero .hero-foot{display:none}
+ /* Keep the secondary path available on phones, not only desktop. */
+ .hero .hero-actions .quiet-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:8px 12px;
+  color:var(--ink);font-size:0.875rem;
+  text-decoration:underline;text-underline-offset:5px
+ }
+ .hero .hero-foot{display:none}
 }
 
 /* Desktop art uses the same clean, unframed presentation as the phone.
