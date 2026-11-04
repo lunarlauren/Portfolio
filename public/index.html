@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#f7f9fa" />
+    <meta name="theme-color" content="#f5f3ef" />
     <script>
       /* Apply persisted/system appearance before the first stylesheet paints. */
       (function () {
@@ -17,10 +17,10 @@
         }
         document.documentElement.setAttribute("data-theme", theme);
         document.documentElement.style.colorScheme = theme;
-        document.documentElement.style.backgroundColor = theme === "dark" ? "#111d2a" : "#f7f9fa";
+        document.documentElement.style.backgroundColor = theme === "dark" ? "#151515" : "#f5f3ef";
         document
           .querySelector('meta[name="theme-color"]')
-          .setAttribute("content", theme === "dark" ? "#111d2a" : "#f7f9fa");
+          .setAttribute("content", theme === "dark" ? "#151515" : "#f5f3ef");
       })();
     </script>
     <!-- Page description and previews shown in search and social sharing. -->
