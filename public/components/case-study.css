@@ -9,6 +9,9 @@
 .case-hero-visual{height:clamp(300px,48vw,640px);margin-block:55px;background:#c8ddd6;display:grid;place-items:center;overflow:hidden;position:relative}
 .case-body{display:grid;grid-template-columns:220px minmax(0,700px);gap:clamp(30px,7vw,110px);margin-top:45px}
 .case-prose p{color:color-mix(in srgb,var(--palette-navy) 85%,var(--palette-paper))}
+/* Keep long case-study explanations readable without altering the chapter index. */
+.case-prose :is(p,li){max-width:70ch;text-wrap:pretty;overflow-wrap:break-word}
+.case-prose :is(a,code){overflow-wrap:anywhere}
 
 .case-facts{display:flex;flex-direction:column;gap:24px}
 .case-fact{display:flex;flex-direction:column;gap:7px;padding-left:14px;border-left:2px solid var(--line);font-family:'DM Sans',system-ui,sans-serif}
