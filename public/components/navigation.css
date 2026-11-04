@@ -6,6 +6,7 @@ html[data-theme="dark"]{--site-chrome-bg:var(--paper)}
 .site-header{
  display:flex;align-items:center;justify-content:space-between;
  position:sticky;top:0;z-index:100;max-width:none;width:100%;
+ display:flex;align-items:center;justify-content:space-between;
  box-sizing:border-box;padding:8px clamp(18px,4vw,56px);
  min-height:66px;gap:24px;
  background:var(--site-chrome-bg);border-bottom:1px solid var(--site-chrome-edge);
