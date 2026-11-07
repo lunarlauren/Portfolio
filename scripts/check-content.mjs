@@ -218,7 +218,7 @@ assert.match(workCss, /\.work \.featured-project\.client-file \.project-visual:n
  'Work must own neutral illustrative background, readable ink and dashed frame');
 assert.doesNotMatch(editorialCss, /\.work \.featured-project \.project-visual:not\(:has\(img\)\)/,
  'Editorial skin must not reintroduce important placeholder overrides');
-assert.match(workCss, /\.work \.featured-project \.project-visual\{[^}]*border:1px solid var\(--editorial-card-edge\);[^}]*border-radius:2px;[^}]*box-shadow:/,
+assert.match(workCss, /\.work \.featured-project \.project-visual\s*\{[^}]*border:1px solid var\(--editorial-card-edge\);[^}]*border-radius:2px;[^}]*box-shadow:/,
  'Work owns the solid preview frame and its editorial theme paint');
 assert.match(workCss, /\.work \.featured-project \.project-visual:has\(img\)\{background:transparent\}/,
  'Supplied Work imagery keeps its transparent image backing');
@@ -830,7 +830,7 @@ assert.doesNotMatch(workCss, /@media\(max-width:420px\)\{\s*\.work \.project-car
 // These structural checks do not replace browser geometry/contrast checks.
 assert.doesNotMatch(css, /\.featured-projects-grid\s*\{|\.notebook-project-index\s*\{|\.project-card-process\s*\{|\.project-card-cta\s*\{/,
  'Featured archive and process teaser rules must stay out of legacy CSS');
-assert.match(workCss, /\.featured-projects-grid\{display:grid/, 'Work component must own archive grid');
+assert.match(workCss, /\.featured-projects-grid\s*\{\s*display:grid/, 'Work component must own archive grid');
 // Project grids and archive spacing have named owners, not late legacy copies.
 assert.ok(!css.includes('.projects-grid,.play-grid'), 'Legacy CSS must not redefine shared project columns');
 assert.ok(homepageCss.includes('grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))'), 'Homepage base owns responsive project columns');
@@ -1418,7 +1418,7 @@ assert.doesNotMatch(editorialCss, /\.notebook-project-index \.featured-project/,
  'Rendered archive files share the .client-file selector');
 assert.doesNotMatch(editorialCss, /\.featured-projects-grid\{gap:|\.featured-project \.project-card h3\{font-family:/,
  'Work grid gap and title font belong to work-cards.css');
-assert.match(workCss, /\.featured-projects-grid\{display:grid;[^}]*gap:clamp\(18px,2\.5vw,34px\)/,
+assert.match(workCss, /\.featured-projects-grid\s*\{\s*display:grid;[^}]*gap:clamp\(18px,2\.5vw,34px\)/,
  'Work owns the effective tablet archive gap');
 assert.doesNotMatch(workCss, /\.featured-project \.project-card h3\{font-family:/,
  'Overridden generic Work title rule must not return');
