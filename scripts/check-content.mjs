@@ -1418,7 +1418,7 @@ assert.doesNotMatch(editorialCss, /\.notebook-project-index \.featured-project/,
  'Rendered archive files share the .client-file selector');
 assert.doesNotMatch(editorialCss, /\.featured-projects-grid\{gap:|\.featured-project \.project-card h3\{font-family:/,
  'Work grid gap and title font belong to work-cards.css');
-assert.match(workCss, /\.featured-projects-grid\s*\{\s*display:\s*grid;[^}]*gap:\s*clamp\(18px,2\.5vw,34px\)/,
+assert.match(workCss, /\.featured-projects-grid\s*\{\s*display:\s*grid;[^}]*gap:\s*clamp\(18px,\s*2\.5vw,\s*34px\)/,
  'Work owns the effective tablet archive gap');
 assert.doesNotMatch(workCss, /\.featured-project \.project-card h3\{font-family:/,
  'Overridden generic Work title rule must not return');
