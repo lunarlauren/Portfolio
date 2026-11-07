@@ -837,7 +837,7 @@ assert.ok(homepageCss.includes('grid-template-columns:repeat(auto-fit,minmax(min
 assert.ok(!css.includes('.work.wrap{padding-block:'), 'Legacy CSS must not redefine Work section spacing');
 assert.ok(workCss.includes('.work.wrap{padding-block:clamp(42px,5vw,68px)}'), 'Work component owns desktop section spacing');
 assert.doesNotMatch(css + workCss + homepageCss, /#collection\b|\.collection(?:\b|-nav\b|-back\b|-head\b)|\.close-collection\b/, 'Retired collection gallery must not retain CSS');
-assert.match(workCss, /\.project-card \.project-card-process\{/, 'Work component must own design approach teaser');
+assert.match(workCss, /\.project-card \.project-card-process\s*\{/, 'Work component must own design approach teaser');
 assert.match(workCss, /:is\(\.work,\.playground\) \.project-card-link:focus-visible\{/, 'Shared Work/Playground keyboard focus ring must remain');
 assert.doesNotMatch(workCss, /\.notebook-project-index \.project-card-link:focus-visible\{/, 'Do not restore the overridden notebook-only focus rule');
 assert.match(html, /work-cards\.css\?v=[0-9]{8}-[a-z0-9-]+/, 'Archive CSS must have a cache-versioned stylesheet reference');
