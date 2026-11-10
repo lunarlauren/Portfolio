@@ -1086,7 +1086,9 @@ for (const [selector,order] of [['h1',3],['feature',2],['description',5],['actio
  assert.match(phoneHeroCss,new RegExp(rule+'\\{[^}]*order:'+order+';'), 'Phone hero order must preserve '+selector);
 }
 assert.match(phoneHeroCss, /\.hero \.hero-copy>\.eyebrow\{[^}]*text-wrap:balance/, 'Phone discipline line should wrap intentionally');
-assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*background:transparent;[^}]*border:0;box-shadow:none/, 'Portrait should not inherit the busy featured-card surface');
+// Frame paint now has one shared owner; phone only controls clipping.
+assert.match(heroPolishCss, /\.hero \.hero-feature\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*box-shadow:\s*none/, 'Portrait frame must remain unframed at every width');
+assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*overflow:hidden/, 'Phone portrait must retain clipping');
 assert.match(phoneHeroCss, /\.hero \.notebook-hero-note\{display:none\}/, 'Phone intro should not repeat its message');
 assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link,\.hero \.hero-foot\{display:none\}/, 'Phone hero should have one primary action');
 // Bound the phone-specific source check at the next media owner so unrelated
