@@ -46,11 +46,14 @@ html[data-theme="dark"] .quiet-link:is(:hover,:focus-visible){color:var(--editor
  /* Parallax uses the individual translate property; do not reserve a
     compositor layer permanently for the image when the hero is offscreen. */
  .hero .hero-portrait-art{translate:0 var(--hero-parallax-y,0px)}
- .hero .hero-copy>.eyebrow{animation:hero-enter .55s ease-out both}
- .hero .hero-copy>h1{animation:hero-enter .7s .09s ease-out both}
- .hero .hero-description{animation:hero-enter .7s .2s ease-out both}
- .hero .hero-actions{animation:hero-enter .7s .28s ease-out both}
- .hero .hero-feature{animation:hero-enter .8s .14s ease-out both}
+ /* One entrance definition; timing remains element-specific. */
+ .hero .hero-copy>.eyebrow,.hero .hero-copy>h1,.hero .hero-description,
+ .hero .hero-actions,.hero .hero-feature{animation:hero-enter var(--hero-enter-duration) var(--hero-enter-delay,0s) ease-out both}
+ .hero .hero-copy>.eyebrow{--hero-enter-duration:.55s}
+ .hero .hero-copy>h1{--hero-enter-duration:.7s;--hero-enter-delay:.09s}
+ .hero .hero-description{--hero-enter-duration:.7s;--hero-enter-delay:.2s}
+ .hero .hero-actions{--hero-enter-duration:.7s;--hero-enter-delay:.28s}
+ .hero .hero-feature{--hero-enter-duration:.8s;--hero-enter-delay:.14s}
 }
 @keyframes hero-enter{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
 /* Motion is opt-in above; match About's heading specificity to stop its type transition. */
