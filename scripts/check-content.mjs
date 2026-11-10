@@ -279,8 +279,9 @@ assert.doesNotMatch(editorialCss, /\.hero(?:-feature| \.hero-copy| \.feature-art
  'Editorial skin must not own hero geometry, ink, note or portrait treatment');
 assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero-description\{background:transparent;/,
  'Hero component keeps notebook paper visible through description');
-assert.match(heroPolishCss, /@media\(max-width:420px\)\{[\s\S]*?\.hero \.hero-description\{max-width:100%;overflow-wrap:break-word\}/,
- 'Narrow phones retain description wrapping');
+// The 600px layout owns width; the 420px rule only needs word wrapping.
+assert.match(heroPolishCss, /@media\(max-width:420px\)\{\.hero \.hero-description\{overflow-wrap:break-word\}\}/,
+ 'Narrow phones retain description wrapping without a redundant width');
 // The old responsive hero layout was consolidated into the finishing component.
 assert.doesNotMatch(css, /@media\(max-width:950px\)|@media\(max-width:650px\)|@media\(min-width:1024px\)/,
  'Legacy stylesheet must not own the hero tablet/desktop breakpoints');
