@@ -2,6 +2,11 @@
    Loaded after the legacy stylesheet. Keep responsive hero ownership here
    rather than layering new overrides in styles.css. */
 
+/* Decorative legacy orbit/tile chrome is retired at every viewport.
+   Keep a single rule instead of repeating it in phone and desktop queries. */
+.hero .hero-feature::before,.hero .hero-feature::after,
+.hero .feature-top,.hero .feature-bottom,.hero .art-orbit,.hero .art-tile{display:none}
+
 /* LEGACY HERO CONSOLIDATION (2026-10-31)
    Own hero ink, artwork stacking and narrow-screen wrapping here.
    The portrait is unframed at every width: legacy background and overflow
@@ -132,9 +137,6 @@ html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:
   margin:0 0 18px;padding:0;overflow:hidden;
   background:transparent;border:0;box-shadow:none
  }
- .hero .hero-feature::before,.hero .hero-feature::after{display:none}
- .hero .feature-top,.hero .feature-bottom,
- .hero .art-orbit,.hero .art-tile{display:none}
  .hero .feature-art{
   height:auto;min-height:0;display:grid;place-items:center;
  }
@@ -164,12 +166,6 @@ html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:
     padding: 0;
     overflow: visible;
   }
-  .hero .hero-feature::before,
-  .hero .hero-feature::after,
-  .hero .feature-top,
-  .hero .feature-bottom,
-  .hero .art-orbit,
-  .hero .art-tile { display: none; }
   .hero .feature-art .hero-portrait-art {
     width: min(100%, 460px);
   }

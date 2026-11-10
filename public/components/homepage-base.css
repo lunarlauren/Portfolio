@@ -26,11 +26,12 @@
 /* Dark resting ink and accent states remain beside homepage link geometry. */
 /* Use the theme's readable ink; --night-link-ink mixes toward dark paper. */
 html[data-theme="dark"] .quiet-link{color:var(--ink)}
+/* Dark resting ink is more specific; restore an equally specific hover state. */
 html[data-theme="dark"] .quiet-link:is(:hover,:focus-visible){color:var(--editorial-accent)}
 .hero-foot {display:flex;gap:18px 24px;flex-wrap:wrap;margin-top:auto;padding-top:68px;font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;font-weight:700;letter-spacing:.14em;color:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper))}
 .hero .status-dot {background:var(--brand-pink)}
 .eyebrow-divider {margin-inline:10px;color:var(--muted)}
-.hero-feature {position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;padding:25px;border-radius:3px}
+.hero-feature {position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;}
 .feature-art {position:absolute;inset:0;display:grid;place-items:center}
 /* HOMEPAGE INTERACTION STATES
    Keep progressive entrance effects beside the homepage button geometry.
