@@ -279,8 +279,10 @@ assert.doesNotMatch(editorialCss, /\.hero(?:-feature| \.hero-copy| \.feature-art
  'Editorial skin must not own hero geometry, ink, note or portrait treatment');
 assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero-description\{background:transparent;/,
  'Hero component keeps notebook paper visible through description');
-assert.match(heroPolishCss, /@media\(max-width:420px\)\{[\s\S]*?\.hero \.hero-description\{max-width:100%;overflow-wrap:break-word\}/,
- 'Narrow phones retain description wrapping');
+// Width is set by the 600px portrait layout; the 420px rule owns only
+// overflow wrapping. Assert behavior independently of unrelated mobile rules.
+assert.match(heroPolishCss, /@media\(max-width:420px\)\{\.hero \.hero-description\{overflow-wrap:break-word\}\}/,
+ 'Narrow phones retain description wrapping without a redundant width');
 // The old responsive hero layout was consolidated into the finishing component.
 assert.doesNotMatch(css, /@media\(max-width:950px\)|@media\(max-width:650px\)|@media\(min-width:1024px\)/,
  'Legacy stylesheet must not own the hero tablet/desktop breakpoints');
@@ -1090,7 +1092,8 @@ assert.match(phoneHeroCss, /\.hero \.hero-copy>\.eyebrow\{[^}]*text-wrap:balance
 assert.match(heroPolishCss, /\.hero \.hero-feature\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*box-shadow:\s*none/, 'Portrait frame must remain unframed at every width');
 assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*overflow:hidden/, 'Phone portrait must retain clipping');
 assert.match(phoneHeroCss, /\.hero \.notebook-hero-note\{display:none\}/, 'Phone intro should not repeat its message');
-assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link,\.hero \.hero-foot\{display:none\}/, 'Phone hero should have one primary action');
+assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link\{display:none\}/, 'Phone hero should hide the secondary action');
+assert.match(heroPolishCss, /(?:^|\s)\.hero-foot\{display:none\}/, 'Hero footer should remain hidden across breakpoints');
 // Bound the phone-specific source check at the next media owner so unrelated
 // reduced-motion accessibility rules are not mistaken for phone overrides.
 // The phone layout already has sufficient component specificity. Keep the

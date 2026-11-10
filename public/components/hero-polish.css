@@ -20,9 +20,9 @@ html:not([data-theme="dark"]) .hero{border-radius:22px;position:relative}
 html:not([data-theme="dark"]) .hero-copy{position:relative;z-index:1}
 /* Keep notebook texture visible through hero copy. */
 html:not([data-theme="dark"]) .hero-description{background:transparent;box-decoration-break:initial;-webkit-box-decoration-break:initial}
-@media(max-width:420px){
- .hero .hero-description{max-width:100%;overflow-wrap:break-word}
-}
+/* The phone layout below owns the description width; narrow phones still
+   need explicit word wrapping for unusually long content. */
+@media(max-width:420px){.hero .hero-description{overflow-wrap:break-word}}
 
 /* Notebook note: visible on tablet/desktop, hidden in the phone hero below.
    Keep typography and optical alignment here rather than in legacy CSS. */
@@ -153,7 +153,7 @@ html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:
   width:auto;min-width:min(100%,238px);min-height:48px;
   justify-content:space-between;gap:24px;box-sizing:border-box
  }
- .hero .hero-actions .quiet-link,.hero .hero-foot{display:none}
+ .hero .hero-actions .quiet-link{display:none}
 }
 
 /* Desktop art uses the same clean, unframed presentation as the phone.
