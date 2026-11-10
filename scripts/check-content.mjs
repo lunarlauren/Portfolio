@@ -1090,7 +1090,8 @@ assert.match(phoneHeroCss, /\.hero \.hero-copy>\.eyebrow\{[^}]*text-wrap:balance
 assert.match(heroPolishCss, /\.hero \.hero-feature\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*box-shadow:\s*none/, 'Portrait frame must remain unframed at every width');
 assert.match(phoneHeroCss, /\.hero \.hero-feature\{[^}]*overflow:hidden/, 'Phone portrait must retain clipping');
 assert.match(phoneHeroCss, /\.hero \.notebook-hero-note\{display:none\}/, 'Phone intro should not repeat its message');
-assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link,\.hero \.hero-foot\{display:none\}/, 'Phone hero should have one primary action');
+assert.match(phoneHeroCss, /\.hero \.hero-actions \.quiet-link\{display:none\}/, 'Phone hero should hide its secondary action');
+assert.match(heroPolishCss, /\.hero \.hero-foot\{display:none\}/, 'Hero footer should remain hidden at every viewport');
 // Bound the phone-specific source check at the next media owner so unrelated
 // reduced-motion accessibility rules are not mistaken for phone overrides.
 // The phone layout already has sufficient component specificity. Keep the
