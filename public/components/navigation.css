@@ -28,9 +28,8 @@ html[data-theme="dark"] .site-header .header-actions nav a{color:var(--ink)}
    include its interaction state without relying on !important. */
 .site-header nav a:is(:hover,:focus-visible),
 html[data-theme="dark"] .site-header .header-actions nav a:is(:hover,:focus-visible){color:var(--editorial-accent)}
-.site-header nav a[aria-current="location"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
-/* Contact is mail, so its section cue does not use aria-current. */
-.site-header .header-contact[data-section-active]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+/* Contact is mail, so its section cue uses data-section-active rather than aria-current. */
+.site-header :is(nav a[aria-current="location"],.header-contact[data-section-active]){text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 @media(max-width:760px){
  .site-header nav a{justify-content:center}
 }
@@ -47,8 +46,8 @@ html[data-theme="dark"] .site-header .header-actions nav a:is(:hover,:focus-visi
 .theme-toggle-icon{font-size:1.0625rem;line-height:1}
 .site-header .theme-toggle{
  /* Keep the icon button as easy to target as the 44px Contact action. */
- flex:0 0 44px;width:44px;min-width:44px;height:44px;min-height:44px;
- padding:0;border-radius:50%;border:1px solid var(--line);
+ flex:0 0 44px;width:44px;height:44px;
+ padding:0;border-radius:50%;
 }
 html[data-theme="dark"] .theme-toggle{
  color:var(--ink);
