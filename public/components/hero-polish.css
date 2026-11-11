@@ -139,7 +139,7 @@ html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:
   margin:0 0 18px;overflow:hidden
  }
  .hero .feature-art{
-  height:auto;min-height:0;display:grid;place-items:center;
+  height:auto;min-height:0;
  }
  .hero .feature-art .hero-portrait-art{width:min(89%,305px);height:100%}
  /* The note repeats the introduction on phones; retain it on larger screens. */
@@ -150,7 +150,7 @@ html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:
  }
  .hero .hero-actions{order:6;width:100%;flex-direction:column;align-items:center;justify-content:center;margin-top:26px;gap:var(--space-2)}
  .hero .hero-actions .primary-link{
-  display:flex;align-items:center;padding:14px 20px;
+  display:flex;padding:14px 20px;
   width:auto;min-width:min(100%,238px);min-height:48px;
   justify-content:space-between;gap:24px;box-sizing:border-box
  }
