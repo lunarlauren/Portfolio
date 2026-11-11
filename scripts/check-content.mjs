@@ -95,8 +95,8 @@ assert.match(homepageCss,/\.hero \.hero-portrait-art\{translate:0 var\(--hero-pa
 // Navigation and viewport ownership regressions: source-level, not visual QA.
 {
  assert.doesNotMatch(css, /scroll-padding-top:82px|scroll-margin-top:82px|site-header nav a,\.feature-project-link/, 'Legacy CSS must not regain mixed navigation rules');
- assert.match(navigationCss, /html\{scroll-padding-top:82px\}/, 'Sticky header scroll offset belongs to navigation');
- assert.match(navigationCss, /#work,#playground,#about,#top,#main\{scroll-margin-top:82px\}/, 'Section anchors must remain in sync');
+ assert.match(navigationCss, /html\{scroll-padding-top:var\(--site-anchor-offset\)\}/, 'Sticky header scroll offset belongs to navigation');
+ assert.match(navigationCss, /:is\(#work,#playground,#about,#top,#main\)\{scroll-margin-top:var\(--site-anchor-offset\)\}/, 'Section anchors must remain in sync');
  assert.match(navigationCss, /\.site-header nav a\{white-space:nowrap;min-height:44px;display:inline-flex;align-items:center\}/, 'Desktop navigation links need 44px targets');
  assert.match(stationeryCss, /env\(safe-area-inset-left\)/, 'Phone gutters must honor safe areas');
  assert.match(workCss, /\.notebook-project-index \.project-card-link\{min-height:44px\}/, 'Active mobile archive links retain 44px targets');
@@ -1135,9 +1135,9 @@ assert.match(navigationCss, /\.site-header \.header-actions nav\{[^}]*flex-wrap:
  'Phone header navigation must reflow rather than clip enlarged text');
 assert.match(navigationCss, /\.site-header \.header-actions nav a\{[^}]*white-space:normal;overflow-wrap:anywhere/,
  'Phone navigation labels must support enlarged and localized content');
-assert.match(navigationCss, /html\{scroll-padding-top:calc\(var\(--mobile-site-header-height,110px\) \+ 12px\)\}/,
+assert.match(navigationCss, /:root\{--site-anchor-offset:calc\(var\(--mobile-site-header-height,110px\) \+ 12px\)\}/,
  'Anchor scroll offsets must follow the actual sticky header height');
-assert.match(navigationCss, /#work,#playground,#about,#top,#main\{scroll-margin-top:calc\(var\(--mobile-site-header-height,110px\) \+ 12px\)\}/,
+assert.match(navigationCss, /html\{scroll-padding-top:var\(--site-anchor-offset\)\}/,
  'Section scroll margins must track the dynamic anchor offset');
 assert.doesNotMatch(navigationCss, /min-height:var\(--mobile-site-header-height\)/,
  'The measured token must not create a feedback loop in header sizing');
