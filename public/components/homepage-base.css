@@ -21,13 +21,9 @@
 .primary-link {display:inline-flex;align-items:center;gap:30px;padding:17px 23px;text-decoration:none;font-size:.9375rem;font-weight:700;border-radius:var(--editorial-action-radius);transition:transform .25s,background .25s,border-color .25s;background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
 .primary-link:is(:hover,:focus-visible){background:var(--editorial-accent);color:var(--editorial-action-ink);border-color:var(--editorial-accent)}
 .quiet-link {display:inline-flex;align-items:center;min-height:44px;font-size:0.875rem;font-weight:700;text-underline-offset:5px}
-/* Homepage quiet-link hover/focus uses the editorial accent token. */
-.quiet-link:is(:hover,:focus-visible){color:var(--editorial-accent)}
-/* Dark resting ink and accent states remain beside homepage link geometry. */
-/* Use the theme's readable ink; --night-link-ink mixes toward dark paper. */
+/* Match dark resting-ink specificity without duplicating the interaction rule. */
+:is(.quiet-link,html[data-theme="dark"] .quiet-link):is(:hover,:focus-visible){color:var(--editorial-accent)}
 html[data-theme="dark"] .quiet-link{color:var(--ink)}
-/* Dark resting ink is more specific; restore an equally specific hover state. */
-html[data-theme="dark"] .quiet-link:is(:hover,:focus-visible){color:var(--editorial-accent)}
 .hero-foot {display:flex;gap:18px 24px;flex-wrap:wrap;margin-top:auto;padding-top:68px;font-family:var(--font-body);font-size:var(--type-xs);line-height:1.5;font-weight:700;letter-spacing:.14em;color:color-mix(in srgb,var(--palette-navy) 73%,var(--palette-paper))}
 .hero .status-dot {background:var(--brand-pink)}
 .eyebrow-divider {margin-inline:10px;color:var(--muted)}
