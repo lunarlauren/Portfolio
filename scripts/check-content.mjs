@@ -1127,7 +1127,7 @@ assert.match(navigationCss, /grid-template-rows:minmax\(44px,auto\) minmax\(44px
 assert.match(navigationCss, /grid-row:1\/3/, 'Logo must span the two rows');
 assert.match(navigationCss, /--mobile-site-header-height:110px/, 'Phone header height must be shared');
 assert.match(caseCss, /top:var\(--mobile-site-header-height,110px\)/, 'Case chapter strip must clear the phone header');
-assert.ok(navigationCss.includes('min-height:44px;padding:0 1px'), 'Phone navigation links must retain 44px hit height');
+assert.match(navigationCss, /\.site-header nav a\{[^}]*min-height:44px/, 'Navigation links must inherit a 44px touch target on phones');
 // Pass 15: do not let the header's measured token size the header itself.
 // ResizeObserver may update the token when 200% text causes the nav to wrap,
 // but the header must also shrink when text is restored to normal.
