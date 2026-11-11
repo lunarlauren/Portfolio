@@ -312,7 +312,8 @@ assert.doesNotMatch(heroPolishCss, /@media\s+\(min-width:\s*1024px\)/,
  'Do not reintroduce a duplicate spaced desktop breakpoint');
 const desktopHeroBlock=heroPolishCss.slice(heroPolishCss.indexOf('@media(min-width:1024px){'),
  heroPolishCss.indexOf('/* Phone editorial layout:'));
-// Desktop copy already centers through the base owner; do not demand a duplicate.\nfor(const selector of ['.hero .feature-art{height:100%;min-height:0}',
+// Desktop copy already centers through the base owner; do not demand a duplicate.
+for(const selector of ['.hero .feature-art{height:100%;min-height:0}',
  '.hero .hero-foot{margin-top:0;']){
  assert.ok(desktopHeroBlock.includes(selector),
   'Desktop hero media block must own '+selector);
