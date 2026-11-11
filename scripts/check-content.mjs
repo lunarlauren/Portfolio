@@ -267,7 +267,7 @@ assert.match(heroPolishCss, /html:not\(\[data-theme="dark"\]\) \.hero h1 em\{col
  'Light hero emphasis inherits headline ink without italics');
 assert.match(heroPolishCss, /html\[data-theme="dark"\] \.hero h1 em\{color:var\(--brand-pink\);font-style:italic\}/,
  'Dark hero emphasis keeps the neutral italic treatment');
-assert.match(heroPolishCss, /\.hero \.feature-art \.hero-portrait-art\{filter:grayscale\(1\) contrast\(1\.08\);transition:filter \.5s ease\}/,
+assert.match(heroPolishCss, /\.hero \.feature-art \.hero-portrait-art\{[^}]*filter:grayscale\(1\) contrast\(1\.08\);transition:filter \.5s ease[^}]*\}/,
  'Hero component owns grayscale reveal and timing');
 assert.match(heroPolishCss, /@media\(hover:none\)\{\.hero \.feature-art \.hero-portrait-art\{filter:none\}\}/,
  'Touch visitors must see the full-color hero portrait');
