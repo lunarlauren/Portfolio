@@ -91,8 +91,10 @@ html[data-theme="dark"] .theme-toggle:hover{
 .footer-mark img{display:block;object-fit:contain}
 /* Section anchors sit below the sticky header. Case-study chapters use
    their own larger offsets in case-study.css. */
-html{scroll-padding-top:82px}
-#work,#playground,#about,#top,#main{scroll-margin-top:82px}
+/* One offset token keeps scroll padding and section anchors in sync. */
+:root{--site-anchor-offset:82px}
+html{scroll-padding-top:var(--site-anchor-offset)}
+:is(#work,#playground,#about,#top,#main){scroll-margin-top:var(--site-anchor-offset)}
 
 /* Phone header: DOM and visual tab order agree (logo, Work/Playground/About,
    Contact, theme). Intrinsic rows grow with enlarged text; a header observer
@@ -130,8 +132,7 @@ html{scroll-padding-top:82px}
  .site-header .theme-toggle{
   grid-column:3;grid-row:2;justify-self:end;
  }
- html{scroll-padding-top:calc(var(--mobile-site-header-height,110px) + 12px)}
- #work,#playground,#about,#top,#main{scroll-margin-top:calc(var(--mobile-site-header-height,110px) + 12px)}
+ :root{--site-anchor-offset:calc(var(--mobile-site-header-height,110px) + 12px)}
 }
 @media(max-width:360px){
  .site-header{column-gap:6px;padding-inline:10px}
