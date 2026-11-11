@@ -4,7 +4,6 @@
 /* --site-chrome-edge already follows the theme-aware --line alias. */
 html[data-theme="dark"]{--site-chrome-bg:var(--paper)}
 .site-header{
- display:flex;align-items:center;justify-content:space-between;
  position:sticky;top:0;z-index:100;max-width:none;width:100%;
  display:flex;align-items:center;justify-content:space-between;
  box-sizing:border-box;padding:8px clamp(18px,4vw,56px);
@@ -58,7 +57,7 @@ html[data-theme="dark"] .header-contact:focus-visible{
  padding:0;border-radius:50%;border:1px solid var(--line);
 }
 html[data-theme="dark"] .theme-toggle{
- border-color:var(--line);color:var(--ink);
+ color:var(--ink);
  /* --palette-navy flips to light ink in dark mode. Build this control from
     the dark paper surface so its foreground stays readable at rest. */
  background:color-mix(in srgb,var(--paper) 82%,var(--palette-blue) 18%);
@@ -130,7 +129,6 @@ html{scroll-padding-top:82px}
  .site-header .header-contact span{display:none}
  .site-header .theme-toggle{
   grid-column:3;grid-row:2;justify-self:end;
-  flex:0 0 44px;width:44px;min-width:44px;height:44px;
  }
  html{scroll-padding-top:calc(var(--mobile-site-header-height,110px) + 12px)}
  #work,#playground,#about,#top,#main{scroll-margin-top:calc(var(--mobile-site-header-height,110px) + 12px)}
