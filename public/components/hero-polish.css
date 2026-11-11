@@ -102,7 +102,6 @@ html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:
   gap:clamp(28px,3vw,52px);
  }
  .hero .feature-art{height:100%;min-height:0}
- .hero .hero-copy{justify-content:center}
  .hero .hero-copy h1{
   font-size:clamp(3.25rem,4.45vw,4.75rem);
   line-height:1.01;margin-block:14px 12px;max-width:16ch
@@ -126,7 +125,7 @@ html[data-theme="dark"] .notebook-hero-note{background:transparent;border-color:
  }
  .hero .hero-copy{display:contents}
  .hero .hero-copy>.eyebrow{
-  order:1;margin:0 0 18px;font-size:.625rem;line-height:1.55;text-align:center;
+  order:1;margin:0 0 18px;text-align:center;
   letter-spacing:.045em;text-wrap:balance
  }
  .hero .hero-copy>h1{
