@@ -912,10 +912,15 @@ const workMotionBlock=workCss.split('@media(hover:hover) and (pointer:fine) and 
 assert.ok(workMotionBlock && [
  '.work .featured-project.client-file:hover{--file-lift:-5px}',
  '.work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}',
- '.project-card-link:hover img{transform:scale(1.035)}',
- '.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)}'
+ '.project-card-link:hover{transform:translateY(-3px)}'
 ].every(rule=>workMotionBlock.includes(rule)),
- 'Fine-pointer media block must retain archive and preview affordances');
+ 'Fine-pointer media block must retain archive folder and pointer affordances');
+const sharedPreviewMotion=workCss.split('@media(prefers-reduced-motion:no-preference){')[1]?.split('\n}')[0];
+assert.ok(sharedPreviewMotion && [
+ '.project-card-link:is(:hover,:focus-visible) img{transform:scale(1.035)}',
+ '.play-grid .project-card-link:is(:hover,:focus-visible) .project-visual{transform:translateY(-5px)}'
+].every(rule=>sharedPreviewMotion.includes(rule)),
+ 'Shared preview motion must preserve hover and keyboard focus in the reduced-motion-safe guard');
 const caseReduceBlock=caseCss.split('@media(prefers-reduced-motion:reduce){')[1]?.split('\n}')[0];
 assert.ok(caseReduceBlock && [
  '.case-view .case-section-links{scroll-behavior:auto}',
