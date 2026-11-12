@@ -931,10 +931,8 @@ assert.ok(caseReduceBlock && [
 
 assert.ok(caseCss.includes('@keyframes detail-reveal') && caseCss.includes('.case-view:not([hidden]) .case-head{animation:detail-reveal'),
  'Case-study must own its entrance animation');
-assert.ok(workCss.includes('.play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)'),
- 'Shared card owner must retain the Playground preview hover');
-assert.ok(workCss.includes('.play-grid .project-card-link:focus-visible .project-visual{transform:translateY(-5px)'),
- 'Keyboard focus must expose the same Playground preview affordance');
+assert.ok(sharedPreviewMotion?.includes('.play-grid .project-card-link:is(:hover,:focus-visible) .project-visual{transform:translateY(-5px)}'),
+ 'Shared card owner must retain Playground hover and keyboard-focus preview affordances');
 assert.doesNotMatch(playgroundCss, /\.play-grid \.project-card-link(?::hover)? \.project-visual\{(?:transition|transform):/,
  'Playground must not duplicate shared preview motion');
 assert.doesNotMatch(workCss, /\.project-card-link\{transition:none!important\}/,
