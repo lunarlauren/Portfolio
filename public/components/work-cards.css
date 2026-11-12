@@ -85,12 +85,16 @@ html:not([data-theme="dark"]) .featured-project{padding:clamp(14px,2vw,22px)}
   border-top: 1px solid var(--line);
   line-height: 1.55;
 }
+/* Shared evidence labels retain their individual typography below. */
+.project-card-process strong,
+.work .project-card-summary-label{
+ display:block;
+ margin-bottom:4px;
+ text-transform:uppercase;
+}
 .project-card-process strong {
-  display: block;
-  font-size: 0.6875rem;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-  margin-bottom: 4px;
+ font-size:0.6875rem;
+ letter-spacing:.11em;
 }
 /* Mobile interaction quality: keep tappable controls comfortable and avoid
    paper decoration interfering with focus or text. */
@@ -324,14 +328,11 @@ html[data-theme="dark"] .client-file{
 /* Explicit challenge label anchors the problem → contribution → approach scan
    without adding invented impact claims or changing project copy. */
 .work .project-card-summary-label{
- display:block;
- margin-bottom:4px;
  color:var(--muted);
  font-size:var(--type-eyebrow);
  font-weight:700;
  letter-spacing:.08em;
  line-height:1.4;
- text-transform:uppercase;
 }
 
 /* Arrow geometry stays constant; motion is opt-in with the other previews. */
