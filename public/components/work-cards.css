@@ -349,14 +349,15 @@ html[data-theme="dark"] .client-file{
 /* Programmatic focus does not draw boxes around static archive headings.
    Actual links retain their visible :focus-visible rings. */
 #work-title[tabindex="-1"]:focus{outline:none;box-shadow:none}
-/* One owner for Work / After Hours preview motion. Keep keyboard focus
-   feedback alongside pointer hover; never animate media for reduced motion. */
+/* One owner for Work / After Hours preview motion. Hover and keyboard focus
+   share image feedback; the fine-pointer block below only owns folder lift
+   and pointer-specific arrow behavior. Reduced motion never animates media. */
 @media(prefers-reduced-motion:no-preference){
  .project-card-link:is(:hover,:focus-visible) .project-meta span:last-child{transform:translate(4px,-4px)}
  .project-card img{transition:transform .45s ease}
- .project-card-link:focus-visible img{transform:scale(1.035)}
+ .project-card-link:is(:hover,:focus-visible) img{transform:scale(1.035)}
  .play-grid .project-card-link .project-visual{transition:transform .55s var(--motion-ease),filter .35s ease}
- .play-grid .project-card-link:focus-visible .project-visual{transform:translateY(-5px)}
+ .play-grid .project-card-link:is(:hover,:focus-visible) .project-visual{transform:translateY(-5px)}
 }
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
  /* Archive folder, label, and preview motion use one fine-pointer guard. */
@@ -364,8 +365,6 @@ html[data-theme="dark"] .client-file{
  .project-card-link:hover .project-meta span:last-child{transform:translate(4px,-3px)}
  .work .featured-project.client-file:hover{--file-lift:-5px}
  .work .featured-project.client-file:hover .client-file-label{transform:translateY(-3px)}
- .project-card-link:hover img{transform:scale(1.035)}
- .play-grid .project-card-link:hover .project-visual{transform:translateY(-5px)}
  .project-card-link:hover{transform:translateY(-3px)}
 }
 /* Transforms above are opt-in. Disable transition properties directly so
