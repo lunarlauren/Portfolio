@@ -1,1 +1,32 @@
-<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#151515"><title>Lauren Leven | Art & Animation</title><meta name="description" content="Illustration, animation, and imagined worlds. Explore my original series Seafoam and more of my personal work."><link rel="canonical" href="https://laur3n.net/art/"><link rel="icon" href="/LL%20logo.svg" type="image/svg+xml"><script>(function(){let theme='dark';try{const saved=localStorage.getItem('portfolio-theme');if(saved==='light'||saved==='dark')theme=saved;}catch{}document.documentElement.setAttribute('data-theme',theme);document.documentElement.style.colorScheme=theme;document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#151515':'#f5f3ef';})();</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="/components/foundations.css"><link rel="stylesheet" href="/landing.css?v=shared-theme"></head><body><main><nav class="topline" aria-label="Main"><a href="/">LAUR3N.NET</a><a href="/ux/">Design portfolio ↗</a></nav><section class="identity" style="grid-template-columns:1fr"><div><p class="eyebrow">Art & Animation</p><h1>Stories.<br><em>With character.</em></h1><p class="intro">Illustration, animation, and imagined worlds. Explore my original series Seafoam and more of my personal work.</p></div></section><nav class="destinations" aria-label="Explore my work"><a class="card" href="https://watchseafoam.com"><span class="number">01 / ORIGINAL SERIES</span><span class="arrow" aria-hidden="true">↗</span><h2>Seafoam</h2><p>A sci-fantasy world of animation, adventure, and connection.</p></a><a class="card" href="https://www.instagram.com/aphrosanimation/"><span class="number">02 / PERSONAL WORK</span><span class="arrow" aria-hidden="true">↗</span><h2>Art & illustration</h2><p>Explore my illustration and animation on Instagram.</p></a></nav><footer><a href="mailto:bertinoln@gmail.com">bertinoln@gmail.com ↗</a><span>Orlando, Florida</span></footer></main></body></html>
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lauren Leven | Art & Animation</title>
+<meta name="description" content="Illustration, animation, and imagined worlds. Explore Seafoam and more of my personal work.">
+<meta name="theme-color" content="#151515"><link rel="canonical" href="https://laur3n.net/art/">
+<link rel="icon" href="/LL%20logo.svg" type="image/svg+xml">
+<script>
+try { const saved=localStorage.getItem('portfolio-theme'); if(saved==='light'||saved==='dark')document.documentElement.dataset.theme=saved; } catch {}
+document.querySelector('meta[name="theme-color"]').content=document.documentElement.dataset.theme==='dark'?'#151515':'#f5f3ef';
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/components/foundations.css">
+<link rel="stylesheet" href="/components/personal-pages.css?v=1">
+</head>
+<body><a class="skip-link" href="#content">Skip to content</a><div class="hub">
+<header class="hub-header"><a class="wordmark" href="/">LAUREN LEVEN</a><div class="header-actions"><a class="contact" href="mailto:bertinoln@gmail.com">Get in touch ↗</a><button class="theme-button" id="theme" type="button" aria-label="Use light theme">◐</button></div></header>
+<main id="content">
+<section class="introduction"><p class="eyebrow">Art & animation</p><h1>Stories.<br><em>With character.</em></h1><p class="description">Illustration, animation, and imagined worlds. Explore my original series Seafoam and more of my personal work.</p></section>
+<nav class="work-index" aria-label="Explore my art">
+<a class="destination" href="https://watchseafoam.com"><span class="number">01</span><h2>Seafoam</h2><p>A sci-fantasy world of animation, adventure, and connection.</p><span class="arrow" aria-hidden="true">↗</span></a>
+<a class="destination" href="https://www.instagram.com/aphrosanimation/"><span class="number">02</span><h2>Art & illustration</h2><p>Explore my illustration and animation on Instagram.</p><span class="arrow" aria-hidden="true">↗</span></a>
+<a class="destination" href="/ux/"><span class="number">03</span><h2>Design portfolio</h2><p>Product design, UX/UI, and selected case studies.</p><span class="arrow" aria-hidden="true">↗</span></a>
+</nav></main><footer class="hub-footer"><span>Lauren Leven · Design & illustration</span><span>laur3n.net</span></footer>
+</div><script>
+const themeButton=document.getElementById('theme');
+function updateThemeLabel(){themeButton.setAttribute('aria-label',document.documentElement.dataset.theme==='dark'?'Use light theme':'Use dark theme');}
+updateThemeLabel();
+themeButton.addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#151515':'#f5f3ef';try{localStorage.setItem('portfolio-theme',theme);}catch{}updateThemeLabel();});
+</script></body></html>

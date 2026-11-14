@@ -144,8 +144,8 @@ assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;min-width:
  const document={documentElement:root,getElementById:()=>button,querySelector:()=>({setAttribute:(key,value)=>{if(key==='content')state.color=value}})};
  const localStorage={getItem:()=>state.stored,setItem:(key,value)=>{state.stored=value}};
  vm.runInNewContext(inlineTheme,{document,window:browser,localStorage});
- assert.equal(state.theme,'light','Default light OS preference must be honored');
- assert.equal(state.pressed,'false','Light theme must expose the toggle as not pressed');
+ assert.equal(state.theme,'dark','Default theme must match the dark personal homepage');
+ assert.equal(state.pressed,'true','Default dark theme must expose the toggle as pressed');
  assert.equal(state.label,'Dark theme','Theme toggle must keep its accessible name in light mode');
  state.dark=true;state.schemeChange();
  assert.equal(state.theme,'dark','OS theme changes must apply without a stored choice');
@@ -157,7 +157,7 @@ assert.match(caseCss, /\.case-next-nav a,\.case-back\{min-height:44px;min-width:
  assert.equal(state.theme,'dark','Theme choices in another tab must synchronize');
  assert.equal(state.label,'Dark theme','Cross-tab updates must not rename the toggle');
  assert.equal(state.pressed,'true','Toggle pressed state must reflect dark theme');
- assert.equal(state.color,'#111d2a','Browser chrome color must reflect dark theme');
+ assert.equal(state.color,'#151515','Browser chrome color must reflect dark theme');
  state.storage({key:'portfolio-theme',newValue:null});
  assert.equal(state.theme,'dark','Clearing preference must restore current OS theme');
  assert.equal(state.label,'Dark theme','System-driven changes must not rename the toggle');

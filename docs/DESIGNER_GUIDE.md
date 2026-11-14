@@ -27,4 +27,4 @@ Commits to GitHub `main` run the browser checks and feed the Cloudflare deployme
 
 ## Personal homepage and art
 
-`public/index.html` is the business card; `public/art/index.html` is the art landing page. Both use `public/landing.css`. The complete design portfolio is at `/ux/`. `worker.js` redirects old case-study links and serves new deep links. Root hash bookmarks forward through a small script in the business-card head.
+`public/index.html` is the business card; `public/art/index.html` is the art landing page. Both use `public/components/personal-pages.css`, which inherits colors, typography, focus styles, and dark mode from `public/components/foundations.css`. The complete design portfolio is at `/ux/`. `worker.js` redirects old case-study links and serves new deep links. Root hash bookmarks forward through a small script in the business-card head.
