@@ -20,7 +20,7 @@ const server=createServer(async(req,res)=>{
   let file=resolve(root,"."+path);
   if(file!==root&&!file.startsWith(root+"/"))throw Error("Outside public/");
   let info=await stat(file).catch(()=>null);
-  if(!info?.isFile()){file=join(root,"index.html");info=await stat(file)}
+  if(!info?.isFile()){file=join(root,"ux/index.html");info=await stat(file)}
   res.writeHead(200,{"content-type":mime[extname(file)]||"application/octet-stream"});
   res.end(await readFile(file));
  }catch(error){res.writeHead(500);res.end(String(error))}
@@ -31,7 +31,7 @@ const browser=await chromium.launch({headless:true});
 const cases=[
  {id:"header",path:"/",selector:".site-header"},
  {id:"hero-art",path:"/",selector:".hero-feature"},
- {id:"case-chapters",path:"/case-studies/hoylu/connected-planning/",
+ {id:"case-chapters",path:"/ux/case-studies/hoylu/connected-planning/",
   selector:".case-section-links"}
 ].flatMap(c=>[390,1280].flatMap(width=>["light","dark"]
  .map(theme=>({...c,width,theme,key:c.id+"-"+width+"-"+theme}))));

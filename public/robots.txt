@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio.bertinoln.workers.dev/sitemap.xml
+Sitemap: https://laur3n.net/sitemap.xml

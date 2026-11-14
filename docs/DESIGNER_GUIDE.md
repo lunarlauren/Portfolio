@@ -7,7 +7,7 @@ The live site is built from `public/`. Make website changes there; root-level fi
 | Edit | File |
 | --- | --- |
 | Project names, descriptions, links, and image briefs | `public/content.js` |
-| Page sections, hero text, and About content | `public/index.html` |
+| Page sections, hero text, and About content | `public/ux/index.html` |
 | Shared colors, fonts, focus rings, and spacing | `public/components/foundations.css` |
 | Header and navigation | `public/components/navigation.css` |
 | Work project cards | `public/components/work-cards.css` |
@@ -24,3 +24,7 @@ For light and dark colors, look for the shared values near the top of `foundatio
 4. Keep project claims tied to documented work. An image brief is an illustration placeholder, not proof that a screen shipped or was tested.
 
 Commits to GitHub `main` run the browser checks and feed the Cloudflare deployment. The production site uses the files in `public/`.
+
+## Personal homepage and art
+
+`public/index.html` is the business card; `public/art/index.html` is the art landing page. Both use `public/landing.css`. The complete design portfolio is at `/ux/`. `worker.js` redirects old case-study links and serves new deep links. Root hash bookmarks forward through a small script in the business-card head.

@@ -31,10 +31,10 @@ const projectSlug = (title) =>
 const casePath = (group, index) => {
   const company = data.companies.find((c) => c.id === group);
   const project = (company?.projects || (group === "playground" ? data.playground : []))?.[index];
-  return project ? "/case-studies/" + slug(group) + "/" + projectSlug(project.title) + "/" : "/#work";
+  return project ? "/ux/case-studies/" + slug(group) + "/" + projectSlug(project.title) + "/" : "/ux/#work";
 };
 const caseRoute = () => {
-  const match = location.pathname.match(/^\/case-studies\/([^/]+)\/([^/]+)\/?$/);
+  const match = location.pathname.match(/^\/ux\/case-studies\/([^/]+)\/([^/]+)\/?$/);
   if (!match) return safeHash();
   let group;
   try {
@@ -281,9 +281,9 @@ function route() {
   if (!hash.startsWith("project/")) {
     // An unknown or renamed deep link currently resolves to the Work archive.
     // Normalize the URL as well, so the homepage never appears under a stale
-    // /case-studies/... address (and its canonical/share metadata stay truthful).
+    // /ux/case-studies/... address (and its canonical/share metadata stay truthful).
     // Replace rather than push: Back should not revisit the broken address.
-    if (location.pathname.startsWith("/case-studies/")) history.replaceState(null, "", "/#work");
+    if (location.pathname.startsWith("/ux/case-studies/")) history.replaceState(null, "", "/ux/#work");
     // Chapter tracking belongs only to the visible case study. Disconnect on
     // exit so a hidden heading cannot keep updating the old chapter index.
     if (window.caseSectionObserver) {
@@ -314,7 +314,7 @@ function route() {
 let caseOpener = null;
 let caseOpenerScroll = 0;
 document.addEventListener("click", (event) => {
-  const link = event.target.closest('a[href^="/case-studies/"]');
+  const link = event.target.closest('a[href^="/ux/case-studies/"]');
   // Only remember an opener for same-tab navigation. Modified clicks open
   // another browsing context and must not overwrite this page's return target.
   if (
@@ -378,7 +378,7 @@ function routeWithMotion() {
   previousHash = nextHash;
 }
 document.addEventListener("click", (event) => {
-  const link = event.target.closest('a[href^="/case-studies/"]');
+  const link = event.target.closest('a[href^="/ux/case-studies/"]');
   // Preserve native new-tab, named-frame, and download behavior. Only route
   // ordinary same-tab clicks through the SPA; modifier keys stay native too.
   if (
@@ -397,13 +397,13 @@ document.addEventListener("click", (event) => {
   navigateCase(link.getAttribute("href"));
 });
 document.addEventListener("click", (event) => {
-  // The header, footer, and case-study return links use canonical /# anchors.
+  // The header, footer, and case-study return links use canonical /ux/# anchors.
   // Intercept only ordinary same-tab clicks while a case study is showing;
   // native new-tab, modifier, and download actions must keep their real URL.
-  const link = event.target.closest('a[href^="/#"]');
+  const link = event.target.closest('a[href^="/ux/#"]');
   if (
     !link ||
-    !location.pathname.startsWith("/case-studies/") ||
+    !location.pathname.startsWith("/ux/case-studies/") ||
     event.defaultPrevented ||
     event.button !== 0 ||
     event.metaKey ||
@@ -417,7 +417,7 @@ document.addEventListener("click", (event) => {
   const hash = link.hash;
   if (!["#top", "#main", "#work", "#playground", "#about"].includes(hash)) return;
   event.preventDefault();
-  history.pushState(null, "", "/" + hash);
+  history.pushState(null, "", "/ux/" + hash);
   routeWithMotion();
   requestAnimationFrame(() => {
     const destination = document.querySelector(hash);
@@ -431,7 +431,7 @@ route();
 // with both hash routes and ordinary scrolling, without rewriting browser history.
 // HEADER AND RESPONSIVE SIZE: keep location and sticky offsets in sync.
 function initSectionNavigation() {
-  const links = [...document.querySelectorAll('.site-header nav a[href^="/#"]')];
+  const links = [...document.querySelectorAll('.site-header nav a[href^="/ux/#"]')];
   const contactLink = document.getElementById("contact-link");
   const contactCTA = document.getElementById("email-link");
   const sections = links

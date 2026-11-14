@@ -14,7 +14,7 @@ const server=createServer(async(req,res)=>{
   let file=resolve(root,"."+decodeURIComponent(path));
   if(!file.startsWith(root+"/")&&file!==root)throw Error("Invalid path");
   let info=await stat(file).catch(()=>null);
-  if(!info?.isFile()){file=join(root,"index.html");info=await stat(file)}
+  if(!info?.isFile()){file=join(root,"ux/index.html");info=await stat(file)}
   res.writeHead(200,{"content-type":types[extname(file)]||"application/octet-stream"});
   res.end(await readFile(file));
  }catch(error){res.writeHead(500);res.end(String(error))}
@@ -49,7 +49,7 @@ try{
   if(path==="/laurenlevenportfolioheroportrait.png")heroImageRequests++;
   if(path==="/styles.css")retiredCssRequests++;
  });
- await page.goto(origin+"/");
+ await page.goto(origin+"/ux/");
  const homepageMetadata=await readMetadata(page);
  // Pass 18: prove render-critical fonts and hero art are discovered in
  // the HTML head, not by an @import waterfall after foundations.css.
@@ -432,7 +432,7 @@ try{
  for(const theme of ["light","dark"]){
   await page.evaluate(value=>document.documentElement.dataset.theme=value,theme);
   const expected=theme==="dark"?"rgb(166, 217, 255)":"rgb(35, 95, 136)";
-  for(const selector of [".site-header nav a[href='/#work']", ".hero-actions .quiet-link"]){
+  for(const selector of [".site-header nav a[href='/ux/#work']", ".hero-actions .quiet-link"]){
    await page.hover(selector);
    const ink=await page.$eval(selector,node=>getComputedStyle(node).color);
    assert.equal(ink,expected,theme+" "+selector+" hover ink");
@@ -811,7 +811,7 @@ try{
  // then ensure ordinary themes still retain their tactile card shadow.
  const contrastCardsPage=await browser.newPage();
  contrastCardsPage.on("pageerror",error=>errors.push(error.message));
- await contrastCardsPage.goto(origin+"/");
+ await contrastCardsPage.goto(origin+"/ux/");
  const contrastCard=contrastCardsPage.locator(".work .featured-project.client-file").first();
  for(const width of [390,1280]){
   await contrastCardsPage.setViewportSize({width,height:844});
@@ -856,7 +856,7 @@ try{
  const forcedPage=await browser.newPage();
  forcedPage.on("pageerror",error=>errors.push(error.message));
  await forcedPage.emulateMedia({forcedColors:"active"});
- await forcedPage.goto(origin+"/");
+ await forcedPage.goto(origin+"/ux/");
  const systemHighlight=await forcedPage.evaluate(()=>{
   const probe=document.createElement("span");
   probe.style.color="Highlight";
@@ -919,7 +919,7 @@ try{
    assert.equal(edges.playground,"solid",width+"px "+theme+": After Hours illustrative frame is solid");
   }
  }
- await forcedPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await forcedPage.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await forcedPage.locator(".case-view .case-head").waitFor();
  for(const width of [390,1280]){
   await forcedPage.setViewportSize({width,height:844});
@@ -942,7 +942,7 @@ try{
  // so inspect each element's scroll box and actual rendered bounds.
  const reflowPage=await browser.newPage();
  reflowPage.on("pageerror",error=>errors.push(error.message));
- await reflowPage.goto(origin+"/");
+ await reflowPage.goto(origin+"/ux/");
  const longToken="ProductStrategyAndEnterpriseWorkflowArchitecture".repeat(5);
  await reflowPage.evaluate(token=>{
   document.querySelector(".work .client-file .archive-project-title").textContent=token;
@@ -973,7 +973,7 @@ try{
    }
   }
  }
- await reflowPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await reflowPage.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await reflowPage.locator(".case-view .case-approach").waitFor();
  await reflowPage.evaluate(token=>{
   document.querySelector(".case-head h1").textContent=token;
@@ -1027,7 +1027,7 @@ try{
   await homepageMotionPage.setViewportSize({width,height:900});
   for(const theme of ["light","dark"]){
    await homepageMotionPage.emulateMedia({reducedMotion:"no-preference"});
-   await homepageMotionPage.goto(origin+"/");
+   await homepageMotionPage.goto(origin+"/ux/");
    await homepageMotionPage.evaluate(value=>document.documentElement.dataset.theme=value,theme);
    const label=width+"px "+theme;
    await homepageMotionPage.waitForFunction(()=>{
@@ -1085,7 +1085,7 @@ try{
  // Reduced-motion visitors must not receive Playground preview or case entrance motion.
  const reducedMotionPage=await browser.newPage({reducedMotion:"reduce"});
  reducedMotionPage.on("pageerror",error=>errors.push(error.message));
- await reducedMotionPage.goto(origin+"/");
+ await reducedMotionPage.goto(origin+"/ux/");
  const previewTransition=await reducedMotionPage.locator("#play-grid .project-card-link .project-visual").first()
   .evaluate(node=>getComputedStyle(node).transitionProperty);
  assert.equal(previewTransition,"none","Playground preview must not animate under reduced motion");
@@ -1174,7 +1174,7 @@ try{
  assert.equal(reducedImageTransition.transition,"none","Project image zoom must honor reduced motion");
  assert.equal(reducedImageTransition.transform,"none","Project image must not zoom on reduced-motion focus");
 
- await reducedMotionPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await reducedMotionPage.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await reducedMotionPage.locator(".case-view .case-head").waitFor();
  const caseAnimation=await reducedMotionPage.locator(".case-view .case-head")
   .evaluate(node=>getComputedStyle(node).animationName);
@@ -1211,7 +1211,7 @@ try{
  // Use a separate page so test focus state cannot affect router assertions.
  const focusPage=await browser.newPage();
  focusPage.on("pageerror",error=>errors.push(error.message));
- await focusPage.goto(origin+"/");
+ await focusPage.goto(origin+"/ux/");
  await focusPage.locator(".work .project-card-link").first().waitFor();
  const inspectFocus=async(selector)=>{
   return await focusPage.locator(selector).first().evaluate(node=>{
@@ -1251,7 +1251,7 @@ try{
    assert.ok(link.outlineWidth>=3,width+"px "+theme+": Work link focus ring remains at least 3px");
   }
  }
- await focusPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await focusPage.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await focusPage.locator(".case-view .case-head").waitFor();
  for(const width of [390,1280]){
   await focusPage.setViewportSize({width,height:844});
@@ -1298,8 +1298,8 @@ try{
  await newTabCard.click();
  const popup=await popupPromise;
  await popup.locator("#case-title").waitFor();
- assert.ok(popup.url().includes("/case-studies/hoylu/connected-planning/"));
- assert.equal(new URL(page.url()).pathname,"/","New-tab navigation must leave the opener on the homepage");
+ assert.ok(popup.url().includes("/ux/case-studies/hoylu/connected-planning/"));
+ assert.equal(new URL(page.url()).pathname,"/ux/","New-tab navigation must leave the opener on the homepage");
  await popup.close();
  await newTabCard.evaluate(link=>link.removeAttribute("target"));
  // The hero illustration and About headshot have different editorial jobs.
@@ -1354,7 +1354,7 @@ try{
    releaseImage=()=>route.continue();
    resolvePending();
   });
-  await imagePage.goto(origin+"/");
+  await imagePage.goto(origin+"/ux/");
   await imagePage.locator(".about-portrait").scrollIntoViewIfNeeded();
   await paused;
   const measure=()=>imagePage.locator(".about-portrait img").evaluate(img=>{
@@ -1551,7 +1551,7 @@ try{
  // or an out-of-date sticky-header offset. Compare its actual rectangles.
  const headerReflowPage=await browser.newPage();
  headerReflowPage.on("pageerror",error=>errors.push(error.message));
- await headerReflowPage.goto(origin+"/");
+ await headerReflowPage.goto(origin+"/ux/");
  const syncHeader=async()=>headerReflowPage.waitForFunction(()=>{
   const header=document.querySelector(".site-header");
   const token=parseFloat(getComputedStyle(document.documentElement)
@@ -1610,8 +1610,8 @@ try{
   document.documentElement.style.fontSize="200%";
  });
  await syncHeader();
- for(const selector of ['.site-header nav a[href="/#work"]',
-  '.site-header nav a[href="/#playground"]','.site-header nav a[href="/#about"]',
+ for(const selector of ['.site-header nav a[href="/ux/#work"]',
+  '.site-header nav a[href="/ux/#playground"]','.site-header nav a[href="/ux/#about"]',
   '.site-header .header-contact','.site-header .theme-toggle']){
   const control=headerReflowPage.locator(selector);
   await control.focus();
@@ -1627,7 +1627,7 @@ try{
   assert.equal(state.outline,"solid",selector+": focus ring stays solid at 200%");
   assert.ok(state.width>=3,selector+": focus outline remains at least 3px");
  }
- await headerReflowPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await headerReflowPage.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await headerReflowPage.locator(".case-section-links").waitFor();
  for(const width of [320,390,650]){
   await headerReflowPage.setViewportSize({width,height:844});
@@ -1834,7 +1834,7 @@ try{
  await page.setViewportSize({width:1280,height:720});
  await page.evaluate(()=>{document.documentElement.dataset.theme="light"});
 
- await page.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await page.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await page.locator("#case-title").waitFor();
  // Pass 10: the shared case-navigation owner keeps every next/back link
  // touch-friendly. Fact values and evidence text retain distinct line heights.
@@ -1874,14 +1874,14 @@ try{
 
  // Canonical homepage anchors must work when opened in another tab from a
  // deep-linked case study. The original case-study page must remain in place.
- for(const selector of [".site-header nav a[href='/#work']", ".case-back"]){
+ for(const selector of [".site-header nav a[href='/ux/#work']", ".case-back"]){
   const link=page.locator(selector);
   await link.evaluate(node=>node.target="_blank");
   const newTabPromise=page.waitForEvent("popup");
   await link.click();
   const newTab=await newTabPromise;
   await newTab.waitForLoadState("domcontentloaded");
-  assert.equal(new URL(newTab.url()).pathname,"/","New-tab return link should open the homepage");
+  assert.equal(new URL(newTab.url()).pathname,"/ux/","New-tab return link should open the homepage");
   assert.equal(new URL(newTab.url()).hash,"#work","New-tab return link should target Work");
   assert.match(page.url(),/connected-planning/,"New-tab return must not navigate the original case study");
   await newTab.close();
@@ -2060,7 +2060,7 @@ try{
  await page.locator('[data-case-jump="case-evidence-notes"]').click();
  assert.equal(await page.locator("#case-evidence-notes").evaluate(node=>document.activeElement===node),true,"Evidence heading should receive focus");
  assert.equal(await page.locator(".case-section-links button[aria-current='location']").count()>0,true);
- await page.locator(".case-next-nav a[href^='/case-studies/']").click();
+ await page.locator(".case-next-nav a[href^='/ux/case-studies/']").click();
  assert.match(page.url(),/\/case-studies\/hoylu\/mobile-insights\//);
  assert.match(await page.locator(".case-prose").innerText(),/Mobile Insights is a shipped product experience/,"Mobile Insights case study should describe its actual delivery status");
  assert.match(await page.locator(".case-evidence").innerText(),/Shipped product contribution/,"The project overview must identify Mobile Insights as shipped");
@@ -2077,19 +2077,19 @@ try{
  assert.match(page.url(),/\/#work$/);
  assert.equal(await page.locator("#main").isVisible(),true);
  assert.deepEqual(await readMetadata(page),homepageMetadata,"Returning from a case study must restore homepage title, canonical, and social previews");
- await page.locator(".project-card-link[href='/case-studies/hoylu/connected-planning/']").first().click();
- await page.locator('.site-header nav a[href="/#about"]').click();
+ await page.locator(".project-card-link[href='/ux/case-studies/hoylu/connected-planning/']").first().click();
+ await page.locator('.site-header nav a[href="/ux/#about"]').click();
  assert.match(page.url(),/\/#about$/);
  assert.equal(await page.locator("#main").isVisible(),true);
  assert.deepEqual(await readMetadata(page),homepageMetadata,"Navigating from a case study to About must also restore homepage metadata");
  // A case-study link uses pushState, which emits neither hashchange nor
  // popstate. The header must identify Work rather than leaving About
  // announced as the current location from the previous view.
- await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="/#about"]')?.getAttribute("aria-current")==="location");
- await page.locator(".project-card-link[href='/case-studies/hoylu/connected-planning/']").first().click();
+ await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="/ux/#about"]')?.getAttribute("aria-current")==="location");
+ await page.locator(".project-card-link[href='/ux/case-studies/hoylu/connected-planning/']").first().click();
  await page.locator("#case-title").waitFor();
- await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="/#work"]')?.getAttribute("aria-current")==="location");
- assert.equal(await page.locator('.site-header nav a[href="/#about"]').getAttribute("aria-current"),null,"About must not remain current on a case-study route");
+ await page.waitForFunction(()=>document.querySelector('.site-header nav a[href="/ux/#work"]')?.getAttribute("aria-current")==="location");
+ assert.equal(await page.locator('.site-header nav a[href="/ux/#about"]').getAttribute("aria-current"),null,"About must not remain current on a case-study route");
  await page.locator(".case-back").click();
  await page.locator("#main").waitFor({state:"visible"});
  // Leaving a case study restores focus/scroll to the opener in an animation
@@ -2135,7 +2135,7 @@ try{
  // previously loaded before the component, in both themes and at phone/desktop.
  const caseOwnerPage=await browser.newPage();
  caseOwnerPage.on("pageerror",error=>errors.push(error.message));
- await caseOwnerPage.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await caseOwnerPage.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await caseOwnerPage.locator(".case-view .case-head").waitFor();
  for(const width of [390,1280]){
   await caseOwnerPage.setViewportSize({width,height:844});
@@ -2184,7 +2184,7 @@ try{
  // case study has evidence notes but no process section, or neither section.
  const optional=await browser.newPage();
  optional.on("pageerror",error=>errors.push(error.message));
- await optional.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await optional.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await optional.evaluate(()=>{
   const project=window.PORTFOLIO.companies.find(company=>company.id==="hoylu").projects[0];
   project.process="";
@@ -2206,7 +2206,7 @@ try{
  const limited=await browser.newPage();
  limited.on("pageerror",error=>errors.push(error.message));
  await limited.addInitScript(()=>{window.IntersectionObserver=undefined;});
- await limited.goto(origin+"/");
+ await limited.goto(origin+"/ux/");
  assert.equal(await limited.evaluate(()=>typeof window.IntersectionObserver),"undefined");
  assert.equal(await limited.locator(".reveal-ready").count(),0,
   "Non-callable IntersectionObserver must leave homepage sections visible");
@@ -2218,7 +2218,7 @@ try{
  const fallback=await browser.newPage();
  fallback.on("pageerror",error=>errors.push(error.message));
  await fallback.addInitScript(()=>{delete window.IntersectionObserver;});
- await fallback.goto(origin+"/case-studies/hoylu/connected-planning/");
+ await fallback.goto(origin+"/ux/case-studies/hoylu/connected-planning/");
  await fallback.locator("#case-title").waitFor();
  assert.equal(await fallback.evaluate(()=>"IntersectionObserver" in window),false,
   "The fallback smoke case must actually disable IntersectionObserver");
@@ -2238,7 +2238,7 @@ try{
   };
   try{
    window.dispatchEvent(new Event("scroll"));
-   history.pushState(null,"","/#work");
+   history.pushState(null,"","/ux/#work");
    route();
   }finally{
    window.cancelAnimationFrame=originalCancel;
@@ -2250,7 +2250,7 @@ try{
  await fallback.close();
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  mobile.on("pageerror",error=>errors.push(error.message));
- await mobile.goto(origin+"/case-studies/alcon/ai-assisted-iol-planning/");
+ await mobile.goto(origin+"/ux/case-studies/alcon/ai-assisted-iol-planning/");
  await mobile.locator("#case-title").waitFor();
  assert.equal(await mobile.locator("#case-title").innerText(),"AI-Assisted IOL Planning");
  assert.equal(await mobile.locator(".case-section-links button").first().isVisible(),true);

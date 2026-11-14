@@ -7,7 +7,7 @@ import vm from 'node:vm';
 const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
 const content = read('../public/content.js');
 const script = read('../public/script.js');
-const html = read('../public/index.html');
+const html = read('../public/ux/index.html');
 const css = read('../public/styles.css');
 // Read the actual owners of these rules after the component extraction.
 // Assertions against only script.js/styles.css silently become stale otherwise.
@@ -460,7 +460,7 @@ const renderProjectCard = vm.runInNewContext(
   visual: () => '<div>image</div>',
   processTeaser: project => project.process || '',
   archiveFactsMarkup: (evidence,id) => evidence ? '<dl id="' + id + '"><dt>My contribution</dt><dd>' + evidence[1] + '</dd><dt>Delivery</dt><dd>' + evidence[2] + '</dd></dl>' : '',
-  casePath: () => '/case-studies/hoylu/connected-planning/'
+  casePath: () => '/ux/case-studies/hoylu/connected-planning/'
  }
 );
 // Project-card descriptions include the challenge and the visible process teaser.
@@ -549,7 +549,7 @@ new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not
  assert.equal(handlers.length,1);
  const click=(target='',download=false)=>{
   let prevented=false;
-  const link={target,hasAttribute:name=>name==='download'&&download,getAttribute:()=>'/case-studies/hoylu/mobile-insights/'};
+  const link={target,hasAttribute:name=>name==='download'&&download,getAttribute:()=>'/ux/case-studies/hoylu/mobile-insights/'};
   handlers[0]({target:{closest:()=>link},button:0,defaultPrevented:false,
    metaKey:false,ctrlKey:false,shiftKey:false,altKey:false,
    preventDefault:()=>{prevented=true}});
@@ -564,7 +564,7 @@ new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not
 }
 
 // A missing/renamed case-study URL must not show the Work archive while
-// retaining a broken /case-studies/... address. Exercise the real route()
+// retaining a broken /ux/case-studies/... address. Exercise the real route()
 // branch with a small DOM/history stub; this is not browser navigation QA.
 {
  const start=script.search(/function\s+route\s*\(\)\s*\{/);
@@ -580,15 +580,15 @@ new vm.Script(script, { filename: 'public/script.js' }); // syntax only; DOM not
   });
   return {replaced,events,main,caseView,skip};
  };
- const missing=exerciseRoute('/case-studies/hoylu/old-title/','work');
+ const missing=exerciseRoute('/ux/case-studies/hoylu/old-title/','work');
  assert.equal(missing.replaced.length,1,'Unknown case-study URLs should be normalized');
- assert.equal(missing.replaced[0][2],'/#work','Broken URLs should resolve to the Work archive');
+ assert.equal(missing.replaced[0][2],'/ux/#work','Broken URLs should resolve to the Work archive');
  assert.equal(missing.main.hidden,false,'The archive should be visible after recovery');
  assert.equal(missing.caseView.hidden,true,'The old case-study view should be hidden');
  assert.equal(missing.skip.href,'#main','Skip link should target the visible main landmark');
  assert.deepEqual(missing.events,['home'],'Homepage metadata should be restored');
  assert.equal(exerciseRoute('/','work').replaced.length,0,'Ordinary homepage routes should not be rewritten');
- const valid=exerciseRoute('/case-studies/hoylu/mobile-insights/','project/hoylu/1');
+ const valid=exerciseRoute('/ux/case-studies/hoylu/mobile-insights/','project/hoylu/1');
  assert.equal(valid.replaced.length,0,'Valid case-study routes must remain unchanged');
  assert.deepEqual(valid.events,['case'],'Valid case studies must still render');
 }
@@ -607,9 +607,9 @@ assert.ok(data && Array.isArray(data.companies) && Array.isArray(data.playground
  const resolve=pathname=>vm.runInNewContext(resolver,{
   location:{pathname},data,safeHash:()=> 'work'
  });
- assert.equal(resolve('/case-studies/hoylu/mobile-insights/'),'project/hoylu/1');
- assert.equal(resolve('/case-studies/hoylu/old-title/'),'work');
- assert.equal(resolve('/case-studies/unknown/mobile-insights/'),'work');
+ assert.equal(resolve('/ux/case-studies/hoylu/mobile-insights/'),'project/hoylu/1');
+ assert.equal(resolve('/ux/case-studies/hoylu/old-title/'),'work');
+ assert.equal(resolve('/ux/case-studies/unknown/mobile-insights/'),'work');
 }
 const ids = data.companies.map(company => company.id);
 assert.equal(new Set(ids).size, ids.length, 'Company IDs must be unique');
