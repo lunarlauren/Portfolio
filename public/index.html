@@ -15,17 +15,51 @@ document.querySelector('meta[name="theme-color"]').content=document.documentElem
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/components/foundations.css">
 <link rel="stylesheet" href="/components/personal-pages.css?v=1">
+<style>
+.mobile-heading,.mobile-contact{display:none}
+.more-links>summary{display:none}
+
+@media(max-width:640px){
+.business-home .hub{max-width:480px;min-height:100svh;padding:0 24px;display:flex;flex-direction:column}
+.business-home .hub-header{min-height:68px;border:0}
+.business-home .wordmark{font-size:11px;letter-spacing:.12em}
+.business-home .header-actions .contact{display:none}
+.business-home main{margin:auto 0;padding:24px 0;}
+.business-home .introduction{padding:0 0 28px}
+.business-home .introduction .eyebrow{font-size:10px;letter-spacing:.1em;margin:0 0 14px}
+.business-home .introduction h1{font-size:clamp(40px,11vw,52px);letter-spacing:-.04em;line-height:1.1;margin:0}
+.business-home .desktop-heading,.business-home .description{display:none}
+.business-home .mobile-heading{display:block}
+.business-home .mobile-heading>span{display:block;font-family:var(--font-body);font-size:15px;font-weight:400;letter-spacing:0;color:var(--muted);margin-top:12px;line-height:1.5}
+.business-home .introduction .eyebrow{font-size:0}
+.business-home .introduction .eyebrow::after{content:'ORLANDO, FLORIDA';font-size:10px}
+.business-home .destination{grid-template-columns:1fr 24px;gap:12px;padding:17px 0;min-height:60px}
+.business-home .destination h2{grid-column:1;font-family:var(--font-body);font-size:17px;letter-spacing:0;font-weight:500}
+.business-home .destination .arrow{grid-column:2;font-size:20px}
+.business-home .destination .number,.business-home .destination p{display:none}
+.business-home .mobile-contact{display:flex;gap:12px;margin:24px 0 12px}
+.business-home .mobile-contact a{display:flex;align-items:center;justify-content:center;min-height:48px;flex:1;border:1px solid var(--line);border-radius:6px;font-size:14px;text-decoration:none}
+.business-home .mobile-contact a:first-child{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.business-home .more-links>summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;font-size:13px;color:var(--muted);cursor:pointer;list-style:none}
+.business-home .more-links>summary::-webkit-details-marker{display:none}
+.business-home .more-links[open]>summary span{transform:rotate(45deg)}
+.business-home .online{padding:8px 0 0;gap:0}
+.business-home .online>div{display:none}
+.business-home .hub-footer{padding:16px 0;font-size:10px;gap:8px}
+}
+</style>
 </head>
-<body><a class="skip-link" href="#content">Skip to content</a><div class="hub">
+<body class="business-home"><a class="skip-link" href="#content">Skip to content</a><div class="hub">
 <header class="hub-header"><a class="wordmark" href="/">LAUREN LEVEN</a><div class="header-actions"><a class="contact" href="mailto:bertinoln@gmail.com">Get in touch ↗</a><button class="theme-button" id="theme" type="button" aria-label="Use light theme">◐</button></div></header>
 <main id="content">
-<section class="introduction"><p class="eyebrow">Designer & illustrator · Orlando, Florida</p><h1>Design with purpose.<br><em>Art with a story.</em></h1><p class="description">I’m Lauren. I create thoughtful digital experiences, illustrated worlds, and the stories that connect them.</p></section>
+<section class="introduction"><p class="eyebrow">Designer & illustrator · Orlando, Florida</p><h1><span class="desktop-heading">Design with purpose.<br><em>Art with a story.</em></span><span class="mobile-heading">Lauren Leven<span>Product designer & illustrator</span></span></h1><p class="description">I’m Lauren. I create thoughtful digital experiences, illustrated worlds, and the stories that connect them.</p></section>
 <nav class="work-index" aria-label="Explore my work">
 <a class="destination" href="/ux/"><span class="number">01</span><h2>Design portfolio</h2><p>Product design, UX/UI, and selected case studies.</p><span class="arrow" aria-hidden="true">↗</span></a>
 <a class="destination" href="/art/"><span class="number">02</span><h2>Art & animation</h2><p>Illustration, character design, and personal work.</p><span class="arrow" aria-hidden="true">↗</span></a>
 <a class="destination" href="https://watchseafoam.com"><span class="number">03</span><h2>Seafoam</h2><p>My original sci-fantasy animated series.</p><span class="arrow" aria-hidden="true">↗</span></a>
 </nav>
-<section class="online" aria-labelledby="online-title"><div><h2 id="online-title">Elsewhere online</h2><p>More work, ongoing projects, and ways to connect.</p></div><nav class="links" aria-label="Social profiles and contact">
+<div class="mobile-contact"><a href="mailto:bertinoln@gmail.com">Email me ↗</a><a href="https://www.linkedin.com/in/laurenbertinoleven">LinkedIn ↗</a></div>
+<details class="more-links"><summary>More links <span aria-hidden="true">+</span></summary><section class="online" aria-labelledby="online-title"><div><h2 id="online-title">Elsewhere online</h2><p>More work, ongoing projects, and ways to connect.</p></div><nav class="links" aria-label="Social profiles and contact">
 <!-- Public profiles verified from Lauren's existing accounts. Add new destinations here. -->
 <a class="profile-link" href="https://www.instagram.com/aphrosanimation/">Instagram <span aria-hidden="true">↗</span></a>
 <a class="profile-link" href="https://www.youtube.com/@AphrosAnimation">YouTube <span aria-hidden="true">↗</span></a>
@@ -35,9 +69,14 @@ document.querySelector('meta[name="theme-color"]').content=document.documentElem
 <a class="profile-link" href="https://aphrosanimation.tumblr.com/">Art Tumblr <span aria-hidden="true">↗</span></a>
 <a class="profile-link" href="https://shoujohell.tumblr.com/">Personal Tumblr <span aria-hidden="true">↗</span></a>
 <a class="profile-link" href="mailto:bertinoln@gmail.com">Email me <span aria-hidden="true">↗</span></a>
-</nav></section>
+</nav></section></details>
 </main><footer class="hub-footer"><span>Lauren Leven · Design & illustration</span><span>laur3n.net</span></footer>
 </div><script>
+const moreLinks=document.querySelector('.more-links');
+const mobileLayout=matchMedia('(max-width:640px)');
+function syncLinksLayout(){moreLinks.open=!mobileLayout.matches;}
+syncLinksLayout();
+mobileLayout.addEventListener('change',syncLinksLayout);
 const themeButton=document.getElementById('theme');
 function updateThemeLabel(){themeButton.setAttribute('aria-label',document.documentElement.dataset.theme==='dark'?'Use light theme':'Use dark theme');}
 updateThemeLabel();
