@@ -11,7 +11,11 @@ export default {
       url.pathname = path.replace(/^\/UX/, '/ux');
       return Response.redirect(url.href, 301);
     }
-    if (path === '/ux' || path === '/art') {
+    if (path === '/art' || path.startsWith('/art/')) {
+      url.pathname = '/characterart/' + path.slice('/art'.length).replace(/^\//, '');
+      return Response.redirect(url.href, 301);
+    }
+    if (path === '/ux' || path === '/characterart') {
       url.pathname += '/';
       return Response.redirect(url.href, 301);
     }
