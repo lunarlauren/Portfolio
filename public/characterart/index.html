@@ -319,6 +319,72 @@ html,body{width:100%;max-width:100%;overflow-x:clip}
 .social{flex:0 0 auto}
 .intro h1,.intro p,.intro-note{overflow-wrap:break-word}
 @media(max-width:699px){.page{width:100%;max-width:100%;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}.brand-logo{width:min(48vw,215px);max-width:48vw}.social{padding:10px 12px;font-size:12px}.intro h1{max-width:100%;font-size:clamp(30px,7.8vw,42px)}}
+
+/* VAPORPAINT: retro desktop paint-program meets candy vaporwave. */
+:root{--vp-ink:#251b54;--vp-pink:#ff73c8;--vp-cyan:#72f2f7;--vp-lilac:#c4b5fd}
+body{background:linear-gradient(135deg,#4e358f,#252c73 56%,#7d397f);color:#fff}
+.page:before{background-image:linear-gradient(#a8f6ff18 1px,transparent 1px),linear-gradient(90deg,#a8f6ff18 1px,transparent 1px);background-size:24px 24px;opacity:1}
+header{background:#f7ddfb;border:3px solid #fff;outline:2px solid #30225f;box-shadow:5px 5px 0 #201947;padding:8px 12px;position:relative}
+header:before{content:"LAUR3N.EXE  —  ART STUDIO";position:absolute;top:-21px;left:-2px;background:#45328f;color:#fff;padding:3px 9px;font:700 10px/1.2 'Courier New',monospace;letter-spacing:.04em;border:2px solid #fff;border-bottom:0}
+.brand-logo{filter:none}
+.social,.button,.quiet,.close{border-radius:0!important;border:2px solid #30225f!important;box-shadow:inset 2px 2px #ffffffa8,inset -2px -2px #714889,3px 3px 0 #241b51!important;transform:none!important;font:700 12px/1.25 'Courier New',monospace!important}
+.social{background:#80eff4!important;color:#231c51!important;padding:10px 12px}
+.button{background:#ff83ce!important;color:#2b1b50!important}
+.quiet{background:#c7b8ff!important;color:#261c50!important}
+.intro{margin-top:12px}
+.eyebrow,.banner-kicker{display:inline-block;background:#7cf3f4;color:#23194b!important;padding:5px 8px;font:700 11px/1.3 'Courier New',monospace;letter-spacing:.035em;text-shadow:none!important;box-shadow:3px 3px 0 #ff76cb}
+.eyebrow span{color:#bc237e}
+.intro h1{font-family:Georgia,serif!important;font-style:normal!important;font-weight:700;letter-spacing:-.03em;color:#fff!important;text-shadow:3px 3px 0 #b02f9c!important;line-height:1.14}
+.intro p,.intro-note{color:#fff!important;text-shadow:none!important}
+.intro-note{display:inline-block;background:#38266d;border:1px dashed #ff99d7;padding:5px 8px;margin-top:10px}
+.mermaid-banner{border:3px solid #f6d7ff!important;border-radius:0!important;outline:2px solid #38216c;box-shadow:6px 6px 0 #211b52!important;overflow:hidden}
+.mermaid-banner:after{background:linear-gradient(90deg,#201747f2 0%,#201747d6 40%,#2017472b 80%)!important}
+.mermaid-banner-copy{position:relative;z-index:1}
+.mermaid-banner p{color:#fff!important;font-family:Georgia,serif;font-style:italic;text-shadow:2px 2px 0 #25184f!important}
+.gallery{gap:14px}
+.tile{border:3px solid #34245f!important;border-radius:0!important;background:#f6e8ff!important;box-shadow:4px 4px 0 #ff79c6!important;transform:none!important;transition:translate .15s ease,box-shadow .15s ease}
+.tile:nth-child(even){box-shadow:4px 4px 0 #70edf4!important}
+.tile:hover{translate:0 -3px;box-shadow:5px 7px 0 #ff79c6!important}
+.tile .thumb{border-bottom:2px solid #34245f;background:#e7d6f4}
+.tile .tile-meta{background:#f8edff!important;border:0!important;padding:10px!important;gap:7px!important;min-height:75px}
+.tile .caption{font:700 12px/1.35 Arial,sans-serif!important;color:#251a4e!important;overflow-wrap:anywhere}
+.tile .price-badge{border:2px solid #33245c!important;border-radius:0!important;background:#86f4f4!important;color:#241b4c!important;box-shadow:2px 2px 0 #34245f!important;font:700 11px/1.2 'Courier New',monospace!important;padding:5px 7px!important;white-space:nowrap}
+.tile:nth-child(even) .price-badge{background:#ff9bda!important}
+.actions{border-top:2px dashed #ff9cd8!important;padding-top:18px}
+.actions p{color:#fff!important}
+dialog{border:3px solid #fff!important;border-radius:0!important;box-shadow:8px 8px 0 #211747;background:#f7eaff!important;color:#241a4b!important}
+.dialog-head{background:#5940aa!important;border-bottom:3px solid #2c1f63!important;color:#fff!important}
+.dialog-head h2{font:700 16px/1.3 'Courier New',monospace!important}
+.dialog-body,.dialog-body p,.dialog-body h3,.viewer .description{color:#281c50!important}
+.commission-form input,.commission-form textarea,.commission-form select{background:#fff!important;color:#251b4c!important;border:2px solid #554184!important;border-radius:0!important}
+.viewer-art{background:#211b4b}
+.viewer-nav{background:#ff9ada!important;border-radius:0!important;color:#251b4c!important;border:2px solid #fff!important}
+@media(max-width:699px){
+ .page{gap:22px!important;padding-top:30px!important}
+ header{gap:10px;padding:7px 9px}
+ header:before{font-size:9px;top:-20px}
+ .brand-logo{width:min(46vw,200px)!important;max-width:46vw!important}
+ .social{font-size:10px!important;padding:8px!important;min-height:38px}
+ .intro{margin-top:0}
+ .intro h1{font-size:clamp(29px,7.8vw,41px)!important}
+ .intro p{font-size:14px!important;line-height:1.5}
+ .eyebrow{font-size:9px}
+ .intro-note{font-size:11px}
+ .mermaid-banner{min-height:210px}
+ .mermaid-banner-copy{max-width:70%!important}
+ .banner-kicker{font-size:9px}
+ .mermaid-banner p{font-size:clamp(17px,4.8vw,23px)}
+ .gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:none!important;gap:12px!important;align-content:start}
+ .tile{width:100%;min-width:0;aspect-ratio:auto!important;align-self:stretch}
+ .tile .thumb{flex:none;aspect-ratio:1}
+ .tile .tile-meta{min-height:84px}
+ .tile .caption{font-size:12px!important}
+ .tile .price-badge{font-size:10px!important}
+ .actions{display:block}
+ .action-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .button,.quiet{font-size:11px!important;min-height:48px}
+}
+@media(prefers-reduced-motion:reduce){.tile{transition:none}}
 </style></head><body><a class="skip" href="#gallery">Skip to artwork</a><main class="page"><header><a class="brand brand-logo" href="/" aria-label="Laur3n home"><img src="/characterart/images/laur3n-vaporwave-logo.svg" alt="Laur3n" width="340" height="105"></a><a class="social" href="https://www.instagram.com/aphrosanimation/">Instagram</a></header><div class="intro"><div class="intro-copy"><span class="eyebrow">CHARACTER ART & COMMISSIONS <span aria-hidden="true">♥</span></span><h1>For characters that live rent-free in your head.</h1><p>Character art, portraits, scenes, icons, and stickers. Take a look at my work and starting prices below.</p><span class="intro-note">Original characters · Fanart · Portraits · NSFW</span></div></div><section class="mermaid-banner" aria-label="Illustrated commission artwork"><div class="mermaid-banner-copy"><span class="banner-kicker">ILLUSTRATION & CHARACTER DESIGN</span><p>Characters, portraits, and scenes made for you.</p></div></section><section id="gallery" class="gallery" aria-label="Commission categories, from simplest to most involved"><button class="tile" type="button" data-art="1" aria-label="Enlarge Discord sticker"><span class="thumb"><img src="/characterart/images/watermarked/discord-sticker.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Discord sticker</span><span class="price-badge">From $20</span></span></button><button class="tile" type="button" data-art="3" aria-label="Enlarge uncolored lineart and coloring page"><span class="thumb"><img src="/characterart/images/watermarked/lineart-coloring-page.svg" alt="" width="1500" height="1500"></span><span class="tile-meta"><span class="caption">Uncolored lineart / coloring page</span><span class="price-badge">From $25</span></span></button><button class="tile" type="button" data-art="0" aria-label="Enlarge Discord icon"><span class="thumb"><img src="/characterart/images/watermarked/cat-icon.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Discord icon</span><span class="price-badge">From $30</span></span></button><button class="tile" type="button" data-art="2" aria-label="Enlarge Bust portrait"><span class="thumb"><img src="/characterart/images/watermarked/bust.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Bust portrait</span><span class="price-badge">From $35</span></span></button><button class="tile" type="button" data-art="4" aria-label="Enlarge Full body, simple color"><span class="thumb"><img src="/characterart/images/watermarked/full-body.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Full body, simple color</span><span class="price-badge">From $50</span></span></button><button class="tile" type="button" data-art="9" aria-label="Enlarge NSFW character art"><span class="thumb"><img src="/characterart/images/watermarked/mature-lingerie.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Lingerie / NSFW art</span><span class="price-badge">From $65</span></span></button><button class="tile" type="button" data-art="5" aria-label="Enlarge Full body, rendered"><span class="thumb"><img src="/characterart/images/watermarked/rendered.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Full body, rendered</span><span class="price-badge">From $95</span></span></button><button class="tile" type="button" data-art="6" aria-label="Enlarge Full body with a simple background"><span class="thumb"><img src="/characterart/images/watermarked/mermaid-scene.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Full body with a simple background</span><span class="price-badge">From $110</span></span></button><button class="tile" type="button" data-art="7" aria-label="Enlarge Character scene"><span class="thumb"><img src="/characterart/images/watermarked/scene.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Character scene</span><span class="price-badge">From $145</span></span></button><button class="tile" type="button" data-art="8" aria-label="Enlarge Multi-character scene"><span class="thumb"><img src="/characterart/images/watermarked/full-scene.svg" alt="" width="1000" height="1000"></span><span class="tile-meta"><span class="caption">Multi-character scene</span><span class="price-badge">From $200</span></span></button></section><footer class="actions"><p>NSFW commissions are welcome. Ask about subjects not shown here.</p><div class="action-buttons"><button class="quiet" data-dialog="details">Commission info</button><button class="button" data-dialog="contact">Request a commission</button></div></footer></main>
 <dialog class="viewer" id="viewer" aria-labelledby="viewer-title"><div class="dialog-head"><h2 id="viewer-title"></h2><span id="viewer-counter" class="viewer-counter" aria-live="polite"></span><button class="close" data-close autofocus>Close ✕</button></div><div class="viewer-art"><button class="viewer-nav prev" type="button" id="viewer-prev" aria-label="Previous artwork">‹</button><img id="viewer-image" alt=""><button class="viewer-nav next" type="button" id="viewer-next" aria-label="Next artwork">›</button></div><p id="viewer-description" class="description"></p></dialog>
 <dialog id="details" aria-labelledby="details-title"><div class="dialog-head"><h2 id="details-title">Commission information</h2><button class="close" data-close autofocus>Close ✕</button></div><div class="dialog-body"><h3>What I draw</h3><p>Original characters, fanart, portraits, full-body illustrations, icons, stickers, and character scenes.</p><h3>NSFW / 18+</h3><p>I allow NSFW furry art, fetish art, nudity, and explicit content. Ask me about specific requests.</p><h3>Pricing</h3><p>Prices on the cards are starting prices in USD. Prices are starting estimates in USD. More detailed work may cost more; I’ll confirm the total with you before starting. I’ll check with you before I start.</p><h3>Reference sheets</h3><p>Reference sheets start at $55. Pricing depends on how many views and details you want included. Ask me for a quote.</p><h3>Before booking</h3><p>Send any references you have, a description of what you'd like, your budget, and any deadline.</p><button class="button" data-dialog="contact">Request a commission</button></div></dialog>
