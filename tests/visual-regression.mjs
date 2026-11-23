@@ -29,8 +29,8 @@ await new Promise(done=>server.listen(0,"127.0.0.1",done));
 const origin="http://127.0.0.1:"+server.address().port;
 const browser=await chromium.launch({headless:true});
 const cases=[
- {id:"header",path:"/",selector:".site-header"},
- {id:"hero-art",path:"/",selector:".hero-feature"},
+ {id:"header",path:"/ux/",selector:".site-header"},
+ {id:"hero-art",path:"/ux/",selector:".hero-feature"},
  {id:"case-chapters",path:"/ux/case-studies/hoylu/connected-planning/",
   selector:".case-section-links"}
 ].flatMap(c=>[390,1280].flatMap(width=>["light","dark"]
