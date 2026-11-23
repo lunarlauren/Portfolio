@@ -68,3 +68,12 @@
 .gallery>.tile .price-prefix{font:700 10px/1.1 Arial,sans-serif!important;color:#352267!important}
 .gallery>.tile:hover{box-shadow:5px 6px 0 #352267!important}
 @media(max-width:699px){.gallery{gap:13px!important}.gallery>.tile .tile-meta{min-height:94px!important;padding:9px!important;gap:8px!important}.gallery>.tile .caption{font-size:12px!important}.gallery>.tile .price-badge{font-size:14px!important;padding:5px 7px!important}.gallery>.tile .price-prefix{font-size:10px!important}.gallery>.tile .tile-window-bar{height:21px!important;flex-basis:21px!important;font-size:8px!important}}
+
+/* Stable logo sizing: don't let the contact CTA squeeze or stretch the wordmark. */
+.retro-header-body{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;column-gap:clamp(12px,3vw,24px)!important;padding:12px clamp(12px,2.5vw,22px)!important;min-height:0!important}
+.retro-header-body .retro-tools{display:none!important}
+header .brand-logo{display:flex!important;align-items:center!important;justify-content:flex-start!important;min-width:0!important;width:100%!important;max-width:320px!important;flex:none!important;line-height:0!important;overflow:visible!important}
+header .brand-logo img{display:block!important;width:100%!important;max-width:320px!important;height:auto!important;max-height:95px!important;aspect-ratio:500/167!important;object-fit:contain!important;object-position:left center!important}
+.retro-header-body .header-contact{flex:none!important;justify-self:end!important;min-width:max-content!important;max-width:100%!important}
+@media(max-width:699px){.retro-header-body{column-gap:12px!important;padding:10px 12px!important}.retro-header-body .brand-logo{max-width:235px!important}.retro-header-body .brand-logo img{max-width:235px!important;max-height:79px!important}.retro-header-body .header-contact{font-size:11px!important;padding:10px!important}}
+@media(max-width:380px){.retro-header-body{column-gap:8px!important;padding:9px!important}.retro-header-body .header-contact{font-size:10px!important;padding:8px!important}}
