@@ -2110,13 +2110,13 @@ try{
   return {left:bounds.left,width:bounds.width,viewport:document.documentElement.clientWidth};
  });
  assert.ok(Math.abs(footerBounds.left)<=1&&footerBounds.width>=footerBounds.viewport-2,"Footer paper must be full bleed at desktop widths");
- await page.locator("footer.wrap a").focus();
+ await page.locator('footer.wrap a[href="/ux/#top"]').focus();
  // Programmatic focus after mouse clicks does not necessarily match :focus-visible.
  // Move focus away and back using the keyboard to test the actual modality.
  await page.keyboard.press("Tab");
  await page.keyboard.press("Shift+Tab");
- assert.equal(await page.locator("footer.wrap a").evaluate(node=>document.activeElement===node),true,"Keyboard focus should return to the footer link");
- assert.equal(await page.locator("footer.wrap a").evaluate(node=>getComputedStyle(node).outlineStyle),"solid","Footer link needs a visible keyboard focus outline");
+ assert.equal(await page.locator('footer.wrap a[href="/ux/#top"]').evaluate(node=>document.activeElement===node),true,"Keyboard focus should return to the footer link");
+ assert.equal(await page.locator('footer.wrap a[href="/ux/#top"]').evaluate(node=>getComputedStyle(node).outlineStyle),"solid","Footer link needs a visible keyboard focus outline");
  // Computed-style check catches a transparent footer in either theme.
  // It does not replace visual or screenshot QA on the deployed site.
  for(const theme of ["light","dark"]){
