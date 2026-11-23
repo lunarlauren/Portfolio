@@ -47,3 +47,10 @@
 .gallery-heading h2{font-size:clamp(25px,3vw,34px)!important;line-height:1.15!important}
 @media(max-width:699px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}.gallery>.tile .tile-meta{padding:9px 9px 11px!important;gap:6px!important}.gallery>.tile .caption{font-size:12px!important;line-height:1.25!important}.gallery>.tile .price-badge{font-size:16px!important}.gallery>.tile .tile-window-bar{height:18px!important;font-size:7px!important}.gallery-heading{margin-top:10px!important;margin-bottom:13px!important}.gallery-heading-note{font-size:11px!important}}
 @media(prefers-reduced-motion:reduce){.gallery>.tile:hover{translate:none!important}}
+
+/* Prevent legacy flex-basis rules from stretching captions into blank panels. */
+.gallery>.tile .caption{flex:0 0 auto!important;min-height:0!important;max-height:none!important;width:100%!important;margin:0!important}
+.gallery>.tile .price-badge{flex:0 0 auto!important;margin:0!important}
+.gallery>.tile .tile-meta{flex:0 0 auto!important;align-content:start!important}
+.gallery>.tile{grid-template-rows:none!important}
+@media(max-width:699px){.gallery>.tile .tile-meta{min-height:0!important}.gallery>.tile .caption{flex-basis:auto!important}}
