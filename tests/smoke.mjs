@@ -111,7 +111,7 @@ try{
   background:document.documentElement.style.backgroundColor
  }));
  assert.ok(["light","dark"].includes(initialTheme.root));
- assert.equal(initialTheme.meta,initialTheme.root==="dark"?"#111d2a":"#f7f9fa");
+ assert.equal(initialTheme.meta,initialTheme.root==="dark"?"#151515":"#f5f3ef");
  assert.ok(initialTheme.background,"Root background should be set before first paint");
 
 
