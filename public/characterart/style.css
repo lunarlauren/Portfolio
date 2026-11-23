@@ -20,3 +20,13 @@
 .steps-cta{margin-top:24px}
 @media(max-width:699px){.gallery-category{align-items:flex-start;gap:8px;padding:17px 0 8px}.gallery-category h3{flex-basis:100%;font-size:22px}.gallery-category p{flex-basis:100%;max-width:none;margin:0;font-size:12px}.commission-steps{margin-top:18px;padding:19px}.steps-grid{grid-template-columns:1fr;gap:18px}.steps-grid>div{padding-top:12px}.steps-heading p{margin-bottom:18px}.steps-cta{width:100%}}
 @media(prefers-reduced-motion:reduce){.gallery .tile{transition:none}.gallery .tile:hover{translate:none}}
+
+/* One compact artwork-led hero replaces the separate intro block. */
+.hero-mermaid{min-height:clamp(285px,34vw,390px)!important;position:relative}
+.hero-mermaid-copy{position:relative;z-index:2;max-width:57%!important;align-items:flex-start!important;justify-content:center!important;gap:10px;padding:clamp(18px,3vw,34px)!important}
+.hero-mermaid-copy h1{font:700 clamp(28px,3.8vw,49px)/1.09 Georgia,serif!important;letter-spacing:-.035em;margin:0;max-width:560px;color:#fff8ff;text-shadow:2px 3px 0 #4a2568;text-wrap:balance}
+.hero-mermaid-copy p{font:500 clamp(12px,1.4vw,16px)/1.4 Arial,sans-serif!important;margin:0;max-width:340px!important;color:#fff8ff}
+.hero-kicker{font:800 10px/1.4 Arial,sans-serif;letter-spacing:.09em;color:#baf8f5}
+.hero-gallery-link{display:inline-flex;align-items:center;justify-content:center;min-height:39px;padding:9px 13px;margin-top:3px;background:#a6efed;color:#352267;border:2px solid #352267;box-shadow:3px 3px 0 #352267;text-decoration:none;font:800 12px Arial,sans-serif}
+.hero-gallery-link:hover,.hero-gallery-link:focus-visible{background:#ffc3e8}
+@media(max-width:699px){.hero-mermaid{min-height:295px!important}.hero-mermaid-copy{max-width:74%!important;gap:9px;padding:16px!important}.hero-mermaid-copy h1{font-size:clamp(26px,6.4vw,35px)!important;line-height:1.09!important;max-width:350px}.hero-mermaid-copy p{font-size:12px!important;max-width:235px!important}.hero-kicker{font-size:8px}.hero-gallery-link{font-size:11px;min-height:37px}.hero-mermaid:before,.hero-mermaid:after{pointer-events:none}}
