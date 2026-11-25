@@ -95,7 +95,7 @@ button, a, summary { touch-action: manipulation; }
 .studio-nav .pearl::after { opacity: .42; }
 
 .hero { position: relative; display: grid; align-items: center; justify-items: end; min-height: clamp(232px, 26vw, 325px); margin-top: .25rem; }
-.hero-art { position: absolute; left: -6%; bottom: -5%; width: 67%; height: 110%; object-fit: cover; object-position: 48% center; pointer-events: none; }
+.hero-art { position: absolute; left: -6%; bottom: -5%; width: 69%; height: auto; object-fit: contain; mask-image: linear-gradient(90deg, transparent, black 6% 78%, transparent); pointer-events: none; }
 .hero-copy { position: relative; width: 53%; padding: 1rem 0 1.4rem; text-align: center; }
 .kicker { display: flex; justify-content: center; align-items: center; gap: .85em; margin: 0 0 1.05rem; color: #ffb9e5; font: 600 clamp(.73rem, 1.2vw, .95rem)/1.2 var(--serif); letter-spacing: .34em; }
 .kicker span { font-size: .95em; letter-spacing: 0; }
@@ -157,12 +157,12 @@ button, a, summary { touch-action: manipulation; }
 .more[open] .when-open { display: inline; }
 .more[open] .chevron { transform: translateY(.1em) rotate(225deg); }
 .more .gallery-grid { margin-top: .75rem; }
-footer { text-align: center; }
+footer { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .divider { display: flex; align-items: center; justify-content: center; gap: .8rem; width: min(80%, 460px); margin: 1rem auto .25rem; }
 .divider::before, .divider::after { content: ""; height: 1px; flex: 1; background: linear-gradient(to right, transparent, #e8beec); }
 .divider::after { transform: rotate(180deg); }
 .divider img { width: 48px; height: auto; }
-footer p { margin: 0; text-shadow: 0 1px 3px #100d29, 0 0 6px #100d29; color: #e8d4ed; font-size: .85rem; }
+footer p { order: -1; margin: 0; text-shadow: 0 1px 3px #100d29, 0 0 6px #100d29; color: #e8d4ed; font-size: .85rem; }
 footer button { min-height: 44px; border: 0; background: none; padding: .2em; color: inherit; text-decoration: underline; text-underline-offset: .18em; }
 
 dialog {
