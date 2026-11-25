@@ -279,3 +279,9 @@ button.viewer-nav{width:36px;height:36px;min-height:36px;padding:0}
 }
 @media(pointer:coarse){button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{min-height:44px}button.viewer-nav{width:44px;height:44px}}
 @media(prefers-reduced-motion:reduce){button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{transition:none}}
+
+/* Typography contract: two families only. Logo is artwork, not a webfont. */
+:root{--serif:Georgia,serif;--sans:Arial,sans-serif}
+body,button,input,select,textarea,summary,.kicker,.tagline,.category-chip,.price,.studio-nav>a,.quiet{font-family:var(--sans)}
+.hero h1,.hero h1 em,.caption,.dialog-head h2,.dialog-body h3{font-family:var(--serif)}
+.tagline{font-style:normal}.price{font-style:normal;font-weight:600}
