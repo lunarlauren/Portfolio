@@ -266,3 +266,16 @@ button.viewer-nav{border-color:#77708b;background:#17182dcc}
 footer button{padding:4px 6px;font-size:13px;min-height:32px;text-decoration:underline;text-underline-offset:3px}
 footer .divider{display:none}
 footer{margin-top:12px}
+
+/* Slim controls with responsive liquid highlights. */
+button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{padding-block:5px;min-height:34px;transition:filter .25s ease,scale .25s cubic-bezier(.2,.8,.2,1),background-color .25s,box-shadow .25s}
+button.close{padding-block:5px;height:34px}
+button.viewer-nav{width:36px;height:36px;min-height:36px;padding:0}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+.pearl:not(.nav-current):hover{scale:1.035;filter:brightness(1.14);box-shadow:inset 0 1px 3px #ffffff88,0 3px 14px #dc69c344,0 3px 14px #38c9ee33}
+.pearl:not(.nav-current)::before{transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.pearl:not(.nav-current):hover::before{transform:scale(.98);opacity:.8}
+.studio-nav>a:hover,.studio-nav>button:hover,.quiet:hover,button.close:hover,button.viewer-nav:hover{scale:1.035;background-color:#ffffff15}
+}
+@media(pointer:coarse){button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{min-height:44px}button.viewer-nav{width:44px;height:44px}}
+@media(prefers-reduced-motion:reduce){button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{transition:none}}
