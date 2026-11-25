@@ -4,8 +4,8 @@
   --muted: #e0cbe6;
   --rose: #ffc0e7;
   --ice: #b4f6ff;
-  --serif: Georgia, 'Times New Roman', serif;
-  --sans: 'Trebuchet MS', Arial, sans-serif;
+  --serif: Georgia, serif;
+  --sans: Arial, sans-serif;
   font: 100%/1.5 var(--sans);
   color: var(--ink);
   background: #10163b;
@@ -178,7 +178,7 @@ body:has(dialog[open]) { overflow: hidden; }
 .dialog-head { position: sticky; z-index: 2; top: 0; display: flex; align-items: center; gap: .5rem; padding: .65rem 1.2rem; border-bottom: 1px solid #b380b02b; background: #252039; }
 .dialog-head h2 { flex: 1; margin: 0; font: 400 clamp(1.2rem, 3vw, 1.55rem)/1.25 var(--serif); }
 .viewer-nav, .quiet { display: inline-grid; place-items: center; min-height: 44px; padding: .45rem .9rem; border: 1px solid #b285b8; border-radius: 100vw; background: #352a4c; color: var(--ink); text-decoration: none; }
-.close { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #decce3; font: 300 1.65rem/1 Arial, sans-serif; }
+.close { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #decce3; font: 300 1.65rem/1 var(--sans); }
 .close:hover { background: #e6b3e414; color: white; }
 .close:focus-visible { outline: 2px solid #b4f6ff; outline-offset: -5px; }
 .dialog-head h2:focus { outline: none; }
