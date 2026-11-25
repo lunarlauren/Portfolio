@@ -258,3 +258,29 @@ body::before,body::after,.hero-art,.hero::before,.hero::after{display:none!impor
 .tile{background:#1b203b;border:1px solid #75688e;box-shadow:none}
 .tile:hover{box-shadow:0 0 12px #c67bd233}
 .thumb{background:#15182d}
+
+/* Art-first motion */
+@media (prefers-reduced-motion:no-preference){
+@keyframes studio-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes opal-breathe{0%,100%{filter:brightness(1)}50%{filter:brightness(1.13)}}
+@keyframes modal-enter{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.masthead,.hero{animation:studio-enter .55s ease-out both}
+.gallery-grid .tile{animation:studio-enter .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--enter,0)*55ms)}
+.gallery-grid .tile:nth-child(1){--enter:0}
+.gallery-grid .tile:nth-child(2){--enter:1}
+.gallery-grid .tile:nth-child(3){--enter:2}
+.gallery-grid .tile:nth-child(4){--enter:3}
+.gallery-grid .tile:nth-child(5){--enter:4}
+.gallery-grid .tile:nth-child(6){--enter:5}
+.gallery-grid .tile:nth-child(7){--enter:6}
+.gallery-grid .tile:nth-child(8){--enter:7}
+.gallery-grid .tile:nth-child(9){--enter:8}
+.gallery-grid .tile:nth-child(10){--enter:9}
+.gallery-grid .tile:nth-child(11){--enter:10}
+.gallery-grid .tile:nth-child(12){--enter:11}
+.pearl{animation:opal-breathe 5s ease-in-out infinite}
+.pearl:hover,.pearl:focus-visible{animation:none;filter:brightness(1.18)}
+.thumb img{transition:scale .45s cubic-bezier(.2,.7,.2,1)}
+@media(hover:hover){.tile:hover .thumb img{scale:1.035}}
+dialog[open]{animation:modal-enter .22s ease-out both}
+}
