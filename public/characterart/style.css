@@ -132,7 +132,7 @@ button, a, summary { touch-action: manipulation; }
 [data-art="full-scene"] { --focus-y: 41%; }
 [data-art="bust"] { --focus-y: 8%; }
 [data-art="scene"] { --focus-y: 0%; }
-[data-art="mermaid-scene"] { --focus-y: 9%; }
+[data-art="couple-portrait"] { --focus-y: 0%; }
 [data-art="rendered"] { --focus-y: 3%; }
 [data-art="full-body"] .thumb { background: white; }
 [data-art="full-body"] .thumb img { object-fit: contain; }
