@@ -49,51 +49,6 @@ button, a, summary { touch-action: manipulation; }
 }
 .studio-nav > :hover { background-color: #d7aef319; }
 
-/* Both reflections follow the same capsule as the liquid and its outer rim. */
-.pearl, .studio-nav .pearl {
-  display: inline-flex; align-items: center; justify-content: center; gap: .46em;
-  position: relative; isolation: isolate; overflow: hidden; min-height: 44px;
-  padding: .72em 1.45em; border: 1px solid transparent; border-radius: 100vw; color: white;
-  font: 600 1.06rem/1.15 var(--serif); text-align: center; text-decoration: none;
-  text-shadow: 0 1px 4px #30143d, 0 0 8px #33143f99;
-  background:
-    radial-gradient(ellipse at 44% 65%, #422052b3 0 15%, transparent 57%) padding-box,
-    radial-gradient(ellipse at 101% 100%, #56efee 0, #358cb5a8 22%, transparent 51%) padding-box,
-    radial-gradient(ellipse at 0% 45%, #ff76c9 0, #db489f 21%, transparent 63%) padding-box,
-    linear-gradient(112deg, #a33a8b, #653687 54%, #375781) padding-box,
-    linear-gradient(116deg, #ffe7fa, #ff9dd6 22%, #efbcff 52%, #a4faff 88%, #efffff) border-box;
-  box-shadow: inset 0 1px 3px #fff9, inset 0 -3px 7px #230c5566, -3px 0 12px #fa51b65c, 3px 0 12px #5be9fe52, 0 5px 17px #080c2d80;
-  transition: filter .18s ease, transform .18s ease;
-}
-.pearl::before, .pearl::after { content: ""; position: absolute; z-index: -1; pointer-events: none; border-radius: inherit; }
-.pearl::before {
-  inset: 2px;
-  background:
-    radial-gradient(ellipse 3.8% 4.5% at 20% 1.5%, #fff6fd 24%, #ffe2f6aa 61%, transparent),
-    radial-gradient(ellipse 1.5% 5% at 4.2% 29%, #fff9fc9c, transparent),
-    radial-gradient(ellipse 1.3% 4.3% at 94% 84%, #dcffff99, transparent),
-    radial-gradient(ellipse 24% 70% at 19% -34%, #fff 28%, transparent 85%),
-    radial-gradient(ellipse 45% 68% at 36% -25%, #ffdbf7bb 12%, transparent 90%),
-    linear-gradient(177deg, #ffe9ff69, #e4d7ff20 39%, transparent 48%);
-  box-shadow: inset 0 2px 1px #ffdcfba8, inset -3px -2px 3px #b1faffb0, inset 3px -2px 4px #ffa2ddbb;
-}
-.pearl::after {
-  inset: 4px 5px; border: 1px solid transparent;
-  border-top-color: #ffefff73; border-bottom-color: #d5deff51;
-  box-shadow: inset 0 -6px 9px -8px #fff, 0 2px 3px -2px #fff9;
-}
-.pearl:hover { filter: brightness(1.13); }
-.pearl:active { transform: translateY(1px); }
-.studio-nav .nav-current {
-  min-height: 42px; padding: .42rem clamp(12px, 1.5vw, 22px); font-size: clamp(.95rem, 1.5vw, 1.2rem);
-  background:
-    linear-gradient(105deg, #6e2d68cf, #3c264ed9 52%, #2d5977d4) padding-box,
-    linear-gradient(120deg, #fdaceb, #daacf4, #a4e8ff) border-box;
-  box-shadow: inset 0 0 9px #efbffa30, -2px 0 9px #ec62c33b, 2px 0 9px #83d7ff42;
-}
-.studio-nav .pearl::before { opacity: .56; }
-.studio-nav .pearl::after { opacity: .42; }
-
 .hero { position: relative; display: grid; align-items: center; justify-items: end; min-height: clamp(198px, 32svh, 300px); margin-top: .25rem; }
 .hero-art { position: absolute; left: -3%; bottom: 0; width: 57%; height: 100%; object-fit: cover; object-position: center 30%; mask-image: radial-gradient(ellipse 63% 64% at 48% 48%, black 38%, transparent 80%); pointer-events: none; }
 .hero-copy { position: relative; width: 53%; padding: 1rem 0 1.4rem; text-align: center; }
@@ -278,61 +233,24 @@ body::before,body::after,.hero-art,.hero::before,.hero::after{display:none!impor
 .gallery-grid .tile:nth-child(10){--enter:9}
 .gallery-grid .tile:nth-child(11){--enter:10}
 .gallery-grid .tile:nth-child(12){--enter:11}
-.pearl{animation:opal-breathe 5s ease-in-out infinite}
-.pearl:hover,.pearl:focus-visible{animation:none;filter:brightness(1.18)}
 .thumb img{transition:scale .45s cubic-bezier(.2,.7,.2,1)}
 @media(hover:hover){.tile:hover .thumb img{scale:1.035}}
 dialog[open]{animation:modal-enter .22s ease-out both}
 }
 
-/* Saturated liquid glass with reflections following the capsule. */
-.pearl,.studio-nav .pearl,.studio-nav .nav-current {
-  border:1px solid transparent;
-  background:
-    radial-gradient(ellipse at 46% 65%,#201038d9 0%,transparent 58%) padding-box,
-    radial-gradient(ellipse at 0% 38%,#ff55c7 0%,#e522a9 24%,transparent 67%) padding-box,
-    radial-gradient(ellipse at 100% 85%,#25eaff 0%,#087fa9 27%,transparent 65%) padding-box,
-    linear-gradient(115deg,#ac197d,#622c86 52%,#156e9c) padding-box,
-    linear-gradient(120deg,#fff0fc,#ff92d6 28%,#e8b4ff 55%,#a3ffff 88%) border-box;
-  backdrop-filter:blur(12px) saturate(170%);
-  -webkit-backdrop-filter:blur(12px) saturate(170%);
-  box-shadow:inset 0 1px 2px #fff9,inset 0 -3px 6px #19093080,-2px 0 12px #ff33b340,2px 0 12px #21dfff35,0 5px 12px #080b2066;
-  text-shadow:0 1px 3px #1b0b36;
-  animation:none;
-  transition:transform .2s,filter .2s;
-}
-.pearl::before,.studio-nav .pearl::before {
-  inset:2px;opacity:1;
-  background:radial-gradient(ellipse 5% 8% at 18% 4%,#fff 15%,#fff5 48%,transparent 80%),linear-gradient(178deg,#fff9, #ffdbf329 24%,transparent 45%);
-  box-shadow:inset 0 2px 1px #fff9,inset 2px 0 3px #ffc7e780,inset -2px -2px 3px #b5ffffb3;
-}
-.pearl::after,.studio-nav .pearl::after {
-  inset:5px;opacity:1;border:1px solid transparent;
-  border-top-color:#fff7;border-bottom-color:#adf7ff66;
-  background:radial-gradient(ellipse 38% 12% at 80% 100%,#c8ffff90,transparent 90%);
-  box-shadow:inset 0 -3px 5px -4px #fff;
-}
-.pearl:hover {filter:brightness(1.12)}
-.pearl:active {transform:scale(.98)}
-@media(prefers-reduced-motion:reduce){.pearl{transition:none}.pearl:active{transform:none}}
 
-/* Compact commission CTA on all screen sizes */
-.pearl.commission{width:auto;max-width:100%;min-height:44px;padding:10px 20px;gap:10px;font:500 16px/1.2 var(--sans);letter-spacing:0;white-space:nowrap;text-shadow:none;box-shadow:inset 0 1px 2px #ffffff55,0 3px 9px #080b2040}
-.pearl.commission::before{inset:1px;box-shadow:inset 0 1px 2px #ffffff66,inset 0 -1px 2px #b5efff55}
-.pearl.commission::after{display:none}
-.pearl.commission .arrow{margin-left:4px;font-size:18px}
-
-.close{width:auto;min-width:44px;padding:6px 12px;font:500 13px/1.2 var(--sans)}
-
-/* Match navigation to compact commission glass */
-.studio-nav{background:transparent;border:0;box-shadow:none;gap:6px;padding:0;width:auto;max-width:100%}
-.studio-nav > *,.studio-nav .nav-current{min-height:44px;padding:10px 16px;font:500 16px/1.2 var(--sans);letter-spacing:0;text-shadow:none;border-radius:999px}
-.studio-nav .nav-current{background:radial-gradient(ellipse at 0% 15%,#f2a4d644,transparent 48%) padding-box,radial-gradient(ellipse at 100% 90%,#80dcff44,transparent 48%) padding-box,linear-gradient(155deg,#ffffff24,#ffffff09 48%,#aab8ff19) padding-box,linear-gradient(125deg,#f8d8eeaa,#ffffff33 38%,#b7d8ff88 78%,#ffffff66) border-box;box-shadow:inset 0 1px 2px #ffffff55,0 3px 9px #080b2040}
-.studio-nav .pearl::before{inset:1px;box-shadow:inset 0 1px 2px #ffffff66,inset 0 -1px 2px #b5efff55;opacity:1}
-.studio-nav .pearl::after{display:none}
-@media(max-width:380px){.studio-nav > *,.studio-nav .nav-current{padding:10px 12px;font-size:14px}}
-
-/* Consistent compact glass controls in dialogs */
-dialog .pearl{width:auto;max-width:100%;min-height:44px;padding:10px 20px;gap:8px;font:500 16px/1.2 var(--sans);letter-spacing:0;text-shadow:none;box-shadow:inset 0 1px 2px #ffffff55,0 3px 9px #080b2040}
-dialog .pearl::before{inset:1px;box-shadow:inset 0 1px 2px #ffffff66,inset 0 -1px 2px #b5efff55}
-dialog .pearl::after{display:none}
+/* One bubble component for every action, excluding artwork tiles. */
+.studio-nav{background:none;border:0;box-shadow:none;gap:6px;padding:0;width:auto;max-width:100%}
+button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{
+position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;width:auto;max-width:100%;min-height:44px;padding:10px 16px;border:1px solid transparent;border-radius:999px;color:#fff;font:500 15px/1.2 var(--sans);letter-spacing:0;text-decoration:none;text-shadow:none;cursor:pointer;
+background:radial-gradient(ellipse at 0% 38%,#ff55c7 0%,#e522a9 24%,transparent 67%) padding-box,radial-gradient(ellipse at 100% 85%,#25eaff 0%,#087fa9 27%,transparent 65%) padding-box,radial-gradient(ellipse at 46% 65%,#201038d9 0%,transparent 58%) padding-box,linear-gradient(115deg,#ac197d,#622c86 52%,#156e9c) padding-box,linear-gradient(120deg,#fff0fc,#ff92d6 28%,#e8b4ff 55%,#a3ffff 88%) border-box;
+box-shadow:inset 0 1px 2px #ffffff55,0 3px 9px #080b2040;transition:filter .2s,scale .2s;animation:none}
+button:not(.tile)::before,.pearl::before,.studio-nav>a::before,.quiet::before,.more>summary::before{content:"";position:absolute;inset:1px;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 5% 8% at 18% 4%,#fff 15%,#fff5 48%,transparent 80%),linear-gradient(178deg,#fff9,#ffdbf329 24%,transparent 45%);box-shadow:inset 0 1px 2px #ffffff66,inset 0 -1px 2px #b5efff55}
+button:not(.tile):hover,.pearl:hover,.studio-nav>a:hover,.quiet:hover,.more>summary:hover{filter:brightness(1.12);text-decoration:none}
+button:not(.tile):active,.pearl:active,.studio-nav>a:active,.quiet:active,.more>summary:active{scale:.97}
+.studio-nav .nav-current,.studio-nav>button{white-space:nowrap}
+button.viewer-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;padding:0;font-size:24px}
+button.close{flex:0 0 auto;padding:8px 12px;font-size:13px}
+.pearl.commission{white-space:nowrap}
+@media(max-width:380px){.studio-nav>a,.studio-nav>button{padding:10px 11px;font-size:14px}}
+@media(prefers-reduced-motion:reduce){button:not(.tile):active,.pearl:active,.studio-nav>a:active,.quiet:active,.more>summary:active{scale:1}}
