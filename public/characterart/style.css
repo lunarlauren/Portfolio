@@ -285,10 +285,33 @@ body::before,body::after,.hero-art,.hero::before,.hero::after{display:none!impor
 dialog[open]{animation:modal-enter .22s ease-out both}
 }
 
-/* Clear liquid glass: restrained chromatic reflections */
-.pearl,.studio-nav .pearl,.studio-nav .nav-current{border:1px solid transparent;background:radial-gradient(ellipse at 0% 15%,#f2a4d644,transparent 48%) padding-box,radial-gradient(ellipse at 100% 90%,#80dcff44,transparent 48%) padding-box,linear-gradient(155deg,#ffffff24,#ffffff09 48%,#aab8ff19) padding-box,linear-gradient(125deg,#f8d8eeaa,#ffffff33 38%,#b7d8ff88 78%,#ffffff66) border-box;backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%);box-shadow:inset 0 1px 2px #ffffff70,inset 0 -2px 5px #a6d9ff30,inset 3px 0 8px #ffc5e326,inset -3px 0 8px #a4e8ff30,0 4px 12px #080b204d;text-shadow:0 1px 2px #10132e66;animation:none;transition:transform .22s cubic-bezier(.2,.8,.2,1),filter .2s,box-shadow .2s}
-.pearl::before{inset:2px;background:none;box-shadow:inset 0 2px 2px -1px #ffffffa0,inset 3px 2px 5px -2px #ffc7e7aa,inset -3px -2px 5px -2px #b5efffaa;opacity:1}
-.pearl::after{inset:4px;border:0;background:none;box-shadow:inset 0 3px 7px -4px #ffffff88,inset 0 -4px 8px -5px #b7eaff99;opacity:1}
-.pearl:hover{filter:brightness(1.12);box-shadow:inset 0 1px 3px #ffffff88,inset 0 -2px 6px #b8eaff55,0 5px 16px #080b2055}
-.pearl:active{transform:scale(.97)}
+/* Saturated liquid glass with reflections following the capsule. */
+.pearl,.studio-nav .pearl,.studio-nav .nav-current {
+  border:1px solid transparent;
+  background:
+    radial-gradient(ellipse at 46% 65%,#201038d9 0%,transparent 58%) padding-box,
+    radial-gradient(ellipse at 0% 38%,#ff55c7 0%,#e522a9 24%,transparent 67%) padding-box,
+    radial-gradient(ellipse at 100% 85%,#25eaff 0%,#087fa9 27%,transparent 65%) padding-box,
+    linear-gradient(115deg,#ac197d,#622c86 52%,#156e9c) padding-box,
+    linear-gradient(120deg,#fff0fc,#ff92d6 28%,#e8b4ff 55%,#a3ffff 88%) border-box;
+  backdrop-filter:blur(12px) saturate(170%);
+  -webkit-backdrop-filter:blur(12px) saturate(170%);
+  box-shadow:inset 0 1px 2px #fff9,inset 0 -3px 6px #19093080,-2px 0 12px #ff33b340,2px 0 12px #21dfff35,0 5px 12px #080b2066;
+  text-shadow:0 1px 3px #1b0b36;
+  animation:none;
+  transition:transform .2s,filter .2s;
+}
+.pearl::before,.studio-nav .pearl::before {
+  inset:2px;opacity:1;
+  background:radial-gradient(ellipse 5% 8% at 18% 4%,#fff 15%,#fff5 48%,transparent 80%),linear-gradient(178deg,#fff9, #ffdbf329 24%,transparent 45%);
+  box-shadow:inset 0 2px 1px #fff9,inset 2px 0 3px #ffc7e780,inset -2px -2px 3px #b5ffffb3;
+}
+.pearl::after,.studio-nav .pearl::after {
+  inset:5px;opacity:1;border:1px solid transparent;
+  border-top-color:#fff7;border-bottom-color:#adf7ff66;
+  background:radial-gradient(ellipse 38% 12% at 80% 100%,#c8ffff90,transparent 90%);
+  box-shadow:inset 0 -3px 5px -4px #fff;
+}
+.pearl:hover {filter:brightness(1.12)}
+.pearl:active {transform:scale(.98)}
 @media(prefers-reduced-motion:reduce){.pearl{transition:none}.pearl:active{transform:none}}
