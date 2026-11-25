@@ -288,3 +288,6 @@ body,button,input,select,textarea,summary,.kicker,.tagline,.category-chip,.price
 
 .pearl{overflow:hidden}
 .pearl::before,.pearl:hover::before{transform:none;border-radius:inherit;inset:1px}
+
+/* Center the two Discord examples without enlarging them. */
+@media(min-width:721px){.more .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));width:calc((200% - clamp(14px,1.8vw,25px))/3);margin-inline:auto}}
