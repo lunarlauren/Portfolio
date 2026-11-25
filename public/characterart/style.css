@@ -241,19 +241,19 @@ dialog[open]{animation:modal-enter .22s ease-out both}
 
 /* One bubble component for every action, excluding artwork tiles. */
 .studio-nav{background:none;border:0;box-shadow:none;gap:6px;padding:0;width:auto;max-width:100%}
-button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{
+button:not(.tile):where(.pearl),.pearl,.studio-nav>a,.quiet,.more>summary{
 position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;width:auto;max-width:100%;min-height:44px;padding:10px 16px;border:1px solid transparent;border-radius:999px;color:#fff;font:500 15px/1.2 var(--sans);letter-spacing:0;text-decoration:none;text-shadow:none;cursor:pointer;
 background:radial-gradient(ellipse at 0% 38%,#ff55c7 0%,#e522a9 24%,transparent 67%) padding-box,radial-gradient(ellipse at 100% 85%,#25eaff 0%,#087fa9 27%,transparent 65%) padding-box,radial-gradient(ellipse at 46% 65%,#201038d9 0%,transparent 58%) padding-box,linear-gradient(115deg,#ac197d,#622c86 52%,#156e9c) padding-box,linear-gradient(120deg,#fff0fc,#ff92d6 28%,#e8b4ff 55%,#a3ffff 88%) border-box;
 box-shadow:inset 0 1px 2px #ffffff55,0 3px 9px #080b2040;transition:filter .2s,scale .2s;animation:none}
-button:not(.tile)::before,.pearl::before,.studio-nav>a::before,.quiet::before,.more>summary::before{content:"";position:absolute;inset:1px;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 5% 8% at 18% 4%,#fff 15%,#fff5 48%,transparent 80%),linear-gradient(178deg,#fff9,#ffdbf329 24%,transparent 45%);box-shadow:inset 0 1px 2px #ffffff66,inset 0 -1px 2px #b5efff55}
-button:not(.tile):hover,.pearl:hover,.studio-nav>a:hover,.quiet:hover,.more>summary:hover{filter:brightness(1.12);text-decoration:none}
-button:not(.tile):active,.pearl:active,.studio-nav>a:active,.quiet:active,.more>summary:active{scale:.97}
+button:not(.tile):where(.pearl)::before,.pearl::before,.studio-nav>a::before,.quiet::before,.more>summary::before{content:"";position:absolute;inset:1px;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 5% 8% at 18% 4%,#fff 15%,#fff5 48%,transparent 80%),linear-gradient(178deg,#fff9,#ffdbf329 24%,transparent 45%);box-shadow:inset 0 1px 2px #ffffff66,inset 0 -1px 2px #b5efff55}
+button:not(.tile):where(.pearl):hover,.pearl:hover,.studio-nav>a:hover,.quiet:hover,.more>summary:hover{filter:brightness(1.12);text-decoration:none}
+button:not(.tile):where(.pearl):active,.pearl:active,.studio-nav>a:active,.quiet:active,.more>summary:active{scale:.97}
 .studio-nav .nav-current,.studio-nav>button{white-space:nowrap}
 button.viewer-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;padding:0;font-size:24px}
 button.close{flex:0 0 auto;padding:8px 12px;font-size:13px}
 .pearl.commission{white-space:nowrap}
 @media(max-width:380px){.studio-nav>a,.studio-nav>button{padding:10px 11px;font-size:14px}}
-@media(prefers-reduced-motion:reduce){button:not(.tile):active,.pearl:active,.studio-nav>a:active,.quiet:active,.more>summary:active{scale:1}}
+@media(prefers-reduced-motion:reduce){button:not(.tile):where(.pearl):active,.pearl:active,.studio-nav>a:active,.quiet:active,.more>summary:active{scale:1}}
 
 /* Secondary controls: quiet, with the bubble reserved for conversion actions. */
 .studio-nav>a,.studio-nav>button,button.close,button.viewer-nav,footer button,.more>summary,.quiet{background:transparent;border:1px solid transparent;box-shadow:none;color:#e0dbea}
@@ -268,7 +268,7 @@ footer .divider{display:none}
 footer{margin-top:12px}
 
 /* Slim controls with responsive liquid highlights. */
-button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{padding-block:5px;min-height:34px;transition:filter .25s ease,scale .25s cubic-bezier(.2,.8,.2,1),background-color .25s,box-shadow .25s}
+button:not(.tile):where(.pearl),.pearl,.studio-nav>a,.quiet,.more>summary{padding-block:5px;min-height:34px;transition:filter .25s ease,scale .25s cubic-bezier(.2,.8,.2,1),background-color .25s,box-shadow .25s}
 button.close{padding-block:5px;height:34px}
 button.viewer-nav{width:36px;height:36px;min-height:36px;padding:0}
 @media(hover:hover) and (prefers-reduced-motion:no-preference){
@@ -277,8 +277,8 @@ button.viewer-nav{width:36px;height:36px;min-height:36px;padding:0}
 .pearl:not(.nav-current):hover::before{transform:none;opacity:1}
 .studio-nav>a:hover,.studio-nav>button:hover,.quiet:hover,button.close:hover,button.viewer-nav:hover{scale:1.035;background-color:#ffffff15}
 }
-@media(pointer:coarse){button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{min-height:44px}button.viewer-nav{width:44px;height:44px}}
-@media(prefers-reduced-motion:reduce){button:not(.tile),.pearl,.studio-nav>a,.quiet,.more>summary{transition:none}}
+@media(pointer:coarse){button:not(.tile):where(.pearl),.pearl,.studio-nav>a,.quiet,.more>summary{min-height:44px}button.viewer-nav{width:44px;height:44px}}
+@media(prefers-reduced-motion:reduce){button:not(.tile):where(.pearl),.pearl,.studio-nav>a,.quiet,.more>summary{transition:none}}
 
 /* Typography contract: two families only. Logo is artwork, not a webfont. */
 :root{--serif:Georgia,serif;--sans:Arial,sans-serif}
@@ -291,3 +291,8 @@ body,button,input,select,textarea,summary,.kicker,.tagline,.category-chip,.price
 
 /* Center the two Discord examples without enlarging them. */
 @media(min-width:721px){.more .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));width:calc((200% - clamp(14px,1.8vw,25px))/3);margin-inline:auto}}
+
+/* Footer is a secondary text action, never a partial glass button. */
+footer button{background:none;border:0;box-shadow:none;color:var(--muted);font:500 13px/1.2 var(--sans);padding:5px 6px;min-height:34px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+footer button::before,footer button::after{content:none}
+footer button:hover{color:white;background:none;box-shadow:none;filter:none}
