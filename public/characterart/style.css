@@ -254,3 +254,15 @@ button.close{flex:0 0 auto;padding:8px 12px;font-size:13px}
 .pearl.commission{white-space:nowrap}
 @media(max-width:380px){.studio-nav>a,.studio-nav>button{padding:10px 11px;font-size:14px}}
 @media(prefers-reduced-motion:reduce){button:not(.tile):active,.pearl:active,.studio-nav>a:active,.quiet:active,.more>summary:active{scale:1}}
+
+/* Secondary controls: quiet, with the bubble reserved for conversion actions. */
+.studio-nav>a,.studio-nav>button,button.close,button.viewer-nav,footer button,.more>summary,.quiet{background:transparent;border:1px solid transparent;box-shadow:none;color:#e0dbea}
+.studio-nav>a::before,.studio-nav>button::before,button.close::before,button.viewer-nav::before,footer button::before,.more>summary::before,.quiet::before{display:none}
+.studio-nav .nav-current{border-color:#77708b;background:#ffffff0b}
+.studio-nav>a:hover,.studio-nav>button:hover,button.close:hover,button.viewer-nav:hover,.quiet:hover{background:#ffffff12;filter:none}
+button.viewer-nav{border-color:#77708b;background:#17182dcc}
+.more>summary{display:flex;width:fit-content;margin:8px auto 0;padding:8px 12px;font-size:14px}
+.more>summary:hover,footer button:hover{text-decoration:underline;filter:none}
+footer button{padding:4px 6px;font-size:13px;min-height:32px;text-decoration:underline;text-underline-offset:3px}
+footer .divider{display:none}
+footer{margin-top:12px}
