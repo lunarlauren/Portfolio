@@ -171,16 +171,20 @@ footer button { min-height: 44px; border: 0; background: none; padding: .2em; co
 
 dialog {
   width: min(640px, calc(100% - 24px)); max-height: 90dvh; overflow: auto; overscroll-behavior: contain; padding: 0;
-  color: var(--ink); background: #201c39; border: 1px solid #e6acd9; border-radius: 20px; box-shadow: 0 8px 48px #070b2acc, 0 0 16px #d782c83d;
+  color: var(--ink); background: #201c39; border: 1px solid #bd91bb80; border-radius: 20px; box-shadow: 0 8px 48px #070b2acc, 0 0 16px #d782c83d;
 }
 dialog::backdrop { background: #0b0c21c9; backdrop-filter: blur(5px); }
 body:has(dialog[open]) { overflow: hidden; }
-.dialog-head { position: sticky; z-index: 2; top: 0; display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border-bottom: 1px solid #b380b055; background: #29213e; }
-.dialog-head h2 { flex: 1; margin: 0; font: italic 400 clamp(1.3rem, 3vw, 1.75rem)/1.15 var(--serif); }
-.close, .viewer-nav, .quiet { display: inline-grid; place-items: center; min-height: 44px; padding: .45rem .9rem; border: 1px solid #b285b8; border-radius: 100vw; background: #352a4c; color: var(--ink); text-decoration: none; }
-.dialog-body { padding: clamp(16px, 3vw, 28px); }
+.dialog-head { position: sticky; z-index: 2; top: 0; display: flex; align-items: center; gap: .5rem; padding: .65rem 1.2rem; border-bottom: 1px solid #b380b02b; background: #252039; }
+.dialog-head h2 { flex: 1; margin: 0; font: 400 clamp(1.2rem, 3vw, 1.55rem)/1.25 var(--serif); }
+.viewer-nav, .quiet { display: inline-grid; place-items: center; min-height: 44px; padding: .45rem .9rem; border: 1px solid #b285b8; border-radius: 100vw; background: #352a4c; color: var(--ink); text-decoration: none; }
+.close { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #decce3; font: 300 1.65rem/1 Arial, sans-serif; }
+.close:hover { background: #e6b3e414; color: white; }
+.close:focus-visible { outline: 2px solid #b4f6ff; outline-offset: -5px; }
+.dialog-head h2:focus { outline: none; }
+.dialog-body { padding: clamp(20px, 3vw, 28px); line-height: 1.6; }
 .dialog-body > :first-child { margin-top: 0; }
-.dialog-body h3 { font: italic 400 1.4rem var(--serif); margin: 1.1em 0 .25em; }
+.dialog-body h3 { font: 400 1.18rem var(--serif); margin: 1.35em 0 .4em; }
 .dialog-body p, .description { color: var(--muted); }
 .dialog-body p { margin: .4em 0 1em; }
 .contact-option-actions, .viewer-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; }

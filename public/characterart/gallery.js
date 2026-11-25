@@ -10,6 +10,7 @@ function openDialog(dialog, trigger) {
   if (previous) previous.close();
   else opener = trigger;
   dialog.showModal();
+  dialog.scrollTop = 0;
 }
 
 function showArt(position) {
